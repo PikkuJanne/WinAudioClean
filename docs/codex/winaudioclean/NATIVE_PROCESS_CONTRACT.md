@@ -2,6 +2,10 @@
 
 Use small PowerShell helpers; do not build a new application framework. Maintain Windows PowerShell 5.1 and supported PowerShell 7 behavior.
 
+Dated implementation sections retain their original scope. Later sections
+supersede earlier limitations; M2-02 adds optional binary stdin and Accurate
+stage deadlines while preserving Fast's original native path.
+
 ## Implemented in WAC-M1-02 (2026-10-02)
 
 `Get-WacFfmpegArguments` returns separate argument values and includes `-nostdin`.
@@ -24,12 +28,12 @@ Current application codes:
 
 | Code | Meaning |
 | --- | --- |
-| 0 | Native exit 0, validated audio published, and report complete. |
+| 0 | Native exit 0, validated audio published without loudness or reporting warnings. |
 | 2 | Input/configuration/destination or launcher usage error. |
-| 3 | Missing dependency or process start failure. |
-| 4 | Native nonzero exit or process/capture/cleanup failure. |
+| 3 | Missing dependency or analysis/render process start failure. |
+| 4 | Native nonzero exit, process/capture/cleanup failure or malformed first-pass measurement. |
 | 5 | Output allocation, space/size check, validation, publication or owned-partial cleanup failure. |
-| 7 | Published audio with report-write or report-metadata failure; audio is retained. |
+| 7 | Published valid audio with loudness or reporting warnings; audio is retained. |
 | 130 | Mode-menu cancellation; running-render Ctrl+C exit semantics are not certified. |
 
 Native status and diagnostics remain distinct from report errors. A report failure
@@ -112,13 +116,13 @@ Treat executable paths and every user path as data. Avoid Invoke-Expression, cmd
 
 Run only the resolved FFmpeg/ffprobe executable. Verify exact child argv using an argument-echo fixture on Windows. Test spaces, trailing backslashes, brackets, Unicode, apostrophes, parentheses, &, %, ! and path-length boundaries through the actual .bat. CMD/PowerShell -File array expansion is a separate boundary: do not certify it by direct PowerShell tests alone. Reject unrepresentable input with a safe alternative rather than silently corrupt it.
 
-Input paths must resolve to existing local filesystem files; explicit supported UNC paths can still reside on a network share. Do not advertise physical offline storage for them. Reject URLs and block external-media references where supported by an allowlisted protocol/demuxer policy. Disable stdin for unattended child jobs. Never turn repository/user media metadata into commands.
+Input paths must resolve to existing local filesystem files; explicit supported UNC paths can still reside on a network share. Do not advertise physical offline storage for them. Reject URLs and block external-media references where supported by an allowlisted protocol/demuxer policy. Disable interactive stdin commands for unattended child jobs; the M2-02 final measurement explicitly uses binary media input. Never turn repository/user media metadata into commands.
 
 ## Lifecycle and output
 
 Drain stdout and stderr concurrently, close handles, handle launch exceptions and observe exit status after process exit. Progress belongs on a dedicated structured stream; error logs are not the progress parser. A probe must have a timeout; long audio renders need user cancellation and a sensible inactivity policy, not an arbitrary short total timeout. Avoid false failure for long normal jobs.
 
-The original proposed map was 0 success; 2 invalid input/config; 3 missing/incompatible dependency; 4 probe/processing failure; 5 output-validation/publication failure; 6 batch completed with failed items; 130 cancelled. The implemented table above now defines current codes, including reporting warning 7. Native FFmpeg exit codes remain in diagnostics when mapped to application codes. Preserve script status before launcher pause.
+The original proposed map was 0 success; 2 invalid input/config; 3 missing/incompatible dependency; 4 probe/processing failure; 5 output-validation/publication failure; 6 batch completed with failed items; 130 cancelled. The implemented table above now defines current codes, including loudness/reporting warning 7. Native FFmpeg exit codes remain in diagnostics when mapped to application codes. Preserve script status before launcher pause.
 
 ## Files and cancellation
 
@@ -190,3 +194,55 @@ existing destination alias. The export constructs a fresh typed allowlist and
 drops all free-form source strings, including paths, filenames, metadata and raw
 diagnostics. It warns to review before sharing and performs no upload. Export
 usage/read/write failures use code `2`; this route does not initialize FFmpeg.
+
+## Implemented in WAC-M2-02 (2026-10-02)
+
+`Invoke-WacNativeProcess` accepts an optional readable `-StandardInputStream`.
+Without it, child stdin closes immediately as before. With it, the wrapper
+starts both stdout/stderr readers, then uses `CopyToAsync` to copy binary bytes
+to child stdin's `BaseStream`. Successful EOF closes child stdin. The wrapper
+never disposes the caller's stream. Read/copy errors and early child exit with
+an incomplete transfer cannot become success merely because native exit is 0.
+Timeout/error cleanup stops only the owned child and bounds transfer/reader
+completion; captured output remains in memory.
+
+Discard each awaiter's result with `[void]$stdinTask.GetAwaiter().GetResult()`.
+Windows PowerShell 5.1 can otherwise emit the task's internal completion value
+into the success stream. The wrapper must return exactly one native-result
+object on both supported shells, including copy-failure and timeout paths.
+
+Fast still uses the unchanged single render and `TimeoutMilliseconds=0`:
+zero means no total render deadline. Accurate analysis, rendering and final
+measurement each use the same finite deadline in milliseconds:
+`min(2147483647, max(120000, durationSeconds * 20000 + 60000))`.
+The duration is the selected input track's validated duration. This is separate
+from the 15-second dependency/probe deadlines and the wrapper's bounded cleanup.
+All three Accurate stages use `-nostats` so recurring progress text does not
+consume the parser's 1 MiB diagnostic limit. Fast's arguments stay unchanged.
+
+Accurate's final check runs after PCM validation and before publication. The
+caller rewinds the still-held validation stream to byte zero and supplies it
+as binary stdin. FFmpeg receives `-nostdin -protocol_whitelist pipe
+-format_whitelist wav -f wav -i pipe:0`, maps `0:0` and measures the encoded
+samples without repeating channel conversion, cleaning or leveling. It never
+reopens the frozen path. Keep the same handle through the existing no-replace
+rename. The [audio contract](AUDIO_CONTRACT.md) defines targets and compliance.
+
+Analysis failure prevents rendering/publication: start failure uses code 3;
+native failure or malformed first-pass measurements use code 4. A render
+process failure likewise prevents publication. If rendering produces valid PCM
+but its measurement JSON is malformed, report a normalization diagnostic
+warning. Failed, undefined or out-of-tolerance final measurement also retains
+valid published audio with `status: WARNING`, `processingStatus: SUCCESS` and
+exit 7. Normalization fallback produces the same warning outcome. Reporting
+completeness stays separate, and a later report failure preserves primary
+processing codes. Failed analysis attempts now receive per-run reports;
+earlier input/dependency/probe failures still use console diagnostics only.
+After failed analysis, `normalization.renderFilter` and `settings.exactFilters`
+remain null because no render was attempted.
+
+Elapsed processing time now includes analysis, rendering, validation, final
+measurement and publication. The report end timestamp follows owned cleanup.
+The [data contract](DATA_FORMATS.md) specifies additive schema-1 stage records
+and the smaller redacted projection. M1 statements about closed stdin,
+render-only timing and unmeasured loudness remain historical for this path.

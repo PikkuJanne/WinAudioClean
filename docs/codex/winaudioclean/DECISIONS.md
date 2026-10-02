@@ -331,3 +331,37 @@ M1-05 encoder change and unreviewed speech quality explicit.
 
 Evidence: `evidence/WAC-M2-01.md`. The next task is M2-02 measured loudness;
 no new optional audio processing, merge, release or deployment is included.
+
+### 2026-10-02 — WAC-M2-02 optional measured loudness
+
+D28. Keep `-LoudnessMode Fast` as the default with the exact Original filter
+strings and render arguments. `Accurate` measures the selected stream after
+explicit channel conversion, Original cleaning where selected, and dynamic
+leveling. Repeat that deterministic prechain for rendering. Accurate alone
+pins its pre-normalization rate to 192 kHz so loudnorm mode negotiation cannot
+change the input rate between passes. Use I=-12, TP=-1.5 and LRA=7 consistently,
+validated invariant measured parameters, and target_offset as offset.
+
+Record the render's actual normalization_type. Recognized undefined values or
+valid measurements outside accepted parameter bounds use an explicit fallback;
+malformed analysis stops processing. No arbitrary NaN/infinity reaches JSON or
+filter arguments. No retry loop attempts to force target compliance.
+
+Independently inspect encoded PCM through the existing held validation stream
+before no-replace publication. Do not reopen its path or weaken its lock.
+The wrapper copies binary input asynchronously, drains both output pipes,
+closes child stdin at EOF, and retains caller ownership. Accurate stages use
+finite duration-based deadlines; Fast retains its existing unlimited render.
+
+Final input statistics determine compliance: integrated loudness within
+0.5 LU, true peak <= -1.3 dBTP, with known peak violations checked first.
+LRA remains informational. Subsecond I/LRA are null with `too_short`; retain
+finite true peak. Silence and undefined loudness have separate fixed reasons.
+Failed final measurement is FAILED, never merely unmeasurable or compliant.
+
+Retain valid PCM with WARNING/7 for normalization fallback, unavailable render
+diagnostics or a non-passing final check. Processing validity and report-writing
+completeness stay separate. Add typed fields to schema 1; support export copies
+only finite numbers, booleans and fixed enums/reasons. Fast stays NOT_MEASURED.
+Evidence: `evidence/WAC-M2-02.md`. This does not approve a new default sound or
+certify speech quality. The next task is optional gentle cleaning, WAC-M2-03.

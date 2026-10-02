@@ -597,8 +597,12 @@
       "title": "Pass consistency",
       "procedure": "Capture both commands for Raw/Zoom, selected stream, mono/stereo and numeric locale variations.",
       "expected": "Prechains, stream, channel policy and parameters match; second pass uses valid pass-1 measurements and invariant decimals.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-02.md",
+        "evidence/WAC-M2-02-source.json",
+        "evidence/WAC-M2-02-measured-loudness.json"
+      ]
     },
     {
       "id": "AC-038",
@@ -606,8 +610,12 @@
       "title": "Output measurements",
       "procedure": "Run eligible full-length fixtures at -12 LUFS / -1.5 dBTP and verify final-file loudness/peak.",
       "expected": "Achievable cases meet declared tolerances; constraints/fallbacks are reported and out-of-tolerance results are not called target-compliant.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-02.md",
+        "evidence/WAC-M2-02-source.json",
+        "evidence/WAC-M2-02-measured-loudness.json"
+      ]
     },
     {
       "id": "AC-039",
@@ -615,8 +623,12 @@
       "title": "Undefined and fallback cases",
       "procedure": "Use silence, <1-second audio, restricted peak headroom, high LRA and malformed measurement output.",
       "expected": "No unchecked nonfinite values, infinite retries, division errors, or false exact-target claims; fallback is logged.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-02.md",
+        "evidence/WAC-M2-02-source.json",
+        "evidence/WAC-M2-02-measured-loudness.json"
+      ]
     },
     {
       "id": "AC-040",

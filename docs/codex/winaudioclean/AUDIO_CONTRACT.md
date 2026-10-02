@@ -1,7 +1,7 @@
 # Audio behavior contract
 
 This combines preserved behavior and proposed later test contracts. Sections
-marked implemented describe current behavior; later measurement and listening
+marked implemented describe current behavior; later preview and listening
 requirements remain pending.
 
 ## Preserved baseline
@@ -34,11 +34,43 @@ that build's defaults. Single-pass output remains independently unmeasured;
 
 ## Fast and Accurate
 
-Fast preserves the existing single-pass filter behavior and remains default. Accurate is opt-in. Compose a common deterministic prechain: selected audio stream -> explicit channel policy -> cleaning where selected -> dynamic leveling. Pass 1 measures that signal with the target normalization measurement stage; pass 2 repeats exactly that prechain and applies valid measured_I, measured_TP, measured_LRA, measured_thresh and target_offset-to-offset mapping. Do not append a second full loudnorm to a chain already normalized to the target.
+### Implemented processing policy — WAC-M2-02 (2026-10-02)
+
+`-LoudnessMode Fast` preserves the existing single-pass filter behavior and remains default. Accurate is opt-in. Compose a common deterministic prechain: selected audio stream -> explicit channel policy -> cleaning where selected -> dynamic leveling. Pass 1 measures that signal with the target normalization measurement stage; pass 2 repeats exactly that prechain and applies valid measured_I, measured_TP, measured_LRA, measured_thresh and target_offset-to-offset mapping. Do not append a second full loudnorm to a chain already normalized to the target.
 
 Pass 1's discarded render is not an input for pass 2 unless an explicitly documented, tested lossless staging design replaces the repeated prechain. Compare both command structures. Unit-test measurement JSON extraction amid stderr text; handle strings such as -inf safely. Parse invariant decimals and serialize only finite allowed values.
 
-Set target I/TP/LRA consistently across passes. Record requested mode and FFmpeg's actual normalization type, including fallback. No unbounded retry loop. Preserve duration and selected channels; any mono conversion must occur before both measurements.
+Both Accurate passes explicitly use I=-12 LUFS, TP=-1.5 dBTP and LRA=7 LU.
+A common `aresample=192000` step follows Original's dynamic leveling and precedes
+terminal loudnorm so linear versus dynamic loudnorm negotiation cannot change
+the rate of the signal being measured.
+The exact same prechain, stream map and channel policy feed both passes. Fast's
+literal filter string and arguments receive no extra resampling or analysis.
+The M1 export policy still determines the final 48 kHz PCM encoding.
+Each Accurate stage has a finite deadline of 20 times the selected duration
+plus 60 seconds, with a 120-second minimum and an Int32-millisecond maximum,
+followed by the native wrapper's bounded cleanup. Fast's render stays unlimited.
+
+First-pass JSON must be complete and well formed; parse invariant
+numbers and validate every value before placing it in a filter argument.
+Recognized undefined measurements from a successful process receive explicit
+null/reason fields and permit an unmeasured fallback, with a warning. Missing or
+malformed JSON, unexpected nonfinite values and failed analysis processes are
+processing failures, not unavailable measurements; they stop publication with
+code 4. An analysis/render process that cannot start retains dependency code 3.
+Never serialize NaN/infinity or invent a measured zero.
+
+Valid finite statistics outside FFmpeg's accepted measured-parameter bounds
+use `linear=false` with fallback reason `measurement_out_of_range`. This is
+different from malformed or invalid measurement data, which fails the stage.
+
+Record requested mode, measured parameters, fallback reason and the render's
+actual `normalization_type`. A requested dynamic fallback is not proof of the
+reported type: the installed FFmpeg can report linear for very short inputs
+even when linear=false. `ffmpeg_dynamic_fallback`, `measurement_out_of_range`
+and undefined-measurement fallbacks produce a published warning. Preserve
+duration and selected channels; any mono conversion precedes both measurements.
+No retry loop is introduced.
 
 ## Final-file verification
 
@@ -70,13 +102,45 @@ References: [FFmpeg WAV muxer](https://ffmpeg.org/ffmpeg-formats.html#wav),
 [loudnorm output rate](https://ffmpeg.org/ffmpeg-filters.html#loudnorm),
 [caller-available disk space](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getdiskfreespaceexw).
 
-### Later loudness-measurement contract
+### Implemented final-file measurement — WAC-M2-02 (2026-10-02)
 
-Probe the final PCM file after output resampling/quantization, not only loudnorm's internal output. Validate stream, nonempty samples, sample rate, codec/bit depth, channel count and duration. For eligible program-length fixtures, initial engineering targets are integrated loudness within 0.5 LU of the requested target and measured true peak no more than target + 0.2 dB measurement tolerance. These tolerances are proposed tests, not an industry specification or a guarantee of exact equality. Establish stricter margins after measurement, not by silently weakening tests.
+Accurate performs a third FFmpeg invocation after validating the encoded PCM
+and before the existing no-replace publication. Keep the validation handle
+open: read its exact WAV bytes from position zero into the child's binary
+stdin, allow only the pipe protocol/WAV demuxer, and discard analysis output.
+Do not release and reopen the path or rerun cleaning, leveling or mono conversion.
+The native wrapper drains both diagnostic streams while copying input, closes
+child stdin at EOF and retains caller ownership of the validation stream.
+Input-copy errors cannot become successful measurements merely because the
+child returned zero. Publication renames the same held object after this check.
 
-The peak ceiling takes precedence over claiming a loudness target. Out-of-tolerance results must be reported as warnings/failures according to a documented target-compliance policy, not labeled compliant. Log requested vs achieved values. Default target remains -12 LUFS / -1.5 dBTP for Original; do not invent a platform-specific standard.
+Use the final-file analysis's `input_i`, `input_tp` and `input_lra` values.
+Its `output_*` values describe a discarded normalized stream and are not the
+export's measurements. This is a separate inspection of the encoded file,
+using FFmpeg's loudnorm meter. Fast has no extra invocation and continues to
+report NOT_MEASURED.
 
-Silent/very short/unmeasurable inputs receive metric value null plus an explicit reason and status. They may still produce a valid audio export under a documented policy, but never a false “target achieved” claim. Do not hide failed processing behind an undefined-loudness exception.
+The declared tolerances are integrated loudness within 0.5 LU of -12 LUFS and
+true peak at most -1.3 dBTP (-1.5 plus 0.2 dB measurement tolerance). These are
+engineering acceptance limits, not an industry standard or exact-equality
+promise. Do not weaken them silently. Evaluate a known peak violation first;
+undefined integrated loudness must not hide an exceeded peak. Compliance can
+pass only when required integrated and true-peak metrics are finite and within
+these limits. Report LRA as information; it has no separate final tolerance.
+
+For input shorter than one second, use `too_short` and null integrated loudness
+and LRA, even if FFmpeg returned finite numbers; retain a finite true peak.
+For longer input, undefined integrated loudness with undefined peak uses
+`silence`; undefined integrated loudness with finite peak uses
+`undefined_loudness`. These recognized cases use null plus a reason for
+unavailable metrics. Failed/malformed final analysis is a FAILED measurement
+diagnostic, not successful or merely unavailable analysis. A structurally valid
+WAV may still be published with `status: WARNING`, `processingStatus: SUCCESS` and
+application exit 7 for undefined/out-of-tolerance results, normalization
+fallback or a render/final measurement diagnostic failure. `reporting.complete`
+describes only report writing. Earlier analysis/render failure prevents
+publication and keeps its primary failure code. Reports never call unmeasured
+or failed results compliant.
 
 ## Timing and preview
 

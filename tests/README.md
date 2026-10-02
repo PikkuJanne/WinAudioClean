@@ -396,3 +396,66 @@ case-insensitively (`key.upper() != 'PSMODULEPATH'`); `os.environ.copy()` uses
 uppercase keys. This avoids PS7 module paths breaking PS5.1 cmdlet discovery.
 See [M2-01 evidence](../docs/codex/winaudioclean/evidence/WAC-M2-01.md) for actual
 checks and the preserved initial environment failure.
+
+## Measured loudness and held-stream input (WAC-M2-02)
+
+Three new suites cover the opt-in Accurate path:
+
+- `WinAudioClean.Loudness.Tests.ps1`: identical Raw/Zoom prechains, selected
+  streams and mono policy; invariant measured arguments; strict JSON parsing;
+  short/silent/out-of-range fallback; final input metrics and peak precedence;
+  warning/report status and redacted fields.
+- `WinAudioClean.LoudnessRuntime.Tests.ps1`: isolated application copies inject
+  native-stage faults while the real runtime controls ordering, publication and
+  persisted reports. It checks fatal first-pass failures, render/final diagnostic
+  warnings, dynamic fallback and successful completion.
+- `WinAudioClean.NativeInput.Tests.ps1`: input larger than a pipe buffer, EOF,
+  both diagnostic streams, unreadable/failing input, early zero-exit children,
+  blocked-input timeout and preservation of an unrelated process. The caller
+  stream remains open and the wrapper returns one result in PS5.1 and PS7.
+
+Run focused suites first in each supported shell; for example:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Loudness.Tests.ps1
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.LoudnessRuntime.Tests.ps1
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.NativeInput.Tests.ps1
+```
+
+Repeat those commands with `powershell.exe` for PS5.1. After focused checks
+stabilize, run one cumulative `-Level Full` per shell using the commands above.
+Full includes these suites; the real-FFmpeg harness remains a separate check.
+
+Use existing local FFmpeg/ffprobe binaries for the complete measured matrix:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-MeasuredLoudness.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-02/measured-full-1
+python -X utf8 scripts/Test-OriginalPreset.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-02/fast-baseline-1
+```
+
+Choose fresh output directories. The measured harness defaults to all **16
+cases**: eight configurations in PS5.1/en-US and PS7/de-DE. Synthetic fixtures
+cover a selected second stream, Raw/Zoom, mono/stereo, explicit downmix, PCM16/24,
+high LRA, restricted peak headroom, silence and subsecond audio. It inspects
+encoded PCM and independently measures the published WAV, verifies all three
+stage commands/measurements, checks the documented compliance/fallback outcomes
+and compares decoded samples across shells/locales. Eligible cases must meet
+the declared integrated/peak tolerances. Source and fixture hashes must remain
+unchanged during the run. Missing shells or failed checks make the run fail.
+
+`--case <case-id>` (repeatable) and `--shell ps51|ps7` limit investigative runs.
+Their recorded `scope.full_matrix` is false; a passing scoped run is not full
+AC-037/038/039 acceptance. Keep preliminary runs and their exact scope separate
+from the final unfiltered 16-case matrix. The Original comparison harness also
+requires Fast to remain unmeasured with null Accurate stages and no loudness
+warning, alongside its existing exact-PCM comparison against Original.
+
+The native wrapper uses binary stdin only for the held final WAV, retains caller
+ownership and closes child stdin at EOF. Accurate stage deadlines are duration
+based with a two-minute minimum; Fast retains its unlimited total render time.
+The development harness has its own bounded child-process timeout and kills
+only the owned harness process tree if it expires. Fixture tests and generated
+audio establish mechanics, not listening approval, long-file/memory stress or
+full >4 GB output. Keep media, raw local reports and private paths out of Git;
+only reviewed, sanitized evidence belongs in the task record.

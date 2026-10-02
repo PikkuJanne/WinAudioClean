@@ -123,12 +123,48 @@ Zoom/Teams:
 dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
 ```
 
-These are single-pass settings. The -12 LUFS target is a preset choice, not a
-universal broadcast standard or a guarantee of the final file's loudness.
-Independent loudness measurements and speech listening approval are not yet
-available. Preset identity covers the filter settings; the explicit 48 kHz
-PCM export policy below is a separate encoding change. Different FFmpeg builds
-or export settings can produce different samples.
+These are the default Fast settings. The -12 LUFS target is a preset choice,
+not a universal broadcast standard or a guarantee of the final file's loudness.
+Fast leaves final loudness unmeasured. Accurate adds the optional measurement
+workflow below. Preset identity names the Original base settings; loudness mode
+and the explicit 48 kHz PCM export policy are separate choices. Different
+FFmpeg builds or export settings can produce different samples. Speech listening
+approval remains pending.
+
+**Fast and Accurate loudness**
+
+`-LoudnessMode Fast` is the default, including drag-and-drop. It retains the
+original single-pass chain and runs no additional loudness analysis. To opt
+into two-pass normalization and final-file measurement, use PowerShell:
+
+```powershell
+.\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -LoudnessMode Accurate -NonInteractive
+```
+
+Accurate analyzes the selected recording, renders it using the measured values,
+and checks the encoded WAV in a separate FFmpeg process. The analysis and render
+repeat the same Original cleaning, dynamic leveling and optional mono conversion.
+A 192 kHz resampling step follows dynamic leveling in both passes; exports
+remain 48 kHz PCM16 or PCM24.
+Accurate takes longer and can sound different from Fast.
+
+Reports keep requested targets separate from measured integrated loudness,
+true peak and loudness range. The final check allows an integrated difference
+of at most 0.5 LU from -12 LUFS and true peak no higher than -1.3 dBTP
+(the -1.5 dBTP target plus 0.2 dB measurement tolerance). These are this tool's
+engineering tolerances. A peak violation takes priority; loudness range is
+reported for information.
+
+FFmpeg may use dynamic normalization when measured linear normalization is
+unavailable or cannot meet its constraints. The report records the actual
+normalization type and fallback reason. Fallbacks, undefined measurements and
+results outside the tolerances produce **WARNING / exit 7** when a valid WAV
+is published. Undefined metrics have `null` values and explicit reasons. For
+audio shorter than one second, integrated loudness and loudness range are
+unavailable; any finite true-peak measurement is retained.
+Malformed first-pass measurements or failed processing stop the run; a failed
+final measurement retains a valid export with a warning. Report completeness
+is recorded separately from loudness compliance.
 
 **Dependencies and audio tracks**
 
@@ -251,13 +287,16 @@ The version 1 JSON records the selected stream, exact filters, requested output
 format, verified audio, native diagnostics and processing/reporting outcomes.
 Reports identify the Original preset as `presetId: original`,
 `presetVersion: 1.0.0`, separately from the application `toolVersion`.
-Input recording duration and elapsed rendering time are separate fields.
-Loudness and true-peak measurements are currently `null` with a reason; successful
-export validation does not claim that a loudness target was achieved.
+Input recording duration and elapsed processing time are separate fields. The
+processing time includes analysis, rendering, validation and publication.
+Fast measurements remain `null` with `not_measured` and compliance
+`NOT_MEASURED`. Accurate reports the final encoded file's measurements,
+normalization stages, actual type, fallback and compliance outcome. Valid PCM
+alone does not establish loudness compliance.
 
 Published audio remains available if a report cannot be written. The console
-returns `7` for a successful export with incomplete reporting; an earlier
-processing failure keeps its own code. Surviving reports are corrected to that
+returns `7` for a valid published export with loudness or reporting warnings;
+an earlier processing failure keeps its own code. Surviving reports are corrected to that
 outcome where storage permits. A crash or unrecoverable write/rollback failure
 can leave incomplete report files. Use the console exit and diagnostics to
 resolve those cases; do not treat an incomplete file as a completed report.
@@ -286,18 +325,20 @@ encoded safely, reporting fails rather than replacing existing bytes.
 
 **Native results and launcher automation**
 
-The script runs the resolved FFmpeg executable directly, disables its stdin and
-captures stdout and stderr separately. Native failure details appear in the
-console and local report. Processing and reporting results use these exit codes:
+The script runs the resolved FFmpeg executable directly and captures stdout
+and stderr separately. Interactive input to FFmpeg is disabled. Accurate's
+final check streams the held WAV into FFmpeg as binary input while the file
+remains protected from changes. Native failure details appear in the console
+and local report. Processing and reporting results use these exit codes:
 
 | Code | Meaning |
 | --- | --- |
-| 0 | Audio was validated and published; reporting completed. |
-| 2 | Invalid input, destination, mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
-| 3 | Missing, incompatible or filter-deficient dependency, or render process start failure. |
-| 4 | Probe/metadata failure, no audio, or processing/capture/cleanup failure. Native failures retain diagnostics. |
+| 0 | Audio was validated and published without loudness or reporting warnings. |
+| 2 | Invalid input, destination, mode, loudness mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
+| 3 | Missing, incompatible or filter-deficient dependency, or analysis/render process start failure. |
+| 4 | Probe/metadata failure, no audio, or analysis/processing/capture/cleanup failure. Malformed first-pass measurements fail here. Native failures retain diagnostics. |
 | 5 | Output allocation, space/size check, validation, publication or owned-file cleanup failed. |
-| 7 | Audio was published, but reporting was incomplete. Audio is retained. |
+| 7 | Valid audio was published with loudness or reporting warnings. Audio is retained; inspect the report for the reason. |
 | 130 | Cancelled at the mode or audio-track menu. |
 
 A reporting failure never changes an existing processing failure to success.

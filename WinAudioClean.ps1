@@ -4,10 +4,16 @@ Cleans and levels spoken-word recordings locally with PowerShell and FFmpeg.
 .DESCRIPTION
 The Original preset (ID original, version 1.0.0) retains the legacy Raw/Zoom
 filter values and order. Choose 1/Raw for cleaning plus leveling, or 2/Zoom
-for leveling only. Both use single-pass normalization with requested targets
-of -12 LUFS integrated loudness and -1.5 dBTP true peak. Results depend on the
-recording; the application does not independently measure final loudness.
-SUCCESS means a validated export and complete reports, not target compliance.
+for leveling only. Default -LoudnessMode Fast keeps single-pass normalization
+with requested targets of -12 LUFS integrated and -1.5 dBTP true peak, without
+independent final measurement. -LoudnessMode Accurate measures the signal after
+channel conversion, cleaning and leveling, then repeats that prechain with
+measured normalization parameters. It independently measures the encoded PCM.
+Accurate accepts integrated loudness within 0.5 LU and true peak <= -1.3 dBTP
+(-1.5 target plus 0.2 dB tolerance). Fallback or an unavailable/failed/out-of-
+tolerance check produces WARNING (exit 7) when a valid export was published.
+Check loudnessCompliance separately from output validity. Neither certifies
+speech quality. Accurate's additional passes take more time.
 
 Raw applies adeclip, an 80 Hz highpass, adeclick, afftdn and agate before the
 shared leveling chain. These filters can reduce some clipping, rumble, clicks
@@ -48,6 +54,13 @@ Run Original/Zoom without the mode prompt. Multiple audio tracks require
 
 Use Original/Raw with 48 kHz PCM24 output. -Mono explicitly averages stereo;
 -Rf64 needs a compatible reader. These options do not retune the preset.
+.EXAMPLE
+.\WinAudioClean.ps1 -inputPath "C:\Audio\meeting.wav" -Mode Zoom -LoudnessMode Accurate -NonInteractive
+
+Request measured normalization and final PCM loudness verification. The shared
+Accurate prechain ends at 192 kHz before loudnorm; output stays at 48 kHz.
+Silent and subsecond audio carry explicit unavailable reasons. No retry loop
+forces a target; inspect warnings and listen to the result.
 .NOTES
 Author: Janne Vuorela. Windows 10/11; Windows PowerShell 5.1 or PowerShell 7+.
 Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
@@ -69,6 +82,7 @@ param(
     [string]$FfprobePath,
     [string]$AudioStreamIndex,
     [string]$BitDepth = '16',
+    [string]$LoudnessMode = 'Fast',
     [switch]$Mono,
     [switch]$Rf64,
     [switch]$NonInteractive,
@@ -641,7 +655,8 @@ function Invoke-WacNativeProcess {
         [string]$FilePath,
         [AllowEmptyCollection()][string[]]$ArgumentList = @(),
         [ValidateRange(0, 2147483647)][int]$TimeoutMilliseconds = 0,
-        [ValidateRange(1, 60000)][int]$StreamCloseTimeoutMilliseconds = 5000
+        [ValidateRange(1, 60000)][int]$StreamCloseTimeoutMilliseconds = 5000,
+        [System.IO.Stream]$StandardInputStream
     )
 
     $result = [pscustomobject]@{
@@ -654,7 +669,10 @@ function Invoke-WacNativeProcess {
     $stdinWriter = $null
     $stdoutTask = $null
     $stderrTask = $null
+    $stdinTask = $null
+    $stdinClosed = $false
     try {
+        if ($null -ne $StandardInputStream -and -not $StandardInputStream.CanRead) { throw 'Native input stream must be readable.' }
         if (-not [IO.Path]::IsPathRooted($FilePath) -or [IO.Path]::GetExtension($FilePath) -ne '.exe') {
             throw 'Native execution requires a resolved absolute .exe path.'
         }
@@ -684,9 +702,21 @@ function Invoke-WacNativeProcess {
         $stdinWriter = $process.StandardInput
         $stdoutTask = $stdoutReader.ReadToEndAsync()
         $stderrTask = $stderrReader.ReadToEndAsync()
-        $stdinWriter.Close()
+        if ($null -eq $StandardInputStream) {
+            $stdinWriter.Close()
+            $stdinClosed = $true
+        } else {
+            # Read from the caller's held immutable file without reopening its
+            # path. Async copying keeps both diagnostic pipes draining.
+            $stdinTask = $StandardInputStream.CopyToAsync($stdinWriter.BaseStream)
+        }
         $watch = [System.Diagnostics.Stopwatch]::StartNew()
         while (-not $process.WaitForExit(100)) {
+            if (-not $stdinClosed -and $stdinTask.IsCompleted) {
+                [void]$stdinTask.GetAwaiter().GetResult()
+                $stdinWriter.Close()
+                $stdinClosed = $true
+            }
             # Zero is deliberate for rendering: a long recording has no short
             # total deadline. Probe/test callers can supply a finite timeout.
             if ($TimeoutMilliseconds -gt 0 -and $watch.ElapsedMilliseconds -ge $TimeoutMilliseconds) {
@@ -698,6 +728,10 @@ function Invoke-WacNativeProcess {
             }
         }
         $result.ExitCode = $process.ExitCode
+        if ($null -ne $stdinTask) {
+            if (-not $stdinTask.Wait($StreamCloseTimeoutMilliseconds)) { throw 'Native input stream transfer did not finish.' }
+            [void]$stdinTask.GetAwaiter().GetResult()
+        }
         $readers = [System.Threading.Tasks.Task[]]@($stdoutTask, $stderrTask)
         if (-not [System.Threading.Tasks.Task]::WaitAll($readers, $StreamCloseTimeoutMilliseconds)) {
             throw "Native output streams did not close within $StreamCloseTimeoutMilliseconds ms."
@@ -726,6 +760,12 @@ function Invoke-WacNativeProcess {
                     catch { $result.CleanupError = $_.Exception.Message }
                 }
             }
+            if ($null -ne $stdinTask) {
+                try {
+                    if (-not $stdinTask.Wait($StreamCloseTimeoutMilliseconds)) { throw 'Native input transfer cleanup exceeded its deadline.' }
+                    [void]$stdinTask.GetAwaiter().GetResult()
+                } catch { $result.CleanupError = $_.Exception.Message }
+            }
             try { $process.Dispose() }
             catch { $result.CleanupError = $_.Exception.Message }
         }
@@ -748,13 +788,200 @@ function ConvertTo-WacMeasurement {
     [ordered]@{ value = $number; reason = $null }
 }
 
+function ConvertFrom-WacLoudnormJson {
+    param([string]$StandardError, [double]$DurationSeconds)
+
+    if ([double]::IsNaN($DurationSeconds) -or [double]::IsInfinity($DurationSeconds) -or
+        $DurationSeconds -le 0 -or $DurationSeconds -gt 1000000000) { throw 'Invalid loudness measurement duration.' }
+    if ([string]::IsNullOrWhiteSpace($StandardError) -or $StandardError.Length -gt 1048576) {
+        throw 'Loudness diagnostics are empty or exceed the 1 MiB limit.'
+    }
+    # loudnorm writes one flat JSON object. Match complete lines so braces in
+    # filenames or other diagnostic text do not become measurement objects.
+    $blocks = @([regex]::Matches($StandardError, '(?m)^[ \t]*\{[^{}]*\}[ \t]*\r?$') |
+        Where-Object { $_.Value -match '"(?:input_i|input_tp|input_lra|input_thresh|normalization_type|target_offset)"\s*:' })
+    if ($blocks.Count -ne 1 -or $blocks[0].Length -gt 8192) { throw 'Expected one bounded loudnorm JSON object.' }
+    $json = $blocks[0].Value.Trim()
+    $numberPattern = '-?(?:0|[1-9][0-9]*)(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?'
+    $pairPattern = '"(?<key>[a-z_]+)"\s*:\s*(?<value>"[^"\\\x00-\x1f]*"|' + $numberPattern + ')\s*'
+    $shape = [regex]::Match($json, '\A\{\s*' + $pairPattern + '(?:,\s*' + $pairPattern + ')*\}\z')
+    if (-not $shape.Success) { throw 'Malformed loudnorm JSON object.' }
+    $fields = @{}
+    for ($index = 0; $index -lt $shape.Groups['key'].Captures.Count; $index++) {
+        $key = $shape.Groups['key'].Captures[$index].Value
+        if ($fields.ContainsKey($key)) { throw 'Duplicate loudnorm measurement field.' }
+        $fields[$key] = $shape.Groups['value'].Captures[$index].Value.Trim('"')
+    }
+    $bounds = @{
+        input_i = @(-200, 0); input_tp = @(-200, 99); input_lra = @(0, 99); input_thresh = @(-200, 0)
+        output_i = @(-200, 0); output_tp = @(-200, 99); output_lra = @(0, 99); output_thresh = @(-200, 0)
+        target_offset = @(-99, 99)
+    }
+    $expected = @($bounds.Keys) + @('normalization_type')
+    if ($fields.Count -ne $expected.Count -or @($expected | Where-Object { -not $fields.ContainsKey($_) }).Count -ne 0) {
+        throw 'Missing or unsupported loudnorm measurement field.'
+    }
+    if ($fields.normalization_type -cnotin @('linear', 'dynamic')) { throw 'Invalid loudnorm normalization type.' }
+    $undefined = $fields.input_i -ceq '-inf'
+    if ($undefined -and ($fields.output_i -cne '-inf' -or $fields.target_offset -cne 'inf')) {
+        throw 'Inconsistent undefined loudnorm measurements.'
+    }
+    $values = @{}
+    foreach ($key in $bounds.Keys) {
+        $raw = $fields[$key]
+        if ($undefined -and (($key -in @('input_i', 'output_i', 'input_tp', 'output_tp') -and $raw -ceq '-inf') -or
+            ($key -eq 'target_offset' -and $raw -ceq 'inf'))) {
+            $values[$key] = $null
+            continue
+        }
+        $value = 0.0
+        if ($raw.Length -gt 64 -or $raw -cnotmatch ('\A' + $numberPattern + '\z') -or
+            -not [double]::TryParse($raw, [Globalization.NumberStyles]::Float, [Globalization.CultureInfo]::InvariantCulture, [ref]$value) -or
+            [double]::IsNaN($value) -or [double]::IsInfinity($value) -or
+            $value -lt $bounds[$key][0] -or $value -gt $bounds[$key][1] -or ($bounds[$key][0] -eq -200 -and $value -eq -200)) {
+            throw ('Invalid or out-of-range loudnorm measurement: ' + $key + '.')
+        }
+        $values[$key] = $value
+    }
+    if ($undefined -and ($values.input_lra -ne 0 -or $values.output_lra -ne 0)) {
+        throw 'Inconsistent undefined loudnorm range.'
+    }
+    $reason = $null
+    if ($DurationSeconds -lt 1) { $reason = 'too_short' }
+    elseif ($undefined) { $reason = if ($null -eq $values.input_tp) { 'silence' } else { 'undefined_loudness' } }
+    [pscustomobject]@{
+        Available = ($null -eq $reason); Reason = $reason
+        InputI = $(if ($reason) { $null } else { $values.input_i })
+        InputTP = $values.input_tp
+        InputLRA = $(if ($reason) { $null } else { $values.input_lra })
+        InputThreshold = $values.input_thresh; TargetOffset = $values.target_offset
+        NormalizationType = $fields.normalization_type
+    }
+}
+
+function Get-WacLoudnessPlan {
+    param([Parameter(Mandatory = $true)][Alias('Profile')]$ProcessingProfile,
+        [Parameter(Mandatory = $true)]$OutputPolicy, $Measurement)
+
+    $terminal = ',loudnorm=I=-12:TP=-1.5'
+    $chain = $ProcessingProfile.FilterChain
+    $originalChains = @((Get-WacProcessingProfile -Choice '1').FilterChain, (Get-WacProcessingProfile -Choice '2').FilterChain)
+    if ($chain -isnot [string] -or $chain -cnotin $originalChains -or -not $chain.EndsWith($terminal, [StringComparison]::Ordinal)) {
+        throw 'Accurate loudness requires the Original terminal normalization filter.'
+    }
+    $prechain = $chain.Substring(0, $chain.Length - $terminal.Length)
+    if ($prechain -match '(?i)loudnorm' -or [string]::IsNullOrWhiteSpace($prechain)) {
+        throw 'Accurate loudness requires exactly one terminal normalization filter.'
+    }
+    if ($OutputPolicy.FilterPrefix -cnotin @('', 'pan=mono|c0=0.5*c0+0.5*c1,')) {
+        throw 'Unsupported channel conversion for Accurate loudness.'
+    }
+    # Explicit rate prevents FFmpeg graph negotiation from changing the signal
+    # received by loudnorm between dynamic analysis and a linear second pass.
+    $prechain = $OutputPolicy.FilterPrefix + $prechain + ',aresample=192000'
+    $normalizer = 'loudnorm=I=-12:TP=-1.5:LRA=7'
+    $render = $normalizer + ':linear=false:print_format=json'
+    $linear = $false
+    $fallback = $null
+    if ($null -ne $Measurement) {
+        if ($Measurement.Available -isnot [bool]) { throw 'Invalid loudness measurement availability.' }
+        if ($Measurement.Available) {
+            $mapping = [ordered]@{
+                InputI = @('measured_I', -99, 0); InputTP = @('measured_TP', -99, 99)
+                InputLRA = @('measured_LRA', 0, 99); InputThreshold = @('measured_thresh', -99, 0)
+                TargetOffset = @('offset', -99, 99)
+            }
+            $render = $normalizer
+            $outsideAllowed = $false
+            foreach ($name in $mapping.Keys) {
+                $value = $Measurement.$name
+                if (($value -isnot [double] -and $value -isnot [int] -and $value -isnot [long] -and $value -isnot [decimal]) -or
+                    [double]::IsNaN($value) -or [double]::IsInfinity($value)) {
+                    throw 'Cannot use invalid measured values in an Accurate render.'
+                }
+                if ($value -lt $mapping[$name][1] -or $value -gt $mapping[$name][2]) { $outsideAllowed = $true }
+                $render += ':' + $mapping[$name][0] + '=' + $value.ToString('0.###############', [Globalization.CultureInfo]::InvariantCulture)
+            }
+            if ($outsideAllowed) {
+                $render = $normalizer + ':linear=false:print_format=json'
+                $fallback = 'measurement_out_of_range'
+            } else {
+                $render += ':linear=true:print_format=json'
+                $linear = $true
+            }
+        } else {
+            if ($Measurement.Reason -cnotin @('too_short', 'silence', 'undefined_loudness')) { throw 'Invalid loudness fallback reason.' }
+            $fallback = $Measurement.Reason
+        }
+    }
+    [pscustomobject]@{
+        Prechain = $prechain
+        AnalysisFilter = $prechain + ',' + $normalizer + ':print_format=json'
+        RenderFilter = $prechain + ',' + $render
+        FinalMeasurementFilter = $normalizer + ':print_format=json'
+        LinearRequested = $linear; FallbackReason = $fallback
+    }
+}
+
+function Get-WacLoudnessArguments {
+    param([string]$InputPath, [Parameter(Mandatory = $true)][string]$FilterChain,
+        [ValidateRange(0, 2147483647)][int]$AudioStreamIndex = 0,
+        [Parameter(Mandatory = $true)]$OutputPolicy, [switch]$FromPipe)
+
+    if ($FromPipe) {
+        # The frozen validated WAV is streamed from its held handle. Measure its
+        # actual channels/samples; do not repeat conversion or the prechain.
+        @('-nostdin', '-protocol_whitelist', 'pipe', '-format_whitelist', 'wav', '-f', 'wav', '-i', 'pipe:0',
+            '-map', '0:0', '-vn', '-af', $FilterChain, '-f', 'null', '-', '-hide_banner', '-loglevel', 'info', '-nostats')
+    } else {
+        @('-nostdin') + (Get-WacLocalMediaArguments) + @('-i', $InputPath,
+            '-map', ('0:' + $AudioStreamIndex.ToString([Globalization.CultureInfo]::InvariantCulture)), '-vn', '-af', $FilterChain,
+            '-ar', '48000', '-ac', $OutputPolicy.Channels.ToString([Globalization.CultureInfo]::InvariantCulture),
+            '-channel_layout', $OutputPolicy.Layout, '-f', 'null', '-', '-hide_banner', '-loglevel', 'info', '-nostats')
+    }
+}
+
+function ConvertTo-WacFinalLoudness {
+    param([Parameter(Mandatory = $true)]$Measurement)
+
+    $metrics = [ordered]@{}
+    foreach ($pair in @(@('integratedLufs', 'InputI'), @('truePeakDbtp', 'InputTP'), @('loudnessRangeLu', 'InputLRA'))) {
+        $value = $Measurement.($pair[1])
+        $metrics[$pair[0]] = [ordered]@{ value = $value; reason = $(if ($null -eq $value) { $Measurement.Reason } else { $null }) }
+    }
+    $status = 'PASSED'; $reason = $null
+    if ($null -ne $Measurement.InputTP -and $Measurement.InputTP -gt -1.3) {
+        $status = 'OUT_OF_TOLERANCE'; $reason = 'true_peak_exceeded'
+    } elseif (-not $Measurement.Available) {
+        $status = 'UNMEASURABLE'; $reason = $Measurement.Reason
+    } elseif ([math]::Abs($Measurement.InputI + 12) -gt 0.5) {
+        $status = 'OUT_OF_TOLERANCE'; $reason = 'loudness_out_of_tolerance'
+    }
+    [pscustomobject]@{ Measurements = $metrics; Compliance = [ordered]@{ status = $status; reason = $reason } }
+}
+
+function ConvertTo-WacLoudnessStage {
+    param([Parameter(Mandatory = $true)]$Process, [double]$DurationSeconds,
+        [string[]]$Arguments, [string]$InputSource = 'file')
+
+    $stage = [ordered]@{ status = 'FAILED'; arguments = @($Arguments); inputSource = $InputSource
+        process = $Process; measurement = $null; error = $null }
+    try {
+        if (-not $Process.Started -or $Process.Error -or $Process.CleanupError -or $Process.TimedOut -or
+            $null -eq $Process.ExitCode -or $Process.ExitCode -ne 0) { throw 'Loudness native process failed.' }
+        $stage.measurement = ConvertFrom-WacLoudnormJson -StandardError $Process.StandardError -DurationSeconds $DurationSeconds
+        $stage.status = 'PASSED'
+    } catch { $stage.error = $_.Exception.Message }
+    $stage
+}
+
 function Update-WacReportOutcome {
     param([System.Collections.IDictionary]$Report)
 
     $Report.reporting.complete = ($Report.reporting.errors.Count -eq 0)
     $Report.applicationExitCode = $Report.processingExitCode
     $Report.status = $Report.processingStatus
-    if (-not $Report.reporting.complete -and $Report.processingExitCode -eq 0) {
+    if ((-not $Report.reporting.complete -or $Report.warningCodes.Count -gt 0) -and $Report.processingExitCode -eq 0) {
         $Report.applicationExitCode = 7
         $Report.status = 'WARNING'
     }
@@ -787,7 +1014,7 @@ function New-WacRunReport {
         applicationExitCode = $c.ExitCode
         nativeExitCode = $c.Process.ExitCode
         reasonCodes = @($c.ReasonCodes)
-        warningCodes = @()
+        warningCodes = @($c.LoudnessWarnings | Where-Object { $_ })
         timing = [ordered]@{
             startedAtUtc = $c.StartedAt.ToUniversalTime().ToString('o', [Globalization.CultureInfo]::InvariantCulture)
             endedAtUtc = [DateTime]::UtcNow.ToString('o', [Globalization.CultureInfo]::InvariantCulture)
@@ -808,8 +1035,9 @@ function New-WacRunReport {
         }
         settings = [ordered]@{
             mode = $c.Mode; modeName = $c.ModeName; bitDepth = $c.Policy.Bits
+            loudnessMode = $(if ($c.LoudnessMode) { $c.LoudnessMode } else { 'Fast' })
             mono = [bool]$c.Mono; rf64 = [bool]$c.Policy.Rf64
-            exactFilters = ($c.Policy.FilterPrefix + $c.FilterChain)
+            exactFilters = $(if ($c.Normalization -and $c.Normalization.requestedMode -eq 'Accurate') { $c.Normalization.renderFilter } else { $c.Policy.FilterPrefix + $c.FilterChain })
         }
         output = [ordered]@{
             path = $c.Transaction.FinalPath; partialPath = $c.Transaction.TempPath
@@ -823,7 +1051,9 @@ function New-WacRunReport {
             }
             verified = $c.VerifiedAudio
         }
-        requestedTargets = [ordered]@{ integratedLufs = -12; truePeakDbtp = -1.5 }
+        requestedTargets = [ordered]@{ integratedLufs = -12; truePeakDbtp = -1.5; loudnessRangeLu = 7 }
+        loudnessTolerances = [ordered]@{ integratedLufs = 0.5; truePeakDbtp = 0.2 }
+        normalization = $c.Normalization
         measurements = [ordered]@{
             integratedLufs = (ConvertTo-WacMeasurement -Value $null)
             truePeakDbtp = (ConvertTo-WacMeasurement -Value $null)
@@ -844,7 +1074,12 @@ function New-WacRunReport {
         reporting = [ordered]@{ complete = $true; errors = @() }
         privacy = 'Local detailed report: may contain paths, filenames, metadata and sensitive diagnostics. Use explicit redacted export and review before sharing.'
     }
+    if ($c.FinalLoudness) {
+        $report.measurements = $c.FinalLoudness.Measurements
+        $report.loudnessCompliance = $c.FinalLoudness.Compliance
+    }
     if ($c.MetadataError) { Add-WacReportFailure -Report $report -Code 'output_metadata_unavailable' -Message $c.MetadataError }
+    Update-WacReportOutcome -Report $report
     $report
 }
 
@@ -874,7 +1109,7 @@ PROCESSING     : $($r.processingStatus) (Application Exit Code: $($r.processingE
 MODE           : $($r.settings.modeName)
 PRESET         : $($r.presetName) (ID: $($r.presetId); version: $($r.presetVersion))
 INPUT DURATION : $($r.input.durationSeconds) s (selected stream)
-PROCESSING TIME: $($r.timing.processingElapsedSeconds) s (wall time for native rendering)
+PROCESSING TIME: $($r.timing.processingElapsedSeconds) s (analysis, rendering, validation and publication)
 STARTED UTC    : $($r.timing.startedAtUtc)
 ENDED UTC      : $($r.timing.endedAtUtc) (processing and output cleanup complete)
 
@@ -890,9 +1125,14 @@ VERIFIED AUDIO : $($r.output.verified.DurationSeconds) s; $($r.output.verified.F
 
 ACTIVE FILTERS : $($r.settings.exactFilters)
 EXPORT FORMAT  : $($r.output.format.sampleRate) Hz; $($r.output.format.codec); $($r.output.format.bitDepth) bits; $($r.output.format.channelLayout); $($r.output.format.container) WAV
-REQUEST TARGETS: -12 LUFS integrated; -1.5 dBTP true peak (requested, not independently measured)
-MEASUREMENTS   : LUFS, true peak and loudness range unavailable (not_measured)
-LOUDNESS CHECK : NOT_MEASURED; export validity does not certify loudness compliance
+LOUDNESS MODE  : $($r.settings.loudnessMode)
+REQUEST TARGETS: -12 LUFS integrated; -1.5 dBTP true peak; 7 LU loudness range
+MEASUREMENTS   : I=$($r.measurements.integratedLufs.value) LUFS [$($r.measurements.integratedLufs.reason)]; TP=$($r.measurements.truePeakDbtp.value) dBTP [$($r.measurements.truePeakDbtp.reason)]; LRA=$($r.measurements.loudnessRangeLu.value) LU [$($r.measurements.loudnessRangeLu.reason)]
+LOUDNESS CHECK : $($r.loudnessCompliance.status); $($r.loudnessCompliance.reason); tolerances 0.5 LU / +0.2 dBTP; export validity is separate
+NORMALIZATION : $($r.normalization.actualType); fallback=$($r.normalization.fallbackReason)
+ANALYSIS STAGE : $($r.normalization.analysis.status); native exit=$($r.normalization.analysis.process.ExitCode); $($r.normalization.analysis.error)
+RENDER STAGE   : $($r.normalization.render.status); native exit=$($r.normalization.render.process.ExitCode); $($r.normalization.render.error)
+FINAL STAGE    : $($r.normalization.final.status); native exit=$($r.normalization.final.process.ExitCode); $($r.normalization.final.error)
 SPACE ESTIMATE : $($r.space.estimatedFileBytes) file bytes + $($r.space.reserveBytes) reserve bytes; $($r.space.availableBytesBeforeRender) available before rendering
 TOOL VERSION   : $($r.toolVersion); schema $($r.schemaVersion); revision not_embedded
 EXECUTABLE     : $($r.dependencies.ffmpeg.path)
@@ -1000,11 +1240,13 @@ function ConvertTo-WacRedactedReport {
         reviewWarning = 'Review this export before sharing. No file has been uploaded.'
         status = $Report.status; processingStatus = $Report.processingStatus
         applicationExitCode = $null; nativeExitCode = $null
-        settings = [ordered]@{ mode = $mode; bitDepth = $null; mono = $null; rf64 = $null }
+        settings = [ordered]@{ mode = $mode; bitDepth = $null; mono = $null; rf64 = $null; loudnessMode = $null }
         input = [ordered]@{ durationSeconds = $null; channels = $null; sampleRate = $null; streamIndex = $null }
         timing = [ordered]@{ processingElapsedSeconds = $null }
         output = [ordered]@{ published = $null; validity = $null; format = [ordered]@{} }
         measurements = [ordered]@{}
+        normalization = [ordered]@{ requestedMode = $null; actualType = $null; linearRequested = $null; fallbackReason = $null }
+        loudnessCompliance = [ordered]@{ status = $null; reason = $null }
         diagnostics = [ordered]@{ omitted = $true; reason = 'may_contain_paths_or_metadata' }
     }
     foreach ($name in @('applicationExitCode', 'nativeExitCode')) {
@@ -1030,8 +1272,27 @@ function ConvertTo-WacRedactedReport {
         $allowed = switch ($name) { 'codec' { @('pcm_s16le', 'pcm_s24le') } 'channelLayout' { @('mono', 'stereo') } 'container' { @('RIFF', 'RF64') } }
         $safe.output.format[$name] = if ($Report.output.format.$name -cin $allowed) { $Report.output.format.$name } else { $null }
     }
+    $metricReasons = @('unavailable', 'not_measured', 'too_short', 'silence', 'undefined_loudness', 'measurement_failed', 'nonfinite', 'not_numeric')
     foreach ($name in @('integratedLufs', 'truePeakDbtp', 'loudnessRangeLu')) {
-        $safe.measurements[$name] = ConvertTo-WacMeasurement -Value $Report.measurements.$name.value
+        $value = $Report.measurements.$name.value
+        $reason = if ($Report.measurements.$name.reason -cin $metricReasons) { $Report.measurements.$name.reason } else { 'not_measured' }
+        if ($null -ne $value -and $value -isnot [double] -and $value -isnot [int] -and $value -isnot [long] -and $value -isnot [decimal]) {
+            $value = $null; $reason = 'not_numeric'
+        }
+        $safe.measurements[$name] = ConvertTo-WacMeasurement -Value $value -UnavailableReason $reason
+    }
+    if ($Report.settings.loudnessMode -cin @('Fast', 'Accurate')) { $safe.settings.loudnessMode = $Report.settings.loudnessMode }
+    if ($Report.normalization.requestedMode -cin @('Fast', 'Accurate')) { $safe.normalization.requestedMode = $Report.normalization.requestedMode }
+    if ($Report.normalization.actualType -cin @('linear', 'dynamic')) { $safe.normalization.actualType = $Report.normalization.actualType }
+    if ($Report.normalization.linearRequested -is [bool]) { $safe.normalization.linearRequested = $Report.normalization.linearRequested }
+    if ($Report.normalization.fallbackReason -cin @('too_short', 'silence', 'undefined_loudness', 'measurement_out_of_range', 'ffmpeg_dynamic_fallback')) {
+        $safe.normalization.fallbackReason = $Report.normalization.fallbackReason
+    }
+    if ($Report.loudnessCompliance.status -cin @('NOT_MEASURED', 'PASSED', 'OUT_OF_TOLERANCE', 'UNMEASURABLE', 'FAILED')) {
+        $safe.loudnessCompliance.status = $Report.loudnessCompliance.status
+    }
+    if ($Report.loudnessCompliance.reason -cin @('no_independent_measurement', 'true_peak_exceeded', 'loudness_out_of_tolerance', 'too_short', 'silence', 'undefined_loudness', 'measurement_failed')) {
+        $safe.loudnessCompliance.reason = $Report.loudnessCompliance.reason
     }
     $safe
 }
@@ -1110,6 +1371,8 @@ try {
         }
     }
     if ($BitDepth -cnotin @('16', '24')) { throw 'Bit depth must be 16 or 24. Supply -BitDepth 16 or -BitDepth 24.' }
+    if ($LoudnessMode -notin @('Fast', 'Accurate')) { throw 'Loudness mode must be Fast or Accurate.' }
+    $LoudnessMode = if ($LoudnessMode -eq 'Accurate') { 'Accurate' } else { 'Fast' }
     $outFolder = Get-WacOutputDirectory -Path $OutputDirectory
     if (-not $Mode -and -not $interactive) {
         throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.'
@@ -1166,7 +1429,10 @@ $modeName = $processingProfile.ModeName
 $filterChain = $processingProfile.FilterChain
 Write-Host ("Preset: {0} (ID: {1}; version: {2})" -f $processingProfile.PresetName, $processingProfile.PresetId, $processingProfile.PresetVersion)
 
-try { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain $filterChain }
+try {
+    Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain $filterChain
+    if ($LoudnessMode -eq 'Accurate') { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain 'aresample' }
+}
 catch {
     Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 3
@@ -1237,16 +1503,54 @@ Write-Host "Chain: $modeName" -ForegroundColor Gray
 $startedAt = [DateTime]::UtcNow
 $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
 
-# FFmpeg Command
-$argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $transaction.TempPath -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
-$process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList
-
-$stopWatch.Stop()
+# Fast retains the original single render and argv. Accurate measures the exact
+# prechain, renders with its measured values, then measures the held final PCM.
+$normalization = [ordered]@{ requestedMode = $LoudnessMode; prechain = $null; analysisFilter = $null
+    renderFilter = ($outputPolicy.FilterPrefix + $filterChain); finalMeasurementFilter = $null
+    linearRequested = $false; fallbackReason = $null; actualType = $null
+    analysis = $null; render = $null; final = $null }
+$loudnessWarnings = @()
+$finalLoudness = $null
+$analysisFailed = $false
+$loudnessTimeout = [int][math]::Min([int]::MaxValue, [math]::Max(120000, $selectedStream.DurationSeconds * 20000 + 60000))
+if ($LoudnessMode -eq 'Accurate') {
+    $normalization.renderFilter = $null
+    $loudnessPlan = Get-WacLoudnessPlan -Profile $processingProfile -OutputPolicy $outputPolicy
+    $normalization.prechain = $loudnessPlan.Prechain
+    $normalization.analysisFilter = $loudnessPlan.AnalysisFilter
+    $normalization.finalMeasurementFilter = $loudnessPlan.FinalMeasurementFilter
+    $analysisArguments = Get-WacLoudnessArguments -InputPath $inputPath -FilterChain $loudnessPlan.AnalysisFilter -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
+    $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $analysisArguments -TimeoutMilliseconds $loudnessTimeout
+    $normalization.analysis = ConvertTo-WacLoudnessStage -Process $process -DurationSeconds $selectedStream.DurationSeconds -Arguments $analysisArguments
+    $analysisFailed = $normalization.analysis.status -ne 'PASSED'
+    if (-not $analysisFailed) {
+        $loudnessPlan = Get-WacLoudnessPlan -Profile $processingProfile -OutputPolicy $outputPolicy -Measurement $normalization.analysis.measurement
+        $normalization.linearRequested = $loudnessPlan.LinearRequested
+        $normalization.fallbackReason = $loudnessPlan.FallbackReason
+        $normalization.renderFilter = $loudnessPlan.RenderFilter
+        # The plan includes channel conversion; the existing argv builder adds
+        # its prefix, so pass only the remainder to avoid applying mono twice.
+        $renderChain = $loudnessPlan.RenderFilter.Substring($outputPolicy.FilterPrefix.Length)
+        $argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $renderChain -OutputFile $transaction.TempPath -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
+        $argumentList[[array]::IndexOf($argumentList, '-loglevel') + 1] = 'info'
+        $argumentList[[array]::IndexOf($argumentList, '-stats')] = '-nostats'
+        $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList -TimeoutMilliseconds $loudnessTimeout
+        $normalization.render = ConvertTo-WacLoudnessStage -Process $process -DurationSeconds $selectedStream.DurationSeconds -Arguments $argumentList
+        if ($normalization.render.status -eq 'PASSED') {
+            $normalization.actualType = $normalization.render.measurement.NormalizationType
+            if ($normalization.linearRequested -and $normalization.actualType -eq 'dynamic') { $normalization.fallbackReason = 'ffmpeg_dynamic_fallback' }
+        } else { $loudnessWarnings += 'normalization_result_unavailable' }
+        if ($normalization.fallbackReason) { $loudnessWarnings += 'normalization_fallback' }
+    }
+} else {
+    $argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $transaction.TempPath -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
+    $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList
+}
 
 # --- LOGGING ---
 $applicationExitCode = 0
 if (-not $process.Started) { $applicationExitCode = 3 }
-elseif ($process.Error -or $process.CleanupError -or $process.TimedOut -or $null -eq $process.ExitCode -or $process.ExitCode -ne 0) { $applicationExitCode = 4 }
+elseif ($analysisFailed -or $process.Error -or $process.CleanupError -or $process.TimedOut -or $null -eq $process.ExitCode -or $process.ExitCode -ne 0) { $applicationExitCode = 4 }
 $validationError = $null
 $verifiedAudio = $null
 if ($applicationExitCode -eq 0) {
@@ -1255,6 +1559,25 @@ if ($applicationExitCode -eq 0) {
         if ($outputStreams.Count -ne 1) { throw 'Output must contain exactly one readable audio stream.' }
         $validationStream = Freeze-WacOutputTransaction -Transaction $transaction
         $verifiedAudio = Assert-WacWaveOutput -Stream $validationStream -InputAudio $selectedStream -OutputAudio $outputStreams[0] -OutputPolicy $outputPolicy
+        if ($LoudnessMode -eq 'Accurate') {
+            # Keep the immutable validation handle through measurement and
+            # publication. FFmpeg cannot reopen a file held with DELETE access.
+            $validationStream.Position = 0
+            $finalArguments = Get-WacLoudnessArguments -FilterChain $loudnessPlan.FinalMeasurementFilter -OutputPolicy $outputPolicy -FromPipe
+            $finalProcess = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $finalArguments -StandardInputStream $validationStream -TimeoutMilliseconds $loudnessTimeout
+            $normalization.final = ConvertTo-WacLoudnessStage -Process $finalProcess -DurationSeconds $verifiedAudio.DurationSeconds -Arguments $finalArguments -InputSource 'held_output_stream'
+            if ($normalization.final.status -eq 'PASSED') {
+                $finalLoudness = ConvertTo-WacFinalLoudness -Measurement $normalization.final.measurement
+            } else {
+                $finalLoudness = [pscustomobject]@{
+                    Measurements = [ordered]@{
+                        integratedLufs = (ConvertTo-WacMeasurement -Value $null -UnavailableReason 'measurement_failed')
+                        truePeakDbtp = (ConvertTo-WacMeasurement -Value $null -UnavailableReason 'measurement_failed')
+                        loudnessRangeLu = (ConvertTo-WacMeasurement -Value $null -UnavailableReason 'measurement_failed') }
+                    Compliance = [ordered]@{ status = 'FAILED'; reason = 'measurement_failed' } }
+            }
+            if ($finalLoudness.Compliance.status -ne 'PASSED') { $loudnessWarnings += 'final_loudness_' + $finalLoudness.Compliance.status.ToLowerInvariant() }
+        }
         Publish-WacOutputTransaction -Transaction $transaction
     } catch {
         $validationError = $_.Exception.Message
@@ -1262,6 +1585,7 @@ if ($applicationExitCode -eq 0) {
         Write-Error -Message ("Output validation/publication failed: " + $validationError) -ErrorAction Continue
     }
 }
+$stopWatch.Stop()
 $status = if ($applicationExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' }
 $nativeExitText = if ($null -eq $process.ExitCode) { 'not started' } else { [string]$process.ExitCode }
 # Keep separate diagnostics even when the child returns a failure code.
@@ -1269,6 +1593,7 @@ if ($process.StandardOutput) { Write-Host $process.StandardOutput }
 if ($process.StandardError) { Write-Host $process.StandardError -ForegroundColor Gray }
 if ($process.Error) { Write-Error -Message $process.Error -ErrorAction Continue }
 if ($process.CleanupError) { Write-Error -Message ("Native cleanup failed: " + $process.CleanupError) -ErrorAction Continue }
+if ($analysisFailed) { Write-Error -Message $normalization.analysis.error -ErrorAction Continue }
 $duration = $stopWatch.Elapsed.ToString("c")
 # Metadata failures affect reporting only; the verified audio remains valid.
 $outputSizeMB = 'N/A'
@@ -1296,6 +1621,7 @@ $reasonCodes = @()
 if (-not $process.Started) { $reasonCodes += 'native_start_failed' }
 elseif ($process.Error -or $process.CleanupError -or $process.TimedOut -or $null -eq $process.ExitCode -or $process.ExitCode -ne 0) { $reasonCodes += 'native_processing_failed' }
 if ($validationError) { $reasonCodes += 'output_validation_or_publication_failed' }
+if ($analysisFailed) { $reasonCodes += 'loudness_analysis_failed' }
 if ($outputCleanupErrors.Count -gt 0) { $reasonCodes += 'owned_output_cleanup_failed' }
 $report = New-WacRunReport -Context @{
     Transaction = $transaction; ToolVersion = $scriptVersion; Process = $process
@@ -1304,6 +1630,7 @@ $report = New-WacRunReport -Context @{
     Stream = $selectedStream; InputBytes = $inputFileItem.Length; OutputBytes = $outputBytes
     Mode = $Mode; ModeName = $modeName; Policy = $outputPolicy; Mono = $Mono
     Profile = $processingProfile; FilterChain = $filterChain; VerifiedAudio = $verifiedAudio
+    LoudnessMode = $LoudnessMode; Normalization = $normalization; LoudnessWarnings = $loudnessWarnings; FinalLoudness = $finalLoudness
     FfmpegPath = $ffmpegPath; FfmpegVersion = $ffmpegVersion; FfprobePath = $ffprobePath; FfprobeVersion = $ffprobeVersion
     SpaceEstimate = $spaceEstimate; AvailableBytes = $availableBytes
     ValidationError = $validationError; CleanupErrors = $outputCleanupErrors; MetadataError = $metadataError
@@ -1328,7 +1655,8 @@ if ($status -eq "SUCCESS") {
     Write-Host "Output Size  : $outputSizeMB"
     Write-Host "File saved to: $outputFile"
 } elseif ($status -eq 'WARNING') {
-    Write-Host "`nDONE: WARNING - Audio was published, but reporting was incomplete." -ForegroundColor Yellow
+    Write-Host "`nDONE: WARNING - Audio was published with loudness or reporting warnings." -ForegroundColor Yellow
+    Write-Host ("Warnings: " + ($report.warningCodes -join ', '))
     Write-Host "File saved to: $outputFile"
 } else {
     Write-Host "`nDONE: FAILED" -ForegroundColor Red

@@ -163,6 +163,10 @@ def main() -> int:
                  "preset_id": report.get("presetId"), "preset_name": report.get("presetName"),
                  "preset_version": report.get("presetVersion"), "preset_version_reason": report.get("presetVersionReason"),
                  "mode": report["settings"]["mode"], "exact_filters": report["settings"]["exactFilters"],
+                 "loudness_mode": report["settings"]["loudnessMode"],
+                 "fast_has_no_measurement_stages": all(report["normalization"][name] is None for name in ("analysis", "render", "final")),
+                 "normalization_requested_mode": report["normalization"]["requestedMode"],
+                 "normalization_actual_type": report["normalization"]["actualType"],
                  "format": report["output"]["format"], "requested_targets": report["requestedTargets"],
                  "measurements": report["measurements"], "loudness_compliance": report["loudnessCompliance"],
                  "status": report["status"], "published": report["output"]["published"],
@@ -177,7 +181,9 @@ def main() -> int:
                            and facts["preset_id"] == PRESET_ID and facts["preset_name"] == "Original" and facts["preset_version"] == PRESET_VERSION
                            and facts["preset_version_reason"] is None and facts["mode"] == mode
                            and facts["exact_filters"] == filters and facts["format"] == expected_format
-                           and facts["requested_targets"] == {"integratedLufs": -12, "truePeakDbtp": -1.5}
+                           and facts["requested_targets"] == {"integratedLufs": -12, "truePeakDbtp": -1.5, "loudnessRangeLu": 7}
+                           and facts["loudness_mode"] == "Fast" and facts["fast_has_no_measurement_stages"]
+                           and facts["normalization_requested_mode"] == "Fast" and facts["normalization_actual_type"] is None
                            and facts["status"] == "SUCCESS" and facts["published"]
                            and facts["application_exit_code"] == 0 and facts["native_exit_code"] == 0
                            and facts["text_contiguous_in_summary"] and facts["text_retains_preset_identity"]

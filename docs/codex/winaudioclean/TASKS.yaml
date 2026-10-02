@@ -489,7 +489,7 @@
       "depends_on": [
         "WAC-M2-01"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Optional two-pass pipeline and final-file measurement; AUDIO_CONTRACT.md.",
       "implementation": [
@@ -503,7 +503,12 @@
         "AC-038",
         "AC-039"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M2-02.md",
+        "evidence/WAC-M2-02-source.json",
+        "evidence/WAC-M2-02-measured-loudness.json",
+        "evidence/WAC-M2-02-fast-compatibility.json"
+      ],
       "blocked_reason": null
     },
     {
