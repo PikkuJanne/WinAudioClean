@@ -27,3 +27,52 @@ D18. Claims of “exact -12 LUFS”, “-12 dB RMS”, “85% leveling”, “95
 ## Changes to decisions
 
 Add dated entries with task ID, rationale, evidence and owner approval where required. Preserve earlier entries and record supersession; do not silently edit away history. Numeric audio tolerances are engineering acceptance proposals in AUDIO_CONTRACT.md, not universal standards.
+
+### 2026-10-02 — WAC-M0-04 baseline gate
+
+D19. Continue the already authorized implementation plan from the verified M0
+checkpoint. D01–D08 remain owner constraints; D09–D18 and the audio, process and
+data contracts guide their scheduled implementation. This gate records no new
+owner approval and does not certify future behavior as implemented. Evidence:
+`evidence/WAC-M0-04.md` and `evidence/WAC-M0-04-reconciliation.json`.
+
+The implementation contracts carried into M1 are:
+
+- Keep the original Raw/Zoom filter text and order in `BASELINE.json`, the
+  `.ps1 -inputPath` and `.bat` entry points, and Windows PowerShell 5.1 support.
+  Continue local processing with no runtime Python or automatic downloads.
+- M1-01 validates literal file input and a writable destination before asking
+  for a mode. Invalid choices must reprompt; cancellation and unattended
+  failure must be explicit. Music remains the default destination. A useful
+  no-input usage route is sufficient; a picker is optional. Reject URL input.
+  If UNC paths are supported, document them as network shares and test them;
+  do not equate filesystem paths with physically offline storage.
+- Keep paths as argument data, capture native exits/diagnostics, and verify
+  actual Windows argument forwarding in M1-02. Its application exit-code and
+  warning/logging-failure policy remains an engineering decision to finalize
+  there, using `NATIVE_PROCESS_CONTRACT.md`.
+- Preserve originals and prior exports with run-owned temporary output,
+  validation and a no-overwrite final move in M1-04. Current collision and
+  overwrite characterizations are defects to replace with regression tests.
+- Implement D10's explicit 48 kHz PCM16 export and optional PCM24 in M1-05,
+  separately from filter tuning. The present application still leaves encoding
+  unspecified; M0-03 measured 192 kHz PCM16 and compared 48 kHz PCM16. The future
+  export change needs format/timing/channel checks and release notes. RF64 and
+  disk-size behavior need their scheduled evidence before acceptance.
+- Preserve selected channels and timing. Later optional Accurate processing,
+  presets, preview, queues and typed settings follow their own task gates;
+  synthetic loudness observations do not establish speech-quality approval.
+
+Pending human decisions and evidence:
+
+| Item | Current status | Effect on continuation |
+| --- | --- | --- |
+| Permission-cleared speech corpus and listening review | No clips admitted; no review performed. Use `evidence/WAC-M0-03-listening.md`. | M1 reliability work can proceed. Speech-quality claims remain unverified. |
+| Change the default sound | No exact settings/revision approved. | Preserve Original; any promotion needs the explicit approval required by D07. |
+| Bundle third-party binaries | No redistribution choice approved. | D15's tool-only portable package remains the planned starting point. |
+| Merge, tag/release, settings changes or website deployment | No action/revision/target approved in `APPROVALS.md`. | Feature pushes and draft PR updates continue under D17. Publication is a later decision. |
+
+The local full gate and same-build reports support proceeding to **WAC-M1-01**,
+not release readiness. `BASELINE.json` and bundle Linux reports remain historical
+anchors; the current Windows evidence and its limits are in M0-03/M0-04 records.
+No earlier decision is superseded by this entry.

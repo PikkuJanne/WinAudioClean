@@ -123,8 +123,14 @@
       "title": "Baseline completeness",
       "procedure": "Check source identities, filters, runnable test commands and environment inventory.",
       "expected": "Each exists with actual evidence; unexecuted Windows/listening checks remain distinguishable.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-04.md",
+        "evidence/WAC-M0-04-source.json",
+        "evidence/WAC-M0-04-reconciliation.json",
+        "evidence/WAC-M0-04-full-ps7.txt",
+        "evidence/WAC-M0-04-full-ps51.txt"
+      ]
     },
     {
       "id": "AC-011",
@@ -132,8 +138,11 @@
       "title": "Plan consistency",
       "procedure": "Run the plan validator after changing task status.",
       "expected": "No unknown dependency, duplicate ID, missing acceptance link, or done task without evidence.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-04.md",
+        "evidence/WAC-M0-04-plan.txt"
+      ]
     },
     {
       "id": "AC-012",
@@ -141,8 +150,11 @@
       "title": "Thread restart",
       "procedure": "Start from a fresh Codex thread reading NEXT_MODEL_START_HERE.md and git.",
       "expected": "The next task and unverified checks are clear without reconstructing prior chat or repeating the entire audit.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-04.md",
+        "evidence/WAC-M0-04-restart.md"
+      ]
     },
     {
       "id": "AC-013",

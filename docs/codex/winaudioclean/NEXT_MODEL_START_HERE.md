@@ -1,65 +1,100 @@
 # Next model starts here
 
-Completed: **WAC-M0-03**, repeatable Windows synthetic audio baseline and private
-listening checklist. Next: **WAC-M0-04 in a fresh thread**. Stop at that coherent
-gate; do not start M1 in the same thread.
+**M0 is complete. Next: WAC-M1-01 in a fresh thread.**
+Validate local input, mode and destination before prompting. Do only that task,
+then checkpoint; do not implement all of M1 in one session.
 
-Branch: `codex/wac-m0-handoff`; [draft PR #1](https://github.com/PikkuJanne/WinAudioClean/pull/1)
-targets main. Continue from the verified feature-branch tip. The source-only
-starting folder has no Git metadata; discover the established separate Git
-checkout and verify root, branch, worktree, effective fetch/push origins and live
-GitHub/PR heads. The preceding checkpoint was
-`7291ce86535e9c689befbdb60563ed9eb4b1b2a6`; M0-03's completion SHA is in the PR/final
-response. Derive live sync afresh; preserve local changes.
+## Locate and verify the checkout
 
-Read AGENTS.md, STATUS.md, DECISIONS.md, SYNC_PROTOCOL.md, TASKS.yaml,
-`tasks/WAC-M0-04.md` and `evidence/WAC-M0-03.md`. Use `tests/README.md` for commands.
-Do not reimport old governance or repeat the historical audit without drift.
+The supplied source-only folder has no `.git`. The established separate checkout
+is named `WinAudioClean-governance`, a sibling of that folder on the active
+machine. If the current folder has no Git metadata, inspect its parent directory
+for that checkout. Verify its root and effective origin; the name is a discovery
+hint, not proof of repository identity. No prior chat is needed.
 
-## Current baseline
+Read AGENTS.md, STATUS.md, DECISIONS.md (including D19), SYNC_PROTOCOL.md,
+TASKS.yaml and tasks/WAC-M1-01.md. Use evidence/WAC-M0-04.md for the reconciled
+gate; older evidence need only be reopened if relevant source has drifted.
 
-- Original .ps1/.bat entry points and all application behavior are unchanged
-  from M0-02. The three pure helpers remain safely importable.
-- `tools/characterize_filters.py` reuses all five synthetic fixtures for 20
-  Raw/Zoom legacy/explicit encoding variants. Reports include exact build and
-  binary identities, commands/exits, fixture/output hashes, formats/durations
-  and independent final-file astats/loudnorm input measurements.
-- Two Windows reports are byte-identical, including all output hashes/metrics.
-  Legacy unspecified WAV outputs are 192 kHz PCM16; explicit comparison outputs
-  are 48 kHz PCM16. Channels and reported durations match input in all cases.
-  Silence/very-short input have null integrated loudness with reasons.
-- Current tested source hashes and sanitized evidence are under
-  `evidence/WAC-M0-03-*`; AC-007 through AC-009 pass. Listening is **pending**.
-- Targeted: 13 Pester passed. Characterizer: 8 unit tests passed. Full on both
-  PS5.1 and PS7: 29 Pester passed; 61 Python passed and one symlink-privilege skip.
-  49 analyzer advisories are visible, including shared Pester setup variables.
-  Parser/static/plan gates passed; no suppressed rules.
+M0 branch: `codex/wac-m0-handoff`; exact fetch/push target:
+`https://github.com/PikkuJanne/WinAudioClean.git`.
+[Draft PR #1](https://github.com/PikkuJanne/WinAudioClean/pull/1) targets main.
+The M0-03 completion checkpoint was `e1bd07b96dc23ab7d84ac0f236ca599a866c73a3`.
+M0-04's exact completion SHA is in the live branch/PR and final response; derive
+it afresh. Preserve local changes. Inspect origin/branch/worktree, fetch and run:
 
-## Tools and reproduction
+```powershell
+python -X utf8 docs/codex/winaudioclean/tools/handoff.py inspect --repo .
+python -X utf8 docs/codex/winaudioclean/tools/handoff.py sync-check --repo .
+python -X utf8 docs/codex/winaudioclean/tools/handoff.py validate-plan --plan-root docs/codex/winaudioclean
+python -X utf8 docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/codex/winaudioclean
+```
 
-Pinned Pester 5.7.1 and PSScriptAnalyzer 1.24.0 remain checkout-local under
-`.wac-local/Modules`. Runners never install tools. Use process-only Bypass for
-PS5.1 as documented; persistent policy is unchanged.
+Only WAC-M1-01 should be ready. Do not proceed on a source-push or sync failure.
+Inspect live PR/CI state separately. Once M0 delivery is verified, create
+`codex/wac-m1-reliability` from its completion tip. If PR #1 is still unmerged,
+use `codex/wac-m0-handoff` as the new draft PR base. If an approved merge occurred,
+inspect the resulting history and choose the matching base without rewriting it.
 
-FFmpeg/ffprobe are not on PATH. A checksum-verified portable Gyan 9.0.2 essentials
-build is under `.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin`.
-Use explicit executable arguments. `WAC-M0-03-download.json` records provenance;
-run JSON records exact binaries/build. Do not commit binaries or generated WAVs.
-The two run folders already exist under `.wac-local/WAC-M0-03/`; future runs must
-use new names because the characterizer refuses existing directories.
+## WAC-M1-01 implementation boundary
 
-## M0-04 scope and remaining limits
+- Validate literal existing/readable filesystem files, reject directories,
+  URLs, missing/zero-byte inputs and unsupported forms before native work.
+- Resolve/create-check a writable destination before prompting. Keep Music as
+  default. Keep UNC support/policy explicit; network shares are not offline disks.
+- Invalid/empty choices must not fall back to Zoom. Reprompt interactively and
+  provide cancellation. Missing input should give useful usage; unattended
+  failure must not prompt. Add only the minimal parameter seam needed for this
+  task; saved settings and the broader parameter set belong to M3-01.
+- Preserve `.ps1 -inputPath`, `.bat`, PS5.1 compatibility and exact Raw/Zoom filter
+  strings. Update legacy defect characterizations only when the corresponding
+  behavior is fixed. Do not fold in M1-02's process wrapper or later export work.
 
-Reconcile baseline evidence once, resolve actual blockers and record contracts
-and pending human decisions. Fresh launcher/PS5.1/PS7 controlled checks already
-pass; direct FFmpeg audio characterization is separate. Speech-quality/listening,
-impulse alignment, channel isolation, long recordings and >4 GB checks remain
-unrun. Use the ready `WAC-M0-03-listening.md` checklist when cleared clips exist.
-Default sound is not approved for promotion. Explicit 48 kHz encoding has only
-been compared; it is not the application's current export policy.
+Acceptance: AC-013 literal filename matrix, AC-014 validation order/failure,
+AC-015 menu/cancel/noninteractive behavior. Read the brief for exact cases.
+Complete media probing belongs to M1-03; do not claim preflight proves decodability.
 
-After the M0-04 gate, update task/acceptance evidence and handoff, stage intended
-files, inspect, commit/push and verify local/live/PR heads. The exact next task
-then becomes **WAC-M1-01**, in a separate thread after the gate is recoverable.
-The GitHub CLI credential helper can be used command-scoped if necessary.
-Ordinary feature work is authorized; merge, release and deployment remain separate.
+## Current evidence and limits
+
+M0-04 Quick passed 13 Pester; Full in PS5.1 and PS7 passed 29 Pester plus 61 Python
+with one symlink-privilege skip each. Parser/static/plan gates pass; 49 analyzer
+advisories are visible with no suppression. Source/command/environment identities
+and sanitized logs are under evidence/WAC-M0-04-*.
+
+M0-03 has two identical same-build reports for 20 synthetic Raw/Zoom variants.
+Legacy WAVs measured 192 kHz PCM16; explicit comparisons measured 48 kHz PCM16.
+The application still uses unspecified encoding. Channels/durations match;
+this does not establish channel isolation, impulse alignment or speech quality.
+
+Listening remains pending with no cleared corpus or default-sound approval.
+Real audio through the launcher, full special-character forwarding, fault
+handling, long recordings and >4 GB exports remain unverified. Controlled entry
+points/process doubles and direct FFmpeg rendering are separate evidence.
+No CI workflow exists yet. These limits do not block the next reliability task.
+
+## Local tools and test commands
+
+Pinned Pester 5.7.1 and PSScriptAnalyzer 1.24.0 are already under
+`.wac-local/Modules`. Runners never install dependencies. Use tests/README.md.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Tag EntryPoint
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full
+```
+
+Bypass is process-only. Existing checksum-verified FFmpeg/ffprobe 9.0.2 essentials
+binaries are at `.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin`;
+use explicit executable paths. Generated audio, binaries, private clips and raw
+logs stay ignored. The old M0-03 run directories exist; a justified new
+characterization run must use a new output directory name.
+
+If the default Git credential helper stalls, the existing GitHub CLI helper can
+be selected for a single command with `-c credential.helper= -c
+'credential.helper=!gh auth git-credential'`; do not change persistent Git config.
+
+After WAC-M1-01, update task/acceptance/status/evidence/handoff, stage intended
+files, review, commit/push and verify local/live/PR heads. Feature work and draft
+PRs are already authorized; pending owner decisions are recorded in D19.
+The next task after accepted, synchronized M1-01 will be **WAC-M1-02**, separately.

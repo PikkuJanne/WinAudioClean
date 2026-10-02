@@ -148,7 +148,7 @@
       "depends_on": [
         "WAC-M0-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Baseline evidence, task state, decisions and next-model handoff.",
       "implementation": [
@@ -162,7 +162,13 @@
         "AC-011",
         "AC-012"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M0-04.md",
+        "evidence/WAC-M0-04-source.json",
+        "evidence/WAC-M0-04-reconciliation.json",
+        "evidence/WAC-M0-04-plan.txt",
+        "evidence/WAC-M0-04-restart.md"
+      ],
       "blocked_reason": null
     },
     {
