@@ -201,8 +201,14 @@
       "title": "Argument fidelity",
       "procedure": "Use a benign argv-echo test executable or equivalent recorder with the filename matrix through both the direct script and actual launcher.",
       "expected": "The child receives exact arguments; command-like filenames cannot become commands; any CMD limitation gets a safe fallback and explicit notice.",
-      "status": "not_run",
-      "evidence": []
+      "status": "blocked",
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-policy.json"
+      ],
+      "reason": "Required Full validation blocked by Windows Code Integrity rejecting 44 launcher and 7 reporting fixture copies. PS5 test-only JSON nesting corrected after Full; corrected native integration has not been rerun. Resume under normally authorized fixture execution; do not bypass machine policy."
     },
     {
       "id": "AC-017",
@@ -210,8 +216,14 @@
       "title": "Error propagation",
       "procedure": "Simulate startup failure, FFmpeg nonzero exit, failed reporting, and successful execution.",
       "expected": "Script and launcher return documented codes and retain useful diagnostic details without claiming success.",
-      "status": "not_run",
-      "evidence": []
+      "status": "blocked",
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-policy.json"
+      ],
+      "reason": "Required Full validation blocked by Windows Code Integrity rejecting 44 launcher and 7 reporting fixture copies. PS5 test-only JSON nesting corrected after Full; corrected native integration has not been rerun. Resume under normally authorized fixture execution; do not bypass machine policy."
     },
     {
       "id": "AC-018",
@@ -219,8 +231,13 @@
       "title": "Output and stream handling",
       "procedure": "Have a test child write large stdout/stderr streams, then exit; repeat with a known synthetic FFmpeg job.",
       "expected": "No deadlock or truncation of essential errors; all handles are closed and completion is accurately observed.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-real-process.json"
+      ]
     },
     {
       "id": "AC-019",

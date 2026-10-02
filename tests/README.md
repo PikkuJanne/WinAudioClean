@@ -1,8 +1,10 @@
 # Local development checks
 
 The application still needs only PowerShell and FFmpeg. These checks also need
-Python 3.10 or newer (standard library only), Pester and PSScriptAnalyzer. None is installed
-by the application or test runner.
+Python 3.10 or newer (standard library only), Pester and PSScriptAnalyzer. Native
+fixture tests additionally use the installed Windows .NET Framework C# compiler
+(`csc.exe`). These are development dependencies; the application and test runner
+do not install or download them.
 
 ## Explicit setup
 
@@ -80,7 +82,7 @@ pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Quick -AnalyzerWarnings
 ```
 
 There are no suppressed rules or suppression attributes. Non-error style and
-design advice is advisory in this first characterization task: the original
+design advice is advisory: the original
 console interface intentionally uses `Write-Host`, and test setup assigns values
 that Pester consumes in later scopes. This does not certify all analyzer advice
 as resolved. New warnings should be inspected rather than hidden in a baseline.
@@ -92,13 +94,14 @@ Characterization cases label known defects, such as timestamp collisions and
 overwrite arguments, with the future task that
 will change the expectation. They do not endorse those behaviors as requirements.
 
-Import checks run in fresh shell processes. Entry point checks run a controlled
-missing-input path through the original `.ps1 -inputPath` and `.bat` boundaries,
-stopping before the menu. A separate script-invocation fixture exercises the runtime
-with real disposable filesystem preflight and process/report doubles. They verify launch/argument behavior, not audio
-quality or actual encoding. Missing shells must be reported as skipped, never passed.
-Listening, real FFmpeg output and large-file behavior remain separate acceptance
-work. Tests use temporary synthetic artifacts; private recordings are unnecessary.
+Import checks run in fresh shell processes. Entry point checks run the actual
+`.ps1 -inputPath` with disposable filesystem inputs and a compiled native argument
+recorder in place of FFmpeg. Launcher checks cross the actual `.bat` boundary;
+their scope is described below. These establish process and argument behavior,
+not audio quality or actual encoding. Missing shells must be reported as skipped,
+never passed. Listening, real FFmpeg output and large-file behavior remain separate
+acceptance work. Tests use temporary synthetic artifacts; private recordings are
+unnecessary.
 
 ## Input and menu regression checks (WAC-M1-01)
 
@@ -115,11 +118,66 @@ switches without redirecting stdin and masking that branch.
 
 Actual bounded child processes in PS5.1 and PS7 reject invalid inputs, destinations
 and missing/invalid modes without showing a menu or processing. Explicit valid
-modes run through the script with a process double and preserve filter/report
-wiring. The original launcher is also checked on missing input; its pause, exit
-propagation and complete special-character forwarding remain M1-02 work. Real
-console empty/invalid/cancel checks and their exact setup are recorded in the
+modes now run through the script with the compiled native fixture to check
+filter/report wiring. Real console empty/invalid/cancel checks and their exact
+M1-01 setup are recorded in the
 [M1-01 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-01.md).
+
+## Native process and launcher checks (WAC-M1-02)
+
+```powershell
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Native.Tests.ps1
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Launcher.Tests.ps1
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Reporting.Tests.ps1
+```
+
+[New-NativeProcessFixture.ps1](fixtures/New-NativeProcessFixture.ps1) compiles
+[NativeProcessFixture.cs](fixtures/NativeProcessFixture.cs) into a fresh,
+test-owned executable with the installed Framework `csc.exe`. Generated binaries
+are temporary and are not committed. The helper refuses to replace an existing
+executable and downloads nothing. Its [fixture contract](fixtures/NativeProcessFixture.md)
+describes the environment controls for actual argv recording, stdout/stderr,
+native exits, stdin and reporting failures. Synthetic output bytes are not audio.
+
+The recorder writes a UTF-8 JSON string array without a BOM. Tests read it with
+`Get-Content -Raw -Encoding UTF8 | ConvertFrom-Json` directly into a variable.
+Explicit UTF-8 preserves Unicode on PS5.1; omitting an outer `@(...)` avoids
+nesting the returned array on that host.
+
+The unattended launcher matrix runs copied application source through outer
+PS5.1 and PS7, CMD, inner Windows PowerShell 5.1, and the native argv recorder.
+It covers spaces, brackets, apostrophes, Unicode, ampersands, percent signs,
+exclamation marks, parentheses, command-looking filenames, a trailing destination
+backslash and a 240-character input path. Exit cases check native success,
+native failure, startup failure and reporting failure without a pause.
+
+Set unattended paths from PowerShell so CMD never parses them as arguments:
+
+```powershell
+$env:WAC_LAUNCH_INPUT = 'C:\Audio\meeting %complete%!.wav'
+$env:WAC_LAUNCH_OUTPUT_DIRECTORY = 'C:\Audio\Cleaned'
+& .\WinAudioClean.bat /unattended Zoom
+$LASTEXITCODE
+```
+
+Default single-file handoff tests use [LauncherApplicationStub.ps1](fixtures/LauncherApplicationStub.ps1)
+followed by the actual native recorder. They check literal handoff, inner PS5.1,
+and exit preservation through `pause`; they do not render audio or exercise the
+interactive application menu. The launcher rejects visible percent/exclamation
+characters in positional input or CMD's original command line. An already-running
+CMD can expand text before the launcher sees it, so that route cannot guarantee
+those characters. A defined-percent-token decoy case checks rejection before
+processing. Use the environment route above or direct `.ps1 -inputPath` from
+PowerShell for these paths.
+
+Windows application-control policy can reject the unsigned compiled fixture even
+when compilation succeeds. This occurred during M1-02 validation and leaves the
+affected acceptance checks blocked. Preserve child diagnostics and CodeIntegrity
+event evidence; a rejected native start must remain a failed check. Do not retry
+or alter fixtures, trust or security settings to bypass a rejection. Real FFmpeg
+checks provide separate evidence and do not replace blocked fixture cases. See
+the fixture contract for the recorded event details and task governance for the
+current acceptance status.
 
 ## Synthetic audio characterization (WAC-M0-03)
 

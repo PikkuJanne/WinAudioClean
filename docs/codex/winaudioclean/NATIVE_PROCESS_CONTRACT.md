@@ -2,6 +2,54 @@
 
 Use small PowerShell helpers; do not build a new application framework. Maintain Windows PowerShell 5.1 and supported PowerShell 7 behavior.
 
+## Implemented in WAC-M1-02 (2026-10-02)
+
+`Get-WacFfmpegArguments` returns separate argument values and includes `-nostdin`.
+`Invoke-WacNativeProcess` starts a resolved absolute `.exe` with
+`UseShellExecute=false` and `CreateNoWindow=true`. The same Windows CRT quoting
+helper is used in PS5.1/PS7, including empty values, embedded quotes and trailing
+backslashes. NUL and an oversized Windows command line are rejected before start.
+Sibling/PATH lookup resolves the executable's full path; full dependency probing
+and explicit-path overrides remain M1-03.
+
+Both UTF-8 readers begin before waiting; stdin is closed. The wrapper polls the
+owned process, captures its actual exit and bounds stream-close waiting to five
+seconds by default. All redirected readers/writer and the process are explicitly
+disposed. A supplied timeout kills only the owned process and bounds cleanup;
+zero means no total render timeout. Stdout/stderr are captured completely in
+memory, separately; long-file/memory stress is not claimed. No shell callbacks,
+global process-name termination or eval are used.
+
+Current application codes:
+
+| Code | Meaning |
+| --- | --- |
+| 0 | Native exit 0 and report complete; final media validation is not yet implemented. |
+| 2 | Input/configuration/destination or launcher usage error. |
+| 3 | Missing dependency or process start failure. |
+| 4 | Native nonzero exit or process/capture/cleanup failure. |
+| 7 | Native success with report-write or report-metadata failure; audio is retained. |
+| 130 | Mode-menu cancellation; running-render Ctrl+C exit semantics are not certified. |
+
+Native status and diagnostics remain distinct from report errors. A report failure
+preserves an earlier code 3/4. Codes 5 (output validation/publication) and 6 (batch
+partial failure) remain reserved proposals for their owning tasks, not current
+behavior. This entry finalizes the earlier proposed map only for implemented work.
+
+The `.bat` uses fixed PowerShell code with paths passed through environment
+values and saves the result before pausing. Its default single-drop route uses
+the system Windows PowerShell executable. `/unattended Raw|Zoom` requires
+`WAC_LAUNCH_INPUT` and `WAC_LAUNCH_OUTPUT_DIRECTORY` set from PowerShell, passes
+no path through CMD arguments and skips pause. Positional percent/exclamation
+forms are rejected when observable in the received value/original CMD invocation.
+Expansion that happened in an already-open CMD session cannot be reconstructed;
+document direct PowerShell or the environment route for such names. Multi-file
+handoff remains M3-02. Tests include real native argv, default handoff/pause with
+a controlled application, and full-app unattended results in both outer shells.
+
+Evidence and exact limits: `evidence/WAC-M1-02.md`. The sections below retain
+requirements for later probing, transactional output and cancellation work.
+
 ## Arguments and execution [S02]
 
 Treat executable paths and every user path as data. Avoid Invoke-Expression, cmd /c construction from user strings, expression-valued configuration and arbitrary filter strings. Start-Process joins ArgumentList items into a command line; simply changing a string to a string array does not solve quoting. Modern ProcessStartInfo.ArgumentList is not available in the same form on all target runtimes. Isolate and test any compatibility quoting path rather than assume equivalence.
@@ -14,7 +62,7 @@ Input paths must resolve to existing local filesystem files; explicit supported 
 
 Drain stdout and stderr concurrently, close handles, handle launch exceptions and observe exit status after process exit. Progress belongs on a dedicated structured stream; error logs are not the progress parser. A probe must have a timeout; long audio renders need user cancellation and a sensible inactivity policy, not an arbitrary short total timeout. Avoid false failure for long normal jobs.
 
-A possible app exit-code contract to finalize at M1: 0 success; 2 invalid input/config; 3 missing/incompatible dependency; 4 probe/processing failure; 5 output-validation/publication failure; 6 batch completed with one or more failed items; 130 cancelled. Explicitly define any warning status and logging-only failure behavior. Native FFmpeg exit codes are included in diagnostics even when mapped to application codes. Preserve the script's exit code before pause in the launcher.
+The original proposed map was 0 success; 2 invalid input/config; 3 missing/incompatible dependency; 4 probe/processing failure; 5 output-validation/publication failure; 6 batch completed with failed items; 130 cancelled. The implemented table above now defines current codes, including reporting warning 7. Native FFmpeg exit codes remain in diagnostics when mapped to application codes. Preserve script status before launcher pause.
 
 ## Files and cancellation
 

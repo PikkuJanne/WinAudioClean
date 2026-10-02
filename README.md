@@ -97,8 +97,47 @@ invalid choices ask again. A mode can also be supplied directly:
 `-Mode` accepts `Raw` or `Zoom`. `-NonInteractive`, a noninteractive host, and
 redirected input require an explicit mode and never show a mode prompt. Running
 without an input file displays usage. Direct script preflight failures return
-exit code `2`; menu cancellation returns `130`. The batch launcher still pauses,
-and native-processing/launcher exit codes are not yet reliable automation results.
+exit code `2`; menu cancellation returns `130`.
+
+**Native results and launcher automation**
+
+The script runs the resolved FFmpeg executable directly, disables its stdin and
+captures stdout and stderr separately. Native failure details appear in the
+console and local report. Processing and reporting results use these exit codes:
+
+| Code | Meaning |
+| --- | --- |
+| 0 | FFmpeg returned success and reporting completed. |
+| 2 | Invalid input, destination, mode or launcher usage. |
+| 3 | FFmpeg was missing or could not start. |
+| 4 | FFmpeg failed, or native capture/cleanup failed. The native exit is retained in diagnostics. |
+| 7 | FFmpeg returned success, but reporting was incomplete. Audio is retained. |
+| 130 | Cancelled at the mode menu. |
+
+A reporting failure never changes an existing processing failure to success.
+Exit `0` does not independently verify the rendered media. Output collisions and
+complete media validation remain limitations of this development version.
+
+The batch launcher preserves the script's exit code across its interactive
+pause. Its default route still accepts one dropped file. CMD can expand `%NAME%`
+and `!NAME!` in paths before the launcher sees them. When observable, the launcher
+rejects these positional paths with a fallback message. An already-open CMD
+session may have changed them earlier; use PowerShell directly or the following
+route for these filenames and for unattended runs:
+
+```powershell
+# Set these values from PowerShell so CMD never receives the paths as arguments.
+$env:WAC_LAUNCH_INPUT = 'C:\Audio\meeting %complete%!.wav'
+$env:WAC_LAUNCH_OUTPUT_DIRECTORY = 'C:\Audio\Cleaned'
+.\WinAudioClean.bat /unattended Zoom
+$LASTEXITCODE
+```
+
+This route requires both environment values and `Raw` or `Zoom`, and skips the
+pause. The launcher uses Windows PowerShell 5.1; direct script calls also support
+PowerShell 7. Long native renders have no fixed total timeout. Diagnostics are
+captured in memory per run; large recordings and very large diagnostic streams
+have not been stress-tested.
 
 **What it actually does (step-by-step)**
 

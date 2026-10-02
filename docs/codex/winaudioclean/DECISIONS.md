@@ -103,3 +103,38 @@ exits 130. M1-02 must finalize the complete process/dependency/report exit map,
 add -nostdin to the native command and preserve exit status across the launcher
 pause. The legacy native command, encoding and exact filter strings are unchanged.
 Evidence: `evidence/WAC-M1-01.md`. No default-sound or publication approval is added.
+
+### 2026-10-02 — WAC-M1-02 native execution and reporting
+
+D21. Use one tested Windows CRT encoder and direct ProcessStartInfo launch in
+PS5.1/PS7, with separate concurrent UTF-8 stdout/stderr readers, closed stdin,
+explicit stream/process disposal and -nostdin. Resolve sibling/PATH ffmpeg.exe
+to its absolute executable path; M1-03 still owns full dependency discovery.
+Render timeout defaults to unlimited; finite test/probe timeouts stop only the
+owned child. Capture is in memory and no long-file/memory-stress claim is made.
+
+Finalize current exit codes: 0 native success/report complete; 2 input/config;
+3 missing/start dependency; 4 native/capture/cleanup failure; 7 native success
+with incomplete reporting; 130 menu cancellation. Preserve native exits and both
+diagnostic streams, and preserve an earlier processing failure if reporting also
+fails. Report failures do not delete audio. Output validation/code 5, batches/
+code 6 and running-render cancellation remain later tasks.
+
+The original .bat remains a single-file launcher and preserves status across
+pause. An explicit /unattended Raw|Zoom route takes WAC_LAUNCH_INPUT and
+WAC_LAUNCH_OUTPUT_DIRECTORY from environment values set in PowerShell. Fixed
+PowerShell code treats them as data. Default positional percent/exclamation
+paths get a fallback diagnostic when observable; earlier CMD expansion cannot
+be reconstructed, so those names need direct PowerShell or the environment route.
+
+Exact Original filters, encoding and the legacy overwrite/collision behavior
+remain unchanged; safe publication is M1-04. Evidence: `evidence/WAC-M1-02.md`.
+No sound promotion, release, merge, security-policy change or deployment approved.
+
+M1-02 remains blocked at the cumulative gate: Windows Code Integrity rejected
+51 test-fixture copies across the two Full runs. Earlier passing recorder cases
+and four successful real-FFmpeg checks remain evidence, but do not replace the
+required green Full gate. Preserve the policy and record the failures; do not
+retry compilation/copying to seek an allowed hash or convert blocked cases to
+skips. Resume validation after fixture execution is permitted through the normal
+machine administration process. Do not advance to M1-03 yet.

@@ -215,7 +215,7 @@
       "depends_on": [
         "WAC-M1-01"
       ],
-      "status": "todo",
+      "status": "blocked",
       "approval_required": false,
       "scope": "FFmpeg process wrapper and .bat exit-code propagation; NATIVE_PROCESS_CONTRACT.md.",
       "implementation": [
@@ -229,8 +229,15 @@
         "AC-017",
         "AC-018"
       ],
-      "evidence": [],
-      "blocked_reason": null
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-source.json",
+        "evidence/WAC-M1-02-policy.json",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-real-process.json"
+      ],
+      "blocked_reason": "Required Full validation blocked by Windows Code Integrity rejecting 44 launcher and 7 reporting fixture copies. PS5 test-only JSON nesting corrected after Full; corrected native integration has not been rerun. Resume under normally authorized fixture execution; do not bypass machine policy."
     },
     {
       "id": "WAC-M1-03",

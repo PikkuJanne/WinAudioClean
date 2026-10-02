@@ -1,4 +1,4 @@
-BeforeDiscovery {
+﻿BeforeDiscovery {
     $shellCases = @()
     foreach ($shellName in @('powershell.exe', 'pwsh.exe')) {
         $command = Get-Command -Name $shellName -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -7,10 +7,12 @@ BeforeDiscovery {
     $controlledCases = foreach ($shell in $shellCases) {
         foreach ($mode in @('1', '2')) {
             foreach ($exitCode in @(0, 7)) {
+              foreach ($blockLog in @($false, $true)) {
                 @{
                     ShellName = $shell.ShellName; ShellPath = $shell.ShellPath
-                    Unavailable = $shell.Unavailable; Mode = $mode; ProcessExitCode = $exitCode
+                    Unavailable = $shell.Unavailable; Mode = $mode; ProcessExitCode = $exitCode; BlockLog = $blockLog
                 }
+              }
             }
         }
     }
@@ -34,6 +36,26 @@ BeforeDiscovery {
             }
         }
     }
+    $dependencyCases = foreach ($shell in $shellCases) {
+        foreach ($brokenExecutable in @($false, $true)) {
+            @{
+                ShellName = $shell.ShellName; ShellPath = $shell.ShellPath; Unavailable = $shell.Unavailable
+                BrokenExecutable = $brokenExecutable
+            }
+        }
+    }
+    $directPathCases = foreach ($shell in $shellCases) {
+        foreach ($fileName in @(
+            'spaces here.wav', '[square brackets].wav', "speaker's recording.wav",
+            'Unicode äöÅ.wav', 'ampersand & here.wav', '%PATH% literal.wav',
+            '!PATH! literal.wav', '(parentheses).wav', 'name & echo WAC_UNEXPECTED_COMMAND.wav'
+        )) {
+            @{
+                ShellName = $shell.ShellName; ShellPath = $shell.ShellPath; Unavailable = $shell.Unavailable
+                FileName = $fileName
+            }
+        }
+    }
 }
 
 BeforeAll {
@@ -41,6 +63,8 @@ BeforeAll {
     $scriptPath = Join-Path $repositoryRoot 'WinAudioClean.ps1'
     $launcherPath = Join-Path $repositoryRoot 'WinAudioClean.bat'
     . (Join-Path $PSScriptRoot 'fixtures\TestProcess.ps1')
+    . (Join-Path $PSScriptRoot 'fixtures\New-NativeProcessFixture.ps1')
+    $nativeFixture = New-WacTestNativeExecutable -OutputPath (Join-Path $TestDrive 'native fixture.exe')
 }
 
 Describe 'AC-004: actual entry points with bounded, controlled input' -Tag 'EntryPoint' {
@@ -122,42 +146,118 @@ Describe 'AC-014/015: actual script preflight is bounded and unattended on inval
     }
 }
 
-Describe 'Controlled runtime execution preserves mode, process and report wiring' -Tag 'Runtime' {
-    It 'uses choice <Mode> and reports process exit <ProcessExitCode> in <ShellName>' -ForEach $controlledCases {
+Describe 'AC-017: actual native execution reports success, failure and reporting warnings' -Tag 'Runtime', 'Native' {
+    It 'AC-016: preserves <FileName> through direct <ShellName> -File and the native child' -ForEach $directPathCases {
+        if ($Unavailable) {
+            Set-ItResult -Skipped -Because "$ShellName is unavailable on this machine; this shell was not tested."
+            return
+        }
+        $scratch = Join-Path $TestDrive ([guid]::NewGuid().ToString())
+        $null = [IO.Directory]::CreateDirectory($scratch)
+        $app = Join-Path $scratch 'WinAudioClean.ps1'
+        Copy-Item -LiteralPath $scriptPath -Destination $app
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
+        $inputFile = Join-Path $scratch $FileName
+        [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
+        $outputDirectory = Join-Path $scratch 'output [1] & %PATH% !'
+        $argvPath = Join-Path $scratch 'argv.json'
+        $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -inputPath {1} -OutputDirectory {2} -Mode Zoom -NonInteractive' -f
+            (ConvertTo-WacTestQuotedArgument $app), (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument ($outputDirectory + '\'))
+        $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables @{
+            WAC_TEST_ARGV_PATH = $argvPath; WAC_TEST_EXIT_CODE = '0'; WAC_TEST_FFMPEG_OUTPUT = '1'
+        }
+        $result.ExitCode | Should -Be 0 -Because ("stdout: {0}; stderr: {1}" -f $result.StandardOutput, $result.StandardError)
+        $received = Get-Content -Raw -LiteralPath $argvPath -Encoding UTF8 | ConvertFrom-Json
+        $received[2] | Should -BeExactly $inputFile
+        # The final file remains inside the literal destination, regardless of
+        # trailing separators; its actual native argv is what is checked here.
+        [IO.Path]::GetFullPath([IO.Path]::GetDirectoryName($received[6])).TrimEnd('\') | Should -BeExactly $outputDirectory
+        [IO.File]::ReadAllBytes($received[6]).Count | Should -Be 8
+        [IO.File]::ReadAllBytes($inputFile).Count | Should -Be 3
+        $result.StandardOutput | Should -Match 'DONE: SUCCESS'
+    }
+
+    It 'returns dependency failure for invalid executable <BrokenExecutable> in <ShellName>' -ForEach $dependencyCases {
+        if ($Unavailable) {
+            Set-ItResult -Skipped -Because "$ShellName is unavailable on this machine; this shell was not tested."
+            return
+        }
+        $scratch = Join-Path $TestDrive ([guid]::NewGuid().ToString())
+        $null = [IO.Directory]::CreateDirectory($scratch)
+        $app = Join-Path $scratch 'WinAudioClean.ps1'
+        Copy-Item -LiteralPath $scriptPath -Destination $app
+        $inputFile = Join-Path $scratch 'input.wav'
+        [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
+        $outputDirectory = Join-Path $scratch 'output'
+        if ($BrokenExecutable) { [IO.File]::WriteAllText((Join-Path $scratch 'ffmpeg.exe'), 'invalid executable') }
+        $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -inputPath {1} -OutputDirectory {2} -Mode Zoom -NonInteractive' -f
+            (ConvertTo-WacTestQuotedArgument $app), (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument $outputDirectory)
+        $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables @{ PATH = '' }
+        $result.ExitCode | Should -Be 3
+        $result.StandardError | Should -Not -BeNullOrEmpty
+        $result.StandardOutput | Should -Not -Match 'DONE: SUCCESS|Enter selection'
+        if ($BrokenExecutable) {
+            $result.StandardOutput | Should -Match 'DONE: FAILED'
+            $log = Get-Content -Raw -LiteralPath (Join-Path $outputDirectory 'WinAudioClean_Log.txt')
+            $log | Should -Match 'Native Exit Code: not started; Application Exit Code: 3'
+        }
+        else { $result.StandardError | Should -Match 'FFmpeg.exe not found' }
+        @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav').Count | Should -Be 0
+    }
+
+    It 'uses mode <Mode>, native exit <ProcessExitCode>, blocked log <BlockLog> in <ShellName>' -ForEach $controlledCases {
         if ($Unavailable) {
             Set-ItResult -Skipped -Because "$ShellName is unavailable on this machine; this shell was not tested."
             return
         }
         $scratch = Join-Path $TestDrive ([guid]::NewGuid().ToString())
         $null = New-Item -ItemType Directory -Path $scratch
-        $fixture = Join-Path $PSScriptRoot 'fixtures\Invoke-ControlledApplication.ps1'
-        $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -ScriptPath {1} -Choice {2} -ProcessExitCode {3}' -f
-            (ConvertTo-WacTestQuotedArgument $fixture), (ConvertTo-WacTestQuotedArgument $scriptPath), $Mode, $ProcessExitCode
-        $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch
-        $result.ExitCode | Should -Be 0
+        $app = Join-Path $scratch 'WinAudioClean.ps1'
+        Copy-Item -LiteralPath $scriptPath -Destination $app
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
+        $inputFile = Join-Path $scratch 'meeting [draft].wav'
+        [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
+        $outputDirectory = Join-Path $scratch 'output [literal]'
+        $argvPath = Join-Path $scratch 'argv.json'
+        $modeValue = if ($Mode -eq '1') { 'Raw' } else { 'Zoom' }
+        $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -inputPath {1} -OutputDirectory {2} -Mode {3} -NonInteractive' -f
+            (ConvertTo-WacTestQuotedArgument $app), (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument $outputDirectory), $modeValue
+        $childEnvironment = @{
+            WAC_TEST_ARGV_PATH = $argvPath; WAC_TEST_EXIT_CODE = [string]$ProcessExitCode
+            WAC_TEST_FFMPEG_OUTPUT = '1'; WAC_TEST_BLOCK_LOG = [string][int]$BlockLog
+            WAC_TEST_STDOUT = 'Native stdout retained'; WAC_TEST_STDERR = 'Native stderr retained'
+        }
+        $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables $childEnvironment
+        $expectedExit = if ($ProcessExitCode -ne 0) { 4 } elseif ($BlockLog) { 7 } else { 0 }
+        $result.ExitCode | Should -Be $expectedExit -Because ("stdout: {0}; stderr: {1}" -f $result.StandardOutput, $result.StandardError)
         $result.StandardError | Should -BeNullOrEmpty
-        $run = $result.StandardOutput | ConvertFrom-Json
-        @($run.Processes).Count | Should -Be 1
-        @($run.Logs).Count | Should -Be 1
-        $run.Processes[0].FileName | Should -BeExactly 'ffmpeg.exe'
-        $run.Processes[0].Wait | Should -BeTrue
-        $run.Processes[0].NoNewWindow | Should -BeTrue
-        $run.Processes[0].PassThru | Should -BeTrue
+        $result.StandardOutput | Should -Match 'Native stdout retained'
+        $result.StandardOutput | Should -Match 'Native stderr retained'
+        $argv = Get-Content -Raw -LiteralPath $argvPath | ConvertFrom-Json
         $filters = 'dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5'
         $modeName = 'ZOOM (Level Only)'
         if ($Mode -eq '1') {
             $filters = 'adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,' + $filters
             $modeName = 'RAW (Clean+Level)'
         }
-        $expectedArguments = '-i "C:\WAC synthetic input\meeting sample.wav" -vn -af "{0}" "C:\WAC synthetic output\meeting sample_Cleaned_20261002-1200.wav" -y -hide_banner -loglevel error -stats' -f $filters
-        $run.Processes[0].Arguments | Should -BeExactly $expectedArguments
-        $run.Logs[0].FileName | Should -BeExactly 'WinAudioClean_Log.txt'
-        $run.Logs[0].Value | Should -Match ('MODE\s+: ' + [regex]::Escape($modeName))
-        $run.Logs[0].Value | Should -Match ('ACTIVE FILTERS : ' + [regex]::Escape($filters))
-        $run.Logs[0].Value | Should -Match 'LOG DATE\s+: 2026-10-02 12:00:00'
-        $status = if ($ProcessExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' }
-        $run.Logs[0].Value | Should -Match ('STATUS\s+: ' + $status + ' \(Exit Code: ' + $ProcessExitCode + '\)')
-        ($run.HostMessages -join "`n") | Should -Match "DONE: $status"
-        @(Get-ChildItem -LiteralPath $scratch -Force -Recurse).Count | Should -Be 0
+        $argv.Count | Should -Be 12
+        $argv[0] | Should -BeExactly '-nostdin'
+        $argv[2] | Should -BeExactly $inputFile
+        $argv[5] | Should -BeExactly $filters
+        [IO.Path]::GetDirectoryName($argv[6]) | Should -BeExactly $outputDirectory
+        $status = if ($expectedExit -eq 0) { 'SUCCESS' } elseif ($expectedExit -eq 7) { 'WARNING' } else { 'FAILED' }
+        $result.StandardOutput | Should -Match "DONE: $status"
+        if ($expectedExit -ne 0) { $result.StandardOutput | Should -Not -Match 'DONE: SUCCESS' }
+        if ($BlockLog) { $result.StandardOutput | Should -Match 'Report could not be written' }
+        else {
+            $log = Get-Content -Raw -LiteralPath (Join-Path $outputDirectory 'WinAudioClean_Log.txt')
+            $log | Should -Match ('MODE\s+: ' + [regex]::Escape($modeName))
+            $log | Should -Match ('ACTIVE FILTERS : ' + [regex]::Escape($filters))
+            $log | Should -Match "Native Exit Code: $ProcessExitCode; Application Exit Code: $expectedExit"
+            $log | Should -Match 'Native stdout retained'
+            $log | Should -Match 'Native stderr retained'
+        }
+        if ($ProcessExitCode -eq 0) { [IO.File]::ReadAllBytes($argv[6]).Count | Should -Be 8 }
+        [IO.File]::ReadAllBytes($inputFile).Count | Should -Be 3
     }
 }

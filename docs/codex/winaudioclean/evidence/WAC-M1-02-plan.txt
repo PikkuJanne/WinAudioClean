@@ -1,0 +1,17 @@
+$ python -X utf8 docs/codex/winaudioclean/tools/handoff.py validate-plan --plan-root docs/codex/winaudioclean
+Exit: 0
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+
+$ python -X utf8 docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/codex/winaudioclean
+Exit: 0
+{
+  "ready": [],
+  "blocked": [
+    "WAC-M1-02"
+  ]
+}

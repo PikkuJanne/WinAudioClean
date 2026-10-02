@@ -129,6 +129,7 @@ function Get-WacInputFile {
     $resolved = Resolve-WacFileSystemPath -Path $Path
     try { $item = Get-Item -LiteralPath $resolved -Force -ErrorAction Stop }
     catch { throw 'Input file does not exist or cannot be accessed.' }
+    if ($null -eq $item) { throw 'Input file does not exist or cannot be accessed.' }
     if ($item -isnot [System.IO.FileInfo]) { throw 'Input must be a file, not a directory.' }
     $stream = $null
     try {
@@ -225,8 +226,131 @@ function Get-WacOutputPath {
 function Get-WacFfmpegArguments {
     param([string]$InputPath, [string]$FilterChain, [string]$OutputFile)
 
-    # Preserve the legacy command here, including -y, until the export-safety task.
-    "-i `"$InputPath`" -vn -af `"$FilterChain`" `"$OutputFile`" -y -hide_banner -loglevel error -stats"
+    # Preserve filters/encoding and -y until the export-safety task. The native
+    # wrapper quotes each argument; no path is interpolated into shell code.
+    @('-nostdin', '-i', $InputPath, '-vn', '-af', $FilterChain, $OutputFile,
+        '-y', '-hide_banner', '-loglevel', 'error', '-stats')
+}
+
+function ConvertTo-WacNativeArgument {
+    param([AllowEmptyString()][string]$Argument)
+
+    if ($Argument.IndexOf([char]0) -ge 0) { throw 'Native arguments cannot contain NUL.' }
+    # Windows CRT quoting, shared by PS5.1 and PS7. Always quote, including an
+    # empty argument, and double backslashes before quotes/the closing delimiter.
+    $builder = New-Object System.Text.StringBuilder
+    [void]$builder.Append('"')
+    $slashes = 0
+    foreach ($character in $Argument.ToCharArray()) {
+        if ($character -eq '\') { $slashes++; continue }
+        if ($character -eq '"') {
+            [void]$builder.Append([char]'\', (2 * $slashes + 1))
+        } else {
+            [void]$builder.Append([char]'\', $slashes)
+        }
+        [void]$builder.Append($character)
+        $slashes = 0
+    }
+    [void]$builder.Append([char]'\', (2 * $slashes))
+    [void]$builder.Append('"')
+    $builder.ToString()
+}
+
+function Invoke-WacNativeProcess {
+    param(
+        [string]$FilePath,
+        [AllowEmptyCollection()][string[]]$ArgumentList = @(),
+        [ValidateRange(0, 2147483647)][int]$TimeoutMilliseconds = 0,
+        [ValidateRange(1, 60000)][int]$StreamCloseTimeoutMilliseconds = 5000
+    )
+
+    $result = [pscustomobject]@{
+        Started = $false; ExitCode = $null; StandardOutput = ''; StandardError = ''
+        Error = $null; TimedOut = $false; CleanupError = $null
+    }
+    $process = $null
+    $stdoutReader = $null
+    $stderrReader = $null
+    $stdinWriter = $null
+    $stdoutTask = $null
+    $stderrTask = $null
+    try {
+        if (-not [IO.Path]::IsPathRooted($FilePath) -or [IO.Path]::GetExtension($FilePath) -ne '.exe') {
+            throw 'Native execution requires a resolved absolute .exe path.'
+        }
+        $quoted = @(foreach ($argument in $ArgumentList) { ConvertTo-WacNativeArgument -Argument $argument })
+        $commandLine = $quoted -join ' '
+        if (($commandLine.Length + $FilePath.Length + 4) -gt 32767) {
+            throw 'Native command exceeds the Windows command-line limit. Use shorter paths.'
+        }
+        $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+        $startInfo.FileName = $FilePath
+        $startInfo.Arguments = $commandLine
+        $startInfo.UseShellExecute = $false
+        $startInfo.CreateNoWindow = $true
+        $startInfo.RedirectStandardInput = $true
+        $startInfo.RedirectStandardOutput = $true
+        $startInfo.RedirectStandardError = $true
+        $startInfo.StandardOutputEncoding = [System.Text.Encoding]::UTF8
+        $startInfo.StandardErrorEncoding = [System.Text.Encoding]::UTF8
+        $process = New-Object System.Diagnostics.Process
+        $process.StartInfo = $startInfo
+        $result.Started = $process.Start()
+        if (-not $result.Started) { throw 'The native process did not start.' }
+        # Both readers start before waiting, so neither full pipe can block the
+        # child. No script callbacks or PowerShell runspace are needed to drain.
+        $stdoutReader = $process.StandardOutput
+        $stderrReader = $process.StandardError
+        $stdinWriter = $process.StandardInput
+        $stdoutTask = $stdoutReader.ReadToEndAsync()
+        $stderrTask = $stderrReader.ReadToEndAsync()
+        $stdinWriter.Close()
+        $watch = [System.Diagnostics.Stopwatch]::StartNew()
+        while (-not $process.WaitForExit(100)) {
+            # Zero is deliberate for rendering: a long recording has no short
+            # total deadline. Probe/test callers can supply a finite timeout.
+            if ($TimeoutMilliseconds -gt 0 -and $watch.ElapsedMilliseconds -ge $TimeoutMilliseconds) {
+                $result.TimedOut = $true
+                $result.Error = "Native process timed out after $TimeoutMilliseconds ms."
+                $process.Kill()
+                if (-not $process.WaitForExit(5000)) { throw 'Timed-out native process did not stop within 5000 ms.' }
+                break
+            }
+        }
+        $result.ExitCode = $process.ExitCode
+        $readers = [System.Threading.Tasks.Task[]]@($stdoutTask, $stderrTask)
+        if (-not [System.Threading.Tasks.Task]::WaitAll($readers, $StreamCloseTimeoutMilliseconds)) {
+            throw "Native output streams did not close within $StreamCloseTimeoutMilliseconds ms."
+        }
+        $result.StandardOutput = $stdoutTask.Result
+        $result.StandardError = $stderrTask.Result
+    } catch {
+        if (-not $result.Error) { $result.Error = $_.Exception.Message }
+    } finally {
+        if ($null -ne $process) {
+            try {
+                if ($result.Started -and -not $process.HasExited) {
+                    # Stop this owned child only, including on pipeline interruption.
+                    $process.Kill()
+                    if (-not $process.WaitForExit(5000)) { throw 'Native process cleanup exceeded 5000 ms.' }
+                }
+                if ($result.Started -and $process.HasExited) { $result.ExitCode = $process.ExitCode }
+            } catch { $result.CleanupError = $_.Exception.Message }
+            if ($null -ne $stdoutTask -and $stdoutTask.Status -eq 'RanToCompletion') { $result.StandardOutput = $stdoutTask.Result }
+            if ($null -ne $stderrTask -and $stderrTask.Status -eq 'RanToCompletion') { $result.StandardError = $stderrTask.Result }
+            # Process.Dispose does not own readers accessed through these
+            # properties. Dispose them explicitly, including incomplete reads.
+            foreach ($stream in @($stdinWriter, $stdoutReader, $stderrReader)) {
+                if ($null -ne $stream) {
+                    try { $stream.Dispose() }
+                    catch { $result.CleanupError = $_.Exception.Message }
+                }
+            }
+            try { $process.Dispose() }
+            catch { $result.CleanupError = $_.Exception.Message }
+        }
+    }
+    $result
 }
 
 # Dot-sourcing exposes only helpers. Normal -File, &, and .bat calls still run below.
@@ -249,13 +373,21 @@ try {
     if (-not $Mode -and -not $interactive) {
         throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.'
     }
-    if (-not (Test-Path -LiteralPath $ffmpegPath -PathType Leaf)) {
-        if (Get-Command 'ffmpeg' -CommandType Application -ErrorAction SilentlyContinue) { $ffmpegPath = 'ffmpeg' }
-        else { throw 'FFmpeg.exe not found! Put it next to this script.' }
-    }
 } catch {
     Write-Error -Message ("Preflight failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 2
+}
+try {
+    if (Test-Path -LiteralPath $ffmpegPath -PathType Leaf) {
+        $ffmpegPath = (Get-Item -LiteralPath $ffmpegPath -ErrorAction Stop).FullName
+    } else {
+        $ffmpegCommand = Get-Command 'ffmpeg.exe' -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+        if (-not $ffmpegCommand) { throw 'FFmpeg.exe not found! Put it next to this script or on PATH.' }
+        $ffmpegPath = $ffmpegCommand.Source
+    }
+} catch {
+    Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
+    exit 3
 }
 $logFile = "$outFolder\WinAudioClean_Log.txt"
 
@@ -303,21 +435,37 @@ $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
 
 # FFmpeg Command
 $argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $outputFile
-$process = Start-Process -FilePath $ffmpegPath -ArgumentList $argumentList -Wait -NoNewWindow -PassThru
+$process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList
 
 $stopWatch.Stop()
 
 # --- LOGGING ---
-$status = if ($process.ExitCode -eq 0) { "SUCCESS" } else { "FAILED" }
+$applicationExitCode = 0
+if (-not $process.Started) { $applicationExitCode = 3 }
+elseif ($process.Error -or $process.CleanupError -or $process.ExitCode -ne 0) { $applicationExitCode = 4 }
+$status = if ($applicationExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' }
+$nativeExitText = if ($null -eq $process.ExitCode) { 'not started' } else { [string]$process.ExitCode }
+# Keep separate diagnostics even when the child returns a failure code.
+if ($process.StandardOutput) { Write-Host $process.StandardOutput }
+if ($process.StandardError) { Write-Host $process.StandardError -ForegroundColor Gray }
+if ($process.Error) { Write-Error -Message $process.Error -ErrorAction Continue }
+if ($process.CleanupError) { Write-Error -Message ("Native cleanup failed: " + $process.CleanupError) -ErrorAction Continue }
 $duration = $stopWatch.Elapsed.ToString("mm\:ss\.ff")
 $logDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
-# Get Output Size if file exists
-if (Test-Path -LiteralPath $outputFile) {
-    $outputFileItem = Get-Item -LiteralPath $outputFile
-    $outputSizeMB = "{0:N2} MB" -f ($outputFileItem.Length / 1MB)
-} else {
-    $outputSizeMB = "N/A"
+# Failure to read report metadata must have the same result under either
+# caller's ErrorActionPreference. Complete output validation belongs to M1-04.
+$outputSizeMB = 'N/A'
+$metadataError = $null
+try {
+    if (Test-Path -LiteralPath $outputFile -ErrorAction Stop) {
+        $outputFileItem = Get-Item -LiteralPath $outputFile -ErrorAction Stop
+        $outputSizeMB = "{0:N2} MB" -f ($outputFileItem.Length / 1MB)
+    }
+} catch {
+    $metadataError = $_.Exception.Message
+    Write-Warning ("Output size could not be read for the report: " + $metadataError)
+    if ($applicationExitCode -eq 0) { $applicationExitCode = 7; $status = 'WARNING' }
 }
 
 # Construct Verbose Log Entry
@@ -325,7 +473,7 @@ $logEntry = @"
 ================================================================================
 LOG DATE       : $logDate
 --------------------------------------------------------------------------------
-STATUS         : $status (Exit Code: $($process.ExitCode))
+STATUS         : $status (Native Exit Code: $nativeExitText; Application Exit Code: $applicationExitCode)
 MODE           : $modeName
 DURATION       : $duration
 
@@ -335,11 +483,27 @@ OUTPUT FILE    : $outputFile
 OUTPUT SIZE    : $outputSizeMB
 
 ACTIVE FILTERS : $filterChain
+EXECUTABLE     : $ffmpegPath
+PROCESS ERROR  : $($process.Error)
+CLEANUP ERROR  : $($process.CleanupError)
+REPORT ERROR   : $metadataError
+STANDARD OUTPUT:
+$($process.StandardOutput)
+STANDARD ERROR:
+$($process.StandardError)
 ================================================================================
 "@
 
 # Write to Log
-Add-Content -LiteralPath $logFile -Value $logEntry
+try { Add-Content -LiteralPath $logFile -Value $logEntry -ErrorAction Stop }
+catch {
+    # Reporting failure must neither hide native failure nor delete audio.
+    Write-Warning ("Report could not be written: " + $_.Exception.Message)
+    if ($applicationExitCode -eq 0) {
+        $applicationExitCode = 7
+        $status = 'WARNING'
+    }
+}
 
 # --- FEEDBACK ---
 if ($status -eq "SUCCESS") {
@@ -347,7 +511,11 @@ if ($status -eq "SUCCESS") {
     Write-Host "Time Elapsed : $duration"
     Write-Host "Output Size  : $outputSizeMB"
     Write-Host "File saved to: $outputFile"
+} elseif ($status -eq 'WARNING') {
+    Write-Host "`nDONE: WARNING - FFmpeg completed, but reporting was incomplete." -ForegroundColor Yellow
+    Write-Host "Requested output: $outputFile"
 } else {
     Write-Host "`nDONE: FAILED" -ForegroundColor Red
-    Write-Host "Check the console for FFmpeg errors."
+    Write-Host "Native exit: $nativeExitText. Application exit: $applicationExitCode. See diagnostics above."
 }
+exit $applicationExitCode

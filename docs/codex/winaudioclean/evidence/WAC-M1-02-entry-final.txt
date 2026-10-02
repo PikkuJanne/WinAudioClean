@@ -1,0 +1,89 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (18 files; shell 7.6.5).
+Static gate passed; 53 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 64 tests in 198ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] AC-014: rejects missing -File -inputPath before prompting in powershell.exe 503ms (472ms|31ms)
+  [+] AC-014: rejects missing -File -inputPath before prompting in pwsh.exe 1.08s (1.08s|1ms)
+  [+] AC-014: rejects a missing dropped file via outer powershell.exe before the menu (inner Windows PowerShell) 656ms (655ms|1ms)
+  [+] AC-014: rejects a missing dropped file via outer pwsh.exe before the menu (inner Windows PowerShell) 1.21s (1.21s|1ms)
+
+Describing AC-014/015: actual script preflight is bounded and unattended on invalid requests
+  [+] rejects no input without a menu or processing in powershell.exe 555ms (553ms|2ms)
+  [+] rejects directory without a menu or processing in powershell.exe 444ms (443ms|2ms)
+  [+] rejects URL without a menu or processing in powershell.exe 416ms (414ms|2ms)
+  [+] rejects zero bytes without a menu or processing in powershell.exe 428ms (427ms|1ms)
+  [+] rejects destination file without a menu or processing in powershell.exe 459ms (458ms|1ms)
+  [+] rejects empty destination without a menu or processing in powershell.exe 447ms (446ms|1ms)
+  [+] rejects invalid mode without a menu or processing in powershell.exe 444ms (443ms|1ms)
+  [+] rejects empty mode without a menu or processing in powershell.exe 499ms (499ms|1ms)
+  [+] rejects missing mode without a menu or processing in powershell.exe 441ms (440ms|1ms)
+  [+] rejects redirected input without a menu or processing in powershell.exe 457ms (456ms|1ms)
+  [+] rejects host noninteractive without a menu or processing in powershell.exe 431ms (430ms|1ms)
+  [+] rejects no input without a menu or processing in pwsh.exe 1.29s (1.28s|1ms)
+  [+] rejects directory without a menu or processing in pwsh.exe 1.28s (1.28s|1ms)
+  [+] rejects URL without a menu or processing in pwsh.exe 1.25s (1.25s|2ms)
+  [+] rejects zero bytes without a menu or processing in pwsh.exe 1.08s (1.08s|1ms)
+  [+] rejects destination file without a menu or processing in pwsh.exe 1.1s (1.1s|1ms)
+  [+] rejects empty destination without a menu or processing in pwsh.exe 1.1s (1.1s|1ms)
+  [+] rejects invalid mode without a menu or processing in pwsh.exe 1.12s (1.11s|1ms)
+  [+] rejects empty mode without a menu or processing in pwsh.exe 1.22s (1.22s|1ms)
+  [+] rejects missing mode without a menu or processing in pwsh.exe 1.03s (1.03s|1ms)
+  [+] rejects redirected input without a menu or processing in pwsh.exe 1.08s (1.08s|1ms)
+  [+] rejects host noninteractive without a menu or processing in pwsh.exe 1.11s (1.11s|1ms)
+
+Describing AC-017: actual native execution reports success, failure and reporting warnings
+  [+] AC-016: preserves spaces here.wav through direct powershell.exe -File and the native child 1.21s (1.21s|1ms)
+  [+] AC-016: preserves [square brackets].wav through direct powershell.exe -File and the native child 653ms (652ms|1ms)
+  [+] AC-016: preserves speaker's recording.wav through direct powershell.exe -File and the native child 590ms (587ms|3ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct powershell.exe -File and the native child 589ms (588ms|1ms)
+  [+] AC-016: preserves ampersand & here.wav through direct powershell.exe -File and the native child 585ms (584ms|1ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct powershell.exe -File and the native child 593ms (593ms|1ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct powershell.exe -File and the native child 630ms (629ms|1ms)
+  [+] AC-016: preserves (parentheses).wav through direct powershell.exe -File and the native child 654ms (653ms|1ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct powershell.exe -File and the native child 631ms (630ms|1ms)
+  [+] AC-016: preserves spaces here.wav through direct pwsh.exe -File and the native child 1.22s (1.22s|1ms)
+  [+] AC-016: preserves [square brackets].wav through direct pwsh.exe -File and the native child 1.25s (1.24s|0ms)
+  [+] AC-016: preserves speaker's recording.wav through direct pwsh.exe -File and the native child 1.23s (1.23s|1ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct pwsh.exe -File and the native child 1.47s (1.47s|1ms)
+  [+] AC-016: preserves ampersand & here.wav through direct pwsh.exe -File and the native child 1.41s (1.41s|1ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct pwsh.exe -File and the native child 1.4s (1.4s|1ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct pwsh.exe -File and the native child 1.27s (1.27s|1ms)
+  [+] AC-016: preserves (parentheses).wav through direct pwsh.exe -File and the native child 1.24s (1.24s|1ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct pwsh.exe -File and the native child 1.27s (1.27s|1ms)
+  [+] returns dependency failure for invalid executable False in powershell.exe 558ms (557ms|1ms)
+  [+] returns dependency failure for invalid executable True in powershell.exe 508ms (504ms|3ms)
+  [+] returns dependency failure for invalid executable False in pwsh.exe 1.06s (1.06s|0ms)
+  [+] returns dependency failure for invalid executable True in pwsh.exe 1.18s (1.18s|0ms)
+  [+] uses mode 1, native exit 0, blocked log False in powershell.exe 614ms (612ms|2ms)
+  [+] uses mode 1, native exit 0, blocked log True in powershell.exe 613ms (612ms|0ms)
+  [+] uses mode 1, native exit 7, blocked log False in powershell.exe 566ms (565ms|1ms)
+  [+] uses mode 1, native exit 7, blocked log True in powershell.exe 608ms (608ms|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in powershell.exe 586ms (585ms|1ms)
+  [+] uses mode 2, native exit 0, blocked log True in powershell.exe 604ms (603ms|1ms)
+  [+] uses mode 2, native exit 7, blocked log False in powershell.exe 612ms (611ms|0ms)
+  [+] uses mode 2, native exit 7, blocked log True in powershell.exe 590ms (589ms|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in pwsh.exe 1.25s (1.25s|1ms)
+  [+] uses mode 1, native exit 0, blocked log True in pwsh.exe 1.22s (1.22s|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in pwsh.exe 1.22s (1.22s|1ms)
+  [+] uses mode 1, native exit 7, blocked log True in pwsh.exe 1.27s (1.26s|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in pwsh.exe 1.23s (1.23s|0ms)
+  [+] uses mode 2, native exit 0, blocked log True in pwsh.exe 1.25s (1.25s|1ms)
+  [+] uses mode 2, native exit 7, blocked log False in pwsh.exe 1.28s (1.28s|0ms)
+  [+] uses mode 2, native exit 7, blocked log True in pwsh.exe 1.25s (1.25s|1ms)
+Tests completed in 58.24s
+Tests Passed: 64, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 64 Pester passed, 0 skipped, 0 outside scope.
