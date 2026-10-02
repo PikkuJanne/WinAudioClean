@@ -115,7 +115,7 @@
       "depends_on": [
         "WAC-M0-02"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Fixture generator, tests/fixtures metadata, baseline reports; private audio stays untracked.",
       "implementation": [
@@ -129,7 +129,12 @@
         "AC-008",
         "AC-009"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M0-03.md",
+        "evidence/WAC-M0-03-source.json",
+        "evidence/WAC-M0-03-comparison.json",
+        "evidence/WAC-M0-03-listening.md"
+      ],
       "blocked_reason": null
     },
     {

@@ -99,3 +99,48 @@ with process/filesystem doubles. They verify launch/argument behavior, not audio
 quality or actual encoding. Missing shells must be reported as skipped, never passed.
 Listening, real FFmpeg output and large-file behavior remain separate acceptance
 work. Tests use temporary synthetic artifacts; private recordings are unnecessary.
+
+## Synthetic audio characterization (WAC-M0-03)
+
+Provide an existing local FFmpeg/ffprobe pair explicitly. This script never
+downloads tools or changes PATH. The recorded Windows baseline uses the
+checksum-verified portable Gyan 9.0.2 essentials build under ignored
+`.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin`.
+Gyan is linked from the [FFmpeg download page](https://ffmpeg.org/download.html).
+The exact archive/binary hashes and full build configuration are in the
+[task evidence](../docs/codex/winaudioclean/evidence/WAC-M0-03.md).
+
+From the repository root, using new output directory names for each run:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 docs/codex/winaudioclean/tools/characterize_filters.py --output .wac-local/WAC-M0-03/run-1 --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+python -X utf8 docs/codex/winaudioclean/tools/characterize_filters.py --output .wac-local/WAC-M0-03/run-2 --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+Get-FileHash .wac-local/WAC-M0-03/run-1/characterization.json,.wac-local/WAC-M0-03/run-2/characterization.json -Algorithm SHA256
+```
+
+Each run creates all [five fixtures](fixtures/README.md), then renders both
+legacy chains with unspecified WAV encoding and, separately, explicit
+`-ar 48000 -c:a pcm_s16le`. That makes 20 output files per run. This encoding
+comparison changes no application settings. The script refuses existing output
+directories and uses bounded, noninteractive FFmpeg processes with `-n`.
+
+Schema-v2 reports record tool/build hashes, fixture hashes, complete argument
+arrays and exits, final WAV hashes/formats/durations, and final-file metrics.
+Independent astats and loudnorm analysis passes discard their renders. The
+reported loudness values use loudnorm's **input** measurements of the final WAV.
+Nonfinite metrics are null with reasons; missing or malformed metrics fail the
+run. Equal report hashes show exact repeatability on the recorded build;
+investigate differing reports rather than adjusting tolerances or hiding them.
+This is direct FFmpeg characterization, not a launcher or speech-quality test.
+
+The new metric-parser tests are included in Full and can run alone:
+
+```powershell
+python -X utf8 -m unittest discover -s docs/codex/winaudioclean/tests -p test_characterize_filters.py -v
+```
+
+Keep WAVs, portable binaries and raw local logs ignored. Commit only sanitized
+reports and metadata. Use the [listening checklist](../docs/codex/winaudioclean/evidence/WAC-M0-03-listening.md)
+when owner-supplied, permission-cleared speech is available; listening remains
+pending until that review actually occurs.

@@ -6,9 +6,21 @@ BeforeAll {
     # build these from production constants or from the helper under test.
     $rawFilters = 'adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5'
     $zoomFilters = 'dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5'
+    $baselinePath = Join-Path (Split-Path $PSScriptRoot -Parent) 'docs/codex/winaudioclean/BASELINE.json'
+    $baseline = Get-Content -Raw -LiteralPath $baselinePath | ConvertFrom-Json
 }
 
 Describe 'Processing profiles preserve the reviewed baseline sound' -Tag 'Unit' {
+    It 'AC-007: matches the Raw filter values and order in BASELINE.json' {
+        (Get-WacProcessingProfile -Choice '1').FilterChain |
+            Should -BeExactly ($baseline.filters.raw_clean + ',' + $baseline.filters.level)
+    }
+
+    It 'AC-007: matches the Zoom filter values and order in BASELINE.json' {
+        (Get-WacProcessingProfile -Choice '2').FilterChain |
+            Should -BeExactly $baseline.filters.level
+    }
+
     It 'selects the exact original Raw mode and filters for choice 1' {
         $processingProfile = Get-WacProcessingProfile -Choice '1'
         $processingProfile.ModeName | Should -BeExactly 'RAW (Clean+Level)'

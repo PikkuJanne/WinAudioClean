@@ -83,8 +83,13 @@
       "title": "Legacy filter identity",
       "procedure": "Compare built filter strings for Raw and Zoom with BASELINE.json.",
       "expected": "Parameter values and order match exactly; output-container changes are recorded separately.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-03.md",
+        "evidence/WAC-M0-03-targeted.txt",
+        "evidence/WAC-M0-03-full-ps7.txt",
+        "evidence/WAC-M0-03-full-ps51.txt"
+      ]
     },
     {
       "id": "AC-008",
@@ -92,8 +97,13 @@
       "title": "Reproducible synthetic baseline",
       "procedure": "Run characterization twice using the same local build and inputs.",
       "expected": "Versions, commands, fixture hashes and output format are recorded; variation is investigated rather than masked.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-03.md",
+        "evidence/WAC-M0-03-run-1.json",
+        "evidence/WAC-M0-03-run-2.json",
+        "evidence/WAC-M0-03-comparison.json"
+      ]
     },
     {
       "id": "AC-009",
@@ -101,8 +111,11 @@
       "title": "Private corpus handling",
       "procedure": "Check ignore rules and staged files before adding the listening-review record.",
       "expected": "No private recordings or identifying local paths are staged; missing listening material is explicitly pending.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-03.md",
+        "evidence/WAC-M0-03-listening.md"
+      ]
     },
     {
       "id": "AC-010",
