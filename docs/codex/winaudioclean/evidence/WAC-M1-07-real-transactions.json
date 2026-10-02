@@ -1,0 +1,1946 @@
+{
+  "task": "WAC-M1-04",
+  "created_utc": "20261002T143241021348Z",
+  "notice": "Synthetic publication/ownership checks. Fault cases use documented isolated application-copy overrides. Disk-full is simulated; no actual volume exhaustion, speech listening or large-file claim.",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.6",
+    "child_psmodulepath_removed": true,
+    "ps51": "5.1.26100.9444",
+    "ps7": "7.6.5"
+  },
+  "source_revision": "ca82376ae60560541fb0985c7c565c7872e3bba4",
+  "runtime_sha256_before": {
+    "WinAudioClean.ps1": "74e07f865b8392ff70556fb3a4e57979a8136dc9b93cf22958edef6e7a3a9066",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+  },
+  "harness_sha256": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+  "tools": {
+    "ffmpeg": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    "ffprobe": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+    }
+  },
+  "fixtures": [
+    {
+      "path": ".wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+      "sha256": "b2f1d43dfa3d10339eff3cd97463946009f79e8fe9bdc6e47c52de3a858e1f37"
+    },
+    {
+      "path": ".wac-local\\WAC-M1-07\\real-transactions\\fixtures\\first\\same-stem.wav",
+      "sha256": "7353fbb9ab4d9eb310d2925489eaba4b4865ed6fc7cde99b6bb33553a310f2ef"
+    },
+    {
+      "path": ".wac-local\\WAC-M1-07\\real-transactions\\fixtures\\second\\same-stem.wav",
+      "sha256": "c8a7eda31c10dfec938b40f345f8f2c0784a5bc6c47bdefe81b3e13218aa2fb6"
+    },
+    {
+      "path": ".wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.mp3",
+      "sha256": "b6bc99b5c41474f659da5e2c04a77cf3dac6bbc9b313936f01e5b8161a33b468"
+    },
+    {
+      "path": ".wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.m4a",
+      "sha256": "8ce462140c144fd36ddc1a2579829e8eccee08e2406ad1d1b0bad23cf9697fec"
+    }
+  ],
+  "cases": [
+    {
+      "id": "ps51-rapid-1",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-repeat\\video + two tracks_Cleaned_20261002-163242660_a71685d9d1614c75b510292fc384a5a6.wav",
+      "output_sha256": "8c9ca9ef5634d65a829d4751c6354d9bf12e9b3272871c5a2b1491fed28c3e81",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 14424464.303
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-rapid-2",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-repeat\\video + two tracks_Cleaned_20261002-163244566_7bb3a157d7664f38b94bdd57fe1f0d35.wav",
+      "output_sha256": "520c893efe363406a23abb9128249170f9992ddc03485b847a6b9921e049f9a5",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 16471266.666
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-same-stem-mono",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem\\same-stem_Cleaned_20261002-163246572_e885c8fc4299420881af0eee39b854f6.wav",
+      "output_sha256": "520c893efe363406a23abb9128249170f9992ddc03485b847a6b9921e049f9a5",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 16471266.666
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-same-stem-stereo",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem\\same-stem_Cleaned_20261002-163248461_c2cf030d316b489685a4523c196b9e72.wav",
+      "output_sha256": "a86fd0d90caeeb8895794af782acd898226f9b04209703615e6124d8ce46cbe4",
+      "audio": {
+        "channels": 2,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          },
+          {
+            "channel": 1,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-compressed-mp3",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-mp3\\compressed_Cleaned_20261002-163250556_f6894171dd2c452d9f3f1fe563f57120.wav",
+      "output_sha256": "4204c7c025909bb13db4af4758ac009bac71d4431ff93a9466ae917757d419a9",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.1,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 16205141.464
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-compressed-aac",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-aac\\compressed_Cleaned_20261002-163252446_304c917f92ef4e21817b9d5386d9bf65.wav",
+      "output_sha256": "0053dca10cfcb41d1ceccfb7c345b5c01e5a38104b44f683710fe69290c4f97e",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.1,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 14674089.13
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-concurrent",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "new_final_count": 2,
+      "outputs": [
+        {
+          "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent\\video + two tracks_Cleaned_20261002-163254438_10602261c7a04d9aae5ed9924a598228.wav",
+          "sha256": "8c9ca9ef5634d65a829d4751c6354d9bf12e9b3272871c5a2b1491fed28c3e81",
+          "audio": {
+            "channels": 1,
+            "sample_rate": 48000,
+            "sample_width_bytes": 2,
+            "duration_seconds": 3.0,
+            "duration_tolerance_seconds": 0.01,
+            "frequencies": [
+              {
+                "channel": 0,
+                "dominant_hz": 440,
+                "expected_to_other_power_ratio": 14424464.303
+              }
+            ],
+            "passed": true
+          }
+        },
+        {
+          "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent\\video + two tracks_Cleaned_20261002-163254445_111600edd211463382ab3354d1669bd4.wav",
+          "sha256": "a86fd0d90caeeb8895794af782acd898226f9b04209703615e6124d8ce46cbe4",
+          "audio": {
+            "channels": 2,
+            "sample_rate": 48000,
+            "sample_width_bytes": 2,
+            "duration_seconds": 3.0,
+            "duration_tolerance_seconds": 0.01,
+            "frequencies": [
+              {
+                "channel": 0,
+                "dominant_hz": 880,
+                "expected_to_other_power_ratio": 3589733.367
+              },
+              {
+                "channel": 1,
+                "dominant_hz": 880,
+                "expected_to_other_power_ratio": 3589733.367
+              }
+            ],
+            "passed": true
+          }
+        }
+      ],
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps51-empty",
+      "fault": "empty",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps51-invalid",
+      "fault": "invalid",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps51-truncated",
+      "fault": "truncated",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps51-encoder",
+      "fault": "encoder",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps51-disk-full",
+      "fault": "disk-full",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps51-rename-race",
+      "fault": "rename-race",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 1,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "foreign_final_unchanged": true
+    },
+    {
+      "id": "ps51-crash",
+      "fault": "crash",
+      "expected_exit": 99,
+      "exit_code": 99,
+      "new_final_count": 0,
+      "partials": {
+        ".wac-local\\WAC-M1-07\\real-transactions\\ps51-crash\\.wac-240a49cc669c42698e471cf754cad58b.partial": "a86fd0d90caeeb8895794af782acd898226f9b04209703615e6124d8ce46cbe4"
+      },
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "retained_audio": {
+        "channels": 2,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          },
+          {
+            "channel": 1,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-after-crash",
+      "exit_code": 0,
+      "leftovers_unchanged": true,
+      "new_final_count": 1,
+      "passed": true
+    },
+    {
+      "id": "ps7-rapid-1",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-repeat\\video + two tracks_Cleaned_20261002-163316670_4953fd687d864e9b9bc5ec5f2c591987.wav",
+      "output_sha256": "8c9ca9ef5634d65a829d4751c6354d9bf12e9b3272871c5a2b1491fed28c3e81",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 14424464.303
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-rapid-2",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-repeat\\video + two tracks_Cleaned_20261002-163319767_e01221a665a54644a0b5aa6c8e07838f.wav",
+      "output_sha256": "520c893efe363406a23abb9128249170f9992ddc03485b847a6b9921e049f9a5",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 16471266.666
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-same-stem-mono",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem\\same-stem_Cleaned_20261002-163322359_14617071404046c6a4c13dac16888e47.wav",
+      "output_sha256": "520c893efe363406a23abb9128249170f9992ddc03485b847a6b9921e049f9a5",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 16471266.666
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-same-stem-stereo",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem\\same-stem_Cleaned_20261002-163325174_b001cbd5017943fea3e9160b74569e34.wav",
+      "output_sha256": "a86fd0d90caeeb8895794af782acd898226f9b04209703615e6124d8ce46cbe4",
+      "audio": {
+        "channels": 2,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          },
+          {
+            "channel": 1,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-compressed-mp3",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-mp3\\compressed_Cleaned_20261002-163328478_30c4e9ebc9b54d028948205d55c01709.wav",
+      "output_sha256": "4204c7c025909bb13db4af4758ac009bac71d4431ff93a9466ae917757d419a9",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.1,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 16205141.464
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-compressed-aac",
+      "exit_code": 0,
+      "new_final_count": 1,
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-aac\\compressed_Cleaned_20261002-163331001_ff6e8ed7308d4c4d85dde275d7ffad1f.wav",
+      "output_sha256": "0053dca10cfcb41d1ceccfb7c345b5c01e5a38104b44f683710fe69290c4f97e",
+      "audio": {
+        "channels": 1,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.1,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 440,
+            "expected_to_other_power_ratio": 14674089.13
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-concurrent",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "new_final_count": 2,
+      "outputs": [
+        {
+          "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent\\video + two tracks_Cleaned_20261002-163333930_3f84549e9913494c967df5e81a763f0d.wav",
+          "sha256": "8c9ca9ef5634d65a829d4751c6354d9bf12e9b3272871c5a2b1491fed28c3e81",
+          "audio": {
+            "channels": 1,
+            "sample_rate": 48000,
+            "sample_width_bytes": 2,
+            "duration_seconds": 3.0,
+            "duration_tolerance_seconds": 0.01,
+            "frequencies": [
+              {
+                "channel": 0,
+                "dominant_hz": 440,
+                "expected_to_other_power_ratio": 14424464.303
+              }
+            ],
+            "passed": true
+          }
+        },
+        {
+          "output": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent\\video + two tracks_Cleaned_20261002-163334675_e6dae9213f3a4c28a81a7df27d686ab7.wav",
+          "sha256": "a86fd0d90caeeb8895794af782acd898226f9b04209703615e6124d8ce46cbe4",
+          "audio": {
+            "channels": 2,
+            "sample_rate": 48000,
+            "sample_width_bytes": 2,
+            "duration_seconds": 3.0,
+            "duration_tolerance_seconds": 0.01,
+            "frequencies": [
+              {
+                "channel": 0,
+                "dominant_hz": 880,
+                "expected_to_other_power_ratio": 3589733.367
+              },
+              {
+                "channel": 1,
+                "dominant_hz": 880,
+                "expected_to_other_power_ratio": 3589733.367
+              }
+            ],
+            "passed": true
+          }
+        }
+      ],
+      "partial_count": 0,
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps7-empty",
+      "fault": "empty",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps7-invalid",
+      "fault": "invalid",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps7-truncated",
+      "fault": "truncated",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps7-encoder",
+      "fault": "encoder",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps7-disk-full",
+      "fault": "disk-full",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "new_final_count": 0,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true
+    },
+    {
+      "id": "ps7-rename-race",
+      "fault": "rename-race",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "new_final_count": 1,
+      "partials": {},
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "foreign_final_unchanged": true
+    },
+    {
+      "id": "ps7-crash",
+      "fault": "crash",
+      "expected_exit": 99,
+      "exit_code": 99,
+      "new_final_count": 0,
+      "partials": {
+        ".wac-local\\WAC-M1-07\\real-transactions\\ps7-crash\\.wac-c3dd216bdc5d4ae684c30995f9fb779b.partial": "a86fd0d90caeeb8895794af782acd898226f9b04209703615e6124d8ce46cbe4"
+      },
+      "sources_unchanged": true,
+      "prior_files_unchanged": true,
+      "passed": true,
+      "retained_audio": {
+        "channels": 2,
+        "sample_rate": 48000,
+        "sample_width_bytes": 2,
+        "duration_seconds": 3.0,
+        "duration_tolerance_seconds": 0.01,
+        "frequencies": [
+          {
+            "channel": 0,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          },
+          {
+            "channel": 1,
+            "dominant_hz": 880,
+            "expected_to_other_power_ratio": 3589733.367
+          }
+        ],
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-after-crash",
+      "exit_code": 0,
+      "leftovers_unchanged": true,
+      "new_final_count": 1,
+      "passed": true
+    }
+  ],
+  "commands": [
+    {
+      "id": "ffmpeg-version",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.019,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ffmpeg-version-stdout.txt",
+      "stdout_sha256": "711056f2bc922237113d5defe7da4dbd97beaab41098e5f8d425753dbfea99ff",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ffmpeg-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ffprobe-version",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.021,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ffprobe-version-stdout.txt",
+      "stdout_sha256": "c28ec08933e2c9eeac8a7341b1fced84e23745c7ca69e26e7ca83226714ef209",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ffprobe-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "generate-multi",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-f",
+        "lavfi",
+        "-i",
+        "color=c=black:s=16x16:r=10",
+        "-f",
+        "lavfi",
+        "-i",
+        "sine=frequency=440:sample_rate=48000",
+        "-f",
+        "lavfi",
+        "-i",
+        "sine=frequency=880:sample_rate=48000",
+        "-map",
+        "0:v:0",
+        "-map",
+        "1:a:0",
+        "-map",
+        "2:a:0",
+        "-c:v",
+        "ffv1",
+        "-c:a",
+        "pcm_s16le",
+        "-ac:a:1",
+        "2",
+        "-t",
+        "3",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.037,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-multi-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-multi-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "generate-mono",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-map",
+        "0:1",
+        "-c:a",
+        "copy",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\first\\same-stem.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.026,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-mono-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-mono-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "generate-stereo",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-map",
+        "0:2",
+        "-c:a",
+        "copy",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\second\\same-stem.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.028,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-stereo-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-stereo-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "generate-mp3",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\first\\same-stem.wav",
+        "-c:a",
+        "libmp3lame",
+        "-b:a",
+        "128k",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.mp3"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.049,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-mp3-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-mp3-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "generate-aac",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\first\\same-stem.wav",
+        "-c:a",
+        "aac",
+        "-b:a",
+        "128k",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.m4a"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.067,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-aac-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\generate-aac-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-version",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$PSVersionTable.PSVersion.ToString()"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.241,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-version-stdout.txt",
+      "stdout_sha256": "20e955843dca875613392595b8b605fe7c7ddeb5dd374f8eea4f6f2820fcf270",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-rapid-1",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-repeat",
+        "-Mode",
+        "Raw",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.951,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-1-stdout.txt",
+      "stdout_sha256": "814a73c8610e8a4da7d38d0554bfe00243d1bdbee3f474658f498b2106f4b622",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-1-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-rapid-2",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-repeat",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.818,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-2-stdout.txt",
+      "stdout_sha256": "a0222c290003f72504d709808210cfeac5ee19aade978573ae59581d0e3445f2",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rapid-2-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-same-stem-mono",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\first\\same-stem.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.889,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem-mono-stdout.txt",
+      "stdout_sha256": "a71f44279bebd4c9d99137099980230e21b9f56224192bb40c661eb224b17457",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem-mono-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-same-stem-stereo",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\second\\same-stem.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.077,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem-stereo-stdout.txt",
+      "stdout_sha256": "bbbe28ebf7feaac05367f8c73c39cfd3c096812373c8045ea1ffff89e8ba1061",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-same-stem-stereo-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-compressed-mp3",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.mp3",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-mp3",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.859,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-mp3-stdout.txt",
+      "stdout_sha256": "863af7e4136a3d3c84760f8604100e135983267ddc99ba876b87f231e9590a4c",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-mp3-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-compressed-aac",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.m4a",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-aac",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.912,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-aac-stdout.txt",
+      "stdout_sha256": "bd6d86f3b9b1bc6010658efc0a2481a17cd765ecdb8063af0318a886bc4f5212",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-compressed-aac-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-concurrent-1",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent",
+        "-Mode",
+        "Raw",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.591,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent-1-stdout.txt",
+      "stdout_sha256": "9da02028e4c244fb0a8f36b80e5da46f74c32b7c3af2c3c14c8dffe671cec528",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent-1-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-concurrent-2",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.577,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent-2-stdout.txt",
+      "stdout_sha256": "fcdfdf56d15bcc615e2bd25a7781a4a414e07960739c18d299dfad2c23deb9f9",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-concurrent-2-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-empty",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-empty",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 2.302,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-empty-stdout.txt",
+      "stdout_sha256": "fd5377b20bd67a2ff6928083f7336dd6efa2ba3fb25aaf5541d7696926417317",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-empty-stderr.txt",
+      "stderr_sha256": "4e5a88ca05d9aab646a81f1ab5eae01e3225cbe31652236c519a20fa4f850f64"
+    },
+    {
+      "id": "ps51-invalid",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-invalid",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 1.942,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-invalid-stdout.txt",
+      "stdout_sha256": "680ac952165820952cebec3129f0b064ea9bf2d021afba0aadde6c999b69edf9",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-invalid-stderr.txt",
+      "stderr_sha256": "8edd96d1ddbbe1d655e7e3de36258fca7617721e93ea4990c10789fd8ec2dde0"
+    },
+    {
+      "id": "ps51-truncated",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-truncated",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 1.976,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-truncated-stdout.txt",
+      "stdout_sha256": "b6881d56ac729cc8a4c177b6d48c12b97ac7ca85f07408d9a6de2215093720f0",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-truncated-stderr.txt",
+      "stderr_sha256": "8594477e20d934aa8458606aa3a5232111710f0d01c5c4eb10241b6e2d8d356a"
+    },
+    {
+      "id": "ps51-encoder",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-encoder",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 1.792,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-encoder-stdout.txt",
+      "stdout_sha256": "12ee5a006631f30e1ae21690960c09e2b3ee226fc9800400c3be11b314014cad",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-encoder-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-disk-full",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-disk-full",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 1.844,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-disk-full-stdout.txt",
+      "stdout_sha256": "80bbf802e6f87d1d789212b5d2dc1968b0ddd51c61371f4f6c0e2a5e850a6f6e",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-disk-full-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-rename-race",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-rename-race",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 2.055,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rename-race-stdout.txt",
+      "stdout_sha256": "6cf2c1214d67f999bb7e1eff5783baee717ba631403d80cf87ec68faf7fbaaa0",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-rename-race-stderr.txt",
+      "stderr_sha256": "526e5a2c976a04635d3df7214b72863f49ab706685b8fa92d38cac836bf55007"
+    },
+    {
+      "id": "ps51-crash",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-crash",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 99,
+      "timed_out": false,
+      "elapsed_seconds": 3.911,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-crash-stdout.txt",
+      "stdout_sha256": "33490235272d18fba4be8b11f559b8a6270b1dddef4d8dcbde5d005bb7bc6972",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-crash-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-after-crash",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps51-crash",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.849,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-after-crash-stdout.txt",
+      "stdout_sha256": "586304d718ef2f8a2cb9e94c465d26e04487d0c48dc654127e3b934553698b6b",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps51-after-crash-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-version",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$PSVersionTable.PSVersion.ToString()"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.322,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-version-stdout.txt",
+      "stdout_sha256": "f1b9015fddbc74eb77f6ac486b89917547a7ff3848591e50bd7b084b560cc2df",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-rapid-1",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-repeat",
+        "-Mode",
+        "Raw",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.617,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-1-stdout.txt",
+      "stdout_sha256": "15005c3e948d8d19e9811de46e5df317aa39972c9857f0f5b436f0b6997a98ae",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-1-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-rapid-2",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-repeat",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.956,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-2-stdout.txt",
+      "stdout_sha256": "24e7c1b6e42b8332e845be4ad765af0cc8660183e3061357f00fefc8d8944e68",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rapid-2-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-same-stem-mono",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\first\\same-stem.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.121,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem-mono-stdout.txt",
+      "stdout_sha256": "712abd4f29588c1df3440d7f41f16d1853782adf7932b4056be82df53fde5548",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem-mono-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-same-stem-stereo",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\second\\same-stem.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.559,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem-stereo-stdout.txt",
+      "stdout_sha256": "a1a5d4abfc5904be31b98964602dcdf929dfbd23941034db8c4f79ffe8624d0b",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-same-stem-stereo-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-compressed-mp3",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.mp3",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-mp3",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.023,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-mp3-stdout.txt",
+      "stdout_sha256": "69004e8784c82db035d62abd97ddb0964bdaec2b444d39813ee952bd16447896",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-mp3-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-compressed-aac",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\compressed.m4a",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-aac",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "0",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.372,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-aac-stdout.txt",
+      "stdout_sha256": "2b4ead0626c075f9c79993d860b031f49ae288e5dfb349c67723c60269cb1320",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-compressed-aac-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-concurrent-1",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent",
+        "-Mode",
+        "Raw",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.778,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent-1-stdout.txt",
+      "stdout_sha256": "88d188c8dd99fcde4b60153c751d98833e4e286e335484229c365ee4edda3a6e",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent-1-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-concurrent-2",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.709,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent-2-stdout.txt",
+      "stdout_sha256": "0cfabc14d59341d7be6eb72d170b27dd59b2beeeef4906ef57c4234f698c77f5",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-concurrent-2-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-empty",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-empty",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 2.219,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-empty-stdout.txt",
+      "stdout_sha256": "549fd7278d80ec1b572bc160622ea2c907d503b4752a1a95748d2ae164aa873a",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-empty-stderr.txt",
+      "stderr_sha256": "a2bf7fe12c5b0d3671898220f6e9d4497efd6b376caa6aa51ba6cf93c7c11452"
+    },
+    {
+      "id": "ps7-invalid",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-invalid",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 2.23,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-invalid-stdout.txt",
+      "stdout_sha256": "e68f427556c2c9e3ff4de59e676e2c1b2ae213ee8836daccd2ddb4bf4a17d8f4",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-invalid-stderr.txt",
+      "stderr_sha256": "601de3c98a14d56951ddc0393d0f289fba82a4d239309d6a262bb38d499760b7"
+    },
+    {
+      "id": "ps7-truncated",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-truncated",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 2.494,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-truncated-stdout.txt",
+      "stdout_sha256": "fbbc4f5adf41257100c87a0a1c35350b434e4f188ec17e99c438386213f0addb",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-truncated-stderr.txt",
+      "stderr_sha256": "a67397e107233e828cdc857a1ff2071c846259d7aa8726d9d08ddfe86b82bc8c"
+    },
+    {
+      "id": "ps7-encoder",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-encoder",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 2.402,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-encoder-stdout.txt",
+      "stdout_sha256": "2bea85fa28f69001763cbd87d77c300b1c8a56ae4ebce740160f15251c3ea3a9",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-encoder-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-disk-full",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-disk-full",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 2.42,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-disk-full-stdout.txt",
+      "stdout_sha256": "3a44e5d7a81c77316be62d2993f5c15dccc2fadd029750d07aef15b526eda7b3",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-disk-full-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-rename-race",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-rename-race",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 2.657,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rename-race-stdout.txt",
+      "stdout_sha256": "597714db00e8fa5e6293241069c888bff407c2fdf6bfcb5264c440232b187be5",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-rename-race-stderr.txt",
+      "stderr_sha256": "b6cbc4b8edf337a0fa0f336e66e3f33fcd8b5d0ae351aa2b7b35b3fb08803141"
+    },
+    {
+      "id": "ps7-crash",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-crash",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "2",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 99,
+      "timed_out": false,
+      "elapsed_seconds": 2.294,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-crash-stdout.txt",
+      "stdout_sha256": "6a1bd6058218e51a514355a3df577c2a7caaa7e5a9059b6b90567e4f8fe11ead",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-crash-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-after-crash",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\fixtures\\video + two tracks.mkv",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-07\\real-transactions\\ps7-crash",
+        "-Mode",
+        "Zoom",
+        "-AudioStreamIndex",
+        "1",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.265,
+      "stdout_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-after-crash-stdout.txt",
+      "stdout_sha256": "94185594212ee8125f25937eab4cea0bcadef8b7529bfec1359376cfe1fc544e",
+      "stderr_log": ".wac-local\\WAC-M1-07\\real-transactions\\ps7-after-crash-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fault_application": {
+    "seam": "Override native result/owned output after actual encoding, or publication immediately before rename; all other code and actual validation retained.",
+    "files": {
+      ".wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      ".wac-local\\WAC-M1-07\\real-transactions\\fault-application\\WinAudioClean.ps1": "f9a3f5fd2b8bc2d1e26626702329a185644c6bb865a5c16c852a13de16f22dd1"
+    },
+    "override_sha256": "16fa2e1eaf6572d231ea1a7a54ac71b76e108e35933b9ff389a2c05ca947804c"
+  },
+  "status": "pass",
+  "runtime_sha256_after": {
+    "WinAudioClean.ps1": "74e07f865b8392ff70556fb3a4e57979a8136dc9b93cf22958edef6e7a3a9066",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+  },
+  "runtime_unchanged_during_run": true
+}

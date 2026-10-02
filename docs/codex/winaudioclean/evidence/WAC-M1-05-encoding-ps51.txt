@@ -1,0 +1,75 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (23 files; shell 5.1.26100.9444).
+Static gate passed; 98 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 48 tests in 428ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Encoding.Tests.ps1'
+Describing AC-025/AC-026: explicit PCM and selected-channel policy
+  [+] preserves 1 channels with 16-bit PCM at 48 kHz 240ms (190ms|50ms)
+  [+] preserves 1 channels with 24-bit PCM at 48 kHz 16ms (14ms|2ms)
+  [+] preserves 2 channels with 16-bit PCM at 48 kHz 23ms (20ms|3ms)
+  [+] preserves 2 channels with 24-bit PCM at 48 kHz 18ms (16ms|2ms)
+  [+] infers conventional layout for 1 channels with a missing layout 19ms (13ms|6ms)
+  [+] infers conventional layout for 2 channels with a missing layout 19ms (16ms|3ms)
+  [+] infers conventional layout for 1 channels with a empty layout 67ms (63ms|4ms)
+  [+] infers conventional layout for 2 channels with a blank layout 9ms (8ms|2ms)
+  [+] rejects unsupported or inconsistent input zero channels, including with explicit mono 62ms (60ms|2ms)
+  [+] rejects unsupported or inconsistent input 2.1, including with explicit mono 11ms (10ms|2ms)
+  [+] rejects unsupported or inconsistent input 5.1, including with explicit mono 16ms (13ms|3ms)
+  [+] rejects unsupported or inconsistent input one channel labeled stereo, including with explicit mono 16ms (12ms|4ms)
+  [+] rejects unsupported or inconsistent input two channels labeled mono, including with explicit mono 13ms (9ms|3ms)
+  [+] rejects unsupported or inconsistent input downmix channel positions, including with explicit mono 15ms (11ms|4ms)
+  [+] rejects unsupported or inconsistent input numeric layout, including with explicit mono 33ms (30ms|3ms)
+  [+] mixes stereo equally before the exact original processing chain only when mono is requested 111ms (108ms|3ms)
+  [+] leaves an already-mono filter path unchanged under explicit mono 19ms (16ms|3ms)
+  [+] pins output encoding and keeps selected stereo channels without trimming or splitting 46ms (44ms|2ms)
+  [+] rejects unsupported bit depth  20ms (16ms|4ms)
+  [+] rejects unsupported bit depth 8 8ms (6ms|2ms)
+  [+] rejects unsupported bit depth 32 7ms (4ms|3ms)
+  [+] rejects unsupported bit depth 16.0 8ms (5ms|3ms)
+
+Describing AC-027: conservative output-size and available-space policy
+  [+] reserves one output file, 101 ms timing slack, a 1 MiB header and at least 64 MiB headroom 180ms (152ms|29ms)
+  [+] uses ten percent headroom when greater than 64 MiB 18ms (15ms|2ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 1 channels/16 bits 57ms (55ms|3ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 2 channels/16 bits 16ms (13ms|3ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 1 channels/24 bits 88ms (85ms|3ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 2 channels/24 bits 16ms (13ms|3ms)
+  [+] uses 64-bit byte counts for a supported very long RF64 estimate 15ms (12ms|2ms)
+  [+] rejects a duration that cannot be estimated: zero 17ms (12ms|4ms)
+  [+] rejects a duration that cannot be estimated: negative 8ms (6ms|2ms)
+  [+] rejects a duration that cannot be estimated: NaN 7ms (5ms|2ms)
+  [+] rejects a duration that cannot be estimated: infinity 30ms (28ms|2ms)
+  [+] rejects a duration that cannot be estimated: above supported bound 19ms (17ms|2ms)
+  [+] rejects invalid requested format in the estimator 19ms (17ms|3ms)
+  [+] rejects invalid requested format in the estimator 15ms (13ms|2ms)
+  [+] rejects invalid requested format in the estimator 13ms (11ms|2ms)
+  [+] rejects one byte below the required space and accepts the exact requirement 499ms (495ms|4ms)
+  [+] does not turn a failed destination query into an available-space result 45ms (38ms|7ms)
+
+Describing AC-027: the native space query uses the held destination directory
+  [+] queries a pinned junction target and rejects the transaction after close 373ms (367ms|6ms)
+
+Describing AC-025/AC-027: the application rejects settings and space before rendering
+  [+] fails safely before render for insufficient space 2.28s (2.27s|9ms)
+  [+] fails safely before render for unavailable space query 2.35s (2.35s|3ms)
+  [+] fails safely before render for RIFF oversized estimate 1.95s (1.94s|2ms)
+  [+] fails safely before render for multichannel input 1.83s (1.78s|52ms)
+  [+] fails safely before render for multichannel input with mono requested 1.9s (1.9s|2ms)
+  [+] fails safely before render for mismatched layout 2.08s (2.08s|2ms)
+  [+] fails safely before render for unsupported bit depth 667ms (665ms|2ms)
+  [+] fails safely before render for missing explicit mono filter 1.99s (1.98s|2ms)
+Tests completed in 19.34s
+Tests Passed: 48, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 48 Pester passed, 0 skipped, 0 outside scope.

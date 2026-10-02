@@ -26,6 +26,36 @@ Set target I/TP/LRA consistently across passes. Record requested mode and FFmpeg
 
 ## Final-file verification
 
+### Implemented export policy — WAC-M1-05 (2026-10-02)
+
+The original profile strings above remain frozen. Exports explicitly request
+48 kHz signed PCM16, or PCM24 with `-BitDepth 24`. This is an intentional encoding
+change from the measured 192 kHz PCM16 legacy default. Mono/stereo channel counts
+and ordering are preserved. Absent layout labels use the standard layout for
+one/two channels; conflicting labels and multichannel input are unsupported.
+`-Mono` explicitly averages stereo left/right before the original filter chain;
+it does not admit multichannel input. Metadata/chapters are not copied to exports.
+
+RIFF WAV is default; `-Rf64` requests RF64 even for small output. A conservative
+size estimate includes 101 ms, 1 MiB of headers, and free-space reserve of the
+greater of 64 MiB/10%. Reject a RIFF estimate above 4,294,967,295 bytes with RF64
+guidance. Count one output allocation: the partial becomes the final by rename.
+Read caller-available capacity on the held destination, including quota effects.
+The check does not reserve space against competing writers.
+
+The held-file validator requires the requested rate, PCM bit depth/codec,
+channels/layout, container and complete timing before publication. RF64 support
+is the FFmpeg single-data-chunk form: first 28-byte ds64, no extra table entries,
+exact 64-bit RIFF/data/sample counts and sentinel fields. Unsupported or malformed
+headers fail closed. Full >4 GB output, real disk exhaustion and speech listening
+are not claimed. Detailed evidence: `evidence/WAC-M1-05.md`.
+
+References: [FFmpeg WAV muxer](https://ffmpeg.org/ffmpeg-formats.html#wav),
+[loudnorm output rate](https://ffmpeg.org/ffmpeg-filters.html#loudnorm),
+[caller-available disk space](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-getdiskfreespaceexw).
+
+### Later loudness-measurement contract
+
 Probe the final PCM file after output resampling/quantization, not only loudnorm's internal output. Validate stream, nonempty samples, sample rate, codec/bit depth, channel count and duration. For eligible program-length fixtures, initial engineering targets are integrated loudness within 0.5 LU of the requested target and measured true peak no more than target + 0.2 dB measurement tolerance. These tolerances are proposed tests, not an industry specification or a guarantee of exact equality. Establish stricter margins after measurement, not by silently weakening tests.
 
 The peak ceiling takes precedence over claiming a loudness target. Out-of-tolerance results must be reported as warnings/failures according to a documented target-compliance policy, not labeled compliant. Log requested vs achieved values. Default target remains -12 LUFS / -1.5 dBTP for Original; do not invent a platform-specific standard.

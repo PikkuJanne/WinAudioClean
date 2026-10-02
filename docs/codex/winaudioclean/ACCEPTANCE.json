@@ -162,8 +162,12 @@
       "title": "Literal path matrix",
       "procedure": "Use files with spaces, square brackets, apostrophes, ä/ö/Å, ampersands, percent signs, exclamation marks and parentheses.",
       "expected": "Each resolves to one intended file; no wildcard expansion or unexpected command execution.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-01.md",
+        "evidence/WAC-M1-01-full-ps51.txt",
+        "evidence/WAC-M1-01-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-014",
@@ -171,8 +175,12 @@
       "title": "Validation order",
       "procedure": "Try no input, directory, nonexistent input, URL, unwritable destination and zero-byte corrupt media.",
       "expected": "Clear preflight diagnostics; no mode prompt for invalid paths and no misleading successful export.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-01.md",
+        "evidence/WAC-M1-01-full-ps51.txt",
+        "evidence/WAC-M1-01-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-015",
@@ -180,8 +188,12 @@
       "title": "Menu correctness",
       "procedure": "Enter empty, invalid, valid and cancel choices. Run missing mode with noninteractive semantics.",
       "expected": "Invalid input cannot silently select Zoom; cancellation/noninteractive failure is explicit.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-01.md",
+        "evidence/WAC-M1-01-full-ps51.txt",
+        "evidence/WAC-M1-01-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-016",
@@ -189,8 +201,17 @@
       "title": "Argument fidelity",
       "procedure": "Use a benign argv-echo test executable or equivalent recorder with the filename matrix through both the direct script and actual launcher.",
       "expected": "The child receives exact arguments; command-like filenames cannot become commands; any CMD limitation gets a safe fallback and explicit notice.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-policy.json",
+        "evidence/WAC-M1-02-resume.md",
+        "evidence/WAC-M1-02-resume-source.json",
+        "evidence/WAC-M1-02-resume-full-ps51.txt",
+        "evidence/WAC-M1-02-resume-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-017",
@@ -198,8 +219,17 @@
       "title": "Error propagation",
       "procedure": "Simulate startup failure, FFmpeg nonzero exit, failed reporting, and successful execution.",
       "expected": "Script and launcher return documented codes and retain useful diagnostic details without claiming success.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-policy.json",
+        "evidence/WAC-M1-02-resume.md",
+        "evidence/WAC-M1-02-resume-source.json",
+        "evidence/WAC-M1-02-resume-full-ps51.txt",
+        "evidence/WAC-M1-02-resume-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-018",
@@ -207,8 +237,17 @@
       "title": "Output and stream handling",
       "procedure": "Have a test child write large stdout/stderr streams, then exit; repeat with a known synthetic FFmpeg job.",
       "expected": "No deadlock or truncation of essential errors; all handles are closed and completion is accurately observed.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-real-process.json",
+        "evidence/WAC-M1-02-resume.md",
+        "evidence/WAC-M1-02-resume-source.json",
+        "evidence/WAC-M1-02-resume-full-ps51.txt",
+        "evidence/WAC-M1-02-resume-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-019",
@@ -216,8 +255,16 @@
       "title": "Dependency resolution",
       "procedure": "Test explicit, sibling and PATH locations; missing, incompatible and selected-mode-filter-deficient builds.",
       "expected": "Precedence is deterministic, failures are actionable, and no download happens without consent.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-03.md",
+        "evidence/WAC-M1-03-source.json",
+        "evidence/WAC-M1-03-full-ps51.txt",
+        "evidence/WAC-M1-03-full-ps7.txt",
+        "evidence/WAC-M1-03-real-media.json",
+        "evidence/WAC-M1-03-console.txt",
+        "evidence/WAC-M1-03-plan.txt"
+      ]
     },
     {
       "id": "AC-020",
@@ -225,8 +272,16 @@
       "title": "Stream choice",
       "procedure": "Use a container with two distinguishable tracks and a video-only container.",
       "expected": "Selected absolute stream index maps to the expected audio; no-audio fails before cleaning; unattended ambiguity fails.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-03.md",
+        "evidence/WAC-M1-03-source.json",
+        "evidence/WAC-M1-03-full-ps51.txt",
+        "evidence/WAC-M1-03-full-ps7.txt",
+        "evidence/WAC-M1-03-real-media.json",
+        "evidence/WAC-M1-03-console.txt",
+        "evidence/WAC-M1-03-plan.txt"
+      ]
     },
     {
       "id": "AC-021",
@@ -234,8 +289,16 @@
       "title": "Probe safety",
       "procedure": "Test malformed JSON, timeout, nonzero probe exit and local playlist referencing an external URL.",
       "expected": "No false metadata or unbounded hang; unsupported network references are rejected/blocked and documented.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-03.md",
+        "evidence/WAC-M1-03-source.json",
+        "evidence/WAC-M1-03-full-ps51.txt",
+        "evidence/WAC-M1-03-full-ps7.txt",
+        "evidence/WAC-M1-03-real-media.json",
+        "evidence/WAC-M1-03-console.txt",
+        "evidence/WAC-M1-03-plan.txt"
+      ]
     },
     {
       "id": "AC-022",
@@ -243,8 +306,17 @@
       "title": "Collision and concurrency",
       "procedure": "Run same input twice rapidly and two inputs with the same stem; run concurrent jobs targeting one destination.",
       "expected": "Every completed output is unique and prior results/source hashes remain unchanged.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ]
     },
     {
       "id": "AC-023",
@@ -252,8 +324,17 @@
       "title": "Failure before publication",
       "procedure": "Inject encoder failure, disk-full simulation, invalid output, and a crash before rename.",
       "expected": "No normal-looking final export is published; originals/prior exports remain untouched; partial files are identifiable.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ]
     },
     {
       "id": "AC-024",
@@ -261,8 +342,17 @@
       "title": "Rename race / validation",
       "procedure": "Create the intended final filename after name selection; simulate exit 0 with an empty or truncated output.",
       "expected": "No existing file is replaced; validation blocks invalid output and reports the true failure.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ]
     },
     {
       "id": "AC-025",
@@ -270,8 +360,18 @@
       "title": "Explicit output matrix",
       "procedure": "Process 44.1/48 kHz mono and stereo fixtures in both modes and 16/24-bit choices; inspect with ffprobe.",
       "expected": "Selected sample rate/codec/channels are correct; no accidental 192 kHz default export.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ]
     },
     {
       "id": "AC-026",
@@ -279,8 +379,18 @@
       "title": "Timing and channels",
       "procedure": "Use stereo channels with different signals and known impulses; compare start/end and duration before/after.",
       "expected": "No unintended downmix, channel swap, silence removal, leading offset or unexplained timing drift.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ]
     },
     {
       "id": "AC-027",
@@ -288,8 +398,18 @@
       "title": "Large-file and space policy",
       "procedure": "Unit-test estimates around the WAV size boundary and inject low-space conditions; exercise an RF64 header with a small supported fixture.",
       "expected": "Policy is deterministic and documented; full >4 GB stress is run only when risk warrants it, or clearly not claimed as tested.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ]
     },
     {
       "id": "AC-028",
@@ -297,8 +417,14 @@
       "title": "Report fidelity",
       "procedure": "Run success, encoder failure and validation failure; compare console, JSON, human log and process exit.",
       "expected": "Statuses agree; recording duration differs from wall time; unsupported/nonfinite measurements become null plus reason.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-06.md",
+        "evidence/WAC-M1-06-source.json",
+        "evidence/WAC-M1-06-full-ps51.txt",
+        "evidence/WAC-M1-06-full-ps7.txt",
+        "evidence/WAC-M1-06-reports.json"
+      ]
     },
     {
       "id": "AC-029",
@@ -306,8 +432,14 @@
       "title": "Privacy export",
       "procedure": "Generate a report containing user-directory names, filenames, container title and potential sensitive diagnostic text.",
       "expected": "Redacted output omits sensitive values and warns about review; raw report remains local only.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-06.md",
+        "evidence/WAC-M1-06-source.json",
+        "evidence/WAC-M1-06-full-ps51.txt",
+        "evidence/WAC-M1-06-full-ps7.txt",
+        "evidence/WAC-M1-06-reports.json"
+      ]
     },
     {
       "id": "AC-030",
@@ -315,8 +447,14 @@
       "title": "Concurrent and failed logging",
       "procedure": "Run concurrent exports and inject a log destination permission failure.",
       "expected": "Reports do not overwrite/interleave incorrectly; audio is not deleted solely because reporting failed; outcome is unambiguous.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-06.md",
+        "evidence/WAC-M1-06-source.json",
+        "evidence/WAC-M1-06-full-ps51.txt",
+        "evidence/WAC-M1-06-full-ps7.txt",
+        "evidence/WAC-M1-06-reports.json"
+      ]
     },
     {
       "id": "AC-031",
@@ -324,8 +462,20 @@
       "title": "Cumulative regression",
       "procedure": "Run the documented M0+M1 suite on the active Windows machine in available supported shells.",
       "expected": "All mandatory local checks pass, or the milestone remains blocked with exact failures.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ]
     },
     {
       "id": "AC-032",
@@ -333,8 +483,20 @@
       "title": "Non-destructive review",
       "procedure": "Inspect all file-writing, rename and cleanup paths alongside fault-injection results.",
       "expected": "No source/prior export overwrite, broad cleanup, silent output ambiguity or false-success path remains known.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ]
     },
     {
       "id": "AC-033",
@@ -342,8 +504,20 @@
       "title": "Remote checkpoint",
       "procedure": "Run live sync-check after pushing the implementation/evidence commit and inspect PR state.",
       "expected": "Clean worktree and identical local/live remote HEAD; CI state is accurately separated from local results.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ]
     },
     {
       "id": "AC-034",

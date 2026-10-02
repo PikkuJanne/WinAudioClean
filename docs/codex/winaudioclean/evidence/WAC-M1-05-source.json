@@ -1,0 +1,149 @@
+{
+  "task": "WAC-M1-05",
+  "starting_head": "afbf25aa8f935517a2a14b0f5fa655cb8a8c6e7e",
+  "source": {
+    "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+    "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+    "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+    "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+    "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+    "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+    "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+    "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+    "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+    "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+    "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+    "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+    "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+    "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+    "tests/fixtures/Invoke-LauncherCase.ps1": "96324d57b0b88ea7782ac3e60a7e0a9206f217d4e1f63c02e49cdc784836dd45",
+    "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+    "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+    "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+    "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+    "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1",
+    "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+    "tests/WinAudioClean.EntryPoints.Tests.ps1": "731d0fe75c3deeaf68f6ac3cfcb082c4e8627aad50b589acfd168b2ca8e6fb01",
+    "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+    "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+    "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+    "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+    "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+    "tests/WinAudioClean.Reporting.Tests.ps1": "37fc962ab339f0f4176d3211818dc20edbe2151427be66a489c84b5e02352114",
+    "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+    "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+    "WinAudioClean.bat": "171ee19fd3ccf36dcd7b2f4253765775a4c33d337243255690f8f428101c5de4",
+    "WinAudioClean.ico": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501",
+    "WinAudioClean.IO.ps1": "146d5aece5a0666d39fd56f025080a4e0fecdcea678e69bd00c6fa5501202621",
+    "WinAudioClean.ps1": "45da24151286e57b5a72be8ef9b604894dac789fc29082c9be75bd1ac5463339"
+  },
+  "source_unchanged": true,
+  "runs": [
+    {
+      "shell": "ps7",
+      "command": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings",
+      "exit": 0,
+      "elapsed_seconds": 377.01,
+      "log": "evidence/WAC-M1-05-full-ps7.txt",
+      "sha256": "cc5bc5e1f3c0632e618b9753e84aff612feda213643d6599b268b0b0e6e19d87"
+    },
+    {
+      "shell": "ps51",
+      "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full",
+      "exit": 0,
+      "elapsed_seconds": 376.92,
+      "log": "evidence/WAC-M1-05-full-ps51.txt",
+      "sha256": "174e5c1593c286efa0d83547832bce7b939c9e0ef99b9e761e1b84eb6022c543"
+    }
+  ],
+  "evidence": {
+    "evidence/WAC-M1-05-development.json": "a6e94f264a74dbb1af96850a17e2d3741a35c2147bdd89a9a388d056aed06038",
+    "evidence/WAC-M1-05-encoding-ps51.txt": "80ebd34395444fe0b4ad8ff3e97deaae34e90ccd1d8bce2f7728b63620839616",
+    "evidence/WAC-M1-05-encoding-ps7.txt": "892bc8995237fa2774de04e6d331da31f884a367077ac4be80a4a8fd7d302855",
+    "evidence/WAC-M1-05-entry-modes-ps51.txt": "d19d5b9843d04b6cb5f98bd53ee05ff78ae21f9bef39bfac436c5467241cbd6c",
+    "evidence/WAC-M1-05-entry-modes-ps7.txt": "3575894b24b1f51c165684135f29070c6a081548ed7b55068a2a0ab0e5c8f7fd",
+    "evidence/WAC-M1-05-full-ps51.txt": "174e5c1593c286efa0d83547832bce7b939c9e0ef99b9e761e1b84eb6022c543",
+    "evidence/WAC-M1-05-full-ps7.txt": "cc5bc5e1f3c0632e618b9753e84aff612feda213643d6599b268b0b0e6e19d87",
+    "evidence/WAC-M1-05-initial-encoding-ps51.txt": "e74f1b9e068f7282447bc4987076b00be605cd232d94879772828de180370510",
+    "evidence/WAC-M1-05-initial-entry-modes-ps51.txt": "214b0c232edb87c643eae79067eb34eef195998881e28efab9717f1f37a4fd7f",
+    "evidence/WAC-M1-05-initial-full-ps51.txt": "7f08b2e24dc2042731f037e34f734969c952fe3bb0a31db4d53ac099bb46812b",
+    "evidence/WAC-M1-05-initial-full-ps7.txt": "50168e0da0597450916ec525c8a6c4aec08dcb20a82642bcb5fd4b074894ac44",
+    "evidence/WAC-M1-05-legacy-delay.json": "5fe6b4f9b585ccb3715131ed7abfaa0480a98473b4467c724b9a85b20212c43d",
+    "evidence/WAC-M1-05-real-encoding.json": "92b37dceb89b26334219c57222d3ecf808bd15db5c60d4bd20f19a575d885513",
+    "evidence/WAC-M1-05-sensitivity.json": "6a4b2f44730f69d5a69e10baf7d66233e8210e27c35afc2cc0eefbaa622a649d",
+    "evidence/WAC-M1-05-transaction-regression.json": "b5d8183958bb13e5a1353247aab78557e2526c84f5883c9d4e6384ccf9249060",
+    "evidence/WAC-M1-05-validation-ps51.txt": "faab136e05e293f03807c16559f7f54f0ce64338f26f5464bb435b81c11e8c35",
+    "evidence/WAC-M1-05-validation-ps7.txt": "1a6d3d4da336910799e51e30b7528f430ca17d36f9659393bba2b360e6c5b82d",
+    "evidence/WAC-M1-05-final-quick-ps7.txt": "c100c2605594cb49db0a778a0c8e331d33203d77d858a5e5b87d497fb337cbab",
+    "evidence/WAC-M1-05-final-quick-ps51.txt": "344f4837abb93a09df9c53631aebfcfeb1fa5f0f8f1508c0e1c7741dc9f2facc"
+  },
+  "notes": [
+    "Python governance suite:61 passed,1 skipped per shell.",
+    "Working bytes identify tested source; Git may normalize line endings.",
+    "Only synthetic/sanitized evidence; full >4GB and listening not tested.",
+    "Full/real media tested LF main; restore tracked CRLF main/README for a focused diff. Normalized main bytes exactly equal Full-tested SHA. Final Quick300 passes both shells on delivery bytes.",
+    "Sanitized evidence logs normalize newlines and trailing whitespace; outcomes/content preserved."
+  ],
+  "delivery_source": {
+    "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+    "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+    "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+    "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+    "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+    "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+    "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+    "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+    "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+    "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+    "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+    "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+    "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+    "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+    "tests/fixtures/Invoke-LauncherCase.ps1": "96324d57b0b88ea7782ac3e60a7e0a9206f217d4e1f63c02e49cdc784836dd45",
+    "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+    "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+    "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+    "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+    "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1",
+    "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+    "tests/WinAudioClean.EntryPoints.Tests.ps1": "731d0fe75c3deeaf68f6ac3cfcb082c4e8627aad50b589acfd168b2ca8e6fb01",
+    "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+    "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+    "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+    "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+    "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+    "tests/WinAudioClean.Reporting.Tests.ps1": "37fc962ab339f0f4176d3211818dc20edbe2151427be66a489c84b5e02352114",
+    "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+    "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+    "WinAudioClean.bat": "171ee19fd3ccf36dcd7b2f4253765775a4c33d337243255690f8f428101c5de4",
+    "WinAudioClean.ico": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501",
+    "WinAudioClean.IO.ps1": "146d5aece5a0666d39fd56f025080a4e0fecdcea678e69bd00c6fa5501202621",
+    "WinAudioClean.ps1": "0efe0d9b8f070c4d80817ffbef9b6cbf00b46bdcaef8aa589a070e60ecd6316f"
+  },
+  "line_endings": {
+    "WinAudioClean.ps1": {
+      "tested_lf_sha256": "45da24151286e57b5a72be8ef9b604894dac789fc29082c9be75bd1ac5463339",
+      "delivery_crlf_sha256": "0efe0d9b8f070c4d80817ffbef9b6cbf00b46bdcaef8aa589a070e60ecd6316f",
+      "content_equal_after_newline_normalization": true
+    },
+    "README.md": {
+      "tested_lf_sha256": "75048b79098bcd8afea468b80fc9c1411f2f6fe60865323b5c2095e9860f05bb",
+      "delivery_crlf_sha256": "fef02726c0e697d1beef8f2f3049422c9bf0dead481bcb25559d107666ca2f52",
+      "content_equal_after_newline_normalization": true
+    }
+  },
+  "delivery_quick_runs": [
+    {
+      "shell": "ps7",
+      "exit": 0,
+      "log": "evidence/WAC-M1-05-final-quick-ps7.txt",
+      "sha256": "c100c2605594cb49db0a778a0c8e331d33203d77d858a5e5b87d497fb337cbab"
+    },
+    {
+      "shell": "ps51",
+      "exit": 0,
+      "log": "evidence/WAC-M1-05-final-quick-ps51.txt",
+      "sha256": "344f4837abb93a09df9c53631aebfcfeb1fa5f0f8f1508c0e1c7741dc9f2facc"
+    }
+  ]
+}

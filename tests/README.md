@@ -1,8 +1,10 @@
 # Local development checks
 
 The application still needs only PowerShell and FFmpeg. These checks also need
-Python 3.10 or newer (standard library only), Pester and PSScriptAnalyzer. None is installed
-by the application or test runner.
+Python 3.10 or newer (standard library only), Pester and PSScriptAnalyzer. Native
+fixture tests additionally use the installed Windows .NET Framework C# compiler
+(`csc.exe`). These are development dependencies; the application and test runner
+do not install or download them.
 
 ## Explicit setup
 
@@ -80,7 +82,7 @@ pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Quick -AnalyzerWarnings
 ```
 
 There are no suppressed rules or suppression attributes. Non-error style and
-design advice is advisory in this first characterization task: the original
+design advice is advisory: the original
 console interface intentionally uses `Write-Host`, and test setup assigns values
 that Pester consumes in later scopes. This does not certify all analyzer advice
 as resolved. New warnings should be inspected rather than hidden in a baseline.
@@ -88,17 +90,168 @@ as resolved. New warnings should be inspected rather than hidden in a baseline.
 ## What the tests establish
 
 The small helpers lock the original Raw/Zoom filter text and command construction.
-Characterization cases label known defects, such as invalid selections choosing
-Zoom, timestamp collisions and overwrite arguments, with the future task that
-will change the expectation. They do not endorse those behaviors as requirements.
+Output regressions now require unique job IDs, owned partials, independent WAV
+validation and no-replacement publication. The exact Raw/Zoom filter strings
+remain baseline assertions.
 
-Import checks run in fresh shell processes. Entry point checks run a controlled
-missing-input path through the original `.ps1 -inputPath` and `.bat` boundaries,
-stopping at preflight. A separate script-invocation fixture exercises the runtime
-with process/filesystem doubles. They verify launch/argument behavior, not audio
-quality or actual encoding. Missing shells must be reported as skipped, never passed.
-Listening, real FFmpeg output and large-file behavior remain separate acceptance
-work. Tests use temporary synthetic artifacts; private recordings are unnecessary.
+Import checks run in fresh shell processes. Entry point checks run the actual
+`.ps1 -inputPath` with disposable filesystem inputs and a compiled native argument
+recorder in place of FFmpeg. Launcher checks cross the actual `.bat` boundary;
+their scope is described below. These establish process and argument behavior,
+not audio quality or actual encoding. Missing shells must be reported as skipped,
+never passed. Listening, real FFmpeg output and large-file behavior remain separate
+acceptance work. Tests use temporary synthetic artifacts; private recordings are
+unnecessary.
+
+## Input and menu regression checks (WAC-M1-01)
+
+```powershell
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Tag Preflight
+```
+
+The helper suite checks the literal filename matrix and destination handling,
+including an exclusively locked input and a disposable directory whose ACL denies
+file creation. The test restores that directory's ACL in `finally` and verifies
+that it can write again. Read-Host doubles exercise menu retry, selection, cancel,
+EOF and read failure. A host-argument seam checks abbreviated noninteractive
+switches without redirecting stdin and masking that branch.
+
+Actual bounded child processes in PS5.1 and PS7 reject invalid inputs, destinations
+and missing/invalid modes without showing a menu or processing. Explicit valid
+modes now run through the script with the compiled native fixture to check
+filter/report wiring. Real console empty/invalid/cancel checks and their exact
+M1-01 setup are recorded in the
+[M1-01 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-01.md).
+
+## Native process and launcher checks (WAC-M1-02)
+
+```powershell
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Native.Tests.ps1
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Launcher.Tests.ps1
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Reporting.Tests.ps1
+```
+
+[New-NativeProcessFixture.ps1](fixtures/New-NativeProcessFixture.ps1) compiles
+[NativeProcessFixture.cs](fixtures/NativeProcessFixture.cs) into a fresh,
+test-owned executable with the installed Framework `csc.exe`. Generated binaries
+are temporary and are not committed. The helper refuses to replace an existing
+executable and downloads nothing. Its [fixture contract](fixtures/NativeProcessFixture.md)
+describes the environment controls for actual argv recording, stdout/stderr,
+native exits, stdin and reporting failures. Synthetic output bytes are not audio.
+
+The recorder writes a UTF-8 JSON string array without a BOM. Tests read it with
+`Get-Content -Raw -Encoding UTF8 | ConvertFrom-Json` directly into a variable.
+Explicit UTF-8 preserves Unicode on PS5.1; omitting an outer `@(...)` avoids
+nesting the returned array on that host.
+
+The unattended launcher matrix runs copied application source through outer
+PS5.1 and PS7, CMD, inner Windows PowerShell 5.1, and the native argv recorder.
+It covers spaces, brackets, apostrophes, Unicode, ampersands, percent signs,
+exclamation marks, parentheses, command-looking filenames, a trailing destination
+backslash and a 240-character input path. Exit cases check native success,
+native failure, startup failure and reporting failure without a pause.
+
+Set unattended paths from PowerShell so CMD never parses them as arguments:
+
+```powershell
+$env:WAC_LAUNCH_INPUT = 'C:\Audio\meeting %complete%!.wav'
+$env:WAC_LAUNCH_OUTPUT_DIRECTORY = 'C:\Audio\Cleaned'
+& .\WinAudioClean.bat /unattended Zoom
+$LASTEXITCODE
+```
+
+Default single-file handoff tests use [LauncherApplicationStub.ps1](fixtures/LauncherApplicationStub.ps1)
+followed by the actual native recorder. They check literal handoff, inner PS5.1,
+and exit preservation through `pause`; they do not render audio or exercise the
+interactive application menu. The launcher rejects visible percent/exclamation
+characters in positional input or CMD's original command line. An already-running
+CMD can expand text before the launcher sees it, so that route cannot guarantee
+those characters. A defined-percent-token decoy case checks rejection before
+processing. Use the environment route above or direct `.ps1 -inputPath` from
+PowerShell for these paths.
+
+Windows application-control policy can reject the unsigned compiled fixture even
+when compilation succeeds. This blocked the initial M1-02 validation. The owner
+later reported Smart App Control Off and authorized a rerun; both Full gates
+then passed on unchanged source (227 Pester and 61 Python cases, one Python
+symlink-privilege skip per shell). See the [resumption evidence](../docs/codex/winaudioclean/evidence/WAC-M1-02-resume.md).
+The runner never changes machine security settings. Preserve child diagnostics
+and CodeIntegrity event evidence; a rejected native start must remain a failed
+check. Do not retry
+or alter fixtures, trust or security settings to bypass a rejection. Real FFmpeg
+checks provide separate evidence and do not replace blocked fixture cases. See
+the fixture contract for the recorded event details and task governance for the
+current acceptance status.
+
+## Dependencies, stream mapping and local media (WAC-M1-03)
+
+The Media suite covers dependency precedence, version/filter failures, strict
+JSON validation, selection/reprompt/cancel behavior and exact absolute mapping.
+It also invokes the real native fixture for malformed/nonzero probe output,
+version/filter/probe deadlines and child reaping. Actual PATH lookup and a copied
+application verify that ffprobe is found next to explicitly selected FFmpeg.
+The existing direct/batch matrices now verify both inspection and render argv.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Media.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Media.Tests.ps1
+```
+
+The final targeted suite passed 99 tests in each shell. Fixture inspection has
+separate `WAC_TEST_VERSION_*`, `WAC_TEST_FILTERS_*` and `WAC_TEST_PROBE_*`
+controls; these test-only variables do not change production behavior. Tests
+preserve absent versus empty environment variables explicitly across PS5.1/PS7.
+
+Run the optional standard-library harness with an existing local FFmpeg pair:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-MediaPreflight.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+It creates a fresh ignored run folder and a three-second Matroska file with video
+index 0, mono 440 Hz audio index 1 and stereo 880 Hz audio index 2. Both shells
+render each track in Raw/Zoom. Independent sample measurements verify selected
+frequency and channel count. Negative cases cover unattended ambiguity,
+non-audio/missing indexes, video-only input and ordinary/renamed HLS/concat lists.
+A loopback HTTP listener has a positive control and counts attempted media
+requests; direct render-helper checks exercise policy even though application
+probing rejects these files earlier. All 32 cases passed with zero media requests.
+
+Python is development tooling only. Generated media and raw local logs remain
+under `.wac-local`; only sanitized evidence is committed. This is no speech
+listening, channel-isolation or decoder-sandbox certification. Output encoding
+and legacy collision behavior remain unchanged in this task. See the
+[M1-03 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-03.md).
+
+## Owned output, validation and publication (WAC-M1-04)
+
+`WinAudioClean.Transaction.Tests.ps1` exercises Windows handles, unique jobs,
+exclusive reservations, hardlink aliases, a retargeted directory junction,
+replacement races, held-object publication, cleanup and guarded reporting.
+`WinAudioClean.Validation.Tests.ps1` checks actual RIFF/sample bytes and selected
+track timing, including repaired headers hiding a shortened render. Entry tests
+inject zero-exit empty/header/truncated/short outputs and probe failures; reporting
+tests retain native failures and published audio.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Transaction.Tests.ps1
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OutputTransactions.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+The development harness runs both shells against existing real FFmpeg. It tests
+rapid repeats, same-stem inputs, concurrent jobs, MP3/AAC inputs, empty/invalid/
+truncated output, encoder/disk-full simulations, a final-name race, an abrupt
+pre-rename exit and the next run's preservation of that leftover. Faults use
+explicitly recorded overrides only in disposable app copies; production has no
+fault environment controls. The disk-full case is simulated, not a filled disk.
+Source, prior-export and runtime hashes are checked; independent PCM duration,
+frequency and channels are recorded. A changed runtime makes the harness fail.
+
+Both runtime files must be copied together when testing or installing the app.
+Keep generated audio and raw logs ignored. Evidence and remaining limits are in
+[M1-04 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-04.md).
 
 ## Synthetic audio characterization (WAC-M0-03)
 
@@ -144,3 +297,70 @@ Keep WAVs, portable binaries and raw local logs ignored. Commit only sanitized
 reports and metadata. Use the [listening checklist](../docs/codex/winaudioclean/evidence/WAC-M0-03-listening.md)
 when owner-supplied, permission-cleared speech is available; listening remains
 pending until that review actually occurs.
+
+## Explicit output encoding (WAC-M1-05)
+
+Run `tests/WinAudioClean.Encoding.Tests.ps1` for export/channel policy, RIFF
+boundaries, headroom, pinned destination capacity and injected early failures.
+`tests/WinAudioClean.Validation.Tests.ps1` checks requested PCM format/layout and
+small RF64 ds64 fixtures, including malformed sizes/tables/sample counts.
+
+The real audio matrix is optional development tooling using installed tools:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OutputEncoding.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+It generates synthetic 44.1/48 kHz mono/stereo signals, runs both original modes
+and PCM16/24 in PS5.1/7, then inspects final format, channel content, timing and
+source hashes. Extra cases exercise explicit mono and small RF64 output. An
+independently encoded frozen legacy chain establishes existing filter delay;
+the harness rejects unexplained residual shifts and altered sample data. Raw's
+existing approximately 25 ms marker delay is recorded, not silently corrected.
+These checks do not certify speech quality, full >4 GB output or real disk
+exhaustion. Keep generated media and raw logs under `.wac-local`.
+
+## M1 reliability gate (WAC-M1-07)
+
+Run Quick, then the focused safety/launcher/reporting group, then one Full gate
+in each available supported Windows shell. Full includes all M0/M1 Pester
+suites and the Python governance tests; it cannot be reduced by path/tag flags.
+Use a fresh process for each command. When launching PS5.1 from a PS7/Python
+host, omit inherited `PSModulePath` in the child environment so Windows
+PowerShell initializes its own module defaults.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "& ./scripts/Invoke-Tests.ps1 -Level Targeted -Tag @('Transaction','RunReports','OutputSafety','Launcher')"
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "& ./scripts/Invoke-Tests.ps1 -Level Targeted -Tag @('Transaction','RunReports','OutputSafety','Launcher')"
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full
+```
+
+The focused group checks ownership/cleanup, report writes/rollback, malformed
+outputs and batch forwarding. Full also covers preflight, native-process,
+dependency/media, encoding and PCM/RF64 validation. A default single-file batch
+handoff uses a controlled application stub; do not label it an Explorer
+interactive drag/drop render.
+
+For additional real encoder and report checks, use existing local binaries and
+fresh output directories under `.wac-local`:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OutputTransactions.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M1-07/real-transactions
+python -X utf8 scripts/Test-RunReports.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M1-07/real-reports
+```
+
+These harnesses retain their originating task labels (M1-04 and M1-06) in the
+JSON; M1-07 records the fresh invocation, source hashes and case results without
+rewriting that provenance. Faults use isolated application copies and synthetic
+media. Disk-full and report-permission injection do not prove real volume
+exhaustion or hardware-failure recovery. Do not commit raw audio or reports.
+
+[Gate evidence](../docs/codex/winaudioclean/evidence/WAC-M1-07.md) records exact
+commands, environment, source identities and limits. The
+[file-safety review](../docs/codex/winaudioclean/evidence/WAC-M1-07-review.md)
+maps runtime writes and cleanup to the relevant tests.

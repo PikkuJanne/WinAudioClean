@@ -5,7 +5,10 @@ function ConvertTo-WacTestQuotedArgument {
     if ($Value.Contains('"') -or $Value.Contains("`r") -or $Value.Contains("`n")) {
         throw 'The test harness accepts only single-line paths without quotation marks.'
     }
-    '"{0}"' -f $Value
+    # These test arguments cannot contain quotes; only a trailing run of
+    # backslashes needs doubling before the closing Windows quote.
+    $trailingSlashes = [regex]::Match($Value, '\\+$').Value
+    '"{0}{1}"' -f $Value, $trailingSlashes
 }
 
 function Invoke-WacTestProcess {
@@ -14,6 +17,7 @@ function Invoke-WacTestProcess {
         [Parameter(Mandatory = $true)][string]$Arguments,
         [Parameter(Mandatory = $true)][string]$WorkingDirectory,
         [string]$StandardInput = '',
+        [hashtable]$EnvironmentVariables = @{},
         [int]$TimeoutMilliseconds = 20000
     )
 
@@ -26,6 +30,10 @@ function Invoke-WacTestProcess {
     $startInfo.RedirectStandardOutput = $true
     $startInfo.RedirectStandardError = $true
     $startInfo.RedirectStandardInput = $true
+    foreach ($key in $EnvironmentVariables.Keys) {
+        if ($null -eq $EnvironmentVariables[$key]) { $startInfo.EnvironmentVariables.Remove($key) }
+        else { $startInfo.EnvironmentVariables[$key] = [string]$EnvironmentVariables[$key] }
+    }
     $process = New-Object System.Diagnostics.Process
     $process.StartInfo = $startInfo
     try {

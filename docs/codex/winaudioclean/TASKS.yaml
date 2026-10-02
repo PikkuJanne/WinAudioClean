@@ -181,7 +181,7 @@
       "depends_on": [
         "WAC-M0-04"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Existing input checks, menu and path-resolution helpers.",
       "implementation": [
@@ -195,7 +195,13 @@
         "AC-014",
         "AC-015"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-01.md",
+        "evidence/WAC-M1-01-source.json",
+        "evidence/WAC-M1-01-full-ps51.txt",
+        "evidence/WAC-M1-01-full-ps7.txt",
+        "evidence/WAC-M1-01-plan.txt"
+      ],
       "blocked_reason": null
     },
     {
@@ -209,7 +215,7 @@
       "depends_on": [
         "WAC-M1-01"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "FFmpeg process wrapper and .bat exit-code propagation; NATIVE_PROCESS_CONTRACT.md.",
       "implementation": [
@@ -223,7 +229,18 @@
         "AC-017",
         "AC-018"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-02.md",
+        "evidence/WAC-M1-02-source.json",
+        "evidence/WAC-M1-02-policy.json",
+        "evidence/WAC-M1-02-full-ps51.txt",
+        "evidence/WAC-M1-02-full-ps7.txt",
+        "evidence/WAC-M1-02-real-process.json",
+        "evidence/WAC-M1-02-resume.md",
+        "evidence/WAC-M1-02-resume-source.json",
+        "evidence/WAC-M1-02-resume-full-ps51.txt",
+        "evidence/WAC-M1-02-resume-full-ps7.txt"
+      ],
       "blocked_reason": null
     },
     {
@@ -237,7 +254,7 @@
       "depends_on": [
         "WAC-M1-02"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Dependency discovery, ffprobe JSON inspection and explicit -map construction.",
       "implementation": [
@@ -251,7 +268,15 @@
         "AC-020",
         "AC-021"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-03.md",
+        "evidence/WAC-M1-03-source.json",
+        "evidence/WAC-M1-03-full-ps51.txt",
+        "evidence/WAC-M1-03-full-ps7.txt",
+        "evidence/WAC-M1-03-real-media.json",
+        "evidence/WAC-M1-03-console.txt",
+        "evidence/WAC-M1-03-plan.txt"
+      ],
       "blocked_reason": null
     },
     {
@@ -265,7 +290,7 @@
       "depends_on": [
         "WAC-M1-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Output naming, run-owned temporary files, validation and final rename.",
       "implementation": [
@@ -279,7 +304,16 @@
         "AC-023",
         "AC-024"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ],
       "blocked_reason": null
     },
     {
@@ -293,7 +327,7 @@
       "depends_on": [
         "WAC-M1-04"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Output encoder settings, disk estimation and RF64 choice.",
       "implementation": [
@@ -307,7 +341,17 @@
         "AC-026",
         "AC-027"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ],
       "blocked_reason": null
     },
     {
@@ -320,7 +364,7 @@
       "depends_on": [
         "WAC-M1-05"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Per-run text/JSON report writer and retained summary log.",
       "implementation": [
@@ -334,7 +378,14 @@
         "AC-029",
         "AC-030"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-06.md",
+        "evidence/WAC-M1-06-source.json",
+        "evidence/WAC-M1-06-full-ps51.txt",
+        "evidence/WAC-M1-06-full-ps7.txt",
+        "evidence/WAC-M1-06-reports.json",
+        "evidence/WAC-M1-06-plan.txt"
+      ],
       "blocked_reason": null
     },
     {
@@ -355,7 +406,7 @@
       "depends_on": [
         "WAC-M1-06"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "M1 test reconciliation, compatibility review and synchronization evidence.",
       "implementation": [
@@ -369,7 +420,19 @@
         "AC-032",
         "AC-033"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ],
       "blocked_reason": null
     },
     {

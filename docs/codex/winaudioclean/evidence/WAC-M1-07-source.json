@@ -1,0 +1,343 @@
+{
+  "task": "WAC-M1-07",
+  "starting_head": "ca82376ae60560541fb0985c7c565c7872e3bba4",
+  "created_utc": "2026-10-02T14:45:06.974213+00:00",
+  "source": {
+    "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+    "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+    "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+    "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+    "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+    "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+    "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+    "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+    "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+    "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+    "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+    "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+    "scripts/Test-RunReports.py": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+    "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+    "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+    "tests/fixtures/Invoke-LauncherCase.ps1": "96324d57b0b88ea7782ac3e60a7e0a9206f217d4e1f63c02e49cdc784836dd45",
+    "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+    "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+    "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+    "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+    "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1",
+    "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+    "tests/WinAudioClean.EntryPoints.Tests.ps1": "731d0fe75c3deeaf68f6ac3cfcb082c4e8627aad50b589acfd168b2ca8e6fb01",
+    "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+    "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+    "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+    "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+    "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+    "tests/WinAudioClean.Reporting.Tests.ps1": "37fc962ab339f0f4176d3211818dc20edbe2151427be66a489c84b5e02352114",
+    "tests/WinAudioClean.ReportIO.Tests.ps1": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a",
+    "tests/WinAudioClean.RunReports.Tests.ps1": "d1a225e75a187cfdcb63ad7efeee9fc2ae05cc724210579a46456918ea32c335",
+    "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+    "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+    "WinAudioClean.bat": "171ee19fd3ccf36dcd7b2f4253765775a4c33d337243255690f8f428101c5de4",
+    "WinAudioClean.ico": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.ps1": "74e07f865b8392ff70556fb3a4e57979a8136dc9b93cf22958edef6e7a3a9066"
+  },
+  "source_count": 37,
+  "source_unchanged": true,
+  "matches_M1_06_delivery": true,
+  "runs": [
+    {
+      "shell": "ps7",
+      "phase": "quick",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/Invoke-Tests.ps1",
+        "-Level",
+        "Quick"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 22.9,
+      "log": "evidence/WAC-M1-07-quick-ps7.txt",
+      "sha256": "79f4da5e801ba9eb7defb44938e5aca46bdbd6f63a0fc176fe8d6b8539a448ad",
+      "pester": {
+        "passed": 332,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "outside_scope": 211
+      },
+      "parser_files": 25,
+      "analyzer_advisories": 112
+    },
+    {
+      "shell": "ps51",
+      "phase": "quick",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/Invoke-Tests.ps1",
+        "-Level",
+        "Quick"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 22.76,
+      "log": "evidence/WAC-M1-07-quick-ps51.txt",
+      "sha256": "d6210a51d776c6f59ab89c44c433515239d35bfe3eb32c7372c8f314251ab30a",
+      "pester": {
+        "passed": 332,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "outside_scope": 211
+      },
+      "parser_files": 25,
+      "analyzer_advisories": 112
+    },
+    {
+      "shell": "ps7",
+      "phase": "targeted",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& ./scripts/Invoke-Tests.ps1 -Level Targeted -Tag @('Transaction','RunReports','OutputSafety','Launcher')"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 260.06,
+      "log": "evidence/WAC-M1-07-targeted-ps7.txt",
+      "sha256": "7e8f16d38dffe58e593141116b83b37ea67b689b9a6cd94e22b1889fb56d9209",
+      "pester": {
+        "passed": 158,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "outside_scope": 385
+      },
+      "parser_files": 25,
+      "analyzer_advisories": 112
+    },
+    {
+      "shell": "ps51",
+      "phase": "targeted",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "& ./scripts/Invoke-Tests.ps1 -Level Targeted -Tag @('Transaction','RunReports','OutputSafety','Launcher')"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 243.99,
+      "log": "evidence/WAC-M1-07-targeted-ps51.txt",
+      "sha256": "3e7db6c79a0cfc1acc906bec898cc38c4e009af936c40d4cfcde01da81c675b7",
+      "pester": {
+        "passed": 158,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "outside_scope": 385
+      },
+      "parser_files": 25,
+      "analyzer_advisories": 112
+    },
+    {
+      "shell": "ps7",
+      "phase": "full",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.EXE",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/Invoke-Tests.ps1",
+        "-Level",
+        "Full",
+        "-AnalyzerWarnings"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 498.47,
+      "log": "evidence/WAC-M1-07-full-ps7.txt",
+      "sha256": "7c4321fd62bdb80fd532d13956be723c7145581b491613980eac4e9cb5925e06",
+      "pester": {
+        "passed": 543,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "outside_scope": 0
+      },
+      "parser_files": 25,
+      "analyzer_advisories": 112,
+      "python": {
+        "passed": 61,
+        "skipped": 1,
+        "skip_reason": "symlink creation privilege unavailable",
+        "failed": 0
+      }
+    },
+    {
+      "shell": "ps51",
+      "phase": "full",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/Invoke-Tests.ps1",
+        "-Level",
+        "Full"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 480.72,
+      "log": "evidence/WAC-M1-07-full-ps51.txt",
+      "sha256": "33d0dc70f41ce99e2c3706ca2ab6c61c75df037483ab6e01bd5dde46f4125954",
+      "pester": {
+        "passed": 543,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "outside_scope": 0
+      },
+      "parser_files": 25,
+      "analyzer_advisories": 112,
+      "python": {
+        "passed": 61,
+        "skipped": 1,
+        "skip_reason": "symlink creation privilege unavailable",
+        "failed": 0
+      }
+    }
+  ],
+  "real_runs": [
+    {
+      "name": "transactions",
+      "command": [
+        "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/Test-OutputTransactions.py",
+        "--ffmpeg",
+        ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe",
+        "--ffprobe",
+        ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffprobe.exe",
+        "--output",
+        ".wac-local/WAC-M1-07/real-transactions"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 79.57,
+      "path": "evidence/WAC-M1-07-real-transactions.json",
+      "sha256": "85965d0de564326f2212e19e3327e193f6f548fc15fa595283b115263a86451c",
+      "status": "pass",
+      "case_count": 30,
+      "passed": 30,
+      "runtime_matches_full": true,
+      "runtime_unchanged": true,
+      "harness_matches_full": true
+    },
+    {
+      "name": "reports",
+      "command": [
+        "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "-X",
+        "utf8",
+        "scripts/Test-RunReports.py",
+        "--ffmpeg",
+        ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe",
+        "--ffprobe",
+        ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffprobe.exe",
+        "--output",
+        ".wac-local/WAC-M1-07/real-reports"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 75.26,
+      "path": "evidence/WAC-M1-07-real-reports.json",
+      "sha256": "4086cea61819e3e2956b323751e4834f1b5ef1adaf507fbb6d82efec3fa9c44b",
+      "status": "pass",
+      "case_count": 24,
+      "passed": 24,
+      "runtime_matches_full": true,
+      "runtime_unchanged": true,
+      "harness_matches_full": true
+    }
+  ],
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.6",
+    "child_psmodulepath_removed": true
+  },
+  "notes": [
+    "Runtime, launcher, fixtures, test code, scripts and static configuration remain byte-for-byte identical to starting HEAD and the M1-06 manifest. Main retains CRLF; IO retains LF.",
+    "One Full gate per shell, after Quick and the focused gate. No runtime correction or repeated Full required.",
+    "Logs remove ANSI formatting/personal paths and normalize line endings/trailing whitespace. Real harness records retain originating task labels and sanitized exact command arrays.",
+    "Completion SHA and fresh clean local/live/PR equality are recorded after push in the PR/final response, avoiding a recursive evidence commit."
+  ],
+  "evidence": {
+    "evidence/WAC-M1-07-full-ps51.txt": "33d0dc70f41ce99e2c3706ca2ab6c61c75df037483ab6e01bd5dde46f4125954",
+    "evidence/WAC-M1-07-full-ps7.txt": "7c4321fd62bdb80fd532d13956be723c7145581b491613980eac4e9cb5925e06",
+    "evidence/WAC-M1-07-quick-ps51.txt": "d6210a51d776c6f59ab89c44c433515239d35bfe3eb32c7372c8f314251ab30a",
+    "evidence/WAC-M1-07-quick-ps7.txt": "79f4da5e801ba9eb7defb44938e5aca46bdbd6f63a0fc176fe8d6b8539a448ad",
+    "evidence/WAC-M1-07-real-reports.json": "4086cea61819e3e2956b323751e4834f1b5ef1adaf507fbb6d82efec3fa9c44b",
+    "evidence/WAC-M1-07-real-transactions.json": "85965d0de564326f2212e19e3327e193f6f548fc15fa595283b115263a86451c",
+    "evidence/WAC-M1-07-review.md": "d0ab6ff98adcfda90765779c2d0ca78208b49e44cd076dc54f9a8617ea9c9f50",
+    "evidence/WAC-M1-07-targeted-ps51.txt": "3e7db6c79a0cfc1acc906bec898cc38c4e009af936c40d4cfcde01da81c675b7",
+    "evidence/WAC-M1-07-targeted-ps7.txt": "7e8f16d38dffe58e593141116b83b37ea67b689b9a6cd94e22b1889fb56d9209",
+    "evidence/WAC-M1-07.md": "cc8b224ce3434ef6a77aae0c266d18801b66fecaa64f339334d6bf56cc7eef8b"
+  },
+  "delivery_documents": {
+    "tests/README.md": "cba6dac335be2c3dd6da472a66bab9370a50c6b0ab7060cb036d2dbacd60b8fe",
+    "docs/codex/winaudioclean/TASKS.yaml": "9bfa51b1ca8df401472339bb8f2d21a4cbfdc76dabb15824dd4d7f3c89cd9364",
+    "docs/codex/winaudioclean/ACCEPTANCE.json": "4b42b754b7f07de1fd99dbea6eb029502b6619849958acb665d2e049bdfe248d",
+    "docs/codex/winaudioclean/DECISIONS.md": "723a1775717cab80c93cba513c985d32d5b6a518a8d67232e5835889ebb88f71",
+    "docs/codex/winaudioclean/STATUS.md": "c07f33ec2e10e030aefa771bfc1766bf52a02046c5d32a5950e676d60c4d2f6b",
+    "docs/codex/winaudioclean/NEXT_MODEL_START_HERE.md": "9a87dd623e752a711b24ffb7011242919cbd66b920e3a989f75cd485a0a70e60"
+  },
+  "post_gate_checks": [
+    {
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/codex/winaudioclean/tools/handoff.py",
+        "validate-plan",
+        "--plan-root",
+        "docs/codex/winaudioclean"
+      ],
+      "exit": 0,
+      "valid": true,
+      "tasks": 30,
+      "acceptance_cases": 90,
+      "improvements": 20
+    },
+    {
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "docs/codex/winaudioclean/tools/handoff.py",
+        "next",
+        "--plan-root",
+        "docs/codex/winaudioclean"
+      ],
+      "exit": 0,
+      "ready": [
+        "WAC-M2-01"
+      ],
+      "blocked": []
+    }
+  ]
+}

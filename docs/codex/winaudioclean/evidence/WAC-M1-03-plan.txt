@@ -1,0 +1,19 @@
+$ python -X utf8 docs\codex\winaudioclean\tools\handoff.py validate-plan --plan-root docs\codex\winaudioclean
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+
+$ python -X utf8 docs\codex\winaudioclean\tools\handoff.py next --plan-root docs\codex\winaudioclean
+{
+  "ready": [
+    {
+      "id": "WAC-M1-04",
+      "title": "Make output publication transactional and collision safe",
+      "approval_needed": false
+    }
+  ],
+  "blocked": []
+}

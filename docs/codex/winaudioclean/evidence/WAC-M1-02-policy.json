@@ -1,0 +1,88 @@
+{
+  "task": "WAC-M1-02",
+  "status": "blocked",
+  "reason": "Windows Code Integrity rejected compiled test fixtures. Required cumulative gates did not pass.",
+  "full_investigation": [
+    "Full validation window: 2026-10-02 13:10:51 through 13:13:45 Europe/Berlin.",
+    "PS5.1 Full: 167 passed, 60 failed. Sixteen EntryPoints failures are test-side ConvertFrom-Json array nesting (expected argv count 12, observed outer array count 1).",
+    "The remaining 44 PS5.1 Launcher failures match 44 distinct blocked test fixture copies in CodeIntegrity event 3077: 76 events total (some launch calls produce multiple events).",
+    "PS7 Full: 220 passed, 7 failed. Seven Reporting failures match seven distinct blocked test fixture copies and seven event 3077 records.",
+    "Each event 3077 has a matching event 3033: 83 of each in this interval. All relate to fixture ffmpeg.exe copies; none target the actual FFmpeg distribution.",
+    "Native.Tests passed all 23 tests in both Full runs. These executions included NUL/command-limit rejection, exact argv, concurrent stream drain, stdin EOF and timeout cleanup.",
+    "No binaries were executed or retried for this investigation, and no policy, trust, signing, executable path, or security setting was changed.",
+    "Safe next work: fix PS5 test-only JSON wrapping, preserve earlier successful evidence and mark this Full run failed; use already-approved installed real FFmpeg for additional product checks without counting it as replacement argv-recorder/fault evidence.",
+    "Completing the blocked fixture portion requires an environment/fixture approval accepted by the existing machine policy. Do not recompile/rename/copy repeatedly, relabel failures as skips, or switch implementations to bypass the block."
+  ],
+  "full_event_correlation": [
+    {
+      "Suite": "Launcher",
+      "Event3077Count": 76,
+      "DistinctBlockedFixtureCopies": 44,
+      "FirstEvent": "2026-10-02T13:12:04.3681699+02:00",
+      "LastEvent": "2026-10-02T13:13:14.116203+02:00"
+    },
+    {
+      "Suite": "Reporting",
+      "Event3077Count": 7,
+      "DistinctBlockedFixtureCopies": 7,
+      "FirstEvent": "2026-10-02T13:13:38.4719471+02:00",
+      "LastEvent": "2026-10-02T13:13:44.4860485+02:00"
+    }
+  ],
+  "initial_investigation": [
+    "Initial PS5.1 native test run: 19 real-child tests failed Started=false; 2 structured-start-failure cases passed.",
+    "The exact wrapper Error field was not printed by the original assertion and is unavailable retroactively.",
+    "Windows CodeIntegrity Operational events 3033 and 3077 record rejected loads of the same test-owned argument echo.exe by powershell.exe during that run.",
+    "Reason recorded by Windows: enterprise signing level requirements / code integrity policy violation.",
+    "No signing policy, security setting, exclusion, or file trust state was modified.",
+    "Later runs built fresh fixture executables and started successfully. A separate PS5 ConvertFrom-Json array-nesting test bug was fixed.",
+    "Final targeted PS5.1 and PS7 runs each passed 21 tests with zero skips. Fresh unsigned fixture execution may still be policy-sensitive.",
+    "Initial failure is explained by OS policy enforcement, not a successful native launch or evidence of a production wrapper defect."
+  ],
+  "native_targeted_observations": {
+    "EvidenceKind": "Manual summary of observed tool outputs; not a raw test transcript",
+    "NativeTestFile": "tests/WinAudioClean.Native.Tests.ps1",
+    "PowerShell7Command": "pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Native.Tests.ps1",
+    "WindowsPowerShellCommand": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Native.Tests.ps1",
+    "InitialWindowsPowerShellResult": {
+      "Passed": 2,
+      "Cause": "CodeIntegrity rejected initial compiled fixture; events 3033 and 3077, nineteen each. Wrapper Error was not exposed by first assertion.",
+      "Failed": 19,
+      "ExitCode": 1
+    },
+    "IntermediateWindowsPowerShellResult": {
+      "Passed": 7,
+      "Cause": "Test-side PS5 ConvertFrom-Json outer-array nesting; corrected in native tests.",
+      "Failed": 14,
+      "ExitCode": 1
+    },
+    "FinalTargetedResults": [
+      {
+        "Passed": 21,
+        "Shell": "Windows PowerShell 5.1.26100.9444",
+        "Failed": 0,
+        "ExitCode": 0,
+        "Skipped": 0
+      },
+      {
+        "Passed": 21,
+        "Shell": "PowerShell 7.6.5",
+        "Failed": 0,
+        "ExitCode": 0,
+        "Skipped": 0
+      }
+    ],
+    "SubsequentChanges": "Added NUL and command-limit rejection tests; they and the original twenty-one passed during both Full runs (23 native tests per shell). Startup assertions now include wrapper Error diagnostics.",
+    "Modules": {
+      "Pester": "5.7.1",
+      "PSScriptAnalyzer": "1.24.0"
+    },
+    "OperatingSystem": "Microsoft Windows NT 10.0.26300.0",
+    "CompilerFileVersion": "4.8.9221.0 built by: NET481REL1LAST_25H2",
+    "RawTargetedLog": null,
+    "RawTargetedLogNote": "No separate raw targeted log was saved. Execution output remains in tool transcript; this file records only observed outcomes."
+  },
+  "private_event_records": "Ignored locally; not committed because they contain machine paths and identifiers.",
+  "security_policy_changed": false,
+  "fixture_retried_after_full_diagnosis": false
+}

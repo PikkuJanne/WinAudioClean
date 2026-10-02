@@ -1,0 +1,78 @@
+{
+  "task": "WAC-M1-03",
+  "starting_head": "ec27fb9d5ecc7dd07033d889987ac153d65eb373",
+  "source": {
+    "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+    "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+    "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+    "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+    "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+    "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+    "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+    "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+    "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+    "scripts/Test-MediaPreflight.py": "d56834b806cb0255b83a7f28616214f8acf0f9b3bcdef7f7846335f5127ed22b",
+    "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+    "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+    "tests/fixtures/Invoke-LauncherCase.ps1": "96324d57b0b88ea7782ac3e60a7e0a9206f217d4e1f63c02e49cdc784836dd45",
+    "tests/fixtures/Invoke-MetadataFailure.ps1": "9ea6e555e0e6597887f6c08a1d878c48ee06ce391164ab6fb9f3ed650e691e0e",
+    "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+    "tests/fixtures/NativeProcessFixture.cs": "be8cc1c159a72d075446fb93fcf0f3236891af1c24ccf87d89e9a4dfb2b8c537",
+    "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+    "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1",
+    "tests/WinAudioClean.EntryPoints.Tests.ps1": "c0016eeae00fb575e4d862234279ccbb5aa675e0f624987d9359d9289db08060",
+    "tests/WinAudioClean.Helpers.Tests.ps1": "84305d8d28f5a761bc8046bbe18be81e6c290b42108c0129a5c5e2b883c92643",
+    "tests/WinAudioClean.Launcher.Tests.ps1": "54d82490345b72bb1bc7883f818e6f4f525a6a21783a7ca9bd2cf548014ed5f2",
+    "tests/WinAudioClean.Media.Tests.ps1": "4d2aa9f9733def20d9d529e71633fd19efbf143f56d5bf1b37c359e76ca9af1b",
+    "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+    "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+    "tests/WinAudioClean.Reporting.Tests.ps1": "b3c0c34cca4d6da2232edbf63bc52b2a12668c9c5a2d81de9b90aacee47df104",
+    "WinAudioClean.bat": "171ee19fd3ccf36dcd7b2f4253765775a4c33d337243255690f8f428101c5de4",
+    "WinAudioClean.ps1": "4d2300a74698b272cb03469e98efb73d7ff1db86a15c24c6dd95292638add3ea"
+  },
+  "unchanged_during_run": true,
+  "runs": [
+    {
+      "shell": "ps51",
+      "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full",
+      "started_utc": "2026-10-02T11:58:48.671342+00:00",
+      "exit_code": 0,
+      "environment_note": "Child process omits inherited PSMODULEPATH so the host initializes its default module paths; machine/user settings unchanged.",
+      "log": "evidence/WAC-M1-03-full-ps51.txt",
+      "sha256": "3d71c32a53f370258885a33d10dbb487976c198b89fb009100cede7c6fea6f6c"
+    },
+    {
+      "shell": "ps7",
+      "command": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings",
+      "started_utc": "2026-10-02T11:57:37.693026+00:00",
+      "exit_code": 0,
+      "log": "evidence/WAC-M1-03-full-ps7.txt",
+      "sha256": "2ea4dfd72c3744fcd912c8673c374ec341745de2cf64864ac31f650ccffd5edc"
+    }
+  ],
+  "initial_runner_failure": {
+    "shell": "ps51",
+    "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full",
+    "started_utc": "2026-10-02T11:57:37.694872+00:00",
+    "exit_code": 1,
+    "log": "evidence/WAC-M1-03-full-ps51-environment-failure.txt",
+    "sha256": "7079a63ebdfa81d5449d81d2aff330b2604f1d146d25bf5c5eaaeabc734b6e7c",
+    "reason": "Python inherited PS7 PSMODULEPATH; Windows PowerShell could not autoload Import-PowerShellDataFile before the gate. Retry omitted PSMODULEPATH in the child only; no product/test/security changes.",
+    "sanitization": "Repository root redacted and trailing whitespace removed; diagnostic text retained."
+  },
+  "pester_passed_per_shell": 326,
+  "python_passed_per_shell": 61,
+  "python_skipped_per_shell": 1,
+  "identity_note": "SHA256 identifies tested working-tree bytes. Git may normalize text line endings. Source remained unchanged during both Full runs.",
+  "real_media": {
+    "path": "evidence/WAC-M1-03-real-media.json",
+    "sha256": "b639480bde6e6802a0d5a9f07a9b298e338c754341bd74501bff4ae01eb69f27",
+    "cases_passed": 32
+  },
+  "interactive_console": {
+    "path": "evidence/WAC-M1-03-console.txt",
+    "sha256": "40c250997dcfa8075799e3ed58c00da7440703bf6bd8517a997fa21e09e3f809",
+    "ps51": "empty/wrong reprompt, q exits 130, no WAV/report",
+    "ps7": "non-audio index 0 reprompts, index 2 renders, exit 0"
+  }
+}

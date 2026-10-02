@@ -1,0 +1,405 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (18 files; shell 7.6.5).
+
+ScriptName                          Line RuleName                                    Message
+----------                          ---- --------                                    -------
+Import-Safety.ps1                     26 PSAvoidUsingWriteHost                       File 'Import-Safety.ps1' uses Cons
+                                                                                     ole.'WriteLine'. Using Console to
+                                                                                     write is not recommended because i
+                                                                                     t may not work in all hosts or the
+                                                                                     re may even be no hosts at all. Us
+                                                                                     e Write-Output instead.
+Invoke-MetadataFailure.ps1            27 PSUseOutputTypeCorrectly                    The cmdlet 'Get-Date' returns an o
+                                                                                     bject of type 'System.String' but
+                                                                                     this type is not declared in the O
+                                                                                     utputType attribute.
+Invoke-MetadataFailure.ps1            10 PSAvoidOverwritingBuiltInCmdlets            'Get-Item' is a cmdlet that is inc
+                                                                                     luded with PowerShell (version cor
+                                                                                     e-6.1.0-windows) whose definition
+                                                                                     should not be overridden
+Invoke-MetadataFailure.ps1            21 PSAvoidOverwritingBuiltInCmdlets            'Get-Date' is a cmdlet that is inc
+                                                                                     luded with PowerShell (version cor
+                                                                                     e-6.1.0-windows) whose definition
+                                                                                     should not be overridden
+New-NativeProcessFixture.ps1           3 PSUseShouldProcessForStateChangingFunctions Function 'New-WacTestNativeExecuta
+                                                                                     ble' has verb that could change sy
+                                                                                     stem state. Therefore, the functio
+                                                                                     n has to support 'ShouldProcess'.
+WinAudioClean.EntryPoints.Tests.ps1    7 PSUseDeclaredVarsMoreThanAssignments        The variable 'controlledCases' is
+                                                                                     assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1   19 PSUseDeclaredVarsMoreThanAssignments        The variable 'preflightCases' is a
+                                                                                     ssigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1   39 PSUseDeclaredVarsMoreThanAssignments        The variable 'dependencyCases' is
+                                                                                     assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1   47 PSUseDeclaredVarsMoreThanAssignments        The variable 'directPathCases' is
+                                                                                     assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1   63 PSUseDeclaredVarsMoreThanAssignments        The variable 'scriptPath' is assig
+                                                                                     ned but never used.
+WinAudioClean.EntryPoints.Tests.ps1   64 PSUseDeclaredVarsMoreThanAssignments        The variable 'launcherPath' is ass
+                                                                                     igned but never used.
+WinAudioClean.EntryPoints.Tests.ps1   67 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeFixture' is as
+                                                                                     signed but never used.
+WinAudioClean.Helpers.Tests.ps1        7 PSUseDeclaredVarsMoreThanAssignments        The variable 'rawFilters' is assig
+                                                                                     ned but never used.
+WinAudioClean.Helpers.Tests.ps1        8 PSUseDeclaredVarsMoreThanAssignments        The variable 'zoomFilters' is assi
+                                                                                     gned but never used.
+WinAudioClean.Helpers.Tests.ps1       10 PSUseDeclaredVarsMoreThanAssignments        The variable 'baseline' is assigne
+                                                                                     d but never used.
+WinAudioClean.Launcher.Tests.ps1      50 PSUseShouldProcessForStateChangingFunctions Function 'New-WacLauncherTestFolde
+                                                                                     r' has verb that could change syst
+                                                                                     em state. Therefore, the function
+                                                                                     has to support 'ShouldProcess'.
+WinAudioClean.Launcher.Tests.ps1      18 PSUseDeclaredVarsMoreThanAssignments        The variable 'launcherExitCases' i
+                                                                                     s assigned but never used.
+WinAudioClean.Launcher.Tests.ps1      32 PSUseDeclaredVarsMoreThanAssignments        The variable 'defaultLauncherPathC
+                                                                                     ases' is assigned but never used.
+WinAudioClean.Launcher.Tests.ps1      33 PSUseDeclaredVarsMoreThanAssignments        The variable 'launcherInvalidCases
+                                                                                     ' is assigned but never used.
+WinAudioClean.Native.Tests.ps1         2 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeArgumentCases'
+                                                                                      is assigned but never used.
+WinAudioClean.Native.Tests.ps1        24 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeFixture' is as
+                                                                                     signed but never used.
+WinAudioClean.Native.Tests.ps1        25 PSUseDeclaredVarsMoreThanAssignments        The variable 'fixtureVariables' is
+                                                                                      assigned but never used.
+WinAudioClean.Preflight.Tests.ps1      2 PSUseDeclaredVarsMoreThanAssignments        The variable 'literalCases' is ass
+                                                                                     igned but never used.
+WinAudioClean.Preflight.Tests.ps1     12 PSUseDeclaredVarsMoreThanAssignments        The variable 'unsupportedCases' is
+                                                                                      assigned but never used.
+WinAudioClean.Reporting.Tests.ps1      2 PSUseDeclaredVarsMoreThanAssignments        The variable 'reportingCases' is a
+                                                                                     ssigned but never used.
+WinAudioClean.Reporting.Tests.ps1     17 PSUseDeclaredVarsMoreThanAssignments        The variable 'scriptPath' is assig
+                                                                                     ned but never used.
+WinAudioClean.Reporting.Tests.ps1     18 PSUseDeclaredVarsMoreThanAssignments        The variable 'metadataFixture' is
+                                                                                     assigned but never used.
+WinAudioClean.Reporting.Tests.ps1     21 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeFixture' is as
+                                                                                     signed but never used.
+WinAudioClean.ps1                    199 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    396 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    397 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    398 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    398 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    402 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    403 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    404 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    405 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    406 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    407 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    414 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    431 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    432 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    449 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    450 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    510 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    511 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    512 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    513 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    515 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    516 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    518 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    519 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses Writ
+                                                                                     e-Host. Avoid using Write-Host bec
+                                                                                     ause it might not work in all host
+                                                                                     s, does not work when there is no
+                                                                                     host, and (prior to PS 5.0) cannot
+                                                                                      be suppressed, captured, or redir
+                                                                                     ected. Instead, use Write-Output,
+                                                                                     Write-Verbose, or Write-Informatio
+                                                                                     n.
+WinAudioClean.ps1                    226 PSUseSingularNouns                          The cmdlet 'Get-WacFfmpegArguments
+                                                                                     ' uses a plural noun. A singular n
+                                                                                     oun should be used instead.
+
+Static gate passed; 53 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 6 files.
+Discovery found 227 tests in 422ms.
+Filter 'Tag' set to ('Quick', 'Unit', 'Import').
+Filters selected 74 tests to run.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] AC-007: matches the Raw filter values and order in BASELINE.json 113ms (78ms|35ms)
+  [+] AC-007: matches the Zoom filter values and order in BASELINE.json 7ms (6ms|2ms)
+  [+] selects the exact original Raw mode and filters for choice 1 9ms (7ms|2ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 6ms (5ms|1ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom () 42ms (39ms|3ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (invalid) 7ms (5ms|2ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (3) 5ms (4ms|2ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 9ms (6ms|3ms)
+  [+] accepts an input stem without an extension 8ms (7ms|1ms)
+  [+] characterizes the legacy minute-timestamp collision 6ms (5ms|1ms)
+  [+] keeps paths and filters as separate arguments and disables native stdin 11ms (10ms|1ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 9ms (8ms|2ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 1.05s (1.04s|4ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preflight.Tests.ps1'
+Describing AC-013: preflight treats filenames as literal data
+  [+] resolves and reads exactly meeting with spaces.wav 66ms (63ms|3ms)
+  [+] resolves and reads exactly meeting [draft].wav 10ms (9ms|1ms)
+  [+] resolves and reads exactly speaker's recording.wav 28ms (27ms|1ms)
+  [+] resolves and reads exactly meeting äöÅ.wav 15ms (13ms|2ms)
+  [+] resolves and reads exactly speaker & guest.wav 18ms (16ms|2ms)
+  [+] resolves and reads exactly meeting %completed%.wav 16ms (14ms|2ms)
+  [+] resolves and reads exactly meeting !important!.wav 29ms (27ms|2ms)
+  [+] resolves and reads exactly meeting (take 1).wav 18ms (16ms|2ms)
+  [+] does not expand brackets to a different existing filename 34ms (33ms|2ms)
+  [+] normalizes a relative path against the PowerShell working directory 22ms (21ms|2ms)
+  [+] rejects provider-qualified syntax even when the underlying file exists 30ms (28ms|1ms)
+
+Describing AC-014: input preflight rejects unsupported or unreadable input
+  [+] rejects empty path for both input and destination 32ms (30ms|2ms)
+  [+] rejects blank path for both input and destination 10ms (9ms|2ms)
+  [+] rejects HTTPS URL for both input and destination 9ms (8ms|1ms)
+  [+] rejects file URL for both input and destination 12ms (10ms|2ms)
+  [+] rejects environment provider for both input and destination 9ms (7ms|2ms)
+  [+] rejects registry provider for both input and destination 7ms (6ms|1ms)
+  [+] rejects UNC path for both input and destination 10ms (9ms|1ms)
+  [+] rejects forward-slash UNC path for both input and destination 7ms (6ms|1ms)
+  [+] rejects extended device path for both input and destination 15ms (13ms|1ms)
+  [+] rejects device namespace for both input and destination 14ms (12ms|2ms)
+  [+] rejects alternate data stream for both input and destination 19ms (17ms|2ms)
+  [+] rejects a missing file without creating it 32ms (30ms|2ms)
+  [+] rejects an existing directory 19ms (17ms|2ms)
+  [+] rejects a zero-byte file and leaves it unchanged 15ms (13ms|2ms)
+  [+] rejects a file that cannot be opened for reading 25ms (24ms|2ms)
+
+Describing AC-013/AC-014: destination preflight creates and verifies literal directories
+  [+] creates a literal destination containing meeting with spaces.wav without leaving probe files 30ms (28ms|2ms)
+  [+] creates a literal destination containing meeting [draft].wav without leaving probe files 14ms (13ms|1ms)
+  [+] creates a literal destination containing speaker's recording.wav without leaving probe files 12ms (11ms|1ms)
+  [+] creates a literal destination containing meeting äöÅ.wav without leaving probe files 24ms (23ms|1ms)
+  [+] creates a literal destination containing speaker & guest.wav without leaving probe files 14ms (13ms|1ms)
+  [+] creates a literal destination containing meeting %completed%.wav without leaving probe files 15ms (13ms|1ms)
+  [+] creates a literal destination containing meeting !important!.wav without leaving probe files 15ms (14ms|1ms)
+  [+] creates a literal destination containing meeting (take 1).wav without leaving probe files 16ms (15ms|1ms)
+  [+] normalizes and creates a nested relative destination 25ms (24ms|1ms)
+  [+] preserves existing files and removes only its own write probe 15ms (14ms|1ms)
+  [+] rejects a destination occupied by a file and preserves that file 16ms (15ms|1ms)
+  [+] rejects a directory whose ACL denies creating files 67ms (66ms|1ms)
+
+Describing AC-015: the menu retries invalid answers and permits cancellation
+  [+] selects Raw for 1 295ms (293ms|2ms)
+  [+] selects Zoom for 2 31ms (28ms|3ms)
+  [+] retries empty and invalid answers before accepting a valid choice 78ms (76ms|2ms)
+  [+] returns no mode for cancellation q 47ms (45ms|3ms)
+  [+] returns no mode for cancellation cancel 16ms (15ms|1ms)
+  [+] returns no mode when the host reports end of input 32ms (28ms|4ms)
+  [+] reports a clear unattended-use route when Read-Host fails 36ms (35ms|1ms)
+
+Describing AC-015: prompt eligibility follows host and script invocation boundaries
+  [+] allows an interactive host with ordinary startup switches 16ms (13ms|2ms)
+  [+] prevents prompting for the explicit application switch 9ms (7ms|2ms)
+  [+] prevents prompting for redirected standard input 2ms (2ms|1ms)
+  [+] prevents prompting for a noninteractive operating system session 3ms (2ms|1ms)
+  [+] recognizes host switch -NonInteractive before script arguments 6ms (6ms|1ms)
+  [+] recognizes host switch -noni before script arguments 6ms (2ms|4ms)
+  [+] recognizes host switch -nonin before script arguments 2ms (1ms|1ms)
+  [+] recognizes host switch -noninter before script arguments 2ms (1ms|1ms)
+  [+] recognizes host switch -NoNiNtErAcTiVe before script arguments 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -File as host switches 6ms (5ms|1ms)
+  [+] does not interpret application arguments after -fi as host switches 2ms (2ms|1ms)
+  [+] does not interpret application arguments after -Command as host switches 2ms (1ms|1ms)
+  [+] does not interpret application arguments after -co as host switches 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -EncodedCommand as host switches 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -ec as host switches 6ms (4ms|1ms)
+  [+] does not confuse a longer lookalike argument with a supported host switch 4ms (4ms|1ms)
+Tests completed in 3.94s
+Tests Passed: 74, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 153
+Quick passed: 74 Pester passed, 0 skipped, 153 outside scope.

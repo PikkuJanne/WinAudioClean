@@ -1,73 +1,67 @@
 # Current status
 
-Date: 2026-10-02. **M0 is complete: WAC-M0-01 through WAC-M0-04.**
-AC-001 through AC-012 pass with evidence. The other 26 tasks remain todo;
-AC-013 through AC-090 remain not_run. No M0 engineering blocker remains.
+Date: 2026-10-02. **WAC-M1-07 and milestone M1 are complete.** M0-01 through
+M0-04 and M1-01 through M1-07 are done. AC-001 through AC-033 pass. Eleven tasks
+are done; 19 remain todo.
 
-**Next: WAC-M1-01 in a fresh thread — validate local input, mode and destination
-before prompting.** Stop this session at the synchronized M0 checkpoint.
+**Next: WAC-M2-01 — Correct audio claims and name the Original preset.**
+Start it separately after fresh synchronization verification. No M2 runtime
+work is included in this checkpoint.
 
-## Baseline gate
+## M1 reliability gate
 
-WAC-M0-04 reconciled the existing evidence once. All 12 M0-03 source hashes,
-seven historical baseline blobs, both report hashes, 50 retained synthetic
-input/output files and both portable FFmpeg binaries match their records.
-All prior task/acceptance evidence links exist. The current tested source list
-contains 18 unchanged runtime/development files. No new audio render was needed.
+The runtime, launcher, fixtures, test code and harnesses remain unchanged from
+M1-06 (`ca82376ae60560541fb0985c7c565c7872e3bba4`). M1-07 adds a file-safety and
+compatibility review, test instructions, fresh evidence and the next handoff.
+No known source/prior-export overwrite, broad cleanup, ambiguous publication
+or false-success defect was found in the reviewed paths and fault cases.
 
-M0-03's two Windows reports remain byte-identical: five synthetic fixtures,
-20 Raw/Zoom variants per run. Legacy unspecified WAVs measured 192 kHz PCM16;
-the separate explicit encoding comparisons measured 48 kHz PCM16. Channel counts
-and reported durations match inputs. Undefined loudness is null with reasons.
-These findings characterize this build; they do not establish speech quality.
+Windows NT 10.0.26300; PS5.1.26100.9444 / PS7.6.5; Python 3.14.6;
+Pester 5.7.1 / PSScriptAnalyzer 1.24.0; FFmpeg/ffprobe 9.0.2:
 
-D19 in DECISIONS.md records the implementation contracts and pending human
-choices. Runtime source, launcher, filter settings and export behavior did not
-change in M0-04. BASELINE.json and bundle audit/Linux reports remain historical.
+- Quick: **332 passed per shell**; focused M1 gate: **158 passed per shell**.
+- One Full run per shell: **543 Pester passed, zero failures/skips; 61 Python
+  passed plus one symlink-privilege skip**, runner exits 0. Parser 25 files;
+  static/plan gates pass with 112 visible non-gating analyzer advisories.
+- Fresh real transactions: **30/30 cases**, 32 application invocations.
+- Fresh real reporting: **24/24 cases**, 24 renders plus four diagnostic CLI
+  invocations. Source, prior exports and prior summary content survived the
+  tested failures. Runtime/harness hashes remain stable and match Full.
+- [Evidence and commands](evidence/WAC-M1-07.md),
+  [write/cleanup review](evidence/WAC-M1-07-review.md), and
+  [all 37 tested source identities](evidence/WAC-M1-07-source.json).
 
-## Checks actually run for M0-04
+## Current behavior and boundaries
 
-Active Windows NT 10.0.26300.0; PS7.6.5; PS5.1.26100.9444; Python 3.14.6;
-Pester 5.7.1; PSScriptAnalyzer 1.24.0. Existing portable FFmpeg/ffprobe 9.0.2
-identities match the M0-03 reports; neither executable is on PATH.
+Literal preflight, dependency/track inspection, owned and validated collision-
+safe publication, explicit 48 kHz PCM16/24, optional mono/RF64 and structured
+local reports remain implemented. Original Raw/Zoom filters and PS1/BAT entry
+points remain. See DECISIONS.md D20-D25 and the native/audio/data contracts.
 
-- Quick: 13 Pester passed.
-- Full in each shell: 29 Pester passed; 61 Python tests passed and one skip for
-  unavailable Windows symlink privileges. All commands exited 0.
-- Parser/static gates passed; 49 existing analyzer advisories remain visible.
-  No rules were suppressed and no new source was introduced.
-- Final plan validation passed: 30 tasks, 90 acceptance cases, 20 improvement
-  groups. Only WAC-M1-01 is ready; it needs no additional implementation approval.
+Successful published audio with incomplete reporting returns WARNING/7;
+processing failures retain their primary codes. Per-run files use exclusive
+creation; the summary serializes append/rollback. Diagnostic export is explicit,
+local, typed, no-overwrite and capped at 16 MiB. No audio or diagnostics upload.
 
-Evidence: [M0-04 gate](evidence/WAC-M0-04.md), source and reconciliation JSON,
-sanitized test logs, and final plan/restart checks. M0-01/02/03 evidence remains
-intact. Exact reproduction commands are in tests/README.md and the gate record.
-
-## Validation still pending
-
-- Human speech listening and speech-quality review: no cleared corpus admitted.
-- Real audio through the application/launcher: controlled preflight and process
-  doubles pass; direct FFmpeg synthetic rendering is a separate result.
-- Complete filename/CMD argument matrix, error/cancellation/collision handling,
-  stream selection, channel isolation, impulse alignment, long and >4 GB exports:
-  their scheduled M1/later acceptance cases remain unrun.
-- Default-sound promotion: unapproved. Explicit 48 kHz is still comparison-only.
-- No CI exists yet. Local tests are the evidence; CI remains scheduled for M4-02.
-
-Existing input-validation, overwrite/collision and process-status defects are
-tracked M1 work. Passing this baseline gate does not certify release readiness.
+Full >4 GB output, actual disk exhaustion, speech listening, long-file/memory
+stress and running-render Ctrl+C remain unverified. Native capture remains in
+memory; space is not reserved against competing writers. Reports lack multi-
+file atomicity and power-loss guarantees. Early pre-render failures remain
+console-only. The legacy Raw marker delay (~25 ms) is unchanged. Independent
+loudness is not measured. Legacy README/help quality claims are assigned to
+M2-01 and are not endorsed by the reliability results.
 
 ## Checkout and delivery
 
-The source-only starting folder has no Git metadata and remains preserved.
-Use the established separate Git checkout. Branch: `codex/wac-m0-handoff`.
-Effective fetch/push origin: `https://github.com/PikkuJanne/WinAudioClean.git`.
-At this session's start, local HEAD, upstream, live remote and open draft PR #1
-matched `e1bd07b96dc23ab7d84ac0f236ca599a866c73a3`; the tree was clean and fetch
-succeeded. M0-04's post-push SHA and verification belong in the PR/final response.
-Recheck live state before advancing; task `done` alone does not establish sync.
+Use WinAudioClean-governance on `codex/wac-m1-reliability`; preserve the original
+source-only folder. Exact effective fetch/push origin:
+https://github.com/PikkuJanne/WinAudioClean.git.
+[Draft PR #2](https://github.com/PikkuJanne/WinAudioClean/pull/2) remains stacked
+on `codex/wac-m0-handoff`; draft PR #1 is open/unmerged. There is no CI workflow
+or check run; local results do not imply CI success.
 
-[Draft PR #1](https://github.com/PikkuJanne/WinAudioClean/pull/1) targets main.
-For M1, start `codex/wac-m1-reliability` from the verified M0 completion tip and
-stack its draft PR on `codex/wac-m0-handoff` while PR #1 remains unmerged.
-Inspect live PR state first and reconcile the base if an approved merge occurred.
+The completion SHA and final clean local/live/PR equality are recorded in the
+PR/final response, avoiding a recursive evidence commit. For M2, inspect and
+create/reuse `codex/wac-m2-audio` from the verified M1 tip; while PR #2 remains
+unmerged, stack the M2 draft on `codex/wac-m1-reliability`. No merge, release,
+default-sound change, repository setting change or deployment is authorized.

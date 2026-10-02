@@ -1,0 +1,6 @@
+{
+  "baseline_passed": true,
+  "swapped_channel_check_failed": true,
+  "shifted_alignment_failed": true,
+  "shifted_max_delta_ms": 30.00000000000025
+}

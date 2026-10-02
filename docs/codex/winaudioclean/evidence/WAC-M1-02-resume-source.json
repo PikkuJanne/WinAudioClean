@@ -1,0 +1,175 @@
+{
+  "task": "WAC-M1-02",
+  "starting_commit": "0d02cf48dcede1196024039294e9316f4624b50a",
+  "status": "accepted",
+  "identity": "SHA256 of the unchanged working-tree source bytes used for both resumed Full gates. All 26 identities match the blocked checkpoint manifest; Git newline normalization can differ.",
+  "environment": {
+    "os": "Windows NT 10.0.26300.0",
+    "powershell": [
+      "5.1.26100.9444",
+      "7.6.5"
+    ],
+    "python": "3.14.6",
+    "pester": "5.7.1",
+    "psscriptanalyzer": "1.24.0",
+    "framework_compiler": "4.8.9221.0"
+  },
+  "policy": {
+    "owner_statement": "Smart App Control is off—rerun M1-02.",
+    "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CI\\Policy",
+    "registry_value": "VerifiedAndReputablePolicyState",
+    "observed_before_tests": 0,
+    "observed_after_tests": 0,
+    "agent_changed_security_settings": false,
+    "limit": "Acceptance covers fixture execution with Smart App Control Off; no claim that unsigned fixtures work with it On."
+  },
+  "files": [
+    {
+      "path": "WinAudioClean.bat",
+      "sha256": "171ee19fd3ccf36dcd7b2f4253765775a4c33d337243255690f8f428101c5de4"
+    },
+    {
+      "path": "WinAudioClean.ps1",
+      "sha256": "292fb01ec4ea7a4a48849cc49f37aa6f4218c2be5a8033d34639fb74212107ef"
+    },
+    {
+      "path": "docs/codex/winaudioclean/BASELINE.json",
+      "sha256": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tests/test_characterize_filters.py",
+      "sha256": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tests/test_handoff.py",
+      "sha256": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/characterize_filters.py",
+      "sha256": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/generate_fixtures.py",
+      "sha256": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/handoff.py",
+      "sha256": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a"
+    },
+    {
+      "path": "scripts/DevDependencies.psd1",
+      "sha256": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90"
+    },
+    {
+      "path": "scripts/Install-DevDependencies.ps1",
+      "sha256": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14"
+    },
+    {
+      "path": "scripts/Invoke-Tests.ps1",
+      "sha256": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b"
+    },
+    {
+      "path": "scripts/PSScriptAnalyzerSettings.psd1",
+      "sha256": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c"
+    },
+    {
+      "path": "tests/WinAudioClean.EntryPoints.Tests.ps1",
+      "sha256": "952d957682e23528c344e195d7f41edc9a3c151be5e600c5ef23a67894939479"
+    },
+    {
+      "path": "tests/WinAudioClean.Helpers.Tests.ps1",
+      "sha256": "31e343dab0165addbb5f9f65e3f80003fb3ab0ebfefd5d842b91d65a2de67863"
+    },
+    {
+      "path": "tests/WinAudioClean.Launcher.Tests.ps1",
+      "sha256": "4f7004372bce73679f140a0456ea113ee69c758c234db9880c3e6f21a3153197"
+    },
+    {
+      "path": "tests/WinAudioClean.Native.Tests.ps1",
+      "sha256": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2"
+    },
+    {
+      "path": "tests/WinAudioClean.Preflight.Tests.ps1",
+      "sha256": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07"
+    },
+    {
+      "path": "tests/WinAudioClean.Reporting.Tests.ps1",
+      "sha256": "e1b156940f0b4367059db4c4fb325f9883a7fe64643a45fca2f01d0309e12000"
+    },
+    {
+      "path": "tests/fixtures/Import-Safety.ps1",
+      "sha256": "8332eff135dc547095cca7fe019e2ca4c3ddeb66bf73af98ca04a4e4cf0f7638"
+    },
+    {
+      "path": "tests/fixtures/Invoke-Launcher.ps1",
+      "sha256": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8"
+    },
+    {
+      "path": "tests/fixtures/Invoke-LauncherCase.ps1",
+      "sha256": "96324d57b0b88ea7782ac3e60a7e0a9206f217d4e1f63c02e49cdc784836dd45"
+    },
+    {
+      "path": "tests/fixtures/Invoke-MetadataFailure.ps1",
+      "sha256": "9ea6e555e0e6597887f6c08a1d878c48ee06ce391164ab6fb9f3ed650e691e0e"
+    },
+    {
+      "path": "tests/fixtures/LauncherApplicationStub.ps1",
+      "sha256": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6"
+    },
+    {
+      "path": "tests/fixtures/NativeProcessFixture.cs",
+      "sha256": "1c3f09ca1eba008019ca605c9034204bb0efd3090dab8e87ef6e3a2dc5f5ce71"
+    },
+    {
+      "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+      "sha256": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8"
+    },
+    {
+      "path": "tests/fixtures/TestProcess.ps1",
+      "sha256": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+    }
+  ],
+  "logs": [
+    {
+      "path": "evidence/WAC-M1-02-resume-full-ps51.txt",
+      "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full",
+      "exit_code": 0,
+      "pester": {
+        "passed": 227,
+        "failed": 0,
+        "skipped": 0
+      },
+      "python": {
+        "passed": 61,
+        "skipped": 1,
+        "skip_reason": "Windows symlink privileges unavailable"
+      },
+      "sha256": "c4fd0157b4d93be6fefb4efce5f3b27cf9a8390d23790a4fe30e6f0480abf312"
+    },
+    {
+      "path": "evidence/WAC-M1-02-resume-full-ps7.txt",
+      "command": "pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings",
+      "exit_code": 0,
+      "pester": {
+        "passed": 227,
+        "failed": 0,
+        "skipped": 0
+      },
+      "python": {
+        "passed": 61,
+        "skipped": 1,
+        "skip_reason": "Windows symlink privileges unavailable"
+      },
+      "sha256": "a703880696eda05f4f2f7361126ac8538068254daebd1fa23b9e2f0ce40ca1e5"
+    }
+  ],
+  "existing_real_process_source_sha256": "292fb01ec4ea7a4a48849cc49f37aa6f4218c2be5a8033d34639fb74212107ef",
+  "real_process_rerun": false,
+  "real_process_reason": "Four prior passing real-FFmpeg application checks use identical runtime source. This resumption changed no runtime or test source.",
+  "historical_evidence_preserved": [
+    "WAC-M1-02-source.json",
+    "WAC-M1-02-policy.json",
+    "WAC-M1-02-full-ps51.txt",
+    "WAC-M1-02-full-ps7.txt"
+  ]
+}
