@@ -289,3 +289,21 @@ paths, metadata, timestamps and raw diagnostics; retain local originals and
 warn to review before sharing. Limit raw input to version 1 JSON objects up to
 16 MiB. Nothing is uploaded. Evidence: evidence/WAC-M1-06.md. No filter, merge,
 release, deployment or security-policy approval is introduced.
+
+### 2026-10-02 — WAC-M1-07 reliability gate
+
+D26. M1 reliability is accepted on the unchanged M1-06 source after cumulative
+Quick, targeted and one Full gate in each supported shell on the active machine.
+Fresh real transaction/report fault checks and the write/rename/cleanup review
+found no known overwrite, ambiguous publication or false-success defect needing
+a runtime correction. Evidence: `evidence/WAC-M1-07.md` and its source manifest.
+
+Preserve exact Original filters and all M1 file/report contracts. This gate does
+not certify speech quality, independent loudness, full >4 GB output, real volume
+exhaustion, running-render Ctrl+C or long-file/memory stress. Keep reporting and
+capacity limitations visible. Legacy README/help claims remain explicitly owned
+by the next task, WAC-M2-01, together with Original preset naming/versioning.
+
+After clean live synchronization, begin M2-01 separately on the inspected M2
+feature branch, stacked on M1 while its draft PR is unmerged. No merge, release,
+default-sound promotion, security change or deployment approval is added.

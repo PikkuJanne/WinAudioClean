@@ -320,3 +320,47 @@ the harness rejects unexplained residual shifts and altered sample data. Raw's
 existing approximately 25 ms marker delay is recorded, not silently corrected.
 These checks do not certify speech quality, full >4 GB output or real disk
 exhaustion. Keep generated media and raw logs under `.wac-local`.
+
+## M1 reliability gate (WAC-M1-07)
+
+Run Quick, then the focused safety/launcher/reporting group, then one Full gate
+in each available supported Windows shell. Full includes all M0/M1 Pester
+suites and the Python governance tests; it cannot be reduced by path/tag flags.
+Use a fresh process for each command. When launching PS5.1 from a PS7/Python
+host, omit inherited `PSModulePath` in the child environment so Windows
+PowerShell initializes its own module defaults.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "& ./scripts/Invoke-Tests.ps1 -Level Targeted -Tag @('Transaction','RunReports','OutputSafety','Launcher')"
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "& ./scripts/Invoke-Tests.ps1 -Level Targeted -Tag @('Transaction','RunReports','OutputSafety','Launcher')"
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full
+```
+
+The focused group checks ownership/cleanup, report writes/rollback, malformed
+outputs and batch forwarding. Full also covers preflight, native-process,
+dependency/media, encoding and PCM/RF64 validation. A default single-file batch
+handoff uses a controlled application stub; do not label it an Explorer
+interactive drag/drop render.
+
+For additional real encoder and report checks, use existing local binaries and
+fresh output directories under `.wac-local`:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OutputTransactions.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M1-07/real-transactions
+python -X utf8 scripts/Test-RunReports.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M1-07/real-reports
+```
+
+These harnesses retain their originating task labels (M1-04 and M1-06) in the
+JSON; M1-07 records the fresh invocation, source hashes and case results without
+rewriting that provenance. Faults use isolated application copies and synthetic
+media. Disk-full and report-permission injection do not prove real volume
+exhaustion or hardware-failure recovery. Do not commit raw audio or reports.
+
+[Gate evidence](../docs/codex/winaudioclean/evidence/WAC-M1-07.md) records exact
+commands, environment, source identities and limits. The
+[file-safety review](../docs/codex/winaudioclean/evidence/WAC-M1-07-review.md)
+maps runtime writes and cleanup to the relevant tests.

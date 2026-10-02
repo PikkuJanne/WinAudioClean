@@ -462,8 +462,20 @@
       "title": "Cumulative regression",
       "procedure": "Run the documented M0+M1 suite on the active Windows machine in available supported shells.",
       "expected": "All mandatory local checks pass, or the milestone remains blocked with exact failures.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ]
     },
     {
       "id": "AC-032",
@@ -471,8 +483,20 @@
       "title": "Non-destructive review",
       "procedure": "Inspect all file-writing, rename and cleanup paths alongside fault-injection results.",
       "expected": "No source/prior export overwrite, broad cleanup, silent output ambiguity or false-success path remains known.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ]
     },
     {
       "id": "AC-033",
@@ -480,8 +504,20 @@
       "title": "Remote checkpoint",
       "procedure": "Run live sync-check after pushing the implementation/evidence commit and inspect PR state.",
       "expected": "Clean worktree and identical local/live remote HEAD; CI state is accurately separated from local results.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ]
     },
     {
       "id": "AC-034",

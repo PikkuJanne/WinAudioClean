@@ -406,7 +406,7 @@
       "depends_on": [
         "WAC-M1-06"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "M1 test reconciliation, compatibility review and synchronization evidence.",
       "implementation": [
@@ -420,7 +420,19 @@
         "AC-032",
         "AC-033"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-07.md",
+        "evidence/WAC-M1-07-source.json",
+        "evidence/WAC-M1-07-review.md",
+        "evidence/WAC-M1-07-full-ps51.txt",
+        "evidence/WAC-M1-07-full-ps7.txt",
+        "evidence/WAC-M1-07-quick-ps51.txt",
+        "evidence/WAC-M1-07-quick-ps7.txt",
+        "evidence/WAC-M1-07-targeted-ps51.txt",
+        "evidence/WAC-M1-07-targeted-ps7.txt",
+        "evidence/WAC-M1-07-real-transactions.json",
+        "evidence/WAC-M1-07-real-reports.json"
+      ],
       "blocked_reason": null
     },
     {
