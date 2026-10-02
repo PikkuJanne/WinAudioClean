@@ -1,0 +1,142 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (32 files; shell 7.6.5).
+Static gate passed; 176 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 113 tests in 334ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Preview.Tests.ps1'
+Describing AC-043: preview ranges are finite bounded sample-aligned excerpts
+  [+] rejects negative start 211ms (134ms|77ms)
+  [+] rejects empty start 5ms (4ms|2ms)
+  [+] rejects blank start 7ms (5ms|2ms)
+  [+] rejects null start 7ms (4ms|3ms)
+  [+] rejects locale decimal start 7ms (4ms|3ms)
+  [+] rejects exponent start 13ms (6ms|7ms)
+  [+] rejects NaN start 5ms (3ms|1ms)
+  [+] rejects infinite start 5ms (4ms|2ms)
+  [+] rejects filter injection start 4ms (3ms|1ms)
+  [+] rejects argument injection start 5ms (4ms|1ms)
+  [+] rejects expression start 9ms (8ms|1ms)
+  [+] rejects start at end 38ms (22ms|16ms)
+  [+] rejects start beyond end 5ms (3ms|1ms)
+  [+] rejects negative duration 10ms (9ms|1ms)
+  [+] rejects zero duration 26ms (25ms|2ms)
+  [+] rejects duration over maximum 6ms (4ms|2ms)
+  [+] rejects duration shorter than half a sample 29ms (26ms|3ms)
+  [+] rejects empty duration 9ms (7ms|2ms)
+  [+] rejects blank duration 8ms (5ms|2ms)
+  [+] rejects null duration 7ms (5ms|2ms)
+  [+] rejects locale decimal duration 8ms (6ms|2ms)
+  [+] rejects exponent duration 8ms (6ms|2ms)
+  [+] rejects NaN duration 7ms (5ms|2ms)
+  [+] rejects infinite duration 10ms (9ms|2ms)
+  [+] rejects filter injection duration 8ms (6ms|2ms)
+  [+] rejects argument injection duration 7ms (5ms|1ms)
+  [+] rejects expression duration 5ms (4ms|2ms)
+  [+] rejects unavailable input duration zero 17ms (14ms|3ms)
+  [+] rejects unavailable input duration negative 8ms (5ms|2ms)
+  [+] rejects unavailable input duration NaN 9ms (7ms|1ms)
+  [+] rejects unavailable input duration positive infinity 6ms (5ms|2ms)
+  [+] rejects unavailable input duration negative infinity 9ms (6ms|3ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at start 131ms (129ms|2ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at middle 37ms (35ms|3ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at near end 27ms (25ms|2ms)
+  [+] clips only the implicit default for a 0.2-second short file 105ms (103ms|2ms)
+  [+] clips only the implicit default for a 3-second short file 14ms (12ms|1ms)
+  [+] clips only the implicit default for a 44-second short file 9ms (8ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 9ms (8ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 7ms (5ms|2ms)
+  [+] accepts an exact explicit end boundary and the 60-second maximum 10ms (9ms|1ms)
+  [+] records clipping only when an implicit requested duration was actually shortened 12ms (11ms|1ms)
+  [+] preserves long-file sample offsets beyond Int32 without overflow 15ms (14ms|1ms)
+  [+] quantizes start and duration to 48 kHz samples using nearest rounding 21ms (20ms|1ms)
+  [+] parses invariant fractional input in en-US 20ms (19ms|1ms)
+  [+] parses invariant fractional input in de-DE 8ms (6ms|1ms)
+  [+] parses invariant fractional input in fi-FI 11ms (10ms|1ms)
+
+Describing AC-044: comparison gain is separate, common and attenuation only
+  [+] matches normal pair at a common target with the true-peak safety margin 96ms (93ms|2ms)
+  [+] matches quiet source at a common target with the true-peak safety margin 22ms (21ms|1ms)
+  [+] matches source peak guard at a common target with the true-peak safety margin 15ms (14ms|1ms)
+  [+] matches fractional guard below one dB at a common target with the true-peak safety margin 19ms (18ms|1ms)
+  [+] matches processed peak guard at a common target with the true-peak safety margin 20ms (19ms|1ms)
+  [+] matches already matched at a common target with the true-peak safety margin 22ms (21ms|1ms)
+  [+] labels unavailable too_short without inventing integrated loudness 47ms (46ms|1ms)
+  [+] labels unavailable silence without inventing integrated loudness 8ms (7ms|1ms)
+  [+] labels unavailable undefined_loudness without inventing integrated loudness 11ms (10ms|1ms)
+  [+] leaves silent null peaks at zero gain and gives too_short priority 11ms (10ms|1ms)
+  [+] rejects invalid measured Available for string availability 15ms (13ms|2ms)
+  [+] rejects invalid measured InputI for numeric string 6ms (5ms|1ms)
+  [+] rejects invalid measured InputI for boolean 6ms (4ms|2ms)
+  [+] rejects invalid measured InputI for array 9ms (7ms|3ms)
+  [+] rejects invalid measured InputI for null 4ms (3ms|1ms)
+  [+] rejects invalid measured InputI for NaN 6ms (5ms|1ms)
+  [+] rejects invalid measured InputI for infinity 4ms (3ms|1ms)
+  [+] rejects invalid measured InputTP for numeric string 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for boolean 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for array 6ms (4ms|3ms)
+  [+] rejects invalid measured InputTP for null 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for NaN 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for infinity 4ms (3ms|1ms)
+  [+] rejects unknown unavailable reasons rather than copying an arbitrary label 8ms (7ms|1ms)
+
+Describing AC-043: preview timeline metadata binds seeking to the selected track
+  [+] uses the selected stream origin and retains a negative container origin only as metadata 362ms (359ms|3ms)
+  [+] uses sample zero only when WAV does not report a presentation origin 27ms (25ms|2ms)
+  [+] rejects unsupported selected timestamp negative 20ms (19ms|1ms)
+  [+] rejects unsupported selected timestamp NaN 11ms (10ms|1ms)
+  [+] rejects unsupported selected timestamp infinity 14ms (13ms|1ms)
+  [+] rejects unsupported selected timestamp N/A 11ms (10ms|1ms)
+  [+] rejects unsupported selected timestamp locale decimal 10ms (9ms|1ms)
+  [+] rejects unsupported selected timestamp filter-like string 28ms (27ms|1ms)
+  [+] rejects unsupported selected timestamp JSON number 14ms (13ms|1ms)
+  [+] rejects unsupported selected timestamp boolean 21ms (19ms|2ms)
+  [+] rejects unsupported selected timestamp array 17ms (14ms|2ms)
+  [+] rejects unsupported selected timestamp beyond supported bound 19ms (17ms|1ms)
+  [+] rejects unsupported selected timestamp null for non-WAV 11ms (11ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for malformed JSON 16ms (15ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for root array 15ms (14ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing streams 16ms (15ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing selected stream 15ms (14ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for duplicate stream index 19ms (18ms|2ms)
+  [+] rejects malformed or ambiguous timeline metadata for string stream index 11ms (11ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing non-WAV origin 11ms (10ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for invalid container timestamp 14ms (13ms|1ms)
+
+Describing AC-043/045: preview commands bound one selected input and preserve mastering settings
+  [+] uses a bounded window and exact sample trim in en-US 86ms (83ms|3ms)
+  [+] uses a bounded window and exact sample trim in de-DE 21ms (20ms|1ms)
+  [+] uses a bounded window and exact sample trim in fi-FI 22ms (19ms|4ms)
+  [+] uses held pipe PCM and only comparison gain for a separately matched asset 14ms (13ms|1ms)
+  [+] adds the selected stream timestamp origin to the source-relative seek 17ms (9ms|8ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 7ms (6ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 4ms (3ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 4ms (3ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 4ms (3ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 1 channels and 16 bits 49ms (48ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 2 channels and 24 bits 6ms (5ms|1ms)
+
+Describing AC-043/045: CLI preview arguments fail before dependency and output side effects
+  [+] returns configuration exit 2 before native startup for start without preview 3.92s (3.92s|3ms)
+  [+] returns configuration exit 2 before native startup for duration without preview 3.48s (3.48s|1ms)
+  [+] returns configuration exit 2 before native startup for negative start 3.61s (3.61s|1ms)
+  [+] returns configuration exit 2 before native startup for empty start 3.65s (3.65s|1ms)
+  [+] returns configuration exit 2 before native startup for locale decimal start 4.08s (4.08s|1ms)
+  [+] returns configuration exit 2 before native startup for infinite start 4.91s (4.91s|1ms)
+  [+] returns configuration exit 2 before native startup for zero duration 3.82s (3.82s|1ms)
+  [+] returns configuration exit 2 before native startup for duration beyond maximum 4.12s (4.12s|1ms)
+  [+] returns configuration exit 2 before native startup for injected duration 3.83s (3.82s|10ms)
+  [+] returns configuration exit 2 before native startup for expression duration 3.1s (3.1s|1ms)
+Tests completed in 42.16s
+Tests Passed: 113, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 113 Pester passed, 0 skipped, 0 outside scope.

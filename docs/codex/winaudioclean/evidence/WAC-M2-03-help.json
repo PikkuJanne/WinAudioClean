@@ -1,0 +1,47 @@
+{
+  "source_sha256": "65023091c1452cd23c1c36a2b43ef31f8ae84bc1d0b1026f36a74e41c804de30",
+  "runs": [
+    {
+      "command": [
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$ErrorActionPreference='Stop'; $h=Get-Help ./WinAudioClean.ps1 -Full; if ($h.parameters.parameter.name -notcontains 'Preset' -or $h.parameters.parameter.name -notcontains 'CleaningOptions') { throw 'Missing cleaning help' }; $examples=$h.examples.example | Out-String; if ($examples -notmatch 'Preset Gentle' -or $examples -notmatch 'CleaningOptions') { throw 'Missing cleaning example' }; [pscustomobject]@{shell=$PSVersionTable.PSVersion.ToString(); parameters=@('Preset','CleaningOptions'); exampleCount=@($h.examples.example).Count; passed=$true} | ConvertTo-Json -Compress"
+      ],
+      "exit_code": 0,
+      "result": {
+        "shell": "5.1.26100.9444",
+        "parameters": [
+          "Preset",
+          "CleaningOptions"
+        ],
+        "exampleCount": 5,
+        "passed": true
+      }
+    },
+    {
+      "command": [
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$ErrorActionPreference='Stop'; $h=Get-Help ./WinAudioClean.ps1 -Full; if ($h.parameters.parameter.name -notcontains 'Preset' -or $h.parameters.parameter.name -notcontains 'CleaningOptions') { throw 'Missing cleaning help' }; $examples=$h.examples.example | Out-String; if ($examples -notmatch 'Preset Gentle' -or $examples -notmatch 'CleaningOptions') { throw 'Missing cleaning example' }; [pscustomobject]@{shell=$PSVersionTable.PSVersion.ToString(); parameters=@('Preset','CleaningOptions'); exampleCount=@($h.examples.example).Count; passed=$true} | ConvertTo-Json -Compress"
+      ],
+      "exit_code": 0,
+      "result": {
+        "shell": "7.6.5",
+        "parameters": [
+          "Preset",
+          "CleaningOptions"
+        ],
+        "exampleCount": 5,
+        "passed": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (29 files; shell 5.1.26100.9444).
+Static gate passed; 126 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 4 files.
+Discovery found 123 tests in 421ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Loudness.Tests.ps1'
+Describing AC-037: Accurate passes share the selected signal and invariant measured values
+  [+] keeps Original choice 1, 1 channels, Mono=False, selected stream 5 in en-US 418ms (366ms|53ms)
+  [+] keeps Original choice 1, 2 channels, Mono=False, selected stream 5 in en-US 54ms (53ms|2ms)
+  [+] keeps Original choice 1, 2 channels, Mono=True, selected stream 5 in en-US 59ms (54ms|5ms)
+  [+] keeps Original choice 2, 1 channels, Mono=False, selected stream 5 in en-US 36ms (34ms|2ms)
+  [+] keeps Original choice 2, 2 channels, Mono=False, selected stream 5 in en-US 35ms (33ms|2ms)
+  [+] keeps Original choice 2, 2 channels, Mono=True, selected stream 5 in en-US 44ms (42ms|2ms)
+  [+] keeps Original choice 1, 1 channels, Mono=False, selected stream 5 in de-DE 54ms (53ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=False, selected stream 5 in de-DE 36ms (34ms|2ms)
+  [+] keeps Original choice 1, 2 channels, Mono=True, selected stream 5 in de-DE 34ms (33ms|1ms)
+  [+] keeps Original choice 2, 1 channels, Mono=False, selected stream 5 in de-DE 40ms (39ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=False, selected stream 5 in de-DE 38ms (36ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=True, selected stream 5 in de-DE 31ms (29ms|1ms)
+  [+] keeps Original choice 1, 1 channels, Mono=False, selected stream 5 in fi-FI 30ms (29ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=False, selected stream 5 in fi-FI 33ms (32ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=True, selected stream 5 in fi-FI 58ms (56ms|3ms)
+  [+] keeps Original choice 2, 1 channels, Mono=False, selected stream 5 in fi-FI 53ms (50ms|2ms)
+  [+] keeps Original choice 2, 2 channels, Mono=False, selected stream 5 in fi-FI 53ms (51ms|2ms)
+  [+] keeps Original choice 2, 2 channels, Mono=True, selected stream 5 in fi-FI 56ms (53ms|3ms)
+  [+] measures the frozen final WAV through pipe 0 without reapplying conversion or cleaning 19ms (17ms|2ms)
+  [+] rejects an altered or duplicated terminal normalization filter 44ms (41ms|3ms)
+  [+] rejects an altered or duplicated terminal normalization filter 5ms (4ms|1ms)
+  [+] rejects an altered or duplicated terminal normalization filter 4ms (3ms|1ms)
+
+Describing AC-039: loudnorm diagnostics have a bounded strict schema
+  [+] extracts one real measurement block amid native diagnostics and unrelated braces 22ms (18ms|3ms)
+  [+] accepts JSON numbers without using the local decimal separator 14ms (12ms|2ms)
+  [+] rejects NaN without treating it as silence or short audio 11ms (10ms|1ms)
+  [+] rejects Infinity without treating it as silence or short audio 5ms (4ms|1ms)
+  [+] rejects unpaired negative infinity without treating it as silence or short audio 5ms (4ms|1ms)
+  [+] rejects unpaired infinite offset without treating it as silence or short audio 9ms (8ms|1ms)
+  [+] rejects overflow exponent without treating it as silence or short audio 51ms (50ms|1ms)
+  [+] rejects comma decimal without treating it as silence or short audio 8ms (7ms|1ms)
+  [+] rejects thousands separator without treating it as silence or short audio 6ms (4ms|2ms)
+  [+] rejects out of range integrated loudness without treating it as silence or short audio 15ms (7ms|8ms)
+  [+] rejects out of range peak without treating it as silence or short audio 30ms (20ms|10ms)
+  [+] rejects negative range without treating it as silence or short audio 13ms (7ms|6ms)
+  [+] rejects positive threshold without treating it as silence or short audio 11ms (8ms|3ms)
+  [+] rejects out of range offset without treating it as silence or short audio 11ms (8ms|2ms)
+  [+] rejects unsupported normalization type without treating it as silence or short audio 36ms (32ms|4ms)
+  [+] rejects array without treating it as silence or short audio 21ms (15ms|6ms)
+  [+] rejects null without treating it as silence or short audio 16ms (13ms|3ms)
+  [+] rejects missing input_i even on short input 15ms (13ms|2ms)
+  [+] rejects missing input_tp even on short input 5ms (3ms|1ms)
+  [+] rejects missing input_lra even on short input 5ms (4ms|2ms)
+  [+] rejects missing input_thresh even on short input 5ms (3ms|1ms)
+  [+] rejects missing output_i even on short input 9ms (6ms|2ms)
+  [+] rejects missing output_tp even on short input 7ms (5ms|2ms)
+  [+] rejects missing output_lra even on short input 5ms (4ms|1ms)
+  [+] rejects missing output_thresh even on short input 7ms (5ms|2ms)
+  [+] rejects missing normalization_type even on short input 5ms (3ms|1ms)
+  [+] rejects missing target_offset even on short input 4ms (3ms|1ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 18ms (17ms|2ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 8ms (6ms|2ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 10ms (8ms|2ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 9ms (5ms|3ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 8ms (6ms|2ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 8ms (7ms|2ms)
+
+Describing AC-038/039: final encoded input measurements control compliance and explicit fallback
+  [+] uses measured input fields, with peak precedence for target 47ms (42ms|5ms)
+  [+] uses measured input fields, with peak precedence for lower loudness boundary 14ms (12ms|2ms)
+  [+] uses measured input fields, with peak precedence for upper loudness boundary 9ms (8ms|1ms)
+  [+] uses measured input fields, with peak precedence for quiet 14ms (12ms|1ms)
+  [+] uses measured input fields, with peak precedence for hot 12ms (11ms|1ms)
+  [+] uses measured input fields, with peak precedence for peak failure 18ms (16ms|2ms)
+  [+] uses measured input fields, with peak precedence for both failures 15ms (13ms|2ms)
+  [+] records silence without passing infinities to render or output JSON 31ms (30ms|1ms)
+  [+] records short linear observation without passing infinities to render or output JSON 21ms (19ms|2ms)
+  [+] records below measurement gate without passing infinities to render or output JSON 21ms (20ms|1ms)
+  [+] records short peak violation without passing infinities to render or output JSON 27ms (26ms|1ms)
+  [+] marks a finite subsecond measurement too short only after checking all fields 11ms (8ms|2ms)
+  [+] retains finite high LRA for FFmpeg to evaluate linear feasibility 8ms (7ms|1ms)
+  [+] retains finite input_i below FFmpeg measured parameter bounds without passing it to pass two 17ms (14ms|3ms)
+  [+] retains finite input_tp below FFmpeg measured parameter bounds without passing it to pass two 18ms (16ms|2ms)
+  [+] retains finite input_thresh below FFmpeg measured parameter bounds without passing it to pass two 13ms (12ms|2ms)
+
+Describing AC-039: a native stage must succeed before its measurements can be used
+  [+] rejects start failure even when stderr contains valid measurements 38ms (32ms|6ms)
+  [+] rejects native failure even when stderr contains valid measurements 18ms (17ms|1ms)
+  [+] rejects missing exit even when stderr contains valid measurements 16ms (15ms|1ms)
+  [+] rejects timeout even when stderr contains valid measurements 15ms (13ms|1ms)
+  [+] rejects capture failure even when stderr contains valid measurements 10ms (9ms|1ms)
+  [+] rejects cleanup failure even when stderr contains valid measurements 14ms (13ms|1ms)
+  [+] records malformed successful-process diagnostics as measurement failure 25ms (24ms|1ms)
+  [+] distinguishes a successful silence measurement from native or parser failure 17ms (15ms|2ms)
+
+Describing AC-038/039: loudness warnings stay separate from publication and report completeness
+  [+] records a complete successful Accurate report with achieved values and separate requested targets 141ms (137ms|4ms)
+  [+] keeps a published quality warning at exit 7 while every report is complete 120ms (118ms|2ms)
+  [+] preserves the processing failure when quality and reporting warnings coexist 24ms (23ms|1ms)
+  [+] keeps Fast metrics unmeasured with no quality warning 29ms (27ms|2ms)
+
+Describing AC-029/038: support export keeps typed loudness facts and fixed labels only
+  [+] retains allowed loudness modes, observed type, fallback and finite metrics without native stages 53ms (49ms|4ms)
+  [+] retains approved unavailable metric reason not_measured 15ms (14ms|1ms)
+  [+] retains approved unavailable metric reason unavailable 10ms (8ms|1ms)
+  [+] retains approved unavailable metric reason too_short 11ms (9ms|1ms)
+  [+] retains approved unavailable metric reason silence 8ms (7ms|1ms)
+  [+] retains approved unavailable metric reason undefined_loudness 13ms (11ms|2ms)
+  [+] retains approved unavailable metric reason measurement_failed 7ms (6ms|1ms)
+  [+] retains approved unavailable metric reason nonfinite 8ms (7ms|1ms)
+  [+] retains approved unavailable metric reason not_numeric 7ms (6ms|1ms)
+  [+] rejects nonnumeric or nonfinite metric numeric string without accepting a supplied reason 14ms (13ms|1ms)
+  [+] rejects nonnumeric or nonfinite metric private string without accepting a supplied reason 8ms (7ms|1ms)
+  [+] rejects nonnumeric or nonfinite metric boolean without accepting a supplied reason 10ms (9ms|1ms)
+  [+] rejects nonnumeric or nonfinite metric NaN without accepting a supplied reason 8ms (7ms|1ms)
+  [+] rejects nonnumeric or nonfinite metric infinity without accepting a supplied reason 21ms (19ms|2ms)
+  [+] drops arbitrary labels and native-stage strings from a malicious report 14ms (13ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.LoudnessRuntime.Tests.ps1'
+Describing AC-039: measured stage failures preserve publication and warning contracts
+  [+] handles analysis-malformed with exit 4 and final publication False 2.7s (2.7s|6ms)
+  [+] handles analysis-exit with exit 4 and final publication False 3.14s (3.13s|2ms)
+  [+] handles analysis-start with exit 3 and final publication False 2.41s (2.41s|2ms)
+  [+] handles render-malformed with exit 7 and final publication True 2.5s (2.5s|2ms)
+  [+] handles final-malformed with exit 7 and final publication True 2.48s (2.48s|1ms)
+  [+] handles final-exit with exit 7 and final publication True 2.68s (2.68s|1ms)
+  [+] handles final-silence with exit 7 and final publication True 2.39s (2.39s|1ms)
+  [+] handles final-peak with exit 7 and final publication True 2.51s (2.51s|2ms)
+  [+] handles render-dynamic with exit 7 and final publication True 2.55s (2.55s|1ms)
+  [+] handles valid with exit 0 and final publication True 2.92s (2.92s|3ms)
+
+Running tests from '<repo>\tests\WinAudioClean.NativeInput.Tests.ps1'
+Describing AC-038/039: held-stream input transfer and native cleanup
+  [+] transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream 361ms (354ms|7ms)
+  [+] drains both output pipes after a large input transfer and retains every diagnostic character 151ms (150ms|1ms)
+  [+] rejects an unreadable caller stream before creating the child 37ms (35ms|2ms)
+  [+] retains a source read error and stops the child without disposing the caller stream 162ms (160ms|1ms)
+  [+] does not treat an early native exit zero as success when the input copy failed 146ms (145ms|1ms)
+  [+] times out an unread input pipe, drains diagnostics and preserves an unrelated process 1.14s (1.14s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preset.Tests.ps1'
+Describing AC-035/036: Original identity belongs to each unchanged processing profile
+  [+] names and versions the Original Raw profile separately from its mode 16ms (13ms|3ms)
+  [+] names and versions the Original Zoom profile separately from its mode 11ms (10ms|2ms)
+
+Describing AC-036: menu choices and direct invocations persist the effective Original preset
+  [+] records the Original Raw preset through menu 2.74s (2.73s|4ms)
+  [+] records the Original Zoom preset through menu 2.68s (2.68s|2ms)
+  [+] records the Original Raw preset through direct -Mode 2.76s (2.76s|2ms)
+  [+] records the Original Zoom preset through direct -Mode 2.67s (2.67s|1ms)
+
+Describing AC-029/036: support export does not invent or disclose preset versions
+  [+] keeps legacy unversioned identity and version fields out of the redacted projection 60ms (56ms|4ms)
+  [+] keeps current Original identity and version fields out of the redacted projection 18ms (15ms|2ms)
+  [+] keeps unknown private identity and version fields out of the redacted projection 14ms (13ms|2ms)
+Tests completed in 44.79s
+Tests Passed: 123, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 123 Pester passed, 0 skipped, 0 outside scope.

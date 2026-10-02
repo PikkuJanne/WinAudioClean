@@ -307,3 +307,174 @@ by the next task, WAC-M2-01, together with Original preset naming/versioning.
 After clean live synchronization, begin M2-01 separately on the inspected M2
 feature branch, stacked on M1 while its draft PR is unmerged. No merge, release,
 default-sound promotion, security change or deployment approval is added.
+
+### 2026-10-02 — WAC-M2-01 claims and Original identity
+
+D27. Name the existing Raw/Zoom filters Original, stable ID `original`, preset
+version `1.0.0`. Preserve every baseline filter value and its order. Both
+existing choices select Original; mode, optional mono and encoder format remain
+separate settings. No new preset selector or default-sound promotion is added.
+
+The selected processing profile supplies identity to version 1 JSON, human
+reports and the retained summary. Application version `2.3` remains separate;
+`presetVersionReason` is now null. Earlier M1 reports remain readable with their
+null/not_versioned values. Redacted diagnostic exports continue to omit all
+free-form identity/version fields. No report schema bump is needed for these
+additive fields; no historical report is rewritten.
+
+README, working comment-based help and menu descriptions use the official
+FFmpeg parameter meanings. -12 LUFS/-1.5 dBTP are chosen targets; independent
+loudness compliance remains NOT_MEASURED. No universal broadcast, exact-result,
+Adobe-equivalence or percentage-success claim is supported. Original identity
+does not promise identical output across builds or formats. Keep the separate
+M1-05 encoder change and unreviewed speech quality explicit.
+
+Evidence: `evidence/WAC-M2-01.md`. The next task is M2-02 measured loudness;
+no new optional audio processing, merge, release or deployment is included.
+
+### 2026-10-02 — WAC-M2-02 optional measured loudness
+
+D28. Keep `-LoudnessMode Fast` as the default with the exact Original filter
+strings and render arguments. `Accurate` measures the selected stream after
+explicit channel conversion, Original cleaning where selected, and dynamic
+leveling. Repeat that deterministic prechain for rendering. Accurate alone
+pins its pre-normalization rate to 192 kHz so loudnorm mode negotiation cannot
+change the input rate between passes. Use I=-12, TP=-1.5 and LRA=7 consistently,
+validated invariant measured parameters, and target_offset as offset.
+
+Record the render's actual normalization_type. Recognized undefined values or
+valid measurements outside accepted parameter bounds use an explicit fallback;
+malformed analysis stops processing. No arbitrary NaN/infinity reaches JSON or
+filter arguments. No retry loop attempts to force target compliance.
+
+Independently inspect encoded PCM through the existing held validation stream
+before no-replace publication. Do not reopen its path or weaken its lock.
+The wrapper copies binary input asynchronously, drains both output pipes,
+closes child stdin at EOF, and retains caller ownership. Accurate stages use
+finite duration-based deadlines; Fast retains its existing unlimited render.
+
+Final input statistics determine compliance: integrated loudness within
+0.5 LU, true peak <= -1.3 dBTP, with known peak violations checked first.
+LRA remains informational. Subsecond I/LRA are null with `too_short`; retain
+finite true peak. Silence and undefined loudness have separate fixed reasons.
+Failed final measurement is FAILED, never merely unmeasurable or compliant.
+
+Retain valid PCM with WARNING/7 for normalization fallback, unavailable render
+diagnostics or a non-passing final check. Processing validity and report-writing
+completeness stay separate. Add typed fields to schema 1; support export copies
+only finite numbers, booleans and fixed enums/reasons. Fast stays NOT_MEASURED.
+Evidence: `evidence/WAC-M2-02.md`. This does not approve a new default sound or
+certify speech quality. The next task is optional gentle cleaning, WAC-M2-03.
+
+### 2026-10-02 — WAC-M2-03 optional Gentle candidate and typed cleaning
+
+D29. Keep Original `original`/`1.0.0` and the exact no-extra-options Raw/Zoom
+graphs as defaults. Add explicit Raw-only `-Preset Gentle`, ID `gentle`, version
+`0.1.0`, marked experimental: declip/declick/gate off, denoise on, highpass 60 Hz,
+noise floor -35 dB and noise reduction 6 dB. Leveling, targets, export and
+channel policy remain separate. The candidate name establishes no listening
+advantage. Zoom rejects Gentle or any nonempty cleaning override.
+
+Accept `-CleaningOptions` only as typed allowlisted Boolean toggles and finite
+numeric scalars within the documented bounds. Reject unknown/injected keys,
+strings, booleans in numeric fields, collections, scriptblocks and null values;
+validate inactive values too. Compose the fixed stage order and invariant
+numeric arguments. Preserve the rounded legacy `agate` literals at nominal
+-45/-25 dB and Original's implicit `afftdn nr` default; reproduction still needs
+the exact graph and FFmpeg build. Accurate repeats the validated selected
+prechain in both passes while retaining its existing held-stream final check.
+
+Report schema 1 adds `presetExperimental`, `presetCustomized` and typed
+`settings.cleaning` (null for Zoom). A nonempty override marks customization
+even if values match defaults; the ID/version continues to identify the base
+candidate. Effective settings and exact filters describe the actual customized
+run. The redacted diagnostic export omits these new settings and identity flags.
+Hashtable CLI examples use a direct PowerShell call; no saved configuration or
+new menu/launcher selector is included.
+
+AC-042 records listening as unperformed because no owner-supplied,
+permission-cleared corpus was supplied. The candidate record retains exact
+base settings and a reviewer checklist; speech render settings, revision,
+playback setup and results remain pending. Synthetic checks cannot approve
+words, consonants, breaths, voice character or artifacts. Evidence:
+`evidence/WAC-M2-03.md` and `evidence/WAC-M2-03-listening.md`.
+No default-sound promotion, merge, release, deployment or security-policy
+approval is added.
+
+### 2026-10-02 — WAC-M2-04 bounded excerpts and comparison gain
+
+D30. Add explicit local `-Preview` through an optional sibling helper,
+retaining the full-render path and Original defaults. Start/duration default
+to 0/45 seconds; the default clips to remaining selected audio, while an
+explicit positive duration must fit and be <=60 seconds. Strict invariant
+decimal ranges become exact 48 kHz sample positions. Process at most five
+seconds of pre/post context, then trim both excerpts to matching positions
+and frames. Accurate analyzes that bounded context rather than the whole
+recording. No preview state is saved and no playback/full render starts
+implicitly.
+
+Ranges count from the selected audio's beginning, not the container's first
+track. Use a separately probed selected-stream origin and absolute timestamp
+seeks; WAV without timestamps uses sample zero. Negative or missing non-WAV
+origins fail closed pending a separately verified seek policy.
+
+Retain declared timestamp resolution and a conservative selection bound of
+`ceil(48000*timeBaseSeconds)+1` samples, no more than 480 samples/10 ms;
+unknown/coarse non-WAV clocks fail closed. Container source-frame selection
+is verified within that bound rather than asserted universally exact. The
+observed +8 sample middle-seek difference is recorded in preliminary/final
+synthetic evidence, separately from preserved graph delay.
+
+Preserve selected graph latency with zero compensation. Pinned 9.0.2 marker
+checks show Original/Gentle Raw at +1200 samples (25 ms), Zoom and the tested
+all-cleaning-stages-disabled Raw at zero. Keep known delay metadata and
+uncalibrated custom-graph/boundary limits explicit. Exact bounded-window
+reference comparisons establish no additional shift; they do not approve
+source/processed waveform zero-lag or full-render equivalence.
+
+Keep Original/Processed and CompareOriginal/CompareProcessed as four owned
+assets. Measure held encoded excerpts, choose a common lower integrated
+level constrained by -1.7 dBTP planning headroom, and apply only attenuation
+to the comparison pair. Re-measure; allow <=0.2 LU difference and require
+finite TP<=-1.5 dBTP. Undefined/short/silent integrated matching is explicitly
+unavailable, with any known peak controlling attenuation. Peak failure rolls
+back owned assets; matching/fallback warnings remain visible. No change to
+mastering/full-render targets is implied.
+
+Use exact sample-count validation, four-asset capacity estimates, retained
+source/output handles, no-replace publication and owned rollback. Detailed
+preview schema 1 records range/context/graphs/gains/stages and encoded-asset
+metrics separately from ordinary full-render reports. Nothing is uploaded.
+After all four valid assets are published, report-writing failure retains
+them with WARNING/7 and explicit incomplete-report diagnostics.
+
+Retain the existing measurement parser's integrated/threshold upper bound
+of 0. The preliminary 0.97-amplitude square reported +0.51 LUFS/+1.80 dBTP
+and failed closed; preserve that evidence. Use a 0.8-amplitude high-peak
+fixture within the accepted domain for the final attenuation checks. This
+is not support or certification of positive-integrated-loudness inputs;
+carry the inherited limitation into subsequent edge-case validation.
+Private speech listening remains unperformed; synthetic mechanics are not
+approval to promote a default sound. No merge/release/deployment/security
+approval is added. Evidence: `evidence/WAC-M2-04-latency.json` and the final
+task evidence/media matrix.
+
+### 2026-10-02 — WAC-M2-05 objective gate and pending human review
+
+D31. Accept the implemented M2 mechanics/format gate and same-input/build
+report-driven reproduction. Runtime, Original defaults and experimental Gentle
+settings remain unchanged from M2-04. Fast unmeasured status, Accurate fallback,
+target misses, short/silent/undefined metrics and positive-LUFS parser rejection
+retain explicit classifications; numeric success is not universal target compliance.
+
+No cleared speech corpus or attributable listening result was supplied. AC-047
+accepts the integrity of that pending record, not an audition or owner approval.
+Default promotion still requires exact settings/evidence/revision approval under
+D07. Optional missing candidate review does not block M3 reliability/preferences.
+The new reproduction utility proves selected recorded configurations with pinned
+input/report/source/tool hashes and exact decoded PCM, not arbitrary cross-build
+or high-precision formatter compatibility. Positive meter domain, codec seek,
+calibration and manual/stress limits remain explicit. Preserve all earlier
+evidence and M1-02 history; no merge/release/security/deployment approval is added.
+Evidence: `evidence/WAC-M2-05.md`, source/classification/reproduction manifests
+and `evidence/WAC-M2-05-listening.md`. Next: WAC-M3-01, separately synchronized.

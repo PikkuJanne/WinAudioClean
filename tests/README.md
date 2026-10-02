@@ -364,3 +364,217 @@ exhaustion or hardware-failure recovery. Do not commit raw audio or reports.
 commands, environment, source identities and limits. The
 [file-safety review](../docs/codex/winaudioclean/evidence/WAC-M1-07-review.md)
 maps runtime writes and cleanup to the relevant tests.
+
+## Original preset identity and compatibility (WAC-M2-01)
+
+`WinAudioClean.Preset.Tests.ps1` checks the unchanged Original profiles and
+preset/report identity through Raw/Zoom menu and direct invocation paths. Its
+isolated menu copies override only host-interactivity detection and Read-Host;
+profile selection, native command construction and persisted reporting run
+normally. Legacy, current and arbitrary identity strings stay omitted from
+redacted diagnostic exports. This does not simulate Explorer drag-and-drop.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preset.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preset.Tests.ps1
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OriginalPreset.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+The optional comparison harness uses existing local tools and deterministic
+synthetic fixtures. It compares both modes in both shells against direct FFmpeg
+references built from `BASELINE.json`: 48 kHz PCM16 stereo, 44.1 kHz mono input,
+short input, silence, and stereo PCM24. Outputs must match decoded PCM bytes
+at zero lag with identical encoding settings and the same FFmpeg build. This
+establishes preservation of tested filter behavior, not speech quality or
+identical files across FFmpeg builds or the historical implicit encoder.
+Generated media/reports remain under ignored `.wac-local`; only sanitized
+summary evidence belongs in Git.
+
+When Python starts child shells on Windows, remove inherited module-path keys
+case-insensitively (`key.upper() != 'PSMODULEPATH'`); `os.environ.copy()` uses
+uppercase keys. This avoids PS7 module paths breaking PS5.1 cmdlet discovery.
+See [M2-01 evidence](../docs/codex/winaudioclean/evidence/WAC-M2-01.md) for actual
+checks and the preserved initial environment failure.
+
+## Measured loudness and held-stream input (WAC-M2-02)
+
+Three new suites cover the opt-in Accurate path:
+
+- `WinAudioClean.Loudness.Tests.ps1`: identical Raw/Zoom prechains, selected
+  streams and mono policy; invariant measured arguments; strict JSON parsing;
+  short/silent/out-of-range fallback; final input metrics and peak precedence;
+  warning/report status and redacted fields.
+- `WinAudioClean.LoudnessRuntime.Tests.ps1`: isolated application copies inject
+  native-stage faults while the real runtime controls ordering, publication and
+  persisted reports. It checks fatal first-pass failures, render/final diagnostic
+  warnings, dynamic fallback and successful completion.
+- `WinAudioClean.NativeInput.Tests.ps1`: input larger than a pipe buffer, EOF,
+  both diagnostic streams, unreadable/failing input, early zero-exit children,
+  blocked-input timeout and preservation of an unrelated process. The caller
+  stream remains open and the wrapper returns one result in PS5.1 and PS7.
+
+Run focused suites first in each supported shell; for example:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Loudness.Tests.ps1
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.LoudnessRuntime.Tests.ps1
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.NativeInput.Tests.ps1
+```
+
+Repeat those commands with `powershell.exe` for PS5.1. After focused checks
+stabilize, run one cumulative `-Level Full` per shell using the commands above.
+Full includes these suites; the real-FFmpeg harness remains a separate check.
+
+Use existing local FFmpeg/ffprobe binaries for the complete measured matrix:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-MeasuredLoudness.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-02/measured-full-1
+python -X utf8 scripts/Test-OriginalPreset.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-02/fast-baseline-1
+```
+
+Choose fresh output directories. The measured harness defaults to all **16
+cases**: eight configurations in PS5.1/en-US and PS7/de-DE. Synthetic fixtures
+cover a selected second stream, Raw/Zoom, mono/stereo, explicit downmix, PCM16/24,
+high LRA, restricted peak headroom, silence and subsecond audio. It inspects
+encoded PCM and independently measures the published WAV, verifies all three
+stage commands/measurements, checks the documented compliance/fallback outcomes
+and compares decoded samples across shells/locales. Eligible cases must meet
+the declared integrated/peak tolerances. Source and fixture hashes must remain
+unchanged during the run. Missing shells or failed checks make the run fail.
+
+`--case <case-id>` (repeatable) and `--shell ps51|ps7` limit investigative runs.
+Their recorded `scope.full_matrix` is false; a passing scoped run is not full
+AC-037/038/039 acceptance. Keep preliminary runs and their exact scope separate
+from the final unfiltered 16-case matrix. The Original comparison harness also
+requires Fast to remain unmeasured with null Accurate stages and no loudness
+warning, alongside its existing exact-PCM comparison against Original.
+
+The native wrapper uses binary stdin only for the held final WAV, retains caller
+ownership and closes child stdin at EOF. Accurate stage deadlines are duration
+based with a two-minute minimum; Fast retains its unlimited total render time.
+The development harness has its own bounded child-process timeout and kills
+only the owned harness process tree if it expires. Fixture tests and generated
+audio establish mechanics, not listening approval, long-file/memory stress or
+full >4 GB output. Keep media, raw local reports and private paths out of Git;
+only reviewed, sanitized evidence belongs in the task record.
+
+## Optional Gentle cleaning and validated controls (WAC-M2-03)
+
+`WinAudioClean.Cleaning.Tests.ps1` covers finite typed options, both numeric
+bounds, injected/unknown settings, stage toggles, locale serialization and
+exact Original defaults. It checks the versioned effective settings, Accurate
+profile reconstruction, candidate/customization reports and diagnostic redaction.
+Entry checks reject invalid cleaning configuration before native execution or
+destination creation. Run this suite in both supported shells before Full:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Cleaning.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Cleaning.Tests.ps1
+```
+
+Use fresh ignored directories for the real FFmpeg harnesses:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-GentleCleaning.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-03/gentle-final
+python -X utf8 scripts/Test-OriginalPreset.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-03/original-final
+```
+
+The Gentle matrix uses deterministic synthetic input in PS5.1/en-US and
+PS7/de-DE. It checks selected streams, mono conversion, Fast/Accurate processing,
+custom stage toggles and boundary/fractional options. An isolated app copy
+records native arguments through a reviewed wrapper that delegates to the
+unchanged runtime. Accurate repeats the validated prechain and meters the held
+encoded output. Independent published-file checks verify reports; Fast cases
+also compare decoded PCM with direct filter references. The separate Original
+matrix verifies unchanged default PCM against the frozen baseline.
+
+These checks establish processing mechanics on the recorded build. Speech
+listening remains unperformed without cleared material; use the
+[candidate record](../docs/codex/winaudioclean/evidence/WAC-M2-03-listening.md)
+for the pending review. Neither synthetic exports nor the Gentle name approve
+voice quality or a default sound change.
+
+## Bounded preview and separate comparison (WAC-M2-04)
+
+`WinAudioClean.Preview.Tests.ps1` tests invariant range validation, sample
+rounding, bounded context, selected-track timestamps, fractional attenuation
+and exact output frames. Fault cases use real owned file transactions with
+controlled native results: cancellation, failed renders/meters, a short output,
+an excessive comparison peak, a publication collision and a report failure.
+They check source/settings preservation, foreign-file retention, owned rollback
+and completed assets retained on a reporting warning. Run both shells:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1
+```
+
+Run the real FFmpeg matrix separately, using a fresh ignored output directory:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-Preview.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-04/preview-final
+```
+
+The matrix covers start/middle/end, default/fractional intervals, short/silent
+input, a shifted selected track, Original/Gentle/custom cleaning, Fast/Accurate,
+channel conversion and encoding including small RF64. Original PCM must match
+an independently decoded source-frame slice exactly at zero offset for WAV;
+container cases record any exact sample offset within the declared timestamp
+precision. Processed PCM matches the bounded filter reference exactly, and
+comparison PCM matches gain-only references. Published-file meters check
+the reported comparison target, matching tolerance and true-peak ceiling.
+Native argument capture proves the application bounds the source input and
+meters held streams; intentional full decoding occurs only in the evidence
+harness. Locale pairs must produce identical PCM and all tested sources and
+fixtures must remain unchanged. `--case` and `--shell` select investigative
+runs; their partial scope cannot establish the complete acceptance matrix.
+
+Five-second context and preserved graph delay can differ from a full render.
+These synthetic checks do not establish listening quality, full-recording
+loudness, running-render Ctrl+C behavior or independent meter calibration.
+Playback is explicit. Keep generated audio and raw local reports out of Git.
+The inherited loudness parser rejects integrated values above 0 LUFS. The
+preliminary hot square exposed that limit; the final lower-amplitude peak-guard
+case does not establish support for positive integrated source loudness.
+
+## M2 objective gate and report reproduction (WAC-M2-05)
+
+Run the Preset, Loudness, LoudnessRuntime, NativeInput, Cleaning, Preview and
+Encoding suites in both shells before the unfiltered Full gate. The Loudness
+suite also checks that positive input/output integrated values and positive
+thresholds remain explicit parser failures, including on short input; they
+must not be relabeled as silence or unavailable measurements.
+
+Run all five real-media matrices separately: `Test-OriginalPreset.py`,
+`Test-MeasuredLoudness.py`, `Test-GentleCleaning.py`, `Test-Preview.py` and
+`Test-OutputEncoding.py`. Use fresh ignored output directories and the same
+pinned FFmpeg/ffprobe. Omit investigative case/shell/prepare-only filters.
+Passing mechanics does not mean every export reaches the loudness targets:
+Fast is NOT_MEASURED, and Accurate fallback, target misses and undefined
+metrics retain their documented warnings and reasons.
+
+`Test-AudioReproduction.py` is a development-only check of reproduction from
+local reports, using deterministic synthetic inputs and the installed build:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-AudioReproduction.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-05/reproduction-final
+```
+
+It checks preset identity/effective settings, processing graphs, stream/channel
+selection, encoding, Accurate measurements and preview range/gains against
+the report before direct same-build replay. Decode and compare the reproduced
+PCM and frame counts; retain input, report, source and tool hashes.
+The matrix covers its selected configurations; reconstructed literals and
+graphs must agree exactly before replay. It does not promise formatter parity
+for every highly precise custom value or independently revalidate every
+preview range-policy field; those policy checks remain in the preview suite.
+Ordinary reports do not embed a source revision or input/executable hashes, so the
+evidence harness supplies that provenance separately. Reproduction depends
+on the same retained input and build; it does not certify different builds,
+speech quality, playback or default promotion. Keep audio and raw reports
+ignored. Record listening status separately from objective acceptance.
