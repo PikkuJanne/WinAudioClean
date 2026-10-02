@@ -30,6 +30,18 @@ execution with Smart App Control On. See
 The child records its original arguments without consuming configuration flags.
 Configure it with inherited environment variables; callers must restore them.
 
+When the executable is named `ffmpeg.exe` or `ffprobe.exe`, dependency inspection
+commands have separate behavior. `-version` emits a fixture version; FFmpeg
+`-filters` lists all original Raw/Zoom filters; ffprobe `-show_entries` emits one
+valid mono PCM audio stream with absolute index 0 at 48 kHz. These calls do not
+write a render argv record, output bytes or blocked-log directory, and do not
+consume generic render faults. Other executable names keep generic behavior.
+
+Inspection can be configured using the `WAC_TEST_VERSION_`, `WAC_TEST_FILTERS_`
+or `WAC_TEST_PROBE_` prefix followed by `STDOUT`, `STDERR`, `EXIT_CODE`, `SLEEP_MS`,
+`ARGV_PATH` or `PID_PATH`. These controls use the same meanings as the generic
+variables below; an absent inspection stdout uses the corresponding default.
+
 | Variable | Behavior |
 | --- | --- |
 | `WAC_TEST_ARGV_PATH` | Write actual argv as a UTF-8 JSON string array. |

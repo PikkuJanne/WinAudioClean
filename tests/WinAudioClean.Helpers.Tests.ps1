@@ -60,8 +60,9 @@ Describe 'Output naming and command construction preserve extraction behavior' -
     }
 
     It 'keeps paths and filters as separate arguments and disables native stdin' {
-        $arguments = Get-WacFfmpegArguments -InputPath 'C:\WAC input\speaker [1].wav' -FilterChain $rawFilters -OutputFile 'C:\WAC output\speaker [1]_Cleaned.wav'
-        $expected = @('-nostdin', '-i', 'C:\WAC input\speaker [1].wav', '-vn', '-af',
+        $arguments = Get-WacFfmpegArguments -InputPath 'C:\WAC input\speaker [1].wav' -FilterChain $rawFilters -OutputFile 'C:\WAC output\speaker [1]_Cleaned.wav' -AudioStreamIndex 3
+        $expected = @('-nostdin', '-protocol_whitelist', 'file', '-format_whitelist',
+            'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi', '-i', 'C:\WAC input\speaker [1].wav', '-map', '0:3', '-vn', '-af',
             $rawFilters, 'C:\WAC output\speaker [1]_Cleaned.wav', '-y', '-hide_banner', '-loglevel', 'error', '-stats')
         $arguments | Should -BeExactly $expected
     }
@@ -69,9 +70,10 @@ Describe 'Output naming and command construction preserve extraction behavior' -
     It 'characterizes the legacy overwrite flag pending transactional output work' {
         # WAC-M1-04 will replace this unsafe baseline. This does not authorize
         # overwriting recordings or prior exports, and no process runs here.
-        $arguments = Get-WacFfmpegArguments -InputPath 'input.wav' -FilterChain $zoomFilters -OutputFile 'output.wav'
-        $arguments[6] | Should -BeExactly 'output.wav'
-        $arguments[7] | Should -BeExactly '-y'
+        $arguments = Get-WacFfmpegArguments -InputPath 'input.wav' -FilterChain $zoomFilters -OutputFile 'output.wav' -AudioStreamIndex 0
+        $overwriteIndex = [Array]::IndexOf($arguments, '-y')
+        $overwriteIndex | Should -BeGreaterThan 0
+        $arguments[$overwriteIndex - 1] | Should -BeExactly 'output.wav'
     }
 }
 

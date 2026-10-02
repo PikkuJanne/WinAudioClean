@@ -54,6 +54,7 @@ BeforeAll {
             [IO.File]::Copy((Join-Path $launcherRepositoryRoot $fileName), (Join-Path $folder $fileName))
         }
         [IO.File]::Copy($launcherFixtureExecutable, (Join-Path $folder 'ffmpeg.exe'))
+        [IO.File]::Copy($launcherFixtureExecutable, (Join-Path $folder 'ffprobe.exe'))
         $folder
     }
 

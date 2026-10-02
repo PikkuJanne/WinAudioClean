@@ -157,22 +157,33 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $app = Join-Path $scratch 'WinAudioClean.ps1'
         Copy-Item -LiteralPath $scriptPath -Destination $app
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $inputFile = Join-Path $scratch $FileName
         [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
         $outputDirectory = Join-Path $scratch 'output [1] & %PATH% !'
         $argvPath = Join-Path $scratch 'argv.json'
+        $probeArgvPath = Join-Path $scratch 'probe-argv.json'
         $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -inputPath {1} -OutputDirectory {2} -Mode Zoom -NonInteractive' -f
             (ConvertTo-WacTestQuotedArgument $app), (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument ($outputDirectory + '\'))
         $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables @{
             WAC_TEST_ARGV_PATH = $argvPath; WAC_TEST_EXIT_CODE = '0'; WAC_TEST_FFMPEG_OUTPUT = '1'
+            WAC_TEST_PROBE_ARGV_PATH = $probeArgvPath
         }
         $result.ExitCode | Should -Be 0 -Because ("stdout: {0}; stderr: {1}" -f $result.StandardOutput, $result.StandardError)
         $received = Get-Content -Raw -LiteralPath $argvPath -Encoding UTF8 | ConvertFrom-Json
-        $received[2] | Should -BeExactly $inputFile
+        $probeArguments = Get-Content -Raw -LiteralPath $probeArgvPath -Encoding UTF8 | ConvertFrom-Json
+        $probeArguments | Should -BeExactly @('-v', 'error', '-protocol_whitelist', 'file', '-format_whitelist',
+            'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi', '-show_entries',
+            'stream=index,codec_type,codec_name,channels,channel_layout,sample_rate:stream_tags=language,title',
+            '-of', 'json', '-i', $inputFile)
+        $inputIndex = [Array]::IndexOf($received, '-i')
+        $inputIndex | Should -BeGreaterOrEqual 0
+        $received[$inputIndex + 1] | Should -BeExactly $inputFile
+        $outputFile = $received[[Array]::IndexOf($received, '-y') - 1]
         # The final file remains inside the literal destination, regardless of
         # trailing separators; its actual native argv is what is checked here.
-        [IO.Path]::GetFullPath([IO.Path]::GetDirectoryName($received[6])).TrimEnd('\') | Should -BeExactly $outputDirectory
-        [IO.File]::ReadAllBytes($received[6]).Count | Should -Be 8
+        [IO.Path]::GetFullPath([IO.Path]::GetDirectoryName($outputFile)).TrimEnd('\') | Should -BeExactly $outputDirectory
+        [IO.File]::ReadAllBytes($outputFile).Count | Should -Be 8
         [IO.File]::ReadAllBytes($inputFile).Count | Should -Be 3
         $result.StandardOutput | Should -Match 'DONE: SUCCESS'
     }
@@ -190,18 +201,18 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
         $outputDirectory = Join-Path $scratch 'output'
         if ($BrokenExecutable) { [IO.File]::WriteAllText((Join-Path $scratch 'ffmpeg.exe'), 'invalid executable') }
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -inputPath {1} -OutputDirectory {2} -Mode Zoom -NonInteractive' -f
             (ConvertTo-WacTestQuotedArgument $app), (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument $outputDirectory)
         $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables @{ PATH = '' }
         $result.ExitCode | Should -Be 3
         $result.StandardError | Should -Not -BeNullOrEmpty
         $result.StandardOutput | Should -Not -Match 'DONE: SUCCESS|Enter selection'
-        if ($BrokenExecutable) {
-            $result.StandardOutput | Should -Match 'DONE: FAILED'
-            $log = Get-Content -Raw -LiteralPath (Join-Path $outputDirectory 'WinAudioClean_Log.txt')
-            $log | Should -Match 'Native Exit Code: not started; Application Exit Code: 3'
-        }
-        else { $result.StandardError | Should -Match 'FFmpeg.exe not found' }
+        # Inspection now rejects the dependency before the rendering/reporting
+        # stage, so no render report should suggest that cleaning was attempted.
+        $result.StandardOutput | Should -Not -Match 'Running WinAudioClean|DONE:'
+        Test-Path -LiteralPath (Join-Path $outputDirectory 'WinAudioClean_Log.txt') | Should -BeFalse
+        if (-not $BrokenExecutable) { $result.StandardError | Should -Match 'ffmpeg.exe.*not found|not found.*ffmpeg.exe' }
         @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav').Count | Should -Be 0
     }
 
@@ -215,6 +226,7 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $app = Join-Path $scratch 'WinAudioClean.ps1'
         Copy-Item -LiteralPath $scriptPath -Destination $app
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $inputFile = Join-Path $scratch 'meeting [draft].wav'
         [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
         $outputDirectory = Join-Path $scratch 'output [literal]'
@@ -240,11 +252,15 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $filters = 'adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,' + $filters
             $modeName = 'RAW (Clean+Level)'
         }
-        $argv.Count | Should -Be 12
+        $argv.Count | Should -Be 18
         $argv[0] | Should -BeExactly '-nostdin'
-        $argv[2] | Should -BeExactly $inputFile
-        $argv[5] | Should -BeExactly $filters
-        [IO.Path]::GetDirectoryName($argv[6]) | Should -BeExactly $outputDirectory
+        $argv[[Array]::IndexOf($argv, '-protocol_whitelist') + 1] | Should -BeExactly 'file'
+        $argv[[Array]::IndexOf($argv, '-format_whitelist') + 1] | Should -BeExactly 'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi'
+        $argv[[Array]::IndexOf($argv, '-i') + 1] | Should -BeExactly $inputFile
+        $argv[[Array]::IndexOf($argv, '-map') + 1] | Should -BeExactly '0:0'
+        $argv[[Array]::IndexOf($argv, '-af') + 1] | Should -BeExactly $filters
+        $outputFile = $argv[[Array]::IndexOf($argv, '-y') - 1]
+        [IO.Path]::GetDirectoryName($outputFile) | Should -BeExactly $outputDirectory
         $status = if ($expectedExit -eq 0) { 'SUCCESS' } elseif ($expectedExit -eq 7) { 'WARNING' } else { 'FAILED' }
         $result.StandardOutput | Should -Match "DONE: $status"
         if ($expectedExit -ne 0) { $result.StandardOutput | Should -Not -Match 'DONE: SUCCESS' }
@@ -256,8 +272,13 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $log | Should -Match "Native Exit Code: $ProcessExitCode; Application Exit Code: $expectedExit"
             $log | Should -Match 'Native stdout retained'
             $log | Should -Match 'Native stderr retained'
+            $log | Should -Match ('EXECUTABLE\s+: ' + [regex]::Escape((Join-Path $scratch 'ffmpeg.exe')))
+            $log | Should -Match ('FFPROBE\s+: ' + [regex]::Escape((Join-Path $scratch 'ffprobe.exe')))
+            $log | Should -Match 'FFMPEG VERSION\s+: ffmpeg version 9\.0\.2-wac-fixture'
+            $log | Should -Match 'FFPROBE VERSION\s*: ffprobe version 9\.0\.2-wac-fixture'
+            $log | Should -Match 'AUDIO STREAM\s+: 0 \(absolute index; map 0:0\)'
         }
-        if ($ProcessExitCode -eq 0) { [IO.File]::ReadAllBytes($argv[6]).Count | Should -Be 8 }
+        if ($ProcessExitCode -eq 0) { [IO.File]::ReadAllBytes($outputFile).Count | Should -Be 8 }
         [IO.File]::ReadAllBytes($inputFile).Count | Should -Be 3
     }
 }

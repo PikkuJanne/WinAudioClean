@@ -5,7 +5,7 @@ Automated Audio Cleaning & Leveling Droplet
 Author: Janne Vuorela
 Target OS: Windows 10/11
 PowerShell: Windows PowerShell 5.1 (built-in) or PowerShell 7+
-Dependencies: FFmpeg.exe (must be in the same folder), .bat wrapper for drag-and-drop
+Dependencies: FFmpeg.exe and ffprobe.exe (explicit paths, sibling or PATH), .bat wrapper for drag-and-drop
 
 SYNOPSIS
     A "drop-and-forget" audio post-production tool.
@@ -48,10 +48,11 @@ MY INTENDED USAGE
 
 SETUP
     1) Create a folder (e.g., C:\Tools\WinAudioClean\).
-    2) Place these three files inside:
+    2) Place these four files inside:
         - WinAudioClean.ps1
         - WinAudioClean.bat
         - ffmpeg.exe (Download from gyan.dev or similar)
+        - ffprobe.exe (from the same distribution)
     3) (Optional) Create a shortcut to the .bat file on your Desktop.
 
 USAGE
@@ -62,6 +63,7 @@ USAGE
     B) Direct PowerShell
         - Open PowerShell.
         - Run: .\WinAudioClean.ps1 -inputPath "C:\Path\To\Audio.wav"
+        - Optional: -FfmpegPath/-FfprobePath for tool paths, -AudioStreamIndex for an absolute audio track index.
 
 NOTES
     - The Noise Gate settings use linear math, not decibels. This conversion is handled internally.
@@ -69,13 +71,13 @@ NOTES
     - Processing speed depends on CPU power and file length.
 
 LIMITATIONS
-    - Requires FFmpeg to be present, cannot run without it.
+    - Requires FFmpeg and ffprobe. Multiple audio tracks require a choice; unattended use requires -AudioStreamIndex.
     - The "Highpass" filter is set to 80Hz. Deep baritone voices might prefer 60Hz, but 80Hz is the safe standard.
     - Extremely noisy audio requires AI tools, which are outside the scope of this script.
 
 TROUBLESHOOTING
-    - "FFmpeg.exe not found!":
-        The script cannot see ffmpeg.exe. Ensure it is in the exact same folder as the .ps1 script.
+    - Dependency failure:
+        Supply explicit -FfmpegPath/-FfprobePath, put both tools next to the script, or add them to PATH.
     - Red "FAILED" text:
         Check the console output immediately above the failure message. FFmpeg usually prints the specific reason (e.g., corrupt input file).
 
@@ -89,6 +91,9 @@ param(
     [Parameter(Position = 0)][string]$inputPath,
     [string]$Mode,
     [string]$OutputDirectory = [Environment]::GetFolderPath('MyMusic'),
+    [string]$FfmpegPath,
+    [string]$FfprobePath,
+    [string]$AudioStreamIndex,
     [switch]$NonInteractive
 )
 
@@ -224,12 +229,165 @@ function Get-WacOutputPath {
 }
 
 function Get-WacFfmpegArguments {
-    param([string]$InputPath, [string]$FilterChain, [string]$OutputFile)
+    param([string]$InputPath, [string]$FilterChain, [string]$OutputFile,
+        [Parameter(Mandatory = $true)][ValidateRange(0, 2147483647)][int]$AudioStreamIndex)
 
     # Preserve filters/encoding and -y until the export-safety task. The native
     # wrapper quotes each argument; no path is interpolated into shell code.
-    @('-nostdin', '-i', $InputPath, '-vn', '-af', $FilterChain, $OutputFile,
+    @('-nostdin') + (Get-WacLocalMediaArguments) + @('-i', $InputPath,
+        '-map', ('0:' + $AudioStreamIndex.ToString([Globalization.CultureInfo]::InvariantCulture)), '-vn', '-af', $FilterChain, $OutputFile,
         '-y', '-hide_banner', '-loglevel', 'error', '-stats')
+}
+
+function Get-WacLocalMediaArguments {
+    # Apply before the input in BOTH tools. Playlists/concat/device demuxers and
+    # network/nested protocols are deliberately outside the supported policy.
+    @('-protocol_whitelist', 'file', '-format_whitelist',
+        'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi')
+}
+
+function Resolve-WacExecutable {
+    param([ValidateSet('ffmpeg.exe', 'ffprobe.exe')][string]$Name,
+        [string]$ExplicitPath, [string]$SiblingDirectory)
+
+    if ($PSBoundParameters.ContainsKey('ExplicitPath')) {
+        if ([string]::IsNullOrWhiteSpace($ExplicitPath)) { throw "An explicit $Name path cannot be empty." }
+        $candidate = Resolve-WacFileSystemPath -Path $ExplicitPath
+    } else {
+        $candidate = Join-Path $SiblingDirectory $Name
+        if (-not (Test-Path -LiteralPath $candidate -ErrorAction Stop)) {
+            $command = Get-Command -Name $Name -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
+            if (-not $command) { throw "$Name not found. Supply its explicit path, put it in '$SiblingDirectory', or add it to PATH. No tools are downloaded automatically." }
+            $candidate = Resolve-WacFileSystemPath -Path $command.Source
+        }
+    }
+    try { $item = Get-Item -LiteralPath $candidate -Force -ErrorAction Stop }
+    catch { throw "Cannot access $Name at '$candidate'. Check the explicit path or installation." }
+    if ($item -isnot [IO.FileInfo] -or $item.Extension -ne '.exe' -or $item.Length -eq 0) {
+        throw "Invalid $Name executable at '$candidate'. Supply a nonempty Windows .exe file."
+    }
+    $item.FullName
+}
+
+function Assert-WacInspectionResult {
+    param($Result, [string]$Operation)
+
+    if (-not $Result.Started -or $Result.TimedOut -or $Result.Error -or
+        $Result.CleanupError -or $null -eq $Result.ExitCode -or $Result.ExitCode -ne 0) {
+        throw "$Operation failed (native exit: $($Result.ExitCode); timeout: $($Result.TimedOut)). $($Result.Error) $($Result.CleanupError) $($Result.StandardError)"
+    }
+}
+
+function Get-WacToolVersion {
+    param([string]$FilePath, [ValidateSet('ffmpeg', 'ffprobe')][string]$ToolName,
+        [ValidateRange(1, 60000)][int]$TimeoutMilliseconds = 15000)
+
+    $result = Invoke-WacNativeProcess -FilePath $FilePath -ArgumentList @('-version') -TimeoutMilliseconds $TimeoutMilliseconds
+    Assert-WacInspectionResult -Result $result -Operation "$ToolName version check at '$FilePath'"
+    $versionLine = ($result.StandardOutput -split '\r?\n' | Select-Object -First 1).Trim()
+    if ($versionLine -notmatch ('^' + $ToolName + ' version \S+')) {
+        throw "Incompatible $ToolName at '$FilePath': its -version response is not recognized. Use a Windows FFmpeg build containing ffmpeg.exe and ffprobe.exe."
+    }
+    $versionLine
+}
+
+function Test-WacRequiredFilters {
+    param([string]$FfmpegPath, [string]$FilterChain,
+        [ValidateRange(1, 60000)][int]$TimeoutMilliseconds = 15000)
+
+    $result = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList @('-hide_banner', '-filters') -TimeoutMilliseconds $TimeoutMilliseconds
+    Assert-WacInspectionResult -Result $result -Operation "FFmpeg filter check at '$FfmpegPath'"
+    $available = @(foreach ($line in ($result.StandardOutput -split '\r?\n')) {
+        if ($line -match '^\s*[TSC.]{2,3}\s+([a-zA-Z0-9_]+)\s+[AVN|]+->[AVN|]+\s') { $Matches[1] }
+    })
+    $required = @($FilterChain -split ',' | ForEach-Object { ($_ -split '=', 2)[0] } | Select-Object -Unique)
+    $missing = @($required | Where-Object { $_ -cnotin $available })
+    if ($missing.Count -gt 0) {
+        throw "FFmpeg at '$FfmpegPath' lacks filters required by this mode: $($missing -join ', '). Choose a build with these filters or supply -FfmpegPath."
+    }
+}
+
+function Get-WacAudioStreams {
+    param([string]$FfprobePath, [string]$InputPath,
+        [ValidateRange(1, 60000)][int]$TimeoutMilliseconds = 15000)
+
+    $arguments = @('-v', 'error') + (Get-WacLocalMediaArguments) + @('-show_entries',
+        'stream=index,codec_type,codec_name,channels,channel_layout,sample_rate:stream_tags=language,title', '-of', 'json', '-i', $InputPath)
+    $result = Invoke-WacNativeProcess -FilePath $FfprobePath -ArgumentList $arguments -TimeoutMilliseconds $TimeoutMilliseconds
+    Assert-WacInspectionResult -Result $result -Operation 'Audio probe (only supported local media formats and the file protocol are allowed)'
+    if ([string]::IsNullOrWhiteSpace($result.StandardOutput) -or [Text.Encoding]::UTF8.GetByteCount($result.StandardOutput) -gt 1MB) {
+        throw 'Invalid probe JSON: empty response or metadata exceeds 1 MiB.'
+    }
+    # Root arrays can be unrolled by PowerShell's pipeline; check the JSON token
+    # as well as the converted shape so an array of one object is not accepted.
+    if (-not $result.StandardOutput.TrimStart().StartsWith('{')) { throw 'Invalid probe JSON: expected an object containing a streams array.' }
+    try { $metadata = ConvertFrom-Json -InputObject $result.StandardOutput -ErrorAction Stop }
+    catch { throw 'Invalid probe JSON: cannot parse ffprobe metadata.' }
+    if ($null -eq $metadata -or $metadata.streams -isnot [Array] -or $metadata.streams.Count -gt 256) {
+        throw 'Invalid probe JSON: expected a streams array with at most 256 entries.'
+    }
+    $seen = @{}
+    $audio = @(foreach ($stream in $metadata.streams) {
+        if ($null -eq $stream -or ($stream.index -isnot [int] -and $stream.index -isnot [long]) -or
+            $stream.index -lt 0 -or $stream.index -gt [int]::MaxValue -or $seen.ContainsKey([string]$stream.index) -or
+            $stream.codec_type -isnot [string] -or [string]::IsNullOrWhiteSpace($stream.codec_type)) {
+            throw 'Invalid probe JSON: missing, duplicate or invalid stream index/type.'
+        }
+        $seen[[string]$stream.index] = $true
+        if ($stream.codec_type -ceq 'audio') {
+            $rate = 0
+            if ($stream.codec_name -isnot [string] -or [string]::IsNullOrWhiteSpace($stream.codec_name) -or
+                ($stream.channels -isnot [int] -and $stream.channels -isnot [long]) -or $stream.channels -le 0 -or
+                $stream.channels -gt [int]::MaxValue -or $stream.sample_rate -isnot [string] -or
+                $stream.sample_rate -notmatch '^[0-9]+$' -or -not [int]::TryParse($stream.sample_rate, [ref]$rate) -or $rate -le 0) {
+                throw 'Invalid probe JSON: audio codec, channel count or sample rate is missing or invalid.'
+            }
+            [pscustomobject]@{
+                Index = [int]$stream.index; Codec = $stream.codec_name; Channels = [int]$stream.channels
+                SampleRate = $rate; ChannelLayout = $stream.channel_layout
+                Language = $stream.tags.language; Title = $stream.tags.title
+            }
+        }
+    })
+    if ($audio.Count -eq 0) { throw 'No audio streams found. Choose a supported file containing audio.' }
+    $audio
+}
+
+function Select-WacAudioStream {
+    param([object[]]$Streams, [string]$RequestedIndex, [bool]$Interactive = $false)
+
+    if ($Streams.Count -eq 0) { throw 'No audio streams are available for selection.' }
+    if ($PSBoundParameters.ContainsKey('RequestedIndex')) {
+        $index = 0
+        if ($RequestedIndex -notmatch '^[0-9]+$' -or -not [int]::TryParse($RequestedIndex, [ref]$index)) {
+            throw 'Audio stream index must be a nonnegative absolute stream index shown by ffprobe.'
+        }
+        $selected = @($Streams | Where-Object { $_.Index -eq $index })
+        if ($selected.Count -ne 1) { throw "Audio stream index $RequestedIndex is not an available audio stream. Available indexes: $(($Streams.Index) -join ', ')." }
+        return $selected[0]
+    }
+    if ($Streams.Count -eq 1) { return $Streams[0] }
+    if (-not $Interactive) {
+        throw "Multiple audio streams found. Supply -AudioStreamIndex with an absolute index: $(($Streams.Index) -join ', ')."
+    }
+    Write-Host 'Choose an audio track by its absolute stream index:'
+    foreach ($stream in $Streams) {
+        # Treat media labels as display text only; remove terminal controls.
+        $label = ("[{0}] {1}; {2} channel(s); {3} Hz; {4}; {5}" -f $stream.Index, $stream.Codec,
+            $stream.Channels, $stream.SampleRate, $stream.Language, $stream.Title) -replace '[\x00-\x1f\x7f-\x9f]', ' '
+        Write-Host $label
+    }
+    while ($true) {
+        try { $answer = Read-Host 'Audio stream index (Q to cancel)' }
+        catch { throw 'Cannot read an audio stream selection. Supply -AudioStreamIndex with -NonInteractive.' }
+        if ($null -eq $answer -or $answer.Trim() -in @('q', 'cancel')) { return $null }
+        $index = 0
+        if ($answer.Trim() -match '^[0-9]+$' -and [int]::TryParse($answer.Trim(), [ref]$index)) {
+            $selected = @($Streams | Where-Object { $_.Index -eq $index })
+            if ($selected.Count -eq 1) { return $selected[0] }
+        }
+        Write-Host 'Invalid selection. Enter an audio index shown above, or Q to cancel.' -ForegroundColor Yellow
+    }
 }
 
 function ConvertTo-WacNativeArgument {
@@ -358,16 +516,21 @@ if ($MyInvocation.InvocationName -eq '.') { return }
 
 # --- CONFIGURATION ---
 $scriptVersion = "2.3"
-$ffmpegPath = "$PSScriptRoot\ffmpeg.exe"
 $interactive = Test-WacInteractive -NonInteractive:$NonInteractive
 
 # Validate before displaying the menu or starting any native process. Reading a
-# file here proves accessibility only; media probing belongs to the probe task.
+# file here proves accessibility; bounded media probing follows below.
 try {
     $inputFileItem = Get-WacInputFile -Path $inputPath
     $inputPath = $inputFileItem.FullName
     if ($PSBoundParameters.ContainsKey('Mode') -and $Mode -notin @('Raw', 'Zoom')) {
         throw 'Invalid mode. Supply -Mode Raw or -Mode Zoom.'
+    }
+    if ($PSBoundParameters.ContainsKey('AudioStreamIndex')) {
+        $parsedIndex = 0
+        if ($AudioStreamIndex -notmatch '^[0-9]+$' -or -not [int]::TryParse($AudioStreamIndex, [ref]$parsedIndex)) {
+            throw 'Audio stream index must be a nonnegative absolute stream index shown by ffprobe.'
+        }
     }
     $outFolder = Get-WacOutputDirectory -Path $OutputDirectory
     if (-not $Mode -and -not $interactive) {
@@ -378,13 +541,14 @@ try {
     exit 2
 }
 try {
-    if (Test-Path -LiteralPath $ffmpegPath -PathType Leaf) {
-        $ffmpegPath = (Get-Item -LiteralPath $ffmpegPath -ErrorAction Stop).FullName
-    } else {
-        $ffmpegCommand = Get-Command 'ffmpeg.exe' -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
-        if (-not $ffmpegCommand) { throw 'FFmpeg.exe not found! Put it next to this script or on PATH.' }
-        $ffmpegPath = $ffmpegCommand.Source
-    }
+    $resolveArguments = @{ Name = 'ffmpeg.exe'; SiblingDirectory = $PSScriptRoot }
+    if ($PSBoundParameters.ContainsKey('FfmpegPath')) { $resolveArguments.ExplicitPath = $FfmpegPath }
+    $ffmpegPath = Resolve-WacExecutable @resolveArguments
+    $resolveArguments = @{ Name = 'ffprobe.exe'; SiblingDirectory = [IO.Path]::GetDirectoryName($ffmpegPath) }
+    if ($PSBoundParameters.ContainsKey('FfprobePath')) { $resolveArguments.ExplicitPath = $FfprobePath }
+    $ffprobePath = Resolve-WacExecutable @resolveArguments
+    $ffmpegVersion = Get-WacToolVersion -FilePath $ffmpegPath -ToolName ffmpeg
+    $ffprobeVersion = Get-WacToolVersion -FilePath $ffprobePath -ToolName ffprobe
 } catch {
     Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 3
@@ -396,6 +560,8 @@ if ($interactive) { Clear-Host }
 Write-Host "WinAudioClean $scriptVersion" -ForegroundColor Cyan
 Write-Host "============================" -ForegroundColor Gray
 Write-Host "Input: " -NoNewline; Write-Host $inputPath -ForegroundColor Yellow
+Write-Host "FFmpeg: $ffmpegPath ($ffmpegVersion)" -ForegroundColor Gray
+Write-Host "FFprobe: $ffprobePath ($ffprobeVersion)" -ForegroundColor Gray
 
 # --- TUI: SELECTION ---
 if (-not $Mode) {
@@ -422,6 +588,30 @@ $processingProfile = Get-WacProcessingProfile -Choice $choice
 $modeName = $processingProfile.ModeName
 $filterChain = $processingProfile.FilterChain
 
+try { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain $filterChain }
+catch {
+    Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
+    exit 3
+}
+try { $audioStreams = @(Get-WacAudioStreams -FfprobePath $ffprobePath -InputPath $inputPath) }
+catch {
+    Write-Error -Message ("Probe failed: " + $_.Exception.Message) -ErrorAction Continue
+    exit 4
+}
+try {
+    $selectionArguments = @{ Streams = $audioStreams; Interactive = $interactive }
+    if ($PSBoundParameters.ContainsKey('AudioStreamIndex')) { $selectionArguments.RequestedIndex = $AudioStreamIndex }
+    $selectedStream = Select-WacAudioStream @selectionArguments
+} catch {
+    Write-Error -Message ("Audio selection failed: " + $_.Exception.Message) -ErrorAction Continue
+    exit 2
+}
+if ($null -eq $selectedStream) {
+    Write-Host 'Cancelled. No audio was processed.'
+    exit 130
+}
+Write-Host "Audio stream: $($selectedStream.Index) ($($selectedStream.Codec), $($selectedStream.Channels) channel(s), $($selectedStream.SampleRate) Hz)"
+
 $inputSizeMB = "{0:N2} MB" -f ($inputFileItem.Length / 1MB)
 
 $timestamp = Get-Date -Format "yyyyMMdd-HHmm"
@@ -434,7 +624,7 @@ Write-Host "Chain: $modeName" -ForegroundColor Gray
 $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
 
 # FFmpeg Command
-$argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $outputFile
+$argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $outputFile -AudioStreamIndex $selectedStream.Index
 $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList
 
 $stopWatch.Stop()
@@ -484,6 +674,12 @@ OUTPUT SIZE    : $outputSizeMB
 
 ACTIVE FILTERS : $filterChain
 EXECUTABLE     : $ffmpegPath
+FFMPEG VERSION : $ffmpegVersion
+FFPROBE        : $ffprobePath
+FFPROBE VERSION: $ffprobeVersion
+AUDIO STREAM   : $($selectedStream.Index) (absolute index; map 0:$($selectedStream.Index))
+INPUT AUDIO    : $($selectedStream.Codec); $($selectedStream.Channels) channel(s); $($selectedStream.SampleRate) Hz
+INPUT POLICY   : file protocol; WAV, MP3, FLAC, Ogg, MOV/MP4, Matroska/WebM, AAC, AIFF, ASF, AVI
 PROCESS ERROR  : $($process.Error)
 CLEANUP ERROR  : $($process.CleanupError)
 REPORT ERROR   : $metadataError

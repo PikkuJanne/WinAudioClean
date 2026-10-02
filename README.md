@@ -22,7 +22,7 @@ A "drop-and-forget" audio post-production tool for podcasters, students, and pro
 
 - Windows PowerShell 5.1 (built-in) or PowerShell 7+
 
-- FFmpeg (Must be downloaded and placed in the script folder)
+- FFmpeg and ffprobe Windows executables, installed by you (see lookup order below)
 
 **Nice to have**
 
@@ -41,11 +41,14 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 - ffmpeg.exe
   - The engine: Download this from gyan.dev or similar. The script cannot run without it.
 
+- ffprobe.exe
+  - Inspects the available audio tracks before processing. Usually included in the same FFmpeg distribution.
+
 **Installation**
 
 1. Copy the files to a folder of your choice, e.g.: C:\Tools\WinAudioClean\
 
-2. Ensure ffmpeg.exe is inside that same folder.
+2. Put ffmpeg.exe and ffprobe.exe inside that folder, or configure their paths as described below.
 
 3. (Optional) Create a desktop shortcut to WinAudioClean.bat and name it something friendly: "Audio Cleaner"
 
@@ -99,6 +102,47 @@ redirected input require an explicit mode and never show a mode prompt. Running
 without an input file displays usage. Direct script preflight failures return
 exit code `2`; menu cancellation returns `130`.
 
+**Dependencies and audio tracks**
+
+FFmpeg lookup order is `-FfmpegPath`, then `ffmpeg.exe` next to the script, then
+`PATH`. FFprobe lookup order is `-FfprobePath`, then `ffprobe.exe` next to the
+resolved FFmpeg executable, then `PATH`. Explicit paths are literal `.exe` file
+paths; a supplied invalid path fails without falling back to another installation.
+A broken sibling executable also fails. Nothing is downloaded automatically.
+
+The script checks each tool's version response and the filters needed for the
+selected mode. It displays resolved paths and versions and includes them in the
+processing report. Use a Windows build with both executables and the required
+filters; a recognized version string alone does not guarantee codec support.
+Each version, filter and media inspection has a 15-second process timeout, plus
+bounded cleanup. This limit does not apply to rendering.
+
+One audio track is selected automatically. For multiple tracks, the interactive
+menu shows absolute stream indexes, codecs, channels, sample rates and available
+language/title labels. Choose an index or `Q` to cancel. Unattended processing
+requires an explicit `-AudioStreamIndex` when more than one audio track exists:
+
+```powershell
+.\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.mkv' -Mode Zoom -AudioStreamIndex 2 -FfmpegPath 'C:\Tools\ffmpeg\bin\ffmpeg.exe' -FfprobePath 'C:\Tools\ffmpeg\bin\ffprobe.exe' -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
+```
+
+The index is the file's absolute stream index, including any video streams. For
+example, video at index 0 and audio at indexes 1 and 2 means `-AudioStreamIndex 2`
+selects the second audio track. The selected track is explicitly mapped and its
+channel count is preserved. Video-only input fails before cleaning. Use the
+PowerShell entry point for unattended stream selection or explicit tool paths;
+the batch launcher's `/unattended` route supports a single audio track.
+
+Supported input containers are WAV, MP3, FLAC, Ogg, MOV/MP4/M4A, Matroska/WebM,
+AAC, AIFF, ASF and AVI, subject to the installed build's decoders. Both probing
+and rendering allow only these demuxers and the `file` protocol. Playlists,
+concat lists, network protocols and device inputs are unsupported, even when a
+playlist is renamed to an audio extension. This prevents supported FFmpeg
+protocols from fetching remote media references; filesystem redirection or
+mapped drives can still use network storage. Malformed metadata, failed probes,
+and inputs without a usable audio codec, channel count and sample rate fail
+before rendering.
+
 **Native results and launcher automation**
 
 The script runs the resolved FFmpeg executable directly, disables its stdin and
@@ -108,11 +152,11 @@ console and local report. Processing and reporting results use these exit codes:
 | Code | Meaning |
 | --- | --- |
 | 0 | FFmpeg returned success and reporting completed. |
-| 2 | Invalid input, destination, mode or launcher usage. |
-| 3 | FFmpeg was missing or could not start. |
-| 4 | FFmpeg failed, or native capture/cleanup failed. The native exit is retained in diagnostics. |
+| 2 | Invalid input, destination, mode, audio selection or launcher usage; ambiguous unattended tracks. |
+| 3 | Missing, incompatible or filter-deficient dependency, or render process start failure. |
+| 4 | Probe/metadata failure, no audio, or processing/capture/cleanup failure. Native failures retain diagnostics. |
 | 7 | FFmpeg returned success, but reporting was incomplete. Audio is retained. |
-| 130 | Cancelled at the mode menu. |
+| 130 | Cancelled at the mode or audio-track menu. |
 
 A reporting failure never changes an existing processing failure to success.
 Exit `0` does not independently verify the rendered media. Output collisions and
@@ -143,7 +187,7 @@ have not been stress-tested.
 
 1. Checks
    - Verifies the input file exists.
-   - Checks if ffmpeg.exe is present.
+   - Resolves and checks ffmpeg.exe and ffprobe.exe.
 
 2. Mode Selection (TUI)
    - Asks the user if they want the full cleaning suite or just volume leveling.
@@ -161,6 +205,7 @@ have not been stress-tested.
      - loudnorm: A final limiter that ensures the average volume hits exactly -12 LUFS.
 
 4. Processing
+   - Probes audio tracks and maps the selected absolute stream index.
    - Runs FFmpeg invisibly in the background.
    - Shows a "Processing..." indicator in the console.
 
@@ -171,13 +216,16 @@ have not been stress-tested.
 **Limitations / When not to use**
 
    - Extreme Noise: If you recorded in a wind tunnel or a busy cafe, standard signal processing isn't enough. You need AI isolation tools for that.
-   - Multi-track editing: This processes the file as a single block. It cannot level one person's voice without leveling the other person's voice.
+   - Multi-track editing: This processes one selected audio track. It cannot separate speakers mixed into that track.
    - Music Production: Do not use this on songs. The "De-clipper" and "Highpass" filters are tuned for human speech and will damage the quality of musical instruments.
 
 **Troubleshooting**
 
-- "FFmpeg.exe not found!"
-  - The script looks in its own folder for the executable. Make sure you didn't leave ffmpeg.exe in your Downloads folder.
+- Dependency failure
+  - Check the reported executable path. Supply `-FfmpegPath` and `-FfprobePath`, place both tools together next to the script, or add them to PATH. Missing required filters need a compatible FFmpeg build.
+
+- Probe failure or multiple audio tracks
+  - Check that the file uses a supported container and contains audio. For unattended multi-track files, supply the absolute `-AudioStreamIndex` shown in the diagnostic.
 
 - Red "FAILED" text
   - Check the console output right above the error. It usually means the input file is corrupt or has a codec FFmpeg doesn't understand.

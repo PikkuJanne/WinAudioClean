@@ -1,21 +1,12 @@
-# Next model: WAC-M1-03
+# Next model: WAC-M1-04
 
-**M1-02 is complete. Start only WAC-M1-03: dependency resolution and audio
-stream probing/mapping.** Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml,
-SYNC_PROTOCOL.md, tasks/WAC-M1-03.md, NATIVE_PROCESS_CONTRACT.md and
-evidence/WAC-M1-02-resume.md. Preserve earlier evidence; no governance reimport
-or repeat of the M0 audit is needed.
+**M1-03 is complete. Start only WAC-M1-04: transactional, collision-safe output publication.** Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml, SYNC_PROTOCOL.md, tasks/WAC-M1-04.md, NATIVE_PROCESS_CONTRACT.md and evidence/WAC-M1-03.md. Preserve earlier evidence; no governance reimport is needed.
 
 ## Inspect and synchronize
 
-Work in the established WinAudioClean-governance Git checkout. The source-only
-starting folder is preserved. Branch: codex/wac-m1-reliability.
-Exact effective fetch/push target: https://github.com/PikkuJanne/WinAudioClean.git.
+Use the established WinAudioClean-governance checkout, branch `codex/wac-m1-reliability`. The source-only starting folder is preserved. Exact fetch/push origin: https://github.com/PikkuJanne/WinAudioClean.git.
 
-The successful M1-02 resumption tested unchanged source at
-0d02cf48dcede1196024039294e9316f4624b50a. The subsequent completion commit adds
-evidence/governance only; derive its SHA from the live branch/PR and verify it
-afresh rather than assuming the tested starting SHA remains HEAD.
+M1-03 started from `ec27fb9d5ecc7dd07033d889987ac153d65eb373`. Derive its completion SHA from the live branch/PR; do not assume the starting SHA remains HEAD.
 
 ```powershell
 python -X utf8 docs/codex/winaudioclean/tools/handoff.py inspect --repo .
@@ -26,75 +17,43 @@ python -X utf8 docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/c
 gh pr view 2 --repo PikkuJanne/WinAudioClean --json url,isDraft,state,baseRefName,headRefName,headRefOid,statusCheckRollup
 ```
 
-Only M1-03 should be ready; no task should be blocked. Reuse draft PR #2, stacked
-on codex/wac-m0-handoff while M0 draft PR #1 is unmerged. Recheck the live base/CI
-state and reconcile an approved merge if one occurred. Do not merge to unlock
-work. Feature commits/pushes and draft PR updates remain authorized.
+Only M1-04 should be ready, with no blocked task. Reuse draft PR #2, stacked on `codex/wac-m0-handoff` while draft PR #1 is unmerged. Recheck live base/CI state; reconcile an approved merge if one occurred. Feature commits/pushes and draft PR updates are authorized. Do not merge to unlock work.
 
 ## Narrow next task
 
-- Retain sibling and PATH FFmpeg resolution; add explicit-path precedence and
-  ffprobe discovery, with useful missing/incompatible/filter diagnostics.
-- Record resolved executable paths and versions without automatic downloads.
-- Probe JSON audio streams and map the selected absolute stream index. Prompt
-  on interactive ambiguity; require an explicit choice unattended.
-- Bound probes and reject malformed/nonzero/timed-out results. Test local
-  playlists referencing external URLs and scope supported protocols.
-- Preserve exact Raw/Zoom filter strings, the original entry points and PS5.1.
-  Transactional outputs/collisions are M1-04; explicit encoding is M1-05.
+- Allocate unique run identifiers and owned temporary WAVs on the destination volume. Prevent source/output aliases and timestamp/concurrency collisions.
+- Validate successful output as nonempty, readable audio with plausible timing before publishing. Reuse bounded probing and selected-stream facts.
+- Publish with a no-clobber rename. Reject a destination created after name selection. Failures/crashes must not publish normal-looking invalid exports or delete originals/prior files. Remove only run-owned partial files.
+- Replace current collision/overwrite characterizations with regressions. Test encoder failure, simulated disk-full, empty/truncated exit-0 output, rename races and crash leftovers per AC-022/023/024.
+- Preserve exact filters, entry points, channel selection and PS5.1. Explicit output encoding belongs separately to M1-05.
 
-## Existing native and launcher behavior
+## Current seams
 
-A direct ProcessStartInfo wrapper quotes individual Windows arguments, drains
-stdout/stderr concurrently, closes stdin and explicitly disposes streams/process.
-FFmpeg uses -nostdin. Rendering has no fixed total deadline; finite caller
-timeouts stop the owned child only. Capture stays in memory; no memory stress
-claim has been made.
+The single script remains the application; dot-sourcing defines helpers only. D22 describes `Resolve-WacExecutable`, `Get-WacToolVersion`, `Test-WacRequiredFilters`, `Get-WacAudioStreams`, `Select-WacAudioStream` and `Get-WacLocalMediaArguments`.
 
-Exits: 0 native success/report complete, 2 input/config, 3 dependency/start,
-4 native/capture/cleanup, 7 reporting incomplete after native success, 130 menu
-cancellation. Reporting preserves a primary native failure and audio. Exit 0
-does not independently validate the rendered media.
+Probe objects have validated Index/Codec/Channels/SampleRate and optional labels/layout. No duration contract exists yet; M1-04 needs bounded output/timing validation. The 1 MiB JSON limit is checked after native capture and is not a capture-memory bound.
 
-The batch launcher uses system Windows PowerShell, preserves status across
-pause and supports /unattended Raw|Zoom via WAC_LAUNCH_INPUT and
-WAC_LAUNCH_OUTPUT_DIRECTORY set in PowerShell. Positional CMD percent/exclamation
-paths have a documented fallback; prior expansion cannot be reconstructed.
-Filters, encoding and legacy -y/minute timestamp collisions remain unchanged.
+`Get-WacFfmpegArguments` now requires `-AudioStreamIndex` and emits `-map 0:N`. Both tools use file-only protocols and ordinary-media demuxers before `-i`; preserve this policy in output validation. Inspection calls have 15-second process deadlines. Rendering has no fixed total timeout. The native wrapper quotes Windows arguments, closes stdin, concurrently drains stdout/stderr and disposes owned resources. FFmpeg uses `-nostdin`.
 
-## Evidence and tools
+Current exits: 0 native success/report complete; 2 input/config/selection; 3 dependency/start; 4 probe/no-audio/native/capture/cleanup; 7 incomplete reporting after native success; 130 menu cancellation. Finalize code 5 for output validation/publication in M1-04, retaining native diagnostics. Reporting failures retain audio and prior processing failures. Early failures use console diagnostics; reports follow render attempts.
 
-Both resumed Full gates passed: **227 Pester tests per shell**, no failures or
-skips; **61 Python tests passed and one symlink-privilege skip per shell**, exit 0.
-Parser/static/plan gates pass; 18 PowerShell files and 53 visible analyzer
-advisories. All 26 source hashes match the blocked checkpoint.
+The `.bat` is unchanged in M1-03. It preserves status across pause and supports `/unattended Raw|Zoom` with PowerShell-set input/output environment values. Use `.ps1` for explicit dependency paths or unattended track selection. CMD expansion limits, in-memory capture and running-render Ctrl+C limits remain. Legacy `-y`, minute timestamp names and unvalidated final output are defects owned by the next task.
 
-Initial runs were blocked by Smart App Control and included a corrected PS5
-JSON-array assertion issue. The owner later reported Smart App Control Off and
-authorized rerunning; read-only state was 0 before/after. Codex did not change
-security settings. Preserve historical failed logs and policy records. Future
-policy rejection remains a real test failure; do not change security settings
-or repeatedly rebuild fixtures to evade it.
+## Tests and tools
+
+Final Full: **326 Pester passed per shell**, zero failures/skips; **61 Python passed and one symlink-privilege skip per shell**, both runner exits 0. Parser/static/plan pass: 19 PowerShell files, 67 visible analyzer advisories. The Media suite contributes 99 cases, including actual PATH/adjacency and native timeout/reaping. Fixture VERSION/FILTERS/PROBE environment controls are independent of render faults.
 
 ```powershell
 pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
-pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Native.Tests.ps1
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Media.Tests.ps1
 pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full
 ```
 
-Pester 5.7.1/PSScriptAnalyzer 1.24.0 are under ignored .wac-local/Modules.
-Bypass is process-only. Fixture tests use the installed Framework C# compiler.
-Runners never download dependencies. Existing FFmpeg/ffprobe 9.0.2:
-.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin.
-Use explicit paths and keep binaries/generated audio ignored.
+Use fresh shells. When launching PS5.1 through Python from PS7, omit inherited PSMODULEPATH in that child so the host initializes its default module paths. The first M1-03 Full invocation failed before tests on that wrapper environment; unchanged source passed after this process-only correction. Pester 5.7.1/PSScriptAnalyzer 1.24.0 remain under ignored `.wac-local/Modules`. No security settings changed. Preserve earlier M1-02 Smart App Control failure/resumption records; future policy rejection remains a test failure, not a reason to change settings or repeatedly rebuild fixtures for an allowed hash.
 
-Four real FFmpeg application checks from M1-02 remain valid on identical runtime
-bytes: Raw/Zoom, both shells, three-second mono 192 kHz PCM16 WAVs/reports,
-unchanged inputs. Saved outputs are .wac-local/WAC-M1-02/real-process. M1-01's
-interactive folder has a zero-byte ffmpeg.exe sentinel unsuitable for processing.
-Human listening, channel isolation, impulse alignment, long recordings, >4 GB
-exports and running-render cancellation remain unverified. No CI exists yet.
+Existing FFmpeg/ffprobe 9.0.2: `.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin`. The optional development harness `scripts/Test-MediaPreflight.py` uses explicit tool paths. Final 32/32 run: `.wac-local/WAC-M1-03/20261002T115537198468Z`; sanitized evidence is committed. It checks video+two distinguishable audio tracks, no-audio/selection failures, and ordinary/renamed HLS/concat rejection in probe/render. The listener received one control request and zero media requests. Eight outputs were readable three-second mono/stereo 192 kHz PCM16 WAVs; inputs stayed unchanged. Actual console reprompt/cancel/selection also passed. No speech listening, channel-isolation, long-file or >4 GB evidence is claimed.
 
-After M1-03, reconcile its acceptance/evidence/status/handoff, stage/review
-intended files, commit/push and verify local/live/PR heads. Stop before M1-04.
+Runtime SHA256 tested in both Full gates and the final real harness: `4d2300a74698b272cb03469e98efb73d7ff1db86a15c24c6dd95292638add3ea`. The source manifest identifies working-tree bytes; Git can normalize line endings.
+
+After M1-04, reconcile acceptance/evidence/status/handoff, stage/review intended files, commit/push and verify local/live/PR heads. Stop before M1-05.

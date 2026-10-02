@@ -33,6 +33,7 @@ Describe 'AC-017: metadata reporting failures preserve native outcome' -Tag 'Rep
         $app = Join-Path $scratch 'WinAudioClean.ps1'
         Copy-Item -LiteralPath $scriptPath -Destination $app
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $inputFile = Join-Path $scratch 'recording.wav'
         [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
         $outputFile = Join-Path $outputDirectory 'recording_Cleaned_20261002-1200.wav'

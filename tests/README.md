@@ -183,6 +183,47 @@ checks provide separate evidence and do not replace blocked fixture cases. See
 the fixture contract for the recorded event details and task governance for the
 current acceptance status.
 
+## Dependencies, stream mapping and local media (WAC-M1-03)
+
+The Media suite covers dependency precedence, version/filter failures, strict
+JSON validation, selection/reprompt/cancel behavior and exact absolute mapping.
+It also invokes the real native fixture for malformed/nonzero probe output,
+version/filter/probe deadlines and child reaping. Actual PATH lookup and a copied
+application verify that ffprobe is found next to explicitly selected FFmpeg.
+The existing direct/batch matrices now verify both inspection and render argv.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Media.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Media.Tests.ps1
+```
+
+The final targeted suite passed 99 tests in each shell. Fixture inspection has
+separate `WAC_TEST_VERSION_*`, `WAC_TEST_FILTERS_*` and `WAC_TEST_PROBE_*`
+controls; these test-only variables do not change production behavior. Tests
+preserve absent versus empty environment variables explicitly across PS5.1/PS7.
+
+Run the optional standard-library harness with an existing local FFmpeg pair:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-MediaPreflight.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+It creates a fresh ignored run folder and a three-second Matroska file with video
+index 0, mono 440 Hz audio index 1 and stereo 880 Hz audio index 2. Both shells
+render each track in Raw/Zoom. Independent sample measurements verify selected
+frequency and channel count. Negative cases cover unattended ambiguity,
+non-audio/missing indexes, video-only input and ordinary/renamed HLS/concat lists.
+A loopback HTTP listener has a positive control and counts attempted media
+requests; direct render-helper checks exercise policy even though application
+probing rejects these files earlier. All 32 cases passed with zero media requests.
+
+Python is development tooling only. Generated media and raw local logs remain
+under `.wac-local`; only sanitized evidence is committed. This is no speech
+listening, channel-isolation or decoder-sandbox certification. Output encoding
+and legacy collision behavior remain unchanged in this task. See the
+[M1-03 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-03.md).
+
 ## Synthetic audio characterization (WAC-M0-03)
 
 Provide an existing local FFmpeg/ffprobe pair explicitly. This script never

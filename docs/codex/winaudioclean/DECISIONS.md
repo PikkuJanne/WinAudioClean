@@ -153,3 +153,44 @@ Keep the initial failed logs and policy history. This is no claim that unsigned
 fixtures work with Smart App Control On and adds no approval for future security
 changes, sound changes, merges, releases or deployment. Evidence:
 `evidence/WAC-M1-02-resume.md`.
+
+### 2026-10-02 — WAC-M1-03 dependency and stream policy
+
+D22. FFmpeg resolves from a bound `-FfmpegPath`, the script directory, then
+PATH. FFprobe resolves from a bound `-FfprobePath`, the resolved FFmpeg directory,
+then PATH. Invalid explicit or present sibling candidates fail without fallback.
+Require nonempty Windows executables, recognized tool version responses and the
+selected mode's exact required filter names. Accept both two- and three-column
+filter flags, as the installed FFmpeg 9.0.2 uses two. Record paths and versions
+in console output and successful/failed rendering reports. Do not impose a
+numeric minimum version in place of capability checks or download dependencies.
+
+Version, filter and media inspections each have a 15-second process deadline
+plus the wrapper's bounded cleanup. Media JSON must be an object with a streams
+array (at most 256 entries and 1 MiB of JSON), unique nonnegative integer stream
+indexes, and usable audio codec/channel/rate fields. Reject failed probes even
+when stdout looks valid. Missing optional labels/layout remain unknown. The
+wrapper still captures output in memory; these checks are not a memory sandbox.
+
+Use a single available audio stream automatically. Ambiguous interactive files
+show absolute indexes and accept a choice or cancellation. Unattended ambiguity
+requires `-AudioStreamIndex`; invalid/non-audio indexes fail with code 2. Map the
+selected index as `-map 0:N` in rendering and retain its channels. Dependency
+inspection failures use code 3; probe/metadata/no-audio failures use code 4;
+either menu cancellation uses 130. Early failures appear in console diagnostics;
+the legacy report is written only after rendering has been attempted.
+
+Both probe and render allow only the `file` protocol and these demuxers:
+`wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi`. This intentionally excludes
+playlists, concat lists, devices and network protocols regardless of extension.
+It does not establish physical offline storage: mapped drives, junctions and
+redirected folders retain their filesystem semantics. MOV external data
+references remain disabled by FFmpeg's default; no option enables them here.
+See the official [protocol](https://ffmpeg.org/ffmpeg-protocols.html),
+[probe](https://ffmpeg.org/ffprobe.html), and
+[stream mapping](https://ffmpeg.org/ffmpeg.html#Stream-selection) documentation.
+
+The `.bat` is unchanged; advanced dependency/stream parameters use `.ps1`.
+Filters and encoding are unchanged. Transactional publication remains M1-04;
+explicit encoding remains M1-05. No sound promotion or publication approval is
+added. Validation and its limits are in `evidence/WAC-M1-03.md`.

@@ -77,11 +77,59 @@ internal static class NativeProcessFixture
         return output;
     }
 
+    private static bool TryInspectDependency(string[] args, out int exitCode)
+    {
+        exitCode = 0;
+        string executable = Path.GetFileNameWithoutExtension(Environment.GetCommandLineArgs()[0]);
+        bool ffmpeg = String.Equals(executable, "ffmpeg", StringComparison.OrdinalIgnoreCase);
+        bool ffprobe = String.Equals(executable, "ffprobe", StringComparison.OrdinalIgnoreCase);
+        if (!ffmpeg && !ffprobe) return false;
+
+        string phase = null;
+        string defaultOutput = null;
+        if (Array.IndexOf(args, "-version") >= 0)
+        {
+            phase = "VERSION";
+            defaultOutput = (ffmpeg ? "ffmpeg" : "ffprobe") + " version 9.0.2-wac-fixture\n";
+        }
+        else if (ffmpeg && Array.IndexOf(args, "-filters") >= 0)
+        {
+            phase = "FILTERS";
+            defaultOutput = "Filters:\n ... adeclip A->A Fixture filter\n ... highpass A->A Fixture filter\n ... adeclick A->A Fixture filter\n ... afftdn A->A Fixture filter\n ... agate A->A Fixture filter\n ... dynaudnorm A->A Fixture filter\n ... loudnorm A->A Fixture filter\n";
+        }
+        else if (ffprobe && Array.IndexOf(args, "-show_entries") >= 0)
+        {
+            phase = "PROBE";
+            defaultOutput = "{\"streams\":[{\"index\":0,\"codec_type\":\"audio\",\"codec_name\":\"pcm_s16le\",\"channels\":1,\"channel_layout\":\"mono\",\"sample_rate\":\"48000\"}]}";
+        }
+        if (phase == null) return false;
+
+        // Dependency inspection has distinct controls so inherited render
+        // failure/diagnostic settings do not prevent the application reaching
+        // the render behavior that the earlier regression tests exercise.
+        string argvPath = Setting(phase + "_ARGV_PATH");
+        if (!String.IsNullOrEmpty(argvPath))
+            File.WriteAllText(argvPath, JsonArguments(args), new UTF8Encoding(false));
+        string pidPath = Setting(phase + "_PID_PATH");
+        if (!String.IsNullOrEmpty(pidPath))
+            File.WriteAllText(pidPath, Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture));
+        Console.Out.Write(Setting(phase + "_STDOUT") ?? defaultOutput);
+        Console.Error.Write(Setting(phase + "_STDERR") ?? String.Empty);
+        Console.Out.Flush();
+        Console.Error.Flush();
+        int delay = Number(phase + "_SLEEP_MS");
+        if (delay > 0) Thread.Sleep(delay);
+        exitCode = Number(phase + "_EXIT_CODE");
+        return true;
+    }
+
     private static int Main(string[] args)
     {
         try
         {
             Console.OutputEncoding = new UTF8Encoding(false);
+            int inspectionExit;
+            if (TryInspectDependency(args, out inspectionExit)) return inspectionExit;
             string argvPath = Setting("ARGV_PATH");
             if (!String.IsNullOrEmpty(argvPath))
                 File.WriteAllText(argvPath, JsonArguments(args), new UTF8Encoding(false));

@@ -50,6 +50,29 @@ a controlled application, and full-app unattended results in both outer shells.
 Evidence and exact limits: `evidence/WAC-M1-02.md`. The sections below retain
 requirements for later probing, transactional output and cancellation work.
 
+## Implemented in WAC-M1-03 (2026-10-02)
+
+The dependency and stream policy is D22 in DECISIONS.md. `-FfmpegPath` takes
+precedence over the script sibling and PATH; `-FfprobePath` takes precedence over
+the resolved FFmpeg sibling and PATH. An invalid chosen candidate never silently
+falls back. Bounded native version/filter checks validate tool identity and
+selected-mode filters. Paths/versions appear in the console and render report.
+
+`Get-WacAudioStreams` runs ffprobe JSON inspection with a 15-second process
+deadline, rejects native and metadata failures, and returns validated audio
+indexes/codec/channel/rate fields. `Select-WacAudioStream` auto-selects a single
+track, prompts for interactive ambiguity, and requires `-AudioStreamIndex` for
+unattended ambiguity. Cancellation is 130; invalid selection is 2. Dependencies
+use 3; probe/metadata/no-audio failures use 4. Early failures use console
+diagnostics; no render report is fabricated for an unstarted render.
+
+Both tools receive the same file-only protocol and ordinary-media demuxer
+allowlists before `-i`. Unsupported playlists/concat inputs fail before cleaning,
+including renamed files. Rendering uses `-map 0:N`, where N is
+the selected absolute index, and preserves the selected channels. No automatic
+downloads or runtime Python dependency are introduced. Render encoding,
+collision/overwrite behavior and cancellation limits still belong to later work.
+
 ## Arguments and execution [S02]
 
 Treat executable paths and every user path as data. Avoid Invoke-Expression, cmd /c construction from user strings, expression-valued configuration and arbitrary filter strings. Start-Process joins ArgumentList items into a command line; simply changing a string to a string array does not solve quoting. Modern ProcessStartInfo.ArgumentList is not available in the same form on all target runtimes. Isolate and test any compatibility quoting path rather than assume equivalence.
