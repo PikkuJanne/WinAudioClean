@@ -1,0 +1,21 @@
+{
+  "taskId": "WAC-M2-04",
+  "recordType": "preliminary_helpers_cli_result",
+  "date": "2026-10-02",
+  "scope": "89 preview range, matching, argument-builder, space-estimate and actual CLI rejection tests. The later ownership/orchestration cases were not yet present.",
+  "command": "pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1",
+  "applicationExitCode": 1,
+  "pester": { "passed": 83, "failed": 6, "skipped": 0, "inconclusive": 0, "outsideScope": 0 },
+  "sanitizedLog": "WAC-M2-04-initial-preview-helpers-cli-ps7.txt",
+  "rawLocalLogSha256": "e7c166e1b150fd09d7be52f6bcfbd7c2a9e045383201f35c891f36d7c0b2360c",
+  "provenanceLimit": "Full source/test file hashes were not captured at the start of this invocation while the sibling implementation was being extended. Do not treat the earlier 68-unit snapshot hashes as exact hashes for this invocation. The log records the original integer-overload gain bug, including the newly added fractional peak-guard regression. Final frozen-source gates supersede this preliminary run.",
+  "failures": [
+    "source peak guard: gain error 0.3 dB",
+    "fractional guard below one dB: gain error 0.4 dB",
+    "processed peak guard: gain error 0.3 dB",
+    "unavailable too_short: gain error 0.2 dB",
+    "unavailable silence: gain error 0.2 dB",
+    "unavailable undefined_loudness: gain error 0.2 dB"
+  ],
+  "correction": "Use double 0.0 for all Math.Min gain clamps. Range, schema, argument/window/space helpers and all ten CLI rejection tests passed."
+}

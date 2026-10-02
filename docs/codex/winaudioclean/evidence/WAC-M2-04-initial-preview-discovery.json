@@ -1,0 +1,21 @@
+{
+  "taskId": "WAC-M2-04",
+  "recordType": "preliminary_discovery_correction",
+  "date": "2026-10-02",
+  "command": "SHELL -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1",
+  "results": [
+    { "shell": "pwsh", "version": "7.6.5", "applicationExitCode": 0, "passed": 113, "failed": 0, "skipped": 0, "sanitizedLog": "WAC-M2-04-initial-preview-discovery-ps7.txt" },
+    { "shell": "powershell.exe", "version": "5.1.26100.9444", "applicationExitCode": 0, "passed": 113, "failed": 0, "skipped": 0, "sanitizedLog": "WAC-M2-04-initial-preview-discovery-ps51.txt" }
+  ],
+  "actualScope": "113 range, matching, timeline, command/space helper and CLI-rejection assertions. No orchestration/fault case was discovered or executed by Pester in these runs.",
+  "testStructureDefect": "The 13-case orchestration Describe block was accidentally placed inside the CLI driver's here-string. The driver contained extraneous Pester source text, so its preliminary rejection results also require the clean-driver rerun. The wrong discovery count was noticed and the block was moved into the test file's execution scope.",
+  "launchSnapshots": {
+    "tests/WinAudioClean.Preview.Tests.ps1": "f8b5eba5cb3d4d551a342a2b3bab6f716a53817c4893f1dc99cd3f12caeb9e21",
+    "WinAudioClean.Preview.ps1": "6d9d53952067b5d6042e3d1b8c6dfd577cefe9757115da23e5f12d44b8213376",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.ps1_PowerShell7": "27e5016da2a78b6a06258dcec2db0f4e754923dc8578819e93ad00b254670224",
+    "WinAudioClean.ps1_PowerShell51": "68351cd1eea4e7082c49bfbf4bf4e33c853a3025f46fa88404aec97330c09992"
+  },
+  "provenanceLimit": "These are snapshots at invocation start. Help/line-ending finalization continued during this preliminary phase. Final focused logs and equal before/after hashes provide the definitive completed-source evidence.",
+  "correctionResult": "Final focused gates discover and pass 126 cases in each shell, including all 13 real-IO orchestration faults/cancellation cases. The exact 1-billion-second range ceiling was also added to the existing long-offset regression. These completed-source gates supersede both preliminary 113-case runs."
+}

@@ -676,8 +676,14 @@
       "title": "Range and alignment",
       "procedure": "Preview from start, middle and near end of a known timed fixture plus a very short recording.",
       "expected": "Valid matched intervals only; no unexplained offset, overwrite or out-of-range processing.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-04.md",
+        "evidence/WAC-M2-04-source.json",
+        "evidence/WAC-M2-04-preview.json",
+        "evidence/WAC-M2-04-targeted-ps51.txt",
+        "evidence/WAC-M2-04-targeted-ps7.txt"
+      ]
     },
     {
       "id": "AC-044",
@@ -685,8 +691,14 @@
       "title": "Comparison gain",
       "procedure": "Measure the original/processed comparison pair with the documented matching method.",
       "expected": "Level matching is separate from the mastering preset and does not introduce clipping; unmeasurable cases are clearly labeled.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-04.md",
+        "evidence/WAC-M2-04-source.json",
+        "evidence/WAC-M2-04-preview.json",
+        "evidence/WAC-M2-04-targeted-ps51.txt",
+        "evidence/WAC-M2-04-targeted-ps7.txt"
+      ]
     },
     {
       "id": "AC-045",
@@ -694,8 +706,14 @@
       "title": "No hidden processing",
       "procedure": "Create/cancel a preview and inspect files, current settings and process state.",
       "expected": "No full recording starts implicitly, source is unchanged and only run-owned preview files are cleaned up.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-04.md",
+        "evidence/WAC-M2-04-source.json",
+        "evidence/WAC-M2-04-preview.json",
+        "evidence/WAC-M2-04-targeted-ps51.txt",
+        "evidence/WAC-M2-04-targeted-ps7.txt"
+      ]
     },
     {
       "id": "AC-046",

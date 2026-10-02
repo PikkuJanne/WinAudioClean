@@ -1,8 +1,8 @@
 # Audio behavior contract
 
 This combines preserved behavior and proposed later test contracts. Sections
-marked implemented describe current behavior; later preview and listening
-requirements remain pending.
+marked implemented describe current behavior; speech listening and later
+milestone requirements remain pending.
 
 ## Preserved baseline
 
@@ -200,6 +200,83 @@ or failed results compliant.
 No trim, silence removal, pitch/speed change, stereo folding or timing rewrite by default. Compare known impulses and boundaries; target duration tolerance for PCM regression fixtures is <=10 ms with no unexplained leading offset. Measure filter delay and test short files rather than pad/trim blindly.
 
 Preview ranges are validated. Account for stateful-filter warmup using pre-roll/post-roll then trim to a matched excerpt; disclose preview edge differences. Level-match A/B excerpts in separate comparison assets without altering full-render settings. Preview integrated loudness is not full-recording integrated loudness.
+
+### Implemented bounded preview — WAC-M2-04 (2026-10-02)
+
+`-Preview` uses a separate optional sibling helper and returns before the
+full-render path. Default start/duration are 0/45 seconds. Default duration
+clips to available audio; explicit duration must fit, be positive and no more
+than 60 seconds. Start is nonnegative and must precede the selected audio's
+end. Reject nonfinite, signed/exponent/comma/whitespace or injected strings;
+seconds use invariant decimal notation. Round to the nearest 48 kHz sample
+with halfway values away from zero and reject zero-sample ranges. Selected
+duration must be known and valid. Range flags without `-Preview` fail.
+
+Take at most five seconds of pre-roll and five seconds of post-roll, clipped
+at the selected stream's ends. Restrict both file inputs with input `-ss` and
+`-t`; the requested filter/context window is at most 70 seconds. Accurate
+seeking may decode/discard earlier packets, so this is no total-decoding-work
+guarantee. Preview ranges are relative to the selected audio's first samples;
+probe its timestamp origin and use absolute `-seek_timestamp 1` seeks to
+`streamStart + windowStart`, rather than another track/container origin.
+Negative selected origins and absent non-WAV origins are unsupported and
+fail closed; RIFF/RF64 WAV without timestamps uses sample zero. Probe the
+selected time base/sample rate and report timestamp resolution plus a
+conservative seek bound `ceil(48000 * timeBaseSeconds) + 1` samples. Reject
+unknown/nonpositive/coarse non-WAV clocks or a bound above 480 samples
+(10 ms). WAV can derive its sample clock when no time base is supplied.
+Container seeks can differ from a fully decoded source-frame slice within
+that declared bound: the synthetic 1 ms Matroska clock yielded +8 samples
+(0.167 ms) in one middle seek. Record measured offsets in the development
+evidence; do not claim universal exact source-start selection. This seek
+uncertainty is separate from preserved filter delay and adds no compensation.
+Original
+applies only the output channel policy, 48 kHz resampling and exact sample
+trimming. Processed applies the selected profile to that bounded window,
+then resamples/trims to the same sample positions. No silence removal or
+padding is introduced. Exported assets require identical requested frame
+counts. Accurate analyzes/repeats the deterministic prechain over the context
+window, retaining observed normalization type and fallback semantics; this is
+not full-program analysis or a promise that the excerpt reaches -12 LUFS.
+
+Preserve existing filter delay, with zero compensation. On pinned FFmpeg
+9.0.2, deterministic random-marker correlation measured Original Raw and
+Gentle Raw at +1200 samples (25 ms); Zoom and the tested Original Raw with
+Declip/Declick/Denoise/Gate all disabled had zero correlation lag. Highpass
+phase can shift impulse peaks by a few samples. Those are approximate graph
+references, not calibration of every custom graph or build. Record exact
+filters, delay policy and context/edge limitations. Compare the bounded
+processed output with its direct filtered-window reference to exclude added
+shifts; do not claim source/processed waveforms align at zero lag. Five
+seconds of context does not guarantee equivalence to a full-file render,
+especially near EOF or with window-dependent leveling.
+
+Create four separately owned assets: Original, Processed, CompareOriginal
+and CompareProcessed. Validate/measure each encoded PCM through its held
+stream. Comparison uses gain only after the original/processed excerpts
+exist. For finite measurable I/TP, choose the lowest of the two integrated
+values and the two peak-safe levels `I - TP - 1.7`. Set each gain to
+`min(0, commonTarget - I)`. No gain boost or mastering retune is allowed.
+For unmeasurable excerpts, integrated matching is unavailable; retain an
+explicit reason and apply only any needed peak-safe attenuation.
+
+Measure the comparison pair again. Available integrated values must differ
+by at most 0.2 LU; each finite true peak must be <= -1.5 dBTP. The -1.7 dBTP
+planning target leaves measurement/encoding headroom. A known exceeded peak
+is fatal and rolls back owned preview assets; unmeasurable or nonmatching
+integrated comparison uses a clearly labelled warning. Null integrated/LRA
+under one second retain `too_short`; silence/undefined reasons remain fixed.
+Preview measurements, including Accurate's context analysis, never stand
+for full-recording integrated loudness. Playback remains an explicit user
+action; no permission-cleared speech review has been performed.
+
+Inherited parser limit: finite integrated/threshold measurements are accepted
+only through 0 LUFS. The initial 0.97-amplitude square fixture reported
+I=+0.51/TP=+1.80 and failed closed with code 4 before publication. This task
+does not expand those existing bounds. The final 0.8-amplitude high-peak
+fixture exercises comparison attenuation within the accepted meter domain;
+it does not certify preview support for positive integrated loudness. Retain
+the preliminary failure and this limitation for later edge-case work.
 
 ## Listening gate
 

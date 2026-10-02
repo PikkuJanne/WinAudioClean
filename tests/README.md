@@ -496,3 +496,47 @@ listening remains unperformed without cleared material; use the
 [candidate record](../docs/codex/winaudioclean/evidence/WAC-M2-03-listening.md)
 for the pending review. Neither synthetic exports nor the Gentle name approve
 voice quality or a default sound change.
+
+## Bounded preview and separate comparison (WAC-M2-04)
+
+`WinAudioClean.Preview.Tests.ps1` tests invariant range validation, sample
+rounding, bounded context, selected-track timestamps, fractional attenuation
+and exact output frames. Fault cases use real owned file transactions with
+controlled native results: cancellation, failed renders/meters, a short output,
+an excessive comparison peak, a publication collision and a report failure.
+They check source/settings preservation, foreign-file retention, owned rollback
+and completed assets retained on a reporting warning. Run both shells:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1
+```
+
+Run the real FFmpeg matrix separately, using a fresh ignored output directory:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-Preview.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-04/preview-final
+```
+
+The matrix covers start/middle/end, default/fractional intervals, short/silent
+input, a shifted selected track, Original/Gentle/custom cleaning, Fast/Accurate,
+channel conversion and encoding including small RF64. Original PCM must match
+an independently decoded source-frame slice exactly at zero offset for WAV;
+container cases record any exact sample offset within the declared timestamp
+precision. Processed PCM matches the bounded filter reference exactly, and
+comparison PCM matches gain-only references. Published-file meters check
+the reported comparison target, matching tolerance and true-peak ceiling.
+Native argument capture proves the application bounds the source input and
+meters held streams; intentional full decoding occurs only in the evidence
+harness. Locale pairs must produce identical PCM and all tested sources and
+fixtures must remain unchanged. `--case` and `--shell` select investigative
+runs; their partial scope cannot establish the complete acceptance matrix.
+
+Five-second context and preserved graph delay can differ from a full render.
+These synthetic checks do not establish listening quality, full-recording
+loudness, running-render Ctrl+C behavior or independent meter calibration.
+Playback is explicit. Keep generated audio and raw local reports out of Git.
+The inherited loudness parser rejects integrated values above 0 LUFS. The
+preliminary hot square exposed that limit; the final lower-amplitude peak-guard
+case does not establish support for positive integrated source loudness.

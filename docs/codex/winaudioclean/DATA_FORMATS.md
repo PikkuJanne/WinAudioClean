@@ -206,6 +206,73 @@ M2-03 keeps this projection unchanged: cleaning settings, preset identity,
 values are injected into a source report. The redacted export is insufficient
 to reproduce a cleaning candidate; the detailed original stays local.
 
+## Preview JSON
+
+### Implemented preview report — WAC-M2-04 (2026-10-02)
+
+Preview has a separate detailed schema-1 record, `reportType: preview`,
+written as `WinAudioClean_Preview_<jobId>.json` and a matching text file.
+It does not append an ordinary full-render summary entry. Record application
+version, status/exit, selected source stream, dependencies/build, preset base
+identity and candidate/customization flags. `settings` retains effective
+cleaning values, channel/encoding choices, Fast/Accurate and the unchanged
+`fullProfileFilters`. Asset measurements describe encoded excerpts; Accurate's
+Analysis measurement separately describes the bounded input context. Neither
+establishes full-program compliance.
+
+`range` contains requested/default duration information plus quantized
+`startSeconds`, `durationSeconds`, `startSamples`, `durationSamples`,
+`windowStartSeconds`, `windowDurationSeconds`, `trimStartSamples`,
+`trimEndSamples`, `preRollSeconds` and `postRollSeconds`. `alignment` records
+zero `compensationSamples`, `filterDelayPolicy: preserved`, the known graph's
+approximate reference delay or null for uncalibrated custom graphs, a fixed
+reference reason and a disclosed interval limitation. `boundaryNotice`
+explains bounded warmup, EOF and normalization differences.
+
+`timeline` carries `streamIndex`, `streamStartSeconds`, nullable
+`formatStartSeconds`, `originReason`, `absoluteSeekSeconds` and
+`seekTimestamp: true`. The source-relative window uses an absolute seek to
+the selected stream's origin plus its window start, including tracks that
+begin later than another container track. Full-render probe/argument policy
+remains separate.
+
+The timeline also records sample rate, rational `timeBase` (or null for a
+WAV fallback), `timestampResolutionSeconds`, `seekToleranceSamples`,
+`seekToleranceSeconds`, a fixed `resolutionReason` and `positionNote`.
+The seek bound is `ceil(48000 * timeBaseSeconds) + 1`, at most 480 samples;
+unknown/coarse non-WAV clocks fail closed. The development evidence records
+actual source-frame differences within that bound. These fields disclose
+container seek uncertainty separately from the unchanged graph delay.
+
+`assets` has exactly Original, Processed, CompareOriginal and CompareProcessed
+keys. Each carries its path, format, duration/frame count, gain, exact graph,
+encoded-file `{ value, reason }` metrics and `measurementStage`. `stages`
+records actual arguments, input source and native results for each render,
+plus Analysis for Accurate. Original/Processed use `bounded_file_window`;
+comparison renders use `held_excerpt_stream`; all asset meters use
+`held_output_stream`. Native diagnostics and paths stay local.
+
+`normalization.scope` is `bounded_context_window`, with requested mode,
+analysis/prechain/render strings and observed normalization type/fallback.
+`matching` records availability/reason/status, `commonTargetLufs`, the two
+attenuation gains, `headroomTargetDbtp: -1.7`, `peakCeilingDbtp: -1.5`,
+`toleranceLu: 0.2` and observed `pairDifferenceLu` or null. Unmeasurable
+matching has no invented common LUFS target. A complete report can coexist
+with WARNING/7 for unavailable/nonmatching comparison or normalization
+fallback. Keep the four-asset space estimate and report-writing completeness
+separate from audio matching.
+
+No preview state is saved and no report/audio uploads automatically. The
+existing redacted diagnostic projection remains the ordinary report subset;
+it drops arbitrary preview assets, range, graphs, stages and paths rather
+than treating preview metadata as full-render measurements. Failed preview
+processing/publication requests use console diagnostics and owned rollback.
+Once all four valid assets are published, report-writing failure preserves
+them with WARNING/7, `reporting.complete: false`, errors and null report paths.
+Owned incomplete reports are retired/removed where possible; the console
+remains authoritative when no corrected report could be written. A crash/storage fault
+can leave incomplete artifacts, so this is no multi-file atomicity guarantee.
+
 ## Website release metadata
 
 Use schemaVersion, status (draft/published), version, releasedAt, repository, sourceCommit, archiveName, downloadUrl, sha256, requirements, dependencyPolicy and changelog reference. Draft status uses null publication URL/date/hash when not known and disables the download button. Only actual approved artifact output may populate published fields. Validate metadata against the package manifest; reject version/checksum mismatch. Do not use an executable runtime auto-update manifest.

@@ -1,0 +1,49 @@
+{
+  "taskId": "WAC-M2-04",
+  "recordType": "final_focused_preview_gate",
+  "date": "2026-10-02",
+  "shell": "powershell.exe",
+  "shellVersion": "5.1.26100.9444",
+  "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1",
+  "applicationExitCode": 0,
+  "scope": "Only tests/WinAudioClean.Preview.Tests.ps1; runner also performed parser, static-analysis and governance-plan prechecks. This is not the Full gate.",
+  "discovered": 149,
+  "passed": 149,
+  "failed": 0,
+  "skipped": 0,
+  "inconclusive": 0,
+  "outsideScope": 0,
+  "pesterVersion": "5.7.1",
+  "psScriptAnalyzerVersion": "1.24.0",
+  "parserFiles": 32,
+  "staticGatePassed": true,
+  "staticNonGatingFindings": 179,
+  "governancePlanPassed": true,
+  "sourceSha256Before": {
+    "WinAudioClean.ps1": "68351cd1eea4e7082c49bfbf4bf4e33c853a3025f46fa88404aec97330c09992",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.Preview.ps1": "0d446a37ba8172b23c44ec009359e0a69abb04ea1ad7250f72da799119ed9cda",
+    "WinAudioClean.Preview.Tests.ps1": "8f94d47cbefd468180b09010e3123cb825e05091ef2189830c6bea931a4cb357"
+  },
+  "sourceSha256After": {
+    "WinAudioClean.ps1": "68351cd1eea4e7082c49bfbf4bf4e33c853a3025f46fa88404aec97330c09992",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.Preview.ps1": "0d446a37ba8172b23c44ec009359e0a69abb04ea1ad7250f72da799119ed9cda",
+    "WinAudioClean.Preview.Tests.ps1": "8f94d47cbefd468180b09010e3123cb825e05091ef2189830c6bea931a4cb357"
+  },
+  "sourceHashesEqual": true,
+  "orchestrationCasesDiscoveredAndExecuted": 13,
+  "coverage": [
+    "Strict invariant range strings, default 45-second clipping, explicit duration bounds and sample-aligned 5-second context.",
+    "Source-relative selected-track origin and timestamp-resolution validation, WAV sample-zero/sample-rate fallbacks, malformed/coarse metadata rejection, nonzero absolute seek arguments.",
+    "Common-target finite attenuation-only matching, fractional true-peak guard, silence/subsecond reasons and invariant argument construction.",
+    "Ten child-CLI preflight rejection cases prove configuration exit 2 precedes native executable resolution and destination creation.",
+    "Thirteen real Windows IO transaction and held-handle orchestration cases exercise success, cancellation, native and measurement failures, exact frame count, publication race, report failure and unmeasurable matching."
+  ],
+  "methodLimit": "Fault orchestration mocks native audio processing and metadata while retaining real IO ownership, WAV validation, publication and normal report writing. Unit and rejected-CLI checks do not constitute real-media DSP or listening evidence.",
+  "sanitizedLog": "WAC-M2-04-preview-focused-ps51.txt",
+  "sanitizedLogSha256": "f6a6d4bf28eb9973e74ee0f8925ee39a009e0f75e10cf9b3b3e6f0b136634b6b",
+  "rawLogSha256": "c6cdee89b06b389a443e29c442db2cd195f210933d66caaa66eb39b0bcece3ea",
+  "sanitization": "Checkout/user-profile paths and ANSI formatting removed; line endings and trailing whitespace normalized. Test content and outcomes retained.",
+  "supersedes": "Earlier focused 126-case runs covered the prior 25511872 helper snapshot. These 149-case runs cover the final 0d446a37 timestamp-resolution extension and frozen test file."
+}

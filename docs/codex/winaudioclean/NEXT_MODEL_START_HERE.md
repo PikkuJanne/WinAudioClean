@@ -1,102 +1,103 @@
-# Next model: WAC-M2-04
+# Next model: WAC-M2-05
 
-**WAC-M2-03 is complete. Start only WAC-M2-04: Add safe excerpt preview and
-level-matched comparison.** Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml,
-SYNC_PROTOCOL.md, tasks/WAC-M2-04.md, AUDIO_CONTRACT.md, DATA_FORMATS.md,
-NATIVE_PROCESS_CONTRACT.md and evidence/WAC-M2-03.md with source/listening records.
-Preserve all earlier evidence and M1-02 policy/resumption history.
+**WAC-M2-04 is complete. Start only WAC-M2-05: Audio gate with honest listening
+status.** Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml, SYNC_PROTOCOL.md,
+tasks/WAC-M2-05.md, AUDIO_CONTRACT.md, DATA_FORMATS.md, NATIVE_PROCESS_CONTRACT.md
+and evidence/WAC-M2-04.md/source/media. Preserve prior evidence and M1-02 history.
 
 ## Inspect and synchronize
 
-Use maintained WinAudioClean-governance on `codex/wac-m2-audio`; preserve the
-source-only original folder. Exact effective fetch/push origin:
-`https://github.com/PikkuJanne/WinAudioClean.git`. M2-03 started from verified
-M2-02 SHA `275c6a7fece04b6879f31b4d58a3feb44587e87c`; find its actual completion
-SHA through the live branch and draft PR #3.
+Use maintained WinAudioClean-governance, `codex/wac-m2-audio`, exact effective
+fetch/push origin `https://github.com/PikkuJanne/WinAudioClean.git`. Keep the
+source-only original folder untouched. M2-04 started from `cabd6cdd8a537d23ac50e2db006f84193fa0cd59`; find its
+actual completion SHA through the live branch and draft PR#3. Run handoff.py
+inspect, fetch --prune origin, sync-check, validate-plan and next per protocol
+(--plan-root for validate-plan/next). Only M2-05 should be ready. Inspect live
+PR/CI separately; no workflow/checks currently exist. Process-only authenticated
+GitHub CLI credential helper is available; never print or persist credentials.
 
-Run handoff.py inspect, fetch --prune origin, sync-check, validate-plan and next
-per SYNC_PROTOCOL.md. Use `--plan-root` for validate-plan/next. Only M2-04 should
-be ready. Inspect live PR/CI separately. If Git needs authentication, use the
-authenticated GitHub CLI as a process-only credential helper after inspecting
-existing process Git settings. Do not print credentials or persist changes.
+Reuse stacked M2 draft#3 on unmerged M1 draft#2/M0. Inspect actual history if an
+approved merge occurred. Feature checkpoints/draft updates are authorized;
+main pushes, merges, tags/releases, default-sound promotion, settings/security
+changes and deployment require exact authorization. Do not merge to unlock work.
 
-Reuse M2 draft #3 stacked on M1 while #2 is unmerged; M1 is stacked on M0.
-Inspect actual history if approved merges occurred. Do not merge to unlock work.
-Feature commits/pushes and draft updates are authorized; main pushes, merge,
-tags/releases, default-sound promotion, settings/security changes and deployment
-are not. No CI workflow currently exists.
+## Preserve runtime contracts
 
-## Contracts to preserve
+- Original graphs/identity `original`/`1.0.0`, application2.3/schema1, channel
+  policy and optional encoding are separate. Fast ordinary export remains
+  unchanged with no extra analysis. IO and BAT remain unchanged from M2-03.
+- Gentle `gentle`/`0.1.0` remains experimental Raw-only: highpass60, afftdn
+  nf=-35:nr=6, declip/declick/gate off, leveling unchanged. Typed cleaning
+  bounds/schema, disabled-value validation and exact Accurate profile rebuilding
+  remain. Zoom rejects Gentle/nonempty overrides. Preserve rounded Original
+  gate values and implicit default nr; reproduce exact graph/build/settings.
+- Full Accurate repeats the same selected post-channel/cleaning/leveling
+  prechain ending aresample192000, targets -12/-1.5/LRA7, measured offset mapping
+  and actual normalization type. Final encoded measurement uses the held WAV
+  binary stdin before no-replace publication. Keep finite +/-0.5 LU/TP<=-1.3,
+  peak precedence, explicit unavailable reasons and WARNING7 semantics.
+- Preview imports its optional sibling only when requested, defaults0/45sec,
+  caps explicit duration60, validates actual selected duration and exact48k
+  output frames. Bound five-second context then trim matching positions;
+  Accurate analysis is context-only. No hidden full render/playback/upload.
+- Timestamp origin plus window start uses seek_timestamp1. WAV no-PTS origin
+  is sample zero; unsupported/negative/missing non-WAV timing fails closed.
+  Record rational timestamp resolution and bounded <=10ms sample uncertainty.
+  Matroska millisecond PTS can shift the common source crop by a few samples:
+  final evidence measures/discloses it; do not claim universal sample-perfect
+  seeking or compensate by guessing. Known graph delay is preserved (Raw
+  Original/Gentle about25ms on pinned build); custom calibration remains limited.
+- Four owned Original/Processed/CompareOriginal/CompareProcessed assets share
+  pinned source/destination identities, capacity4outputs+reserve, held meters
+  and gain-only comparison copies. Target min(Ia,Ib,Ia-TPa-1.7,Ib-TPb-1.7),
+  gains<=0, finalTP<=-1.5/pairdifference<=0.2 plus1e-9 floatguard. Unmeasurable
+  matching is WARNING7. Peak/processing/publication failure rolls back only
+  owned objects. Report failure after4valid publications retains audio WARNING7.
+- Preview schema1 reports are separate from normal summaries; all metrics are
+  excerpt/context-only. No saved state. Preserve source locks through reports,
+  owned cleanup and PS5.1 compatibility. Reports/capture remain local/private.
 
-- Original `original`/`1.0.0` preserves exact Raw/Zoom defaults. Application 2.3,
-  report schema 1, mode, channel conversion and output format are separate.
-  Fast is default: one render with unchanged arguments, no extra analysis.
-- Gentle `gentle`/`0.1.0` is an experimental Raw-only candidate, no listening
-  approval: highpass 60, afftdn nf=-35:nr=6, declip/declick/gate off, leveling
-  unchanged. Zoom rejects Gentle and nonempty cleaning options.
-- Get-WacCleaningSettings builds schema 1 typed effective settings. Four actual
-  Boolean toggles; finite numeric scalars HighpassHz20..200, NoiseFloorDb-80..-20,
-  NoiseReductionDb0.01..20, GateThresholdDb-80..-20, GateRangeDb-60..0. Reject
-  strings/arrays/nulls/unknown keys/case duplicates; validate disabled settings.
-  Only the four declared stages toggle; highpass and leveling remain.
-- Original nf=-25/nr12 retains implicit nr; legacy gate nominal -45/-25 retains
-  rounded 0.0056/0.056. Other gate dB values convert invariantly. Graph/build,
-  settings and customization flag are necessary for reproducing custom output.
-- Accurate reconstructs profiles from exact typed schema keys and identity,
-  rejects graph/meta/customization mismatch, repeats the deterministic prechain
-  ending aresample=192000 before exactly one loudnorm. Targets I=-12/TP=-1.5/LRA=7.
-  Map target_offset to invariant offset, retain observed type/fallback semantics.
-- Final PCM measurement uses binary stdin from the held validation stream before
-  publication; retain locks, no-replace rename, stream ownership, bounded process
-  cleanup and PS5.1 void casts. No frozen-path reopen or repeated cleaning.
-- Final finite compliance is +/-0.5 LU and TP<=-1.3 dBTP, peak precedence; LRA is
-  informational. Subsecond I/LRA null with too_short; finite TP stays. Failed
-  measurement is FAILED; malformed first pass is fatal. Valid PCM with fallback
-  or failed/unavailable/out-of-tolerance checks is WARNING/7. Reporting.complete
-  covers writing only; retain primary processing failure codes.
-- Reports add presetExperimental/presetCustomized and typed settings.cleaning
-  (null for Zoom). Base identity is separate from overrides. Redaction omits
-  these fields and free-form identity/commands/diagnostics. Earlier schema1
-  reports remain accepted; raw reports/audio are never uploaded automatically.
-- Keep PS1/BAT entry points and IO sibling, import safety, PS5.1, stream policy,
-  held source/destination identity, owned partial/report cleanup and rollback.
-  Main/README remain CRLF/no BOM; IO remains LF. IO/launcher were unchanged.
-- 48 kHz PCM16 remains default; optional PCM24/mono/RF64. Preserve Original
-  Raw's approximate 25 ms delay; optional candidates have different stateful
-  filters, so preview alignment must measure/account for the selected graph.
+## Next task and validation
 
-## Narrow next scope
+M2-05 is an objective audio/compatibility gate, reproduction from recorded
+input/build/settings and honest listening/approval status. Run implemented-mode
+checks and classify undefined/ineligible metrics. Complete permission-cleared
+listening if material exists; otherwise keep pending/unperformed explicitly.
+No cleared speech was supplied for M2-03/04. Missing optional candidate approval
+does not block unrelated reliability delivery or authorize default promotion.
+Do not invent consent/reviewer results or broaden into saved settings/batch.
 
-Follow M2-04/AC-043 through AC-045: explicit validated excerpt start/duration,
-useful 30–60 second defaults where possible, pre/post-roll for stateful filters,
-matched source/processed intervals and separately level-matched comparison
-assets. Disclose boundary/warmup limitations. Preview loudness is not full-file
-loudness. Playback is explicit; creating/cancelling preview must not launch a
-full recording or affect full-render settings. Keep all writes/cleanup owned
-and no-replace, source unchanged. No saved settings, batch or broad rewrite.
+Use tests/README.md. Existing ignored Pester5.7.1/PSScriptAnalyzer1.24.0 and
+FFmpeg/ffprobe9.0.2 are installed. Python-spawned shells need inherited keys
+with key.upper()=='PSMODULEPATH' removed. Use actual arrays in -Command for
+multiple paths/tags, not comma text via -File. Focus before one Full per shell.
+M2-04 final Targeted:322, Full:1015Pester+61Python per shell,
+one privilege skip; 24preview cases/12locale pairs and20Original cases
++10frozen references pass. Source manifest pins finalphysicalhashes. Initial
+126focus predates timingprecision refinement; final gates supersede it. Preserve
+documented preliminary bugs/scopes and current timestamp uncertainty.
 
-## Validation and limits
+Review the inherited parser's positive integrated-loudness limit explicitly:
+raw hot square I=+0.51 LUFS failed closed. The final lower-amplitude peak fixture
+does not certify that domain. Timestamp tick+one-sample bounds are the tested
+application policy, not a guarantee for all codecs/decoder seek behavior.
 
-Use tests/README.md. Pester5.7.1/PSScriptAnalyzer1.24.0 already under ignored
-.wac-local/Modules; FFmpeg/ffprobe9.0.2 under
-.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin.
-When Python spawns PS5.1 remove inherited keys with key.upper()=='PSMODULEPATH'.
-Pass multi-path/tag filters through an actual array in -Command, not comma text
-through -File. Run focused checks before one required Full per shell.
+The first full preview matrix also exposed a harness assertion that expected
+finite LRA=0 for silence although the application correctly reports null/silence.
+Only three assertion lines were added to classify silent/undefined I/LRA (and
+unavailable TP). Removing exactly that block reproduces the captured prior
+harness SHA. The correction was outside Targeted/Full execution: those runners
+parse/analyze PowerShell, run Pester and run Python governance tests; they never
+execute Test-Preview.py. Runtime, PowerShell tests, native fixtures and Python
+governance sources stayed unchanged. The Full capture wrapper's broad hash
+flag detects the unused harness change and exits1 despite both shell gates
+exiting0; this scoped provenance condition is recorded, not claimed as an
+unchanged whole-tree gate. The final corrected unfiltered media matrix pins
+the final harness and stable sources. No cumulative test result is fabricated.
 
-M2-03 final Targeted:323 and Full:866 Pester +61 Python per shell, one privilege
-skip. Gentle/custom:16 cases +4 Fast references; Original:20 +10 frozen references.
-All eight Gentle locale pairs match PCM. Keep correct WARNING7 results. Media
-predates only two help-text clarifications; byte comparison established identical
-parameters/helpers/runtime. Final gates/help pin final hashes. Preserve the
-initial PS5.1 diagnostic-wrap assertion failures and test-only correction.
-
-No cleared speech corpus was supplied: listening remains UNPERFORMED; AC042
-accepted only the unavailable-review record. Never substitute synthetic tones
-for quality approval. >4 GB/disk exhaustion, running-render Ctrl+C, long-file/
-memory stress and independent meter calibration remain unverified. Capture is
-in memory; capacity is not reserved; reports lack multi-file atomicity/durability.
-
-Update task/acceptance/status/handoff, explicitly stage/review, commit/push the
-feature branch and verify clean local/live/PR equality. Record exact post-push
-SHA in PR/final response. Stop after M2-04; no default-sound promotion.
+Speech listening, independent calibration, >4GB output, actual disk exhaustion,
+running-render Ctrl+C and long-file/memory stress remain unverified. Capacity is
+not reserved; capture is in memory; sets are not multi-file atomic or power-loss
+durable. Use synthetic media only for mechanics. Update canonical acceptance,
+task/status/handoff, stage/review explicitly, commit/push and verify clean
+local/live/PR equality. Stop after M2-05; no default-sound promotion or release.

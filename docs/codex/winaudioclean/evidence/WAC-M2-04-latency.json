@@ -1,0 +1,135 @@
+{
+  "notice": "Synthetic isolated impulse/random marker; no speech/listening. Input and outputs are full12sec mechanics references only. No latency compensation applied.",
+  "ffmpeg_sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+  "ffmpeg_version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers",
+  "cases": [
+    {
+      "profile": "original_raw",
+      "filter": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "sample_delay": 1200,
+      "milliseconds": 25.0,
+      "correlation": 0.95083085913279,
+      "impulse_peak_offsets_samples": [
+        1202,
+        1202
+      ],
+      "source_sha256": "4bdd0c68680b302d573c4a7d30dddfaa3d4a7d86f25dbe0cf0b5750b7f2e3cfd",
+      "output_sha256": "33fd32d2a7d31795678e65a74d169601da376a8b7373c83b8fde8bd0b4a2a5a4",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-n",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\impulse-noise-marker.wav",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\original_raw.wav"
+      ],
+      "exit_code": 0
+    },
+    {
+      "profile": "gentle_raw",
+      "filter": "highpass=f=60,afftdn=nf=-35:nr=6,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "sample_delay": 1200,
+      "milliseconds": 25.0,
+      "correlation": 0.9481125664955413,
+      "impulse_peak_offsets_samples": [
+        1200,
+        1200
+      ],
+      "source_sha256": "4bdd0c68680b302d573c4a7d30dddfaa3d4a7d86f25dbe0cf0b5750b7f2e3cfd",
+      "output_sha256": "c39aee5267e80b54b92766c4b7091aba78393b055097f38ebe299196df5b856a",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-n",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\impulse-noise-marker.wav",
+        "-af",
+        "highpass=f=60,afftdn=nf=-35:nr=6,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\gentle_raw.wav"
+      ],
+      "exit_code": 0
+    },
+    {
+      "profile": "disabled_raw",
+      "filter": "highpass=f=80,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "sample_delay": 0,
+      "milliseconds": 0.0,
+      "correlation": 0.9424915608796451,
+      "impulse_peak_offsets_samples": [
+        0,
+        0
+      ],
+      "source_sha256": "4bdd0c68680b302d573c4a7d30dddfaa3d4a7d86f25dbe0cf0b5750b7f2e3cfd",
+      "output_sha256": "85cdd84f1cc3c75c75103706c9e65ecc5b10f526bfc02edb5c83e58cfbb7b8ed",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-n",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\impulse-noise-marker.wav",
+        "-af",
+        "highpass=f=80,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\disabled_raw.wav"
+      ],
+      "exit_code": 0
+    },
+    {
+      "profile": "zoom",
+      "filter": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "sample_delay": 0,
+      "milliseconds": 0.0,
+      "correlation": 0.9476069106026612,
+      "impulse_peak_offsets_samples": [
+        0,
+        0
+      ],
+      "source_sha256": "4bdd0c68680b302d573c4a7d30dddfaa3d4a7d86f25dbe0cf0b5750b7f2e3cfd",
+      "output_sha256": "6e245f0dce502dfeaf16ab849c9e0a1877af2de76d59a9444c057145d2965ded",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-n",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\impulse-noise-marker.wav",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "<repo>\\.wac-local\\WAC-M2-04\\latency\\zoom.wav"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "task": "WAC-M2-04",
+  "investigation_source": "import array, hashlib, json, math, random, subprocess, wave\nfrom pathlib import Path\n\nroot=Path(__file__).resolve().parent\nrepo=root.parents[2]\nffmpeg=repo/'.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe'\nrate=48000\nsource=root/'impulse-noise-marker.wav'\nrng=random.Random(24680)\nx=array.array('h')\nfor frame in range(rate*12):\n    t=frame/rate\n    value=0.002*math.sin(2*math.pi*220*t)\n    if 6<=t<6.25:\n        value+=0.4*(rng.random()*2-1)*math.sin(math.pi*(t-6)/0.25)**2\n    if frame in (4*rate,8*rate):\n        value=0.8\n    x.append(round(value*32767))\nwith wave.open(str(source),'wb') as w:\n    w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate); w.writeframes(x.tobytes())\nlevel='dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5'\nchains={'original_raw':'adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,'+level,\n        'gentle_raw':'highpass=f=60,afftdn=nf=-35:nr=6,'+level,\n        'disabled_raw':'highpass=f=80,'+level,'zoom':level}\nrecords=[]\ndef score(y,lag,step):\n    inds=range(round(6.03*rate),round(6.22*rate),step)\n    xs=[x[i] for i in inds]; ys=[y[i+lag] for i in inds]\n    return sum(a*b for a,b in zip(xs,ys))/math.sqrt(sum(a*a for a in xs)*sum(b*b for b in ys))\nfor name,chain in chains.items():\n    dest=root/(name+'.wav')\n    cmd=[str(ffmpeg),'-nostdin','-hide_banner','-v','error','-n','-i',str(source),'-af',chain,'-ar',str(rate),'-c:a','pcm_s16le',str(dest)]\n    result=subprocess.run(cmd,capture_output=True,check=True)\n    with wave.open(str(dest),'rb') as w:y=array.array('h',w.readframes(w.getnframes()))\n    coarse=max(range(-2400,2401,16),key=lambda lag:score(y,lag,16))\n    lag=max(range(coarse-16,coarse+17),key=lambda lag:score(y,lag,4))\n    peaks=[max(range(round(t*rate)-2400,round(t*rate)+2401),key=lambda i:abs(y[i]))-round(t*rate) for t in (4,8)]\n    rec={'profile':name,'filter':chain,'sample_delay':lag,'milliseconds':1000*lag/rate,'correlation':score(y,lag,1),'impulse_peak_offsets_samples':peaks,'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),'output_sha256':hashlib.sha256(dest.read_bytes()).hexdigest(),'command':cmd,'exit_code':result.returncode}\n    print(name,lag,1000*lag/rate,rec['correlation'],peaks,flush=True)\n    records.append(rec)\nsummary={'notice':'Synthetic isolated impulse/random marker; no speech/listening. Input and outputs are full12sec mechanics references only. No latency compensation applied.', 'ffmpeg_sha256':hashlib.sha256(ffmpeg.read_bytes()).hexdigest(),'ffmpeg_version':subprocess.check_output([str(ffmpeg),'-version'],text=True).splitlines()[0],'cases':records}\ntext=json.dumps(summary,indent=2).replace(str(repo),' <repo>'.strip()).replace(str(repo).replace('\\\\','\\\\\\\\'),'<repo>')\n(root/'summary.json').write_text(text+'\\n',encoding='utf-8')\n",
+  "investigation_source_sha256": "30288fd15543606733638137b3c39f73e33460b67e437624e1668ce8eb7de863",
+  "interpretation": "No added shift is required: retain graph delay; tested Original/Gentle both +1200 samples, denoise-disabled Raw/Zoom 0; no universal compensation for custom settings."
+}

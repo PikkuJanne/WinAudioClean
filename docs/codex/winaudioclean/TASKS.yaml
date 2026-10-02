@@ -556,7 +556,7 @@
       "depends_on": [
         "WAC-M2-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Optional local preview path, excerpt selection and comparison metadata.",
       "implementation": [
@@ -570,7 +570,30 @@
         "AC-044",
         "AC-045"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M2-04-full-ps51.txt",
+        "evidence/WAC-M2-04-full-ps7.txt",
+        "evidence/WAC-M2-04-initial-preview-discovery-ps51.txt",
+        "evidence/WAC-M2-04-initial-preview-discovery-ps7.txt",
+        "evidence/WAC-M2-04-initial-preview-discovery.json",
+        "evidence/WAC-M2-04-initial-preview-helpers-cli-ps7.txt",
+        "evidence/WAC-M2-04-initial-preview-helpers-cli.json",
+        "evidence/WAC-M2-04-initial-preview-unit.json",
+        "evidence/WAC-M2-04-latency.json",
+        "evidence/WAC-M2-04-original-preservation.json",
+        "evidence/WAC-M2-04-preview-focused-ps51.json",
+        "evidence/WAC-M2-04-preview-focused-ps51.txt",
+        "evidence/WAC-M2-04-preview-focused-ps7.json",
+        "evidence/WAC-M2-04-preview-focused-ps7.txt",
+        "evidence/WAC-M2-04-preview-harness-initial.json",
+        "evidence/WAC-M2-04-preview-preliminary.json",
+        "evidence/WAC-M2-04-preview-silence-correction.json",
+        "evidence/WAC-M2-04-preview.json",
+        "evidence/WAC-M2-04-source.json",
+        "evidence/WAC-M2-04-targeted-ps51.txt",
+        "evidence/WAC-M2-04-targeted-ps7.txt",
+        "evidence/WAC-M2-04.md"
+      ],
       "blocked_reason": null
     },
     {

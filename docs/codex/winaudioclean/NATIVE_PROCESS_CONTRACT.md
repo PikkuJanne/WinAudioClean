@@ -246,3 +246,61 @@ measurement and publication. The report end timestamp follows owned cleanup.
 The [data contract](DATA_FORMATS.md) specifies additive schema-1 stage records
 and the smaller redacted projection. M1 statements about closed stdin,
 render-only timing and unmeasured loudness remain historical for this path.
+
+## Implemented in WAC-M2-04 (2026-10-02)
+
+The main entry point imports `WinAudioClean.Preview.ps1` only for `-Preview`
+and returns after the preview result. A missing optional sibling produces
+dependency code 3; full rendering/import safety does not require it. Range
+flags require Preview and undergo strict invariant validation before native
+execution. Selection cancellation produces 130 with owned cleanup. No
+preview action starts playback or implicitly invokes the full-render path.
+
+Keep the existing held source/destination identities throughout preview.
+Allocate four independent output transactions with shared source/directory
+identity and unique role names. Capacity accounts for all four outputs plus
+the existing reserve policy. Add input `-ss`/`-t` before `-i` for the bounded
+context window; map the same selected absolute stream for both source
+renders and Accurate analysis. A separate bounded preview timing probe reads
+the selected stream's timestamp origin. Set `-seek_timestamp 1` and seek to
+`streamStart + windowStart`, keeping user ranges relative to that audio's
+beginning. Record the origin, absolute seek and selected time-base precision.
+The conservative source selection bound is `ceil(48000*timeBase)+1` samples;
+missing/coarse non-WAV clocks or a bound above 480 samples fail closed.
+WAV may use its sample clock. Do not claim exact source-frame selection for
+container seeks: record the bound separately from preserved graph latency.
+Accurate seeking may decode
+and discard earlier packets; the bounded filter window is not a guarantee
+of total decoder work. Exact sample trims happen after the chosen
+channel/profile policy. Preview analysis, rendering and asset meters have
+finite duration-based deadlines with a two-minute minimum; dependency/media/
+timing probes retain their 15-second deadlines. All use owned process cleanup.
+
+Validate and freeze each encoded excerpt before measurement. The asset
+meters consume the held WAV using binary stdin. Comparison renders consume
+the still-held Original/Processed WAVs through binary stdin, apply only
+invariant attenuation and resampling, and retain caller stream ownership.
+Rewind the owned stream at each use; never release/reopen frozen paths.
+The four assets must contain exactly the requested sample count. Keep the
+same locks through publication and report completion.
+
+Publish only after all assets are validated/measured and peak checks pass.
+Ordinary native/process/measurement errors retain dependency/native codes
+3/4; validation/publication/storage failures use 5. Unavailable/nonmatching
+comparison or normalization fallback yields WARNING/7 when valid assets
+and their reports exist. Preview reports use CreateNew held writers, no
+overwrite, no automatic ordinary-summary append and no automatic upload.
+If publication fails, roll back only owned published objects via their
+retained immutable handles and only owned partials/reports. After all four
+valid assets are published, report-writing failure retains the audio with
+WARNING/7 and explicit incomplete reporting/errors. Retire/remove only the
+owned incomplete report files, preserving existing/foreign reports. Corrected
+status remains in the returned report and console if storage prevents a
+persisted report from being written.
+Never infer ownership from a preview filename or delete a foreign replacement.
+Cleanup failures are disclosed and may leave owned artifacts. Multi-file
+publication is not atomic and has no crash/power-loss guarantee.
+
+Full-render settings, exact Original defaults and the original launcher
+route remain unchanged. Running-render Ctrl+C, full-duration stress and
+speech playback/listening are not certified by these preview checks.

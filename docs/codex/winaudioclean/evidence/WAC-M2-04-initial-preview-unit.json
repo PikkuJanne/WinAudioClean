@@ -1,0 +1,30 @@
+{
+  "taskId": "WAC-M2-04",
+  "recordType": "initial_unit_result_summary",
+  "date": "2026-10-02",
+  "scope": "Preview range and matching helpers only. Orchestration was still being implemented; no audio or listening claim is made.",
+  "command": "pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preview.Tests.ps1 -Tag Unit",
+  "applicationExitCode": 1,
+  "powershellVersion": "7.6.5",
+  "pesterVersion": "5.7.1",
+  "analyzerVersion": "1.24.0",
+  "parser": { "passed": true, "files": 32 },
+  "staticGate": { "passed": true, "advisoryFindings": 173 },
+  "planValidation": { "passed": true, "tasks": 30, "acceptanceCases": 90, "improvements": 20 },
+  "pester": { "discovered": 78, "selected": 68, "passed": 63, "failed": 5, "skipped": 0, "inconclusive": 0, "outsideScope": 10 },
+  "testedSourceSha256": {
+    "WinAudioClean.ps1": "27e5016da2a78b6a06258dcec2db0f4e754923dc8578819e93ad00b254670224",
+    "WinAudioClean.Preview.ps1": "1b651213fdb606ce2734bac2b088318d69d1fcff369ff4d99c1e93c565b4055e",
+    "tests/WinAudioClean.Preview.Tests.ps1": "1801b327e9cef64841fe0d1125176f79348d8fa84d58953499ecddab6a395b07"
+  },
+  "failures": [
+    { "case": "source peak guard", "field": "OriginalGainDb", "expected": -1.7, "actual": -2 },
+    { "case": "processed peak guard", "field": "OriginalGainDb", "expected": -3.7, "actual": -4 },
+    { "case": "unavailable too_short", "field": "OriginalGainDb", "expected": -1.2, "actual": -1 },
+    { "case": "unavailable silence", "field": "OriginalGainDb", "expected": -1.2, "actual": -1 },
+    { "case": "unavailable undefined_loudness", "field": "OriginalGainDb", "expected": -1.2, "actual": -1 }
+  ],
+  "cause": "Math.Min(0, doubleGain) selected an integer overload and rounded fractional attenuation before the result was cast to double.",
+  "correction": "Use the double literal 0.0 in all four gain clamps. Retain fractional attenuation and add a below-one-dB peak-guard regression; a required -0.4 dB gain must not round to zero.",
+  "recordingNote": "This sanitized summary preserves the direct tool result. A complete raw log was not saved for this first invocation. A subsequent preliminary helpers/CLI log retained the same bug before its correction; final gates supersede these results."
+}

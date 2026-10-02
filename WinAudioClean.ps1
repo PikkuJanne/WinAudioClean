@@ -38,6 +38,16 @@ experimental Raw candidate: 60 Hz highpass and afftdn nf=-35:nr=6, with declip,
 declick and gate disabled. It retains leveling and has no listening approval.
 Custom cleaning settings are recorded separately from the named base preset.
 
+-Preview creates only a bounded local excerpt and comparison assets. It uses
+up to five seconds of surrounding audio on each side for filter warmup, then
+trims to the requested source interval. Stateful filters and normalization can
+differ from a full-recording run; selected-graph delay is retained and disclosed.
+Separate comparison copies use attenuation for level matching and a peak guard.
+Silent/subsecond excerpts may be unmeasurable. Preview metrics describe excerpts,
+not full-program loudness or speech quality. No playback starts automatically.
+Ranges count from the selected track's timestamp origin. Negative or missing
+origins are rejected; WAV without timestamps uses its first sample as zero.
+
 The source and prior exports are preserved. New audio and per-run JSON/text
 reports are written to Music by default; WinAudioClean_Log.txt is the summary.
 Reports may contain local paths and metadata. Diagnostic export is a separate
@@ -52,6 +62,17 @@ NoiseReductionDb 0.01..20, GateThresholdDb -80..-20, GateRangeDb -60..0.
 Unknown keys, numeric strings and arbitrary filter text are rejected. Supply a
 PowerShell hashtable through & invocation; a literal hashtable cannot be passed
 through a native -File argument. Zoom rejects nonempty cleaning options. No settings are saved.
+.PARAMETER Preview
+Create source/processed excerpts and separate level-matched comparison WAVs.
+The opt-in route ends after preview; it never starts a full render or playback.
+Requires the sibling WinAudioClean.Preview.ps1. Open comparison files explicitly.
+.PARAMETER PreviewStartSeconds
+Nonnegative finite seconds from the selected source's start, default 0.
+Use an invariant decimal point. Requires -Preview and a start inside the source.
+.PARAMETER PreviewDurationSeconds
+Positive finite duration through 60 seconds, default 45. The omitted default
+shortens to the available source; an explicit duration beyond the end is rejected.
+Requires -Preview. Source interval rounding is to complete 48 kHz samples.
 .EXAMPLE
 .\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav"
 
@@ -80,9 +101,17 @@ forces a target; inspect warnings and listen to the result.
 Opt into the Gentle listening candidate with a typed cleaning override. Reports
 identify the base candidate, customization and exact effective settings. Raw's
 highpass and shared leveling remain; only the four documented stages have toggles.
+.EXAMPLE
+.\WinAudioClean.ps1 -inputPath "C:\Audio\meeting.wav" -Mode Zoom -Preview -PreviewStartSeconds 15 -PreviewDurationSeconds 30 -NonInteractive
+
+Create a bounded preview only. Reports identify the selected interval, warmup
+limits, effective filters, excerpt measurements and separate comparison gains.
+The files remain local; open them explicitly to compare. Full-render settings
+and the source recording are unchanged.
 .NOTES
 Author: Janne Vuorela. Windows 10/11; Windows PowerShell 5.1 or PowerShell 7+.
 Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
+Keep WinAudioClean.Preview.ps1 beside them to use optional previews.
 Supply FFmpeg/ffprobe through -FfmpegPath/-FfprobePath, beside the script, or PATH.
 No dependency is automatically downloaded. Processing time depends on the file
 and machine. Severe noise and lost/clipped detail may not be recoverable;
@@ -104,6 +133,9 @@ param(
     [string]$LoudnessMode = 'Fast',
     [string]$Preset = 'Original',
     [System.Collections.IDictionary]$CleaningOptions = @{},
+    [switch]$Preview,
+    [string]$PreviewStartSeconds = '0',
+    [string]$PreviewDurationSeconds = '45',
     [switch]$Mono,
     [switch]$Rf64,
     [switch]$NonInteractive,
@@ -1499,6 +1531,17 @@ if ($PSBoundParameters.ContainsKey('ExportDiagnostic') -or $PSBoundParameters.Co
 $scriptVersion = "2.3"
 $interactive = Test-WacInteractive -NonInteractive:$NonInteractive
 
+# The preview component is optional for normal exports. Loading defines helpers;
+# it never renders or launches playback. Existing full-render installations and
+# dot-source imports retain their original IO-only dependency contract.
+if ($Preview) {
+    try { . (Join-Path $PSScriptRoot 'WinAudioClean.Preview.ps1') }
+    catch {
+        Write-Error -Message ('Preview component failed: keep WinAudioClean.Preview.ps1 beside the main script. ' + $_.Exception.Message) -ErrorAction Continue
+        exit 3
+    }
+}
+
 # Validate before displaying the menu or starting any native process. Reading a
 # file here proves accessibility; bounded media probing follows below.
 try {
@@ -1520,6 +1563,14 @@ try {
     if ($Mode) {
         $validatedChoice = if ($Mode -eq 'Raw') { '1' } else { '2' }
         $null = Get-WacProcessingProfile -Choice $validatedChoice -Preset $Preset -CleaningOptions $CleaningOptions
+    }
+    if (-not $Preview -and ($PSBoundParameters.ContainsKey('PreviewStartSeconds') -or $PSBoundParameters.ContainsKey('PreviewDurationSeconds'))) {
+        throw 'Preview start/duration require -Preview. No full recording will be processed implicitly.'
+    }
+    if ($Preview) {
+        # Validate numeric options against the supported duration ceiling here;
+        # the actual selected stream is pinned/probed and checked by the preview.
+        $null = Get-WacPreviewRange -InputDurationSeconds 1000000000 -Start $PreviewStartSeconds -Duration $PreviewDurationSeconds -DurationExplicit:($PSBoundParameters.ContainsKey('PreviewDurationSeconds'))
     }
     $outFolder = Get-WacOutputDirectory -Path $OutputDirectory
     if (-not $Mode -and -not $interactive) {
@@ -1587,11 +1638,37 @@ if ($processingProfile.CleaningSettings) { Write-Host ('Cleaning: ' + ($processi
 try {
     Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain $filterChain
     if ($LoudnessMode -eq 'Accurate') { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain 'aresample' }
+    if ($Preview) { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain 'atrim,asetpts,aresample,volume' }
 }
 catch {
     Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 3
 }
+if ($Preview) {
+    $previewArguments = @{
+        InputPath = $inputPath; OutputFolder = $outFolder
+        FfmpegPath = $ffmpegPath; FfprobePath = $ffprobePath
+        ProcessingProfile = $processingProfile; LoudnessMode = $LoudnessMode
+        BitDepth = $BitDepth; Mono = $Mono; Rf64 = $Rf64
+        Start = $PreviewStartSeconds; Duration = $PreviewDurationSeconds
+        DurationExplicit = $PSBoundParameters.ContainsKey('PreviewDurationSeconds')
+        Interactive = $interactive; ToolVersion = $scriptVersion
+        FfmpegVersion = $ffmpegVersion; FfprobeVersion = $ffprobeVersion
+    }
+    if ($PSBoundParameters.ContainsKey('AudioStreamIndex')) { $previewArguments.AudioStreamIndex = $AudioStreamIndex }
+    try { $previewResult = Invoke-WacPreview @previewArguments }
+    catch {
+        Write-Error -Message ('Preview failed: ' + $_.Exception.Message) -ErrorAction Continue
+        exit 5
+    }
+    Write-Host ('Preview: ' + $previewResult.Status)
+    if ($previewResult.Error) { Write-Error -Message $previewResult.Error -ErrorAction Continue }
+    if ($previewResult.CleanupErrors) { Write-Warning ($previewResult.CleanupErrors -join ' ') }
+    if ($previewResult.ReportPaths) { Write-Host ('Preview reports: ' + ($previewResult.ReportPaths | ConvertTo-Json -Compress)) }
+    Write-Host 'Preview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.'
+    exit $previewResult.ExitCode
+}
+
 $transaction = $null
 $applicationExitCode = 0
 try {

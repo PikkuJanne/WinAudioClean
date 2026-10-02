@@ -400,3 +400,61 @@ words, consonants, breaths, voice character or artifacts. Evidence:
 `evidence/WAC-M2-03.md` and `evidence/WAC-M2-03-listening.md`.
 No default-sound promotion, merge, release, deployment or security-policy
 approval is added.
+
+### 2026-10-02 — WAC-M2-04 bounded excerpts and comparison gain
+
+D30. Add explicit local `-Preview` through an optional sibling helper,
+retaining the full-render path and Original defaults. Start/duration default
+to 0/45 seconds; the default clips to remaining selected audio, while an
+explicit positive duration must fit and be <=60 seconds. Strict invariant
+decimal ranges become exact 48 kHz sample positions. Process at most five
+seconds of pre/post context, then trim both excerpts to matching positions
+and frames. Accurate analyzes that bounded context rather than the whole
+recording. No preview state is saved and no playback/full render starts
+implicitly.
+
+Ranges count from the selected audio's beginning, not the container's first
+track. Use a separately probed selected-stream origin and absolute timestamp
+seeks; WAV without timestamps uses sample zero. Negative or missing non-WAV
+origins fail closed pending a separately verified seek policy.
+
+Retain declared timestamp resolution and a conservative selection bound of
+`ceil(48000*timeBaseSeconds)+1` samples, no more than 480 samples/10 ms;
+unknown/coarse non-WAV clocks fail closed. Container source-frame selection
+is verified within that bound rather than asserted universally exact. The
+observed +8 sample middle-seek difference is recorded in preliminary/final
+synthetic evidence, separately from preserved graph delay.
+
+Preserve selected graph latency with zero compensation. Pinned 9.0.2 marker
+checks show Original/Gentle Raw at +1200 samples (25 ms), Zoom and the tested
+all-cleaning-stages-disabled Raw at zero. Keep known delay metadata and
+uncalibrated custom-graph/boundary limits explicit. Exact bounded-window
+reference comparisons establish no additional shift; they do not approve
+source/processed waveform zero-lag or full-render equivalence.
+
+Keep Original/Processed and CompareOriginal/CompareProcessed as four owned
+assets. Measure held encoded excerpts, choose a common lower integrated
+level constrained by -1.7 dBTP planning headroom, and apply only attenuation
+to the comparison pair. Re-measure; allow <=0.2 LU difference and require
+finite TP<=-1.5 dBTP. Undefined/short/silent integrated matching is explicitly
+unavailable, with any known peak controlling attenuation. Peak failure rolls
+back owned assets; matching/fallback warnings remain visible. No change to
+mastering/full-render targets is implied.
+
+Use exact sample-count validation, four-asset capacity estimates, retained
+source/output handles, no-replace publication and owned rollback. Detailed
+preview schema 1 records range/context/graphs/gains/stages and encoded-asset
+metrics separately from ordinary full-render reports. Nothing is uploaded.
+After all four valid assets are published, report-writing failure retains
+them with WARNING/7 and explicit incomplete-report diagnostics.
+
+Retain the existing measurement parser's integrated/threshold upper bound
+of 0. The preliminary 0.97-amplitude square reported +0.51 LUFS/+1.80 dBTP
+and failed closed; preserve that evidence. Use a 0.8-amplitude high-peak
+fixture within the accepted domain for the final attenuation checks. This
+is not support or certification of positive-integrated-loudness inputs;
+carry the inherited limitation into subsequent edge-case validation.
+Private speech listening remains unperformed; synthetic mechanics are not
+approval to promote a default sound. No merge/release/deployment/security
+approval is added. Evidence: `evidence/WAC-M2-04-latency.json` and the final
+task evidence/media matrix.

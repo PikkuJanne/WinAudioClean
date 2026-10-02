@@ -38,6 +38,9 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 - WinAudioClean.IO.ps1
   - Required sibling helper for Windows file ownership, validation locks and safe publication.
 
+- WinAudioClean.Preview.ps1
+  - Sibling helper for the optional excerpt and level-matched comparison workflow. Full renders work without it.
+
 - WinAudioClean.bat
   - Simple launcher: enables drag-and-drop functionality for audio files.
 
@@ -185,6 +188,76 @@ the noise floor or reduction makes `nr` explicit. Other gate dB settings are
 converted to linear amplitude as `10^(dB/20)` with
 invariant decimal formatting. Preserve the report's exact filters and FFmpeg
 build when reproducing a render.
+
+**Local excerpt preview and comparison**
+
+Use `-Preview` to create a short original excerpt, the processed excerpt and
+two separate files for comparing them at a matched level:
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -Preset Gentle -Preview -PreviewStartSeconds 30 -PreviewDurationSeconds 45 -NonInteractive
+```
+
+The default starts at zero and requests 45 seconds, shortened to the remaining
+audio when needed. An explicit duration must be greater than zero, at most
+60 seconds and fit before the selected track ends. Start must be nonnegative
+and before the track ends. Start counts from the selected audio track's
+beginning, including tracks that start later than others in a container.
+Preview rejects negative or missing selected-track timestamp origins;
+WAV sample zero is accepted as its origin when timestamps are absent.
+Use decimal seconds with a dot, such as `30.125`.
+The range is rounded to 48 kHz sample positions; a range shorter than one
+output sample is rejected. Range options require `-Preview`.
+
+Each request creates four uniquely named WAVs:
+
+- `Original`: the selected interval with the chosen output/channel policy.
+- `Processed`: that interval after the selected Raw/Zoom profile.
+- `CompareOriginal`: a separately attenuated original for comparison.
+- `CompareProcessed`: a separately attenuated processed excerpt for comparison.
+
+Open the two comparison files yourself to listen. The script never starts
+playback or a full recording render as part of preview. Choose or cancel the
+mode/audio-track prompt before processing; a cancelled selection creates no
+preview audio. Existing files and the source are preserved.
+
+Processing uses up to five seconds of context before and after the excerpt,
+limited by the track's ends, then trims both excerpts to matching source
+positions and frame counts. Stateful filtering and normalization over that
+window can differ from a full render. Container timestamp precision can also
+shift a seek by a few samples; the report gives its resolution and a
+conservative bound of at most 10 ms. WAV source intervals are checked exactly
+in the synthetic tests; container positions are checked within their declared
+precision. Unknown/coarse non-WAV timestamp clocks are rejected.
+The current Original and Gentle Raw
+graphs retain an approximately 25 ms waveform delay on the tested FFmpeg
+build; Zoom and the tested Raw graph with all four cleaning stages disabled
+had zero reference delay. No delay compensation is applied. Custom graphs
+need their own delay check. The report labels context and these limitations.
+
+Comparison uses attenuation only. Both excerpts are measured, a common lower
+LUFS level is chosen with a -1.7 dBTP headroom target, and the resulting files
+are measured again. Matching allows a difference of 0.2 LU and requires true
+peak at or below -1.5 dBTP. Silence or clips shorter than one second are
+labelled unmeasurable; any available peak still controls safe attenuation.
+Preview metrics describe these excerpts, never the full recording's loudness.
+The comparison gain leaves full-render settings unchanged.
+
+The shared meter parser currently accepts integrated values through 0 LUFS.
+A preliminary very loud synthetic clip reported +0.51 LUFS and was rejected
+without publication. This inherited limit remains; the successful peak-guard
+fixture has negative integrated loudness and does not establish support for
+positive-LUFS material.
+
+The preview JSON/text reports contain each asset's measurements, selected
+range, context, gains and exact graphs. They may include local paths and native
+diagnostics; review them before sharing. Processing/publication failures
+roll back only owned preview files where storage permits. If writing reports
+fails after all four valid assets are published, the audio is retained with
+WARNING/7 and an incomplete-report diagnostic. Creating these files is
+not speech listening approval. The optional helper must be beside the main
+script, and the existing Fast/Accurate, bit-depth, mono and stream choices
+remain available. Accurate analyzes only the bounded context window.
 
 **Fast and Accurate loudness**
 
