@@ -1,0 +1,38 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (11 files; shell 7.6.5).
+Static gate passed; 48 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 2 files.
+Discovery found 27 tests in 210ms.
+Filter 'Tag' set to ('Quick', 'Unit', 'Import').
+Filters selected 11 tests to run.
+Running tests.
+
+Running tests from '<repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] selects the exact original Raw mode and filters for choice 1 101ms (69ms|31ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 6ms (4ms|1ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom () 22ms (20ms|2ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom (invalid) 4ms (3ms|1ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom (3) 4ms (3ms|1ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 7ms (6ms|2ms)
+  [+] accepts an input stem without an extension 11ms (3ms|8ms)
+  [+] characterizes the legacy minute-timestamp collision 6ms (5ms|1ms)
+  [+] quotes paths and the filter string in the original FFmpeg argument order 25ms (24ms|1ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 9ms (7ms|1ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 947ms (940ms|7ms)
+Tests completed in 1.71s
+Tests Passed: 11, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 16
+Quick passed: 11 Pester passed, 0 skipped, 16 outside scope.

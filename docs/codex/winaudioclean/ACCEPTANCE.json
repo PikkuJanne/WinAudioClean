@@ -43,8 +43,12 @@
       "title": "Compatibility entry points",
       "procedure": "Invoke the original -inputPath call and the .bat entry point with controlled input in both available Windows shells.",
       "expected": "Existing modes and entry points remain; unavailable shell runs are marked not-run, not passed.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-02.md",
+        "evidence/WAC-M0-02-full-ps7.txt",
+        "evidence/WAC-M0-02-full-ps51.txt"
+      ]
     },
     {
       "id": "AC-005",
@@ -52,8 +56,12 @@
       "title": "No import side effects",
       "procedure": "Load test helpers in a fresh process with FFmpeg/process-start mocked.",
       "expected": "No menu, process, writes, or exit on import; tests can run unattended.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-02.md",
+        "evidence/WAC-M0-02-full-ps7.txt",
+        "evidence/WAC-M0-02-full-ps51.txt"
+      ]
     },
     {
       "id": "AC-006",
@@ -61,8 +69,13 @@
       "title": "Useful checks",
       "procedure": "Run the new Quick runner, deliberately break a tested helper in an isolated worktree, then restore it.",
       "expected": "The runner fails for the deliberate defect and passes after restoration; no broad analyzer suppressions hide it.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-02.md",
+        "evidence/WAC-M0-02-full-ps7.txt",
+        "evidence/WAC-M0-02-full-ps51.txt",
+        "evidence/WAC-M0-02-mutation.json"
+      ]
     },
     {
       "id": "AC-007",

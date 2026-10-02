@@ -86,6 +86,38 @@ LICENSE / WARRANTY
 
 param([string]$inputPath)
 
+# Small, side-effect-free seams for characterization of the existing workflow.
+function Get-WacProcessingProfile {
+    param([string]$Choice)
+
+    $cleanFilters = "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056"
+    $levelFilters = "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+
+    if ($Choice -eq '1') {
+        [pscustomobject]@{ ModeName = 'RAW (Clean+Level)'; FilterChain = "$cleanFilters,$levelFilters" }
+    } else {
+        # Legacy fallback for every other answer; validation belongs to WAC-M1-01.
+        [pscustomobject]@{ ModeName = 'ZOOM (Level Only)'; FilterChain = $levelFilters }
+    }
+}
+
+function Get-WacOutputPath {
+    param([string]$InputPath, [string]$OutputFolder, [string]$Timestamp)
+
+    $fileName = [System.IO.Path]::GetFileNameWithoutExtension($InputPath)
+    "$OutputFolder\$fileName`_Cleaned_$Timestamp.wav"
+}
+
+function Get-WacFfmpegArguments {
+    param([string]$InputPath, [string]$FilterChain, [string]$OutputFile)
+
+    # Preserve the legacy command here, including -y, until the export-safety task.
+    "-i `"$InputPath`" -vn -af `"$FilterChain`" `"$OutputFile`" -y -hide_banner -loglevel error -stats"
+}
+
+# Dot-sourcing exposes only helpers. Normal -File, &, and .bat calls still run below.
+if ($MyInvocation.InvocationName -eq '.') { return }
+
 # --- CONFIGURATION ---
 $scriptVersion = "2.3"
 $ffmpegPath = "$PSScriptRoot\ffmpeg.exe"
@@ -107,21 +139,10 @@ Write-Host "    -> Use for meeting audio. Preserves existing noise cancellation.
 
 $choice = Read-Host "`nEnter selection (1 or 2)"
 
-# --- FILTER CHAINS ---
-# Robust Cleaning: De-clip -> Highpass(80Hz) -> De-click -> FFT Denoise -> Gate(Linear Scale)
-$cleanFilters = "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056"
-
-# Leveling: Dynamic Normalizer -> Loudness Limiter (-12dB RMS)
-$levelFilters = "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
-
-# --- LOGIC ---
-if ($choice -eq '1') {
-    $modeName = "RAW (Clean+Level)"
-    $filterChain = "$cleanFilters,$levelFilters"
-} else {
-    $modeName = "ZOOM (Level Only)"
-    $filterChain = "$levelFilters"
-}
+# --- FILTER SELECTION ---
+$processingProfile = Get-WacProcessingProfile -Choice $choice
+$modeName = $processingProfile.ModeName
+$filterChain = $processingProfile.FilterChain
 
 # --- PRE-FLIGHT CHECKS ---
 if (-not (Test-Path $inputPath)) { Write-Error "No file dropped!"; exit }
@@ -133,9 +154,8 @@ if (-not (Test-Path $ffmpegPath)) {
 $inputFileItem = Get-Item $inputPath
 $inputSizeMB = "{0:N2} MB" -f ($inputFileItem.Length / 1MB)
 
-$fileName = [System.IO.Path]::GetFileNameWithoutExtension($inputPath)
 $timestamp = Get-Date -Format "yyyyMMdd-HHmm"
-$outputFile = "$outFolder\$fileName`_Cleaned_$timestamp.wav"
+$outputFile = Get-WacOutputPath -InputPath $inputPath -OutputFolder $outFolder -Timestamp $timestamp
 
 # --- EXECUTION ---
 Write-Host "`nRunning WinAudioClean..." -ForegroundColor Cyan
@@ -144,7 +164,7 @@ Write-Host "Chain: $modeName" -ForegroundColor Gray
 $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
 
 # FFmpeg Command
-$argumentList = "-i `"$inputPath`" -vn -af `"$filterChain`" `"$outputFile`" -y -hide_banner -loglevel error -stats"
+$argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $outputFile
 $process = Start-Process -FilePath $ffmpegPath -ArgumentList $argumentList -Wait -NoNewWindow -PassThru
 
 $stopWatch.Stop()

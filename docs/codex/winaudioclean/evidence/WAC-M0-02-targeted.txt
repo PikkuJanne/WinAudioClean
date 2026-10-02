@@ -1,0 +1,31 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (11 files; shell 7.6.5).
+Static gate passed; 48 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 2 files.
+Discovery found 27 tests in 226ms.
+Filter 'Tag' set to ('EntryPoint').
+Filters selected 8 tests to run.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] accepts -File -inputPath in powershell.exe with choice 1 508ms (477ms|31ms)
+  [+] accepts -File -inputPath in powershell.exe with choice 2 397ms (396ms|1ms)
+  [+] accepts -File -inputPath in pwsh.exe with choice 1 1.28s (1.28s|2ms)
+  [+] accepts -File -inputPath in pwsh.exe with choice 2 1.1s (1.1s|1ms)
+  [+] runs the unchanged .bat from outer powershell.exe with choice 1 (inner Windows PowerShell) 627ms (624ms|4ms)
+  [+] runs the unchanged .bat from outer powershell.exe with choice 2 (inner Windows PowerShell) 672ms (671ms|1ms)
+  [+] runs the unchanged .bat from outer pwsh.exe with choice 1 (inner Windows PowerShell) 1.28s (1.27s|1ms)
+  [+] runs the unchanged .bat from outer pwsh.exe with choice 2 (inner Windows PowerShell) 1.3s (1.3s|1ms)
+Tests completed in 7.73s
+Tests Passed: 8, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 19
+Targeted passed: 8 Pester passed, 0 skipped, 19 outside scope.

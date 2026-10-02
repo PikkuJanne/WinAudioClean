@@ -83,7 +83,7 @@
       "depends_on": [
         "WAC-M0-01"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "WinAudioClean.ps1, small internal helper file only when useful, tests/, scripts/Invoke-Tests.ps1.",
       "implementation": [
@@ -97,7 +97,11 @@
         "AC-005",
         "AC-006"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M0-02.md",
+        "evidence/WAC-M0-02-source.json",
+        "evidence/WAC-M0-02-mutation.json"
+      ],
       "blocked_reason": null
     },
     {

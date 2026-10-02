@@ -1,38 +1,54 @@
 # Next model starts here
 
-Completed task: **WAC-M0-01**, governance installation and acceptance AC-001–003.
-Next task: **WAC-M0-02 in a fresh thread**. Work branch:
-`codex/wac-m0-handoff`; [draft PR #1](https://github.com/PikkuJanne/WinAudioClean/pull/1)
-targets main. Continue from the verified feature-branch tip, including the
-completion evidence commit, without repeating the import.
+Completed: **WAC-M0-02**, minimal helpers and local PowerShell test runners.
+Next: **WAC-M0-03 in a fresh thread**. Branch: `codex/wac-m0-handoff`;
+[draft PR #1](https://github.com/PikkuJanne/WinAudioClean/pull/1) targets main.
+Continue from the verified feature-branch tip.
 
-Last recorded verified checkpoint: `8163feb35401096cb260693c02b8e5eb0886b78d`.
-The clean local tree, upstream and live GitHub branch matched, and the PR was
-open/draft at that SHA. See `evidence/WAC-M0-01-checkpoint.json` for its timestamp.
-The subsequent completion commit's exact SHA is recorded in the PR/final response.
-Derive current HEAD and live synchronization afresh before WAC-M0-02.
+The starting folder has no Git metadata. Discover the separate Git checkout
+created for WAC-M0-01 and verify its root, branch, worktree, exact fetch/push
+origin and live GitHub tip. Do not reimport governance or replace current files
+with the old bundle. The previous verified checkpoint was
+`d88c4fdcb2ccab445fe8b96636e42cf154138950`; this completion commit's exact SHA is
+in the PR/final response. Derive live synchronization afresh.
 
-The supplied source folder had no Git metadata; a separate checkout was created.
-Discover and verify the actual Git root rather than treating that source folder
-as an installed checkout. Do not reimport the bundle. See `evidence/WAC-M0-01.md`
-for the reconciliation, current machine and actual validations. Product files
-are unchanged; runtime, launcher and listening checks are unrun. FFmpeg/ffprobe
-were not found on PATH. No dependency setup was performed.
+Read AGENTS.md, STATUS.md, DECISIONS.md, SYNC_PROTOCOL.md, TASKS.yaml and
+`tasks/WAC-M0-03.md`. Read `evidence/WAC-M0-02.md` for validation and
+`tests/README.md` for setup/runner commands. Do not repeat the historical audit
+unless drift or a failing check calls for it.
 
-Read the applicable AGENTS.md files, STATUS.md, DECISIONS.md, SYNC_PROTOCOL.md and TASKS.yaml. Inspect the actual checkout, branch, worktree, current remote HEAD and any existing PR. Do not reset to BASELINE.json or recopy this handoff over newer work.
+## What exists
 
-If governance is already installed, reconcile current TASKS.yaml and git history rather than repeat import. Select the first dependency-ready unfinished task. Work only that task in this thread, adding a smaller continuation task when genuinely needed rather than stretching context across a milestone.
+- `WinAudioClean.ps1`: Get-WacProcessingProfile, Get-WacOutputPath and
+  Get-WacFfmpegArguments; dot-sourcing returns before application side effects.
+  Original entry points, filters and command behavior remain.
+- `scripts/Install-DevDependencies.ps1`: explicit, checksum-verified Pester 5.7.1
+  and PSScriptAnalyzer 1.24.0 setup under ignored `.wac-local/Modules`.
+- `scripts/Invoke-Tests.ps1 -Level Quick|Targeted|Full`: PS5.1/PS7 compatible;
+  requires Python 3.10+ for governance checks. Never installs dependencies.
+- 27 Pester tests: Quick passed 11/11 and Full 27/27 in both shells. Each Full
+  run also passed 53 governance tests, skipping one symlink case for unavailable
+  Windows privileges. A deliberate output-name defect failed Quick with three
+  failures; exact restoration passed 11/11 in an isolated worktree.
+- `evidence/WAC-M0-02-*`: sanitized logs and hashes. AC-004 through AC-006 pass;
+  later cases are unrun. No WAC-M0-02 blocker remains.
 
-Read `tasks/WAC-M0-02.md` for the next scope: minimal test seams and local
-PowerShell test runners. Do not repeat the baseline audit unless live drift or a
-failure requires it. The installed helper suite ran 54 tests, 53 passed and one
-symlink test skipped for missing Windows privileges; all 30 tasks and 90 cases
-remain valid. No WAC-M0-01 blocker remains. Git pushes may need the existing
-GitHub CLI credential helper for this command only; no configuration change is
-required. All publication/merge approval boundaries remain in force.
+## Scope for WAC-M0-03
 
-## Required next-thread handoff fields
+Reuse the synthetic generator; characterize both legacy filters on this Windows
+machine with exact FFmpeg build/fixture/output records; prepare the permission-
+cleared listening-corpus checklist. FFmpeg/ffprobe are absent from PATH and were
+not installed by this task. Missing listening material stays pending. Tests used
+controlled preflight and process/log mocks, which do not establish real encoding
+or speech quality. The `.bat` pins Windows PowerShell internally even from PS7.
 
-Current branch; task completed or blocked; changed files; tests and evidence actually produced; last verified remote checkpoint; unresolved issues/approvals; exact next task and read set. Derive live sync afresh.
+48 analyzer advisories remain visible, mainly legacy console output and test
+doubles. Error, compatible-syntax and listed safety findings gate; no rules are
+suppressed. Invalid-selection, timestamp-collision and overwrite behavior is
+labeled as legacy characterization for M1. Preserve default sound.
 
-Do not repeat the full historical audit unless new drift or a failing test justifies it. No owner question is needed for ordinary planned feature-branch work; genuinely destructive/publication actions remain approval-gated.
+After the next coherent task, update task/acceptance evidence and handoff,
+stage intended files, inspect, commit/push and verify local/live/PR heads.
+The existing GitHub CLI credential helper can be used for the push command if
+the default helper stalls. Ordinary feature work is authorized; publication and
+merge boundaries remain unchanged.
