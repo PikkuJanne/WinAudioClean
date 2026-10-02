@@ -138,3 +138,18 @@ required green Full gate. Preserve the policy and record the failures; do not
 retry compilation/copying to seek an allowed hash or convert blocked cases to
 skips. Resume validation after fixture execution is permitted through the normal
 machine administration process. Do not advance to M1-03 yet.
+
+### 2026-10-02 — WAC-M1-02 validation resumption (D21 addendum)
+
+The owner reported Smart App Control Off and explicitly requested the rerun.
+Read-only checks returned VerifiedAndReputablePolicyState=0 before and after it;
+Codex did not change security settings. On the unchanged 0d02cf48 source,
+both Full gates passed: 227 Pester cases, 61 Python cases and one documented
+symlink-privilege skip per shell. All 26 recorded source hashes match.
+
+M1-02 and AC-016/017/018 are accepted. This supersedes the blocked continuation
+restriction above; the next task after synchronized delivery is WAC-M1-03.
+Keep the initial failed logs and policy history. This is no claim that unsigned
+fixtures work with Smart App Control On and adds no approval for future security
+changes, sound changes, merges, releases or deployment. Evidence:
+`evidence/WAC-M1-02-resume.md`.

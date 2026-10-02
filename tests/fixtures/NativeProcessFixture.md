@@ -13,12 +13,19 @@ fixtures to get around a rejection, or change signing/trust/security settings.
 Successful real-FFmpeg checks provide separate evidence and do not replace the
 argv-recorder or fault-injection cases.
 
-During Windows validation on 2026-10-02, CodeIntegrity Operational events 3033
+During the initial Windows validation on 2026-10-02, CodeIntegrity Operational events 3033
 and 3077 reported signing-level/policy rejections for generated fixture copies.
 The Full runs encountered 44 blocked launcher copies and seven blocked reporting
 copies, producing 83 events of each type. All 23 direct native-wrapper tests
 passed in both Full runs; those passes do not establish acceptance of the
-blocked integration cases. No signing or security policy was changed.
+blocked integration cases. No signing or security policy was changed by Codex.
+
+The owner subsequently reported Smart App Control Off and authorized a rerun.
+Read-only checks confirmed state 0; both Full gates passed on unchanged source:
+227 Pester cases and 61 Python cases, with one Python symlink-privilege skip per
+shell. This resolves that validation block; it does not certify unsigned-fixture
+execution with Smart App Control On. See
+[resumption evidence](../../docs/codex/winaudioclean/evidence/WAC-M1-02-resume.md).
 
 The child records its original arguments without consuming configuration flags.
 Configure it with inherited environment variables; callers must restore them.

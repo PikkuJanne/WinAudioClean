@@ -1,5 +1,10 @@
 # WAC-M1-02 — Native execution, launcher status and diagnostics
 
+**Current outcome:** M1-02 subsequently passed both Full gates after the owner's
+authorized environment change. See [successful resumption](WAC-M1-02-resume.md).
+The remaining record below describes the initial blocked checkpoint and is
+retained as history, including its failed logs and then-current next action.
+
 Date: 2026-10-02. **Implemented; blocked at the cumulative validation gate.**
 Do not advance to M1-03. This checkpoint preserves implementation and evidence;
 it does not claim complete engineering acceptance.

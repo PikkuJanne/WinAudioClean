@@ -201,14 +201,17 @@
       "title": "Argument fidelity",
       "procedure": "Use a benign argv-echo test executable or equivalent recorder with the filename matrix through both the direct script and actual launcher.",
       "expected": "The child receives exact arguments; command-like filenames cannot become commands; any CMD limitation gets a safe fallback and explicit notice.",
-      "status": "blocked",
+      "status": "pass",
       "evidence": [
         "evidence/WAC-M1-02.md",
         "evidence/WAC-M1-02-full-ps51.txt",
         "evidence/WAC-M1-02-full-ps7.txt",
-        "evidence/WAC-M1-02-policy.json"
-      ],
-      "reason": "Required Full validation blocked by Windows Code Integrity rejecting 44 launcher and 7 reporting fixture copies. PS5 test-only JSON nesting corrected after Full; corrected native integration has not been rerun. Resume under normally authorized fixture execution; do not bypass machine policy."
+        "evidence/WAC-M1-02-policy.json",
+        "evidence/WAC-M1-02-resume.md",
+        "evidence/WAC-M1-02-resume-source.json",
+        "evidence/WAC-M1-02-resume-full-ps51.txt",
+        "evidence/WAC-M1-02-resume-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-017",
@@ -216,14 +219,17 @@
       "title": "Error propagation",
       "procedure": "Simulate startup failure, FFmpeg nonzero exit, failed reporting, and successful execution.",
       "expected": "Script and launcher return documented codes and retain useful diagnostic details without claiming success.",
-      "status": "blocked",
+      "status": "pass",
       "evidence": [
         "evidence/WAC-M1-02.md",
         "evidence/WAC-M1-02-full-ps51.txt",
         "evidence/WAC-M1-02-full-ps7.txt",
-        "evidence/WAC-M1-02-policy.json"
-      ],
-      "reason": "Required Full validation blocked by Windows Code Integrity rejecting 44 launcher and 7 reporting fixture copies. PS5 test-only JSON nesting corrected after Full; corrected native integration has not been rerun. Resume under normally authorized fixture execution; do not bypass machine policy."
+        "evidence/WAC-M1-02-policy.json",
+        "evidence/WAC-M1-02-resume.md",
+        "evidence/WAC-M1-02-resume-source.json",
+        "evidence/WAC-M1-02-resume-full-ps51.txt",
+        "evidence/WAC-M1-02-resume-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-018",
@@ -236,7 +242,11 @@
         "evidence/WAC-M1-02.md",
         "evidence/WAC-M1-02-full-ps51.txt",
         "evidence/WAC-M1-02-full-ps7.txt",
-        "evidence/WAC-M1-02-real-process.json"
+        "evidence/WAC-M1-02-real-process.json",
+        "evidence/WAC-M1-02-resume.md",
+        "evidence/WAC-M1-02-resume-source.json",
+        "evidence/WAC-M1-02-resume-full-ps51.txt",
+        "evidence/WAC-M1-02-resume-full-ps7.txt"
       ]
     },
     {

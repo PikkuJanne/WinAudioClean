@@ -171,9 +171,13 @@ processing. Use the environment route above or direct `.ps1 -inputPath` from
 PowerShell for these paths.
 
 Windows application-control policy can reject the unsigned compiled fixture even
-when compilation succeeds. This occurred during M1-02 validation and leaves the
-affected acceptance checks blocked. Preserve child diagnostics and CodeIntegrity
-event evidence; a rejected native start must remain a failed check. Do not retry
+when compilation succeeds. This blocked the initial M1-02 validation. The owner
+later reported Smart App Control Off and authorized a rerun; both Full gates
+then passed on unchanged source (227 Pester and 61 Python cases, one Python
+symlink-privilege skip per shell). See the [resumption evidence](../docs/codex/winaudioclean/evidence/WAC-M1-02-resume.md).
+The runner never changes machine security settings. Preserve child diagnostics
+and CodeIntegrity event evidence; a rejected native start must remain a failed
+check. Do not retry
 or alter fixtures, trust or security settings to bypass a rejection. Real FFmpeg
 checks provide separate evidence and do not replace blocked fixture cases. See
 the fixture contract for the recorded event details and task governance for the

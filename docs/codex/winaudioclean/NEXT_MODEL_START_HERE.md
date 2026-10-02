@@ -1,18 +1,21 @@
-# Next model: resume WAC-M1-02
+# Next model: WAC-M1-03
 
-**M1-02 is implemented, but validation is blocked. Do not start M1-03.**
-Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml, SYNC_PROTOCOL.md,
-tasks/WAC-M1-02.md, NATIVE_PROCESS_CONTRACT.md and evidence/WAC-M1-02.md.
-Preserve prior evidence and the source-only starting folder; work in the
-established WinAudioClean-governance Git checkout.
+**M1-02 is complete. Start only WAC-M1-03: dependency resolution and audio
+stream probing/mapping.** Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml,
+SYNC_PROTOCOL.md, tasks/WAC-M1-03.md, NATIVE_PROCESS_CONTRACT.md and
+evidence/WAC-M1-02-resume.md. Preserve earlier evidence; no governance reimport
+or repeat of the M0 audit is needed.
 
 ## Inspect and synchronize
 
-Branch: codex/wac-m1-reliability.
+Work in the established WinAudioClean-governance Git checkout. The source-only
+starting folder is preserved. Branch: codex/wac-m1-reliability.
 Exact effective fetch/push target: https://github.com/PikkuJanne/WinAudioClean.git.
-The task started from accepted M1-01 at
-116380c0f6f722e5ff116b6aafc348c0fabdd9e5. Inspect the live branch for this
-checkpoint's later commit; do not assume the starting SHA is still HEAD.
+
+The successful M1-02 resumption tested unchanged source at
+0d02cf48dcede1196024039294e9316f4624b50a. The subsequent completion commit adds
+evidence/governance only; derive its SHA from the live branch/PR and verify it
+afresh rather than assuming the tested starting SHA remains HEAD.
 
 ```powershell
 python -X utf8 docs/codex/winaudioclean/tools/handoff.py inspect --repo .
@@ -23,81 +26,75 @@ python -X utf8 docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/c
 gh pr view 2 --repo PikkuJanne/WinAudioClean --json url,isDraft,state,baseRefName,headRefName,headRefOid,statusCheckRollup
 ```
 
-The plan should show M1-02 blocked and no ready task. PR #2 remains the M1 draft,
-based on codex/wac-m0-handoff while M0 draft PR #1 is unmerged. Recheck live state.
-Do not merge to unlock work. Feature commits/pushes and draft PR updates are
-authorized; merges/releases/security-policy changes are not.
+Only M1-03 should be ready; no task should be blocked. Reuse draft PR #2, stacked
+on codex/wac-m0-handoff while M0 draft PR #1 is unmerged. Recheck the live base/CI
+state and reconcile an approved merge if one occurred. Do not merge to unlock
+work. Feature commits/pushes and draft PR updates remain authorized.
 
-## Exact blocker and recovery
+## Narrow next task
 
-The Full gate ran 227 Pester cases in each shell: PS5.1 167 passed/60 failed,
-PS7 220 passed/7 failed. Windows Code Integrity events match all 51 native
-startup failures (44 launcher copies, seven reporting copies). The other 16
-PS5.1 failures came from a test-side nested JSON array; that assignment is now
-corrected and failure assertions include stdout/stderr. Final Quick parse/static
-checks pass; corrected integration has not been rerun.
+- Retain sibling and PATH FFmpeg resolution; add explicit-path precedence and
+  ffprobe discovery, with useful missing/incompatible/filter diagnostics.
+- Record resolved executable paths and versions without automatic downloads.
+- Probe JSON audio streams and map the selected absolute stream index. Prompt
+  on interactive ambiguity; require an explicit choice unattended.
+- Bound probes and reject malformed/nonzero/timed-out results. Test local
+  playlists referencing external URLs and scope supported protocols.
+- Preserve exact Raw/Zoom filter strings, the original entry points and PS5.1.
+  Transactional outputs/collisions are M1-04; explicit encoding is M1-05.
 
-The unsigned C# fixture uses the installed Framework compiler and writes only
-test artifacts. Earlier targeted runs passed, but this does not establish that
-machine policy now permits it. No security settings were changed. Do not rerun
-compilation/copying to seek an allowed binary, disable policy, sign with an
-unapproved certificate, add exclusions, or turn these failures into skips.
-Resume both Full gates only when fixture execution has been accepted through
-the machine's normal administration process. Keep failures explicit if blocked.
+## Existing native and launcher behavior
 
-All 23 wrapper cases passed in both failed Full runs, including simultaneous
-512 KiB stdout/stderr, exact arguments, stdin EOF, timeouts/reaping and rejection
-of NUL/overlong commands. Four real FFmpeg Raw/Zoom application runs across
-PS5.1/PS7 also passed. Those establish AC-018; AC-016/017 remain blocked until
-the cumulative validation is complete. Evidence separates tested runtime hashes
-from post-Full test corrections.
+A direct ProcessStartInfo wrapper quotes individual Windows arguments, drains
+stdout/stderr concurrently, closes stdin and explicitly disposes streams/process.
+FFmpeg uses -nostdin. Rendering has no fixed total deadline; finite caller
+timeouts stop the owned child only. Capture stays in memory; no memory stress
+claim has been made.
 
-## Current implementation
+Exits: 0 native success/report complete, 2 input/config, 3 dependency/start,
+4 native/capture/cleanup, 7 reporting incomplete after native success, 130 menu
+cancellation. Reporting preserves a primary native failure and audio. Exit 0
+does not independently validate the rendered media.
 
-The original .ps1/.bat entry points remain. A direct ProcessStartInfo wrapper
-quotes individual Windows arguments, captures stdout/stderr concurrently,
-closes stdin, disposes owned streams/process and preserves failures. FFmpeg uses
--nostdin. Rendering has no fixed total deadline; finite caller timeouts stop the
-owned child only. Stream-close/cleanup waits are bounded; capture remains in
-memory and has no long-recording stress result.
+The batch launcher uses system Windows PowerShell, preserves status across
+pause and supports /unattended Raw|Zoom via WAC_LAUNCH_INPUT and
+WAC_LAUNCH_OUTPUT_DIRECTORY set in PowerShell. Positional CMD percent/exclamation
+paths have a documented fallback; prior expansion cannot be reconstructed.
+Filters, encoding and legacy -y/minute timestamp collisions remain unchanged.
 
-Application exits: 0 success/report complete, 2 input/config, 3 dependency/start,
-4 native/capture/cleanup, 7 reporting incomplete after native success, 130 mode
-menu cancellation. Reporting preserves a primary native failure and output.
-Exit 0 does not independently validate media output.
+## Evidence and tools
 
-The launcher pins system Windows PowerShell, preserves status before pause and
-has /unattended Raw|Zoom using WAC_LAUNCH_INPUT/WAC_LAUNCH_OUTPUT_DIRECTORY from
-PowerShell environment values. Percent/exclamation positional CMD paths have a
-documented fallback; already-expanded CMD input cannot be reconstructed.
+Both resumed Full gates passed: **227 Pester tests per shell**, no failures or
+skips; **61 Python tests passed and one symlink-privilege skip per shell**, exit 0.
+Parser/static/plan gates pass; 18 PowerShell files and 53 visible analyzer
+advisories. All 26 source hashes match the blocked checkpoint.
 
-Filters, encoding and legacy -y/timestamp collision behavior are unchanged.
-M1-03 probes/streams/external references, M1-04 transactional output/collisions,
-M1-05 encoding and M3-01 saved settings remain separate tasks.
-
-## Validation commands and local tools
+Initial runs were blocked by Smart App Control and included a corrected PS5
+JSON-array assertion issue. The owner later reported Smart App Control Off and
+authorized rerunning; read-only state was 0 before/after. Codex did not change
+security settings. Preserve historical failed logs and policy records. Future
+policy rejection remains a real test failure; do not change security settings
+or repeatedly rebuild fixtures to evade it.
 
 ```powershell
 pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
-powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
-# Run Full only after the fixture-policy blocker is resolved.
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Native.Tests.ps1
 pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full
 ```
 
-Pester 5.7.1 and PSScriptAnalyzer 1.24.0 are in ignored .wac-local/Modules.
-Bypass is process-only. Native fixture tests require the installed Windows
-Framework C# compiler; no runner downloads tools. Existing FFmpeg/ffprobe 9.0.2:
+Pester 5.7.1/PSScriptAnalyzer 1.24.0 are under ignored .wac-local/Modules.
+Bypass is process-only. Fixture tests use the installed Framework C# compiler.
+Runners never download dependencies. Existing FFmpeg/ffprobe 9.0.2:
 .wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin.
-Use explicit paths. M1-02 real-process outputs are in ignored
-.wac-local/WAC-M1-02/real-process; preserve them. The M1-01 interactive folder
-contains a zero-byte ffmpeg.exe sentinel and is unsuitable for audio checks.
+Use explicit paths and keep binaries/generated audio ignored.
 
-Final Quick checks pass; independent Python suite: 61 passed, one Windows
-symlink-privilege skip. Parser/static gates pass with 53 analyzer advisories.
-No speech listening, channel isolation, impulse alignment, long recording or
->4 GB export validation. No CI exists yet.
+Four real FFmpeg application checks from M1-02 remain valid on identical runtime
+bytes: Raw/Zoom, both shells, three-second mono 192 kHz PCM16 WAVs/reports,
+unchanged inputs. Saved outputs are .wac-local/WAC-M1-02/real-process. M1-01's
+interactive folder has a zero-byte ffmpeg.exe sentinel unsuitable for processing.
+Human listening, channel isolation, impulse alignment, long recordings, >4 GB
+exports and running-render cancellation remain unverified. No CI exists yet.
 
-After both Full gates pass, reconcile TASKS/ACCEPTANCE/evidence/status/handoff,
-review/stage intended files, commit/push the feature branch, and verify local,
-live branch and PR heads. Only then unlock **WAC-M1-03**.
+After M1-03, reconcile its acceptance/evidence/status/handoff, stage/review
+intended files, commit/push and verify local/live/PR heads. Stop before M1-04.

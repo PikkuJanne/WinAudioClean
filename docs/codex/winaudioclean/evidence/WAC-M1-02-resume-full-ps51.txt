@@ -1,0 +1,348 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (18 files; shell 5.1.26100.9444).
+Static gate passed; 53 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 6 files.
+Discovery found 227 tests in 604ms.
+Running tests.
+
+Running tests from 'WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] AC-014: rejects missing -File -inputPath before prompting in powershell.exe 812ms (764ms|48ms)
+  [+] AC-014: rejects missing -File -inputPath before prompting in pwsh.exe 1.3s (1.3s|1ms)
+  [+] AC-014: rejects a missing dropped file via outer powershell.exe before the menu (inner Windows PowerShell) 813ms (810ms|2ms)
+  [+] AC-014: rejects a missing dropped file via outer pwsh.exe before the menu (inner Windows PowerShell) 1.58s (1.57s|3ms)
+
+Describing AC-014/015: actual script preflight is bounded and unattended on invalid requests
+  [+] rejects no input without a menu or processing in powershell.exe 511ms (506ms|6ms)
+  [+] rejects directory without a menu or processing in powershell.exe 503ms (500ms|2ms)
+  [+] rejects URL without a menu or processing in powershell.exe 439ms (437ms|2ms)
+  [+] rejects zero bytes without a menu or processing in powershell.exe 476ms (473ms|3ms)
+  [+] rejects destination file without a menu or processing in powershell.exe 530ms (527ms|3ms)
+  [+] rejects empty destination without a menu or processing in powershell.exe 483ms (479ms|4ms)
+  [+] rejects invalid mode without a menu or processing in powershell.exe 502ms (501ms|1ms)
+  [+] rejects empty mode without a menu or processing in powershell.exe 473ms (471ms|2ms)
+  [+] rejects missing mode without a menu or processing in powershell.exe 570ms (569ms|1ms)
+  [+] rejects redirected input without a menu or processing in powershell.exe 567ms (565ms|2ms)
+  [+] rejects host noninteractive without a menu or processing in powershell.exe 622ms (621ms|1ms)
+  [+] rejects no input without a menu or processing in pwsh.exe 1.11s (1.11s|1ms)
+  [+] rejects directory without a menu or processing in pwsh.exe 1.3s (1.3s|2ms)
+  [+] rejects URL without a menu or processing in pwsh.exe 1.09s (1.09s|1ms)
+  [+] rejects zero bytes without a menu or processing in pwsh.exe 1.25s (1.25s|1ms)
+  [+] rejects destination file without a menu or processing in pwsh.exe 1.27s (1.27s|2ms)
+  [+] rejects empty destination without a menu or processing in pwsh.exe 1.27s (1.27s|2ms)
+  [+] rejects invalid mode without a menu or processing in pwsh.exe 1.51s (1.51s|2ms)
+  [+] rejects empty mode without a menu or processing in pwsh.exe 1.14s (1.13s|3ms)
+  [+] rejects missing mode without a menu or processing in pwsh.exe 1.37s (1.37s|1ms)
+  [+] rejects redirected input without a menu or processing in pwsh.exe 1.3s (1.3s|1ms)
+  [+] rejects host noninteractive without a menu or processing in pwsh.exe 1.36s (1.35s|2ms)
+
+Describing AC-017: actual native execution reports success, failure and reporting warnings
+  [+] AC-016: preserves spaces here.wav through direct powershell.exe -File and the native child 852ms (848ms|4ms)
+  [+] AC-016: preserves [square brackets].wav through direct powershell.exe -File and the native child 757ms (756ms|1ms)
+  [+] AC-016: preserves speaker's recording.wav through direct powershell.exe -File and the native child 753ms (750ms|2ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct powershell.exe -File and the native child 801ms (797ms|3ms)
+  [+] AC-016: preserves ampersand & here.wav through direct powershell.exe -File and the native child 755ms (754ms|1ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct powershell.exe -File and the native child 798ms (796ms|2ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct powershell.exe -File and the native child 773ms (771ms|2ms)
+  [+] AC-016: preserves (parentheses).wav through direct powershell.exe -File and the native child 716ms (713ms|2ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct powershell.exe -File and the native child 719ms (717ms|1ms)
+  [+] AC-016: preserves spaces here.wav through direct pwsh.exe -File and the native child 1.42s (1.42s|1ms)
+  [+] AC-016: preserves [square brackets].wav through direct pwsh.exe -File and the native child 1.3s (1.3s|1ms)
+  [+] AC-016: preserves speaker's recording.wav through direct pwsh.exe -File and the native child 1.3s (1.3s|1ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct pwsh.exe -File and the native child 1.29s (1.29s|2ms)
+  [+] AC-016: preserves ampersand & here.wav through direct pwsh.exe -File and the native child 1.41s (1.4s|2ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct pwsh.exe -File and the native child 1.4s (1.4s|2ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct pwsh.exe -File and the native child 1.64s (1.63s|2ms)
+  [+] AC-016: preserves (parentheses).wav through direct pwsh.exe -File and the native child 1.34s (1.34s|5ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct pwsh.exe -File and the native child 1.32s (1.32s|2ms)
+  [+] returns dependency failure for invalid executable False in powershell.exe 585ms (584ms|1ms)
+  [+] returns dependency failure for invalid executable True in powershell.exe 654ms (653ms|1ms)
+  [+] returns dependency failure for invalid executable False in pwsh.exe 1.25s (1.25s|2ms)
+  [+] returns dependency failure for invalid executable True in pwsh.exe 1.35s (1.35s|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in powershell.exe 748ms (745ms|2ms)
+  [+] uses mode 1, native exit 0, blocked log True in powershell.exe 735ms (734ms|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in powershell.exe 781ms (780ms|2ms)
+  [+] uses mode 1, native exit 7, blocked log True in powershell.exe 728ms (727ms|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in powershell.exe 704ms (703ms|2ms)
+  [+] uses mode 2, native exit 0, blocked log True in powershell.exe 762ms (761ms|1ms)
+  [+] uses mode 2, native exit 7, blocked log False in powershell.exe 752ms (750ms|2ms)
+  [+] uses mode 2, native exit 7, blocked log True in powershell.exe 782ms (781ms|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in pwsh.exe 1.56s (1.56s|3ms)
+  [+] uses mode 1, native exit 0, blocked log True in pwsh.exe 1.56s (1.56s|4ms)
+  [+] uses mode 1, native exit 7, blocked log False in pwsh.exe 1.51s (1.51s|3ms)
+  [+] uses mode 1, native exit 7, blocked log True in pwsh.exe 1.49s (1.49s|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in pwsh.exe 1.5s (1.5s|1ms)
+  [+] uses mode 2, native exit 0, blocked log True in pwsh.exe 1.42s (1.42s|2ms)
+  [+] uses mode 2, native exit 7, blocked log False in pwsh.exe 1.43s (1.43s|1ms)
+  [+] uses mode 2, native exit 7, blocked log True in pwsh.exe 1.51s (1.51s|1ms)
+
+Running tests from 'WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] AC-007: matches the Raw filter values and order in BASELINE.json 34ms (17ms|17ms)
+  [+] AC-007: matches the Zoom filter values and order in BASELINE.json 7ms (6ms|1ms)
+  [+] selects the exact original Raw mode and filters for choice 1 19ms (18ms|2ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 12ms (9ms|2ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom () 81ms (78ms|3ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (invalid) 7ms (5ms|2ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (3) 7ms (6ms|2ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 18ms (13ms|5ms)
+  [+] accepts an input stem without an extension 6ms (4ms|1ms)
+  [+] characterizes the legacy minute-timestamp collision 11ms (9ms|2ms)
+  [+] keeps paths and filters as separate arguments and disables native stdin 11ms (10ms|1ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 10ms (9ms|1ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 357ms (353ms|4ms)
+
+Running tests from 'WinAudioClean.Launcher.Tests.ps1'
+Describing AC-016: actual launcher keeps environment paths literal through both Windows shells
+  [+] passes meeting with spaces.wav exactly from powershell.exe through inner PS5.1 to the native child 1.22s (1.21s|3ms)
+  [+] passes meeting [draft].wav exactly from powershell.exe through inner PS5.1 to the native child 1.13s (1.12s|1ms)
+  [+] passes speaker's recording.wav exactly from powershell.exe through inner PS5.1 to the native child 1.12s (1.11s|1ms)
+  [+] passes meeting äöÅ.wav exactly from powershell.exe through inner PS5.1 to the native child 1.09s (1.09s|1ms)
+  [+] passes speaker & guest.wav exactly from powershell.exe through inner PS5.1 to the native child 1.22s (1.22s|1ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from powershell.exe through inner PS5.1 to the native child 1.1s (1.1s|1ms)
+  [+] passes meeting !important!.wav exactly from powershell.exe through inner PS5.1 to the native child 1.08s (1.07s|2ms)
+  [+] passes meeting (take 1).wav exactly from powershell.exe through inner PS5.1 to the native child 1.1s (1.1s|1ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from powershell.exe through inner PS5.1 to the native child 1.06s (1.06s|1ms)
+  [+] passes meeting with spaces.wav exactly from pwsh.exe through inner PS5.1 to the native child 1.75s (1.75s|1ms)
+  [+] passes meeting [draft].wav exactly from pwsh.exe through inner PS5.1 to the native child 1.79s (1.79s|2ms)
+  [+] passes speaker's recording.wav exactly from pwsh.exe through inner PS5.1 to the native child 1.79s (1.79s|1ms)
+  [+] passes meeting äöÅ.wav exactly from pwsh.exe through inner PS5.1 to the native child 1.82s (1.82s|1ms)
+  [+] passes speaker & guest.wav exactly from pwsh.exe through inner PS5.1 to the native child 1.82s (1.82s|2ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from pwsh.exe through inner PS5.1 to the native child 1.78s (1.78s|3ms)
+  [+] passes meeting !important!.wav exactly from pwsh.exe through inner PS5.1 to the native child 1.74s (1.74s|2ms)
+  [+] passes meeting (take 1).wav exactly from pwsh.exe through inner PS5.1 to the native child 1.78s (1.78s|2ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from pwsh.exe through inner PS5.1 to the native child 1.86s (1.86s|1ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from powershell.exe 890ms (888ms|1ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from powershell.exe 840ms (839ms|1ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from powershell.exe 837ms (836ms|1ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from powershell.exe 840ms (839ms|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from powershell.exe 826ms (825ms|1ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from powershell.exe 799ms (797ms|2ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from powershell.exe 854ms (853ms|2ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from pwsh.exe 1.6s (1.6s|1ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from pwsh.exe 1.53s (1.53s|2ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from pwsh.exe 1.68s (1.68s|2ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from pwsh.exe 1.61s (1.61s|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from pwsh.exe 1.54s (1.54s|1ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from pwsh.exe 1.59s (1.59s|1ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from pwsh.exe 1.58s (1.58s|2ms)
+  [+] accepts an environment destination with a trailing backslash from powershell.exe 1.12s (1.12s|1ms)
+  [+] accepts an environment destination with a trailing backslash from pwsh.exe 1.81s (1.81s|1ms)
+  [+] passes a 240-character input path exactly from powershell.exe 1.22s (1.22s|1ms)
+  [+] passes a 240-character input path exactly from pwsh.exe 1.71s (1.7s|2ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in powershell.exe 732ms (730ms|2ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in pwsh.exe 1.39s (1.39s|2ms)
+
+Describing AC-017: launcher preserves application status and has a bounded unattended route
+  [+] preserves status for successful child from powershell.exe 1.08s (1.08s|3ms)
+  [+] preserves status for nonzero child from powershell.exe 1.05s (1.04s|1ms)
+  [+] preserves status for failed report after native success from powershell.exe 1.1s (1.1s|1ms)
+  [+] preserves status for invalid executable from powershell.exe 941ms (939ms|3ms)
+  [+] preserves status for successful child from pwsh.exe 1.6s (1.59s|1ms)
+  [+] preserves status for nonzero child from pwsh.exe 1.85s (1.85s|3ms)
+  [+] preserves status for failed report after native success from pwsh.exe 1.81s (1.81s|1ms)
+  [+] preserves status for invalid executable from pwsh.exe 1.61s (1.6s|3ms)
+  [+] rejects InvalidMode without starting native processing from powershell.exe 698ms (697ms|1ms)
+  [+] rejects MissingEnvironment without starting native processing from powershell.exe 748ms (747ms|1ms)
+  [+] rejects ExtraArgument without starting native processing from powershell.exe 729ms (728ms|2ms)
+  [+] rejects ExtraFile without starting native processing from powershell.exe 739ms (737ms|1ms)
+  [+] rejects InvalidMode without starting native processing from pwsh.exe 1.47s (1.47s|2ms)
+  [+] rejects MissingEnvironment without starting native processing from pwsh.exe 1.41s (1.41s|1ms)
+  [+] rejects ExtraArgument without starting native processing from pwsh.exe 1.45s (1.45s|1ms)
+  [+] rejects ExtraFile without starting native processing from pwsh.exe 1.41s (1.41s|1ms)
+  [+] preserves missing-input failure after the default pause in powershell.exe 870ms (868ms|2ms)
+  [+] preserves missing-input failure after the default pause in pwsh.exe 1.5s (1.5s|2ms)
+  [+] preserves a controlled application cancellation status after pause in powershell.exe 773ms (772ms|1ms)
+  [+] preserves a controlled application cancellation status after pause in pwsh.exe 1.65s (1.65s|2ms)
+
+Running tests from 'WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv 267ms (263ms|5ms)
+  [+] preserves square brackets in actual child argv 76ms (74ms|2ms)
+  [+] preserves apostrophe in actual child argv 89ms (88ms|1ms)
+  [+] preserves Unicode in actual child argv 90ms (87ms|3ms)
+  [+] preserves ampersand in actual child argv 88ms (86ms|2ms)
+  [+] preserves percent signs in actual child argv 93ms (92ms|1ms)
+  [+] preserves exclamation marks in actual child argv 84ms (83ms|1ms)
+  [+] preserves parentheses in actual child argv 82ms (81ms|1ms)
+  [+] preserves empty argument in actual child argv 83ms (81ms|1ms)
+  [+] preserves embedded quotes in actual child argv 86ms (84ms|2ms)
+  [+] preserves a quote alone in actual child argv 80ms (78ms|2ms)
+  [+] preserves trailing backslash after spaces in actual child argv 82ms (80ms|2ms)
+  [+] preserves multiple trailing backslashes in actual child argv 80ms (79ms|1ms)
+  [+] preserves backslashes before an embedded quote in actual child argv 109ms (108ms|1ms)
+  [+] starts with no child arguments and no render timeout 108ms (106ms|2ms)
+  [+] keeps native nonzero status and both diagnostic streams 82ms (78ms|4ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input 60ms (59ms|1ms)
+  [+] returns structured startup failure for a missing executable 13ms (12ms|1ms)
+  [+] returns structured startup failure for a file that is not an executable 15ms (14ms|1ms)
+  [+] rejects a NUL argument before starting the child 14ms (13ms|1ms)
+  [+] rejects an excessive command line before starting the child 19ms (18ms|1ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity 70ms (69ms|1ms)
+  [+] terminates the timed-out child and retains prior diagnostics 1.7s (1.7s|1ms)
+
+Running tests from 'WinAudioClean.Preflight.Tests.ps1'
+Describing AC-013: preflight treats filenames as literal data
+  [+] resolves and reads exactly meeting with spaces.wav 64ms (62ms|2ms)
+  [+] resolves and reads exactly meeting [draft].wav 13ms (11ms|1ms)
+  [+] resolves and reads exactly speaker's recording.wav 22ms (20ms|2ms)
+  [+] resolves and reads exactly meeting äöÅ.wav 14ms (13ms|1ms)
+  [+] resolves and reads exactly speaker & guest.wav 19ms (17ms|1ms)
+  [+] resolves and reads exactly meeting %completed%.wav 17ms (16ms|2ms)
+  [+] resolves and reads exactly meeting !important!.wav 17ms (16ms|1ms)
+  [+] resolves and reads exactly meeting (take 1).wav 17ms (14ms|3ms)
+  [+] does not expand brackets to a different existing filename 30ms (28ms|1ms)
+  [+] normalizes a relative path against the PowerShell working directory 15ms (14ms|1ms)
+  [+] rejects provider-qualified syntax even when the underlying file exists 17ms (16ms|1ms)
+
+Describing AC-014: input preflight rejects unsupported or unreadable input
+  [+] rejects empty path for both input and destination 23ms (18ms|5ms)
+  [+] rejects blank path for both input and destination 8ms (7ms|1ms)
+  [+] rejects HTTPS URL for both input and destination 8ms (7ms|1ms)
+  [+] rejects file URL for both input and destination 14ms (12ms|1ms)
+  [+] rejects environment provider for both input and destination 13ms (11ms|1ms)
+  [+] rejects registry provider for both input and destination 10ms (8ms|2ms)
+  [+] rejects UNC path for both input and destination 8ms (7ms|1ms)
+  [+] rejects forward-slash UNC path for both input and destination 13ms (11ms|2ms)
+  [+] rejects extended device path for both input and destination 11ms (10ms|1ms)
+  [+] rejects device namespace for both input and destination 13ms (12ms|2ms)
+  [+] rejects alternate data stream for both input and destination 11ms (9ms|2ms)
+  [+] rejects a missing file without creating it 12ms (11ms|1ms)
+  [+] rejects an existing directory 14ms (13ms|1ms)
+  [+] rejects a zero-byte file and leaves it unchanged 16ms (14ms|2ms)
+  [+] rejects a file that cannot be opened for reading 18ms (16ms|2ms)
+
+Describing AC-013/AC-014: destination preflight creates and verifies literal directories
+  [+] creates a literal destination containing meeting with spaces.wav without leaving probe files 31ms (26ms|5ms)
+  [+] creates a literal destination containing meeting [draft].wav without leaving probe files 7ms (6ms|1ms)
+  [+] creates a literal destination containing speaker's recording.wav without leaving probe files 9ms (6ms|3ms)
+  [+] creates a literal destination containing meeting äöÅ.wav without leaving probe files 10ms (9ms|1ms)
+  [+] creates a literal destination containing speaker & guest.wav without leaving probe files 10ms (9ms|1ms)
+  [+] creates a literal destination containing meeting %completed%.wav without leaving probe files 9ms (8ms|1ms)
+  [+] creates a literal destination containing meeting !important!.wav without leaving probe files 9ms (7ms|2ms)
+  [+] creates a literal destination containing meeting (take 1).wav without leaving probe files 8ms (7ms|1ms)
+  [+] normalizes and creates a nested relative destination 11ms (10ms|1ms)
+  [+] preserves existing files and removes only its own write probe 12ms (10ms|2ms)
+  [+] rejects a destination occupied by a file and preserves that file 11ms (10ms|1ms)
+  [+] rejects a directory whose ACL denies creating files 39ms (38ms|1ms)
+
+Describing AC-015: the menu retries invalid answers and permits cancellation
+  [+] selects Raw for 1 369ms (365ms|3ms)
+  [+] selects Zoom for 2 51ms (46ms|5ms)
+  [+] retries empty and invalid answers before accepting a valid choice 92ms (90ms|2ms)
+  [+] returns no mode for cancellation q 38ms (36ms|2ms)
+  [+] returns no mode for cancellation cancel 63ms (62ms|1ms)
+  [+] returns no mode when the host reports end of input 39ms (38ms|1ms)
+  [+] reports a clear unattended-use route when Read-Host fails 47ms (45ms|2ms)
+
+Describing AC-015: prompt eligibility follows host and script invocation boundaries
+  [+] allows an interactive host with ordinary startup switches 22ms (18ms|4ms)
+  [+] prevents prompting for the explicit application switch 9ms (7ms|2ms)
+  [+] prevents prompting for redirected standard input 8ms (6ms|2ms)
+  [+] prevents prompting for a noninteractive operating system session 5ms (3ms|2ms)
+  [+] recognizes host switch -NonInteractive before script arguments 8ms (6ms|2ms)
+  [+] recognizes host switch -noni before script arguments 3ms (2ms|1ms)
+  [+] recognizes host switch -nonin before script arguments 5ms (3ms|2ms)
+  [+] recognizes host switch -noninter before script arguments 4ms (3ms|2ms)
+  [+] recognizes host switch -NoNiNtErAcTiVe before script arguments 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -File as host switches 9ms (6ms|3ms)
+  [+] does not interpret application arguments after -fi as host switches 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -Command as host switches 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -co as host switches 6ms (4ms|2ms)
+  [+] does not interpret application arguments after -EncodedCommand as host switches 6ms (3ms|3ms)
+  [+] does not interpret application arguments after -ec as host switches 3ms (2ms|1ms)
+  [+] does not confuse a longer lookalike argument with a supported host switch 5ms (4ms|1ms)
+
+Running tests from 'WinAudioClean.Reporting.Tests.ps1'
+Describing AC-017: metadata reporting failures preserve native outcome
+  [+] handles native exit 0 with caller Continue in powershell.exe 776ms (774ms|2ms)
+  [+] handles native exit 0 with caller Stop in powershell.exe 769ms (767ms|2ms)
+  [+] handles native exit 9 with caller Continue in powershell.exe 797ms (795ms|1ms)
+  [+] handles native exit 9 with caller Stop in powershell.exe 877ms (876ms|1ms)
+  [+] handles native exit 0 with caller Continue in pwsh.exe 1.23s (1.23s|1ms)
+  [+] handles native exit 0 with caller Stop in pwsh.exe 1.34s (1.34s|1ms)
+  [+] handles native exit 9 with caller Continue in pwsh.exe 1.36s (1.36s|1ms)
+  [+] handles native exit 9 with caller Stop in pwsh.exe 1.44s (1.44s|1ms)
+Tests completed in 160.08s
+Tests Passed: 227, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+test_commands_sanitize_paths_and_use_bounded_no_shell_process (test_characterize_filters.CharacterizationTests.test_commands_sanitize_paths_and_use_bounded_no_shell_process) ... ok
+test_existing_output_is_refused_without_launch_or_overwrite (test_characterize_filters.CharacterizationTests.test_existing_output_is_refused_without_launch_or_overwrite) ... ok
+test_malformed_metric_fails_instead_of_becoming_unavailable (test_characterize_filters.CharacterizationTests.test_malformed_metric_fails_instead_of_becoming_unavailable) ... ok
+test_missing_or_ambiguous_metrics_fail (test_characterize_filters.CharacterizationTests.test_missing_or_ambiguous_metrics_fail) ... ok
+test_nonfinite_metrics_are_null_with_reason_and_valid_json (test_characterize_filters.CharacterizationTests.test_nonfinite_metrics_are_null_with_reason_and_valid_json) ... ok
+test_process_failure_is_not_reported_as_success (test_characterize_filters.CharacterizationTests.test_process_failure_is_not_reported_as_success) ... ok
+test_sample_and_loudness_analyses_are_independent (test_characterize_filters.CharacterizationTests.test_sample_and_loudness_analyses_are_independent) ... ok
+test_uses_final_file_input_metrics_not_analysis_output (test_characterize_filters.CharacterizationTests.test_uses_final_file_input_metrics_not_analysis_output) ... ok
+test_apply_preserves_application (test_handoff.BundleAndInstallTests.test_apply_preserves_application) ... ok
+test_copy_failure_rolls_back_only_new_files (test_handoff.BundleAndInstallTests.test_copy_failure_rolls_back_only_new_files) ... ok
+test_detached_head_rejected (test_handoff.BundleAndInstallTests.test_detached_head_rejected) ... ok
+test_differing_agents_never_overwritten (test_handoff.BundleAndInstallTests.test_differing_agents_never_overwritten) ... ok
+test_dirty_apply_rejected (test_handoff.BundleAndInstallTests.test_dirty_apply_rejected) ... ok
+test_expected_head_mismatch_rejected (test_handoff.BundleAndInstallTests.test_expected_head_mismatch_rejected) ... ok
+test_extra_file_rejected (test_handoff.BundleAndInstallTests.test_extra_file_rejected) ... ok
+test_main_apply_rejected (test_handoff.BundleAndInstallTests.test_main_apply_rejected) ... ok
+test_multiple_push_destinations_rejected (test_handoff.BundleAndInstallTests.test_multiple_push_destinations_rejected) ... ok
+test_preview_is_read_only (test_handoff.BundleAndInstallTests.test_preview_is_read_only) ... ok
+test_repeat_after_checkpoint_is_idempotent (test_handoff.BundleAndInstallTests.test_repeat_after_checkpoint_is_idempotent) ... ok
+test_runtime_payload_rejected (test_handoff.BundleAndInstallTests.test_runtime_payload_rejected) ... ok
+test_subdirectory_is_not_repository_root (test_handoff.BundleAndInstallTests.test_subdirectory_is_not_repository_root) ... ok
+test_tampered_file_rejected (test_handoff.BundleAndInstallTests.test_tampered_file_rejected) ... ok
+test_tampered_sums_rejected (test_handoff.BundleAndInstallTests.test_tampered_sums_rejected) ... ok
+test_unreviewed_drift_rejected (test_handoff.BundleAndInstallTests.test_unreviewed_drift_rejected) ... ok
+test_valid_bundle (test_handoff.BundleAndInstallTests.test_valid_bundle) ... ok
+test_wrong_origin_rejected (test_handoff.BundleAndInstallTests.test_wrong_origin_rejected) ... ok
+test_current_plan_is_valid (test_handoff.CanonicalPlanTests.test_current_plan_is_valid) ... ok
+test_existing_file_preserved (test_handoff.FixtureTests.test_existing_file_preserved) ... ok
+test_fixture_format_and_no_overwrite (test_handoff.FixtureTests.test_fixture_format_and_no_overwrite) ... ok
+test_repeatable_pcm (test_handoff.FixtureTests.test_repeatable_pcm) ... ok
+test_bad_origins (test_handoff.PathAndOriginTests.test_bad_origins) ... ok
+test_payload_is_governance_only (test_handoff.PathAndOriginTests.test_payload_is_governance_only) ... ok
+test_safe_paths (test_handoff.PathAndOriginTests.test_safe_paths) ... ok
+test_supported_origin_forms (test_handoff.PathAndOriginTests.test_supported_origin_forms) ... ok
+test_symlink_rejected (test_handoff.PathAndOriginTests.test_symlink_rejected) ... skipped 'Symlink privileges unavailable'
+test_unsafe_paths (test_handoff.PathAndOriginTests.test_unsafe_paths) ... ok
+test_all_improvements_required (test_handoff.PlanTests.test_all_improvements_required) ... ok
+test_blocked_without_reason_rejected (test_handoff.PlanTests.test_blocked_without_reason_rejected) ... ok
+test_cycle_rejected (test_handoff.PlanTests.test_cycle_rejected) ... ok
+test_deferred_without_approval_rejected (test_handoff.PlanTests.test_deferred_without_approval_rejected) ... ok
+test_done_before_dependencies_rejected (test_handoff.PlanTests.test_done_before_dependencies_rejected) ... ok
+test_done_with_real_evidence_unlocks_next (test_handoff.PlanTests.test_done_with_real_evidence_unlocks_next) ... ok
+test_done_without_evidence_rejected (test_handoff.PlanTests.test_done_without_evidence_rejected) ... ok
+test_duplicate_acceptance_rejected (test_handoff.PlanTests.test_duplicate_acceptance_rejected) ... ok
+test_duplicate_task_rejected (test_handoff.PlanTests.test_duplicate_task_rejected) ... ok
+test_evidence_path_traversal_rejected (test_handoff.PlanTests.test_evidence_path_traversal_rejected) ... ok
+test_initial_plan (test_handoff.PlanTests.test_initial_plan) ... ok
+test_missing_brief_rejected (test_handoff.PlanTests.test_missing_brief_rejected) ... ok
+test_missing_dependency_rejected (test_handoff.PlanTests.test_missing_dependency_rejected) ... ok
+test_next_is_governance_only (test_handoff.PlanTests.test_next_is_governance_only) ... ok
+test_orphan_case_rejected (test_handoff.PlanTests.test_orphan_case_rejected) ... ok
+test_pass_without_evidence_rejected (test_handoff.PlanTests.test_pass_without_evidence_rejected) ... ok
+test_publication_is_approval_gated (test_handoff.PlanTests.test_publication_is_approval_gated) ... ok
+test_skip_without_reason_rejected (test_handoff.PlanTests.test_skip_without_reason_rejected) ... ok
+test_unknown_state_rejected (test_handoff.PlanTests.test_unknown_state_rejected) ... ok
+test_actual_local_bare_round_trip (test_handoff.SyncTests.test_actual_local_bare_round_trip) ... ok
+test_dirty_checkpoint_rejected (test_handoff.SyncTests.test_dirty_checkpoint_rejected) ... ok
+test_empty_live_ref_rejected (test_handoff.SyncTests.test_empty_live_ref_rejected) ... ok
+test_equal_live_head_passes (test_handoff.SyncTests.test_equal_live_head_passes) ... ok
+test_network_failure_not_success (test_handoff.SyncTests.test_network_failure_not_success) ... ok
+test_stale_live_head_rejected (test_handoff.SyncTests.test_stale_live_head_rejected) ... ok
+test_wrong_upstream_rejected (test_handoff.SyncTests.test_wrong_upstream_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 62 tests in 41.976s
+
+OK (skipped=1)
+Full passed: 227 Pester passed, 0 skipped, 0 outside scope.
