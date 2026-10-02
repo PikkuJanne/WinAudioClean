@@ -4,8 +4,8 @@ param(
     [int]$ProcessExitCode = 0
 )
 
-# Test doubles exercise script execution while preventing native processing and
-# file writes. The synthetic input never has to exist; no recording is needed.
+# Test doubles exercise processing/report wiring after real filesystem preflight.
+# Only disposable synthetic input and a destination are created; no audio runs.
 $ErrorActionPreference = 'Stop'
 $wacFixtureState = [pscustomobject]@{
     Choice = $Choice
@@ -15,13 +15,16 @@ $wacFixtureState = [pscustomobject]@{
     HostMessages = @()
 }
 function Clear-Host { }
-function Read-Host { param($Prompt) $wacFixtureState.Choice }
+function Read-Host { throw 'Unattended application unexpectedly prompted.' }
 function Write-Host {
     param($Object, $ForegroundColor, [switch]$NoNewline)
     $wacFixtureState.HostMessages += [string]$Object
 }
-function Test-Path { param($Path) $true }
-function Get-Item { param($Path) [pscustomobject]@{ Length = 2097152 } }
+function Test-Path {
+    param($LiteralPath, $PathType)
+    if ([System.IO.Path]::GetFileName($LiteralPath) -eq 'ffmpeg.exe') { return $true }
+    Microsoft.PowerShell.Management\Test-Path -LiteralPath $LiteralPath
+}
 function Get-Date {
     param($Format)
     if ($Format -eq 'yyyyMMdd-HHmm') { return '20261002-1200' }
@@ -40,9 +43,9 @@ function Start-Process {
     [pscustomobject]@{ ExitCode = $wacFixtureState.ProcessExitCode }
 }
 function Add-Content {
-    param($Path, $Value)
+    param($LiteralPath, $Value)
     $wacFixtureState.LogCalls += [pscustomobject]@{
-        FileName = [System.IO.Path]::GetFileName($Path)
+        FileName = [System.IO.Path]::GetFileName($LiteralPath)
         Value = $Value
     }
 }
@@ -53,19 +56,26 @@ function Remove-Item { throw 'Unexpected file removal in controlled execution.' 
 function ffmpeg { throw 'Unexpected direct FFmpeg invocation.' }
 function ffmpeg.exe { throw 'Unexpected direct FFmpeg invocation.' }
 
-& $ScriptPath -inputPath 'C:\WAC synthetic input\meeting sample.wav'
+$scratch = (Get-Location).ProviderPath
+$inputFile = [System.IO.Path]::Combine($scratch, 'meeting sample.wav')
+$outputDirectory = [System.IO.Path]::Combine($scratch, 'output [literal]')
+[System.IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
+try {
+    $mode = if ($Choice -eq '1') { 'Raw' } else { 'Zoom' }
+    & $ScriptPath -inputPath $inputFile -Mode $mode -OutputDirectory $outputDirectory -NonInteractive
+} finally {
+    [System.IO.File]::Delete($inputFile)
+    if ([System.IO.Directory]::Exists($outputDirectory)) { [System.IO.Directory]::Delete($outputDirectory) }
+}
 
-# Redact the real Music directory before any child output or test diagnostics.
-$musicFolder = [Environment]::GetFolderPath('MyMusic')
+# Redact temporary paths before child output or test diagnostics.
 $result = [pscustomobject]@{
     Processes = $wacFixtureState.ProcessCalls
     Logs = $wacFixtureState.LogCalls
     HostMessages = $wacFixtureState.HostMessages
 }
 $json = $result | ConvertTo-Json -Depth 5 -Compress
-if ($musicFolder) {
-    # JSON escaping doubles backslashes; redact after serialization as well.
-    $encodedMusic = ($musicFolder | ConvertTo-Json -Compress).Trim('"')
-    $json = $json.Replace($encodedMusic, 'C:\\WAC synthetic output')
-}
+$encodedOutput = ($outputDirectory | ConvertTo-Json -Compress).Trim('"')
+$encodedScratch = ($scratch | ConvertTo-Json -Compress).Trim('"')
+$json = $json.Replace($encodedOutput, 'C:\\WAC synthetic output').Replace($encodedScratch, 'C:\\WAC synthetic input')
 [Console]::WriteLine($json)

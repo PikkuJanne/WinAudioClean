@@ -1,0 +1,122 @@
+{
+  "task": "WAC-M1-01",
+  "starting_commit": "329852555170c5e58be3db92c18634b5341eb138",
+  "identity": "SHA256 of tested working-tree bytes, including line endings. No runtime/test source changes after final Full runs.",
+  "environment": {
+    "os": "Windows NT 10.0.26300.0",
+    "powershell": [
+      "5.1.26100.9444",
+      "7.6.5"
+    ],
+    "python": "3.14.6",
+    "pester": "5.7.1",
+    "psscriptanalyzer": "1.24.0"
+  },
+  "files": [
+    {
+      "path": "WinAudioClean.bat",
+      "sha256": "7d8a3ff8b68ec92ef72be54361b7f1eef9dc626c0b3bb8067d154a61d675b13b"
+    },
+    {
+      "path": "WinAudioClean.ps1",
+      "sha256": "fd36ac2270df7f130794ad376852c9c0fadbfb2f1c2365e14e9c3897b9be4b0b"
+    },
+    {
+      "path": "docs/codex/winaudioclean/BASELINE.json",
+      "sha256": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tests/test_characterize_filters.py",
+      "sha256": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tests/test_handoff.py",
+      "sha256": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/characterize_filters.py",
+      "sha256": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/generate_fixtures.py",
+      "sha256": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/handoff.py",
+      "sha256": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a"
+    },
+    {
+      "path": "scripts/DevDependencies.psd1",
+      "sha256": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90"
+    },
+    {
+      "path": "scripts/Install-DevDependencies.ps1",
+      "sha256": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14"
+    },
+    {
+      "path": "scripts/Invoke-Tests.ps1",
+      "sha256": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b"
+    },
+    {
+      "path": "scripts/PSScriptAnalyzerSettings.psd1",
+      "sha256": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c"
+    },
+    {
+      "path": "tests/WinAudioClean.EntryPoints.Tests.ps1",
+      "sha256": "9cfd0a77fd6f3d9954c0ae01712b0e467d9dcd98fb76aa75c5a465aa9406c3e8"
+    },
+    {
+      "path": "tests/WinAudioClean.Helpers.Tests.ps1",
+      "sha256": "43978f147c85ce231a84cb94f783073468350d020abc61a5fa2cb43e17a73e26"
+    },
+    {
+      "path": "tests/WinAudioClean.Preflight.Tests.ps1",
+      "sha256": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07"
+    },
+    {
+      "path": "tests/fixtures/Import-Safety.ps1",
+      "sha256": "8332eff135dc547095cca7fe019e2ca4c3ddeb66bf73af98ca04a4e4cf0f7638"
+    },
+    {
+      "path": "tests/fixtures/Invoke-ControlledApplication.ps1",
+      "sha256": "57cc55452a9ef7bfc7c6fab813ee2c953d6fe3831c6247904012676d91c74f74"
+    },
+    {
+      "path": "tests/fixtures/Invoke-Launcher.ps1",
+      "sha256": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8"
+    },
+    {
+      "path": "tests/fixtures/TestProcess.ps1",
+      "sha256": "9278382914eba153fcf03754aeba5d9a18ba3416cdaa80d3a0a1eb83a3605a85"
+    }
+  ],
+  "logs": [
+    {
+      "path": "evidence/WAC-M1-01-entry.txt",
+      "sha256": "5077a3bdfecde2b4100299f9f3b79c4daaee0bf22653104bb032c2bb3a260007",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/WAC-M1-01-full-ps7.txt",
+      "sha256": "ce4be01a05466c5a86c06ff86c60294e8a97507befe63ab9bdc4e051a105740c",
+      "exit_code": 0
+    },
+    {
+      "path": "evidence/WAC-M1-01-full-ps51.txt",
+      "sha256": "71d0e97348f88771cb74f0a128d9f278f33d0598d134588bed23c150f5ac4e85",
+      "exit_code": 0
+    }
+  ],
+  "console_checks": {
+    "source_copy_sha256": "fd36ac2270df7f130794ad376852c9c0fadbfb2f1c2365e14e9c3897b9be4b0b",
+    "shells": [
+      "5.1.26100.9444",
+      "7.6.5"
+    ],
+    "empty_and_invalid": "reprompt",
+    "cancel_exit": 130,
+    "abbreviated_host_noninteractive_exit": 2,
+    "output_directory_file_count": 0,
+    "native_audio_executed": false
+  }
+}

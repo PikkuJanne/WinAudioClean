@@ -84,9 +84,122 @@ LICENSE / WARRANTY
     - Logic based on standard audio engineering practices.
 #>
 
-param([string]$inputPath)
+[CmdletBinding(PositionalBinding = $false)]
+param(
+    [Parameter(Position = 0)][string]$inputPath,
+    [string]$Mode,
+    [string]$OutputDirectory = [Environment]::GetFolderPath('MyMusic'),
+    [switch]$NonInteractive
+)
 
-# Small, side-effect-free seams for characterization of the existing workflow.
+# Importing defines helpers only; filesystem checks run when explicitly called.
+function Resolve-WacFileSystemPath {
+    param([string]$Path)
+
+    if ([string]::IsNullOrWhiteSpace($Path)) { throw 'A filesystem path is required.' }
+    # UNC and device namespaces are outside the current supported path policy.
+    # A drive path can still be mapped/redirected; this is not an offline guarantee.
+    if ($Path -match '^[\\/]{2}') { throw 'UNC and device paths are not supported. Use a local drive path.' }
+    if ($Path -match '^[a-zA-Z][a-zA-Z0-9+.-]*://' -or $Path.Contains('::')) {
+        throw 'Only filesystem paths are supported; URLs and provider-qualified paths are not accepted.'
+    }
+    $provider = $null
+    $drive = $null
+    try {
+        $resolved = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($Path, [ref]$provider, [ref]$drive)
+    } catch {
+        throw 'Cannot resolve this filesystem path.'
+    }
+    if ($provider.Name -ne 'FileSystem') { throw 'Only filesystem paths are supported.' }
+    if ($resolved -match '^[\\/]{2}') { throw 'UNC and device paths are not supported. Use a local drive path.' }
+    # Restrict native handoff to ordinary Windows drive paths, with no alternate
+    # data streams, wildcard characters, or control characters.
+    if ($resolved -notmatch '^[a-zA-Z]:[\\/]' -or $resolved.Substring(2) -match '[:*?"<>|\x00-\x1f]') {
+        throw 'Unsupported filesystem path. Use an ordinary Windows file or directory path.'
+    }
+    $resolved
+}
+
+function Get-WacInputFile {
+    param([string]$Path)
+
+    if ([string]::IsNullOrWhiteSpace($Path)) {
+        throw 'No input file supplied. Drop a file onto WinAudioClean.bat or run: .\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav" [-Mode Raw|Zoom -NonInteractive]'
+    }
+    $resolved = Resolve-WacFileSystemPath -Path $Path
+    try { $item = Get-Item -LiteralPath $resolved -Force -ErrorAction Stop }
+    catch { throw 'Input file does not exist or cannot be accessed.' }
+    if ($item -isnot [System.IO.FileInfo]) { throw 'Input must be a file, not a directory.' }
+    $stream = $null
+    try {
+        $stream = [System.IO.File]::Open($item.FullName, [System.IO.FileMode]::Open, [System.IO.FileAccess]::Read, [System.IO.FileShare]::ReadWrite)
+        if ($stream.Length -eq 0) { throw 'Input file is empty (zero bytes).' }
+        $null = $stream.ReadByte()
+    } catch {
+        throw "Input file is not readable or is empty (zero bytes): $($_.Exception.Message)"
+    } finally {
+        if ($null -ne $stream) { $stream.Dispose() }
+    }
+    $item
+}
+
+function Get-WacOutputDirectory {
+    param([string]$Path)
+
+    $resolved = Resolve-WacFileSystemPath -Path $Path
+    $probe = $null
+    try {
+        $null = [System.IO.Directory]::CreateDirectory($resolved)
+        $probePath = [System.IO.Path]::Combine($resolved, ('.wac-write-check-' + [guid]::NewGuid().ToString('N') + '.tmp'))
+        $probe = [System.IO.FileStream]::new($probePath, [System.IO.FileMode]::CreateNew,
+            [System.IO.FileAccess]::Write, [System.IO.FileShare]::None, 1, [System.IO.FileOptions]::DeleteOnClose)
+        $probe.WriteByte(0)
+        $probe.Flush()
+    } catch {
+        throw "Output directory cannot be created or written: $($_.Exception.Message)"
+    } finally {
+        if ($null -ne $probe) { $probe.Dispose() }
+    }
+    $resolved
+}
+
+function Test-WacInteractive {
+    param(
+        [switch]$NonInteractive,
+        [string[]]$HostArguments = [Environment]::GetCommandLineArgs(),
+        [bool]$InputRedirected = [Console]::IsInputRedirected,
+        [bool]$UserInteractive = [Environment]::UserInteractive
+    )
+
+    if ($NonInteractive -or -not $UserInteractive -or $InputRedirected) { return $false }
+    # Inspect host switches only; script arguments may contain the same text.
+    foreach ($argument in ($HostArguments | Select-Object -Skip 1)) {
+        if ($argument -notmatch '^[-/]') { continue }
+        $hostSwitch = $argument.Substring(1).ToLowerInvariant()
+        if (-not $hostSwitch) { continue }
+        if ('file'.StartsWith($hostSwitch) -or 'command'.StartsWith($hostSwitch) -or
+            'encodedcommand'.StartsWith($hostSwitch) -or 'commandwithargs'.StartsWith($hostSwitch) -or
+            $hostSwitch -in @('ec', 'cwa')) { break }
+        if ($hostSwitch.Length -ge 4 -and 'noninteractive'.StartsWith($hostSwitch)) { return $false }
+    }
+    $true
+}
+
+function Read-WacMode {
+    while ($true) {
+        try { $choice = Read-Host "`nEnter selection (1 or 2; Q to cancel)" }
+        catch { throw 'Cannot read a mode. Supply -Mode Raw or -Mode Zoom with -NonInteractive.' }
+        if ($null -eq $choice) { return $null }
+        switch ($choice.Trim()) {
+            '1' { return 'Raw' }
+            '2' { return 'Zoom' }
+            'q' { return $null }
+            'cancel' { return $null }
+            default { Write-Host 'Invalid selection. Enter 1 for Raw, 2 for Zoom, or Q to cancel.' -ForegroundColor Yellow }
+        }
+    }
+}
+
 function Get-WacProcessingProfile {
     param([string]$Choice)
 
@@ -95,9 +208,10 @@ function Get-WacProcessingProfile {
 
     if ($Choice -eq '1') {
         [pscustomobject]@{ ModeName = 'RAW (Clean+Level)'; FilterChain = "$cleanFilters,$levelFilters" }
-    } else {
-        # Legacy fallback for every other answer; validation belongs to WAC-M1-01.
+    } elseif ($Choice -eq '2') {
         [pscustomobject]@{ ModeName = 'ZOOM (Level Only)'; FilterChain = $levelFilters }
+    } else {
+        throw 'Invalid processing choice. Expected 1 (Raw) or 2 (Zoom).'
     }
 }
 
@@ -121,37 +235,61 @@ if ($MyInvocation.InvocationName -eq '.') { return }
 # --- CONFIGURATION ---
 $scriptVersion = "2.3"
 $ffmpegPath = "$PSScriptRoot\ffmpeg.exe"
-$outFolder = [Environment]::GetFolderPath("MyMusic")
+$interactive = Test-WacInteractive -NonInteractive:$NonInteractive
+
+# Validate before displaying the menu or starting any native process. Reading a
+# file here proves accessibility only; media probing belongs to the probe task.
+try {
+    $inputFileItem = Get-WacInputFile -Path $inputPath
+    $inputPath = $inputFileItem.FullName
+    if ($PSBoundParameters.ContainsKey('Mode') -and $Mode -notin @('Raw', 'Zoom')) {
+        throw 'Invalid mode. Supply -Mode Raw or -Mode Zoom.'
+    }
+    $outFolder = Get-WacOutputDirectory -Path $OutputDirectory
+    if (-not $Mode -and -not $interactive) {
+        throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.'
+    }
+    if (-not (Test-Path -LiteralPath $ffmpegPath -PathType Leaf)) {
+        if (Get-Command 'ffmpeg' -CommandType Application -ErrorAction SilentlyContinue) { $ffmpegPath = 'ffmpeg' }
+        else { throw 'FFmpeg.exe not found! Put it next to this script.' }
+    }
+} catch {
+    Write-Error -Message ("Preflight failed: " + $_.Exception.Message) -ErrorAction Continue
+    exit 2
+}
 $logFile = "$outFolder\WinAudioClean_Log.txt"
 
 # --- TUI: HEADER ---
-Clear-Host
+if ($interactive) { Clear-Host }
 Write-Host "WinAudioClean $scriptVersion" -ForegroundColor Cyan
 Write-Host "============================" -ForegroundColor Gray
 Write-Host "Input: " -NoNewline; Write-Host $inputPath -ForegroundColor Yellow
 
 # --- TUI: SELECTION ---
-Write-Host "`nSelect Processing Mode:" -ForegroundColor White
-Write-Host "[1] RAW RECORDING (Clean + Level)" -ForegroundColor Green
-Write-Host "    -> Use for mic recordings. Removes hiss, rumble, clicks, and levels volume."
-Write-Host "[2] ZOOM/TEAMS (Level Only)" -ForegroundColor Magenta
-Write-Host "    -> Use for meeting audio. Preserves existing noise cancellation."
-
-$choice = Read-Host "`nEnter selection (1 or 2)"
+if (-not $Mode) {
+    Write-Host "`nSelect Processing Mode:" -ForegroundColor White
+    Write-Host "[1] RAW RECORDING (Clean + Level)" -ForegroundColor Green
+    Write-Host "    -> Use for mic recordings. Removes hiss, rumble, clicks, and levels volume."
+    Write-Host "[2] ZOOM/TEAMS (Level Only)" -ForegroundColor Magenta
+    Write-Host "    -> Use for meeting audio. Preserves existing noise cancellation."
+    Write-Host '[Q] Cancel'
+    try { $Mode = Read-WacMode }
+    catch {
+        Write-Error -Message $_.Exception.Message -ErrorAction Continue
+        exit 2
+    }
+    if (-not $Mode) {
+        Write-Host 'Cancelled. No audio was processed.'
+        exit 130
+    }
+}
 
 # --- FILTER SELECTION ---
+$choice = if ($Mode -eq 'Raw') { '1' } else { '2' }
 $processingProfile = Get-WacProcessingProfile -Choice $choice
 $modeName = $processingProfile.ModeName
 $filterChain = $processingProfile.FilterChain
 
-# --- PRE-FLIGHT CHECKS ---
-if (-not (Test-Path $inputPath)) { Write-Error "No file dropped!"; exit }
-if (-not (Test-Path $ffmpegPath)) { 
-    if (Get-Command "ffmpeg" -ErrorAction SilentlyContinue) { $ffmpegPath = "ffmpeg" } 
-    else { Write-Error "FFmpeg.exe not found! Put it next to this script."; exit }
-}
-
-$inputFileItem = Get-Item $inputPath
 $inputSizeMB = "{0:N2} MB" -f ($inputFileItem.Length / 1MB)
 
 $timestamp = Get-Date -Format "yyyyMMdd-HHmm"
@@ -175,8 +313,8 @@ $duration = $stopWatch.Elapsed.ToString("mm\:ss\.ff")
 $logDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 
 # Get Output Size if file exists
-if (Test-Path $outputFile) {
-    $outputFileItem = Get-Item $outputFile
+if (Test-Path -LiteralPath $outputFile) {
+    $outputFileItem = Get-Item -LiteralPath $outputFile
     $outputSizeMB = "{0:N2} MB" -f ($outputFileItem.Length / 1MB)
 } else {
     $outputSizeMB = "N/A"
@@ -201,7 +339,7 @@ ACTIVE FILTERS : $filterChain
 "@
 
 # Write to Log
-Add-Content -Path $logFile -Value $logEntry
+Add-Content -LiteralPath $logFile -Value $logEntry
 
 # --- FEEDBACK ---
 if ($status -eq "SUCCESS") {

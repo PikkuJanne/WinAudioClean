@@ -72,6 +72,34 @@ Run from a PowerShell prompt:
 
 You will see the same interactive menu and the same final log output.
 
+**Input, destination and mode checks**
+
+The script checks the input and destination before showing the mode menu. Input
+must be an existing, readable, nonempty file. Paths are handled literally,
+including spaces, square brackets, apostrophes and Unicode characters. URLs,
+PowerShell provider paths, alternate data streams, UNC and device paths are not
+supported. Use ordinary Windows drive paths or paths relative to your current
+PowerShell directory. Mapped drives and redirected folders can still use network
+storage; a drive path does not guarantee that a recording is physically offline.
+
+Music remains the default destination. Use `-OutputDirectory` to choose another
+folder; the script creates it if needed and checks that it can write there. An
+empty or invalid destination fails before the menu. These checks establish file
+accessibility; they do not prove that FFmpeg can decode the media.
+
+At the menu, enter `1` for Raw, `2` for Zoom/Teams, or `Q` to cancel. Empty and
+invalid choices ask again. A mode can also be supplied directly:
+
+```powershell
+.\WinAudioClean.ps1 -inputPath 'C:\Audio\meeting [draft].wav' -Mode Zoom -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
+```
+
+`-Mode` accepts `Raw` or `Zoom`. `-NonInteractive`, a noninteractive host, and
+redirected input require an explicit mode and never show a mode prompt. Running
+without an input file displays usage. Direct script preflight failures return
+exit code `2`; menu cancellation returns `130`. The batch launcher still pauses,
+and native-processing/launcher exit codes are not yet reliable automation results.
+
 **What it actually does (step-by-step)**
 
 1. Checks

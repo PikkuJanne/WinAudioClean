@@ -1,0 +1,218 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (12 files; shell 5.1.26100.9444).
+Static gate passed; 49 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 3 files.
+Discovery found 108 tests in 375ms.
+Running tests.
+
+Running tests from 'WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] AC-014: rejects missing -File -inputPath before prompting in powershell.exe 704ms (660ms|44ms)
+  [+] AC-014: rejects missing -File -inputPath before prompting in pwsh.exe 1.22s (1.22s|2ms)
+  [+] AC-014: rejects a missing dropped file via outer powershell.exe before the menu (inner Windows PowerShell) 786ms (783ms|3ms)
+  [+] AC-014: rejects a missing dropped file via outer pwsh.exe before the menu (inner Windows PowerShell) 1.53s (1.53s|4ms)
+
+Describing AC-014/015: actual script preflight is bounded and unattended on invalid requests
+  [+] rejects no input without a menu or processing in powershell.exe 453ms (448ms|4ms)
+  [+] rejects directory without a menu or processing in powershell.exe 466ms (465ms|1ms)
+  [+] rejects URL without a menu or processing in powershell.exe 569ms (567ms|2ms)
+  [+] rejects zero bytes without a menu or processing in powershell.exe 470ms (468ms|2ms)
+  [+] rejects destination file without a menu or processing in powershell.exe 506ms (504ms|2ms)
+  [+] rejects empty destination without a menu or processing in powershell.exe 456ms (455ms|2ms)
+  [+] rejects invalid mode without a menu or processing in powershell.exe 472ms (469ms|2ms)
+  [+] rejects empty mode without a menu or processing in powershell.exe 495ms (493ms|2ms)
+  [+] rejects missing mode without a menu or processing in powershell.exe 511ms (509ms|2ms)
+  [+] rejects redirected input without a menu or processing in powershell.exe 526ms (523ms|2ms)
+  [+] rejects host noninteractive without a menu or processing in powershell.exe 527ms (525ms|1ms)
+  [+] rejects no input without a menu or processing in pwsh.exe 1s (1s|2ms)
+  [+] rejects directory without a menu or processing in pwsh.exe 1.06s (1.06s|2ms)
+  [+] rejects URL without a menu or processing in pwsh.exe 1.29s (1.29s|1ms)
+  [+] rejects zero bytes without a menu or processing in pwsh.exe 1.28s (1.28s|1ms)
+  [+] rejects destination file without a menu or processing in pwsh.exe 1.22s (1.22s|1ms)
+  [+] rejects empty destination without a menu or processing in pwsh.exe 1.24s (1.24s|1ms)
+  [+] rejects invalid mode without a menu or processing in pwsh.exe 1.25s (1.25s|1ms)
+  [+] rejects empty mode without a menu or processing in pwsh.exe 1.35s (1.35s|2ms)
+  [+] rejects missing mode without a menu or processing in pwsh.exe 1.24s (1.24s|1ms)
+  [+] rejects redirected input without a menu or processing in pwsh.exe 1.16s (1.15s|1ms)
+  [+] rejects host noninteractive without a menu or processing in pwsh.exe 1.4s (1.4s|2ms)
+
+Describing Controlled runtime execution preserves mode, process and report wiring
+  [+] uses choice 1 and reports process exit 0 in powershell.exe 743ms (737ms|6ms)
+  [+] uses choice 1 and reports process exit 7 in powershell.exe 574ms (572ms|2ms)
+  [+] uses choice 2 and reports process exit 0 in powershell.exe 592ms (590ms|1ms)
+  [+] uses choice 2 and reports process exit 7 in powershell.exe 546ms (543ms|2ms)
+  [+] uses choice 1 and reports process exit 0 in pwsh.exe 1.29s (1.29s|1ms)
+  [+] uses choice 1 and reports process exit 7 in pwsh.exe 1.19s (1.19s|2ms)
+  [+] uses choice 2 and reports process exit 0 in pwsh.exe 1.08s (1.08s|3ms)
+  [+] uses choice 2 and reports process exit 7 in pwsh.exe 1.14s (1.13s|2ms)
+
+Running tests from 'WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] AC-007: matches the Raw filter values and order in BASELINE.json 26ms (20ms|6ms)
+  [+] AC-007: matches the Zoom filter values and order in BASELINE.json 8ms (6ms|2ms)
+  [+] selects the exact original Raw mode and filters for choice 1 10ms (9ms|2ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 7ms (6ms|1ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom () 57ms (55ms|2ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (invalid) 7ms (5ms|2ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (3) 8ms (6ms|2ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 15ms (12ms|4ms)
+  [+] accepts an input stem without an extension 7ms (5ms|2ms)
+  [+] characterizes the legacy minute-timestamp collision 10ms (9ms|1ms)
+  [+] quotes paths and the filter string in the original FFmpeg argument order 29ms (27ms|2ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 12ms (11ms|1ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 367ms (362ms|5ms)
+
+Running tests from 'WinAudioClean.Preflight.Tests.ps1'
+Describing AC-013: preflight treats filenames as literal data
+  [+] resolves and reads exactly meeting with spaces.wav 85ms (83ms|3ms)
+  [+] resolves and reads exactly meeting [draft].wav 17ms (14ms|2ms)
+  [+] resolves and reads exactly speaker's recording.wav 19ms (18ms|1ms)
+  [+] resolves and reads exactly meeting äöÅ.wav 17ms (16ms|1ms)
+  [+] resolves and reads exactly speaker & guest.wav 19ms (17ms|2ms)
+  [+] resolves and reads exactly meeting %completed%.wav 20ms (19ms|1ms)
+  [+] resolves and reads exactly meeting !important!.wav 20ms (18ms|2ms)
+  [+] resolves and reads exactly meeting (take 1).wav 12ms (11ms|1ms)
+  [+] does not expand brackets to a different existing filename 23ms (22ms|1ms)
+  [+] normalizes a relative path against the PowerShell working directory 11ms (10ms|1ms)
+  [+] rejects provider-qualified syntax even when the underlying file exists 21ms (18ms|2ms)
+
+Describing AC-014: input preflight rejects unsupported or unreadable input
+  [+] rejects empty path for both input and destination 27ms (23ms|4ms)
+  [+] rejects blank path for both input and destination 12ms (10ms|1ms)
+  [+] rejects HTTPS URL for both input and destination 8ms (7ms|2ms)
+  [+] rejects file URL for both input and destination 10ms (9ms|1ms)
+  [+] rejects environment provider for both input and destination 9ms (7ms|2ms)
+  [+] rejects registry provider for both input and destination 10ms (9ms|2ms)
+  [+] rejects UNC path for both input and destination 7ms (6ms|1ms)
+  [+] rejects forward-slash UNC path for both input and destination 10ms (7ms|3ms)
+  [+] rejects extended device path for both input and destination 15ms (12ms|2ms)
+  [+] rejects device namespace for both input and destination 12ms (10ms|2ms)
+  [+] rejects alternate data stream for both input and destination 13ms (12ms|1ms)
+  [+] rejects a missing file without creating it 15ms (14ms|1ms)
+  [+] rejects an existing directory 12ms (11ms|1ms)
+  [+] rejects a zero-byte file and leaves it unchanged 15ms (14ms|1ms)
+  [+] rejects a file that cannot be opened for reading 17ms (15ms|2ms)
+
+Describing AC-013/AC-014: destination preflight creates and verifies literal directories
+  [+] creates a literal destination containing meeting with spaces.wav without leaving probe files 26ms (21ms|4ms)
+  [+] creates a literal destination containing meeting [draft].wav without leaving probe files 8ms (7ms|1ms)
+  [+] creates a literal destination containing speaker's recording.wav without leaving probe files 9ms (8ms|1ms)
+  [+] creates a literal destination containing meeting äöÅ.wav without leaving probe files 8ms (7ms|1ms)
+  [+] creates a literal destination containing speaker & guest.wav without leaving probe files 8ms (6ms|2ms)
+  [+] creates a literal destination containing meeting %completed%.wav without leaving probe files 9ms (7ms|3ms)
+  [+] creates a literal destination containing meeting !important!.wav without leaving probe files 7ms (6ms|1ms)
+  [+] creates a literal destination containing meeting (take 1).wav without leaving probe files 12ms (11ms|1ms)
+  [+] normalizes and creates a nested relative destination 10ms (9ms|1ms)
+  [+] preserves existing files and removes only its own write probe 14ms (10ms|4ms)
+  [+] rejects a destination occupied by a file and preserves that file 14ms (13ms|1ms)
+  [+] rejects a directory whose ACL denies creating files 31ms (30ms|1ms)
+
+Describing AC-015: the menu retries invalid answers and permits cancellation
+  [+] selects Raw for 1 444ms (440ms|4ms)
+  [+] selects Zoom for 2 31ms (27ms|4ms)
+  [+] retries empty and invalid answers before accepting a valid choice 93ms (92ms|2ms)
+  [+] returns no mode for cancellation q 30ms (28ms|2ms)
+  [+] returns no mode for cancellation cancel 26ms (24ms|1ms)
+  [+] returns no mode when the host reports end of input 59ms (58ms|1ms)
+  [+] reports a clear unattended-use route when Read-Host fails 40ms (40ms|1ms)
+
+Describing AC-015: prompt eligibility follows host and script invocation boundaries
+  [+] allows an interactive host with ordinary startup switches 26ms (23ms|3ms)
+  [+] prevents prompting for the explicit application switch 8ms (6ms|2ms)
+  [+] prevents prompting for redirected standard input 7ms (3ms|4ms)
+  [+] prevents prompting for a noninteractive operating system session 5ms (3ms|2ms)
+  [+] recognizes host switch -NonInteractive before script arguments 8ms (6ms|3ms)
+  [+] recognizes host switch -noni before script arguments 5ms (3ms|2ms)
+  [+] recognizes host switch -nonin before script arguments 5ms (4ms|1ms)
+  [+] recognizes host switch -noninter before script arguments 4ms (3ms|1ms)
+  [+] recognizes host switch -NoNiNtErAcTiVe before script arguments 4ms (2ms|2ms)
+  [+] does not interpret application arguments after -File as host switches 8ms (7ms|1ms)
+  [+] does not interpret application arguments after -fi as host switches 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -Command as host switches 5ms (3ms|1ms)
+  [+] does not interpret application arguments after -co as host switches 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -EncodedCommand as host switches 5ms (3ms|2ms)
+  [+] does not interpret application arguments after -ec as host switches 5ms (4ms|1ms)
+  [+] does not confuse a longer lookalike argument with a supported host switch 6ms (5ms|2ms)
+Tests completed in 34.07s
+Tests Passed: 108, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+test_commands_sanitize_paths_and_use_bounded_no_shell_process (test_characterize_filters.CharacterizationTests.test_commands_sanitize_paths_and_use_bounded_no_shell_process) ... ok
+test_existing_output_is_refused_without_launch_or_overwrite (test_characterize_filters.CharacterizationTests.test_existing_output_is_refused_without_launch_or_overwrite) ... ok
+test_malformed_metric_fails_instead_of_becoming_unavailable (test_characterize_filters.CharacterizationTests.test_malformed_metric_fails_instead_of_becoming_unavailable) ... ok
+test_missing_or_ambiguous_metrics_fail (test_characterize_filters.CharacterizationTests.test_missing_or_ambiguous_metrics_fail) ... ok
+test_nonfinite_metrics_are_null_with_reason_and_valid_json (test_characterize_filters.CharacterizationTests.test_nonfinite_metrics_are_null_with_reason_and_valid_json) ... ok
+test_process_failure_is_not_reported_as_success (test_characterize_filters.CharacterizationTests.test_process_failure_is_not_reported_as_success) ... ok
+test_sample_and_loudness_analyses_are_independent (test_characterize_filters.CharacterizationTests.test_sample_and_loudness_analyses_are_independent) ... ok
+test_uses_final_file_input_metrics_not_analysis_output (test_characterize_filters.CharacterizationTests.test_uses_final_file_input_metrics_not_analysis_output) ... ok
+test_apply_preserves_application (test_handoff.BundleAndInstallTests.test_apply_preserves_application) ... ok
+test_copy_failure_rolls_back_only_new_files (test_handoff.BundleAndInstallTests.test_copy_failure_rolls_back_only_new_files) ... ok
+test_detached_head_rejected (test_handoff.BundleAndInstallTests.test_detached_head_rejected) ... ok
+test_differing_agents_never_overwritten (test_handoff.BundleAndInstallTests.test_differing_agents_never_overwritten) ... ok
+test_dirty_apply_rejected (test_handoff.BundleAndInstallTests.test_dirty_apply_rejected) ... ok
+test_expected_head_mismatch_rejected (test_handoff.BundleAndInstallTests.test_expected_head_mismatch_rejected) ... ok
+test_extra_file_rejected (test_handoff.BundleAndInstallTests.test_extra_file_rejected) ... ok
+test_main_apply_rejected (test_handoff.BundleAndInstallTests.test_main_apply_rejected) ... ok
+test_multiple_push_destinations_rejected (test_handoff.BundleAndInstallTests.test_multiple_push_destinations_rejected) ... ok
+test_preview_is_read_only (test_handoff.BundleAndInstallTests.test_preview_is_read_only) ... ok
+test_repeat_after_checkpoint_is_idempotent (test_handoff.BundleAndInstallTests.test_repeat_after_checkpoint_is_idempotent) ... ok
+test_runtime_payload_rejected (test_handoff.BundleAndInstallTests.test_runtime_payload_rejected) ... ok
+test_subdirectory_is_not_repository_root (test_handoff.BundleAndInstallTests.test_subdirectory_is_not_repository_root) ... ok
+test_tampered_file_rejected (test_handoff.BundleAndInstallTests.test_tampered_file_rejected) ... ok
+test_tampered_sums_rejected (test_handoff.BundleAndInstallTests.test_tampered_sums_rejected) ... ok
+test_unreviewed_drift_rejected (test_handoff.BundleAndInstallTests.test_unreviewed_drift_rejected) ... ok
+test_valid_bundle (test_handoff.BundleAndInstallTests.test_valid_bundle) ... ok
+test_wrong_origin_rejected (test_handoff.BundleAndInstallTests.test_wrong_origin_rejected) ... ok
+test_current_plan_is_valid (test_handoff.CanonicalPlanTests.test_current_plan_is_valid) ... ok
+test_existing_file_preserved (test_handoff.FixtureTests.test_existing_file_preserved) ... ok
+test_fixture_format_and_no_overwrite (test_handoff.FixtureTests.test_fixture_format_and_no_overwrite) ... ok
+test_repeatable_pcm (test_handoff.FixtureTests.test_repeatable_pcm) ... ok
+test_bad_origins (test_handoff.PathAndOriginTests.test_bad_origins) ... ok
+test_payload_is_governance_only (test_handoff.PathAndOriginTests.test_payload_is_governance_only) ... ok
+test_safe_paths (test_handoff.PathAndOriginTests.test_safe_paths) ... ok
+test_supported_origin_forms (test_handoff.PathAndOriginTests.test_supported_origin_forms) ... ok
+test_symlink_rejected (test_handoff.PathAndOriginTests.test_symlink_rejected) ... skipped 'Symlink privileges unavailable'
+test_unsafe_paths (test_handoff.PathAndOriginTests.test_unsafe_paths) ... ok
+test_all_improvements_required (test_handoff.PlanTests.test_all_improvements_required) ... ok
+test_blocked_without_reason_rejected (test_handoff.PlanTests.test_blocked_without_reason_rejected) ... ok
+test_cycle_rejected (test_handoff.PlanTests.test_cycle_rejected) ... ok
+test_deferred_without_approval_rejected (test_handoff.PlanTests.test_deferred_without_approval_rejected) ... ok
+test_done_before_dependencies_rejected (test_handoff.PlanTests.test_done_before_dependencies_rejected) ... ok
+test_done_with_real_evidence_unlocks_next (test_handoff.PlanTests.test_done_with_real_evidence_unlocks_next) ... ok
+test_done_without_evidence_rejected (test_handoff.PlanTests.test_done_without_evidence_rejected) ... ok
+test_duplicate_acceptance_rejected (test_handoff.PlanTests.test_duplicate_acceptance_rejected) ... ok
+test_duplicate_task_rejected (test_handoff.PlanTests.test_duplicate_task_rejected) ... ok
+test_evidence_path_traversal_rejected (test_handoff.PlanTests.test_evidence_path_traversal_rejected) ... ok
+test_initial_plan (test_handoff.PlanTests.test_initial_plan) ... ok
+test_missing_brief_rejected (test_handoff.PlanTests.test_missing_brief_rejected) ... ok
+test_missing_dependency_rejected (test_handoff.PlanTests.test_missing_dependency_rejected) ... ok
+test_next_is_governance_only (test_handoff.PlanTests.test_next_is_governance_only) ... ok
+test_orphan_case_rejected (test_handoff.PlanTests.test_orphan_case_rejected) ... ok
+test_pass_without_evidence_rejected (test_handoff.PlanTests.test_pass_without_evidence_rejected) ... ok
+test_publication_is_approval_gated (test_handoff.PlanTests.test_publication_is_approval_gated) ... ok
+test_skip_without_reason_rejected (test_handoff.PlanTests.test_skip_without_reason_rejected) ... ok
+test_unknown_state_rejected (test_handoff.PlanTests.test_unknown_state_rejected) ... ok
+test_actual_local_bare_round_trip (test_handoff.SyncTests.test_actual_local_bare_round_trip) ... ok
+test_dirty_checkpoint_rejected (test_handoff.SyncTests.test_dirty_checkpoint_rejected) ... ok
+test_empty_live_ref_rejected (test_handoff.SyncTests.test_empty_live_ref_rejected) ... ok
+test_equal_live_head_passes (test_handoff.SyncTests.test_equal_live_head_passes) ... ok
+test_network_failure_not_success (test_handoff.SyncTests.test_network_failure_not_success) ... ok
+test_stale_live_head_rejected (test_handoff.SyncTests.test_stale_live_head_rejected) ... ok
+test_wrong_upstream_rejected (test_handoff.SyncTests.test_wrong_upstream_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 62 tests in 24.344s
+
+OK (skipped=1)
+Full passed: 108 Pester passed, 0 skipped, 0 outside scope.

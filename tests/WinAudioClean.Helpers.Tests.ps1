@@ -33,14 +33,10 @@ Describe 'Processing profiles preserve the reviewed baseline sound' -Tag 'Unit' 
         $processingProfile.FilterChain | Should -BeExactly $zoomFilters
     }
 
-    It 'characterizes the legacy invalid-choice fallback to Zoom (<Choice>)' -ForEach @(
+    It 'AC-015: rejects an invalid choice instead of falling back to Zoom (<Choice>)' -ForEach @(
         @{ Choice = '' }, @{ Choice = 'invalid' }, @{ Choice = '3' }
     ) {
-        # Known validation defect, scheduled for WAC-M1-01. This freezes the
-        # extraction baseline only; accepting invalid input is not a goal.
-        $processingProfile = Get-WacProcessingProfile -Choice $Choice
-        $processingProfile.ModeName | Should -BeExactly 'ZOOM (Level Only)'
-        $processingProfile.FilterChain | Should -BeExactly $zoomFilters
+        { Get-WacProcessingProfile -Choice $Choice } | Should -Throw '*Invalid processing choice*'
     }
 }
 

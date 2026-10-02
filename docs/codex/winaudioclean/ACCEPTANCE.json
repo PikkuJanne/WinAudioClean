@@ -162,8 +162,12 @@
       "title": "Literal path matrix",
       "procedure": "Use files with spaces, square brackets, apostrophes, ä/ö/Å, ampersands, percent signs, exclamation marks and parentheses.",
       "expected": "Each resolves to one intended file; no wildcard expansion or unexpected command execution.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-01.md",
+        "evidence/WAC-M1-01-full-ps51.txt",
+        "evidence/WAC-M1-01-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-014",
@@ -171,8 +175,12 @@
       "title": "Validation order",
       "procedure": "Try no input, directory, nonexistent input, URL, unwritable destination and zero-byte corrupt media.",
       "expected": "Clear preflight diagnostics; no mode prompt for invalid paths and no misleading successful export.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-01.md",
+        "evidence/WAC-M1-01-full-ps51.txt",
+        "evidence/WAC-M1-01-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-015",
@@ -180,8 +188,12 @@
       "title": "Menu correctness",
       "procedure": "Enter empty, invalid, valid and cancel choices. Run missing mode with noninteractive semantics.",
       "expected": "Invalid input cannot silently select Zoom; cancellation/noninteractive failure is explicit.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-01.md",
+        "evidence/WAC-M1-01-full-ps51.txt",
+        "evidence/WAC-M1-01-full-ps7.txt"
+      ]
     },
     {
       "id": "AC-016",

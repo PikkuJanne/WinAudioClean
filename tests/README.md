@@ -88,17 +88,38 @@ as resolved. New warnings should be inspected rather than hidden in a baseline.
 ## What the tests establish
 
 The small helpers lock the original Raw/Zoom filter text and command construction.
-Characterization cases label known defects, such as invalid selections choosing
-Zoom, timestamp collisions and overwrite arguments, with the future task that
+Characterization cases label known defects, such as timestamp collisions and
+overwrite arguments, with the future task that
 will change the expectation. They do not endorse those behaviors as requirements.
 
 Import checks run in fresh shell processes. Entry point checks run a controlled
 missing-input path through the original `.ps1 -inputPath` and `.bat` boundaries,
-stopping at preflight. A separate script-invocation fixture exercises the runtime
-with process/filesystem doubles. They verify launch/argument behavior, not audio
+stopping before the menu. A separate script-invocation fixture exercises the runtime
+with real disposable filesystem preflight and process/report doubles. They verify launch/argument behavior, not audio
 quality or actual encoding. Missing shells must be reported as skipped, never passed.
 Listening, real FFmpeg output and large-file behavior remain separate acceptance
 work. Tests use temporary synthetic artifacts; private recordings are unnecessary.
+
+## Input and menu regression checks (WAC-M1-01)
+
+```powershell
+pwsh -NoProfile -File scripts/Invoke-Tests.ps1 -Level Targeted -Tag Preflight
+```
+
+The helper suite checks the literal filename matrix and destination handling,
+including an exclusively locked input and a disposable directory whose ACL denies
+file creation. The test restores that directory's ACL in `finally` and verifies
+that it can write again. Read-Host doubles exercise menu retry, selection, cancel,
+EOF and read failure. A host-argument seam checks abbreviated noninteractive
+switches without redirecting stdin and masking that branch.
+
+Actual bounded child processes in PS5.1 and PS7 reject invalid inputs, destinations
+and missing/invalid modes without showing a menu or processing. Explicit valid
+modes run through the script with a process double and preserve filter/report
+wiring. The original launcher is also checked on missing input; its pause, exit
+propagation and complete special-character forwarding remain M1-02 work. Real
+console empty/invalid/cancel checks and their exact setup are recorded in the
+[M1-01 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-01.md).
 
 ## Synthetic audio characterization (WAC-M0-03)
 

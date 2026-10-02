@@ -76,3 +76,30 @@ The local full gate and same-build reports support proceeding to **WAC-M1-01**,
 not release readiness. `BASELINE.json` and bundle Linux reports remain historical
 anchors; the current Windows evidence and its limits are in M0-03/M0-04 records.
 No earlier decision is superseded by this entry.
+
+### 2026-10-02 — WAC-M1-01 preflight policy
+
+D20. Input and output accept ordinary Windows drive and relative filesystem
+paths, resolved literally against the PowerShell location. Reject URLs,
+provider-qualified syntax, non-filesystem providers, UNC/device namespaces,
+alternate data streams, asterisks, question marks and invalid/control characters. UNC support is not
+implemented. Mapped drives, junctions and redirected folders can still use
+network storage; this policy does not certify physical offline storage.
+
+Require an existing readable, nonempty FileInfo input and verify destination
+creation/write access with a unique CreateNew/DeleteOnClose probe. Music remains
+the default. These are access checks, not media validation or a durable guarantee
+against later filesystem changes. Existing/new destination folders remain after
+cancellation; only the owned write probe is removed.
+
+Introduce only the needed CLI seams now: -Mode Raw|Zoom, -OutputDirectory and
+-NonInteractive, preserving positional input and -inputPath. Saved settings,
+presets and the broader CLI remain M3-01. Empty/invalid menu choices reprompt;
+Q/cancel and EOF cancel explicitly. Redirected stdin, a noninteractive OS session,
+the app switch or a host noninteractive switch require an explicit mode.
+
+Direct script preflight/read failures currently exit 2 and menu cancellation
+exits 130. M1-02 must finalize the complete process/dependency/report exit map,
+add -nostdin to the native command and preserve exit status across the launcher
+pause. The legacy native command, encoding and exact filter strings are unchanged.
+Evidence: `evidence/WAC-M1-01.md`. No default-sound or publication approval is added.
