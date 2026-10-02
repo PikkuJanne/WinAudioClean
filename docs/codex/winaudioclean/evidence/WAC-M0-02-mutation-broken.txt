@@ -1,0 +1,69 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (11 files; shell 7.6.5).
+Static gate passed; 48 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 2 files.
+Discovery found 27 tests in 208ms.
+Filter 'Tag' set to ('Quick', 'Unit', 'Import').
+Filters selected 11 tests to run.
+Running tests.
+
+Running tests from '<repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] selects the exact original Raw mode and filters for choice 1 94ms (68ms|26ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 7ms (6ms|1ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom () 22ms (19ms|2ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom (invalid) 4ms (3ms|1ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom (3) 5ms (4ms|1ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [-] keeps spaces, brackets and extra dots in the stem while replacing its extension 55ms (52ms|2ms)
+   Expected strings to be the same, but they were different.
+   Expected length: 58
+   Actual length:   57
+   Strings differ at index 33.
+   Expected: 'C:\WAC output\Meeting [draft].v2_Cleaned_20261002-1200.wav'
+   But was:  'C:\WAC output\Meeting [draft].v2_Broken_20261002-1200.wav'
+              ---------------------------------^
+   at Should -BeExactly 'C:\WAC output\Meeting [draft].v2_Cleaned_20261002-1200.wav', <repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1:38
+   at <ScriptBlock>, <repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1:37
+  [-] accepts an input stem without an extension 6ms (5ms|1ms)
+   Expected strings to be the same, but they were different.
+   Expected length: 47
+   Actual length:   46
+   Strings differ at index 22.
+   Expected: 'C:\WAC output\meeting_Cleaned_20261002-1200.wav'
+   But was:  'C:\WAC output\meeting_Broken_20261002-1200.wav'
+              ----------------------^
+   at Should -BeExactly 'C:\WAC output\meeting_Cleaned_20261002-1200.wav', <repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1:43
+   at <ScriptBlock>, <repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1:42
+  [-] characterizes the legacy minute-timestamp collision 12ms (11ms|1ms)
+   Expected strings to be the same, but they were different.
+   Expected length: 44
+   Actual length:   43
+   Strings differ at index 19.
+   Expected: 'C:\WAC output\same_Cleaned_20261002-1200.wav'
+   But was:  'C:\WAC output\same_Broken_20261002-1200.wav'
+              -------------------^
+   at $first | Should -BeExactly 'C:\WAC output\same_Cleaned_20261002-1200.wav', <repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1:50
+   at <ScriptBlock>, <repo>\.wac-local\WAC-M0-02-mutation\tests\WinAudioClean.Helpers.Tests.ps1:50
+  [+] quotes paths and the filter string in the original FFmpeg argument order 24ms (23ms|1ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 10ms (9ms|1ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 955ms (951ms|4ms)
+Tests completed in 1.8s
+Tests Passed: 8, Failed: 3, Skipped: 0, Inconclusive: 0, NotRun: 16
+Exception: <repo>\.wac-local\WAC-M0-02-mutation\scripts\Invoke-Tests.ps1:128
+Line |
+ 128 |      throw "Pester failed: $($result.FailedCount) test(s), $($result.F …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Pester failed: 3 test(s), 0 container(s), 0 block(s).

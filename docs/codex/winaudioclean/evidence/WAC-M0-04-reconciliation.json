@@ -1,0 +1,192 @@
+{
+  "task": "WAC-M0-04",
+  "acceptance_id": "AC-010",
+  "starting_commit": "e1bd07b96dc23ab7d84ac0f236ca599a866c73a3",
+  "check_exit_code": 0,
+  "scope": "Read-only reconciliation of recorded evidence and retained local bytes; no new audio rendering or listening.",
+  "prior_source_hashes_matched": 12,
+  "tested_source_files": 18,
+  "historical_baseline_blobs_verified": [
+    "LICENSE",
+    "README.md",
+    "WinAudioClean.bat",
+    "WinAudioClean.ps1",
+    "WinAudioClean.ico",
+    "WinAudioClean_icon.png",
+    "WinAudioClean_poster.png"
+  ],
+  "reports": [
+    {
+      "file": "WAC-M0-03-run-1.json",
+      "sha256": "a187eee1935ab3448eae4a9c8fce78fa050646ba0959a401fb6edd900509e153",
+      "recorded_successful_commands": 87,
+      "retained_fixture_output_hashes_matched": 25,
+      "filter_format_channel_duration_records_match": true
+    },
+    {
+      "file": "WAC-M0-03-run-2.json",
+      "sha256": "a187eee1935ab3448eae4a9c8fce78fa050646ba0959a401fb6edd900509e153",
+      "recorded_successful_commands": 87,
+      "retained_fixture_output_hashes_matched": 25,
+      "filter_format_channel_duration_records_match": true
+    }
+  ],
+  "report_bytes_identical": true,
+  "retained_audio_files_rehashed": 50,
+  "binaries": [
+    {
+      "binary": "ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "matches_recorded_build": true
+    },
+    {
+      "binary": "ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "matches_recorded_build": true
+    }
+  ],
+  "prior_evidence_references_verified": [
+    {
+      "record": "WAC-M0-01",
+      "path": "evidence/WAC-M0-01.md"
+    },
+    {
+      "record": "WAC-M0-01",
+      "path": "evidence/WAC-M0-01-checkpoint.json"
+    },
+    {
+      "record": "WAC-M0-02",
+      "path": "evidence/WAC-M0-02.md"
+    },
+    {
+      "record": "WAC-M0-02",
+      "path": "evidence/WAC-M0-02-source.json"
+    },
+    {
+      "record": "WAC-M0-02",
+      "path": "evidence/WAC-M0-02-mutation.json"
+    },
+    {
+      "record": "WAC-M0-03",
+      "path": "evidence/WAC-M0-03.md"
+    },
+    {
+      "record": "WAC-M0-03",
+      "path": "evidence/WAC-M0-03-source.json"
+    },
+    {
+      "record": "WAC-M0-03",
+      "path": "evidence/WAC-M0-03-comparison.json"
+    },
+    {
+      "record": "WAC-M0-03",
+      "path": "evidence/WAC-M0-03-listening.md"
+    },
+    {
+      "record": "AC-001",
+      "path": "evidence/WAC-M0-01.md"
+    },
+    {
+      "record": "AC-001",
+      "path": "evidence/WAC-M0-01-helper-tests.txt"
+    },
+    {
+      "record": "AC-002",
+      "path": "evidence/WAC-M0-01.md"
+    },
+    {
+      "record": "AC-002",
+      "path": "evidence/WAC-M0-01-helper-tests.txt"
+    },
+    {
+      "record": "AC-003",
+      "path": "evidence/WAC-M0-01.md"
+    },
+    {
+      "record": "AC-003",
+      "path": "evidence/WAC-M0-01-checkpoint.json"
+    },
+    {
+      "record": "AC-004",
+      "path": "evidence/WAC-M0-02.md"
+    },
+    {
+      "record": "AC-004",
+      "path": "evidence/WAC-M0-02-full-ps7.txt"
+    },
+    {
+      "record": "AC-004",
+      "path": "evidence/WAC-M0-02-full-ps51.txt"
+    },
+    {
+      "record": "AC-005",
+      "path": "evidence/WAC-M0-02.md"
+    },
+    {
+      "record": "AC-005",
+      "path": "evidence/WAC-M0-02-full-ps7.txt"
+    },
+    {
+      "record": "AC-005",
+      "path": "evidence/WAC-M0-02-full-ps51.txt"
+    },
+    {
+      "record": "AC-006",
+      "path": "evidence/WAC-M0-02.md"
+    },
+    {
+      "record": "AC-006",
+      "path": "evidence/WAC-M0-02-full-ps7.txt"
+    },
+    {
+      "record": "AC-006",
+      "path": "evidence/WAC-M0-02-full-ps51.txt"
+    },
+    {
+      "record": "AC-006",
+      "path": "evidence/WAC-M0-02-mutation.json"
+    },
+    {
+      "record": "AC-007",
+      "path": "evidence/WAC-M0-03.md"
+    },
+    {
+      "record": "AC-007",
+      "path": "evidence/WAC-M0-03-targeted.txt"
+    },
+    {
+      "record": "AC-007",
+      "path": "evidence/WAC-M0-03-full-ps7.txt"
+    },
+    {
+      "record": "AC-007",
+      "path": "evidence/WAC-M0-03-full-ps51.txt"
+    },
+    {
+      "record": "AC-008",
+      "path": "evidence/WAC-M0-03.md"
+    },
+    {
+      "record": "AC-008",
+      "path": "evidence/WAC-M0-03-run-1.json"
+    },
+    {
+      "record": "AC-008",
+      "path": "evidence/WAC-M0-03-run-2.json"
+    },
+    {
+      "record": "AC-008",
+      "path": "evidence/WAC-M0-03-comparison.json"
+    },
+    {
+      "record": "AC-009",
+      "path": "evidence/WAC-M0-03.md"
+    },
+    {
+      "record": "AC-009",
+      "path": "evidence/WAC-M0-03-listening.md"
+    }
+  ],
+  "characterization_blockers": [],
+  "listening": "pending; no permission-cleared speech corpus supplied"
+}

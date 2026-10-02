@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "reviewed_commit": "7dfe43361395908a277d7b513b1c9a4fd3cd192a",
+  "environment": {
+    "os": "Linux",
+    "architecture": "x86_64",
+    "python": "3.13.5",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers"
+  },
+  "scope": "Direct FFmpeg filters on synthetic tones only. No PowerShell/.bat execution or speech listening test.",
+  "fixture": {
+    "file": "synthetic_stereo_48k.wav",
+    "sample_rate": 48000,
+    "channels": 2,
+    "frames": 384000,
+    "seconds": 8.0,
+    "kind": "varying_tones",
+    "sha256": "6d572ba752642a6f27d3a307293c944737406ed755dc3d4e3902b72247e14c3f",
+    "bytes": 1536044
+  },
+  "input": {
+    "file": "synthetic_stereo_48k.wav",
+    "sample_rate": 48000,
+    "channels": 2,
+    "codec": "pcm_s16le",
+    "bits_per_sample": 16,
+    "duration_seconds": 8.0,
+    "bytes": 1536044
+  },
+  "runs": [
+    {
+      "label": "raw_legacy_unspecified_output",
+      "mode": "raw",
+      "exit_code": 0,
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "argv": [
+        "ffmpeg",
+        "-nostdin",
+        "-n",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "synthetic_stereo_48k.wav",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "raw_legacy_unspecified_output.wav"
+      ],
+      "stderr": "",
+      "output": {
+        "file": "raw_legacy_unspecified_output.wav",
+        "sample_rate": 192000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "bits_per_sample": 16,
+        "duration_seconds": 8.0,
+        "bytes": 6144102
+      }
+    },
+    {
+      "label": "raw_explicit_48k_pcm16",
+      "mode": "raw",
+      "exit_code": 0,
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "argv": [
+        "ffmpeg",
+        "-nostdin",
+        "-n",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "synthetic_stereo_48k.wav",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "raw_explicit_48k_pcm16.wav"
+      ],
+      "stderr": "",
+      "output": {
+        "file": "raw_explicit_48k_pcm16.wav",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "bits_per_sample": 16,
+        "duration_seconds": 8.0,
+        "bytes": 1536078
+      }
+    },
+    {
+      "label": "zoom_legacy_unspecified_output",
+      "mode": "zoom",
+      "exit_code": 0,
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "argv": [
+        "ffmpeg",
+        "-nostdin",
+        "-n",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "synthetic_stereo_48k.wav",
+        "-vn",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "zoom_legacy_unspecified_output.wav"
+      ],
+      "stderr": "",
+      "output": {
+        "file": "zoom_legacy_unspecified_output.wav",
+        "sample_rate": 192000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "bits_per_sample": 16,
+        "duration_seconds": 8.0,
+        "bytes": 6144102
+      }
+    },
+    {
+      "label": "zoom_explicit_48k_pcm16",
+      "mode": "zoom",
+      "exit_code": 0,
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "argv": [
+        "ffmpeg",
+        "-nostdin",
+        "-n",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "synthetic_stereo_48k.wav",
+        "-vn",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "zoom_explicit_48k_pcm16.wav"
+      ],
+      "stderr": "",
+      "output": {
+        "file": "zoom_explicit_48k_pcm16.wav",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "bits_per_sample": 16,
+        "duration_seconds": 8.0,
+        "bytes": 1536078
+      }
+    }
+  ]
+}

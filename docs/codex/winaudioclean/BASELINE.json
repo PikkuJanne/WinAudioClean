@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "repository": "PikkuJanne/WinAudioClean",
+  "reviewed_branch": "main",
+  "reviewed_commit": "7dfe43361395908a277d7b513b1c9a4fd3cd192a",
+  "reviewed_on": "2026-10-02",
+  "script_version": "2.3",
+  "source": "GitHub connector: branches/main, pinned recursive tree, and pinned WinAudioClean.ps1 content",
+  "local_checkout": "unknown",
+  "runtime_test_status": "Windows launcher/PowerShell and human listening not run while preparing this handoff",
+  "files": [
+    {
+      "path": "LICENSE",
+      "git_blob_sha1": "d8cca2639474e791c0aaa4d77aac79d8c8900359",
+      "bytes": 1070
+    },
+    {
+      "path": "README.md",
+      "git_blob_sha1": "597eca844bce85c63e3db51238baa57d17a59992",
+      "bytes": 5197
+    },
+    {
+      "path": "WinAudioClean.bat",
+      "git_blob_sha1": "c9e1afb3e22b0c49a81ae7d514a858e5b8392548",
+      "bytes": 186
+    },
+    {
+      "path": "WinAudioClean.ps1",
+      "git_blob_sha1": "b81e765503108c751ee7bcbb2977781a82e2c6df",
+      "bytes": 8093
+    },
+    {
+      "path": "WinAudioClean.ico",
+      "git_blob_sha1": "6005ab943ed246647d34f459dee8bf81fc17e5a0",
+      "bytes": 30763
+    },
+    {
+      "path": "WinAudioClean_icon.png",
+      "git_blob_sha1": "fbe0fd186b04977c1db86dcf96da92b782ec02da",
+      "bytes": 12146
+    },
+    {
+      "path": "WinAudioClean_poster.png",
+      "git_blob_sha1": "f33a1fe72b929288fc32f337bb62b301b0be9587",
+      "bytes": 6947178
+    }
+  ],
+  "filters": {
+    "raw_clean": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056",
+    "level": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+  },
+  "source_links": {
+    "WinAudioClean.ps1": "https://github.com/PikkuJanne/WinAudioClean/blob/7dfe43361395908a277d7b513b1c9a4fd3cd192a/WinAudioClean.ps1",
+    "WinAudioClean.bat": "https://github.com/PikkuJanne/WinAudioClean/blob/7dfe43361395908a277d7b513b1c9a4fd3cd192a/WinAudioClean.bat",
+    "README.md": "https://github.com/PikkuJanne/WinAudioClean/blob/7dfe43361395908a277d7b513b1c9a4fd3cd192a/README.md",
+    "LICENSE": "https://github.com/PikkuJanne/WinAudioClean/blob/7dfe43361395908a277d7b513b1c9a4fd3cd192a/LICENSE"
+  }
+}

@@ -1,0 +1,7 @@
+# Local recordings, generated fixtures and developer validation output.
+/.wac-local/
+/artifacts/local/
+/dist/
+# Optional handoff helper caches; no Python requirement for the application.
+/docs/codex/winaudioclean/**/__pycache__/
+/docs/codex/winaudioclean/**/*.pyc

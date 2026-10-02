@@ -1,0 +1,25 @@
+{
+  "task": "WAC-M0-01",
+  "verified_at_utc": "2026-10-02T09:36:32Z",
+  "checkpoint_kind": "First pushed governance checkpoint; final evidence commit requires fresh verification",
+  "sync": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "branch": "codex/wac-m0-handoff",
+    "head": "8163feb35401096cb260693c02b8e5eb0886b78d",
+    "clean": true,
+    "live_remote_head": "8163feb35401096cb260693c02b8e5eb0886b78d",
+    "upstream": "origin/codex/wac-m0-handoff",
+    "synchronized": true,
+    "note": "Point-in-time branch verification only; PR/CI/publication state must be inspected separately."
+  },
+  "pull_request": {
+    "baseRefName": "main",
+    "headRefName": "codex/wac-m0-handoff",
+    "headRefOid": "8163feb35401096cb260693c02b8e5eb0886b78d",
+    "isDraft": true,
+    "number": 1,
+    "state": "OPEN",
+    "statusCheckRollup": [],
+    "url": "https://github.com/PikkuJanne/WinAudioClean/pull/1"
+  }
+}

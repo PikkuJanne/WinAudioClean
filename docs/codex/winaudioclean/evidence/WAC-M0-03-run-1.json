@@ -1,0 +1,2867 @@
+{
+  "schema_version": 2,
+  "reviewed_commit": "7dfe43361395908a277d7b513b1c9a4fd3cd192a",
+  "environment": {
+    "os": "Windows",
+    "os_version": "10.0.26300",
+    "architecture": "AMD64",
+    "python": "3.14.6",
+    "ffmpeg": {
+      "binary": "ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "version_output": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\nbuilt with gcc 16.2.0 (Rev3, Built by MSYS2 project)\nconfiguration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102\n\nExiting with exit code 0",
+      "version_output_sha256": "1b8bf6c2f9f9cba74e2910fa3cd0016fb31e5f2808e5ead6bb35c505ae96df77",
+      "command": {
+        "argv": [
+          "ffmpeg.exe",
+          "-version"
+        ],
+        "exit_code": 0
+      }
+    },
+    "ffprobe": {
+      "binary": "ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "version_output": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers\nbuilt with gcc 16.2.0 (Rev3, Built by MSYS2 project)\nconfiguration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-zlib --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-sdl2 --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxvid --enable-libaom --enable-libopenjpeg --enable-libvpx --enable-mediafoundation --enable-libass --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-openal --enable-libgme --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libtheora --enable-libvo-amrwbenc --enable-libgsm --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-librubberband\nlibavutil      61.  1.102 / 61.  1.102\nlibavcodec     63.  1.102 / 63.  1.102\nlibavformat    63.  1.102 / 63.  1.102\nlibavdevice    63.  1.102 / 63.  1.102\nlibavfilter    12.  1.102 / 12.  1.102\nlibswscale     10.  1.102 / 10.  1.102\nlibswresample   7.  1.102 /  7.  1.102",
+      "version_output_sha256": "ecb454f5218046b35474e7c9d2d8bebecfd003604517ccb257a911b996f46221",
+      "command": {
+        "argv": [
+          "ffprobe.exe",
+          "-version"
+        ],
+        "exit_code": 0
+      }
+    }
+  },
+  "scope": "Direct FFmpeg filters on five synthetic mechanics fixtures only. No PowerShell/.bat execution, speech listening, or target-compliance test. Legacy and explicit output encoding are separate comparisons.",
+  "reproducibility": "No timestamps or local paths. Compare the complete JSON reports from two new directories using the same tool binaries; investigate any difference, including hashes and metrics.",
+  "fixtures": [
+    {
+      "generator": {
+        "file": "synthetic_stereo_48k.wav",
+        "sample_rate": 48000,
+        "channels": 2,
+        "frames": 384000,
+        "seconds": 8.0,
+        "kind": "varying_tones",
+        "sha256": "6d572ba752642a6f27d3a307293c944737406ed755dc3d4e3902b72247e14c3f",
+        "bytes": 1536044
+      },
+      "input": {
+        "file": "fixtures/synthetic_stereo_48k.wav",
+        "sha256": "6d572ba752642a6f27d3a307293c944737406ed755dc3d4e3902b72247e14c3f",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 8.0,
+        "bytes": 1536044,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "fixtures/synthetic_stereo_48k.wav"
+          ],
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "generator": {
+        "file": "input [mix] äö Å.wav",
+        "sample_rate": 44100,
+        "channels": 1,
+        "frames": 132300,
+        "seconds": 3.0,
+        "kind": "varying_tones",
+        "sha256": "796e1829115ab11dc28af52e9347f7cb6ebec5ec3297b26cdd35caa8a170b660",
+        "bytes": 264644
+      },
+      "input": {
+        "file": "fixtures/input [mix] äö Å.wav",
+        "sha256": "796e1829115ab11dc28af52e9347f7cb6ebec5ec3297b26cdd35caa8a170b660",
+        "sample_rate": 44100,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 264644,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "fixtures/input [mix] äö Å.wav"
+          ],
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "generator": {
+        "file": "silence.wav",
+        "sample_rate": 48000,
+        "channels": 1,
+        "frames": 144000,
+        "seconds": 3.0,
+        "kind": "silence",
+        "sha256": "5cffdd4793d2c7986a33d893ef9f6e29f84420b47f145c3669ecc971581941e7",
+        "bytes": 288044
+      },
+      "input": {
+        "file": "fixtures/silence.wav",
+        "sha256": "5cffdd4793d2c7986a33d893ef9f6e29f84420b47f145c3669ecc971581941e7",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 288044,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "fixtures/silence.wav"
+          ],
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "generator": {
+        "file": "very_short.wav",
+        "sample_rate": 48000,
+        "channels": 1,
+        "frames": 9600,
+        "seconds": 0.2,
+        "kind": "varying_tones",
+        "sha256": "6ad135d033a033dd3fb0d6c80f06386e4ada2051224b2d8af7e15e86d176864e",
+        "bytes": 19244
+      },
+      "input": {
+        "file": "fixtures/very_short.wav",
+        "sha256": "6ad135d033a033dd3fb0d6c80f06386e4ada2051224b2d8af7e15e86d176864e",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 0.2,
+        "bytes": 19244,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "fixtures/very_short.wav"
+          ],
+          "exit_code": 0
+        }
+      }
+    },
+    {
+      "generator": {
+        "file": "synthetic_stress.wav",
+        "sample_rate": 48000,
+        "channels": 2,
+        "frames": 144000,
+        "seconds": 3.0,
+        "kind": "stress",
+        "sha256": "31ec5456baba43a335f3cc40f3f6543c7eb0b818925cd181ab0ee6492ea9a3d7",
+        "bytes": 576044
+      },
+      "input": {
+        "file": "fixtures/synthetic_stress.wav",
+        "sha256": "31ec5456baba43a335f3cc40f3f6543c7eb0b818925cd181ab0ee6492ea9a3d7",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 576044,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "fixtures/synthetic_stress.wav"
+          ],
+          "exit_code": 0
+        }
+      }
+    }
+  ],
+  "runs": [
+    {
+      "fixture": "synthetic_stereo_48k.wav",
+      "label": "raw_legacy_unspecified_output",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stereo_48k.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "synthetic_stereo_48k__raw_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stereo_48k__raw_legacy_unspecified_output.wav",
+        "sha256": "cd6b8fce0c6a8562a2f8e5f77ed0804d1ebdc7fd6f9482eb769e579492789ba1",
+        "sample_rate": 192000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 8.0,
+        "bytes": 6144102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stereo_48k__raw_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -12.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -6.79,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 1.6,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -22.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -6.789804,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.255753,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "synthetic_stereo_48k.wav",
+      "label": "raw_explicit_48k_pcm16",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stereo_48k.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "synthetic_stereo_48k__raw_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stereo_48k__raw_explicit_48k_pcm16.wav",
+        "sha256": "162049d04c1a7931fac86a7e4dfc0d9f82763619362976d2dacdd9e7068518f5",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 8.0,
+        "bytes": 1536078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stereo_48k__raw_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -12.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -6.79,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 1.6,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -22.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -6.789225,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.255743,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "synthetic_stereo_48k.wav",
+      "label": "zoom_legacy_unspecified_output",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stereo_48k.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "synthetic_stereo_48k__zoom_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stereo_48k__zoom_legacy_unspecified_output.wav",
+        "sha256": "475c6135f63e79bed4f7d09f0e5477feaf359da98df77f7f0bfb41bb25aa3346",
+        "sample_rate": 192000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 8.0,
+        "bytes": 6144102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stereo_48k__zoom_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -12.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -6.58,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 1.6,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -22.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -6.580344,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.233144,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "synthetic_stereo_48k.wav",
+      "label": "zoom_explicit_48k_pcm16",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stereo_48k.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "synthetic_stereo_48k__zoom_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stereo_48k__zoom_explicit_48k_pcm16.wav",
+        "sha256": "06f6507caddbb043088fcb2b13dcea84ad13e6a2bb79df16fd182b3df58d04ba",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 8.0,
+        "bytes": 1536078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stereo_48k__zoom_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stereo_48k__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -12.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -6.58,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 1.6,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -22.13,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -6.592226,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.233145,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "input [mix] äö Å.wav",
+      "label": "raw_legacy_unspecified_output",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/input [mix] äö Å.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "input [mix] äö Å__raw_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "input [mix] äö Å__raw_legacy_unspecified_output.wav",
+        "sha256": "9a104a7b465a070d62d2ae7a05ee50fe0215c833dd7a16b319ef0a96df28fe4a",
+        "sample_rate": 192000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 1152102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "input [mix] äö Å__raw_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -11.95,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -5.47,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.1,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -21.95,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -5.47183,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -11.061691,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "input [mix] äö Å.wav",
+      "label": "raw_explicit_48k_pcm16",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/input [mix] äö Å.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "input [mix] äö Å__raw_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "input [mix] äö Å__raw_explicit_48k_pcm16.wav",
+        "sha256": "f19beea14ece3749de069c5f03cccd7159ac84c94f135596fd066f2a8f823be0",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 288078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "input [mix] äö Å__raw_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -11.95,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -5.47,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.2,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -21.95,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -5.475314,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -11.061694,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "input [mix] äö Å.wav",
+      "label": "zoom_legacy_unspecified_output",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/input [mix] äö Å.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "input [mix] äö Å__zoom_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "input [mix] äö Å__zoom_legacy_unspecified_output.wav",
+        "sha256": "abce445af4a269a43682c3893f8ded811a60256a147b6fe41816d1d1ea2da99f",
+        "sample_rate": 192000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 1152102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "input [mix] äö Å__zoom_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -12.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -5.2,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.1,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -22.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -5.195084,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -11.049805,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "input [mix] äö Å.wav",
+      "label": "zoom_explicit_48k_pcm16",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/input [mix] äö Å.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "input [mix] äö Å__zoom_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "input [mix] äö Å__zoom_explicit_48k_pcm16.wav",
+        "sha256": "c808eaf497a654bdb71703f3982183f24cf1dc03bd9cbde3792cd4c07985ce0e",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 288078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "input [mix] äö Å__zoom_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "input [mix] äö Å__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -12.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -5.2,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.1,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -22.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -5.207628,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -11.049801,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "silence.wav",
+      "label": "raw_legacy_unspecified_output",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/silence.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "silence__raw_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "silence__raw_legacy_unspecified_output.wav",
+        "sha256": "6577fe7d068d53459d949a527d4c16490eba9fdc2cc8f6d51d34400a4fdd965e",
+        "sample_rate": 192000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 1152102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "silence__raw_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": null,
+            "unit": "dBTP",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "rms": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          }
+        }
+      }
+    },
+    {
+      "fixture": "silence.wav",
+      "label": "raw_explicit_48k_pcm16",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/silence.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "silence__raw_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "silence__raw_explicit_48k_pcm16.wav",
+        "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 288078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "silence__raw_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": null,
+            "unit": "dBTP",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "rms": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          }
+        }
+      }
+    },
+    {
+      "fixture": "silence.wav",
+      "label": "zoom_legacy_unspecified_output",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/silence.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "silence__zoom_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "silence__zoom_legacy_unspecified_output.wav",
+        "sha256": "6577fe7d068d53459d949a527d4c16490eba9fdc2cc8f6d51d34400a4fdd965e",
+        "sample_rate": 192000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 1152102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "silence__zoom_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": null,
+            "unit": "dBTP",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "rms": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          }
+        }
+      }
+    },
+    {
+      "fixture": "silence.wav",
+      "label": "zoom_explicit_48k_pcm16",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/silence.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "silence__zoom_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "silence__zoom_explicit_48k_pcm16.wav",
+        "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 288078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "silence__zoom_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "silence__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": null,
+            "unit": "dBTP",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "rms": {
+            "value": null,
+            "unit": "dBFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          }
+        }
+      }
+    },
+    {
+      "fixture": "very_short.wav",
+      "label": "raw_legacy_unspecified_output",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/very_short.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "very_short__raw_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "very_short__raw_legacy_unspecified_output.wav",
+        "sha256": "e448567eeb1258f881048330875b807f255522beeb29f80cedbb217442c997f8",
+        "sample_rate": 192000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 0.2,
+        "bytes": 76902,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "very_short__raw_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": -1.5,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -1.499683,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -6.863884,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "very_short.wav",
+      "label": "raw_explicit_48k_pcm16",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/very_short.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "very_short__raw_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "very_short__raw_explicit_48k_pcm16.wav",
+        "sha256": "50612f1957e222a684c926f1eebac133163a9b448a23f9852bfe3d24aecfc30a",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 0.2,
+        "bytes": 19278,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "very_short__raw_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": -1.5,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -1.501889,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -6.864038,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "very_short.wav",
+      "label": "zoom_legacy_unspecified_output",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/very_short.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "very_short__zoom_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "very_short__zoom_legacy_unspecified_output.wav",
+        "sha256": "145cce907102693bf636939a2cad9b761af5a966adc484302a3e102a47ddd799",
+        "sample_rate": 192000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 0.2,
+        "bytes": 76902,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "very_short__zoom_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": -1.5,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -1.499683,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -5.947858,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "very_short.wav",
+      "label": "zoom_explicit_48k_pcm16",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/very_short.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "very_short__zoom_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "very_short__zoom_explicit_48k_pcm16.wav",
+        "sha256": "664e2eb863086aae6d6bcce72a735f633197c6597d2678fd206130d578e38a8d",
+        "sample_rate": 48000,
+        "channels": 1,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 0.2,
+        "bytes": 19278,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "very_short__zoom_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "very_short__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": null,
+            "unit": "LUFS",
+            "status": "unavailable",
+            "reason": "FFmpeg reported -inf; this metric is undefined or unmeasurable."
+          },
+          "true_peak": {
+            "value": -1.51,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.0,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -70.0,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -1.514187,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -5.947861,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "synthetic_stress.wav",
+      "label": "raw_legacy_unspecified_output",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stress.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "synthetic_stress__raw_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stress__raw_legacy_unspecified_output.wav",
+        "sha256": "7841318ddedf280c0c364bcdb8a8b487dbad4817f64321174fce118329b8d512",
+        "sample_rate": 192000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 2304102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stress__raw_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__raw_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -11.96,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -11.38,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.1,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -21.96,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -11.382637,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.096805,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "synthetic_stress.wav",
+      "label": "raw_explicit_48k_pcm16",
+      "mode": "raw",
+      "filter_chain": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stress.wav",
+          "-vn",
+          "-af",
+          "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "synthetic_stress__raw_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stress__raw_explicit_48k_pcm16.wav",
+        "sha256": "bd50255f4e0712cfaa94428e11b10b7185ee771b8135d880e1d3d4835f6d17a3",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 576078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stress__raw_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__raw_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -11.96,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -11.38,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.1,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -21.96,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -11.385586,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.0968,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "synthetic_stress.wav",
+      "label": "zoom_legacy_unspecified_output",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stress.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "synthetic_stress__zoom_legacy_unspecified_output.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stress__zoom_legacy_unspecified_output.wav",
+        "sha256": "feb4e3a9e092d020cb8eaaabcdb42784d1de8421fbeb6eaf42106389d4cecb5c",
+        "sample_rate": 192000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 2304102,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stress__zoom_legacy_unspecified_output.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__zoom_legacy_unspecified_output.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -11.98,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -12.11,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.1,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -21.98,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -12.107991,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.095153,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    },
+    {
+      "fixture": "synthetic_stress.wav",
+      "label": "zoom_explicit_48k_pcm16",
+      "mode": "zoom",
+      "filter_chain": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "render": {
+        "argv": [
+          "ffmpeg.exe",
+          "-nostdin",
+          "-n",
+          "-hide_banner",
+          "-v",
+          "error",
+          "-i",
+          "fixtures/synthetic_stress.wav",
+          "-vn",
+          "-af",
+          "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+          "-ar",
+          "48000",
+          "-c:a",
+          "pcm_s16le",
+          "synthetic_stress__zoom_explicit_48k_pcm16.wav"
+        ],
+        "exit_code": 0
+      },
+      "stderr": "",
+      "output": {
+        "file": "synthetic_stress__zoom_explicit_48k_pcm16.wav",
+        "sha256": "93665b575f8c19f16a52c00a24153757b171c1d04d1859f60625fb326fc792ef",
+        "sample_rate": 48000,
+        "channels": 2,
+        "codec": "pcm_s16le",
+        "sample_format": "s16",
+        "bits_per_sample": 16,
+        "container": "wav",
+        "duration_seconds": 3.0,
+        "bytes": 576078,
+        "command": {
+          "argv": [
+            "ffprobe.exe",
+            "-v",
+            "error",
+            "-show_streams",
+            "-show_format",
+            "-of",
+            "json",
+            "synthetic_stress__zoom_explicit_48k_pcm16.wav"
+          ],
+          "exit_code": 0
+        }
+      },
+      "metrics": {
+        "method": "Independent astats overall sample peak/RMS and loudnorm input_* analyses of final PCM file; analysis renders are discarded. No target-compliance or listening claim.",
+        "commands": {
+          "sample_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "astats=metadata=0:reset=0:measure_perchannel=none:measure_overall=Peak_level+RMS_level",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          },
+          "loudness_metrics": {
+            "argv": [
+              "ffmpeg.exe",
+              "-nostdin",
+              "-hide_banner",
+              "-nostats",
+              "-v",
+              "info",
+              "-i",
+              "synthetic_stress__zoom_explicit_48k_pcm16.wav",
+              "-vn",
+              "-af",
+              "loudnorm=I=-12:TP=-1.5:print_format=json",
+              "-f",
+              "null",
+              "-"
+            ],
+            "exit_code": 0
+          }
+        },
+        "values": {
+          "integrated_loudness": {
+            "value": -11.98,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "true_peak": {
+            "value": -12.12,
+            "unit": "dBTP",
+            "status": "measured",
+            "reason": null
+          },
+          "loudness_range": {
+            "value": 0.1,
+            "unit": "LU",
+            "status": "measured",
+            "reason": null
+          },
+          "relative_threshold": {
+            "value": -21.98,
+            "unit": "LUFS",
+            "status": "measured",
+            "reason": null
+          },
+          "sample_peak": {
+            "value": -12.137961,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          },
+          "rms": {
+            "value": -14.095138,
+            "unit": "dBFS",
+            "status": "measured",
+            "reason": null
+          }
+        }
+      }
+    }
+  ]
+}

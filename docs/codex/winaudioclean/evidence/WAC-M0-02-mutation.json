@@ -1,0 +1,24 @@
+{
+  "acceptance": "AC-006",
+  "base": "d88c4fdcb2ccab445fe8b96636e42cf154138950",
+  "mutation": "Get-WacOutputPath suffix: _Cleaned_ -> _Broken_",
+  "shell": "PowerShell 7.6.5",
+  "results": [
+    {
+      "phase": "before",
+      "exit_code": 0,
+      "source_sha256": "1E7EA19B66DDC972EDE227E09DD0276058E43BCF9CCD0ED526AADBF0FA44E4B6"
+    },
+    {
+      "phase": "broken",
+      "exit_code": 1,
+      "source_sha256": "1D4A409CD6241658B828E7D5EFD351E23902DCD91D8D4193001A51BE928611DD"
+    },
+    {
+      "phase": "restored",
+      "exit_code": 0,
+      "source_sha256": "1E7EA19B66DDC972EDE227E09DD0276058E43BCF9CCD0ED526AADBF0FA44E4B6"
+    }
+  ],
+  "restored_identically": true
+}

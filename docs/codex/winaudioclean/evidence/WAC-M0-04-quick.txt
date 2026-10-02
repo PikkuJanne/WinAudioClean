@@ -1,0 +1,41 @@
+Process exit code: 0
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (11 files; shell 7.6.5).
+Static gate passed; 49 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 2 files.
+Discovery found 29 tests in 208ms.
+Filter 'Tag' set to ('Quick', 'Unit', 'Import').
+Filters selected 13 tests to run.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] AC-007: matches the Raw filter values and order in BASELINE.json 113ms (77ms|36ms)
+  [+] AC-007: matches the Zoom filter values and order in BASELINE.json 5ms (3ms|1ms)
+  [+] selects the exact original Raw mode and filters for choice 1 7ms (6ms|1ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 5ms (4ms|1ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom () 11ms (9ms|2ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom (invalid) 4ms (3ms|1ms)
+  [+] characterizes the legacy invalid-choice fallback to Zoom (3) 4ms (3ms|1ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 8ms (5ms|3ms)
+  [+] accepts an input stem without an extension 4ms (3ms|1ms)
+  [+] characterizes the legacy minute-timestamp collision 5ms (4ms|1ms)
+  [+] quotes paths and the filter string in the original FFmpeg argument order 24ms (24ms|1ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 10ms (9ms|1ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 890ms (886ms|4ms)
+Tests completed in 1.67s
+Tests Passed: 13, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 16
+Quick passed: 13 Pester passed, 0 skipped, 16 outside scope.

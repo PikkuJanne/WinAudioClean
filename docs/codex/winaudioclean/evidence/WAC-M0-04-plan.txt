@@ -1,0 +1,22 @@
+WAC-M0-04 final plan validation after task/acceptance updates
+Commands run from the repository root.
+python -X utf8 docs/codex/winaudioclean/tools/handoff.py validate-plan --plan-root docs/codex/winaudioclean
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Exit code: 0
+python -X utf8 docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/codex/winaudioclean
+{
+  "ready": [
+    {
+      "id": "WAC-M1-01",
+      "title": "Validate local input, mode and destination before prompting",
+      "approval_needed": false
+    }
+  ],
+  "blocked": []
+}
+Exit code: 0
