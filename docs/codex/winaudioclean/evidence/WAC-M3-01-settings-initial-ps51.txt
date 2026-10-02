@@ -1,0 +1,157 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (34 files; shell 5.1.26100.9444).
+Static gate passed; 197 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 123 tests in 506ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Settings.Tests.ps1'
+Describing AC-049: explicit settings override saved values and built-in defaults
+  [+] chooses the saved then explicit Mode value with an attributable origin 399ms (305ms|94ms)
+  [+] chooses the saved then explicit Preset value with an attributable origin 19ms (16ms|3ms)
+  [+] chooses the saved then explicit LoudnessMode value with an attributable origin 31ms (27ms|4ms)
+  [+] chooses the saved then explicit BitDepth value with an attributable origin 32ms (28ms|4ms)
+  [+] chooses the saved then explicit Mono value with an attributable origin 97ms (91ms|6ms)
+  [+] chooses the saved then explicit Rf64 value with an attributable origin 28ms (25ms|3ms)
+  [+] chooses the saved then explicit OutputDirectory value with an attributable origin 38ms (36ms|2ms)
+  [+] chooses the saved then explicit AudioStreamIndex value with an attributable origin 28ms (24ms|4ms)
+  [+] chooses the saved then explicit CleaningOptions value with an attributable origin 124ms (121ms|4ms)
+  [+] retains the exact built-in policy when every preference is omitted 141ms (137ms|4ms)
+  [+] computes the default path without reading or creating preferences 20ms (14ms|6ms)
+  [+] returns omitted settings for a missing isolated file without creating its parent 50ms (46ms|4ms)
+  [+] maps all saved fields into app-compatible values without materializing defaults 813ms (809ms|4ms)
+  [+] rejects explicit empty Mode instead of falling back to a saved value 62ms (59ms|3ms)
+  [+] rejects explicit empty Preset instead of falling back to a saved value 19ms (13ms|6ms)
+  [+] rejects explicit empty LoudnessMode instead of falling back to a saved value 111ms (108ms|3ms)
+  [+] rejects explicit empty BitDepth instead of falling back to a saved value 13ms (10ms|3ms)
+  [+] rejects explicit empty OutputDirectory instead of falling back to a saved value 25ms (22ms|3ms)
+  [+] rejects explicit empty AudioStreamIndex instead of falling back to a saved value 20ms (17ms|3ms)
+  [+] validates an invalid saved field even when an explicit value would replace it 72ms (69ms|3ms)
+  [+] accepts explicit false SwitchParameter values and ignores non-preference main arguments 64ms (61ms|3ms)
+
+Describing AC-051: saved JSON is bounded typed data rather than executable options
+  [+] rejects truncated JSON while preserving the complete file bytes 92ms (83ms|8ms)
+  [+] rejects trailing content while preserving the complete file bytes 37ms (34ms|4ms)
+  [+] rejects root array while preserving the complete file bytes 48ms (43ms|5ms)
+  [+] rejects root null while preserving the complete file bytes 28ms (24ms|4ms)
+  [+] rejects missing schema while preserving the complete file bytes 37ms (34ms|4ms)
+  [+] rejects unknown schema while preserving the complete file bytes 30ms (27ms|3ms)
+  [+] rejects string schema while preserving the complete file bytes 50ms (47ms|3ms)
+  [+] rejects boolean schema while preserving the complete file bytes 36ms (33ms|3ms)
+  [+] rejects fractional schema while preserving the complete file bytes 31ms (27ms|4ms)
+  [+] rejects missing settings while preserving the complete file bytes 30ms (28ms|2ms)
+  [+] rejects null settings while preserving the complete file bytes 25ms (22ms|3ms)
+  [+] rejects array settings while preserving the complete file bytes 62ms (56ms|6ms)
+  [+] rejects unknown outer key while preserving the complete file bytes 36ms (33ms|3ms)
+  [+] rejects wrong outer key case while preserving the complete file bytes 57ms (49ms|7ms)
+  [+] rejects duplicate outer key while preserving the complete file bytes 28ms (24ms|4ms)
+  [+] rejects duplicate setting while preserving the complete file bytes 33ms (30ms|3ms)
+  [+] rejects escaped duplicate setting while preserving the complete file bytes 34ms (31ms|3ms)
+  [+] rejects wrong setting key case while preserving the complete file bytes 28ms (25ms|3ms)
+  [+] rejects case-coalescing settings keys while preserving the complete file bytes 27ms (25ms|2ms)
+  [+] rejects unknown setting while preserving the complete file bytes 27ms (25ms|2ms)
+  [+] rejects invalid mode while preserving the complete file bytes 32ms (29ms|3ms)
+  [+] rejects null mode while preserving the complete file bytes 26ms (24ms|2ms)
+  [+] rejects empty mode while preserving the complete file bytes 29ms (26ms|3ms)
+  [+] rejects boolean mode while preserving the complete file bytes 32ms (29ms|3ms)
+  [+] rejects invalid preset while preserving the complete file bytes 37ms (35ms|2ms)
+  [+] rejects invalid loudness mode while preserving the complete file bytes 42ms (40ms|2ms)
+  [+] rejects string bit depth while preserving the complete file bytes 34ms (32ms|3ms)
+  [+] rejects fractional bit depth while preserving the complete file bytes 32ms (28ms|4ms)
+  [+] rejects unsupported bit depth while preserving the complete file bytes 29ms (27ms|2ms)
+  [+] rejects boolean bit depth while preserving the complete file bytes 34ms (31ms|2ms)
+  [+] rejects numeric mono while preserving the complete file bytes 36ms (33ms|3ms)
+  [+] rejects string mono while preserving the complete file bytes 33ms (30ms|3ms)
+  [+] rejects array RF64 while preserving the complete file bytes 34ms (32ms|2ms)
+  [+] rejects null RF64 while preserving the complete file bytes 25ms (24ms|2ms)
+  [+] rejects empty output directory while preserving the complete file bytes 29ms (26ms|3ms)
+  [+] rejects numeric output directory while preserving the complete file bytes 23ms (21ms|2ms)
+  [+] rejects URL output directory while preserving the complete file bytes 27ms (25ms|2ms)
+  [+] rejects negative stream index while preserving the complete file bytes 34ms (28ms|6ms)
+  [+] rejects string stream index while preserving the complete file bytes 30ms (28ms|3ms)
+  [+] rejects fractional stream index while preserving the complete file bytes 51ms (49ms|2ms)
+  [+] rejects decimal integer stream index while preserving the complete file bytes 27ms (25ms|2ms)
+  [+] rejects overflow stream index while preserving the complete file bytes 30ms (27ms|3ms)
+  [+] rejects boolean stream index while preserving the complete file bytes 28ms (25ms|3ms)
+  [+] rejects null cleaning while preserving the complete file bytes 32ms (30ms|3ms)
+  [+] rejects array cleaning while preserving the complete file bytes 23ms (20ms|3ms)
+  [+] rejects unknown cleaning option while preserving the complete file bytes 28ms (27ms|2ms)
+  [+] rejects wrong cleaning key case while preserving the complete file bytes 25ms (23ms|2ms)
+  [+] rejects case-coalescing cleaning keys while preserving the complete file bytes 30ms (28ms|2ms)
+  [+] rejects duplicate cleaning option while preserving the complete file bytes 27ms (24ms|3ms)
+  [+] rejects string cleaning number while preserving the complete file bytes 34ms (31ms|3ms)
+  [+] rejects boolean cleaning number while preserving the complete file bytes 31ms (27ms|3ms)
+  [+] rejects nonfinite cleaning number while preserving the complete file bytes 32ms (30ms|2ms)
+  [+] rejects below cleaning bound while preserving the complete file bytes 34ms (31ms|3ms)
+  [+] rejects above cleaning bound while preserving the complete file bytes 28ms (26ms|2ms)
+  [+] rejects numeric cleaning toggle while preserving the complete file bytes 35ms (32ms|3ms)
+  [+] rejects injected cleaning string while preserving the complete file bytes 24ms (21ms|2ms)
+  [+] rejects NaN JSON token while preserving the complete file bytes 27ms (25ms|2ms)
+  [+] rejects Zoom Gentle conflict while preserving the complete file bytes 27ms (24ms|3ms)
+  [+] rejects Zoom cleaning conflict while preserving the complete file bytes 35ms (33ms|2ms)
+  [+] rejects invalid disabled gate value while preserving the complete file bytes 29ms (27ms|2ms)
+  [+] rejects invalid disabled denoise value while preserving the complete file bytes 24ms (22ms|2ms)
+  [+] rejects malformed UTF-8 byte encoding without rewriting it 27ms (24ms|3ms)
+  [+] rejects UTF-16 encoding byte encoding without rewriting it 36ms (34ms|3ms)
+  [+] rejects embedded NUL byte encoding without rewriting it 20ms (18ms|2ms)
+  [+] accepts the byte ceiling and rejects one byte beyond it 86ms (85ms|1ms)
+  [+] accepts one UTF-8 BOM and counts it in the byte limit 25ms (23ms|2ms)
+  [+] rejects executable-looking settings without executing their text 78ms (76ms|1ms)
+  [+] reports invalid settings without echoing private configuration contents 24ms (23ms|1ms)
+  [+] serializes typed values and profile numbers invariantly in de-DE 167ms (165ms|1ms)
+  [+] serializes typed values and profile numbers invariantly in fi-FI 45ms (43ms|2ms)
+
+Describing AC-051: atomic settings saves preserve old data on failed publication
+  [+] rejects a directory config path without changing its contents 38ms (34ms|4ms)
+  [-] rejects a config path through a junction without changing the target or foreign files 50ms (48ms|3ms)
+   NullReferenceException: Object reference not set to an instance of an object.
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Settings.Tests.ps1:300
+  [+] preserves a foreign destination appearing after an initially absent target was reserved 513ms (511ms|1ms)
+  [+] replaces a valid config and resets it to an empty versioned document 65ms (61ms|4ms)
+  [+] preserves old bytes and a foreign temporary during publication error 87ms (84ms|3ms)
+  [+] preserves old bytes and a foreign temporary during interrupted publication 55ms (53ms|2ms)
+  [+] preserves a locked old target and removes its own temporary after replacement fails 48ms (46ms|2ms)
+  [+] denies non-owner delete, rename and write while publication retains the owned temporary handle 102ms (100ms|2ms)
+  [+] rejects invalid new settings before changing the previous config 19ms (17ms|2ms)
+
+Describing AC-049/050: isolated settings management is unattended and never starts media tools
+  [+] shows omitted/default values without input, native startup, prompts or autosaving 1.34s (1.33s|8ms)
+  [+] explicitly saves typed chosen settings and shows their origins without media processing 2.03s (2.03s|2ms)
+  [+] resets a corrupt config without reading its content or starting native tools 1.83s (1.83s|3ms)
+  [+] ignores a corrupt isolated config for Show without repairing or rewriting it 1.54s (1.54s|2ms)
+  [+] rejects save and reset with code 2 before native or preference/output changes 1.23s (1.22s|5ms)
+  [+] rejects show input with code 2 before native or preference/output changes 1.19s (1.18s|3ms)
+  [+] rejects show preview with code 2 before native or preference/output changes 1.49s (1.48s|4ms)
+  [+] rejects show preview range with code 2 before native or preference/output changes 1.61s (1.61s|3ms)
+  [+] rejects show native path with code 2 before native or preference/output changes 1.59s (1.59s|3ms)
+  [+] rejects show diagnostic with code 2 before native or preference/output changes 1.15s (1.15s|3ms)
+  [+] rejects reset mode with code 2 before native or preference/output changes 991ms (987ms|4ms)
+  [+] rejects empty explicit mode with code 2 before native or preference/output changes 2.45s (2.45s|4ms)
+  [+] rejects empty settings path with code 2 before native or preference/output changes 1.96s (1.96s|2ms)
+  [+] rejects a corrupt saved file before explicit CLI overrides, dependencies or output creation 4.13s (4.13s|7ms)
+  [+] uses saved mode/output choices for a real unattended entry point without autosaving 5.27s (5.27s|2ms)
+  [+] replaces saved cleaning wholly with an explicit empty dictionary before constructing the graph 5.37s (5.36s|3ms)
+  [+] runs an explicit job while ignoring corrupt saved settings without rewriting them 4.64s (4.63s|3ms)
+  [+] passes explicit false switches through the main entry point over saved true values 5.98s (5.97s|6ms)
+  [+] fails missing unattended mode without prompting, rendering or saving defaults 1.9s (1.89s|3ms)
+  [+] uses the saved absolute stream index and rejects omitted selection without prompting 5.39s (5.38s|10ms)
+  [+] uses the saved absolute stream index and rejects omitted selection without prompting 4.72s (4.72s|4ms)
+  [+] retains positional legacy input with only main/IO when saved settings are explicitly ignored 5.84s (5.83s|3ms)
+  [+] dot-sources main/IO without loading settings or acting on management parameters 1.3s (1.29s|7ms)
+Tests completed in 74.65s
+Tests Passed: 122, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 0
+Pester failed: 1 test(s), 0 container(s), 0 block(s).
+At <repo>\scripts\Invoke-Tests.ps1:128 char:5
++     throw "Pester failed: $($result.FailedCount) test(s), $($result.F ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Pester failed: ...s), 0 block(s).:String) [], RuntimeException
+    + FullyQualifiedErrorId : Pester failed: 1 test(s), 0 container(s), 0 block(s).

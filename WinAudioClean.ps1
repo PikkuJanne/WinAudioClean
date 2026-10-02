@@ -61,7 +61,29 @@ Boolean values. Finite numeric scalars: HighpassHz 20..200, NoiseFloorDb -80..-2
 NoiseReductionDb 0.01..20, GateThresholdDb -80..-20, GateRangeDb -60..0.
 Unknown keys, numeric strings and arbitrary filter text are rejected. Supply a
 PowerShell hashtable through & invocation; a literal hashtable cannot be passed
-through a native -File argument. Zoom rejects nonempty cleaning options. No settings are saved.
+through a native -File argument. Zoom rejects nonempty cleaning options.
+An explicit dictionary replaces the saved override dictionary, including @{}.
+.PARAMETER SettingsPath
+Optional local JSON preferences path. Defaults to the current user's application
+data folder, WinAudioClean\settings.json. Missing files use built-in defaults.
+Existing files are fully validated before use: explicit CLI > saved > built-in.
+Requires the sibling WinAudioClean.Settings.ps1 when a settings file is present
+or -SettingsPath or a management action is requested. No automatic save occurs.
+.PARAMETER IgnoreSavedSettings
+Bypass reading saved preferences for this invocation. Explicit CLI choices and
+built-in defaults still apply. Use this to recover from a rejected settings file.
+.PARAMETER ShowSettings
+Print effective preferences and each value's origin as JSON, then exit without
+input, FFmpeg, a menu or audio output. May accompany SaveSettings or ResetSettings.
+.PARAMETER SaveSettings
+Validate and atomically save effective preferences, then print them and exit.
+CLI values override saved values; -IgnoreSavedSettings saves from built-in values.
+Stores only existing processing preferences, never input/executable paths,
+preview ranges, NonInteractive or diagnostic actions. Requires no input file.
+.PARAMETER ResetSettings
+Atomically replace preferences with an empty version-1 settings object, restoring
+built-in defaults. Bypasses malformed/unknown-version JSON for explicit recovery.
+Cannot accompany SaveSettings or processing choices. Requires no input file.
 .PARAMETER Preview
 Create source/processed excerpts and separate level-matched comparison WAVs.
 The opt-in route ends after preview; it never starts a full render or playback.
@@ -108,10 +130,22 @@ Create a bounded preview only. Reports identify the selected interval, warmup
 limits, effective filters, excerpt measurements and separate comparison gains.
 The files remain local; open them explicitly to compare. Full-render settings
 and the source recording are unchanged.
+.EXAMPLE
+.\WinAudioClean.ps1 -SaveSettings -Mode Zoom -OutputDirectory "C:\Audio\Exports"
+
+Save existing processing choices explicitly. Later invocations use saved mode
+without the menu; CLI choices override it. -ShowSettings inspects preferences;
+-ResetSettings restores built-in defaults. These actions do not process audio.
+.EXAMPLE
+& .\WinAudioClean.ps1 "C:\Audio\recording.wav" -Mode Raw -Mono:$false -CleaningOptions @{} -NonInteractive
+
+Override saved mode, mono and the entire cleaning override dictionary for one
+run. The file at positional argument zero remains the legacy input parameter.
 .NOTES
 Author: Janne Vuorela. Windows 10/11; Windows PowerShell 5.1 or PowerShell 7+.
 Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
 Keep WinAudioClean.Preview.ps1 beside them to use optional previews.
+Keep WinAudioClean.Settings.ps1 beside them to use saved preferences.
 Supply FFmpeg/ffprobe through -FfmpegPath/-FfprobePath, beside the script, or PATH.
 No dependency is automatically downloaded. Processing time depends on the file
 and machine. Severe noise and lost/clipped detail may not be recoverable;
@@ -140,7 +174,12 @@ param(
     [switch]$Rf64,
     [switch]$NonInteractive,
     [string]$ExportDiagnostic,
-    [string]$DiagnosticOutputPath
+    [string]$DiagnosticOutputPath,
+    [string]$SettingsPath,
+    [switch]$IgnoreSavedSettings,
+    [switch]$ShowSettings,
+    [switch]$SaveSettings,
+    [switch]$ResetSettings
 )
 
 . (Join-Path $PSScriptRoot 'WinAudioClean.IO.ps1')
@@ -1527,6 +1566,83 @@ if ($PSBoundParameters.ContainsKey('ExportDiagnostic') -or $PSBoundParameters.Co
     }
 }
 
+# Settings are optional for an installation with no saved preferences. Imports
+# return above without reading user configuration or requiring this component.
+# Explicit management never probes an input, resolves native tools or prompts.
+$settingsManagement = $ShowSettings -or $SaveSettings -or $ResetSettings
+$audioStreamIndexSpecified = $PSBoundParameters.ContainsKey('AudioStreamIndex')
+$resolvedSettings = $null
+try {
+    $settingsFilePath = $SettingsPath
+    if (-not $PSBoundParameters.ContainsKey('SettingsPath')) {
+        $applicationData = [Environment]::GetFolderPath('ApplicationData')
+        if ($applicationData) { $settingsFilePath = [IO.Path]::Combine($applicationData, 'WinAudioClean', 'settings.json') }
+    }
+    $useSettingsComponent = $settingsManagement -or $PSBoundParameters.ContainsKey('SettingsPath') -or
+        (-not $IgnoreSavedSettings -and $settingsFilePath -and (Test-Path -LiteralPath $settingsFilePath))
+    if ($useSettingsComponent) {
+        $settingsComponent = Join-Path $PSScriptRoot 'WinAudioClean.Settings.ps1'
+        if (-not (Test-Path -LiteralPath $settingsComponent -PathType Leaf)) {
+            throw 'Keep WinAudioClean.Settings.ps1 beside the main script to use saved preferences.'
+        }
+        . $settingsComponent
+        if ($settingsManagement) {
+            $preferenceNames = @('Mode', 'Preset', 'LoudnessMode', 'BitDepth', 'Mono', 'Rf64', 'OutputDirectory', 'AudioStreamIndex', 'CleaningOptions')
+            foreach ($name in $PSBoundParameters.Keys) {
+                if ($name -notin $preferenceNames + @('SettingsPath', 'IgnoreSavedSettings', 'ShowSettings', 'SaveSettings', 'ResetSettings', 'NonInteractive')) {
+                    throw 'Settings management cannot be combined with input, preview, dependencies or diagnostic actions.'
+                }
+            }
+            if ($SaveSettings -and $ResetSettings) { throw 'SaveSettings and ResetSettings cannot be combined.' }
+            if ($ResetSettings) {
+                foreach ($name in $preferenceNames) {
+                    if ($PSBoundParameters.ContainsKey($name)) { throw 'ResetSettings cannot be combined with processing choices.' }
+                }
+            }
+        }
+        $settingsFilePath = Resolve-WacFileSystemPath -Path $settingsFilePath
+        $savedSettings = @{}
+        if (-not $IgnoreSavedSettings -and -not $ResetSettings) {
+            $savedSettings = Read-WacSettings -Path $settingsFilePath
+        }
+        $resolvedSettings = Resolve-WacSettings -Explicit $PSBoundParameters -Saved $savedSettings
+        if ($settingsManagement) {
+            if ($ResetSettings) {
+                $null = Save-WacSettings -Path $settingsFilePath -Values @{}
+                Write-Host 'Saved preferences reset to built-in defaults.'
+            } elseif ($SaveSettings) {
+                $null = Save-WacSettings -Path $settingsFilePath -Values $resolvedSettings.Values
+                Write-Host 'Preferences saved.'
+            }
+            $settingsDisplay = ConvertTo-WacSettingsJson -Values $resolvedSettings.Values | ConvertFrom-Json
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name origins -Value $resolvedSettings.Origins
+            $displayProfile = $null
+            if ($resolvedSettings.Values.Mode) {
+                $displayChoice = if ($resolvedSettings.Values.Mode -eq 'Raw') { '1' } else { '2' }
+                $displayProfile = Get-WacProcessingProfile -Choice $displayChoice -Preset $resolvedSettings.Values.Preset -CleaningOptions $resolvedSettings.Values.CleaningOptions
+            }
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name effectiveCleaning -Value $(if ($displayProfile) { $displayProfile.CleaningSettings } else { $null })
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name effectiveFilterChain -Value $(if ($displayProfile) { $displayProfile.FilterChain } else { $null })
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name effectiveProfileReason -Value $(if ($displayProfile) { $null } else { 'mode_not_selected' })
+            Write-Output ($settingsDisplay | ConvertTo-Json -Depth 8 -Compress)
+            exit 0
+        }
+        $Mode = $resolvedSettings.Values.Mode
+        $Preset = $resolvedSettings.Values.Preset
+        $LoudnessMode = $resolvedSettings.Values.LoudnessMode
+        $BitDepth = $resolvedSettings.Values.BitDepth
+        $Mono = $resolvedSettings.Values.Mono
+        $Rf64 = $resolvedSettings.Values.Rf64
+        $OutputDirectory = $resolvedSettings.Values.OutputDirectory
+        $AudioStreamIndex = $resolvedSettings.Values.AudioStreamIndex
+        $CleaningOptions = $resolvedSettings.Values.CleaningOptions
+        $audioStreamIndexSpecified = $null -ne $resolvedSettings.Values.AudioStreamIndex
+    }
+} catch {
+    Write-Error -Message ('Settings failed: ' + $_.Exception.Message + ' Use -IgnoreSavedSettings or -ResetSettings for recovery.') -ErrorAction Continue
+    exit 2
+}
+
 # --- CONFIGURATION ---
 $scriptVersion = "2.3"
 $interactive = Test-WacInteractive -NonInteractive:$NonInteractive
@@ -1550,7 +1666,7 @@ try {
     if ($PSBoundParameters.ContainsKey('Mode') -and $Mode -notin @('Raw', 'Zoom')) {
         throw 'Invalid mode. Supply -Mode Raw or -Mode Zoom.'
     }
-    if ($PSBoundParameters.ContainsKey('AudioStreamIndex')) {
+    if ($audioStreamIndexSpecified) {
         $parsedIndex = 0
         if ($AudioStreamIndex -notmatch '^[0-9]+$' -or -not [int]::TryParse($AudioStreamIndex, [ref]$parsedIndex)) {
             throw 'Audio stream index must be a nonnegative absolute stream index shown by ffprobe.'
@@ -1622,6 +1738,13 @@ if (-not $Mode) {
 }
 
 # --- FILTER SELECTION ---
+$effectiveSettingsDisplay = [ordered]@{
+    mode = $Mode; preset = $Preset; loudnessMode = $LoudnessMode; bitDepth = [int]$BitDepth
+    mono = [bool]$Mono; rf64 = [bool]$Rf64; outputDirectory = $outFolder
+    audioStreamIndex = $(if ($audioStreamIndexSpecified) { [int]$AudioStreamIndex } else { $null })
+    cleaningOptions = $CleaningOptions
+}
+Write-Host ('Effective settings: ' + ($effectiveSettingsDisplay | ConvertTo-Json -Depth 6 -Compress))
 $choice = if ($Mode -eq 'Raw') { '1' } else { '2' }
 try { $processingProfile = Get-WacProcessingProfile -Choice $choice -Preset $Preset -CleaningOptions $CleaningOptions }
 catch {
@@ -1655,7 +1778,7 @@ if ($Preview) {
         Interactive = $interactive; ToolVersion = $scriptVersion
         FfmpegVersion = $ffmpegVersion; FfprobeVersion = $ffprobeVersion
     }
-    if ($PSBoundParameters.ContainsKey('AudioStreamIndex')) { $previewArguments.AudioStreamIndex = $AudioStreamIndex }
+    if ($audioStreamIndexSpecified) { $previewArguments.AudioStreamIndex = $AudioStreamIndex }
     try { $previewResult = Invoke-WacPreview @previewArguments }
     catch {
         Write-Error -Message ('Preview failed: ' + $_.Exception.Message) -ErrorAction Continue
@@ -1689,7 +1812,7 @@ catch {
 }
 try {
     $selectionArguments = @{ Streams = $audioStreams; Interactive = $interactive }
-    if ($PSBoundParameters.ContainsKey('AudioStreamIndex')) { $selectionArguments.RequestedIndex = $AudioStreamIndex }
+    if ($audioStreamIndexSpecified) { $selectionArguments.RequestedIndex = $AudioStreamIndex }
     $selectedStream = Select-WacAudioStream @selectionArguments
 } catch {
     Write-Error -Message ("Audio selection failed: " + $_.Exception.Message) -ErrorAction Continue

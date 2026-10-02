@@ -4,7 +4,7 @@ A local audio cleaning and leveling tool for speech recordings, including meetin
 
 **Synopsis**
 
-- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only), both using Original by default. Raw also offers an optional experimental Gentle preset.
+- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only), with Original as the built-in preset. Raw also offers an optional experimental Gentle preset.
 
 - Cleaning: Attempts clipping and click repair, reduces low-frequency rumble, and applies noise reduction and a gate.
 
@@ -41,6 +41,9 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 - WinAudioClean.Preview.ps1
   - Sibling helper for the optional excerpt and level-matched comparison workflow. Full renders work without it.
 
+- WinAudioClean.Settings.ps1
+  - Sibling helper for loading and managing optional local JSON preferences. Loading an existing saved file, an explicit SettingsPath or a settings action requires it.
+
 - WinAudioClean.bat
   - Simple launcher: enables drag-and-drop functionality for audio files.
 
@@ -63,7 +66,7 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 
 1. Drag an audio file (WAV, MP3, M4A, MKV, etc.) onto the WinAudioClean.bat icon.
 
-2. A window will open asking for Mode Selection:
+2. With no saved mode, a window will open asking for Mode Selection:
    - Type 1 for Raw Recording (Microphone audio that needs noise removal).
    - Type 2 for Zoom/Teams (Meeting audio that is already noise-cancelled).
 
@@ -71,7 +74,7 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 
 4. Wait for the green SUCCESS message.
 
-5. Find your new file in your Music folder.
+5. Find your new file in your chosen destination, or Music when no destination preference was supplied.
 
 **Command line**
 
@@ -79,7 +82,7 @@ Run from a PowerShell prompt:
 
 .\WinAudioClean.ps1 -inputPath "C:\Path\To\MyRecording.wav"
 
-You will see the same interactive menu and the same final log output.
+With no saved mode, you will see the same interactive menu and final log output.
 
 **Input, destination and mode checks**
 
@@ -91,8 +94,8 @@ supported. Use ordinary Windows drive paths or paths relative to your current
 PowerShell directory. Mapped drives and redirected folders can still use network
 storage; a drive path does not guarantee that a recording is physically offline.
 
-Music remains the default destination. Use `-OutputDirectory` to choose another
-folder; the script creates it if needed and checks that it can write there. An
+Music remains the built-in destination. A saved preference or `-OutputDirectory`
+can choose another folder; the script creates it if needed and checks that it can write there. An
 empty or invalid destination fails before the menu. These checks establish file
 accessibility; they do not prove that FFmpeg can decode the media.
 
@@ -104,13 +107,96 @@ invalid choices ask again. A mode can also be supplied directly:
 ```
 
 `-Mode` accepts `Raw` or `Zoom`. `-NonInteractive`, a noninteractive host, and
-redirected input require an explicit mode and never show a mode prompt. Running
+redirected input require a mode from the CLI or saved settings and never show a mode prompt. Running
 without an input file displays usage. Direct script preflight failures return
 exit code `2`; menu cancellation returns `130`.
 
+**Local saved settings and unattended runs**
+
+Optional preferences are stored at
+`[Environment]::GetFolderPath('ApplicationData')\WinAudioClean\settings.json`.
+Use `-SettingsPath` to choose another local JSON file. An absent file uses the
+built-in choices; normal runs do not create or update it. Values resolve in
+this order: explicit CLI parameter, saved value, then built-in default. A saved
+mode can supply the required unattended mode, and a saved audio-stream index
+can resolve a multi-track recording. Positional input and `-inputPath` still work.
+
+Inspect, save or reset preferences without an input file:
+
+```powershell
+& .\WinAudioClean.ps1 -ShowSettings
+& .\WinAudioClean.ps1 -SaveSettings -Mode Raw -Preset Gentle -BitDepth 24 -OutputDirectory 'C:\Audio\Cleaned'
+& .\WinAudioClean.ps1 -ResetSettings -ShowSettings
+```
+
+`-ShowSettings` prints one compact JSON line with resolved preference `settings`
+and an `origins` object identifying CLI, saved or built-in values. Cleaning
+preferences retain their override dictionary; the processing console/reports
+show the expanded effective cleaning and exact graph. The display also includes
+`effectiveCleaning` and `effectiveFilterChain` when the mode is known; otherwise
+they are null with `effectiveProfileReason: mode_not_selected`. It may accompany
+Save or Reset. `-SaveSettings` writes the resolved supported preferences;
+`-ResetSettings` writes an empty settings object so later runs use built-ins.
+Save and Reset are exclusive. Reset rejects processing choices. These management
+actions do not process audio or run FFmpeg; do not combine them with input,
+preview, executable-path or diagnostic-export options.
+
+Saved JSON has this shape; every field inside `settings` is optional:
+
+```json
+{
+  "schemaVersion": 1,
+  "settings": {
+    "mode": "Raw",
+    "preset": "Gentle",
+    "loudnessMode": "Fast",
+    "bitDepth": 24,
+    "mono": false,
+    "rf64": false,
+    "outputDirectory": "C:\\Audio\\Cleaned",
+    "audioStreamIndex": 1,
+    "cleaningOptions": { "HighpassHz": 61.5, "Denoise": true }
+  }
+}
+```
+
+The supported fields are `mode` (`Raw`/`Zoom`), `preset` (`Original`/`Gentle`),
+`loudnessMode` (`Fast`/`Accurate`), `bitDepth` (integer 16/24), Boolean `mono`
+and `rf64`, a local `outputDirectory`, a nonnegative integer
+`audioStreamIndex`, and the typed `cleaningOptions` object described below.
+Use JSON numbers and `true`/`false`, with decimal dots; quoted numbers, nulls,
+unknown keys, unknown schema versions and arbitrary filter/script text fail.
+Field names use the exact casing shown above and in the cleaning-options table.
+Files must be UTF-8 JSON of at most 64 KiB, including an optional UTF-8 BOM.
+The saved configuration is validated as a whole, including mode/preset
+compatibility and disabled cleaning values, before CLI overrides are applied.
+Invalid JSON/settings return code `2` and preserve the file. Use
+`-IgnoreSavedSettings` to run with CLI/built-ins, or `-ResetSettings` to recover.
+There is no automatic migration or silent repair.
+
+Explicit false is an override: `-Mono:$false` and `-Rf64:$false` replace saved
+true values. `-CleaningOptions` replaces the entire saved override dictionary;
+it does not merge individual keys. `-CleaningOptions @{}` clears saved
+overrides and restores the selected preset's cleaning values. For example:
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -AudioStreamIndex 0 -Mono:$false -CleaningOptions @{} -NonInteractive
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -IgnoreSavedSettings -NonInteractive
+```
+
+Saving normalizes the output directory to an absolute path. A hand-written
+relative directory resolves against the current PowerShell location.
+Settings writes use a temporary file in the same directory and atomic
+replacement; a failed save preserves an existing valid file where storage
+permits. This does not promise power-loss durability or conflict merging
+between concurrent writers. Preferences stay local and may contain a destination
+path; review them before sharing. Input filenames, executable paths,
+`NonInteractive`, preview ranges and diagnostic options are never persisted.
+The application remains version 2.3 and reports remain schema 1.
+
 **Original preset**
 
-Both mode choices select **Original**, ID `original`, version `1.0.0` by default.
+The built-in preset is **Original**, ID `original`, version `1.0.0`.
 Choose `1` / `-Mode Raw` for cleaning plus leveling, or `2` / `-Mode Zoom` for
 leveling only. Naming the preset preserves these legacy filter values and order:
 
@@ -173,11 +259,11 @@ For example, disable the Original gate and request 4 dB of noise reduction:
 
 Run hashtable examples in PowerShell with the call operator `&`. A native
 `powershell.exe -File` or `pwsh -File` invocation cannot pass a hashtable literal
-as a typed parameter. Drag-and-drop and the menu default to Original; use the
+as a typed parameter. Drag-and-drop and the menu use Original when no preset preference is saved; use the
 PowerShell entry point for these options. `-Mode Zoom` accepts only Original
 with no nonempty cleaning options, so it remains leveling only. These options
 can accompany either Fast or Accurate; Accurate repeats the selected cleaning
-chain in both passes. Settings are not saved between runs.
+chain in both passes. Preferences change only when you explicitly save or reset them.
 
 The range limits are application choices within the supported FFmpeg options,
 not listening guarantees. High-pass filtering remains present in Raw even when
@@ -261,7 +347,7 @@ remain available. Accurate analyzes only the bounded context window.
 
 **Fast and Accurate loudness**
 
-`-LoudnessMode Fast` is the default, including drag-and-drop. It retains the
+`-LoudnessMode Fast` is the built-in default. It retains the
 original single-pass chain and runs no additional loudness analysis. To opt
 into two-pass normalization and final-file measurement, use PowerShell:
 
@@ -312,7 +398,8 @@ bounded cleanup. This limit does not apply to rendering.
 One audio track is selected automatically. For multiple tracks, the interactive
 menu shows absolute stream indexes, codecs, channels, sample rates and available
 language/title labels. Choose an index or `Q` to cancel. Unattended processing
-requires an explicit `-AudioStreamIndex` when more than one audio track exists:
+requires an audio-stream index from saved settings or `-AudioStreamIndex`
+when more than one audio track exists:
 
 ```powershell
 .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.mkv' -Mode Zoom -AudioStreamIndex 2 -FfmpegPath 'C:\Tools\ffmpeg\bin\ffmpeg.exe' -FfprobePath 'C:\Tools\ffmpeg\bin\ffprobe.exe' -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
@@ -323,7 +410,7 @@ example, video at index 0 and audio at indexes 1 and 2 means `-AudioStreamIndex 
 selects the second audio track. The selected track is explicitly mapped and its
 channel count is preserved unless `-Mono` is requested. Video-only input fails before cleaning. Use the
 PowerShell entry point for unattended stream selection or explicit tool paths;
-the batch launcher's `/unattended` route supports a single audio track.
+the batch launcher's `/unattended` route also uses saved preferences.
 
 Supported input containers are WAV, MP3, FLAC, Ogg, MOV/MP4/M4A, Matroska/WebM,
 AAC, AIFF, ASF and AVI, subject to the installed build's decoders. Both probing
@@ -338,7 +425,7 @@ files with unknown track timing fail safely before rendering.
 
 **Output format and channels**
 
-Exports use **48 kHz, 16-bit signed PCM WAV**. This intentionally replaces the
+The built-in export is **48 kHz, 16-bit signed PCM WAV**. This intentionally replaces the
 previous unspecified encoder output, which produced 192 kHz PCM16 with the tested
 FFmpeg build. The original Raw/Zoom filters are unchanged; exported samples are
 not bit-identical to the earlier files. Use `-BitDepth 24` for 24-bit editing files:
@@ -354,7 +441,7 @@ Prepare a standard mono/stereo track explicitly for these inputs. `-Mono` opts
 into an equal-weight left/right mix before the original processing chain; it
 does not enable multichannel input. Source metadata and chapters are omitted
 from the audio export. Use the PowerShell entry point for these export options;
-drag-and-drop retains the defaults.
+drag-and-drop uses saved export preferences or these built-in defaults.
 
 **Large files and destination space**
 
@@ -466,8 +553,8 @@ and local report. Processing and reporting results use these exit codes:
 
 | Code | Meaning |
 | --- | --- |
-| 0 | Audio was validated and published without loudness or reporting warnings. |
-| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
+| 0 | Audio was validated and published without loudness or reporting warnings, or settings inspect/save/reset completed successfully. |
+| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout, saved JSON/settings or launcher usage; ambiguous unattended tracks; settings-management or diagnostic export failure. |
 | 3 | Missing, incompatible or filter-deficient dependency, or analysis/render process start failure. |
 | 4 | Probe/metadata failure, no audio, or analysis/processing/capture/cleanup failure. Malformed first-pass measurements fail here. Native failures retain diagnostics. |
 | 5 | Output allocation, space/size check, validation, publication or owned-file cleanup failed. |

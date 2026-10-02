@@ -8,6 +8,67 @@ Use a schemaVersion integer and typed allowlisted fields for mode, preset ID, ta
 
 A persisted default-sound change still requires the user's own explicit settings action; new application versions must not silently retune Original.
 
+### Implemented preferences — WAC-M3-01 (2026-10-02)
+
+Preference schema version `1` is separate from ordinary/preview report schema
+version `1` and application `2.3`. The default local path is the current user's
+ApplicationData folder plus `WinAudioClean\settings.json`. `-SettingsPath`
+selects an isolated local file. Reading never saves; only `-SaveSettings` or
+`-ResetSettings` writes preferences. The optional Settings sibling is needed
+for a present saved file, explicit path or management action. Dot-source imports
+return before reading preferences and retain their IO-only dependency contract.
+
+The root object contains exactly `schemaVersion` and `settings`. The latter is
+an object with these optional, case-sensitive fields:
+
+| Field | JSON type and allowed values |
+| --- | --- |
+| `mode` | String `Raw` or `Zoom`; omission retains interactive mode selection or an unattended missing-mode error. |
+| `preset` | String `Original` or `Gentle`; the existing CLI names identify the supported versioned base presets. |
+| `loudnessMode` | String `Fast` or `Accurate`. |
+| `bitDepth` | Integer `16` or `24`. |
+| `mono`, `rf64` | Boolean; explicit CLI false overrides saved true. |
+| `outputDirectory` | Nonempty supported local filesystem path; saving canonicalizes it to an absolute path without creating the audio output directory. |
+| `audioStreamIndex` | Nonnegative integer through Int32 maximum, an absolute ffprobe index. Omission retains automatic single-track selection. |
+| `cleaningOptions` | Object of the existing PascalCase typed cleaning override keys and bounds. It stores overrides rather than an expanded base profile. |
+
+No target/sample-rate knobs are introduced. Input paths, executable paths,
+NonInteractive, preview/actions/ranges and diagnostic choices are not preferences.
+There is no script configuration, arbitrary filter string or executable option.
+Read the complete file with strict bounded UTF-8/JSON validation before applying
+precedence. Reject unknown keys/versions, duplicate decoded keys, wrong scalar
+types, nonfinite/out-of-range values and invalid preset/mode combinations.
+Invalid files fail with configuration exit `2`, even if CLI choices would hide
+their invalid fields. No implicit migration occurs; `-IgnoreSavedSettings`
+bypasses the file and `-ResetSettings` explicitly recovers it.
+
+Actual bound CLI parameters override saved preferences, which override built-ins.
+An explicit cleaning dictionary replaces the entire saved override dictionary,
+including an empty `@{}`. Validate the resulting combination too. A saved mode
+or selected index resolves the corresponding unattended omission; execution
+context is never saved. Original/Fast/PCM16 and the existing channel policy
+remain the built-ins. Processing reports continue recording effective choices
+and exact graphs; saved preferences select existing choices without retuning
+their graphs or changing report schema.
+
+`-ShowSettings`, `-SaveSettings` and `-ResetSettings` run without input, media
+tools, prompting or audio output. Show may accompany either write action; Save
+and Reset are mutually exclusive. Reset rejects processing choices and writes
+`{"schemaVersion":1,"settings":{}}`, preserving the built-in menu behavior.
+The management JSON displays resolved preferences and per-field origins, plus
+expanded `effectiveCleaning` and `effectiveFilterChain` when a mode is selected.
+Otherwise they are null with `effectiveProfileReason: mode_not_selected`.
+These display-only fields are not part of stored JSON. Ordinary runs display
+effective choices and expanded cleaning before rendering.
+
+Writes validate first, create/flush a same-directory owned temporary file, then
+atomically replace the existing file or publish without replacing a newly
+appeared destination. Failed publication preserves prior bytes and cleans only
+the owned temporary file. Settings storage rejects reparse files/directories
+and reparse parents; the reader also rejects files with multiple filesystem
+links. This is a complete-file publication contract, without a
+claim of power-loss durability, configuration migration or a multi-file commit.
+
 ## Run JSON
 
 Include schemaVersion, jobId, toolVersion, presetVersion, sourceRevision when known, start/end timestamps, status, warning/reason codes, native/application exit codes, dependency versions, stream selection, input media duration, elapsed processing time, effective settings, exact filters, output audio format, requested targets, measured metrics and paths to local diagnostics. JSON numbers must be finite; undefined metrics are null plus reason. Separate export validity from loudness-target compliance. Do not put credentials in command strings.

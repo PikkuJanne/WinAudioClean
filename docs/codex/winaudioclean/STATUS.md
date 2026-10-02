@@ -1,60 +1,55 @@
 # Current status
 
-Date: 2026-10-02. **WAC-M2-05 and milestone M2 are complete.** M0, M1 and M2
-engineering checkpoints are done. AC-001 through AC-048 pass their contracts.
-Sixteen tasks are done; 14 remain todo. Human listening is unperformed.
+Date: 2026-10-02. **WAC-M3-01 is complete.** M0/M1/M2 remain complete;
+AC-001 through AC-051 pass their engineering contracts. Seventeen tasks are
+done;13 remain todo. Human listening/default promotion remain unperformed.
 
-**Next: WAC-M3-01 — Add noninteractive parameters and saved settings.** Start
-separately after fresh synchronization; no merge is required to unlock it.
+**Next: WAC-M3-02 — Support multiple dropped files through the existing launcher.**
+Start separately after fresh synchronization. No merge is required to unlock it.
 
-## M2 audio gate
+## M3-01 preferences checkpoint
 
-Runtime/main/IO/Preview/BAT hashes equal M2-04. Original remains exact default;
-Gentle stays opt-in experimental. The new development-only report-reproduction
-utility and three positive-LUFS rejection test cases change no product sound.
+Optional schema-1 typed per-user JSON, explicit CLI > saved > built-in precedence,
+effective display/origins, explicit Save/Reset and Ignore recovery are implemented.
+Saved mode/stream support unattended jobs. False switches and whole cleaning
+replacement retain actual bound-parameter semantics. Management starts no
+input/media-process/menu/audio work. Normal execution never autosaves; imports stay IO-only.
 
-- Targeted: **523 Pester each**. Full: **1018 Pester +61 Python each**,
-  one Python privilege skip per shell, no failures. Parser/static/plan pass;
-  179 visible advisories. Both capture wrappers exit0 with stable code.
-- **116 fresh media cases** pass:20 Original,16 measured,16 Gentle/custom,
-  24 preview,40 encoding. Exact frozen/direct PCM references, frame counts,
-  channel/container checks, held native input, typed settings and locale pairs
-  remain covered. Target misses/fallbacks retain WARNING7; Fast is NOT_MEASURED.
-- **16 report-driven reproductions /22 assets** pass exact decoded PCM,
-  frames, encoding and classified meters on retained synthetic input/build.
-  Reports are pinned before parsing; source, input/report/assets/tools stay
-  unchanged. Selected configurations and exact graph checks bound this proof.
-- **AC-047 integrity passes with listening NOT PERFORMED**: no cleared corpus,
-  attributed reviewer or default promotion approval. No speech was rendered or
-  played; candidate/consent/playback/results remain pending.
+- Final Settings targeted 123 and EntryPoints targeted 80 per shell; required
+  Full: 1141 Pester +62 Python discovered each (61 execute, one privilege skip).
+  Parser: 34 files; static/plan pass with 197 visible advisories. Final wrappers exit 0,
+  code stable within each scope. Earlier PS5.1 test-cleanup failure is preserved.
+- Fresh Original20/20 exact frozen PCM references and settings matrix
+  68/68 actual invocations pass, including 18 exact
+  saved/CLI PCM pairs, both hosts and German/Finnish decimal culture.
+- Strict JSON and held atomic settings rename/failure cleanup pass; old and
+  foreign bytes are preserved in bounded injected/locking/junction checks.
 
-[Evidence](evidence/WAC-M2-05.md), [source manifest](evidence/WAC-M2-05-source.json),
-[classifications](evidence/WAC-M2-05-classifications.json),
-[reproduction](evidence/WAC-M2-05-reproduction.json),
-[human record](evidence/WAC-M2-05-listening.md). Preserve all prior evidence and
-M1-02 policy/resumption history, including clearly labeled preliminary failures.
+[Evidence](evidence/WAC-M3-01.md), [manifest](evidence/WAC-M3-01-source.json),
+[settings matrix](evidence/WAC-M3-01-settings-media.json),
+[final focused gate](evidence/WAC-M3-01-settings-final.json).
+Preserve all prior evidence/canonical history, including M1-02 policy/resumption
+and M2-04/M3-01 preliminary scopes and failures.
 
 ## Preserved behavior and limits
 
-Application2.3/schema1; Original original/1.0.0; Gentle gentle/0.1.0 Raw-only;
-strict typed cleaning, repeated Accurate prechain, held final-file meter,
-PCM16/24/mono/RF64 and owned no-replace publication/report warnings remain.
-Preview is explicit and bounded, with four assets, attenuation-only comparisons,
-exact frames and no automatic playback/full render. Fast remains ordinary default.
+All pre-existing main helper bodies and IO/Preview/BAT remain unchanged from M2.
+Original original/1.0.0 remains built-in; Gentle gentle/0.1.0 stays opt-in Raw-only
+experimental. Application2.3/report1, Fast default, Accurate warnings/checks,
+PCM16/24/mono/RF64, owned media/report publication and bounded explicit preview
+remain. Preferences store only already-supported choices and require explicit save.
 
-Finite positive integrated/threshold values remain unsupported parser failures;
-they are not silent/undefined results. Preview source seek has declared <=10ms
-fixture-tested uncertainty and preserved approximately25ms Raw graph delay;
-custom/build/edge/full-render equivalence remains limited. Report reproduction
-does not promise universal numerical formatter parity or cross-build PCM.
-Speech listening, independent calibration, full >4GB, real disk exhaustion,
-long-file/memory stress and active-render Ctrl+C remain unverified. Capacity is
-not reserved, capture is in memory, sets are not multi-file atomic/power-loss durable.
+Settings publication is complete-file atomic, without power-loss or concurrent
+conflict-merging proof. Reader rejects hardlinked settings; storage rejects reparse
+paths. Actual user preferences were not written. Speech listening/calibration,
+>4GB/disk exhaustion, active-render Ctrl+C, long-file/memory stress and universal
+codec seeking remain unverified. Positive integrated/threshold values remain
+unsupported meter failures; inherited M2 seek/latency/formatter limits persist.
 
 ## Checkout and delivery
 
-Maintained WinAudioClean-governance, `codex/wac-m2-audio`; source-only original
-folder untouched. Exact origin: `https://github.com/PikkuJanne/WinAudioClean.git`.
-Draft PR#3 remains stacked on unmerged `codex/wac-m1-reliability` draft#2/M0.
-Verify the actual M2-05 SHA through live sync/PR after push. No CI workflow/checks.
-No default promotion, merge/release/security setting change or deployment.
+Maintained WinAudioClean-governance, `codex/wac-m3-settings`; source-only original
+untouched. Exact origin `https://github.com/PikkuJanne/WinAudioClean.git`.
+New M3 draft stacks on M2 `codex/wac-m2-audio` draft#3, itself on unmerged M1#2/M0.
+Verify actual completion SHA/live draft/CI after push; no workflows/checks currently
+exist. No merge/release/default promotion/security change or deployment.

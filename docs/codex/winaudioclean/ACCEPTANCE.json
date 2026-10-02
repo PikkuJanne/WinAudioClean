@@ -760,8 +760,13 @@
       "title": "Precedence matrix",
       "procedure": "Set conflicting built-in, saved and CLI values then reset settings.",
       "expected": "Documented precedence wins; legacy input invocation remains valid.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-01.md",
+        "evidence/WAC-M3-01-source.json",
+        "evidence/WAC-M3-01-settings-final.json",
+        "evidence/WAC-M3-01-settings-media.json"
+      ]
     },
     {
       "id": "AC-050",
@@ -769,8 +774,13 @@
       "title": "Unattended behavior",
       "procedure": "Run with all required values; omit a required mode/stream or supply invalid settings with redirected stdin.",
       "expected": "No prompt/pause or hang; valid jobs run and invalid jobs fail with a useful exit code.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-01.md",
+        "evidence/WAC-M3-01-source.json",
+        "evidence/WAC-M3-01-settings-final.json",
+        "evidence/WAC-M3-01-settings-media.json"
+      ]
     },
     {
       "id": "AC-051",
@@ -778,8 +788,13 @@
       "title": "Config durability",
       "procedure": "Test malformed JSON, unknown schema, wrong types, interrupted save and German/Finnish decimal culture.",
       "expected": "Safe diagnostics, previous valid config preserved and invariant FFmpeg serialization; no arbitrary code execution.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-01.md",
+        "evidence/WAC-M3-01-source.json",
+        "evidence/WAC-M3-01-settings-final.json",
+        "evidence/WAC-M3-01-settings-media.json"
+      ]
     },
     {
       "id": "AC-052",

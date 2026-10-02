@@ -578,3 +578,45 @@ evidence harness supplies that provenance separately. Reproduction depends
 on the same retained input and build; it does not certify different builds,
 speech quality, playback or default promotion. Keep audio and raw reports
 ignored. Record listening status separately from objective acceptance.
+
+## Local JSON settings and unattended precedence (WAC-M3-01)
+
+`WinAudioClean.Settings.Tests.ps1` covers the optional settings helper,
+schema-1 JSON types and keys, complete saved-file validation, explicit
+CLI > saved > built-in precedence, and settings management without audio or
+native execution. It checks actual bound-key presence for explicit false
+switches and empty cleaning dictionaries, saved mode/stream selection,
+malformed/unknown-version recovery, locale-independent numbers, atomic writes
+and preservation of the prior valid file on injected save failures.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1
+```
+
+Keep input/import, preset/cleaning and entry-point regressions in the focused
+compatibility group, then run the unfiltered Full gate in both supported shells.
+Importing the main script remains IO-only. A missing settings sibling is
+compatible when the default file is absent and no explicit SettingsPath or
+settings action requires it. Unattended input
+still fails promptly when neither CLI nor saved choices resolve a required
+mode or an ambiguous audio stream; it must never fall back to Read-Host.
+
+Settings tests use isolated JSON paths and temporary outputs. The task's real
+FFmpeg matrix uses synthetic fixtures under ignored `.wac-local/WAC-M3-01`
+and an explicit isolated `-SettingsPath` for every run. It compares saved
+preferences with equivalent explicit CLI renders on the same pinned build,
+including PCM16/24, mono false overriding saved true, RF64 selection, a saved
+second-stream index, whole-dictionary cleaning replacement and `@{}` clearing.
+German/Finnish decimal-culture cases use actual JSON numbers with decimal dots.
+Malformed settings fail with code 2 even if a CLI override names the invalid
+field; Ignore and Reset exercise the documented recovery routes. Management
+cases verify no audio publication, while source/settings hashes and exact
+decoded PCM/frame checks establish preservation and precedence. A direct
+Original reference checks the unchanged built-in graph separately.
+
+Record the actual matrix command, cases, exits, source/tool/configuration hashes
+and sanitized results with the task evidence. Counts describe completed runs,
+not planned coverage. Keep generated audio, full local reports and raw logs
+ignored; do not read or overwrite the user's own preferences. These checks do
+not approve speech quality, retune Original or certify cross-build PCM.

@@ -478,3 +478,29 @@ calibration and manual/stress limits remain explicit. Preserve all earlier
 evidence and M1-02 history; no merge/release/security/deployment approval is added.
 Evidence: `evidence/WAC-M2-05.md`, source/classification/reproduction manifests
 and `evidence/WAC-M2-05-listening.md`. Next: WAC-M3-01, separately synchronized.
+
+### 2026-10-02 — WAC-M3-01 explicit local preferences
+
+D32. Extend existing Mode/Preset/OutputDirectory/NonInteractive parameters and
+retain positional inputPath, menu, launcher and PS5.1 support. Add optional
+per-user ApplicationData JSON preferences, schema 1, with explicit bound CLI
+values above saved preferences above built-ins. Persist only already-supported
+processing choices; use existing preset names in the allowlist rather than
+introducing target/sample-rate controls. Save is explicit and never automatic.
+No application/report version bump or default audio change is required.
+
+Keep the Settings sibling optional when no saved file/action/path is used.
+Imports remain IO-only and return without configuration reads. Invalid complete
+saved files fail closed before precedence; no automatic unknown-version migration.
+Explicit IgnoreSavedSettings bypasses them and ResetSettings atomically writes
+an empty supported settings object. Management has no audio input/native/prompt
+side effects. Explicit false switches and an empty cleaning dictionary override
+saved values; cleaning overrides replace as a unit, retaining base preset identity.
+
+Typed bounded JSON never executes code or passes arbitrary FFmpeg options.
+Validate before same-directory flushed atomic publication; retain previous bytes
+on pre-publication failure and remove only owned temporary files. Reject reparse
+settings storage. Complete-file replacement does not certify power-loss durability.
+Human listening/default promotion remains pending under D07/D31. Feature-branch
+delivery is authorized; no merge/release/settings/security/deployment approval
+is added. Evidence: `evidence/WAC-M3-01.md`. Next: WAC-M3-02 only.

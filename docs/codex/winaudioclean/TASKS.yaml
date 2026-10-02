@@ -655,7 +655,7 @@
       "depends_on": [
         "WAC-M2-05"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Backward-compatible parameters, local JSON settings and help.",
       "implementation": [
@@ -669,7 +669,26 @@
         "AC-050",
         "AC-051"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-01-full-ps51.txt",
+        "evidence/WAC-M3-01-full-ps7.txt",
+        "evidence/WAC-M3-01-original-run.txt",
+        "evidence/WAC-M3-01-original.json",
+        "evidence/WAC-M3-01-settings-final-ps51.txt",
+        "evidence/WAC-M3-01-settings-final-ps7.txt",
+        "evidence/WAC-M3-01-settings-final.json",
+        "evidence/WAC-M3-01-settings-initial-ps51.txt",
+        "evidence/WAC-M3-01-settings-initial-ps7.txt",
+        "evidence/WAC-M3-01-settings-initial.json",
+        "evidence/WAC-M3-01-settings-media.json",
+        "evidence/WAC-M3-01-smoke-ps51.txt",
+        "evidence/WAC-M3-01-smoke-ps7.txt",
+        "evidence/WAC-M3-01-smoke.json",
+        "evidence/WAC-M3-01-source.json",
+        "evidence/WAC-M3-01-targeted-ps51.txt",
+        "evidence/WAC-M3-01-targeted-ps7.txt",
+        "evidence/WAC-M3-01.md"
+      ],
       "blocked_reason": null
     },
     {
