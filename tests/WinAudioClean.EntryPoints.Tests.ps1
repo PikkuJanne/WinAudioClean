@@ -56,6 +56,74 @@
             }
         }
     }
+    $publicationFailureCases = foreach ($shell in $shellCases) {
+        foreach ($scenario in @('empty', 'header', 'truncated', 'short', 'malformed output probe', 'failed output probe', 'missing input duration', 'input aliases log')) {
+            @{
+                ShellName = $shell.ShellName; ShellPath = $shell.ShellPath; Unavailable = $shell.Unavailable
+                Scenario = $scenario
+            }
+        }
+    }
+}
+
+Describe 'AC-023/AC-024: invalid output is never published and reporting preserves source bytes' -Tag 'OutputSafety', 'Runtime', 'Native' {
+    It 'handles <Scenario> in the actual application in <ShellName>' -ForEach $publicationFailureCases {
+        if ($Unavailable) {
+            Set-ItResult -Skipped -Because "$ShellName is unavailable on this machine; this shell was not tested."
+            return
+        }
+        $scratch = Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
+        $outputDirectory = Join-Path $scratch 'output'
+        $null = [IO.Directory]::CreateDirectory($outputDirectory)
+        $app = Join-Path $scratch 'WinAudioClean.ps1'
+        Copy-Item -LiteralPath $scriptPath -Destination $app
+        Copy-Item -LiteralPath (Join-Path $repositoryRoot 'WinAudioClean.IO.ps1') -Destination $scratch
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
+        Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
+        $inputFile = Join-Path $scratch 'recording.wav'
+        if ($Scenario -eq 'input aliases log') { $inputFile = Join-Path $outputDirectory 'WinAudioClean_Log.txt' }
+        [IO.File]::WriteAllBytes($inputFile, [byte[]]@(11, 22, 33, 44))
+        $priorExport = Join-Path $outputDirectory 'prior.wav'
+        [IO.File]::WriteAllBytes($priorExport, [byte[]]@(55, 66, 77))
+        $argvPath = Join-Path $scratch 'render-argv.json'
+        $childEnvironment = @{
+            WAC_TEST_FFMPEG_OUTPUT = '1'; WAC_TEST_ARGV_PATH = $argvPath
+            WAC_TEST_EXIT_CODE = '0'
+        }
+        $expectedExit = 5
+        switch ($Scenario) {
+            { $_ -in @('empty', 'header', 'truncated', 'short') } { $childEnvironment.WAC_TEST_OUTPUT_MODE = $Scenario }
+            'malformed output probe' { $childEnvironment.WAC_TEST_OUTPUT_PROBE_STDOUT = '{bad json' }
+            'failed output probe' { $childEnvironment.WAC_TEST_OUTPUT_PROBE_EXIT_CODE = '9' }
+            'missing input duration' {
+                $childEnvironment.WAC_TEST_PROBE_STDOUT = '{"streams":[{"index":0,"codec_type":"audio","codec_name":"pcm_s16le","channels":1,"sample_rate":"48000"}]}'
+                $expectedExit = 4
+            }
+            'input aliases log' { $expectedExit = 7 }
+        }
+        $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -inputPath {1} -OutputDirectory {2} -Mode Zoom -NonInteractive' -f
+            (ConvertTo-WacTestQuotedArgument $app), (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument $outputDirectory)
+        $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables $childEnvironment
+        $result.ExitCode | Should -Be $expectedExit -Because ("stdout: {0}; stderr: {1}" -f $result.StandardOutput, $result.StandardError)
+        $result.StandardOutput | Should -Not -Match 'DONE: SUCCESS'
+        [Convert]::ToBase64String([IO.File]::ReadAllBytes($inputFile)) | Should -BeExactly 'CxYhLA=='
+        [Convert]::ToBase64String([IO.File]::ReadAllBytes($priorExport)) | Should -BeExactly 'N0JN'
+        @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.partial' -Force).Count | Should -Be 0
+        $published = @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav' | Where-Object { $_.FullName -ne $priorExport })
+        if ($Scenario -eq 'input aliases log') {
+            $published.Count | Should -Be 1
+            $published[0].Length | Should -Be 288044
+            $result.StandardOutput | Should -Match 'DONE: WARNING'
+        } else {
+            $published.Count | Should -Be 0
+        }
+        if ($Scenario -eq 'missing input duration') {
+            Test-Path -LiteralPath $argvPath | Should -BeFalse
+            Test-Path -LiteralPath (Join-Path $outputDirectory 'WinAudioClean_Log.txt') | Should -BeFalse
+        } else {
+            Test-Path -LiteralPath $argvPath | Should -BeTrue
+        }
+    }
 }
 
 BeforeAll {
@@ -156,6 +224,7 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $null = [IO.Directory]::CreateDirectory($scratch)
         $app = Join-Path $scratch 'WinAudioClean.ps1'
         Copy-Item -LiteralPath $scriptPath -Destination $app
+        Copy-Item -LiteralPath (Join-Path $repositoryRoot 'WinAudioClean.IO.ps1') -Destination $scratch
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $inputFile = Join-Path $scratch $FileName
@@ -174,7 +243,7 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $probeArguments = Get-Content -Raw -LiteralPath $probeArgvPath -Encoding UTF8 | ConvertFrom-Json
         $probeArguments | Should -BeExactly @('-v', 'error', '-protocol_whitelist', 'file', '-format_whitelist',
             'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi', '-show_entries',
-            'stream=index,codec_type,codec_name,channels,channel_layout,sample_rate:stream_tags=language,title',
+            'stream=index,codec_type,codec_name,channels,channel_layout,sample_rate,duration,start_time:stream_tags=language,title,DURATION',
             '-of', 'json', '-i', $inputFile)
         $inputIndex = [Array]::IndexOf($received, '-i')
         $inputIndex | Should -BeGreaterOrEqual 0
@@ -183,7 +252,12 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         # The final file remains inside the literal destination, regardless of
         # trailing separators; its actual native argv is what is checked here.
         [IO.Path]::GetFullPath([IO.Path]::GetDirectoryName($outputFile)).TrimEnd('\') | Should -BeExactly $outputDirectory
-        [IO.File]::ReadAllBytes($outputFile).Count | Should -Be 8
+        [IO.Path]::GetFileName($outputFile) | Should -Match '^\.wac-[a-f0-9]{32}\.partial$'
+        Test-Path -LiteralPath $outputFile | Should -BeFalse
+        $published = @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav')
+        $published.Count | Should -Be 1
+        $published[0].Name | Should -Match ('^' + [regex]::Escape([IO.Path]::GetFileNameWithoutExtension($FileName)) + '_Cleaned_[0-9]{8}-[0-9]{9}_[a-f0-9]{32}\.wav$')
+        $published[0].Length | Should -Be 288044
         [IO.File]::ReadAllBytes($inputFile).Count | Should -Be 3
         $result.StandardOutput | Should -Match 'DONE: SUCCESS'
     }
@@ -197,6 +271,7 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $null = [IO.Directory]::CreateDirectory($scratch)
         $app = Join-Path $scratch 'WinAudioClean.ps1'
         Copy-Item -LiteralPath $scriptPath -Destination $app
+        Copy-Item -LiteralPath (Join-Path $repositoryRoot 'WinAudioClean.IO.ps1') -Destination $scratch
         $inputFile = Join-Path $scratch 'input.wav'
         [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
         $outputDirectory = Join-Path $scratch 'output'
@@ -225,6 +300,7 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $null = New-Item -ItemType Directory -Path $scratch
         $app = Join-Path $scratch 'WinAudioClean.ps1'
         Copy-Item -LiteralPath $scriptPath -Destination $app
+        Copy-Item -LiteralPath (Join-Path $repositoryRoot 'WinAudioClean.IO.ps1') -Destination $scratch
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $inputFile = Join-Path $scratch 'meeting [draft].wav'
@@ -252,13 +328,14 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $filters = 'adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,' + $filters
             $modeName = 'RAW (Clean+Level)'
         }
-        $argv.Count | Should -Be 18
+        $argv.Count | Should -Be 20
         $argv[0] | Should -BeExactly '-nostdin'
         $argv[[Array]::IndexOf($argv, '-protocol_whitelist') + 1] | Should -BeExactly 'file'
         $argv[[Array]::IndexOf($argv, '-format_whitelist') + 1] | Should -BeExactly 'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi'
         $argv[[Array]::IndexOf($argv, '-i') + 1] | Should -BeExactly $inputFile
         $argv[[Array]::IndexOf($argv, '-map') + 1] | Should -BeExactly '0:0'
         $argv[[Array]::IndexOf($argv, '-af') + 1] | Should -BeExactly $filters
+        $argv[[Array]::IndexOf($argv, '-f') + 1] | Should -BeExactly 'wav'
         $outputFile = $argv[[Array]::IndexOf($argv, '-y') - 1]
         [IO.Path]::GetDirectoryName($outputFile) | Should -BeExactly $outputDirectory
         $status = if ($expectedExit -eq 0) { 'SUCCESS' } elseif ($expectedExit -eq 7) { 'WARNING' } else { 'FAILED' }
@@ -278,7 +355,13 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $log | Should -Match 'FFPROBE VERSION\s*: ffprobe version 9\.0\.2-wac-fixture'
             $log | Should -Match 'AUDIO STREAM\s+: 0 \(absolute index; map 0:0\)'
         }
-        if ($ProcessExitCode -eq 0) { [IO.File]::ReadAllBytes($outputFile).Count | Should -Be 8 }
+        Test-Path -LiteralPath $outputFile | Should -BeFalse
+        $published = @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav')
+        if ($ProcessExitCode -eq 0) {
+            $published.Count | Should -Be 1
+            $published[0].Length | Should -Be 288044
+            $published[0].Name | Should -Match '_Cleaned_[0-9]{8}-[0-9]{9}_[a-f0-9]{32}\.wav$'
+        } else { $published.Count | Should -Be 0 }
         [IO.File]::ReadAllBytes($inputFile).Count | Should -Be 3
     }
 }

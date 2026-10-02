@@ -306,8 +306,17 @@
       "title": "Collision and concurrency",
       "procedure": "Run same input twice rapidly and two inputs with the same stem; run concurrent jobs targeting one destination.",
       "expected": "Every completed output is unique and prior results/source hashes remain unchanged.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ]
     },
     {
       "id": "AC-023",
@@ -315,8 +324,17 @@
       "title": "Failure before publication",
       "procedure": "Inject encoder failure, disk-full simulation, invalid output, and a crash before rename.",
       "expected": "No normal-looking final export is published; originals/prior exports remain untouched; partial files are identifiable.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ]
     },
     {
       "id": "AC-024",
@@ -324,8 +342,17 @@
       "title": "Rename race / validation",
       "procedure": "Create the intended final filename after name selection; simulate exit 0 with an empty or truncated output.",
       "expected": "No existing file is replaced; validation blocks invalid output and reports the true failure.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ]
     },
     {
       "id": "AC-025",

@@ -40,6 +40,7 @@ def main() -> int:
     args = parser.parse_args()
     repo = Path(__file__).resolve().parent.parent
     source = repo / "WinAudioClean.ps1"
+    runtime = [source, repo / "WinAudioClean.IO.ps1"]
     ffmpeg, ffprobe = args.ffmpeg.resolve(strict=True), args.ffprobe.resolve(strict=True)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     output = (args.output or repo / ".wac-local" / "WAC-M1-03" / stamp).resolve()
@@ -97,12 +98,15 @@ def main() -> int:
             raise RuntimeError(f"{record['id']} failed: {record['stderr']}")
         return record
 
+    runtime_sha256_before = {path.name: sha256(path) for path in runtime}
     summary = {
         "task": "WAC-M1-03", "created_utc": stamp,
         "notice": "Synthetic Windows mechanics checks; no speech listening, channel-isolation, encoding promotion or decoder sandbox claim.",
         "environment": {"platform": platform.platform(), "python": platform.python_version()},
         "source_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip(),
-        "source_sha256_before": sha256(source), "harness_sha256": sha256(Path(__file__)),
+        # Retain entry-script fields for readers of the historical evidence.
+        "source_sha256_before": runtime_sha256_before[source.name], "harness_sha256": sha256(Path(__file__)),
+        "runtime_sha256_before": runtime_sha256_before,
         "tool_paths": {"ffmpeg": str(ffmpeg), "ffprobe": str(ffprobe)},
         "tool_sha256": {"ffmpeg": sha256(ffmpeg), "ffprobe": sha256(ffprobe)},
         "fixtures": [], "cases": [], "commands": commands,
@@ -290,8 +294,8 @@ def main() -> int:
                 print(f"{label}: {'PASS' if case['passed'] else 'FAIL'}", flush=True)
 
         summary["loopback_media_requests"] = list(requests)
-        if sha256(source) != summary["source_sha256_before"]:
-            raise RuntimeError("Runtime changed during validation; rerun on stable source")
+        if {path.name: sha256(path) for path in runtime} != summary["runtime_sha256_before"]:
+            raise RuntimeError("Runtime files changed during validation; rerun on stable runtime files")
         summary["status"] = "pass" if all(case["passed"] for case in summary["cases"]) and not requests else "fail"
         return 0 if summary["status"] == "pass" else 1
     except Exception as error:
@@ -303,10 +307,12 @@ def main() -> int:
         if server is not None:
             server.shutdown()
             server.server_close()
-        summary["source_sha256_after"] = sha256(source)
+        summary["runtime_sha256_after"] = {path.name: sha256(path) for path in runtime}
+        summary["source_sha256_after"] = summary["runtime_sha256_after"][source.name]
         summary["source_unchanged_during_run"] = summary["source_sha256_before"] == summary["source_sha256_after"]
-        if not summary["source_unchanged_during_run"] and not args.prepare_only:
-            summary["status"] = "invalid: runtime changed during validation"
+        summary["runtime_unchanged_during_run"] = summary["runtime_sha256_before"] == summary["runtime_sha256_after"]
+        if not summary["runtime_unchanged_during_run"] and not args.prepare_only:
+            summary["status"] = "invalid: runtime files changed during validation"
         evidence = output / "summary.json"
         evidence.write_text(json.dumps(sanitize(summary), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"Evidence: {sanitize(str(evidence))}", flush=True)

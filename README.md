@@ -35,6 +35,9 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 - WinAudioClean.ps1
   - Main script: handles the TUI, calculates linear gate values, runs FFmpeg, and logs the report.
 
+- WinAudioClean.IO.ps1
+  - Required sibling helper for Windows file ownership, validation locks and safe publication.
+
 - WinAudioClean.bat
   - Simple launcher: enables drag-and-drop functionality for audio files.
 
@@ -141,7 +144,29 @@ playlist is renamed to an audio extension. This prevents supported FFmpeg
 protocols from fetching remote media references; filesystem redirection or
 mapped drives can still use network storage. Malformed metadata, failed probes,
 and inputs without a usable audio codec, channel count and sample rate fail
-before rendering.
+before rendering. The selected audio track must also expose a usable duration;
+files with unknown track timing fail safely before rendering.
+
+**Safe exports**
+
+Each run reserves `.wac-<job-id>.partial` in the destination folder and renders
+WAV into that owned file. A successful process must then pass audio, PCM size,
+sample-count, channel and duration checks. Only then is it renamed to
+`<name>_Cleaned_<timestamp>_<job-id>.wav`. The rename refuses an existing file,
+including one created while processing. Repeated and concurrent runs get unique
+job IDs. The source is held against writing through processing and reporting.
+The report writer rejects linked log files that could redirect an append into
+existing audio; a report failure retains the completed export and returns `7`.
+
+Timing is checked against the selected audio track, never a longer video or
+container duration: at most 10 ms difference for PCM, or 100 ms for compressed
+audio to allow codec padding. This verifies file completeness and plausible
+timing; it does not certify perceived quality or achieved loudness.
+
+Failures remove only the current run's owned partial. An abrupt crash may leave
+a `.wac-<job-id>.partial` file. It is not a completed export; inspect it and remove
+it manually once that job has stopped. Later runs preserve these leftovers.
+RF64 and files beyond RIFF's size limit are rejected pending large-file support.
 
 **Native results and launcher automation**
 
@@ -151,16 +176,17 @@ console and local report. Processing and reporting results use these exit codes:
 
 | Code | Meaning |
 | --- | --- |
-| 0 | FFmpeg returned success and reporting completed. |
+| 0 | Audio was validated and published; reporting completed. |
 | 2 | Invalid input, destination, mode, audio selection or launcher usage; ambiguous unattended tracks. |
 | 3 | Missing, incompatible or filter-deficient dependency, or render process start failure. |
 | 4 | Probe/metadata failure, no audio, or processing/capture/cleanup failure. Native failures retain diagnostics. |
-| 7 | FFmpeg returned success, but reporting was incomplete. Audio is retained. |
+| 5 | Output allocation, validation, publication or owned-file cleanup failed. |
+| 7 | Audio was published, but reporting was incomplete. Audio is retained. |
 | 130 | Cancelled at the mode or audio-track menu. |
 
 A reporting failure never changes an existing processing failure to success.
-Exit `0` does not independently verify the rendered media. Output collisions and
-complete media validation remain limitations of this development version.
+An invalid output is never presented as a completed export. Native diagnostics
+remain available when publication fails after FFmpeg returns zero.
 
 The batch launcher preserves the script's exit code across its interactive
 pause. Its default route still accepts one dropped file. CMD can expand `%NAME%`

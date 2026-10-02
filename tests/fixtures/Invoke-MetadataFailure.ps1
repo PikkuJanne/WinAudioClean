@@ -18,16 +18,6 @@ function Get-Item {
     Microsoft.PowerShell.Management\Get-Item @PSBoundParameters
 }
 
-function Get-Date {
-    [CmdletBinding()]
-    param([string]$Format)
-
-    # A fixed filename lets the failure case inspect a test-owned existing
-    # output, because the native fixture creates output only on exit zero.
-    if ($Format -eq 'yyyyMMdd-HHmm') { return '20261002-1200' }
-    Microsoft.PowerShell.Utility\Get-Date @PSBoundParameters
-}
-
 $ErrorActionPreference = $CallerErrorPreference
 & $ScriptPath -inputPath $InputPath -OutputDirectory $OutputDirectory -Mode Zoom -NonInteractive
 exit $LASTEXITCODE

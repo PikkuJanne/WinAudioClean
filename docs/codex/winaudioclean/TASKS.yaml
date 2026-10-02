@@ -290,7 +290,7 @@
       "depends_on": [
         "WAC-M1-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Output naming, run-owned temporary files, validation and final rename.",
       "implementation": [
@@ -304,7 +304,16 @@
         "AC-023",
         "AC-024"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-04.md",
+        "evidence/WAC-M1-04-source.json",
+        "evidence/WAC-M1-04-full-ps51.txt",
+        "evidence/WAC-M1-04-full-ps7.txt",
+        "evidence/WAC-M1-04-real-output.json",
+        "evidence/WAC-M1-04-media-regression.json",
+        "evidence/WAC-M1-04-development.txt",
+        "evidence/WAC-M1-04-plan.txt"
+      ],
       "blocked_reason": null
     },
     {

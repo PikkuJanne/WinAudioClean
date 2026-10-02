@@ -1,5 +1,5 @@
 // Benign Windows process fixture. It records actual argv and can emulate only
-// the process/file effects needed by tests; its output is not valid audio.
+// the process/file effects needed by tests, including synthetic PCM silence.
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -68,13 +68,65 @@ internal static class NativeProcessFixture
                 input = args[++index];
                 continue;
             }
-            if (args[index].EndsWith(".wav", StringComparison.OrdinalIgnoreCase))
+            if (args[index].EndsWith(".wav", StringComparison.OrdinalIgnoreCase) ||
+                args[index].EndsWith(".partial", StringComparison.OrdinalIgnoreCase))
                 output = args[index];
         }
         if (String.IsNullOrEmpty(output)) throw new InvalidOperationException("Fixture could not find a WAV output argument.");
         if (String.Equals(output, input, StringComparison.OrdinalIgnoreCase))
             throw new InvalidOperationException("Fixture refuses to replace its input.");
         return output;
+    }
+
+    private static void WriteWave(string path)
+    {
+        string mode = Setting("OUTPUT_MODE") ?? "valid";
+        if (mode == "empty")
+        {
+            using (FileStream empty = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete)) { }
+            return;
+        }
+        int frames = mode == "short" ? 12000 : 144000;
+        int declaredBytes = frames * 2;
+        if (mode == "header") declaredBytes = 0;
+        using (BinaryWriter writer = new BinaryWriter(new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.ReadWrite | FileShare.Delete)))
+        {
+            writer.Write(Encoding.ASCII.GetBytes("RIFF"));
+            writer.Write(36 + declaredBytes);
+            writer.Write(Encoding.ASCII.GetBytes("WAVEfmt "));
+            writer.Write(16);
+            writer.Write((short)1);
+            writer.Write((short)1);
+            writer.Write(48000);
+            writer.Write(96000);
+            writer.Write((short)2);
+            writer.Write((short)16);
+            writer.Write(Encoding.ASCII.GetBytes("data"));
+            writer.Write(declaredBytes);
+            int actualBytes = mode == "truncated" ? declaredBytes / 2 : declaredBytes;
+            writer.Write(new byte[actualBytes]);
+        }
+    }
+
+    private static string OutputWaveMetadata(string path)
+    {
+        byte[] header = new byte[44];
+        long length;
+        using (FileStream stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete))
+        {
+            length = stream.Length;
+            if (stream.Read(header, 0, header.Length) != header.Length ||
+                Encoding.ASCII.GetString(header, 0, 4) != "RIFF" ||
+                Encoding.ASCII.GetString(header, 8, 4) != "WAVE")
+                throw new InvalidDataException("Fixture output is not a readable WAV.");
+        }
+        int channels = BitConverter.ToInt16(header, 22);
+        int sampleRate = BitConverter.ToInt32(header, 24);
+        int blockAlign = BitConverter.ToInt16(header, 32);
+        double duration = (double)(length - 44) / blockAlign / sampleRate;
+        return "{\"streams\":[{\"index\":0,\"codec_type\":\"audio\",\"codec_name\":\"pcm_s16le\",\"channels\":" +
+            channels.ToString(CultureInfo.InvariantCulture) + ",\"sample_rate\":\"" + sampleRate.ToString(CultureInfo.InvariantCulture) +
+            "\",\"duration\":\"" + duration.ToString("0.000000", CultureInfo.InvariantCulture) + "\"}]}";
     }
 
     private static bool TryInspectDependency(string[] args, out int exitCode)
@@ -100,7 +152,13 @@ internal static class NativeProcessFixture
         else if (ffprobe && Array.IndexOf(args, "-show_entries") >= 0)
         {
             phase = "PROBE";
-            defaultOutput = "{\"streams\":[{\"index\":0,\"codec_type\":\"audio\",\"codec_name\":\"pcm_s16le\",\"channels\":1,\"channel_layout\":\"mono\",\"sample_rate\":\"48000\"}]}";
+            defaultOutput = "{\"streams\":[{\"index\":0,\"codec_type\":\"audio\",\"codec_name\":\"pcm_s16le\",\"channels\":1,\"channel_layout\":\"mono\",\"sample_rate\":\"48000\",\"duration\":\"3.000000\"}]}";
+            int inputIndex = Array.IndexOf(args, "-i");
+            if (inputIndex >= 0 && inputIndex + 1 < args.Length && args[inputIndex + 1].EndsWith(".partial", StringComparison.OrdinalIgnoreCase))
+            {
+                phase = "OUTPUT_PROBE";
+                defaultOutput = Setting(phase + "_STDOUT") ?? OutputWaveMetadata(args[inputIndex + 1]);
+            }
         }
         if (phase == null) return false;
 
@@ -165,7 +223,7 @@ internal static class NativeProcessFixture
             int exitCode = Number("EXIT_CODE");
             string outputPath = FindOutput(args);
             if (exitCode == 0 && !String.IsNullOrEmpty(outputPath))
-                File.WriteAllBytes(outputPath, new byte[] { 82, 73, 70, 70, 1, 2, 3, 4 });
+                WriteWave(outputPath);
             if (Setting("BLOCK_LOG") == "1")
             {
                 if (String.IsNullOrEmpty(outputPath)) throw new InvalidOperationException("A fixture output path is required to block logging.");

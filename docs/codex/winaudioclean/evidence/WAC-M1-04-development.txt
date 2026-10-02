@@ -1,0 +1,127 @@
+WAC-M1-04 development and targeted checks
+
+These intermediate results do not replace the final unchanged-source Full and real-media gates.
+Both shells: Helpers/Native36 pass; Validation final29 pass; Transaction final27 pass.
+Initial application migration: 201 pass /44 fail in each shell; failures expected a shorter timestamp.
+Corrected publication-name subset: 52 pass /0 fail /0 skip in each shell (86 tests outside this subset).
+All16 added application fault cases passed in the migration runs and are covered again by Full.
+
+regression-unit-ps51.log
+Raw retained local SHA256: 2aafb70fbdbc44059cc4ed3b59ad8cfb1386e88b5ea4d4f1018dca6436ab929b
+Tests Passed: 36, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 36 Pester passed, 0 skipped, 0 outside scope.
+
+regression-unit-ps7.log
+Raw retained local SHA256: c967b95fcf99ed98075c938c3868189a706554b93f46ebdac8ee26b536e9490e
+Tests Passed: 36, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 36 Pester passed, 0 skipped, 0 outside scope.
+
+regression-app-ps51.log
+Raw retained local SHA256: 5ec5de9c8537888e5b57fbf90c315fdd1bb1e12a9e162e60f982ca83b9919537
+Tests Passed: 201, Failed: 44, Skipped: 0, Inconclusive: 0, NotRun: 0
+Pester failed: 44 test(s), 0 container(s), 0 block(s).
++     throw "Pester failed: $($result.FailedCount) test(s), $($result.F ...
+    + CategoryInfo          : OperationStopped: (Pester failed: ...s), 0 block(s).:String) [], RuntimeException
+    + FullyQualifiedErrorId : Pester failed: 44 test(s), 0 container(s), 0 block(s).
+   Expected regular expression '^spaces\ here_Cleaned_[0-9]{8}-[0-9]{4,6}_[a-f0-9]{32}\.wav$' to match 'spaces here_Cleaned_20261002-144140579_48d70ce087aa4cfa9791fda16c839687.wav', but it did not match.
+
+regression-app-ps7.log
+Raw retained local SHA256: 5be01f72dca7af14fb04bf2119c6405a91b4acd4402f0524c5c0a93bc47a3274
+Tests Passed: 201, Failed: 44, Skipped: 0, Inconclusive: 0, NotRun: 0
+ 128 |      throw "Pester failed: $($result.FailedCount) test(s), $($result.F …
+     | Pester failed: 44 test(s), 0 container(s), 0 block(s).
+   Expected regular expression '^spaces\ here_Cleaned_[0-9]{8}-[0-9]{4,6}_[a-f0-9]{32}\.wav$' to match 'spaces here_Cleaned_20261002-144129094_9bc48d8d6d1d4b1bbdf4da876a65ac03.wav', but it did not match.
+
+regression-names-ps51.log
+Raw retained local SHA256: ee88365afe3144e5baf225a590af12263eb0bfcc21a6ba46db65e747042392ca
+Tests Passed: 52, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 86
+Publication naming rerun passed: 52 cases.
+
+regression-names-ps7.log
+Raw retained local SHA256: 54aa1a5e51c60ecb7c2418fa1b3c4a496a29f8df6e773e30a89107c5f075b3fb
+Tests Passed: 52, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 86
+Publication naming rerun passed: 52 cases.
+
+Intermediate real harness runs each passed30 cases but exited1 because runtime hashes changed during ongoing edits; neither is used as final acceptance evidence.
+20261002T123932249061Z: status=error; unchanged=False; cases=30; SHA256=b82af8dbb1bde9d7d9ffc8bec9bdfde8371e97dc6505cf32dfaac6e73ae24d5d
+20261002T124607377099Z: status=error; unchanged=False; cases=30; SHA256=7961de05f15986e0149ca2e9d1bc62ecff3d5295c0bf80589b5c9143fc73dc78
+
+WAC-M1-04 IO implementation and independent review evidence
+Date: 2026-10-02
+Scope: WinAudioClean.IO.ps1 and tests/WinAudioClean.Transaction.Tests.ps1.
+Paths below are repository-relative. This record contains no private media.
+
+Final IO SHA256:
+1634F984EC713D8A5514E00965B9AC57FEF0CEF0E3BC02F06D5D0D7A5C90BB7E
+Hash command actually run:
+Get-FileHash -Algorithm SHA256 -LiteralPath WinAudioClean.IO.ps1
+
+Implementation and corrections
+- Lazy native declarations preserve import safety in Windows PowerShell 5.1
+  and PowerShell 7. No compilation, native process or filesystem work occurs
+  merely from importing the helper.
+- CreateNew reserves a unique partial in the destination. A source read lock
+  remains held through reporting. Canonical paths resolve junction aliases;
+  volume plus 128-bit file identity detects a replaced partial.
+- Validation holds the exact output with read/delete access and read sharing.
+  Publication renames that held file without replacing an existing final.
+  Cleanup deletes only a matching owned partial by handle; foreign replacements
+  and unowned crash leftovers are retained.
+- Initial native rename using RootDirectory plus a relative leaf failed with
+  Win32 87 in unit and real integration checks. The final implementation uses
+  an absolute path obtained from the held destination directory and a null
+  RootDirectory. Rename remains by the held validated file handle, with
+  ReplaceIfExists false.
+- A read/write report guard was incompatible with PS5.1 Add-Content. A later
+  metadata-only guard allowed Add-Content but failed the deletion protection
+  assertion in both shells: 24 passed / 2 failed in each run. Final write-only
+  access is compatible with Add-Content and makes denied delete sharing
+  effective. The guard opens the leaf itself, rejects reparse points and
+  multiple hardlinks, and retains the checked leaf through the report write.
+- A focused direct check proved metadata-only destination directory access
+  permitted a physical rename. Final GENERIC_READ access with no delete
+  sharing blocks that rename. A regression test also verifies rename works
+  after the transaction closes.
+- Separate direct checks after that correction attempted Directory.Move on
+  the destination's parent and on an input file's parent while their relevant
+  handles were held. Both failed with access denied. Scratch artifacts were
+  explicitly removed after disposing the handles. These were local Windows
+  checks, not assertions about every filesystem or remote share.
+
+Final targeted verification
+Exact commands actually run from the repository root:
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Transaction.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Transaction.Tests.ps1
+
+Results in fresh processes after the final IO correction:
+- PowerShell 7.6.5: 27 passed, 0 failed, 0 skipped.
+- Windows PowerShell 5.1.26100.9444: 27 passed, 0 failed, 0 skipped.
+- Each invocation passed its parser, static and governance gates. At these
+  runs the parser covered 22 files and static analysis reported 77 non-gating
+  advisories. These counts describe those invocations, not subsequent full runs.
+
+Coverage includes unique overlapping allocations, preexisting partials,
+input/partial equality, exact-handle freeze, blocked writes and renames,
+publication without validation, repeat publication, final-name races, input
+and prior-export hardlinks, source/log aliases, owned cleanup, foreign partial
+replacement, cleanup sharing failure, tampered destination paths, canonical
+input/output junction behavior, physical destination pinning, identifier
+validation, import safety, Add-Content compatibility, and report hardlink and
+junction protection. Native declarations were retested in fresh processes
+because Add-Type caches a compiled type within a process.
+
+Independent root-runtime review
+- Reviewed selected-stream duration parsing, RIFF/PCM validation, publication
+  ordering, report ordering and exit handling without editing WinAudioClean.ps1.
+- Found one malformed-header gap: fmt length 40 with extensible cbSize 200 was
+  accepted by Assert-WacWaveOutput. A 3-second mono PCM16 MemoryStream
+  reproduced success despite the contradictory extension size. Reported the
+  required cbSize <= fmt length - 18 bound and a valid extensible test to root.
+- Root subsequently reported the bound fixed and 29/29 validation tests passing
+  in both shells. Those validation reruns were performed by root, not this agent.
+- No additional actionable integration defect was found in this review. This
+  is mechanical file/process validation; no listening or sound-quality result
+  is claimed. Full-suite and real-media results are maintained separately.
+
+Primary reference for cbSize interpretation:
+https://learn.microsoft.com/en-us/previous-versions/dd757713(v=vs.85)

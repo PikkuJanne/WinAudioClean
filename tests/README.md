@@ -90,9 +90,9 @@ as resolved. New warnings should be inspected rather than hidden in a baseline.
 ## What the tests establish
 
 The small helpers lock the original Raw/Zoom filter text and command construction.
-Characterization cases label known defects, such as timestamp collisions and
-overwrite arguments, with the future task that
-will change the expectation. They do not endorse those behaviors as requirements.
+Output regressions now require unique job IDs, owned partials, independent WAV
+validation and no-replacement publication. The exact Raw/Zoom filter strings
+remain baseline assertions.
 
 Import checks run in fresh shell processes. Entry point checks run the actual
 `.ps1 -inputPath` with disposable filesystem inputs and a compiled native argument
@@ -223,6 +223,35 @@ under `.wac-local`; only sanitized evidence is committed. This is no speech
 listening, channel-isolation or decoder-sandbox certification. Output encoding
 and legacy collision behavior remain unchanged in this task. See the
 [M1-03 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-03.md).
+
+## Owned output, validation and publication (WAC-M1-04)
+
+`WinAudioClean.Transaction.Tests.ps1` exercises Windows handles, unique jobs,
+exclusive reservations, hardlink aliases, a retargeted directory junction,
+replacement races, held-object publication, cleanup and guarded reporting.
+`WinAudioClean.Validation.Tests.ps1` checks actual RIFF/sample bytes and selected
+track timing, including repaired headers hiding a shortened render. Entry tests
+inject zero-exit empty/header/truncated/short outputs and probe failures; reporting
+tests retain native failures and published audio.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Transaction.Tests.ps1
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OutputTransactions.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+The development harness runs both shells against existing real FFmpeg. It tests
+rapid repeats, same-stem inputs, concurrent jobs, MP3/AAC inputs, empty/invalid/
+truncated output, encoder/disk-full simulations, a final-name race, an abrupt
+pre-rename exit and the next run's preservation of that leftover. Faults use
+explicitly recorded overrides only in disposable app copies; production has no
+fault environment controls. The disk-full case is simulated, not a filled disk.
+Source, prior-export and runtime hashes are checked; independent PCM duration,
+frequency and channels are recorded. A changed runtime makes the harness fail.
+
+Both runtime files must be copied together when testing or installing the app.
+Keep generated audio and raw logs ignored. Evidence and remaining limits are in
+[M1-04 evidence](../docs/codex/winaudioclean/evidence/WAC-M1-04.md).
 
 ## Synthetic audio characterization (WAC-M0-03)
 

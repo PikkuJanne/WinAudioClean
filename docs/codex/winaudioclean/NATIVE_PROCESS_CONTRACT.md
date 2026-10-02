@@ -24,17 +24,17 @@ Current application codes:
 
 | Code | Meaning |
 | --- | --- |
-| 0 | Native exit 0 and report complete; final media validation is not yet implemented. |
+| 0 | Native exit 0, validated audio published, and report complete. |
 | 2 | Input/configuration/destination or launcher usage error. |
 | 3 | Missing dependency or process start failure. |
 | 4 | Native nonzero exit or process/capture/cleanup failure. |
-| 7 | Native success with report-write or report-metadata failure; audio is retained. |
+| 5 | Output allocation, validation, publication or owned-partial cleanup failure. |
+| 7 | Published audio with report-write or report-metadata failure; audio is retained. |
 | 130 | Mode-menu cancellation; running-render Ctrl+C exit semantics are not certified. |
 
 Native status and diagnostics remain distinct from report errors. A report failure
-preserves an earlier code 3/4. Codes 5 (output validation/publication) and 6 (batch
-partial failure) remain reserved proposals for their owning tasks, not current
-behavior. This entry finalizes the earlier proposed map only for implemented work.
+preserves an earlier code 3/4/5. Code 6 (batch partial failure) remains a proposal
+for its owning task. Code 5 is implemented by M1-04 below.
 
 The `.bat` uses fixed PowerShell code with paths passed through environment
 values and saves the result before pausing. Its default single-drop route uses
@@ -72,6 +72,39 @@ including renamed files. Rendering uses `-map 0:N`, where N is
 the selected absolute index, and preserves the selected channels. No automatic
 downloads or runtime Python dependency are introduced. Render encoding,
 collision/overwrite behavior and cancellation limits still belong to later work.
+
+## Implemented in WAC-M1-04 (2026-10-02)
+
+`WinAudioClean.IO.ps1` is a required sibling helper. Its lazy Windows declarations
+use stable file identities and handles for owned partials and publication; both
+scripts can be imported without running native compilation or filesystem work.
+The source is opened read-only with read sharing before inspection and held
+through reporting. Canonical handle paths account for supported junction aliases.
+Filesystems that cannot establish the required identities fail closed.
+
+A random 128-bit job ID appears in the partial and final names. CreateNew
+exclusively reserves `.wac-<id>.partial` in the pinned destination directory.
+FFmpeg receives that owned partial with explicit `-f wav`; its `-y` cannot address
+the final name. After exit 0, bounded ffprobe inspection precedes a read/delete
+handle that prevents further writing. Identity is checked again, and the exact
+held PCM file is structurally validated and renamed by handle without replacement.
+The final name is `<stem>_Cleaned_yyyyMMdd-HHmmssfff_<id>.wav`.
+
+Require one readable PCM audio stream, nonempty aligned sample data, consistent
+RIFF/chunk/format sizes and agreement between the probe and the PCM parameters.
+Compare sample-count duration with the selected input track: 10 ms tolerance for
+PCM, 100 ms for compressed padding. Prefer stream duration; Matroska's per-stream
+DURATION tag minus start time is a fallback. Never substitute container duration.
+Unknown selected timing fails before rendering. RF64 is explicitly rejected here;
+output rate/encoding and early size/space policy remain M1-05.
+
+Failure cleanup marks only a matching owned file for deletion by handle. A
+foreign replacement is retained with a diagnostic. A crash can leave an
+identifiable partial; later runs never sweep it. Report paths are held against
+replacement and reject reparse files or multiple hardlinks before Add-Content,
+protecting prior audio from report aliases. Reporting follows publication and
+retains audio if it fails. Output errors use code 5; native failures retain their
+own codes and diagnostics. Evidence: `evidence/WAC-M1-04.md`.
 
 ## Arguments and execution [S02]
 

@@ -194,3 +194,40 @@ The `.bat` is unchanged; advanced dependency/stream parameters use `.ps1`.
 Filters and encoding are unchanged. Transactional publication remains M1-04;
 explicit encoding remains M1-05. No sound promotion or publication approval is
 added. Validation and its limits are in `evidence/WAC-M1-03.md`.
+
+### 2026-10-02 — WAC-M1-04 owned output and publication
+
+D23. Add a required sibling `WinAudioClean.IO.ps1` with lazy Windows handle
+helpers. Pin input and destination identities; keep the source read-only through
+reporting. Reserve `.wac-<128-bit-job-id>.partial` with CreateNew on the destination
+volume. Hold it without delete sharing during FFmpeg, using `-f wav` and `-y`
+only for this owned partial. Final names include millisecond timestamps and the
+job ID; uniqueness does not depend on clock resolution.
+
+Native exit 0 is necessary but insufficient. Bounded ffprobe inspection must
+find one usable audio stream. Reopen the same identity for read/delete access
+without write/delete sharing, validate RIFF lengths, PCM format, complete aligned
+samples, channels and duration, then rename that held object with
+ReplaceIfExists=false. A final filename created during the run must survive.
+See Microsoft's [rename structure](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_rename_info)
+and [file identity](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_id_info)
+contracts. Do not replace the held-object rename with a Test-Path check followed
+by an overwrite operation or a release-and-reopen publication sequence.
+
+Timing uses only the selected stream: positive finite duration, or Matroska's
+DURATION end timestamp minus start time. Unknown timing fails before rendering.
+The output sample count must agree within 10 ms for PCM and 100 ms for compressed
+audio padding. These are completeness checks, not sound/loudness certification.
+RIFF PCM8/16/24/32 and PCM extensible headers are structurally supported; the
+actual default encoder remains unchanged. RF64 and early disk/size estimates
+belong to M1-05 and are not claimed here.
+
+Cleanup deletes only the owned identity by handle. Foreign replacements survive
+with a warning. Crashes may leave `.wac-<id>.partial`; document manual inspection
+after the job has stopped and never sweep old partials. Hold report filenames
+against replacement and reject reparse files/multiple hardlinks before appending,
+so the log cannot alias a prior export. A failed report retains published audio.
+Use code 5 for allocation/validation/publication failures; preserve earlier native
+codes 3/4 and separate diagnostics. No filters, launcher/CLI parameters, sound presets,
+security settings or publication permissions change. Evidence is in
+`evidence/WAC-M1-04.md`.

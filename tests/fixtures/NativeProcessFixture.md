@@ -1,7 +1,8 @@
 # Native process fixture
 
 `NativeProcessFixture.cs` is a benign argv recorder and fault fixture. Its
-synthetic output bytes are not audio. `New-NativeProcessFixture.ps1` exposes
+default output is three seconds of synthetic mono PCM16 silence at 48 kHz.
+`New-NativeProcessFixture.ps1` exposes
 `New-WacTestNativeExecutable -OutputPath <fresh absolute .exe>` and uses the
 Windows-installed .NET Framework compiler. It does not install tools or replace
 an existing output executable. Generated executables stay in test-owned folders.
@@ -33,7 +34,7 @@ Configure it with inherited environment variables; callers must restore them.
 When the executable is named `ffmpeg.exe` or `ffprobe.exe`, dependency inspection
 commands have separate behavior. `-version` emits a fixture version; FFmpeg
 `-filters` lists all original Raw/Zoom filters; ffprobe `-show_entries` emits one
-valid mono PCM audio stream with absolute index 0 at 48 kHz. These calls do not
+valid mono PCM audio stream with absolute index 0 at 48 kHz and duration 3 seconds. These calls do not
 write a render argv record, output bytes or blocked-log directory, and do not
 consume generic render faults. Other executable names keep generic behavior.
 
@@ -41,6 +42,12 @@ Inspection can be configured using the `WAC_TEST_VERSION_`, `WAC_TEST_FILTERS_`
 or `WAC_TEST_PROBE_` prefix followed by `STDOUT`, `STDERR`, `EXIT_CODE`, `SLEEP_MS`,
 `ARGV_PATH` or `PID_PATH`. These controls use the same meanings as the generic
 variables below; an absent inspection stdout uses the corresponding default.
+
+Probing a `.partial` output instead uses `WAC_TEST_OUTPUT_PROBE_` with those same
+suffixes. Its default metadata comes from the generated WAV header and actual
+payload size, independently of input-probe overrides. Reads and writes allow the
+transaction's held file handles. Output fault modes test invalid exit-zero data;
+these fixtures are mechanics tests and provide no sound-quality evidence.
 
 | Variable | Behavior |
 | --- | --- |
@@ -51,8 +58,9 @@ variables below; an absent inspection stdout uses the corresponding default.
 | `WAC_TEST_STREAM_BYTES` | Concurrently emit this many `O` / `E` characters to the respective streams, followed by `STDOUT_END` / `STDERR_END`. |
 | `WAC_TEST_SLEEP_MS` | Sleep after emitting output, before returning. |
 | `WAC_TEST_READ_STDIN` | When `1`, read stdin to EOF and emit `STDIN_EOF:` followed by the received character count. |
-| `WAC_TEST_FFMPEG_OUTPUT` | When `1`, select the last `.wav` argument excluding the argument after `-i`; on exit 0 write synthetic bytes there. |
-| `WAC_TEST_OUTPUT_PATH` | Explicit output path, overriding argument selection; on exit 0 write synthetic bytes there. |
+| `WAC_TEST_FFMPEG_OUTPUT` | When `1`, select the last `.wav` or `.partial` argument excluding the argument after `-i`; on exit 0 write synthetic WAV data there. |
+| `WAC_TEST_OUTPUT_PATH` | Explicit output path, overriding argument selection; on exit 0 write synthetic WAV data there. |
+| `WAC_TEST_OUTPUT_MODE` | Default `valid`; `empty` writes zero bytes, `header` writes a WAV header with no samples, `truncated` declares three seconds but writes half, and `short` writes a valid quarter-second WAV. |
 | `WAC_TEST_BLOCK_LOG` | When `1`, create a directory named `WinAudioClean_Log.txt` beside the selected output, so application reporting fails. This also applies to configured nonzero native exits. |
 
 Unexpected fixture errors return 97 and include `NATIVE_FIXTURE_ERROR` on stderr.

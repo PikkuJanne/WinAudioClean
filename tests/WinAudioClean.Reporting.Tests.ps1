@@ -32,15 +32,14 @@ Describe 'AC-017: metadata reporting failures preserve native outcome' -Tag 'Rep
         $null = [IO.Directory]::CreateDirectory($outputDirectory)
         $app = Join-Path $scratch 'WinAudioClean.ps1'
         Copy-Item -LiteralPath $scriptPath -Destination $app
+        Copy-Item -LiteralPath (Join-Path $repositoryRoot 'WinAudioClean.IO.ps1') -Destination $scratch
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffmpeg.exe')
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $inputFile = Join-Path $scratch 'recording.wav'
         [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
-        $outputFile = Join-Path $outputDirectory 'recording_Cleaned_20261002-1200.wav'
-        if ($NativeExit -ne 0) {
-            # Existing output is test-owned; native failure must retain it.
-            [IO.File]::WriteAllBytes($outputFile, [byte[]]@(11, 12, 13, 14))
-        }
+        $priorOutput = Join-Path $outputDirectory 'recording_Cleaned_20261002-1200.wav'
+        # Every run must preserve prior exports, including one with a legacy name.
+        [IO.File]::WriteAllBytes($priorOutput, [byte[]]@(11, 12, 13, 14))
         $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -ScriptPath {1} -InputPath {2} -OutputDirectory {3} -CallerErrorPreference {4}' -f
             (ConvertTo-WacTestQuotedArgument $metadataFixture), (ConvertTo-WacTestQuotedArgument $app),
             (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument $outputDirectory), $CallerPreference
@@ -55,18 +54,27 @@ Describe 'AC-017: metadata reporting failures preserve native outcome' -Tag 'Rep
             "the child must preserve the native/reporting outcome. Captured stdout:`n{0}`nCaptured stderr:`n{1}" -f
             $result.StandardOutput, $result.StandardError)
         $result.StandardError | Should -BeNullOrEmpty
-        $result.StandardOutput | Should -Match 'Output size could not be read for the report'
-        $result.StandardOutput | Should -Match 'simulated metadata access failure'
+        if ($NativeExit -eq 0) {
+            $result.StandardOutput | Should -Match 'Output size could not be read for the report'
+            $result.StandardOutput | Should -Match 'simulated metadata access failure'
+        } else {
+            $result.StandardOutput | Should -Not -Match 'simulated metadata access failure'
+        }
         $result.StandardOutput | Should -Match "DONE: $expectedStatus"
         $result.StandardOutput | Should -Not -Match 'DONE: SUCCESS'
         $log = Get-Content -Raw -LiteralPath (Join-Path $outputDirectory 'WinAudioClean_Log.txt')
         $log | Should -Match "STATUS\s+: $expectedStatus \(Native Exit Code: $NativeExit; Application Exit Code: $expectedExit\)"
         $log | Should -Match 'OUTPUT SIZE\s+: N/A'
-        $log | Should -Match 'REPORT ERROR\s+: simulated metadata access failure'
+        if ($NativeExit -eq 0) { $log | Should -Match 'REPORT ERROR\s+: simulated metadata access failure' }
         $log | Should -Match 'Native stdout retained'
         $log | Should -Match 'Native stderr retained'
-        $expectedOutput = if ($NativeExit -eq 0) { 'UklGRgECAwQ=' } else { 'CwwNDg==' }
-        [Convert]::ToBase64String([IO.File]::ReadAllBytes($outputFile)) | Should -BeExactly $expectedOutput
+        $published = @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav' | Where-Object { $_.FullName -ne $priorOutput })
+        if ($NativeExit -eq 0) {
+            $published.Count | Should -Be 1
+            $published[0].Length | Should -Be 288044
+        } else { $published.Count | Should -Be 0 }
+        @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.partial' -Force).Count | Should -Be 0
+        [Convert]::ToBase64String([IO.File]::ReadAllBytes($priorOutput)) | Should -BeExactly 'CwwNDg=='
         [Convert]::ToBase64String([IO.File]::ReadAllBytes($inputFile)) | Should -BeExactly 'AQID'
     }
 }

@@ -50,7 +50,7 @@ BeforeAll {
     function New-WacLauncherTestFolder {
         $folder = Join-Path $TestDrive ([guid]::NewGuid().ToString('N').Substring(0, 8) + ' [app]')
         $null = [IO.Directory]::CreateDirectory($folder)
-        foreach ($fileName in @('WinAudioClean.ps1', 'WinAudioClean.bat')) {
+        foreach ($fileName in @('WinAudioClean.ps1', 'WinAudioClean.IO.ps1', 'WinAudioClean.bat')) {
             [IO.File]::Copy((Join-Path $launcherRepositoryRoot $fileName), (Join-Path $folder $fileName))
         }
         [IO.File]::Copy($launcherFixtureExecutable, (Join-Path $folder 'ffmpeg.exe'))
@@ -96,10 +96,13 @@ Describe 'AC-016: actual launcher keeps environment paths literal through both W
         $inputIndex | Should -BeGreaterOrEqual 0
         $nativeArguments[$inputIndex + 1] | Should -BeExactly $inputFile
         $nativeArguments | Should -Contain '-nostdin'
-        $outputArgument = @($nativeArguments | Where-Object { $_ -ne $inputFile -and $_ -like '*.wav' })
+        $outputArgument = @($nativeArguments | Where-Object { $_ -like '*.partial' })
         $outputArgument.Count | Should -Be 1
         [IO.Path]::GetDirectoryName($outputArgument[0]) | Should -BeExactly $outputFolder
-        Test-Path -LiteralPath $outputArgument[0] -PathType Leaf | Should -BeTrue
+        Test-Path -LiteralPath $outputArgument[0] | Should -BeFalse
+        $published = @(Get-ChildItem -LiteralPath $outputFolder -Filter '*.wav')
+        $published.Count | Should -Be 1
+        $published[0].Name | Should -Match '_Cleaned_[0-9]{8}-[0-9]{9}_[a-f0-9]{32}\.wav$'
         [IO.File]::ReadAllBytes($inputFile).Length | Should -Be 3
     }
 
@@ -127,10 +130,11 @@ Describe 'AC-016: actual launcher keeps environment paths literal through both W
         $result = Invoke-WacLauncherTestCase -ShellPath $ShellPath -Folder $folder -InputFile $inputFile -OutputFolder $outputFolder -TrailingOutputSeparator
         $result.ExitCode | Should -Be 0 -Because $result.Diagnostic
         $nativeArguments = Get-Content -LiteralPath (Join-Path $folder 'recorded-argv.json') -Raw -Encoding UTF8 | ConvertFrom-Json
-        $outputArgument = @($nativeArguments | Where-Object { $_ -ne $inputFile -and $_ -like '*.wav' })
+        $outputArgument = @($nativeArguments | Where-Object { $_ -like '*.partial' })
         $outputArgument.Count | Should -Be 1
         [IO.Path]::GetFullPath([IO.Path]::GetDirectoryName($outputArgument[0])).TrimEnd('\') | Should -BeExactly $outputFolder
-        Test-Path -LiteralPath $outputArgument[0] | Should -BeTrue
+        Test-Path -LiteralPath $outputArgument[0] | Should -BeFalse
+        @(Get-ChildItem -LiteralPath $outputFolder -Filter '*.wav').Count | Should -Be 1
     }
 
     It 'passes a 240-character input path exactly from <ShellName>' -ForEach $launcherShellCases {

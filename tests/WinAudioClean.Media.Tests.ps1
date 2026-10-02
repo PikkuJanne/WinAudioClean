@@ -412,7 +412,7 @@ Describe 'AC-021: real probe processes fail safely and terminate within their de
         $probeFixture = New-WacTestNativeExecutable -OutputPath (Join-Path $TestDrive 'media native\ffprobe.exe')
         $ffmpegFixture = Join-Path (Split-Path $probeFixture -Parent) 'ffmpeg.exe'
         Copy-Item -LiteralPath $probeFixture -Destination $ffmpegFixture
-        $inspectionVariables = @(foreach ($phase in @('PROBE', 'VERSION', 'FILTERS')) {
+        $inspectionVariables = @(foreach ($phase in @('PROBE', 'OUTPUT_PROBE', 'VERSION', 'FILTERS')) {
             foreach ($setting in @('STDOUT', 'STDERR', 'EXIT_CODE', 'SLEEP_MS', 'ARGV_PATH', 'PID_PATH')) {
                 'WAC_TEST_' + $phase + '_' + $setting
             }
@@ -456,6 +456,7 @@ Describe 'AC-021: real probe processes fail safely and terminate within their de
         $null = [IO.Directory]::CreateDirectory($appDirectory)
         $app = Join-Path $appDirectory 'WinAudioClean.ps1'
         Copy-Item -LiteralPath (Join-Path (Split-Path $PSScriptRoot -Parent) 'WinAudioClean.ps1') -Destination $app
+        Copy-Item -LiteralPath (Join-Path (Split-Path $PSScriptRoot -Parent) 'WinAudioClean.IO.ps1') -Destination $appDirectory
         # A broken script-sibling probe exposes a wiring error: selected FFmpeg's
         # companion must win without a second explicit tool path or PATH entry.
         [IO.File]::WriteAllText((Join-Path $appDirectory 'ffprobe.exe'), 'invalid sibling executable')
