@@ -265,3 +265,27 @@ M1-05 timing evidence also identifies the preserved Raw filter delay (about 25 m
 A legacy unspecified-encoding render confirms it predates explicit 48 kHz output;
 the marker difference is under 0.009 ms. AC-026 records unchanged channel/timing
 behavior and no added offset; it does not approve a filter-delay correction.
+
+### 2026-10-02 — WAC-M1-06 structured reports and local support export
+
+D25. Add version 1 per-run JSON and text with unique transaction IDs; retain
+the detailed human summary and exact filters/native diagnostics. Recording
+duration and rendering wall time are separate. Unknown versions/revision and
+unmeasured/nonfinite metrics have null values and explicit reasons. Valid PCM
+output does not certify loudness compliance.
+
+Create per-run files exclusively, serialize summary append/rollback under one
+writer, preserve existing encoding/bytes and reject reparse/multiple-link leaves.
+Complete owned-file cleanup before composing terminal outcomes while retaining
+source/destination safety pins. Preserve primary processing codes; successful
+published audio with incomplete reporting is WARNING/7. Correct surviving
+reports after write failures where storage permits. Later release of already-
+flushed or read-only handles is advisory, preventing stale terminal statuses.
+Multi-file atomicity and recovery from arbitrary storage failures are not claimed.
+
+Use explicit -ExportDiagnostic/-DiagnosticOutputPath to create a no-overwrite
+typed projection, with no FFmpeg requirement. Omit free-form source strings,
+paths, metadata, timestamps and raw diagnostics; retain local originals and
+warn to review before sharing. Limit raw input to version 1 JSON objects up to
+16 MiB. Nothing is uploaded. Evidence: evidence/WAC-M1-06.md. No filter, merge,
+release, deployment or security-policy approval is introduced.

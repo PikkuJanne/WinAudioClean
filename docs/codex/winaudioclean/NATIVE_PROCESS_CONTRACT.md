@@ -145,3 +145,48 @@ same-volume partial/final rename needs one audio allocation plus headroom;
 concurrent writers can still consume space afterward. Invalid export settings
 or unsupported layouts use code 2. Missing `pan` for requested stereo-to-mono
 uses code 3. All native diagnostics/publication/cleanup guarantees above remain.
+
+## Implemented in WAC-M1-06 (2026-10-02)
+
+Each render attempt gets uniquely named `WinAudioClean_<jobId>.json` and `.txt`
+reports in the pinned destination. The version 1 schema is documented in
+DATA_FORMATS.md. The shared `WinAudioClean_Log.txt` retains human-readable run
+entries; it is not the only detailed record. Early pre-render errors remain
+console-only. Reports distinguish recording duration from elapsed native
+rendering time, requested output format from verified audio, and export validity
+from unmeasured loudness compliance.
+
+`Complete-WacOutputTransaction` finishes owned-partial cleanup before the report
+outcome is serialized, retaining the source and destination handles. The source
+remains protected through reporting. A processing failure keeps its primary
+code `3`, `4` or `5` if reporting also fails. Successful published audio with a
+metadata or report-write failure uses code `7`; reporting never deletes that
+audio. Release advisories for already-flushed report handles and the remaining
+read-only safety handles do not revise a persisted terminal outcome.
+
+New report writers use CreateNew, held identity, read/write/delete access and
+read sharing only. Summary writers open/create without truncation, inspect the
+leaf itself, and reject reparse points, directories and multiple hardlinks before
+writing. Sharing/lock conflicts retry for at most three seconds by default.
+Writers remain exclusive through write, flush and any correction/rollback, so
+concurrent runs cannot mix entries or replace reports. Every successful write
+explicitly flushes before completion. New per-run files use UTF-8 without a BOM;
+summary appends preserve the existing BOM/encoding and original bytes under the
+compatibility policy in DATA_FORMATS.md.
+
+If a report fails, retire that writer and attempt to delete only its held,
+exclusively created file; a summary rollback retains all bytes present before
+ownership. Rewrite surviving reports with the corrected reporting outcome.
+The summary is written last. These writes are not an atomic multi-file commit:
+an unrecoverable storage fault or crash may leave incomplete artifacts, and a
+failed rollback is disclosed in console diagnostics. Never present an
+incomplete artifact as a completed report; use the process exit and diagnostics
+to resolve such failures.
+
+Explicit `-ExportDiagnostic` plus `-DiagnosticOutputPath` reads a local version 1
+JSON object with a 16 MiB limit, holds the source read-only and pins the existing
+destination directory. CreateNew prevents replacement of the source or any
+existing destination alias. The export constructs a fresh typed allowlist and
+drops all free-form source strings, including paths, filenames, metadata and raw
+diagnostics. It warns to review before sharing and performs no upload. Export
+usage/read/write failures use code `2`; this route does not initialize FFmpeg.

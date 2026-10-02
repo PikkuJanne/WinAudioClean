@@ -417,8 +417,14 @@
       "title": "Report fidelity",
       "procedure": "Run success, encoder failure and validation failure; compare console, JSON, human log and process exit.",
       "expected": "Statuses agree; recording duration differs from wall time; unsupported/nonfinite measurements become null plus reason.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-06.md",
+        "evidence/WAC-M1-06-source.json",
+        "evidence/WAC-M1-06-full-ps51.txt",
+        "evidence/WAC-M1-06-full-ps7.txt",
+        "evidence/WAC-M1-06-reports.json"
+      ]
     },
     {
       "id": "AC-029",
@@ -426,8 +432,14 @@
       "title": "Privacy export",
       "procedure": "Generate a report containing user-directory names, filenames, container title and potential sensitive diagnostic text.",
       "expected": "Redacted output omits sensitive values and warns about review; raw report remains local only.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-06.md",
+        "evidence/WAC-M1-06-source.json",
+        "evidence/WAC-M1-06-full-ps51.txt",
+        "evidence/WAC-M1-06-full-ps7.txt",
+        "evidence/WAC-M1-06-reports.json"
+      ]
     },
     {
       "id": "AC-030",
@@ -435,8 +447,14 @@
       "title": "Concurrent and failed logging",
       "procedure": "Run concurrent exports and inject a log destination permission failure.",
       "expected": "Reports do not overwrite/interleave incorrectly; audio is not deleted solely because reporting failed; outcome is unambiguous.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-06.md",
+        "evidence/WAC-M1-06-source.json",
+        "evidence/WAC-M1-06-full-ps51.txt",
+        "evidence/WAC-M1-06-full-ps7.txt",
+        "evidence/WAC-M1-06-reports.json"
+      ]
     },
     {
       "id": "AC-031",

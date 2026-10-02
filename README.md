@@ -214,6 +214,49 @@ it manually once that job has stopped. Later runs preserve these leftovers.
 RIFF and explicitly requested RF64 sizes, PCM format and sample counts are checked
 on the held file before publication.
 
+**Run reports and sharing diagnostics**
+
+After a render attempt, the destination contains `WinAudioClean_<job-id>.json`
+and `WinAudioClean_<job-id>.txt`. The shared `WinAudioClean_Log.txt` retains a
+human-readable entry for each run. Unique report names refuse existing files;
+summary entries use an exclusive writer so concurrent jobs cannot interleave.
+Early input, dependency, selection and space errors remain console-only.
+
+The version 1 JSON records the selected stream, exact filters, requested output
+format, verified audio, native diagnostics and processing/reporting outcomes.
+Input recording duration and elapsed rendering time are separate fields.
+Loudness and true-peak measurements are currently `null` with a reason; successful
+export validation does not claim that a loudness target was achieved.
+
+Published audio remains available if a report cannot be written. The console
+returns `7` for a successful export with incomplete reporting; an earlier
+processing failure keeps its own code. Surviving reports are corrected to that
+outcome where storage permits. A crash or unrecoverable write/rollback failure
+can leave incomplete report files. Use the console exit and diagnostics to
+resolve those cases; do not treat an incomplete file as a completed report.
+
+Detailed reports stay local and can contain paths, filenames, stream metadata
+and sensitive native diagnostics. To create a separate support copy, replace
+the example report path below with the JSON path from your run:
+
+```powershell
+.\WinAudioClean.ps1 -ExportDiagnostic 'C:\Audio\Cleaned\WinAudioClean_0123456789abcdef0123456789abcdef.json' -DiagnosticOutputPath 'C:\Audio\Cleaned\wac-support.json'
+```
+
+The source must be a supported version 1 report no larger than 16 MiB. The
+destination's parent folder must already exist, and its filename must be new.
+This command runs without FFmpeg and cannot be combined with audio-processing
+options. It creates an allowlisted diagnostic JSON with numeric values, booleans
+and fixed labels; it omits all free-form source text, paths, filenames, titles,
+timestamps, job IDs, dependency banners and raw diagnostics. **Review the export
+before sharing it.** Nothing is uploaded automatically; the raw report remains
+unchanged. See the [report format](docs/codex/winaudioclean/DATA_FORMATS.md).
+
+New per-run reports use UTF-8 without a BOM. The summary preserves an existing
+BOM and its encoding. For a summary without a BOM, valid UTF-8 is retained;
+otherwise the current Windows ANSI code page is used. If an entry cannot be
+encoded safely, reporting fails rather than replacing existing bytes.
+
 **Native results and launcher automation**
 
 The script runs the resolved FFmpeg executable directly, disables its stdin and
@@ -223,7 +266,7 @@ console and local report. Processing and reporting results use these exit codes:
 | Code | Meaning |
 | --- | --- |
 | 0 | Audio was validated and published; reporting completed. |
-| 2 | Invalid input, destination, mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks. |
+| 2 | Invalid input, destination, mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
 | 3 | Missing, incompatible or filter-deficient dependency, or render process start failure. |
 | 4 | Probe/metadata failure, no audio, or processing/capture/cleanup failure. Native failures retain diagnostics. |
 | 5 | Output allocation, space/size check, validation, publication or owned-file cleanup failed. |
@@ -282,8 +325,8 @@ have not been stress-tested.
    - Shows a "Processing..." indicator in the console.
 
 5. Logging
-   - Generates a WinAudioClean_Log.txt in the Music folder.
-   - Records the exact duration, file sizes, and the full technical filter string used.
+   - Writes per-run JSON/text reports and appends WinAudioClean_Log.txt in the selected destination.
+   - Records recording duration separately from rendering time, along with file sizes, exact filters, diagnostics and outcome.
 
 **Limitations / When not to use**
 

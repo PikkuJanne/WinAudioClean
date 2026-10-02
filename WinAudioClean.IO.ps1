@@ -124,6 +124,48 @@ namespace WinAudioClean
             finally { Marshal.FreeHGlobal(information); }
         }
 
+        public static FileStream OpenReportWriter(string path, bool createNew, int timeoutMilliseconds)
+        {
+            // Exclusive writer ownership spans validation, append and rollback.
+            // OPEN_REPARSE_POINT inspects the leaf itself without following links.
+            var timer = System.Diagnostics.Stopwatch.StartNew();
+            SafeFileHandle handle;
+            while (true)
+            {
+                uint access = createNew ? 0xC0010000u : 0xC0000000u;
+                handle = CreateFileW(path, access, 1, IntPtr.Zero, createNew ? 1u : 4u, 0x00200080, IntPtr.Zero);
+                if (!handle.IsInvalid) break;
+                int error = Marshal.GetLastWin32Error();
+                handle.Dispose();
+                if ((error != 32 && error != 33) || timer.ElapsedMilliseconds >= timeoutMilliseconds)
+                    throw new IOException("Cannot open report writer: " + new Win32Exception(error).Message + " (Win32 " + error + ").");
+                System.Threading.Thread.Sleep((int)Math.Min(50, Math.Max(1, timeoutMilliseconds - timer.ElapsedMilliseconds)));
+            }
+            try
+            {
+                ValidateReportWriter(handle);
+                return new FileStream(handle, FileAccess.ReadWrite);
+            }
+            catch { handle.Dispose(); throw; }
+        }
+
+        public static void ValidateReportWriter(SafeFileHandle handle)
+        {
+            IntPtr information = Marshal.AllocHGlobal(24);
+            try
+            {
+                if (!GetFileInformationByHandleEx(handle, 9, information, 8))
+                    throw Failure("Cannot inspect report attributes");
+                if ((Marshal.ReadInt32(information) & 0x410) != 0)
+                    throw new IOException("Report path is a reparse point or directory; it will not be written.");
+                if (!GetFileInformationByHandleEx(handle, 1, information, 24))
+                    throw Failure("Cannot inspect report link count");
+                if (Marshal.ReadInt32(information, 16) != 1)
+                    throw new IOException("Report has multiple filesystem links; it will not be written.");
+            }
+            finally { Marshal.FreeHGlobal(information); }
+        }
+
         public static void RenameNoReplace(FileStream stream, SafeFileHandle directory, string leaf)
         {
             if (String.IsNullOrEmpty(leaf) || leaf != Path.GetFileName(leaf) || leaf.IndexOf(':') >= 0)
@@ -187,7 +229,7 @@ function New-WacOutputTransaction {
         TempHandle = $null; TempPath = $null; FinalPath = $null; TempIdentity = $null
         ValidationHandle = $null; OutputDirectoryHandle = $null; OutputDirectoryIdentity = $null
         InputPath = [IO.Path]::GetFullPath($InputPath); OutputFolder = $null
-        Published = $false; Closed = $false
+        Published = $false; OutputCompleted = $false; Closed = $false
     }
     try {
         $transaction.InputLock = [IO.File]::Open($transaction.InputPath, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
@@ -225,7 +267,7 @@ function New-WacOutputTransaction {
 function Freeze-WacOutputTransaction {
     param([Parameter(Mandatory = $true)]$Transaction)
 
-    if ($Transaction.Closed -or $Transaction.Published) { throw 'This output transaction cannot be frozen.' }
+    if ($Transaction.Closed -or $Transaction.OutputCompleted -or $Transaction.Published) { throw 'This output transaction cannot be frozen.' }
     if ($null -ne $Transaction.ValidationHandle) { return $Transaction.ValidationHandle }
     if ($null -ne $Transaction.TempHandle) {
         $Transaction.TempHandle.Dispose()
@@ -249,7 +291,7 @@ function Freeze-WacOutputTransaction {
 function Publish-WacOutputTransaction {
     param([Parameter(Mandatory = $true)]$Transaction)
 
-    if ($Transaction.Closed -or $Transaction.Published -or $null -eq $Transaction.ValidationHandle) {
+    if ($Transaction.Closed -or $Transaction.OutputCompleted -or $Transaction.Published -or $null -eq $Transaction.ValidationHandle) {
         throw 'Output must be held for validation before publication.'
     }
     if ([WinAudioClean.NativeFileIO]::Identity($Transaction.ValidationHandle.SafeFileHandle) -ne $Transaction.TempIdentity -or
@@ -267,10 +309,10 @@ function Publish-WacOutputTransaction {
     $Transaction.Published = $true
 }
 
-function Close-WacOutputTransaction {
+function Complete-WacOutputTransaction {
     param([Parameter(Mandatory = $true)]$Transaction)
 
-    if ($Transaction.Closed) { return }
+    if ($Transaction.Closed -or $Transaction.OutputCompleted) { return }
     $diagnostics = New-Object 'System.Collections.Generic.List[string]'
     try {
         if ($null -ne $Transaction.TempHandle) {
@@ -296,9 +338,28 @@ function Close-WacOutputTransaction {
             }
         }
     } finally {
-        # Reporting runs before this call. Source protection is released LAST,
-        # including when the shared log path is a hardlink to the input file.
-        foreach ($name in @('ValidationHandle', 'OutputDirectoryHandle', 'InputLock')) {
+        # Finish owned-output cleanup before reporting its final outcome. Keep
+        # the source and destination pinned until Close-WacOutputTransaction.
+        if ($null -ne $Transaction.ValidationHandle) {
+            try { $Transaction.ValidationHandle.Dispose() }
+            catch { $diagnostics.Add("ValidationHandle could not be closed: $($_.Exception.Message)") }
+            $Transaction.ValidationHandle = $null
+        }
+        $Transaction.OutputCompleted = $true
+    }
+    $diagnostics.ToArray()
+}
+
+function Close-WacOutputTransaction {
+    param([Parameter(Mandatory = $true)]$Transaction)
+
+    if ($Transaction.Closed) { return }
+    $diagnostics = New-Object 'System.Collections.Generic.List[string]'
+    try {
+        foreach ($message in @(Complete-WacOutputTransaction -Transaction $Transaction)) { $diagnostics.Add($message) }
+    } finally {
+        # Source protection is released LAST, after all report writers close.
+        foreach ($name in @('OutputDirectoryHandle', 'InputLock')) {
             if ($null -ne $Transaction.$name) {
                 try { $Transaction.$name.Dispose() }
                 catch { $diagnostics.Add("$name could not be closed: $($_.Exception.Message)") }
@@ -334,5 +395,140 @@ function Close-WacReportGuard {
     if ($null -ne $Guard.Handle) {
         $Guard.Handle.Dispose()
         $Guard.Handle = $null
+    }
+}
+
+function Open-WacReportWriter {
+    param([Parameter(Mandatory = $true)][string]$Path, [switch]$CreateNew,
+        [ValidateRange(0, 60000)][int]$TimeoutMilliseconds = 3000)
+
+    Initialize-WacNativeFileIO
+    $stream = $null
+    try {
+        $stream = [WinAudioClean.NativeFileIO]::OpenReportWriter([IO.Path]::GetFullPath($Path), [bool]$CreateNew, $TimeoutMilliseconds)
+        $writer = [pscustomobject]@{
+            Stream = $stream; Path = [WinAudioClean.NativeFileIO]::ResolvedPath($stream.SafeFileHandle)
+            Identity = [WinAudioClean.NativeFileIO]::Identity($stream.SafeFileHandle)
+            CreatedNew = [bool]$CreateNew; InitialLength = $stream.Length; Closed = $false
+            Encoding = Get-WacReportEncoding -Stream $stream
+        }
+        $stream = $null
+        $writer
+    } finally {
+        if ($null -ne $stream) { $stream.Dispose() }
+    }
+}
+
+function Get-WacReportEncoding {
+    param([Parameter(Mandatory = $true)][IO.Stream]$Stream)
+
+    $position = $Stream.Position
+    try {
+        $Stream.Position = 0
+        $prefix = [byte[]]::new(4)
+        $count = $Stream.Read($prefix, 0, $prefix.Length)
+        if ($count -ge 4 -and $prefix[0] -eq 255 -and $prefix[1] -eq 254 -and $prefix[2] -eq 0 -and $prefix[3] -eq 0) {
+            return [Text.UTF32Encoding]::new($false, $false, $true)
+        }
+        if ($count -ge 4 -and $prefix[0] -eq 0 -and $prefix[1] -eq 0 -and $prefix[2] -eq 254 -and $prefix[3] -eq 255) {
+            return [Text.UTF32Encoding]::new($true, $false, $true)
+        }
+        if ($count -ge 2 -and $prefix[0] -eq 255 -and $prefix[1] -eq 254) { return [Text.UnicodeEncoding]::new($false, $false, $true) }
+        if ($count -ge 2 -and $prefix[0] -eq 254 -and $prefix[1] -eq 255) { return [Text.UnicodeEncoding]::new($true, $false, $true) }
+        $utf8 = [Text.UTF8Encoding]::new($false, $true)
+        if ($count -ge 3 -and $prefix[0] -eq 239 -and $prefix[1] -eq 187 -and $prefix[2] -eq 191) { return $utf8 }
+        # Legacy Add-Content logs can be ANSI. Without a BOM, prefer strict UTF-8;
+        # otherwise use the current Windows culture's ANSI code page. Inspect
+        # with bounded buffers and never rewrite any pre-existing report bytes.
+        $Stream.Position = 0
+        $decoder = $utf8.GetDecoder()
+        $bytes = [byte[]]::new(4096)
+        $characters = [char[]]::new($utf8.GetMaxCharCount($bytes.Length))
+        try {
+            while (($read = $Stream.Read($bytes, 0, $bytes.Length)) -gt 0) {
+                $null = $decoder.GetChars($bytes, 0, $read, $characters, 0, $false)
+            }
+            # Explicit final flush catches an incomplete final UTF-8 sequence
+            # on .NET Framework as well as modern .NET.
+            $null = $decoder.GetChars($bytes, 0, 0, $characters, 0, $true)
+        } catch [Text.DecoderFallbackException] {
+            return [Text.Encoding]::GetEncoding([Globalization.CultureInfo]::CurrentCulture.TextInfo.ANSICodePage,
+                [Text.EncoderFallback]::ExceptionFallback, [Text.DecoderFallback]::ExceptionFallback)
+        }
+        $utf8
+    } finally {
+        $Stream.Position = $position
+    }
+}
+
+function Assert-WacReportWriter {
+    param([Parameter(Mandatory = $true)]$Writer)
+
+    if ($Writer.Closed -or $null -eq $Writer.Stream -or -not $Writer.Stream.CanWrite) { throw 'Report writer is closed.' }
+    if ([WinAudioClean.NativeFileIO]::Identity($Writer.Stream.SafeFileHandle) -ne $Writer.Identity) { throw 'Report writer ownership changed.' }
+    [WinAudioClean.NativeFileIO]::ValidateReportWriter($Writer.Stream.SafeFileHandle)
+}
+
+function Set-WacOwnedReportContent {
+    param([Parameter(Mandatory = $true)]$Writer, [Parameter(Mandatory = $true)][AllowEmptyString()][string]$Content)
+
+    Assert-WacReportWriter -Writer $Writer
+    if (-not $Writer.CreatedNew) { throw 'Only an exclusively created report may be replaced.' }
+    $bytes = $Writer.Encoding.GetBytes($Content)
+    $Writer.Stream.Position = 0
+    $Writer.Stream.Write($bytes, 0, $bytes.Length)
+    $Writer.Stream.SetLength($bytes.Length)
+    $Writer.Stream.Flush($true)
+}
+
+function Reset-WacSummaryReport {
+    param([Parameter(Mandatory = $true)]$Writer, [Parameter(Mandatory = $true)][long]$Length)
+
+    Assert-WacReportWriter -Writer $Writer
+    if ($Writer.CreatedNew -or $Length -lt $Writer.InitialLength -or $Length -gt $Writer.Stream.Length) {
+        throw 'Summary rollback must preserve all bytes present before writer ownership.'
+    }
+    $Writer.Stream.SetLength($Length)
+    $Writer.Stream.Position = $Length
+    $Writer.Stream.Flush($true)
+}
+
+function Add-WacSummaryReportContent {
+    param([Parameter(Mandatory = $true)]$Writer, [Parameter(Mandatory = $true)][AllowEmptyString()][string]$Content)
+
+    Assert-WacReportWriter -Writer $Writer
+    if ($Writer.CreatedNew) { throw 'Summary append requires an existing-or-created summary writer.' }
+    $originalLength = $Writer.Stream.Length
+    $bytes = $Writer.Encoding.GetBytes($Content)
+    try {
+        $Writer.Stream.Position = $originalLength
+        $Writer.Stream.Write($bytes, 0, $bytes.Length)
+        $Writer.Stream.Flush($true)
+    } catch {
+        $originalError = $_
+        try { Reset-WacSummaryReport -Writer $Writer -Length $originalLength }
+        catch { throw "Report append failed: $($originalError.Exception.Message) Summary rollback also failed: $($_.Exception.Message)" }
+        throw $originalError
+    }
+    $originalLength
+}
+
+function Remove-WacOwnedReport {
+    param([Parameter(Mandatory = $true)]$Writer)
+
+    Assert-WacReportWriter -Writer $Writer
+    if (-not $Writer.CreatedNew) { throw 'Only an exclusively created report may be removed.' }
+    [WinAudioClean.NativeFileIO]::DeleteOwned($Writer.Stream)
+}
+
+function Close-WacReportWriter {
+    param([Parameter(Mandatory = $true)]$Writer)
+
+    if ($Writer.Closed) { return }
+    try {
+        if ($null -ne $Writer.Stream) { $Writer.Stream.Dispose() }
+    } finally {
+        $Writer.Stream = $null
+        $Writer.Closed = $true
     }
 }

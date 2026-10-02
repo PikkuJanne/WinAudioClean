@@ -100,7 +100,9 @@ param(
     [string]$BitDepth = '16',
     [switch]$Mono,
     [switch]$Rf64,
-    [switch]$NonInteractive
+    [switch]$NonInteractive,
+    [string]$ExportDiagnostic,
+    [string]$DiagnosticOutputPath
 )
 
 . (Join-Path $PSScriptRoot 'WinAudioClean.IO.ps1')
@@ -760,8 +762,361 @@ function Invoke-WacNativeProcess {
     $result
 }
 
+function ConvertTo-WacMeasurement {
+    param($Value, [string]$UnavailableReason = 'not_measured')
+
+    if ($null -eq $Value) { return [ordered]@{ value = $null; reason = $UnavailableReason } }
+    $number = 0.0
+    if (-not [double]::TryParse([Convert]::ToString($Value, [Globalization.CultureInfo]::InvariantCulture), [Globalization.NumberStyles]::Float,
+        [Globalization.CultureInfo]::InvariantCulture, [ref]$number)) {
+        return [ordered]@{ value = $null; reason = 'not_numeric' }
+    }
+    if ([double]::IsNaN($number) -or [double]::IsInfinity($number)) {
+        return [ordered]@{ value = $null; reason = 'nonfinite' }
+    }
+    [ordered]@{ value = $number; reason = $null }
+}
+
+function Update-WacReportOutcome {
+    param([System.Collections.IDictionary]$Report)
+
+    $Report.reporting.complete = ($Report.reporting.errors.Count -eq 0)
+    $Report.applicationExitCode = $Report.processingExitCode
+    $Report.status = $Report.processingStatus
+    if (-not $Report.reporting.complete -and $Report.processingExitCode -eq 0) {
+        $Report.applicationExitCode = 7
+        $Report.status = 'WARNING'
+    }
+}
+
+function Add-WacReportFailure {
+    param([System.Collections.IDictionary]$Report, [string]$Code, [string]$Message)
+
+    $Report.warningCodes = @($Report.warningCodes) + $Code
+    $Report.reporting.errors = @($Report.reporting.errors) + $Message
+    Update-WacReportOutcome -Report $Report
+}
+
+function New-WacRunReport {
+    param([System.Collections.IDictionary]$Context)
+
+    $c = $Context
+    $inputDuration = ConvertTo-WacMeasurement -Value $c.Stream.DurationSeconds -UnavailableReason 'unavailable'
+    $elapsed = ConvertTo-WacMeasurement -Value $c.ElapsedSeconds -UnavailableReason 'unavailable'
+    $report = [ordered]@{
+        schemaVersion = 1
+        jobId = $c.Transaction.JobId
+        toolVersion = $c.ToolVersion
+        presetVersion = $null; presetVersionReason = 'not_versioned'
+        sourceRevision = $null; sourceRevisionReason = 'not_embedded'
+        status = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
+        processingStatus = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
+        processingExitCode = $c.ExitCode
+        applicationExitCode = $c.ExitCode
+        nativeExitCode = $c.Process.ExitCode
+        reasonCodes = @($c.ReasonCodes)
+        warningCodes = @()
+        timing = [ordered]@{
+            startedAtUtc = $c.StartedAt.ToUniversalTime().ToString('o', [Globalization.CultureInfo]::InvariantCulture)
+            endedAtUtc = [DateTime]::UtcNow.ToString('o', [Globalization.CultureInfo]::InvariantCulture)
+            processingElapsedSeconds = $elapsed.value; processingElapsedSecondsReason = $elapsed.reason
+        }
+        dependencies = [ordered]@{
+            ffmpeg = [ordered]@{ path = $c.FfmpegPath; version = $c.FfmpegVersion }
+            ffprobe = [ordered]@{ path = $c.FfprobePath; version = $c.FfprobeVersion }
+        }
+        input = [ordered]@{
+            path = $c.Transaction.InputPath; sizeBytes = $c.InputBytes
+            durationSeconds = $inputDuration.value; durationSecondsReason = $inputDuration.reason
+            stream = [ordered]@{
+                index = $c.Stream.Index; codec = $c.Stream.Codec; channels = $c.Stream.Channels
+                sampleRate = $c.Stream.SampleRate; channelLayout = $c.Stream.ChannelLayout
+                language = $c.Stream.Language; title = $c.Stream.Title
+            }
+        }
+        settings = [ordered]@{
+            mode = $c.Mode; modeName = $c.ModeName; bitDepth = $c.Policy.Bits
+            mono = [bool]$c.Mono; rf64 = [bool]$c.Policy.Rf64
+            exactFilters = ($c.Policy.FilterPrefix + $c.FilterChain)
+        }
+        output = [ordered]@{
+            path = $c.Transaction.FinalPath; partialPath = $c.Transaction.TempPath
+            published = [bool]$c.Transaction.Published; sizeBytes = $c.OutputBytes
+            sizeReason = $(if ($null -eq $c.OutputBytes) { 'unavailable' } else { $null })
+            validity = $(if ($c.Transaction.Published) { 'PASSED' } else { 'FAILED' })
+            format = [ordered]@{
+                sampleRate = $c.Policy.SampleRate; bitDepth = $c.Policy.Bits; codec = $c.Policy.Codec
+                channels = $c.Policy.Channels; channelLayout = $c.Policy.Layout
+                container = $(if ($c.Policy.Rf64) { 'RF64' } else { 'RIFF' })
+            }
+            verified = $c.VerifiedAudio
+        }
+        requestedTargets = [ordered]@{ integratedLufs = -12; truePeakDbtp = -1.5 }
+        measurements = [ordered]@{
+            integratedLufs = (ConvertTo-WacMeasurement -Value $null)
+            truePeakDbtp = (ConvertTo-WacMeasurement -Value $null)
+            loudnessRangeLu = (ConvertTo-WacMeasurement -Value $null)
+        }
+        loudnessCompliance = [ordered]@{ status = 'NOT_MEASURED'; reason = 'no_independent_measurement' }
+        space = [ordered]@{
+            estimatedFileBytes = $c.SpaceEstimate.FileBytes; reserveBytes = $c.SpaceEstimate.ReserveBytes
+            availableBytesBeforeRender = $c.AvailableBytes
+        }
+        diagnostics = [ordered]@{
+            standardOutput = $c.Process.StandardOutput; standardError = $c.Process.StandardError
+            processError = $c.Process.Error; nativeCleanupError = $c.Process.CleanupError
+            outputError = $c.ValidationError; outputCleanupErrors = @($c.CleanupErrors)
+            jsonPath = [IO.Path]::Combine($c.Transaction.OutputFolder, ('WinAudioClean_' + $c.Transaction.JobId + '.json'))
+            textPath = [IO.Path]::Combine($c.Transaction.OutputFolder, ('WinAudioClean_' + $c.Transaction.JobId + '.txt'))
+        }
+        reporting = [ordered]@{ complete = $true; errors = @() }
+        privacy = 'Local detailed report: may contain paths, filenames, metadata and sensitive diagnostics. Use explicit redacted export and review before sharing.'
+    }
+    if ($c.MetadataError) { Add-WacReportFailure -Report $report -Code 'output_metadata_unavailable' -Message $c.MetadataError }
+    $report
+}
+
+function Format-WacReportLabel {
+    param([string]$Value)
+
+    # Metadata must not create extra labeled lines in the human report.
+    [regex]::Replace($Value, '[\x00-\x1f\x7f]', {
+        param($match)
+        '\u{0:x4}' -f [int][char]$match.Value
+    })
+}
+
+function Format-WacRunReport {
+    param([System.Collections.IDictionary]$Report)
+
+    $r = $Report
+    $nativeExitText = if ($null -eq $r.nativeExitCode) { 'not started' } else { [string]$r.nativeExitCode }
+    $inputSize = '{0:N2} MB' -f ($r.input.sizeBytes / 1MB)
+    $outputSize = if ($null -eq $r.output.sizeBytes) { 'N/A' } else { '{0:N2} MB' -f ($r.output.sizeBytes / 1MB) }
+    @"
+================================================================================
+LOG DATE       : $($r.timing.endedAtUtc)
+--------------------------------------------------------------------------------
+STATUS         : $($r.status) (Native Exit Code: $nativeExitText; Application Exit Code: $($r.applicationExitCode))
+PROCESSING     : $($r.processingStatus) (Application Exit Code: $($r.processingExitCode))
+MODE           : $($r.settings.modeName)
+INPUT DURATION : $($r.input.durationSeconds) s (selected stream)
+PROCESSING TIME: $($r.timing.processingElapsedSeconds) s (wall time for native rendering)
+STARTED UTC    : $($r.timing.startedAtUtc)
+ENDED UTC      : $($r.timing.endedAtUtc) (processing and output cleanup complete)
+
+INPUT FILE     : $($r.input.path)
+INPUT SIZE     : $inputSize
+OUTPUT FILE    : $($r.output.path)
+OUTPUT SIZE    : $outputSize
+JOB ID         : $($r.jobId)
+PARTIAL FILE   : $($r.output.partialPath)
+PUBLISHED      : $($r.output.published)
+VALIDITY       : $($r.output.validity)
+VERIFIED AUDIO : $($r.output.verified.DurationSeconds) s; $($r.output.verified.Frames) frames; $($r.output.verified.SampleRate) Hz; $($r.output.verified.Bits) bits
+
+ACTIVE FILTERS : $($r.settings.exactFilters)
+EXPORT FORMAT  : $($r.output.format.sampleRate) Hz; $($r.output.format.codec); $($r.output.format.bitDepth) bits; $($r.output.format.channelLayout); $($r.output.format.container) WAV
+REQUEST TARGETS: -12 LUFS integrated; -1.5 dBTP true peak (requested, not independently measured)
+MEASUREMENTS   : LUFS, true peak and loudness range unavailable (not_measured)
+LOUDNESS CHECK : NOT_MEASURED; export validity does not certify loudness compliance
+SPACE ESTIMATE : $($r.space.estimatedFileBytes) file bytes + $($r.space.reserveBytes) reserve bytes; $($r.space.availableBytesBeforeRender) available before rendering
+TOOL VERSION   : $($r.toolVersion); schema $($r.schemaVersion); preset not_versioned; revision not_embedded
+EXECUTABLE     : $($r.dependencies.ffmpeg.path)
+FFMPEG VERSION : $(Format-WacReportLabel -Value $r.dependencies.ffmpeg.version)
+FFPROBE        : $($r.dependencies.ffprobe.path)
+FFPROBE VERSION: $(Format-WacReportLabel -Value $r.dependencies.ffprobe.version)
+AUDIO STREAM   : $($r.input.stream.index) (absolute index; map 0:$($r.input.stream.index))
+INPUT AUDIO    : $($r.input.stream.codec); $($r.input.stream.channels) channel(s); $($r.input.stream.sampleRate) Hz
+STREAM TITLE   : $(Format-WacReportLabel -Value $r.input.stream.title)
+STREAM LANGUAGE: $(Format-WacReportLabel -Value $r.input.stream.language)
+INPUT POLICY   : file protocol; WAV, MP3, FLAC, Ogg, MOV/MP4, Matroska/WebM, AAC, AIFF, ASF, AVI
+REASON CODES   : $($r.reasonCodes -join ', ')
+WARNING CODES  : $($r.warningCodes -join ', ')
+PROCESS ERROR  : $($r.diagnostics.processError)
+CLEANUP ERROR  : $($r.diagnostics.nativeCleanupError) $($r.diagnostics.outputCleanupErrors -join '; ')
+REPORT ERROR   : $($r.reporting.errors -join '; ')
+OUTPUT ERROR   : $($r.diagnostics.outputError)
+JSON REPORT    : $($r.diagnostics.jsonPath)
+TEXT REPORT    : $($r.diagnostics.textPath)
+PRIVACY        : $($r.privacy)
+STANDARD OUTPUT:
+$($r.diagnostics.standardOutput)
+STANDARD ERROR:
+$($r.diagnostics.standardError)
+================================================================================
+
+"@
+}
+
+function Write-WacRunReports {
+    param([System.Collections.IDictionary]$Report, [string]$OutputFolder)
+
+    # Hold all writers until the final outcome is known. Each failed writer is
+    # retired; surviving reports are rewritten with the warning outcome. The
+    # summary is written last and rolled back before any corrected attempt.
+    $writers = [ordered]@{}
+    $paths = [ordered]@{
+        json = $Report.diagnostics.jsonPath; text = $Report.diagnostics.textPath
+        summary = [IO.Path]::Combine($OutputFolder, 'WinAudioClean_Log.txt')
+    }
+    try {
+        foreach ($kind in $paths.Keys) {
+            try { $writers[$kind] = Open-WacReportWriter -Path $paths[$kind] -CreateNew:($kind -ne 'summary') }
+            catch {
+                Add-WacReportFailure -Report $Report -Code ($kind + '_report_unavailable') -Message $_.Exception.Message
+                Write-Warning ('Report could not be written: ' + $_.Exception.Message)
+            }
+        }
+        do {
+            $retry = $false
+            $text = Format-WacRunReport -Report $Report
+            $json = $Report | ConvertTo-Json -Depth 12
+            foreach ($kind in @($writers.Keys)) {
+                $writer = $writers[$kind]
+                try {
+                    if ($kind -eq 'summary') {
+                        Reset-WacSummaryReport -Writer $writer -Length $writer.InitialLength
+                        $null = Add-WacSummaryReportContent -Writer $writer -Content $text
+                    } else {
+                        $content = if ($kind -eq 'json') { $json + "`r`n" } else { $text }
+                        Set-WacOwnedReportContent -Writer $writer -Content $content
+                    }
+                } catch {
+                    Add-WacReportFailure -Report $Report -Code ($kind + '_report_write_failed') -Message $_.Exception.Message
+                    Write-Warning ('Report could not be written: ' + $_.Exception.Message)
+                    try {
+                        if ($kind -eq 'summary') { Reset-WacSummaryReport -Writer $writer -Length $writer.InitialLength }
+                        else { Remove-WacOwnedReport -Writer $writer }
+                    } catch {
+                        Add-WacReportFailure -Report $Report -Code 'report_cleanup_failed' -Message $_.Exception.Message
+                        Write-Warning ('Incomplete report could not be removed or rolled back: ' + $_.Exception.Message)
+                    } finally {
+                        try { Close-WacReportWriter -Writer $writer }
+                        catch { Write-Warning ('Report handle release failed: ' + $_.Exception.Message) }
+                        $writers.Remove($kind)
+                    }
+                    $retry = $true
+                    break
+                }
+            }
+        } while ($retry -and $writers.Count -gt 0)
+    } finally {
+        foreach ($writer in $writers.Values) {
+            # All content was explicitly flushed above. A subsequent handle
+            # release advisory must not rewrite the persisted terminal outcome.
+            try { Close-WacReportWriter -Writer $writer }
+            catch { Write-Warning ('Report handle release failed: ' + $_.Exception.Message) }
+        }
+    }
+}
+
+function ConvertTo-WacRedactedReport {
+    param($Report)
+
+    if ($null -eq $Report -or ($Report.schemaVersion -isnot [int] -and $Report.schemaVersion -isnot [long]) -or $Report.schemaVersion -ne 1 -or
+        $Report.status -isnot [string] -or $Report.processingStatus -isnot [string] -or
+        $Report.status -cnotin @('SUCCESS', 'WARNING', 'FAILED') -or
+        $Report.processingStatus -cnotin @('SUCCESS', 'FAILED')) { throw 'Expected a version 1 WinAudioClean run report.' }
+    # Copy no free-form source strings: even version/filter/error fields may
+    # contain filenames, metadata or credentials. All retained values are typed
+    # numbers, booleans, fixed enums or values regenerated from built-in profiles.
+    $mode = if ($Report.settings.mode -cin @('Raw', 'Zoom')) { $Report.settings.mode } else { $null }
+    $safe = [ordered]@{
+        schemaVersion = 1; diagnosticExport = 'redacted'
+        reviewWarning = 'Review this export before sharing. No file has been uploaded.'
+        status = $Report.status; processingStatus = $Report.processingStatus
+        applicationExitCode = $null; nativeExitCode = $null
+        settings = [ordered]@{ mode = $mode; bitDepth = $null; mono = $null; rf64 = $null }
+        input = [ordered]@{ durationSeconds = $null; channels = $null; sampleRate = $null; streamIndex = $null }
+        timing = [ordered]@{ processingElapsedSeconds = $null }
+        output = [ordered]@{ published = $null; validity = $null; format = [ordered]@{} }
+        measurements = [ordered]@{}
+        diagnostics = [ordered]@{ omitted = $true; reason = 'may_contain_paths_or_metadata' }
+    }
+    foreach ($name in @('applicationExitCode', 'nativeExitCode')) {
+        $value = $Report.$name
+        if (($value -is [int] -or $value -is [long]) -and $value -ge [int]::MinValue -and $value -le [int]::MaxValue) { $safe[$name] = $value }
+    }
+    if (($Report.settings.bitDepth -is [int] -or $Report.settings.bitDepth -is [long]) -and $Report.settings.bitDepth -in @(16, 24)) { $safe.settings.bitDepth = $Report.settings.bitDepth }
+    foreach ($name in @('mono', 'rf64')) { if ($Report.settings.$name -is [bool]) { $safe.settings[$name] = $Report.settings.$name } }
+    foreach ($name in @('channels', 'sampleRate', 'index')) {
+        $value = $Report.input.stream.$name
+        $target = if ($name -eq 'index') { 'streamIndex' } else { $name }
+        if (($value -is [int] -or $value -is [long]) -and $value -ge 0 -and $value -le [int]::MaxValue) { $safe.input[$target] = $value }
+    }
+    $safe.input.durationSeconds = (ConvertTo-WacMeasurement -Value $Report.input.durationSeconds -UnavailableReason 'unavailable')
+    $safe.timing.processingElapsedSeconds = (ConvertTo-WacMeasurement -Value $Report.timing.processingElapsedSeconds -UnavailableReason 'unavailable')
+    if ($Report.output.published -is [bool]) { $safe.output.published = $Report.output.published }
+    if ($Report.output.validity -cin @('PASSED', 'FAILED')) { $safe.output.validity = $Report.output.validity }
+    foreach ($name in @('sampleRate', 'bitDepth', 'channels')) {
+        $value = $Report.output.format.$name
+        $safe.output.format[$name] = if (($value -is [int] -or $value -is [long]) -and $value -gt 0 -and $value -le [int]::MaxValue) { $value } else { $null }
+    }
+    foreach ($name in @('codec', 'channelLayout', 'container')) {
+        $allowed = switch ($name) { 'codec' { @('pcm_s16le', 'pcm_s24le') } 'channelLayout' { @('mono', 'stereo') } 'container' { @('RIFF', 'RF64') } }
+        $safe.output.format[$name] = if ($Report.output.format.$name -cin $allowed) { $Report.output.format.$name } else { $null }
+    }
+    foreach ($name in @('integratedLufs', 'truePeakDbtp', 'loudnessRangeLu')) {
+        $safe.measurements[$name] = ConvertTo-WacMeasurement -Value $Report.measurements.$name.value
+    }
+    $safe
+}
+
+function Export-WacDiagnostic {
+    param([string]$Path, [string]$Destination)
+
+    $source = $null; $directory = $null; $writer = $null
+    try {
+        $sourcePath = Resolve-WacFileSystemPath -Path $Path
+        $destinationPath = Resolve-WacFileSystemPath -Path $Destination
+        $source = [IO.File]::Open($sourcePath, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+        if ($source.Length -gt 16MB) { throw 'Diagnostic input exceeds the 16 MiB export limit.' }
+        $reader = [IO.StreamReader]::new($source, [Text.Encoding]::UTF8, $true, 4096, $true)
+        try {
+            $jsonText = $reader.ReadToEnd()
+            if (-not $jsonText.TrimStart().StartsWith('{')) { throw 'Diagnostic input must be a JSON object.' }
+            $data = $jsonText | ConvertFrom-Json -ErrorAction Stop
+        }
+        finally { $reader.Dispose() }
+        $redacted = ConvertTo-WacRedactedReport -Report $data
+        Initialize-WacNativeFileIO
+        $directory = [WinAudioClean.NativeFileIO]::OpenDirectory([IO.Path]::GetDirectoryName($destinationPath))
+        $canonical = [WinAudioClean.NativeFileIO]::ResolvedPath($directory)
+        $writer = Open-WacReportWriter -Path ([IO.Path]::Combine($canonical, [IO.Path]::GetFileName($destinationPath))) -CreateNew
+        try { Set-WacOwnedReportContent -Writer $writer -Content (($redacted | ConvertTo-Json -Depth 10) + "`r`n") }
+        catch {
+            Remove-WacOwnedReport -Writer $writer
+            throw
+        }
+        Write-Warning 'Review the redacted diagnostic export before sharing. No file has been uploaded.'
+        Write-Host ('Diagnostic export saved to: ' + $writer.Path)
+    } finally {
+        if ($null -ne $writer) { Close-WacReportWriter -Writer $writer }
+        if ($null -ne $directory) { $directory.Dispose() }
+        if ($null -ne $source) { $source.Dispose() }
+    }
+}
+
+
 # Dot-sourcing exposes only helpers. Normal -File, &, and .bat calls still run below.
 if ($MyInvocation.InvocationName -eq '.') { return }
+
+# Explicit local support export bypasses media/dependency initialization.
+if ($PSBoundParameters.ContainsKey('ExportDiagnostic') -or $PSBoundParameters.ContainsKey('DiagnosticOutputPath')) {
+    try {
+        foreach ($name in $PSBoundParameters.Keys) {
+            if ($name -notin @('ExportDiagnostic', 'DiagnosticOutputPath', 'NonInteractive')) {
+                throw 'Diagnostic export cannot be combined with audio processing options.'
+            }
+        }
+        Export-WacDiagnostic -Path $ExportDiagnostic -Destination $DiagnosticOutputPath
+        exit 0
+    } catch {
+        Write-Error -Message ('Diagnostic export failed: ' + $_.Exception.Message) -ErrorAction Continue
+        exit 2
+    }
+}
 
 # --- CONFIGURATION ---
 $scriptVersion = "2.3"
@@ -803,7 +1158,6 @@ try {
     Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 3
 }
-$logFile = "$outFolder\WinAudioClean_Log.txt"
 
 # --- TUI: HEADER ---
 if ($interactive) { Clear-Host }
@@ -849,7 +1203,6 @@ try {
     $transaction = New-WacOutputTransaction -InputPath $inputPath -OutputFolder $outFolder
     $inputPath = $transaction.InputPath
     $outputFile = $transaction.FinalPath
-    $logFile = [IO.Path]::Combine($transaction.OutputFolder, 'WinAudioClean_Log.txt')
 } catch {
     Write-Error -Message ("Output allocation failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 5
@@ -902,12 +1255,12 @@ $containerName = if ($outputPolicy.Rf64) { 'RF64' } else { 'RIFF' }
 Write-Host "Export: 48000 Hz, $($outputPolicy.Bits)-bit PCM, $($outputPolicy.Layout), $containerName WAV"
 Write-Host "Destination space: $availableBytes bytes available; $($spaceEstimate.RequiredBytes) bytes required including headroom."
 
-$inputSizeMB = "{0:N2} MB" -f ($inputFileItem.Length / 1MB)
 
 # --- EXECUTION ---
 Write-Host "`nRunning WinAudioClean..." -ForegroundColor Cyan
 Write-Host "Chain: $modeName" -ForegroundColor Gray
 
+$startedAt = [DateTime]::UtcNow
 $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
 
 # FFmpeg Command
@@ -942,86 +1295,55 @@ if ($process.StandardOutput) { Write-Host $process.StandardOutput }
 if ($process.StandardError) { Write-Host $process.StandardError -ForegroundColor Gray }
 if ($process.Error) { Write-Error -Message $process.Error -ErrorAction Continue }
 if ($process.CleanupError) { Write-Error -Message ("Native cleanup failed: " + $process.CleanupError) -ErrorAction Continue }
-$duration = $stopWatch.Elapsed.ToString("mm\:ss\.ff")
-$logDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-
-# Failure to read report metadata must have the same result under either
-# caller's ErrorActionPreference. Only a published file has report metadata.
+$duration = $stopWatch.Elapsed.ToString("c")
+# Metadata failures affect reporting only; the verified audio remains valid.
 $outputSizeMB = 'N/A'
+$outputBytes = $null
 $metadataError = $null
 try {
     if ($transaction.Published) {
         $outputFileItem = Get-Item -LiteralPath $outputFile -ErrorAction Stop
-        $outputSizeMB = "{0:N2} MB" -f ($outputFileItem.Length / 1MB)
+        $outputBytes = $outputFileItem.Length
+        $outputSizeMB = "{0:N2} MB" -f ($outputBytes / 1MB)
     }
 } catch {
     $metadataError = $_.Exception.Message
     Write-Warning ("Output size could not be read for the report: " + $metadataError)
-    if ($applicationExitCode -eq 0) { $applicationExitCode = 7; $status = 'WARNING' }
 }
 
-# Construct Verbose Log Entry
-$logEntry = @"
-================================================================================
-LOG DATE       : $logDate
---------------------------------------------------------------------------------
-STATUS         : $status (Native Exit Code: $nativeExitText; Application Exit Code: $applicationExitCode)
-MODE           : $modeName
-DURATION       : $duration
-
-INPUT FILE     : $inputPath
-INPUT SIZE     : $inputSizeMB
-OUTPUT FILE    : $outputFile
-OUTPUT SIZE    : $outputSizeMB
-JOB ID         : $($transaction.JobId)
-PARTIAL FILE   : $($transaction.TempPath)
-PUBLISHED      : $($transaction.Published)
-VERIFIED AUDIO : $($verifiedAudio.DurationSeconds) s; $($verifiedAudio.Frames) frames; $($verifiedAudio.SampleRate) Hz; $($verifiedAudio.Bits) bits
-
-ACTIVE FILTERS : $($outputPolicy.FilterPrefix)$filterChain
-EXPORT FORMAT  : 48000 Hz; $($outputPolicy.Codec); $($outputPolicy.Bits) bits; $($outputPolicy.Layout); $containerName WAV
-SPACE ESTIMATE : $($spaceEstimate.FileBytes) file bytes + $($spaceEstimate.ReserveBytes) reserve bytes; $availableBytes available before rendering
-EXECUTABLE     : $ffmpegPath
-FFMPEG VERSION : $ffmpegVersion
-FFPROBE        : $ffprobePath
-FFPROBE VERSION: $ffprobeVersion
-AUDIO STREAM   : $($selectedStream.Index) (absolute index; map 0:$($selectedStream.Index))
-INPUT AUDIO    : $($selectedStream.Codec); $($selectedStream.Channels) channel(s); $($selectedStream.SampleRate) Hz
-INPUT DURATION : $($selectedStream.DurationSeconds) s (selected stream)
-INPUT POLICY   : file protocol; WAV, MP3, FLAC, Ogg, MOV/MP4, Matroska/WebM, AAC, AIFF, ASF, AVI
-PROCESS ERROR  : $($process.Error)
-CLEANUP ERROR  : $($process.CleanupError)
-REPORT ERROR   : $metadataError
-OUTPUT ERROR   : $validationError
-STANDARD OUTPUT:
-$($process.StandardOutput)
-STANDARD ERROR:
-$($process.StandardError)
-================================================================================
-"@
-
-# Write to Log
-$reportGuard = $null
-try {
-    $reportGuard = Open-WacReportGuard -Path $logFile
-    Add-Content -LiteralPath $reportGuard.Path -Value $logEntry -ErrorAction Stop
+# Settle owned-partial cleanup before recording the terminal processing outcome.
+# Keep source and destination pinned until every report writer has closed.
+$outputCleanupErrors = @(Complete-WacOutputTransaction -Transaction $transaction)
+if ($outputCleanupErrors.Count -gt 0) {
+    Write-Warning ($outputCleanupErrors -join ' ')
+    if ($applicationExitCode -eq 0) { $applicationExitCode = 5 }
 }
-catch {
-    # Reporting failure must neither hide native failure nor delete audio.
-    Write-Warning ("Report could not be written: " + $_.Exception.Message)
-    if ($applicationExitCode -eq 0) {
-        $applicationExitCode = 7
-        $status = 'WARNING'
-    }
-} finally {
-    if ($null -ne $reportGuard) { Close-WacReportGuard -Guard $reportGuard }
+$reasonCodes = @()
+if (-not $process.Started) { $reasonCodes += 'native_start_failed' }
+elseif ($process.Error -or $process.CleanupError -or $process.TimedOut -or $null -eq $process.ExitCode -or $process.ExitCode -ne 0) { $reasonCodes += 'native_processing_failed' }
+if ($validationError) { $reasonCodes += 'output_validation_or_publication_failed' }
+if ($outputCleanupErrors.Count -gt 0) { $reasonCodes += 'owned_output_cleanup_failed' }
+$report = New-WacRunReport -Context @{
+    Transaction = $transaction; ToolVersion = $scriptVersion; Process = $process
+    ExitCode = $applicationExitCode; ReasonCodes = $reasonCodes
+    StartedAt = $startedAt; ElapsedSeconds = $stopWatch.Elapsed.TotalSeconds
+    Stream = $selectedStream; InputBytes = $inputFileItem.Length; OutputBytes = $outputBytes
+    Mode = $Mode; ModeName = $modeName; Policy = $outputPolicy; Mono = $Mono
+    FilterChain = $filterChain; VerifiedAudio = $verifiedAudio
+    FfmpegPath = $ffmpegPath; FfmpegVersion = $ffmpegVersion; FfprobePath = $ffprobePath; FfprobeVersion = $ffprobeVersion
+    SpaceEstimate = $spaceEstimate; AvailableBytes = $availableBytes
+    ValidationError = $validationError; CleanupErrors = $outputCleanupErrors; MetadataError = $metadataError
 }
+Write-WacRunReports -Report $report -OutputFolder $transaction.OutputFolder
+$applicationExitCode = $report.applicationExitCode
+$status = $report.status
 
 } finally {
     $cleanupErrors = @(Close-WacOutputTransaction -Transaction $transaction)
     if ($cleanupErrors.Count -gt 0) {
         Write-Warning ($cleanupErrors -join ' ')
-        if ($applicationExitCode -eq 0) { $applicationExitCode = 5; $status = 'FAILED' }
+        # Owned-output cleanup already settled the outcome before reporting.
+        # Releasing read-only source/directory handles is a console advisory.
     }
 }
 

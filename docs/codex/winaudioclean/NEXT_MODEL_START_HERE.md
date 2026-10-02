@@ -1,17 +1,17 @@
-# Next model: WAC-M1-06
+# Next model: WAC-M1-07
 
-**M1-05 is complete. Start only WAC-M1-06: readable, structured, privacy-aware
-run reports.** Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml,
-SYNC_PROTOCOL.md, tasks/WAC-M1-06.md, DATA_FORMATS.md, NATIVE_PROCESS_CONTRACT.md
-and evidence/WAC-M1-05.md. Preserve earlier evidence.
+**M1-06 is complete. Start only WAC-M1-07: Reliability regression gate.**
+Read AGENTS.md, STATUS.md, DECISIONS.md, TASKS.yaml, SYNC_PROTOCOL.md,
+tasks/WAC-M1-07.md, NATIVE_PROCESS_CONTRACT.md, DATA_FORMATS.md and
+evidence/WAC-M1-06.md. Preserve earlier evidence.
 
 ## Inspect and synchronize
 
 Use the established WinAudioClean-governance checkout on
 `codex/wac-m1-reliability`. Preserve the source-only starting folder. Exact
 fetch/push origin: https://github.com/PikkuJanne/WinAudioClean.git.
-M1-05 started at `afbf25aa8f935517a2a14b0f5fa655cb8a8c6e7e`; derive its completion
-SHA from the live branch/PR, not the starting SHA.
+M1-06 started at `cbe732c10bf815e57936fc8ddce50f1c86aa1559`; derive its final
+SHA from the live branch and PR, not this starting SHA.
 
 ```powershell
 python -X utf8 docs/codex/winaudioclean/tools/handoff.py inspect --repo .
@@ -22,102 +22,94 @@ python -X utf8 docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/c
 gh pr view 2 --repo PikkuJanne/WinAudioClean --json url,isDraft,state,baseRefName,headRefName,headRefOid,statusCheckRollup
 ```
 
-Only M1-06 should be ready. Reuse draft PR #2, stacked on `codex/wac-m0-handoff`
-while draft PR #1 is unmerged. Recheck live base/CI. Feature commits/pushes and
-draft PR updates are authorized; merges/releases/deployment require exact approval.
+Only M1-07 should be ready. Reuse draft PR #2, stacked on `codex/wac-m0-handoff`
+while draft PR #1 remains unmerged. Verify the live base/CI. Feature commits,
+pushes and draft PR updates are authorized; merges/releases/deployment require
+exact approval.
 
 ## Narrow next task
 
-- Keep a human summary and add versioned per-run JSON with status, tool versions,
-  selected stream, settings, exact effective filters, recording duration,
-  processing elapsed time, output format and metrics availability/reasons.
-- Retain native diagnostics and unique job IDs. Preserve primary processing
-  failures and published audio when report writes fail. Concurrent reports must
-  not overwrite or interleave incorrectly. Keep existing report-alias protection.
-- Provide an explicit redacted diagnostic export removing paths, filenames,
-  metadata and sensitive diagnostic text. Raw logs remain local; never upload
-  automatically. Cover AC-028/029/030 with success/encoder/validation failures,
-  null/nonfinite metrics, concurrent runs and injected logging failures.
-- Preserve exact filters/format policy, transaction guarantees, entry points and
-  PS5.1. No new sound tuning, broad CLI/queue work or publication.
+- Run cumulative Quick and M1 targeted checks, then one Full gate after resolving
+  any failures. Review intentional behavior changes and retained PowerShell/
+  drag-and-drop entry points. Do not turn this into the next audio feature task.
+- Review file writes, rename and cleanup paths with their fault evidence;
+  resolve known source/prior-output overwrites, ambiguous outcomes or false success.
+- Reconcile AC-031/032/033, record exact source/environment/commands, update state,
+  commit/push and verify clean local/live/PR equality. Stop at that checkpoint.
 
-## Current seams and invariants
+## Reporting seams and invariants
 
-Main script and required `WinAudioClean.IO.ps1` import without running the app;
-native declarations compile lazily. Copy both into sandboxes/distribution.
+Main and required sibling WinAudioClean.IO.ps1 dot-source without runtime
+work; native declarations compile lazily. Keep both in sandboxes/distribution.
+The main script owns New-WacRunReport, Format-WacRunReport, Write-WacRunReports,
+ConvertTo-WacMeasurement and explicit redaction/export helpers. Version 1 JSON
+and text use WinAudioClean_<jobId> filenames; the summary retains old labels.
+Rendering duration is separate from selected recording duration. No independent
+loudness measurements exist; null/reason values are intentional.
 
-`Get-WacOutputPolicy` builds fixed 48 kHz PCM16/24, standard mono/stereo, optional
-mono prechain and explicit RF64 policy. CLI `-BitDepth 16|24`, `-Mono`, `-Rf64`;
-invalid bits/layouts use code 2. `FilterPrefix` is empty except requested stereo
-mono (`pan=mono|c0=0.5*c0+0.5*c1,`). Exact Original Raw/Zoom profiles are unchanged.
-Reports must record prefix plus profile, actual verified output and requested
-format. Source metadata/chapters are omitted from exports. Batch launcher uses
-defaults; advanced export settings use PowerShell.
+IO Open-WacReportWriter uses CreateNew for per-run files and exclusive writers
+for summary append. Retry only sharing/lock errors up to 3 seconds. Reject
+reparse/multiple-hardlink files, hold the canonical destination and source, flush
+before success, and rollback only bytes appended under this writer. BOM/strict
+UTF-8/current ANSI encoding detection preserves old logs. Preserve the older
+Open/Close-WacReportGuard API/tests. Complete-WacOutputTransaction finishes
+owned-file cleanup before reporting; Close releases the remaining safety pins.
+Later release of flushed/read-only handles is advisory and cannot contradict
+the persisted outcome. Unrecoverable I/O/crashes can leave incomplete reports.
 
-`Get-WacOutputSpaceEstimate` uses selected-track duration + 101 ms, 1 MiB header
-allowance, and the greater of 64 MiB or 10% reserve. RIFF estimates above uint32 max fail with
-RF64 guidance. `Get-WacAvailableOutputBytes` calls GetDiskFreeSpaceExW using the
-held destination handle's canonical path, including quota effects. Space failure
-is code 5 before render. Checks do not reserve capacity against other writers.
+Write-WacRunReports retires a failed writer, removes only its owned file (or
+rolls back summary), then corrects surviving files to WARNING/7 where possible.
+Earlier native/output failures retain 3/4/5. Raw diagnostics stay in local JSON/
+text. Human metadata control chars are escaped to prevent forged field lines.
 
-`New-WacOutputTransaction` pins input/destination identities and owns CreateNew
-`.wac-<GUID>.partial`. Bounded output probing precedes freeze; the same identity
-is validated and renamed through a held handle with replacement disabled. The
-validator now requires requested PCM/rate/layout/container, complete samples and
-selected-track timing; RF64 ds64 supports one data chunk, no extra table, exact
-64-bit sizes/frame counts. Cleanup removes only owned partials; crash leftovers
-and foreign replacements survive. Never replace this with release/reopen rename.
+-ExportDiagnostic <raw-json> -DiagnosticOutputPath <new-json> bypasses media
+dependencies, rejects processing flags and arrays/unknown versions, limits
+input to 16 MiB, pins its source read-only and destination parent, and never
+overwrites. Projection retains only typed numbers/booleans/fixed labels,
+omitting all free-form strings. Review-before-sharing warning appears; no upload.
 
-Input remains locked through reporting. Existing report guard uses write access
-without delete sharing and rejects reparse/multiple-hardlink files. PS5
-Add-Content is incompatible with a read/write guard; metadata-only handles do
-not prevent replacement. Current text log is shared and appended; concurrency
-and per-run structure belong to M1-06. Early pre-render failures use console
-messages. Existing report DURATION is elapsed render time; selected recording
-duration is available separately. No measured LUFS/true-peak values exist yet.
+## Earlier safety and audio contracts
 
-Exits: 0 validated/published/report complete; 2 preflight/settings/selection;
-3 dependency/start; 4 probe/native/capture/cleanup; 5 output/space/validation/
-publication/owned cleanup; 7 published audio with incomplete report; 130 menu
-cancel. Preserve prior failures and native diagnostics when reporting fails.
+Keep exact Original Raw/Zoom strings and explicit 48 kHz PCM16/24 mono/stereo
+exports. Mono is an explicit equal-weight prechain; RF64 is explicit. Metadata
+and chapters are omitted from audio. Capacity includes 101 ms timing slack,
+1 MiB headers and max(64 MiB, 10%) reserve, queried through the pinned directory.
+No capacity reservation against competing writers. Unsupported layouts/settings
+fail before render. Stream duration never substitutes container duration.
+
+Transaction owns a CreateNew .wac-<GUID>.partial. Probe, freeze/check identity,
+validate complete PCM/layout/container/timing, then rename the held object with
+replacement disabled. Cleanup deletes only owned identities; preserve foreign
+replacements and crash leftovers. Never replace this with a release/reopen move.
+Native direct-process capture remains in memory, inspection deadline 15 seconds,
+render has no total timeout. Exits: 0 complete, 2 input/settings, 3 dependency/
+start, 4 probe/native/capture, 5 output/space/cleanup, 7 reporting, 130 menu cancel.
+Early pre-render failures remain console-only.
 
 ## Tests and tools
 
-Final Full: 487 Pester per shell, zero failures/skips; 61 Python passed plus one
-symlink-privilege skip per shell, runner exits 0. Parser: 23 files; 98 non-gating
-analyzer advisories. Encoding 48, Validation 70 and entry subset 16 pass per shell.
-Real encoding 40/40; transaction regression 30/30 (32 app invocations), stable
-runtime hashes. Full/source/evidence identities are recorded in the manifest.
+Final M1-06 Full: 543 Pester passed, zero failures/skips; 61 Python passed plus
+one symlink-privilege skip per shell. Parser 25 files; 112 non-gating advisories.
+RunReports 33/33, ReportIO 23/23, Transaction 27/27 per shell. Real reporting
+24/24 (24 renders and four diagnostic CLI invocations), stable runtime/harness
+hashes matching Full. Earlier encoding/transaction/media evidence is preserved.
 
 ```powershell
 pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Quick
-pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Reporting.Tests.ps1
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.RunReports.Tests.ps1
 pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings
 powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Full
 ```
 
-Use fresh shells. Pinned modules are in ignored `.wac-local/Modules`. Python
-wrappers omit inherited PSMODULEPATH per child so PS5 initializes its defaults;
-keep the established transient runner flags. Do not alter persistent security
-settings. Preserve earlier M1-02 policy/resumption history. PS5 New-Item Junction
-treats bracketed target text as a wildcard; test setup uses an ordinary target.
+Use fresh shells and pinned modules under ignored .wac-local/Modules. Python
+child launchers omit inherited PSMODULEPATH for PS5. Use existing FFmpeg/ffprobe
+9.0.2 under .wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin.
+Test-RunReports.py stores synthetic audio/raw reports locally; evidence carries
+sanitized status observations/hashes. No runtime Python or security changes.
+Preserve M1-02's policy/resumption history. Main/README tracked CRLF and IO LF
+must stay intact; the current delivery bytes are the exact Full/real-tested ones.
 
-Existing FFmpeg 9.0.2:
-`.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin`.
-`scripts/Test-OutputEncoding.py` covers format/channels/timing/small RF64;
-`scripts/Test-OutputTransactions.py` retains publication/failure/compressed-input
-checks; `scripts/Test-MediaPreflight.py` retains track/network policy. All use
-installed tools, synthetic local media and ignored output; no runtime Python.
-
-Raw's approximately 25 ms marker delay is measured in both the original 192 kHz
-render and new 48 kHz output; residual change is under 0.009 ms. Preserve and report
-this behavior. No speech listening, full >4 GB, real disk exhaustion, long-file/
-memory stress or running-render Ctrl+C claim. Native capture remains in memory.
-
-After M1-06, reconcile acceptance/evidence/status/handoff, stage/review intended
-files, commit/push, verify local/live/PR heads, and stop before M1-07.
-
-Delivery note: the main script and README retain their tracked CRLF line endings.
-Main bytes equal the Full/real-tested source after newline normalization. Final
-Quick passed 300/300 in both shells on delivery bytes; the source manifest retains
-Full and delivery hashes separately. No logic changed after the Full gate.
+No independent loudness/speech-quality claim. Preserve the original Raw marker
+delay (~25 ms), measured against the legacy render in M1-05. Full >4 GB, real
+disk exhaustion, speech listening, long-file/memory stress and running-render
+Ctrl+C remain unverified. Do not convert these limits into passing evidence.
