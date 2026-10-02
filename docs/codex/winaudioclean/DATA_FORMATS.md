@@ -24,21 +24,24 @@ remain console-only. New per-run files use CreateNew and UTF-8 without a BOM.
 | Fields | Meaning |
 | --- | --- |
 | `schemaVersion`, `jobId`, `toolVersion` | Integer schema version `1`, the unique transaction ID and the application version. |
-| `presetId`, `presetName`, `presetVersion` | Since M2-01, `original`, `Original`, `1.0.0` from the selected processing profile; `presetVersionReason` is `null`. Both Raw and Zoom use this preset. Older M1 reports have a null version with `not_versioned`. |
+| `presetId`, `presetName`, `presetVersion` | Base preset from the selected processing profile: default `original`, `Original`, `1.0.0`; optional Raw `gentle`, `Gentle (experimental)`, `0.1.0` since M2-03. `presetVersionReason` is `null`. Older M1 reports have a null version with `not_versioned`. |
+| `presetExperimental`, `presetCustomized` | Since M2-03, typed booleans: Gentle is experimental; a nonempty cleaning-options override marks the run customized. |
 | `sourceRevision` | `null` with `not_embedded`; no revision is inferred from the machine. |
 | `status`, `applicationExitCode` | Final `SUCCESS`, `WARNING` or `FAILED` outcome, including loudness and reporting warnings. |
 | `processingStatus`, `processingExitCode`, `nativeExitCode` | Processing/publication/owned-cleanup result kept separate from loudness/report warnings and the actual native exit. |
 | `reasonCodes`, `warningCodes`, `reporting` | Machine-readable cause labels, report completeness and local error messages. |
 | `timing`, `input` | UTC processing start and post-processing/cleanup end; elapsed analysis, rendering, validation and publication seconds; selected recording duration, size, path and stream metadata. |
-| `settings`, `dependencies` | Raw/Zoom mode, `loudnessMode` (`Fast` or `Accurate`), bit depth, mono/RF64 choices, exact effective filter chain, executable paths and version banners. |
+| `settings`, `dependencies` | Raw/Zoom mode, `loudnessMode` (`Fast` or `Accurate`), bit depth, mono/RF64 choices, typed effective cleaning settings since M2-03, exact effective filter chain, executable paths and version banners. |
 | `output`, `space` | Published state, validity, requested format, verified PCM parameters, paths/size, and pre-render capacity estimates. Requested format alone is not proof of a valid export. |
 | `requestedTargets`, `measurements`, `loudnessCompliance` | Requested integrated LUFS, true-peak dBTP and `loudnessRangeLu`; final-file measurement availability and compliance status. |
 | `loudnessTolerances`, `normalization` | Integrated/peak tolerances; requested processing mode, actual normalization type, fallback and analysis/render/final-measurement stage records. |
 | `diagnostics`, `privacy` | Separate native stdout/stderr, processing/output/cleanup errors, local report paths and a privacy notice. |
 
-Preset identity is additive in schema version 1. It describes the filter values
+Preset identity is additive in schema version 1. It names the base filter values
 and order, separately from `toolVersion` (currently `2.3`), mode and export
-format. JSON, text and the summary carry the effective identity. Redacted
+format. Since M2-03, customized renders also require their effective settings
+and exact graph; the base identity alone is insufficient. JSON, text and the
+summary carry the identity and customization flag. Redacted
 diagnostic exports continue to omit all preset/application version fields,
 including arbitrary values supplied in a report.
 
@@ -131,6 +134,46 @@ Warnings must survive later report outcome updates and report-write retries.
 `measurement_failed`; PASSED has a null reason. A normalization fallback can
 produce overall WARNING/7 even when final compliance is PASSED.
 
+### Implemented cleaning fields — WAC-M2-03 (2026-10-02)
+
+Schema version 1 gains additive `presetExperimental`, `presetCustomized` and
+`settings.cleaning`. Earlier reports remain readable with these fields absent;
+no historical report is rewritten. `presetExperimental` is true for Gentle,
+false for Original. `presetCustomized` is true whenever a nonempty
+`-CleaningOptions` dictionary was supplied, including values equal to defaults.
+Identity remains the selected base candidate rather than a new preset ID for
+each override. Local text/summary reports also mark experimental/customized
+state and retain the exact filter chain.
+
+For Raw, `settings.cleaning` is a typed object with these exact field names:
+
+| Field | Type / meaning |
+| --- | --- |
+| `schemaVersion` | Integer `1` for this cleaning-settings contract. |
+| `Declip`, `Declick`, `Denoise`, `Gate` | Boolean effective stage toggles. |
+| `HighpassHz` | Finite number, 20 through 200 Hz. |
+| `NoiseFloorDb` | Finite number, -80 through -20 dB. |
+| `NoiseReductionDb` | Finite number, 0.01 through 20 dB. |
+| `GateThresholdDb` | Finite number, -80 through -20 dBFS. |
+| `GateRangeDb` | Finite number, -60 through 0 dB. |
+
+Bounds are inclusive. Numeric fields retain the validated effective values
+even when denoise or gate is disabled; their toggles determine whether the
+stage is present. Zoom has `settings.cleaning: null`, because it applies no
+cleaning. It accepts only Original and no nonempty override.
+
+Original Raw has all toggles true, 80 Hz, -25/12 dB noise settings and nominal
+-45/-25 dB gate settings. Gentle Raw has declip/declick/gate false, denoise
+true, 60 Hz and -35/6 dB noise settings; its dormant gate settings remain
+-45/-25 dB. Nominal gate defaults preserve the rounded legacy linear literals
+`threshold=0.0056` and `range=0.056`. Other gate values use `10^(dB/20)`.
+Original's baseline graph leaves `afftdn nr` implicit; 12 dB is the default
+of the tested build. Reproduction needs the base identity, customization flag,
+typed settings, `settings.exactFilters`, processing mode, FFmpeg build and
+output/channel policy together. Accurate additionally retains its actual
+analysis/render graphs under `normalization`. These flags record selection;
+they do not certify listening approval or processing success.
+
 ### Explicit redacted diagnostic export
 
 `-ExportDiagnostic <raw-json> -DiagnosticOutputPath <new-json>` is a separate
@@ -157,6 +200,11 @@ Stage records, arguments, filters, stage measurements, native output and error
 strings are omitted. Targets and tolerances are also omitted from this smaller
 diagnostic schema. Earlier version 1 reports remain accepted; absent new labels
 become null.
+
+M2-03 keeps this projection unchanged: cleaning settings, preset identity,
+`presetExperimental` and `presetCustomized` are omitted, even if arbitrary
+values are injected into a source report. The redacted export is insufficient
+to reproduce a cleaning candidate; the detailed original stays local.
 
 ## Website release metadata
 

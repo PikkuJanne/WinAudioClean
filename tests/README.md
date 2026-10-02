@@ -459,3 +459,40 @@ only the owned harness process tree if it expires. Fixture tests and generated
 audio establish mechanics, not listening approval, long-file/memory stress or
 full >4 GB output. Keep media, raw local reports and private paths out of Git;
 only reviewed, sanitized evidence belongs in the task record.
+
+## Optional Gentle cleaning and validated controls (WAC-M2-03)
+
+`WinAudioClean.Cleaning.Tests.ps1` covers finite typed options, both numeric
+bounds, injected/unknown settings, stage toggles, locale serialization and
+exact Original defaults. It checks the versioned effective settings, Accurate
+profile reconstruction, candidate/customization reports and diagnostic redaction.
+Entry checks reject invalid cleaning configuration before native execution or
+destination creation. Run this suite in both supported shells before Full:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Cleaning.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Cleaning.Tests.ps1
+```
+
+Use fresh ignored directories for the real FFmpeg harnesses:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-GentleCleaning.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-03/gentle-final
+python -X utf8 scripts/Test-OriginalPreset.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-03/original-final
+```
+
+The Gentle matrix uses deterministic synthetic input in PS5.1/en-US and
+PS7/de-DE. It checks selected streams, mono conversion, Fast/Accurate processing,
+custom stage toggles and boundary/fractional options. An isolated app copy
+records native arguments through a reviewed wrapper that delegates to the
+unchanged runtime. Accurate repeats the validated prechain and meters the held
+encoded output. Independent published-file checks verify reports; Fast cases
+also compare decoded PCM with direct filter references. The separate Original
+matrix verifies unchanged default PCM against the frozen baseline.
+
+These checks establish processing mechanics on the recorded build. Speech
+listening remains unperformed without cleared material; use the
+[candidate record](../docs/codex/winaudioclean/evidence/WAC-M2-03-listening.md)
+for the pending review. Neither synthetic exports nor the Gentle name approve
+voice quality or a default sound change.

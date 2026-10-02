@@ -636,8 +636,12 @@
       "title": "Parameter validation",
       "procedure": "Test valid bounds, invalid values, unknown settings and filter-like injected strings.",
       "expected": "Only typed allowlisted settings construct the graph; no arbitrary filter/command injection through configuration.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-03.md",
+        "evidence/WAC-M2-03-source.json",
+        "evidence/WAC-M2-03-gentle-cleaning.json"
+      ]
     },
     {
       "id": "AC-041",
@@ -645,8 +649,13 @@
       "title": "Defaults unchanged",
       "procedure": "Run the existing no-extra-options Raw and Zoom paths after adding presets.",
       "expected": "Original filters remain the default; Zoom does not accidentally enable cleaning stages.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-03.md",
+        "evidence/WAC-M2-03-source.json",
+        "evidence/WAC-M2-03-gentle-cleaning.json",
+        "evidence/WAC-M2-03-original-preservation.json"
+      ]
     },
     {
       "id": "AC-042",
@@ -654,8 +663,12 @@
       "title": "Listening candidate record",
       "procedure": "Compare original/gentle on the approved local corpus or record why unavailable.",
       "expected": "Reviewer evaluates words, consonants, breaths, voice character and artifacts; synthetic checks are not presented as listening approval.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-03.md",
+        "evidence/WAC-M2-03-source.json",
+        "evidence/WAC-M2-03-listening.md"
+      ]
     },
     {
       "id": "AC-043",

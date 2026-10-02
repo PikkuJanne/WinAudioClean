@@ -365,3 +365,38 @@ completeness stay separate. Add typed fields to schema 1; support export copies
 only finite numbers, booleans and fixed enums/reasons. Fast stays NOT_MEASURED.
 Evidence: `evidence/WAC-M2-02.md`. This does not approve a new default sound or
 certify speech quality. The next task is optional gentle cleaning, WAC-M2-03.
+
+### 2026-10-02 — WAC-M2-03 optional Gentle candidate and typed cleaning
+
+D29. Keep Original `original`/`1.0.0` and the exact no-extra-options Raw/Zoom
+graphs as defaults. Add explicit Raw-only `-Preset Gentle`, ID `gentle`, version
+`0.1.0`, marked experimental: declip/declick/gate off, denoise on, highpass 60 Hz,
+noise floor -35 dB and noise reduction 6 dB. Leveling, targets, export and
+channel policy remain separate. The candidate name establishes no listening
+advantage. Zoom rejects Gentle or any nonempty cleaning override.
+
+Accept `-CleaningOptions` only as typed allowlisted Boolean toggles and finite
+numeric scalars within the documented bounds. Reject unknown/injected keys,
+strings, booleans in numeric fields, collections, scriptblocks and null values;
+validate inactive values too. Compose the fixed stage order and invariant
+numeric arguments. Preserve the rounded legacy `agate` literals at nominal
+-45/-25 dB and Original's implicit `afftdn nr` default; reproduction still needs
+the exact graph and FFmpeg build. Accurate repeats the validated selected
+prechain in both passes while retaining its existing held-stream final check.
+
+Report schema 1 adds `presetExperimental`, `presetCustomized` and typed
+`settings.cleaning` (null for Zoom). A nonempty override marks customization
+even if values match defaults; the ID/version continues to identify the base
+candidate. Effective settings and exact filters describe the actual customized
+run. The redacted diagnostic export omits these new settings and identity flags.
+Hashtable CLI examples use a direct PowerShell call; no saved configuration or
+new menu/launcher selector is included.
+
+AC-042 records listening as unperformed because no owner-supplied,
+permission-cleared corpus was supplied. The candidate record retains exact
+base settings and a reviewer checklist; speech render settings, revision,
+playback setup and results remain pending. Synthetic checks cannot approve
+words, consonants, breaths, voice character or artifacts. Evidence:
+`evidence/WAC-M2-03.md` and `evidence/WAC-M2-03-listening.md`.
+No default-sound promotion, merge, release, deployment or security-policy
+approval is added.

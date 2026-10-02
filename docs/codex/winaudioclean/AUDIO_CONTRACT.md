@@ -28,6 +28,58 @@ the same FFmpeg build and output settings. Omitted FFmpeg options still use
 that build's defaults. Single-pass output remains independently unmeasured;
 -12 LUFS and -1.5 dBTP are requested settings. Speech listening remains pending.
 
+### Implemented optional cleaning — WAC-M2-03 (2026-10-02)
+
+`-Preset Original` remains default. `-Preset Gentle` is an opt-in experimental
+Raw candidate, ID `gentle`, version `0.1.0`. Its Fast graph is:
+
+```text
+highpass=f=60,afftdn=nf=-35:nr=6,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
+```
+
+Gentle disables declip, declick and gate, retains denoise, and changes only
+the high-pass cutoff/noise settings. Leveling and loudness targets remain as
+above. "Gentle" names this candidate; no speech-quality advantage is established.
+Zoom accepts only Original and an empty cleaning-options dictionary; it never
+adds cleaning stages. The two-choice menu and launcher retain their defaults.
+No saved settings or automatic preset selection is implemented here.
+
+Raw accepts `-CleaningOptions` as a PowerShell hashtable. The allowlist is:
+
+| Key | Type / inclusive bounds |
+| --- | --- |
+| `Declip`, `Declick`, `Denoise`, `Gate` | Boolean |
+| `HighpassHz` | Finite numeric scalar, 20 through 200 |
+| `NoiseFloorDb` | Finite numeric scalar, -80 through -20 |
+| `NoiseReductionDb` | Finite numeric scalar, 0.01 through 20 |
+| `GateThresholdDb` | Finite numeric scalar, -80 through -20 |
+| `GateRangeDb` | Finite numeric scalar, -60 through 0 |
+
+Reject unknown keys, numeric strings, booleans in numeric fields, null,
+nonfinite values, collections and scriptblocks before constructing filters.
+Validate dormant values too. Overrides affect only this run; they do not admit
+FFmpeg option/filter text. Preserve stage order: optional adeclip, highpass,
+optional adeclick, optional afftdn, optional agate, then unchanged leveling.
+Highpass always remains in Raw. Accurate repeats this validated selected
+prechain in both passes before its existing measured normalization workflow.
+
+Original's effective Raw defaults are all four stages enabled, 80 Hz,
+noise floor -25 dB, noise reduction 12 dB, and nominal gate threshold/range
+-45/-25 dB. Gentle uses 60 Hz, -35/6 dB, with the same dormant gate values.
+Keep the original literal `0.0056` threshold and `0.056` range when the nominal
+gate defaults are selected; rounding them anew would change the baseline.
+Other gate values use `10^(dB/20)` and invariant decimal serialization.
+Original's baseline afftdn omits `nr`; 12 dB is the tested build's default.
+The exact graph and FFmpeg build remain required for reproducibility.
+
+These application bounds are deliberately narrower than some FFmpeg limits.
+Parameter meanings were rechecked against [afftdn](https://ffmpeg.org/ffmpeg-filters.html#afftdn),
+[agate](https://ffmpeg.org/ffmpeg-filters.html#agate) and
+[highpass](https://ffmpeg.org/ffmpeg-filters.html#highpass), plus installed
+FFmpeg 9.0.2 filter help. This substantiates option compatibility, not listening
+approval. Candidate settings and the unavailable-corpus disposition are in
+`evidence/WAC-M2-03-listening.md`.
+
 ## Correct definitions [S01]
 
 `loudnorm I` targets integrated LUFS, not RMS. `dynaudnorm p` is a peak-amplitude target, not an Adobe percentage. `afftdn nf` describes the noise floor; `nr` controls reduction. A nonzero gate range is limited attenuation, not guaranteed silence. Dynamic loudnorm uses 192 kHz internally; specify the export rate. Two-pass processing can fall back to dynamic normalization when linear constraints are not met.
@@ -41,11 +93,12 @@ that build's defaults. Single-pass output remains independently unmeasured;
 Pass 1's discarded render is not an input for pass 2 unless an explicitly documented, tested lossless staging design replaces the repeated prechain. Compare both command structures. Unit-test measurement JSON extraction amid stderr text; handle strings such as -inf safely. Parse invariant decimals and serialize only finite allowed values.
 
 Both Accurate passes explicitly use I=-12 LUFS, TP=-1.5 dBTP and LRA=7 LU.
-A common `aresample=192000` step follows Original's dynamic leveling and precedes
+A common `aresample=192000` step follows the selected preset's dynamic leveling and precedes
 terminal loudnorm so linear versus dynamic loudnorm negotiation cannot change
 the rate of the signal being measured.
 The exact same prechain, stream map and channel policy feed both passes. Fast's
-literal filter string and arguments receive no extra resampling or analysis.
+no-extra-options Original filter strings and arguments receive no extra
+resampling or analysis; optional cleaning changes only the selected Raw chain.
 The M1 export policy still determines the final 48 kHz PCM encoding.
 Each Accurate stage has a finite deadline of 20 times the selected duration
 plus 60 seconds, with a 120-second minimum and an Int32-millisecond maximum,

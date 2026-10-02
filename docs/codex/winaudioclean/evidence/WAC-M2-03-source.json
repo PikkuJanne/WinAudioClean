@@ -1,0 +1,306 @@
+{
+  "task": "WAC-M2-03",
+  "date": "2026-10-02",
+  "start_revision": "275c6a7fece04b6879f31b4d58a3feb44587e87c",
+  "branch": "codex/wac-m2-audio",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.6",
+    "child_psmodulepath_removed": true,
+    "ps51": "5.1.26100.9444",
+    "ps7": "7.6.5"
+  },
+  "development_modules": {
+    "Pester": "5.7.1",
+    "PSScriptAnalyzer": "1.24.0"
+  },
+  "tools": {
+    "ffmpeg": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    "ffprobe": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+    }
+  },
+  "source": {
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.bat": "171ee19fd3ccf36dcd7b2f4253765775a4c33d337243255690f8f428101c5de4",
+    "WinAudioClean.ps1": "65023091c1452cd23c1c36a2b43ef31f8ae84bc1d0b1026f36a74e41c804de30",
+    "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+    "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+    "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+    "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+    "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+    "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+    "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+    "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+    "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+    "scripts/Test-GentleCleaning.py": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87",
+    "scripts/Test-MeasuredLoudness.py": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762",
+    "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+    "scripts/Test-OriginalPreset.py": "5243779ab0bf7599b0559622ce0056eefc1063b7fb684be4ee6ca259a2a7a34a",
+    "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+    "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+    "scripts/Test-RunReports.py": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+    "tests/WinAudioClean.Cleaning.Tests.ps1": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1",
+    "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+    "tests/WinAudioClean.EntryPoints.Tests.ps1": "731d0fe75c3deeaf68f6ac3cfcb082c4e8627aad50b589acfd168b2ca8e6fb01",
+    "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+    "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+    "tests/WinAudioClean.Loudness.Tests.ps1": "b31746b37e163ffe9db3502c74cbab417e1d46fb2aba50a5cd4c9a042ebaace7",
+    "tests/WinAudioClean.LoudnessRuntime.Tests.ps1": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94",
+    "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+    "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+    "tests/WinAudioClean.NativeInput.Tests.ps1": "52660d8626758fea83ef8338888b10125cf5cd1d3d3a7be903a50fcc8c13206a",
+    "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+    "tests/WinAudioClean.Preset.Tests.ps1": "b749593844bb61c284702254413955bf2f20258d1f61df3d6bae9837ecd3596b",
+    "tests/WinAudioClean.ReportIO.Tests.ps1": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a",
+    "tests/WinAudioClean.Reporting.Tests.ps1": "37fc962ab339f0f4176d3211818dc20edbe2151427be66a489c84b5e02352114",
+    "tests/WinAudioClean.RunReports.Tests.ps1": "d1a225e75a187cfdcb63ad7efeee9fc2ae05cc724210579a46456918ea32c335",
+    "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+    "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+    "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+    "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+    "tests/fixtures/Invoke-LauncherCase.ps1": "96324d57b0b88ea7782ac3e60a7e0a9206f217d4e1f63c02e49cdc784836dd45",
+    "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+    "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+    "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+    "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+    "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+  },
+  "source_unchanged_during_final_targeted_and_full": true,
+  "preserved_earlier_source_except_main": 41,
+  "preserved_prior_m2_02_evidence": true,
+  "targeted": {
+    "runs": [
+      {
+        "shell": "ps51",
+        "phase": "Targeted",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.Loudness.Tests.ps1','tests/WinAudioClean.LoudnessRuntime.Tests.ps1','tests/WinAudioClean.NativeInput.Tests.ps1','tests/WinAudioClean.Preset.Tests.ps1','tests/WinAudioClean.Cleaning.Tests.ps1')"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 55.22,
+        "log": "evidence/WAC-M2-03-targeted-ps51.txt",
+        "log_sha256": "a9a60fc19baff97a5a2e87df6647ead3489d112b61ba7766804eb2b8fac89a83"
+      },
+      {
+        "shell": "ps7",
+        "phase": "Targeted",
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.Loudness.Tests.ps1','tests/WinAudioClean.LoudnessRuntime.Tests.ps1','tests/WinAudioClean.NativeInput.Tests.ps1','tests/WinAudioClean.Preset.Tests.ps1','tests/WinAudioClean.Cleaning.Tests.ps1')"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 65.68,
+        "log": "evidence/WAC-M2-03-targeted-ps7.txt",
+        "log_sha256": "5745f59a28118585c9c6ebb278d8683f7312fb45e83c00b2857c5e49aadeffc1"
+      }
+    ],
+    "pester_per_shell": 323
+  },
+  "full": {
+    "runs": [
+      {
+        "shell": "ps51",
+        "phase": "Full",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Full"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 549.14,
+        "log": "evidence/WAC-M2-03-full-ps51.txt",
+        "log_sha256": "a13533293f3e7508f562b9e990db00fb21169b5a8dd5c1a266c2265378ff77e4"
+      },
+      {
+        "shell": "ps7",
+        "phase": "Full",
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 580.2,
+        "log": "evidence/WAC-M2-03-full-ps7.txt",
+        "log_sha256": "6968511e2accfc7b4ee50685cf225b493681487c7cb0d2faf5997d160763d1dc"
+      }
+    ],
+    "pester_per_shell": 866,
+    "python_passed_per_shell": 61,
+    "python_skipped_per_shell": 1,
+    "skip_reason": "Windows symlink privilege unavailable",
+    "powershell_parser_files": 30,
+    "non_gating_analyzer_advisories": 161
+  },
+  "initial_targeted": {
+    "runs": [
+      {
+        "shell": "ps51",
+        "phase": "Targeted",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.Loudness.Tests.ps1','tests/WinAudioClean.LoudnessRuntime.Tests.ps1','tests/WinAudioClean.NativeInput.Tests.ps1','tests/WinAudioClean.Preset.Tests.ps1','tests/WinAudioClean.Cleaning.Tests.ps1')"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 51.41,
+        "log": "evidence/WAC-M2-03-targeted-initial-ps51.txt",
+        "log_sha256": "91de107d8bce0112a69ea018d659f472e5c3c857ff817857190acce8263a0db1"
+      },
+      {
+        "shell": "ps7",
+        "phase": "Targeted",
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.Loudness.Tests.ps1','tests/WinAudioClean.LoudnessRuntime.Tests.ps1','tests/WinAudioClean.NativeInput.Tests.ps1','tests/WinAudioClean.Preset.Tests.ps1','tests/WinAudioClean.Cleaning.Tests.ps1')"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 59.26,
+        "log": "evidence/WAC-M2-03-targeted-initial-ps7.txt",
+        "log_sha256": "f05cebdfff2b62164cb4661b641336a0764ca36ba049dd74c0f9d57295a56b24"
+      }
+    ],
+    "pester_per_shell": 312,
+    "source_unchanged": true,
+    "note": "Before integrity refinements and expanded CLI tests; superseded by final gates"
+  },
+  "preliminary_cleaning": {
+    "commands": [
+      [
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/Invoke-Tests.ps1",
+        "-Level",
+        "Targeted",
+        "-Path",
+        "tests/WinAudioClean.Cleaning.Tests.ps1"
+      ],
+      [
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/Invoke-Tests.ps1",
+        "-Level",
+        "Targeted",
+        "-Path",
+        "tests/WinAudioClean.Cleaning.Tests.ps1"
+      ]
+    ],
+    "main_sha256": "ba14baa4f74cabb73831e817e4aef959fb05f542d5a184e462c1acdf4e368b60",
+    "test_sha256": "f86d35604010d130c97ef6f352a2b6c1853be2bd698965c70f0f84aac5cc81ef",
+    "ps51": {
+      "passed": 193,
+      "failed": 7,
+      "exit_code": 1
+    },
+    "ps7": {
+      "passed": 200,
+      "failed": 0,
+      "exit_code": 0
+    },
+    "reason": "Only diagnostic wrapping assertions failed in PS5.1; normalize whitespace in tests. Child exit2 and no output already passed."
+  },
+  "media": {
+    "gentle_cases": 16,
+    "gentle_fast_references": 4,
+    "original_cases": 20,
+    "original_frozen_references": 10,
+    "locale_pcm_pairs": 8,
+    "exit_codes": [
+      0,
+      0
+    ],
+    "source_scope": {
+      "media_main_sha256": "ba14baa4f74cabb73831e817e4aef959fb05f542d5a184e462c1acdf4e368b60",
+      "final_main_sha256": "65023091c1452cd23c1c36a2b43ef31f8ae84bc1d0b1026f36a74e41c804de30",
+      "changes": [
+        "Comment-based help: Original Raw qualifier",
+        "Comment-based help: Zoom rejects nonempty options"
+      ],
+      "all_parameters_helpers_runtime_identical": true
+    },
+    "gentle_evidence": "evidence/WAC-M2-03-gentle-cleaning.json",
+    "original_evidence": "evidence/WAC-M2-03-original-preservation.json"
+  },
+  "listening": {
+    "performed": false,
+    "reason": "No permission-cleared owner speech corpus supplied or selected",
+    "approval": false,
+    "evidence": "evidence/WAC-M2-03-listening.md"
+  },
+  "documents": {
+    "README.md": "049601e9ef3761f090bf0d835378d1197628d0342c1ed195a3000a7cf7033935",
+    "tests/README.md": "4b558878443e7c843a10ea48aa1a80dd3d0dd5336b748291a930355ef7eb9b3a",
+    "docs/codex/winaudioclean/AUDIO_CONTRACT.md": "2eaa93484fc07c66a615cc7cd37c97dbe550d8781d07e46c647a557ed5873320",
+    "docs/codex/winaudioclean/DATA_FORMATS.md": "b5b4851de23d088550c4f0a0fe0330289ad1dd829641a9e9ea0768361edb529d",
+    "docs/codex/winaudioclean/DECISIONS.md": "eff46f11f548c3057c21dc206a804fcadd74bec25902cb00b4a74a7d895a77ab",
+    "docs/codex/winaudioclean/STATUS.md": "bb6cc91171ad335d670b89386c38634c32a964510720b675941a84bcacee1979",
+    "docs/codex/winaudioclean/NEXT_MODEL_START_HERE.md": "560b9d035f00b80dbaba1bd3e68ff1ebeabca572ebd4f66fdf774860e29a0469",
+    "docs/codex/winaudioclean/TASKS.yaml": "3692124bbbc3a313a431a9a40f5636d2f0ce5864d558af4f0f8566e12e3276fd",
+    "docs/codex/winaudioclean/ACCEPTANCE.json": "cc2354690973ae72a53e4eaeb0c1e8101138bdd4c7c60314ab09d5410c2dd503"
+  },
+  "evidence": {
+    "evidence/WAC-M2-03-cleaning-preliminary-ps51.txt": "7c7508675ab42898e1880a285c55024a1002d82c7b5fb2831d92fcda650d93df",
+    "evidence/WAC-M2-03-cleaning-preliminary-ps7.txt": "6113f09543f5cb025ce946e0c286c8d8fbd4d105f262bd65c08dd548d6e46a1e",
+    "evidence/WAC-M2-03-full-ps51.txt": "a13533293f3e7508f562b9e990db00fb21169b5a8dd5c1a266c2265378ff77e4",
+    "evidence/WAC-M2-03-full-ps7.txt": "6968511e2accfc7b4ee50685cf225b493681487c7cb0d2faf5997d160763d1dc",
+    "evidence/WAC-M2-03-gentle-cleaning.json": "b91ef6311e699c45d99572f79b1912b3648fc558f7753a5df26b917661ae68b7",
+    "evidence/WAC-M2-03-help.json": "7fc1157f0b817acff96820e29b70a4a1ee8db72e14d95a0946fd448d87353d98",
+    "evidence/WAC-M2-03-listening.md": "de18fa29fe138e3e21ca50cdc859a9de87d775146bc102f83ccf09b82249c872",
+    "evidence/WAC-M2-03-original-preservation.json": "79dd31179dac5ef60975681a1c09f2e4255c9ad83ca7dcfdd55aa5cfa5e1eaf0",
+    "evidence/WAC-M2-03-targeted-initial-ps51.txt": "91de107d8bce0112a69ea018d659f472e5c3c857ff817857190acce8263a0db1",
+    "evidence/WAC-M2-03-targeted-initial-ps7.txt": "f05cebdfff2b62164cb4661b641336a0764ca36ba049dd74c0f9d57295a56b24",
+    "evidence/WAC-M2-03-targeted-ps51.txt": "a9a60fc19baff97a5a2e87df6647ead3489d112b61ba7766804eb2b8fac89a83",
+    "evidence/WAC-M2-03-targeted-ps7.txt": "5745f59a28118585c9c6ebb278d8683f7312fb45e83c00b2857c5e49aadeffc1",
+    "evidence/WAC-M2-03.md": "33a5c9b95ed2f63b021eeca7f3045007a8712d8926457f252fe30ae3b34de945"
+  },
+  "delivery": "Verify clean local/upstream/live branch and draft PR #3 after push; record exact SHA in PR/final response.",
+  "limitations": [
+    "No speech listening or default-sound promotion",
+    "Same FFmpeg meter; no independent calibration",
+    "No full >4 GB render, real disk exhaustion, long-file/memory stress or running-render Ctrl+C certification",
+    "Capture remains in memory; capacity is not reserved; reports are not multi-file atomic"
+  ]
+}

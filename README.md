@@ -1,10 +1,10 @@
 # WinAudioClean — Automated Audio Cleaning & Leveling Droplet (PowerShell + FFmpeg)
 
-A local audio cleaning and leveling tool for speech recordings, including meetings, podcasts and voiceovers. It applies a fixed FFmpeg filter chain and saves a separate WAV export. Results depend on the recording; listen to the output before using it.
+A local audio cleaning and leveling tool for speech recordings, including meetings, podcasts and voiceovers. It applies a validated FFmpeg filter chain and saves a separate WAV export. Results depend on the recording; listen to the output before using it.
 
 **Synopsis**
 
-- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only), both using the Original preset.
+- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only), both using Original by default. Raw also offers an optional experimental Gentle preset.
 
 - Cleaning: Attempts clipping and click repair, reduces low-frequency rumble, and applies noise reduction and a gate.
 
@@ -107,7 +107,7 @@ exit code `2`; menu cancellation returns `130`.
 
 **Original preset**
 
-Both existing mode choices select **Original**, ID `original`, version `1.0.0`.
+Both mode choices select **Original**, ID `original`, version `1.0.0` by default.
 Choose `1` / `-Mode Raw` for cleaning plus leveling, or `2` / `-Mode Zoom` for
 leveling only. Naming the preset preserves these legacy filter values and order:
 
@@ -131,6 +131,61 @@ and the explicit 48 kHz PCM export policy are separate choices. Different
 FFmpeg builds or export settings can produce different samples. Speech listening
 approval remains pending.
 
+**Optional Gentle cleaning and advanced settings**
+
+`-Preset Gentle` selects an experimental Raw cleaning candidate, ID `gentle`,
+version `0.1.0`. It skips clipping repair, click repair and the gate, uses a
+60 Hz high-pass cutoff and sets `afftdn=nf=-35:nr=6`. Dynamic leveling and
+loudness targets stay the same. The name describes the chosen settings;
+speech listening has not established that it improves a recording.
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -Preset Gentle -NonInteractive
+```
+
+Raw accepts a `-CleaningOptions` hashtable with the settings below. Values
+override the selected base preset for that run. All numeric bounds are
+inclusive. Booleans must be `$true` or `$false`; numbers must be finite numeric
+scalars. Strings, arrays, null values, scriptblocks, unknown keys and arbitrary
+FFmpeg filter text are rejected. Numeric settings are validated even when
+their stage is disabled.
+
+| Option | Allowed value | Original Raw | Gentle Raw |
+| --- | --- | --- | --- |
+| `Declip` | Boolean | `$true` | `$false` |
+| `Declick` | Boolean | `$true` | `$false` |
+| `Denoise` | Boolean | `$true` | `$true` |
+| `Gate` | Boolean | `$true` | `$false` |
+| `HighpassHz` | 20 to 200 Hz | 80 | 60 |
+| `NoiseFloorDb` | -80 to -20 dB | -25 | -35 |
+| `NoiseReductionDb` | 0.01 to 20 dB | 12 | 6 |
+| `GateThresholdDb` | -80 to -20 dBFS | -45 | -45 (inactive) |
+| `GateRangeDb` | -60 to 0 dB | -25 | -25 (inactive) |
+
+For example, disable the Original gate and request 4 dB of noise reduction:
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -CleaningOptions @{Gate=$false; NoiseReductionDb=4} -NonInteractive
+```
+
+Run hashtable examples in PowerShell with the call operator `&`. A native
+`powershell.exe -File` or `pwsh -File` invocation cannot pass a hashtable literal
+as a typed parameter. Drag-and-drop and the menu default to Original; use the
+PowerShell entry point for these options. `-Mode Zoom` accepts only Original
+with no nonempty cleaning options, so it remains leveling only. These options
+can accompany either Fast or Accurate; Accurate repeats the selected cleaning
+chain in both passes. Settings are not saved between runs.
+
+The range limits are application choices within the supported FFmpeg options,
+not listening guarantees. High-pass filtering remains present in Raw even when
+all four optional stages are disabled. At its built-in settings, Original retains the legacy
+gate values `range=0.056:threshold=0.0056` at the nominal -25/-45 dB settings,
+and leaves `afftdn nr` implicit at the tested FFmpeg default of 12 dB. Changing
+the noise floor or reduction makes `nr` explicit. Other gate dB settings are
+converted to linear amplitude as `10^(dB/20)` with
+invariant decimal formatting. Preserve the report's exact filters and FFmpeg
+build when reproducing a render.
+
 **Fast and Accurate loudness**
 
 `-LoudnessMode Fast` is the default, including drag-and-drop. It retains the
@@ -143,7 +198,7 @@ into two-pass normalization and final-file measurement, use PowerShell:
 
 Accurate analyzes the selected recording, renders it using the measured values,
 and checks the encoded WAV in a separate FFmpeg process. The analysis and render
-repeat the same Original cleaning, dynamic leveling and optional mono conversion.
+repeat the same selected cleaning, dynamic leveling and optional mono conversion.
 A 192 kHz resampling step follows dynamic leveling in both passes; exports
 remain 48 kHz PCM16 or PCM24.
 Accurate takes longer and can sound different from Fast.
@@ -285,8 +340,12 @@ Early input, dependency, selection and space errors remain console-only.
 
 The version 1 JSON records the selected stream, exact filters, requested output
 format, verified audio, native diagnostics and processing/reporting outcomes.
-Reports identify the Original preset as `presetId: original`,
-`presetVersion: 1.0.0`, separately from the application `toolVersion`.
+Reports identify the base preset and its version separately from the
+application `toolVersion`. `presetExperimental` marks Gentle and
+`presetCustomized` marks a nonempty cleaning-options override, even if its values
+match the defaults. Raw reports include the typed effective `settings.cleaning`;
+Zoom records `null`. The base ID/version alone does not describe a customized
+render; retain its settings, exact filters, FFmpeg build and output format.
 Input recording duration and elapsed processing time are separate fields. The
 processing time includes analysis, rendering, validation and publication.
 Fast measurements remain `null` with `not_measured` and compliance
@@ -314,7 +373,8 @@ destination's parent folder must already exist, and its filename must be new.
 This command runs without FFmpeg and cannot be combined with audio-processing
 options. It creates an allowlisted diagnostic JSON with numeric values, booleans
 and fixed labels; it omits all free-form source text, paths, filenames, titles,
-timestamps, job IDs, dependency banners and raw diagnostics. **Review the export
+timestamps, job IDs, preset identity/flags, cleaning settings, dependency banners
+and raw diagnostics. **Review the export
 before sharing it.** Nothing is uploaded automatically; the raw report remains
 unchanged. See the [report format](docs/codex/winaudioclean/DATA_FORMATS.md).
 
@@ -334,7 +394,7 @@ and local report. Processing and reporting results use these exit codes:
 | Code | Meaning |
 | --- | --- |
 | 0 | Audio was validated and published without loudness or reporting warnings. |
-| 2 | Invalid input, destination, mode, loudness mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
+| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
 | 3 | Missing, incompatible or filter-deficient dependency, or analysis/render process start failure. |
 | 4 | Probe/metadata failure, no audio, or analysis/processing/capture/cleanup failure. Malformed first-pass measurements fail here. Native failures retain diagnostics. |
 | 5 | Output allocation, space/size check, validation, publication or owned-file cleanup failed. |
@@ -377,7 +437,7 @@ have not been stress-tested.
    - Zoom/Teams skips the cleaning filters for recordings that already received noise reduction.
 
 3. Construct Filter Chain
-   - Cleaning (Mode 1 Only):
+   - Original cleaning by default (Mode 1 Only; optional Raw settings are described above):
      - adeclip: Attempts to reconstruct clipped peaks.
      - highpass: Attenuates low frequencies with an 80 Hz cutoff.
      - adeclick: Attempts to remove impulsive clicks.

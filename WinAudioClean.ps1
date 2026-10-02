@@ -15,7 +15,7 @@ tolerance check produces WARNING (exit 7) when a valid export was published.
 Check loudnessCompliance separately from output validity. Neither certifies
 speech quality. Accurate's additional passes take more time.
 
-Raw applies adeclip, an 80 Hz highpass, adeclick, afftdn and agate before the
+Original Raw applies adeclip, an 80 Hz highpass, adeclick, afftdn and agate before the
 shared leveling chain. These filters can reduce some clipping, rumble, clicks
 and steady noise, but can also alter speech. Listen to the result.
 
@@ -33,12 +33,25 @@ That encoder policy was introduced separately from the legacy filters; preset
 identity does not promise identical files across formats or FFmpeg builds.
 Standard mono/stereo channels are preserved unless -Mono is requested.
 Original preset version, application version and report schema version are
-recorded separately. Existing Raw/Zoom choices both select Original.
+recorded separately. Raw/Zoom default to Original. -Preset Gentle is an opt-in
+experimental Raw candidate: 60 Hz highpass and afftdn nf=-35:nr=6, with declip,
+declick and gate disabled. It retains leveling and has no listening approval.
+Custom cleaning settings are recorded separately from the named base preset.
 
 The source and prior exports are preserved. New audio and per-run JSON/text
 reports are written to Music by default; WinAudioClean_Log.txt is the summary.
 Reports may contain local paths and metadata. Diagnostic export is a separate
 local action; review it before sharing. Nothing is automatically uploaded.
+.PARAMETER Preset
+Original (default) preserves the existing Raw/Zoom graphs. Gentle is experimental
+and requires Raw. Neither the preset name nor synthetic checks certify speech quality.
+.PARAMETER CleaningOptions
+Optional typed dictionary for Raw. Declip, Declick, Denoise and Gate require
+Boolean values. Finite numeric scalars: HighpassHz 20..200, NoiseFloorDb -80..-20,
+NoiseReductionDb 0.01..20, GateThresholdDb -80..-20, GateRangeDb -60..0.
+Unknown keys, numeric strings and arbitrary filter text are rejected. Supply a
+PowerShell hashtable through & invocation; a literal hashtable cannot be passed
+through a native -File argument. Zoom rejects nonempty cleaning options. No settings are saved.
 .EXAMPLE
 .\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav"
 
@@ -61,6 +74,12 @@ Request measured normalization and final PCM loudness verification. The shared
 Accurate prechain ends at 192 kHz before loudnorm; output stays at 48 kHz.
 Silent and subsecond audio carry explicit unavailable reasons. No retry loop
 forces a target; inspect warnings and listen to the result.
+.EXAMPLE
+& .\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav" -Mode Raw -Preset Gentle -CleaningOptions @{Denoise=$false; HighpassHz=50} -NonInteractive
+
+Opt into the Gentle listening candidate with a typed cleaning override. Reports
+identify the base candidate, customization and exact effective settings. Raw's
+highpass and shared leveling remain; only the four documented stages have toggles.
 .NOTES
 Author: Janne Vuorela. Windows 10/11; Windows PowerShell 5.1 or PowerShell 7+.
 Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
@@ -83,6 +102,8 @@ param(
     [string]$AudioStreamIndex,
     [string]$BitDepth = '16',
     [string]$LoudnessMode = 'Fast',
+    [string]$Preset = 'Original',
+    [System.Collections.IDictionary]$CleaningOptions = @{},
     [switch]$Mono,
     [switch]$Rf64,
     [switch]$NonInteractive,
@@ -201,18 +222,100 @@ function Read-WacMode {
     }
 }
 
+function Get-WacCleaningSettings {
+    param([string]$Preset = 'Original', [System.Collections.IDictionary]$Options = @{})
+
+    if ($Preset -notin @('Original', 'Gentle')) { throw 'Preset must be Original or Gentle.' }
+    if ($null -eq $Options) { throw 'Cleaning options must be a typed dictionary, not null.' }
+    $gentle = $Preset -eq 'Gentle'
+    $settings = [ordered]@{
+        schemaVersion = 1
+        Declip = (-not $gentle); Declick = (-not $gentle); Denoise = $true; Gate = (-not $gentle)
+        HighpassHz = $(if ($gentle) { 60.0 } else { 80.0 })
+        NoiseFloorDb = $(if ($gentle) { -35.0 } else { -25.0 })
+        NoiseReductionDb = $(if ($gentle) { 6.0 } else { 12.0 })
+        GateThresholdDb = -45.0; GateRangeDb = -25.0
+    }
+    $bounds = @{
+        HighpassHz = @(20, 200); NoiseFloorDb = @(-80, -20); NoiseReductionDb = @(0.01, 20)
+        GateThresholdDb = @(-80, -20); GateRangeDb = @(-60, 0)
+    }
+    # Never coerce strings, booleans, arrays or scriptblocks into filter values.
+    # Numeric settings are finite scalar CLR numbers, serialized invariantly.
+    $seen = @{}
+    foreach ($key in $Options.Keys) {
+        if ($key -isnot [string] -or $key -notin @('Declip', 'Declick', 'Denoise', 'Gate') + @($bounds.Keys)) {
+            throw 'Unknown cleaning option. Only documented cleaning settings are accepted.'
+        }
+        if ($seen.ContainsKey($key)) { throw 'Duplicate cleaning option.' }
+        $seen[$key] = $true
+        $value = $Options[$key]
+        if ($key -in @('Declip', 'Declick', 'Denoise', 'Gate')) {
+            if ($value -isnot [bool]) { throw "Cleaning option $key must be a Boolean." }
+            $settings[$key] = $value
+        } else {
+            if ($value -isnot [byte] -and $value -isnot [sbyte] -and $value -isnot [int16] -and
+                $value -isnot [uint16] -and $value -isnot [int] -and $value -isnot [uint32] -and
+                $value -isnot [long] -and $value -isnot [uint64] -and $value -isnot [single] -and
+                $value -isnot [double] -and $value -isnot [decimal]) {
+                throw "Cleaning option $key must be a finite numeric scalar."
+            }
+            $number = [double]$value
+            if ([double]::IsNaN($number) -or [double]::IsInfinity($number) -or
+                $number -lt $bounds[$key][0] -or $number -gt $bounds[$key][1]) {
+                throw "Cleaning option $key is outside its supported range."
+            }
+            $settings[$key] = $number
+        }
+    }
+    $settings
+}
+
 function Get-WacProcessingProfile {
-    param([string]$Choice)
+    param([string]$Choice, [string]$Preset = 'Original',
+        [System.Collections.IDictionary]$CleaningOptions = @{})
 
-    $cleanFilters = "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056"
-    $levelFilters = "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
-
+    if ($Choice -cnotin @('1', '2')) { throw 'Invalid processing choice. Expected 1 (Raw) or 2 (Zoom).' }
+    $settings = Get-WacCleaningSettings -Preset $Preset -Options $CleaningOptions
+    if ($Choice -eq '2' -and ($Preset -ne 'Original' -or $CleaningOptions.Count -gt 0)) {
+        throw 'Zoom is leveling only. Use Original with no cleaning options, or choose Raw for cleaning.'
+    }
+    $gentle = $Preset -eq 'Gentle'
+    $levelFilters = 'dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5'
+    $filters = @()
     if ($Choice -eq '1') {
-        [pscustomobject]@{ PresetId = 'original'; PresetName = 'Original'; PresetVersion = '1.0.0'; ModeName = 'RAW (Clean+Level)'; FilterChain = "$cleanFilters,$levelFilters" }
-    } elseif ($Choice -eq '2') {
-        [pscustomobject]@{ PresetId = 'original'; PresetName = 'Original'; PresetVersion = '1.0.0'; ModeName = 'ZOOM (Level Only)'; FilterChain = $levelFilters }
-    } else {
-        throw 'Invalid processing choice. Expected 1 (Raw) or 2 (Zoom).'
+        $culture = [Globalization.CultureInfo]::InvariantCulture
+        if ($settings.Declip) { $filters += 'adeclip' }
+        $filters += 'highpass=f=' + $settings.HighpassHz.ToString('0.###############', $culture)
+        if ($settings.Declick) { $filters += 'adeclick' }
+        if ($settings.Denoise) {
+            $denoise = 'afftdn=nf=' + $settings.NoiseFloorDb.ToString('0.###############', $culture)
+            # The frozen Original graph intentionally leaves nr at FFmpeg's default.
+            if ($gentle -or $settings.NoiseFloorDb -ne -25 -or $settings.NoiseReductionDb -ne 12) {
+                $denoise += ':nr=' + $settings.NoiseReductionDb.ToString('0.###############', $culture)
+            }
+            $filters += $denoise
+        }
+        if ($settings.Gate) {
+            # Preserve the legacy rounded linear values at its documented dB settings.
+            $range = if ($settings.GateRangeDb -eq -25) { '0.056' } else {
+                [math]::Pow(10, $settings.GateRangeDb / 20).ToString('0.###############', $culture)
+            }
+            $threshold = if ($settings.GateThresholdDb -eq -45) { '0.0056' } else {
+                [math]::Pow(10, $settings.GateThresholdDb / 20).ToString('0.###############', $culture)
+            }
+            $filters += 'agate=range=' + $range + ':threshold=' + $threshold
+        }
+    }
+    $filters += $levelFilters
+    [pscustomobject]@{
+        PresetId = $(if ($gentle) { 'gentle' } else { 'original' })
+        PresetName = $(if ($gentle) { 'Gentle (experimental)' } else { 'Original' })
+        PresetVersion = $(if ($gentle) { '0.1.0' } else { '1.0.0' })
+        PresetExperimental = $gentle; CleaningCustomized = ($CleaningOptions.Count -gt 0)
+        ModeChoice = $Choice; ModeName = $(if ($Choice -eq '1') { 'RAW (Clean+Level)' } else { 'ZOOM (Level Only)' })
+        CleaningSettings = $(if ($Choice -eq '1') { $settings } else { $null })
+        FilterChain = ($filters -join ',')
     }
 }
 
@@ -865,10 +968,45 @@ function Get-WacLoudnessPlan {
 
     $terminal = ',loudnorm=I=-12:TP=-1.5'
     $chain = $ProcessingProfile.FilterChain
-    $originalChains = @((Get-WacProcessingProfile -Choice '1').FilterChain, (Get-WacProcessingProfile -Choice '2').FilterChain)
-    if ($chain -isnot [string] -or $chain -cnotin $originalChains -or -not $chain.EndsWith($terminal, [StringComparison]::Ordinal)) {
-        throw 'Accurate loudness requires the Original terminal normalization filter.'
-    }
+    # Rebuild an allowlisted profile from its typed effective settings. Merely
+    # ending an arbitrary graph in loudnorm is not permission to execute it.
+    try {
+        if ($ProcessingProfile.ModeChoice -cnotin @('1', '2') -or
+            $ProcessingProfile.PresetId -cnotin @('original', 'gentle')) { throw 'Invalid profile identity.' }
+        $presetName = if ($ProcessingProfile.PresetId -eq 'gentle') { 'Gentle' } else { 'Original' }
+        $options = @{}
+        if ($ProcessingProfile.ModeChoice -eq '1') {
+            $effective = $ProcessingProfile.CleaningSettings
+            if ($effective -isnot [System.Collections.IDictionary] -or $effective.Count -ne 10 -or
+                $effective.schemaVersion -isnot [int] -or $effective.schemaVersion -ne 1) {
+                throw 'Invalid effective cleaning schema.'
+            }
+            $schemaKeys = @('schemaVersion', 'Declip', 'Declick', 'Denoise', 'Gate', 'HighpassHz',
+                'NoiseFloorDb', 'NoiseReductionDb', 'GateThresholdDb', 'GateRangeDb')
+            foreach ($key in $effective.Keys) {
+                if ($key -isnot [string] -or $key -cnotin $schemaKeys) { throw 'Invalid effective cleaning schema key.' }
+                if ($key -cne 'schemaVersion') { $options[$key] = $effective[$key] }
+            }
+        } elseif ($null -ne $ProcessingProfile.CleaningSettings) { throw 'Zoom cannot contain cleaning settings.' }
+        $expected = Get-WacProcessingProfile -Choice $ProcessingProfile.ModeChoice -Preset $presetName -CleaningOptions $options
+        if ($ProcessingProfile.ModeChoice -eq '2' -and $ProcessingProfile.CleaningCustomized) {
+            throw 'Zoom cannot be customized.'
+        }
+        if ($ProcessingProfile.ModeChoice -eq '1' -and -not $ProcessingProfile.CleaningCustomized) {
+            $baseSettings = Get-WacCleaningSettings -Preset $presetName
+            foreach ($key in $baseSettings.Keys) {
+                if ($ProcessingProfile.CleaningSettings[$key] -cne $baseSettings[$key]) { throw 'Unmarked custom cleaning settings.' }
+            }
+        }
+        if ($chain -isnot [string] -or $chain -cne $expected.FilterChain -or
+            $ProcessingProfile.PresetVersion -cne $expected.PresetVersion -or
+            $ProcessingProfile.PresetName -cne $expected.PresetName -or
+            $ProcessingProfile.ModeName -cne $expected.ModeName -or
+            $ProcessingProfile.PresetExperimental -isnot [bool] -or
+            $ProcessingProfile.PresetExperimental -ne $expected.PresetExperimental -or
+            $ProcessingProfile.CleaningCustomized -isnot [bool] -or
+            -not $chain.EndsWith($terminal, [StringComparison]::Ordinal)) { throw 'Profile does not match its typed settings.' }
+    } catch { throw 'Accurate loudness requires a validated profile with the supported terminal normalization filter.' }
     $prechain = $chain.Substring(0, $chain.Length - $terminal.Length)
     if ($prechain -match '(?i)loudnorm' -or [string]::IsNullOrWhiteSpace($prechain)) {
         throw 'Accurate loudness requires exactly one terminal normalization filter.'
@@ -1007,6 +1145,8 @@ function New-WacRunReport {
         toolVersion = $c.ToolVersion
         presetId = $c.Profile.PresetId; presetName = $c.Profile.PresetName
         presetVersion = $c.Profile.PresetVersion; presetVersionReason = $null
+        presetExperimental = [bool]$c.Profile.PresetExperimental
+        presetCustomized = [bool]$c.Profile.CleaningCustomized
         sourceRevision = $null; sourceRevisionReason = 'not_embedded'
         status = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
         processingStatus = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
@@ -1037,6 +1177,7 @@ function New-WacRunReport {
             mode = $c.Mode; modeName = $c.ModeName; bitDepth = $c.Policy.Bits
             loudnessMode = $(if ($c.LoudnessMode) { $c.LoudnessMode } else { 'Fast' })
             mono = [bool]$c.Mono; rf64 = [bool]$c.Policy.Rf64
+            cleaning = $c.Profile.CleaningSettings
             exactFilters = $(if ($c.Normalization -and $c.Normalization.requestedMode -eq 'Accurate') { $c.Normalization.renderFilter } else { $c.Policy.FilterPrefix + $c.FilterChain })
         }
         output = [ordered]@{
@@ -1108,6 +1249,8 @@ STATUS         : $($r.status) (Native Exit Code: $nativeExitText; Application Ex
 PROCESSING     : $($r.processingStatus) (Application Exit Code: $($r.processingExitCode))
 MODE           : $($r.settings.modeName)
 PRESET         : $($r.presetName) (ID: $($r.presetId); version: $($r.presetVersion))
+PRESET FLAGS   : experimental=$($r.presetExperimental); customized=$($r.presetCustomized)
+CLEANING       : $(if ($r.settings.cleaning) { $r.settings.cleaning | ConvertTo-Json -Compress } else { 'none (leveling only)' })
 INPUT DURATION : $($r.input.durationSeconds) s (selected stream)
 PROCESSING TIME: $($r.timing.processingElapsedSeconds) s (analysis, rendering, validation and publication)
 STARTED UTC    : $($r.timing.startedAtUtc)
@@ -1373,6 +1516,11 @@ try {
     if ($BitDepth -cnotin @('16', '24')) { throw 'Bit depth must be 16 or 24. Supply -BitDepth 16 or -BitDepth 24.' }
     if ($LoudnessMode -notin @('Fast', 'Accurate')) { throw 'Loudness mode must be Fast or Accurate.' }
     $LoudnessMode = if ($LoudnessMode -eq 'Accurate') { 'Accurate' } else { 'Fast' }
+    $null = Get-WacCleaningSettings -Preset $Preset -Options $CleaningOptions
+    if ($Mode) {
+        $validatedChoice = if ($Mode -eq 'Raw') { '1' } else { '2' }
+        $null = Get-WacProcessingProfile -Choice $validatedChoice -Preset $Preset -CleaningOptions $CleaningOptions
+    }
     $outFolder = Get-WacOutputDirectory -Path $OutputDirectory
     if (-not $Mode -and -not $interactive) {
         throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.'
@@ -1405,7 +1553,7 @@ Write-Host "FFprobe: $ffprobePath ($ffprobeVersion)" -ForegroundColor Gray
 
 # --- TUI: SELECTION ---
 if (-not $Mode) {
-    Write-Host "`nSelect Processing Mode (Original preset):" -ForegroundColor White
+    Write-Host ("`nSelect Processing Mode ({0} preset):" -f $Preset) -ForegroundColor White
     Write-Host "[1] RAW RECORDING (Clean + Level)" -ForegroundColor Green
     Write-Host "    -> Cleaning plus leveling for mic recordings. Listen for speech changes."
     Write-Host "[2] ZOOM/TEAMS (Level Only)" -ForegroundColor Magenta
@@ -1424,10 +1572,17 @@ if (-not $Mode) {
 
 # --- FILTER SELECTION ---
 $choice = if ($Mode -eq 'Raw') { '1' } else { '2' }
-$processingProfile = Get-WacProcessingProfile -Choice $choice
+try { $processingProfile = Get-WacProcessingProfile -Choice $choice -Preset $Preset -CleaningOptions $CleaningOptions }
+catch {
+    Write-Error -Message ('Cleaning settings failed: ' + $_.Exception.Message) -ErrorAction Continue
+    exit 2
+}
 $modeName = $processingProfile.ModeName
 $filterChain = $processingProfile.FilterChain
 Write-Host ("Preset: {0} (ID: {1}; version: {2})" -f $processingProfile.PresetName, $processingProfile.PresetId, $processingProfile.PresetVersion)
+if ($processingProfile.PresetExperimental) { Write-Host 'Gentle is an experimental listening candidate; speech quality has not been reviewed.' -ForegroundColor Yellow }
+if ($processingProfile.CleaningCustomized) { Write-Host 'Custom cleaning settings override the named base preset. Inspect the effective settings and listen.' -ForegroundColor Yellow }
+if ($processingProfile.CleaningSettings) { Write-Host ('Cleaning: ' + ($processingProfile.CleaningSettings | ConvertTo-Json -Compress)) }
 
 try {
     Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain $filterChain
