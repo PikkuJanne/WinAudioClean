@@ -53,7 +53,7 @@
         17
       ],
       "depends_on": [],
-      "status": "in_progress",
+      "status": "done",
       "approval_required": false,
       "scope": "AGENTS.md and docs/codex/winaudioclean; inspect the existing checkout and GitHub before installing.",
       "implementation": [
@@ -68,7 +68,8 @@
         "AC-003"
       ],
       "evidence": [
-        "evidence/WAC-M0-01.md"
+        "evidence/WAC-M0-01.md",
+        "evidence/WAC-M0-01-checkpoint.json"
       ],
       "blocked_reason": null
     },

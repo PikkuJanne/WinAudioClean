@@ -31,8 +31,11 @@
       "title": "Initial checkpoint",
       "procedure": "Compare runtime files before/after governance import; commit and push only intended handoff files. Run live sync-check.",
       "expected": "Runtime content is unchanged; clean worktree, matching local/live-remote branch HEAD, and a real PR reference or explicit API blocker are recorded.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-01.md",
+        "evidence/WAC-M0-01-checkpoint.json"
+      ]
     },
     {
       "id": "AC-004",

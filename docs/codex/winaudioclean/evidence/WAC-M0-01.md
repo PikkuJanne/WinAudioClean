@@ -85,10 +85,53 @@ were verified in fixtures; the real checkout preview/apply also passed.
 returned exit 0: 30 tasks, 90 acceptance cases, 20 improvement groups.
 The corresponding `next` command returned only WAC-M0-01 while it is in progress.
 
-AC-003 additionally requires a committed clean tree, a live matching remote HEAD
-and a real draft PR. Those delivery checks remain pending at this first checkpoint.
-The final state update will reference the first verified pushed checkpoint;
-the final commit's own SHA belongs in the PR and end-of-thread report.
+AC-003 was pending when the first local checkpoint was committed. The delivery
+verification below completes that case; its state is now pass.
+
+## Verified delivery
+
+- Commit `8163feb35401096cb260693c02b8e5eb0886b78d` contains the additive
+  governance checkpoint: 64 new files, no existing product file changes.
+- `git diff --cached --check` and the explicit staged product-file preservation
+  diff returned 0 before commit. Staged names and content were reviewed; only
+  `.gitignore`, `AGENTS.md` and `docs/codex/winaudioclean/` were included.
+- The first default-credential `git push` stalled and was interrupted. GitHub
+  reported the feature branch absent before the retry. The orphaned credential
+  helper from this attempt was stopped. No success was inferred from that attempt.
+- With `GIT_TERMINAL_PROMPT=0` and `GCM_INTERACTIVE=never`,
+  `git -c credential.helper= -c 'credential.helper=!gh auth git-credential' push --set-upstream origin HEAD:refs/heads/codex/wac-m0-handoff`
+  returned 0 using existing GitHub CLI authentication. This invocation did not
+  change Git credential configuration.
+- `python -X utf8 docs/codex/winaudioclean/tools/handoff.py sync-check --repo .`
+  returned 0 at 2026-10-02 09:35:10 UTC: clean tree, matching local/upstream/live
+  HEAD `8163feb35401096cb260693c02b8e5eb0886b78d`.
+- The matching PR search was empty before creation.
+  `gh pr create --repo PikkuJanne/WinAudioClean --base main --head codex/wac-m0-handoff --draft --title 'WAC-M0-01: install governance and verify safe handoff' --body-file .wac-local/pr-body.md`
+  returned 0 and created [draft PR #1](https://github.com/PikkuJanne/WinAudioClean/pull/1).
+- `gh pr view 1 --repo PikkuJanne/WinAudioClean --json number,url,state,isDraft,headRefName,headRefOid,baseRefName,statusCheckRollup`
+  confirmed OPEN, draft, base main and the matching head. Checks were empty.
+  `gh run list --repo PikkuJanne/WinAudioClean --branch codex/wac-m0-handoff --limit 10 --json databaseId,headSha,status,conclusion,url`
+  returned 0 with no workflow runs. No CI pass is claimed.
+- A repeated successful sync/PR snapshot is stored in
+  `WAC-M0-01-checkpoint.json`. AC-003 passes on these actual delivery observations.
+
+This completion update records the preceding verified checkpoint. After it is
+committed and pushed, its exact final SHA and fresh live verification belong in
+the PR and end-of-thread report, avoiding a recursive evidence commit.
+
+## Completion-state validation
+
+After marking WAC-M0-01 done and AC-001–003 pass, the same installed-suite command
+ran again: exit 0, 54 tests in 20.920 seconds, 53 passed and one symlink privilege
+skip. Log: `WAC-M0-01-completion-tests.txt`. Test source remains at the SHA-256
+recorded above; the source checkpoint is `8163feb35401096cb260693c02b8e5eb0886b78d`
+plus the completion-state documentation changes.
+
+`validate-plan` returned exit 0 with 30 tasks, 90 cases and 20 improvement groups.
+`next` returned only WAC-M0-02, with no approval needed and no blocked tasks.
+State inventory confirmed one done task, 29 todo tasks, three passed cases and
+87 not_run cases. The diff against the reviewed baseline for all seven original
+product files again returned exit 0. No runtime implementation was performed.
 
 ## Explicitly unrun and unavailable checks
 

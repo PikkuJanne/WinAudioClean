@@ -1,8 +1,16 @@
 # Next model starts here
 
-Current task: **WAC-M0-01**, governance imported; final validation and remote
-checkpoint pending. Work branch: `codex/wac-m0-handoff`. Once its delivery is
-verified, the next task is **WAC-M0-02 in a fresh thread**.
+Completed task: **WAC-M0-01**, governance installation and acceptance AC-001–003.
+Next task: **WAC-M0-02 in a fresh thread**. Work branch:
+`codex/wac-m0-handoff`; [draft PR #1](https://github.com/PikkuJanne/WinAudioClean/pull/1)
+targets main. Continue from the verified feature-branch tip, including the
+completion evidence commit, without repeating the import.
+
+Last recorded verified checkpoint: `8163feb35401096cb260693c02b8e5eb0886b78d`.
+The clean local tree, upstream and live GitHub branch matched, and the PR was
+open/draft at that SHA. See `evidence/WAC-M0-01-checkpoint.json` for its timestamp.
+The subsequent completion commit's exact SHA is recorded in the PR/final response.
+Derive current HEAD and live synchronization afresh before WAC-M0-02.
 
 The supplied source folder had no Git metadata; a separate checkout was created.
 Discover and verify the actual Git root rather than treating that source folder
@@ -15,7 +23,13 @@ Read the applicable AGENTS.md files, STATUS.md, DECISIONS.md, SYNC_PROTOCOL.md a
 
 If governance is already installed, reconcile current TASKS.yaml and git history rather than repeat import. Select the first dependency-ready unfinished task. Work only that task in this thread, adding a smaller continuation task when genuinely needed rather than stretching context across a milestone.
 
-After WAC-M0-01, create the committed/pushed governance checkpoint and end the thread. Start runtime/test-seam work as WAC-M0-02 in a fresh thread.
+Read `tasks/WAC-M0-02.md` for the next scope: minimal test seams and local
+PowerShell test runners. Do not repeat the baseline audit unless live drift or a
+failure requires it. The installed helper suite ran 54 tests, 53 passed and one
+symlink test skipped for missing Windows privileges; all 30 tasks and 90 cases
+remain valid. No WAC-M0-01 blocker remains. Git pushes may need the existing
+GitHub CLI credential helper for this command only; no configuration change is
+required. All publication/merge approval boundaries remain in force.
 
 ## Required next-thread handoff fields
 
