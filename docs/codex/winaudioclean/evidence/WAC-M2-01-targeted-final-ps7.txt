@@ -1,0 +1,34 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (26 files; shell 7.6.5).
+Static gate passed; 116 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 9 tests in 208ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Preset.Tests.ps1'
+Describing AC-035/036: Original identity belongs to each unchanged processing profile
+  [+] names and versions the Original Raw profile separately from its mode 137ms (97ms|41ms)
+  [+] names and versions the Original Zoom profile separately from its mode 7ms (6ms|1ms)
+
+Describing AC-036: menu choices and direct invocations persist the effective Original preset
+  [+] records the Original Raw preset through menu 3.09s (3.09s|5ms)
+  [+] records the Original Zoom preset through menu 2.68s (2.68s|1ms)
+  [+] records the Original Raw preset through direct -Mode 2.54s (2.54s|1ms)
+  [+] records the Original Zoom preset through direct -Mode 2.51s (2.51s|1ms)
+
+Describing AC-029/036: support export does not invent or disclose preset versions
+  [+] keeps legacy unversioned identity and version fields out of the redacted projection 50ms (48ms|2ms)
+  [+] keeps current Original identity and version fields out of the redacted projection 4ms (3ms|1ms)
+  [+] keeps unknown private identity and version fields out of the redacted projection 8ms (7ms|1ms)
+Tests completed in 11.93s
+Tests Passed: 9, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 9 Pester passed, 0 skipped, 0 outside scope.

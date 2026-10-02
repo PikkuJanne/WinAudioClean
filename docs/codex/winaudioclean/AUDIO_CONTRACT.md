@@ -1,6 +1,8 @@
 # Audio behavior contract
 
-This is a proposed implementation/test contract, not evidence that the application already complies.
+This combines preserved behavior and proposed later test contracts. Sections
+marked implemented describe current behavior; later measurement and listening
+requirements remain pending.
 
 ## Preserved baseline
 
@@ -11,6 +13,20 @@ Both-mode leveling chain:
 `dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5`
 
 Zoom uses only the leveling chain. Naming a preset must not change its values/order. Do not claim bit-identical output across FFmpeg builds or after changing sample format/rate.
+
+### Implemented preset identity — WAC-M2-01 (2026-10-02)
+
+Both existing Raw and Zoom choices use **Original**, ID `original`, version
+`1.0.0`. The version names the exact legacy filter values/order above; no
+filter was retuned. The application version remains separately `2.3`. Menu,
+console and local reports identify Original; JSON also records its ID/version.
+No preset selector, saved settings or Accurate option is introduced here.
+
+Preset identity excludes the explicit output encoding policy and optional
+channel conversion described below. Equal-filter output comparisons require
+the same FFmpeg build and output settings. Omitted FFmpeg options still use
+that build's defaults. Single-pass output remains independently unmeasured;
+-12 LUFS and -1.5 dBTP are requested settings. Speech listening remains pending.
 
 ## Correct definitions [S01]
 

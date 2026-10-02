@@ -1,14 +1,14 @@
 # WinAudioClean — Automated Audio Cleaning & Leveling Droplet (PowerShell + FFmpeg)
 
-A "drop-and-forget" audio post-production tool for podcasters, students, and professionals who just want their audio to sound good. Audio engineering is complex, but this script treats it like a laundry machine, drop dirty audio in, get clean, broadcast-ready audio out. It combines standard noise reduction with loudness normalization to make recordings sound consistent and professional. I use it to process Zoom recordings and voiceovers without opening a DAW.
+A local audio cleaning and leveling tool for speech recordings, including meetings, podcasts and voiceovers. It applies a fixed FFmpeg filter chain and saves a separate WAV export. Results depend on the recording; listen to the output before using it.
 
 **Synopsis**
 
-- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only).
+- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only), both using the Original preset.
 
-- Robust Cleaning: De-clips distortion, cuts rumble (80Hz), de-clicks mouth noises, and gates background hiss.
+- Cleaning: Attempts clipping and click repair, reduces low-frequency rumble, and applies noise reduction and a gate.
 
-- Broadcast Leveling: Uses dynamic gain leveling (85%) and loudness limiting (-12dB RMS) to match industry standards.
+- Leveling: Uses dynamic gain adjustment followed by loudness normalization with chosen targets of -12 LUFS integrated loudness and -1.5 dBTP true peak.
 
 - Detailed Logging: Writes a report for every file to the Music folder, tracking size, duration, and filter chains.
 
@@ -104,6 +104,31 @@ invalid choices ask again. A mode can also be supplied directly:
 redirected input require an explicit mode and never show a mode prompt. Running
 without an input file displays usage. Direct script preflight failures return
 exit code `2`; menu cancellation returns `130`.
+
+**Original preset**
+
+Both existing mode choices select **Original**, ID `original`, version `1.0.0`.
+Choose `1` / `-Mode Raw` for cleaning plus leveling, or `2` / `-Mode Zoom` for
+leveling only. Naming the preset preserves these legacy filter values and order:
+
+Raw:
+
+```text
+adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
+```
+
+Zoom/Teams:
+
+```text
+dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
+```
+
+These are single-pass settings. The -12 LUFS target is a preset choice, not a
+universal broadcast standard or a guarantee of the final file's loudness.
+Independent loudness measurements and speech listening approval are not yet
+available. Preset identity covers the filter settings; the explicit 48 kHz
+PCM export policy below is a separate encoding change. Different FFmpeg builds
+or export settings can produce different samples.
 
 **Dependencies and audio tracks**
 
@@ -224,6 +249,8 @@ Early input, dependency, selection and space errors remain console-only.
 
 The version 1 JSON records the selected stream, exact filters, requested output
 format, verified audio, native diagnostics and processing/reporting outcomes.
+Reports identify the Original preset as `presetId: original`,
+`presetVersion: 1.0.0`, separately from the application `toolVersion`.
 Input recording duration and elapsed rendering time are separate fields.
 Loudness and true-peak measurements are currently `null` with a reason; successful
 export validation does not claim that a loudness target was achieved.
@@ -306,18 +333,23 @@ have not been stress-tested.
 
 2. Mode Selection (TUI)
    - Asks the user if they want the full cleaning suite or just volume leveling.
-   - This prevents "over-processing" artifacts on audio that was already cleaned by Zoom's algorithms.
+   - Zoom/Teams skips the cleaning filters for recordings that already received noise reduction.
 
 3. Construct Filter Chain
    - Cleaning (Mode 1 Only):
-     - adeclip: Repairs digital clipping (distortion) in loud peaks.
-     - highpass: Cuts low-end mud and rumble below 80Hz.
-     - adeclick: Smooths out mouth clicks and lip smacks.
-     - afftdn: Reduces steady background noise (fans, hiss) by ~25dB.
-     - agate: Silences the track when the volume drops below -45dB.
+     - adeclip: Attempts to reconstruct clipped peaks.
+     - highpass: Attenuates low frequencies with an 80 Hz cutoff.
+     - adeclick: Attempts to remove impulsive clicks.
+     - afftdn: `nf=-25` sets the noise floor in dB. Reduction is controlled separately by `nr`, left at FFmpeg's default of 12 dB.
+     - agate: Reduces low-level audio below a threshold of about -45 dBFS. `range=0.056` limits attenuation to about 25 dB; it does not mute the track.
    - Leveling (Mode 1 & 2):
-     - dynaudnorm: Dynamically boosts quiet sections to make volume consistent (matches Adobe's "Speech Volume Leveler").
-     - loudnorm: A final limiter that ensures the average volume hits exactly -12 LUFS.
+     - dynaudnorm: Adjusts gain over time. `p=0.85` sets a peak-amplitude target of 0.85 of full scale, not a leveling percentage.
+     - loudnorm: Requests -12 LUFS integrated loudness and -1.5 dBTP maximum true peak. LUFS measures loudness; it is not an RMS level.
+
+   Parameter definitions: FFmpeg's [afftdn](https://ffmpeg.org/ffmpeg-filters.html#afftdn),
+   [agate](https://ffmpeg.org/ffmpeg-filters.html#agate),
+   [dynaudnorm](https://ffmpeg.org/ffmpeg-filters.html#dynaudnorm) and
+   [loudnorm](https://ffmpeg.org/ffmpeg-filters.html#loudnorm) documentation.
 
 4. Processing
    - Probes audio tracks and maps the selected absolute stream index.
@@ -330,9 +362,9 @@ have not been stress-tested.
 
 **Limitations / When not to use**
 
-   - Extreme Noise: If you recorded in a wind tunnel or a busy cafe, standard signal processing isn't enough. You need AI isolation tools for that.
+   - Heavy noise or distortion may remain, and filtering can introduce artifacts. Listen for lost quiet words, pumping and changes to voice character.
    - Multi-track editing: This processes one selected audio track. It cannot separate speakers mixed into that track.
-   - Music Production: Do not use this on songs. The "De-clipper" and "Highpass" filters are tuned for human speech and will damage the quality of musical instruments.
+   - Music: This preset is intended for speech. Its filters can alter musical tone and dynamics.
 
 **Troubleshooting**
 

@@ -1,92 +1,63 @@
 <#
-WinAudioClean.ps1
-Automated Audio Cleaning & Leveling Droplet
+.SYNOPSIS
+Cleans and levels spoken-word recordings locally with PowerShell and FFmpeg.
+.DESCRIPTION
+The Original preset (ID original, version 1.0.0) retains the legacy Raw/Zoom
+filter values and order. Choose 1/Raw for cleaning plus leveling, or 2/Zoom
+for leveling only. Both use single-pass normalization with requested targets
+of -12 LUFS integrated loudness and -1.5 dBTP true peak. Results depend on the
+recording; the application does not independently measure final loudness.
+SUCCESS means a validated export and complete reports, not target compliance.
 
-Author: Janne Vuorela
-Target OS: Windows 10/11
-PowerShell: Windows PowerShell 5.1 (built-in) or PowerShell 7+
-Dependencies: FFmpeg.exe and ffprobe.exe (explicit paths, sibling or PATH), .bat wrapper for drag-and-drop
+Raw applies adeclip, an 80 Hz highpass, adeclick, afftdn and agate before the
+shared leveling chain. These filters can reduce some clipping, rumble, clicks
+and steady noise, but can also alter speech. Listen to the result.
 
-SYNOPSIS
-    A "drop-and-forget" audio post-production tool.
-    Takes a raw audio file, cleans it using physics-based signal processing (De-clip/De-click/Denoise),
-    and levels it to broadcast standards (-12dB RMS) using a loudness chain.
+Parameter meanings in the preserved filters:
+- loudnorm I is an integrated LUFS target, distinct from RMS level. -12 LUFS
+  is this preset's choice, not a universal delivery standard or exact result.
+- dynaudnorm p=0.85 sets the target peak amplitude relative to full scale.
+- afftdn nf=-25 sets the noise floor in dB; nr sets reduction and is left at
+  the FFmpeg default (12 dB on the tested build).
+- agate threshold=0.0056 and range=0.056 are linear values. The nonzero range
+  limits attenuation; it does not mute all background sound.
 
-WHAT THIS IS (AND ISN'T)
-    - A codified version of a specific Adobe Audition "Speech Volume Leveler" workflow.
-    - Designed to be a robust "black box" that just works for 95% of spoken word audio.
-    - Favors consistency over granular control.
-    - Not an AI-based voice isolator.
-    - Not a multi-track editor, it processes single mixed files.
+Exports are 48 kHz PCM16 WAV, with optional PCM24, explicit mono or RF64.
+That encoder policy was introduced separately from the legacy filters; preset
+identity does not promise identical files across formats or FFmpeg builds.
+Standard mono/stereo channels are preserved unless -Mono is requested.
+Original preset version, application version and report schema version are
+recorded separately. Existing Raw/Zoom choices both select Original.
 
-FEATURES
-    - Text User Interface (TUI):
-        Simple prompt asking if the source is a "Raw Recording" or "Zoom/Teams" meeting.
-        Prevents over-processing of audio that is already noise-cancelled by VoIP software.
-    - Robust Cleaning Chain (Mode 1):
-        1. De-Clipper: Reconstructs peaks damaged by digital distortion.
-        2. Highpass Filter (80Hz): Removes AC hum, traffic rumble, and desk thumps.
-        3. De-Clicker: Smooths out mouth noises and lip smacks.
-        4. FFT Denoiser: Profiling-free noise reduction for steady background hiss.
-        5. Noise Gate: Silences breath and room tone between speech (Linear scale).
-    - Broadcast Leveling (Mode 1 & 2):
-        Uses Dynamic Audio Normalizer (dynaudnorm) to chase peaks and boost quiet sections (85% leveling).
-        Finishes with a Loudness Limiter (loudnorm) targeting exactly -12 LUFS/dB.
-    - Report Logging:
-        Generates a verbose log file in the Music folder.
-        Tracks input/output file sizes, duration, and the exact FFmpeg filter chain used for every run.
-    - Non-Destructive:
-        Never overwrites the original. Saves a new file with a timestamp and "_Cleaned" suffix.
+The source and prior exports are preserved. New audio and per-run JSON/text
+reports are written to Music by default; WinAudioClean_Log.txt is the summary.
+Reports may contain local paths and metadata. Diagnostic export is a separate
+local action; review it before sharing. Nothing is automatically uploaded.
+.EXAMPLE
+.\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav"
 
-MY INTENDED USAGE
-    - I keep WinAudioClean shortcut on my Desktop.
-    - When I finish a voice recording or download a Zoom meeting:
-        1. I drag the audio file onto the shortcut (.bat) file.
-        2. I type "1" for raw mic audio or "2" for a meeting.
-        3. I wait for the green "SUCCESS" text.
-        4. I find the polished file in my Music folder, ready for upload.
+Choose Raw or Zoom at the prompt. Dragging a file onto WinAudioClean.bat uses
+this same menu.
+.EXAMPLE
+.\WinAudioClean.ps1 -inputPath "C:\Audio\meeting.wav" -Mode Zoom -NonInteractive
 
-SETUP
-    1) Create a folder (e.g., C:\Tools\WinAudioClean\).
-    2) Place these five files inside:
-        - WinAudioClean.ps1
-        - WinAudioClean.IO.ps1
-        - WinAudioClean.bat
-        - ffmpeg.exe (Download from gyan.dev or similar)
-        - ffprobe.exe (from the same distribution)
-    3) (Optional) Create a shortcut to the .bat file on your Desktop.
+Run Original/Zoom without the mode prompt. Multiple audio tracks require
+-AudioStreamIndex with an absolute stream index.
+.EXAMPLE
+.\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav" -Mode Raw -BitDepth 24
 
-USAGE
-    A) Drag-and-Drop (Recommended)
-        - Drag an audio file (WAV, MP3, M4A, MKV, etc.) onto WinAudioClean.bat.
-        - Follow the on-screen prompts.
-
-    B) Direct PowerShell
-        - Open PowerShell.
-        - Run: .\WinAudioClean.ps1 -inputPath "C:\Path\To\Audio.wav"
-        - Optional: -FfmpegPath/-FfprobePath for tool paths, -AudioStreamIndex for an absolute audio track index.
-        - Exports 48 kHz PCM16 WAV. Use -BitDepth 24 for editing, -Mono for an explicit stereo mix,
-          or -Rf64 for a large WAV (requires an RF64-compatible reader).
-
-NOTES
-    - The Noise Gate settings use linear math, not decibels. This conversion is handled internally.
-    - The script forces the output format to .wav for maximum compatibility and quality preservation.
-    - Processing speed depends on CPU power and file length.
-
-LIMITATIONS
-    - Requires FFmpeg and ffprobe. Multiple audio tracks require a choice; unattended use requires -AudioStreamIndex.
-    - The "Highpass" filter is set to 80Hz. Deep baritone voices might prefer 60Hz, but 80Hz is the safe standard.
-    - Extremely noisy audio requires AI tools, which are outside the scope of this script.
-
-TROUBLESHOOTING
-    - Dependency failure:
-        Supply explicit -FfmpegPath/-FfprobePath, put both tools next to the script, or add them to PATH.
-    - Red "FAILED" text:
-        Check the console output immediately above the failure message. FFmpeg usually prints the specific reason (e.g., corrupt input file).
-
-LICENSE / WARRANTY
-    - Personal automation tool, provided as-is.
-    - Logic based on standard audio engineering practices.
+Use Original/Raw with 48 kHz PCM24 output. -Mono explicitly averages stereo;
+-Rf64 needs a compatible reader. These options do not retune the preset.
+.NOTES
+Author: Janne Vuorela. Windows 10/11; Windows PowerShell 5.1 or PowerShell 7+.
+Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
+Supply FFmpeg/ffprobe through -FfmpegPath/-FfprobePath, beside the script, or PATH.
+No dependency is automatically downloaded. Processing time depends on the file
+and machine. Severe noise and lost/clipped detail may not be recoverable;
+80 Hz filtering and leveling can affect voice character. Speech-quality
+listening has not been completed. This is a personal tool provided as-is.
+.LINK
+https://ffmpeg.org/ffmpeg-filters.html
 #>
 
 [CmdletBinding(PositionalBinding = $false)]
@@ -223,9 +194,9 @@ function Get-WacProcessingProfile {
     $levelFilters = "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
 
     if ($Choice -eq '1') {
-        [pscustomobject]@{ ModeName = 'RAW (Clean+Level)'; FilterChain = "$cleanFilters,$levelFilters" }
+        [pscustomobject]@{ PresetId = 'original'; PresetName = 'Original'; PresetVersion = '1.0.0'; ModeName = 'RAW (Clean+Level)'; FilterChain = "$cleanFilters,$levelFilters" }
     } elseif ($Choice -eq '2') {
-        [pscustomobject]@{ ModeName = 'ZOOM (Level Only)'; FilterChain = $levelFilters }
+        [pscustomobject]@{ PresetId = 'original'; PresetName = 'Original'; PresetVersion = '1.0.0'; ModeName = 'ZOOM (Level Only)'; FilterChain = $levelFilters }
     } else {
         throw 'Invalid processing choice. Expected 1 (Raw) or 2 (Zoom).'
     }
@@ -807,7 +778,8 @@ function New-WacRunReport {
         schemaVersion = 1
         jobId = $c.Transaction.JobId
         toolVersion = $c.ToolVersion
-        presetVersion = $null; presetVersionReason = 'not_versioned'
+        presetId = $c.Profile.PresetId; presetName = $c.Profile.PresetName
+        presetVersion = $c.Profile.PresetVersion; presetVersionReason = $null
         sourceRevision = $null; sourceRevisionReason = 'not_embedded'
         status = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
         processingStatus = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
@@ -900,6 +872,7 @@ LOG DATE       : $($r.timing.endedAtUtc)
 STATUS         : $($r.status) (Native Exit Code: $nativeExitText; Application Exit Code: $($r.applicationExitCode))
 PROCESSING     : $($r.processingStatus) (Application Exit Code: $($r.processingExitCode))
 MODE           : $($r.settings.modeName)
+PRESET         : $($r.presetName) (ID: $($r.presetId); version: $($r.presetVersion))
 INPUT DURATION : $($r.input.durationSeconds) s (selected stream)
 PROCESSING TIME: $($r.timing.processingElapsedSeconds) s (wall time for native rendering)
 STARTED UTC    : $($r.timing.startedAtUtc)
@@ -921,7 +894,7 @@ REQUEST TARGETS: -12 LUFS integrated; -1.5 dBTP true peak (requested, not indepe
 MEASUREMENTS   : LUFS, true peak and loudness range unavailable (not_measured)
 LOUDNESS CHECK : NOT_MEASURED; export validity does not certify loudness compliance
 SPACE ESTIMATE : $($r.space.estimatedFileBytes) file bytes + $($r.space.reserveBytes) reserve bytes; $($r.space.availableBytesBeforeRender) available before rendering
-TOOL VERSION   : $($r.toolVersion); schema $($r.schemaVersion); preset not_versioned; revision not_embedded
+TOOL VERSION   : $($r.toolVersion); schema $($r.schemaVersion); revision not_embedded
 EXECUTABLE     : $($r.dependencies.ffmpeg.path)
 FFMPEG VERSION : $(Format-WacReportLabel -Value $r.dependencies.ffmpeg.version)
 FFPROBE        : $($r.dependencies.ffprobe.path)
@@ -1169,11 +1142,11 @@ Write-Host "FFprobe: $ffprobePath ($ffprobeVersion)" -ForegroundColor Gray
 
 # --- TUI: SELECTION ---
 if (-not $Mode) {
-    Write-Host "`nSelect Processing Mode:" -ForegroundColor White
+    Write-Host "`nSelect Processing Mode (Original preset):" -ForegroundColor White
     Write-Host "[1] RAW RECORDING (Clean + Level)" -ForegroundColor Green
-    Write-Host "    -> Use for mic recordings. Removes hiss, rumble, clicks, and levels volume."
+    Write-Host "    -> Cleaning plus leveling for mic recordings. Listen for speech changes."
     Write-Host "[2] ZOOM/TEAMS (Level Only)" -ForegroundColor Magenta
-    Write-Host "    -> Use for meeting audio. Preserves existing noise cancellation."
+    Write-Host "    -> Leveling for meeting audio; skips the Raw cleaning filters."
     Write-Host '[Q] Cancel'
     try { $Mode = Read-WacMode }
     catch {
@@ -1191,6 +1164,7 @@ $choice = if ($Mode -eq 'Raw') { '1' } else { '2' }
 $processingProfile = Get-WacProcessingProfile -Choice $choice
 $modeName = $processingProfile.ModeName
 $filterChain = $processingProfile.FilterChain
+Write-Host ("Preset: {0} (ID: {1}; version: {2})" -f $processingProfile.PresetName, $processingProfile.PresetId, $processingProfile.PresetVersion)
 
 try { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain $filterChain }
 catch {
@@ -1329,7 +1303,7 @@ $report = New-WacRunReport -Context @{
     StartedAt = $startedAt; ElapsedSeconds = $stopWatch.Elapsed.TotalSeconds
     Stream = $selectedStream; InputBytes = $inputFileItem.Length; OutputBytes = $outputBytes
     Mode = $Mode; ModeName = $modeName; Policy = $outputPolicy; Mono = $Mono
-    FilterChain = $filterChain; VerifiedAudio = $verifiedAudio
+    Profile = $processingProfile; FilterChain = $filterChain; VerifiedAudio = $verifiedAudio
     FfmpegPath = $ffmpegPath; FfmpegVersion = $ffmpegVersion; FfprobePath = $ffprobePath; FfprobeVersion = $ffprobeVersion
     SpaceEstimate = $spaceEstimate; AvailableBytes = $availableBytes
     ValidationError = $validationError; CleanupErrors = $outputCleanupErrors; MetadataError = $metadataError

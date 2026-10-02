@@ -525,8 +525,23 @@
       "title": "Claims audit",
       "procedure": "Search all shipped docs/help/website drafts for old claims and compare parameter descriptions to official docs.",
       "expected": "Units and limitations are accurate; -12 LUFS is a chosen preset, not a universal broadcast standard.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-01-claims-review.md",
+        "evidence/WAC-M2-01-filter-options.json",
+        "evidence/WAC-M2-01-full-ps51.txt",
+        "evidence/WAC-M2-01-full-ps7.txt",
+        "evidence/WAC-M2-01-harness-timeout.json",
+        "evidence/WAC-M2-01-help-console.json",
+        "evidence/WAC-M2-01-initial-targeted-ps51.txt",
+        "evidence/WAC-M2-01-original-compatibility.json",
+        "evidence/WAC-M2-01-targeted-final-ps51.txt",
+        "evidence/WAC-M2-01-targeted-final-ps7.txt",
+        "evidence/WAC-M2-01-targeted-ps51.txt",
+        "evidence/WAC-M2-01-targeted-ps7.txt",
+        "evidence/WAC-M2-01.md",
+        "evidence/WAC-M2-01-source.json"
+      ]
     },
     {
       "id": "AC-035",
@@ -534,8 +549,23 @@
       "title": "Preset compatibility",
       "procedure": "Compare Original Raw/Zoom filter strings and synthetic output with the baseline on the same build/output settings.",
       "expected": "Filter values/order remain; any differences are explained by explicit encoder behavior rather than silent retuning.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-01-claims-review.md",
+        "evidence/WAC-M2-01-filter-options.json",
+        "evidence/WAC-M2-01-full-ps51.txt",
+        "evidence/WAC-M2-01-full-ps7.txt",
+        "evidence/WAC-M2-01-harness-timeout.json",
+        "evidence/WAC-M2-01-help-console.json",
+        "evidence/WAC-M2-01-initial-targeted-ps51.txt",
+        "evidence/WAC-M2-01-original-compatibility.json",
+        "evidence/WAC-M2-01-targeted-final-ps51.txt",
+        "evidence/WAC-M2-01-targeted-final-ps7.txt",
+        "evidence/WAC-M2-01-targeted-ps51.txt",
+        "evidence/WAC-M2-01-targeted-ps7.txt",
+        "evidence/WAC-M2-01.md",
+        "evidence/WAC-M2-01-source.json"
+      ]
     },
     {
       "id": "AC-036",
@@ -543,8 +573,23 @@
       "title": "Preset version report",
       "procedure": "Select Original from existing interactive paths and a test invocation.",
       "expected": "The effective preset ID/version appears in the report and is not confused with the application version.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-01-claims-review.md",
+        "evidence/WAC-M2-01-filter-options.json",
+        "evidence/WAC-M2-01-full-ps51.txt",
+        "evidence/WAC-M2-01-full-ps7.txt",
+        "evidence/WAC-M2-01-harness-timeout.json",
+        "evidence/WAC-M2-01-help-console.json",
+        "evidence/WAC-M2-01-initial-targeted-ps51.txt",
+        "evidence/WAC-M2-01-original-compatibility.json",
+        "evidence/WAC-M2-01-targeted-final-ps51.txt",
+        "evidence/WAC-M2-01-targeted-final-ps7.txt",
+        "evidence/WAC-M2-01-targeted-ps51.txt",
+        "evidence/WAC-M2-01-targeted-ps7.txt",
+        "evidence/WAC-M2-01.md",
+        "evidence/WAC-M2-01-source.json"
+      ]
     },
     {
       "id": "AC-037",

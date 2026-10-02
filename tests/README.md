@@ -364,3 +364,35 @@ exhaustion or hardware-failure recovery. Do not commit raw audio or reports.
 commands, environment, source identities and limits. The
 [file-safety review](../docs/codex/winaudioclean/evidence/WAC-M1-07-review.md)
 maps runtime writes and cleanup to the relevant tests.
+
+## Original preset identity and compatibility (WAC-M2-01)
+
+`WinAudioClean.Preset.Tests.ps1` checks the unchanged Original profiles and
+preset/report identity through Raw/Zoom menu and direct invocation paths. Its
+isolated menu copies override only host-interactivity detection and Read-Host;
+profile selection, native command construction and persisted reporting run
+normally. Legacy, current and arbitrary identity strings stay omitted from
+redacted diagnostic exports. This does not simulate Explorer drag-and-drop.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preset.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Preset.Tests.ps1
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OriginalPreset.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+The optional comparison harness uses existing local tools and deterministic
+synthetic fixtures. It compares both modes in both shells against direct FFmpeg
+references built from `BASELINE.json`: 48 kHz PCM16 stereo, 44.1 kHz mono input,
+short input, silence, and stereo PCM24. Outputs must match decoded PCM bytes
+at zero lag with identical encoding settings and the same FFmpeg build. This
+establishes preservation of tested filter behavior, not speech quality or
+identical files across FFmpeg builds or the historical implicit encoder.
+Generated media/reports remain under ignored `.wac-local`; only sanitized
+summary evidence belongs in Git.
+
+When Python starts child shells on Windows, remove inherited module-path keys
+case-insensitively (`key.upper() != 'PSMODULEPATH'`); `os.environ.copy()` uses
+uppercase keys. This avoids PS7 module paths breaking PS5.1 cmdlet discovery.
+See [M2-01 evidence](../docs/codex/winaudioclean/evidence/WAC-M2-01.md) for actual
+checks and the preserved initial environment failure.

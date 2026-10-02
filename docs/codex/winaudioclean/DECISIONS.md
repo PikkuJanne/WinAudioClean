@@ -307,3 +307,27 @@ by the next task, WAC-M2-01, together with Original preset naming/versioning.
 After clean live synchronization, begin M2-01 separately on the inspected M2
 feature branch, stacked on M1 while its draft PR is unmerged. No merge, release,
 default-sound promotion, security change or deployment approval is added.
+
+### 2026-10-02 — WAC-M2-01 claims and Original identity
+
+D27. Name the existing Raw/Zoom filters Original, stable ID `original`, preset
+version `1.0.0`. Preserve every baseline filter value and its order. Both
+existing choices select Original; mode, optional mono and encoder format remain
+separate settings. No new preset selector or default-sound promotion is added.
+
+The selected processing profile supplies identity to version 1 JSON, human
+reports and the retained summary. Application version `2.3` remains separate;
+`presetVersionReason` is now null. Earlier M1 reports remain readable with their
+null/not_versioned values. Redacted diagnostic exports continue to omit all
+free-form identity/version fields. No report schema bump is needed for these
+additive fields; no historical report is rewritten.
+
+README, working comment-based help and menu descriptions use the official
+FFmpeg parameter meanings. -12 LUFS/-1.5 dBTP are chosen targets; independent
+loudness compliance remains NOT_MEASURED. No universal broadcast, exact-result,
+Adobe-equivalence or percentage-success claim is supported. Original identity
+does not promise identical output across builds or formats. Keep the separate
+M1-05 encoder change and unreviewed speech quality explicit.
+
+Evidence: `evidence/WAC-M2-01.md`. The next task is M2-02 measured loudness;
+no new optional audio processing, merge, release or deployment is included.

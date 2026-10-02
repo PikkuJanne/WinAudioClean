@@ -447,7 +447,7 @@
       "depends_on": [
         "WAC-M1-07"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "README, comment-based help, preset metadata and exact legacy filters.",
       "implementation": [
@@ -461,7 +461,22 @@
         "AC-035",
         "AC-036"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M2-01-claims-review.md",
+        "evidence/WAC-M2-01-filter-options.json",
+        "evidence/WAC-M2-01-full-ps51.txt",
+        "evidence/WAC-M2-01-full-ps7.txt",
+        "evidence/WAC-M2-01-harness-timeout.json",
+        "evidence/WAC-M2-01-help-console.json",
+        "evidence/WAC-M2-01-initial-targeted-ps51.txt",
+        "evidence/WAC-M2-01-original-compatibility.json",
+        "evidence/WAC-M2-01-targeted-final-ps51.txt",
+        "evidence/WAC-M2-01-targeted-final-ps7.txt",
+        "evidence/WAC-M2-01-targeted-ps51.txt",
+        "evidence/WAC-M2-01-targeted-ps7.txt",
+        "evidence/WAC-M2-01.md",
+        "evidence/WAC-M2-01-source.json"
+      ],
       "blocked_reason": null
     },
     {

@@ -24,7 +24,8 @@ remain console-only. New per-run files use CreateNew and UTF-8 without a BOM.
 | Fields | Meaning |
 | --- | --- |
 | `schemaVersion`, `jobId`, `toolVersion` | Integer schema version `1`, the unique transaction ID and the application version. |
-| `presetVersion`, `sourceRevision` | Currently `null`, with `not_versioned` and `not_embedded` reason fields. No revision is inferred from the machine. |
+| `presetId`, `presetName`, `presetVersion` | Since M2-01, `original`, `Original`, `1.0.0` from the selected processing profile; `presetVersionReason` is `null`. Both Raw and Zoom use this preset. Older M1 reports have a null version with `not_versioned`. |
+| `sourceRevision` | `null` with `not_embedded`; no revision is inferred from the machine. |
 | `status`, `applicationExitCode` | Final `SUCCESS`, `WARNING` or `FAILED` outcome, including reporting failures. |
 | `processingStatus`, `processingExitCode`, `nativeExitCode` | Processing/publication/owned-cleanup result kept separate from report warnings and the actual native exit. |
 | `reasonCodes`, `warningCodes`, `reporting` | Machine-readable cause labels, report completeness and local error messages. |
@@ -33,6 +34,12 @@ remain console-only. New per-run files use CreateNew and UTF-8 without a BOM.
 | `output`, `space` | Published state, validity, requested format, verified PCM parameters, paths/size, and pre-render capacity estimates. Requested format alone is not proof of a valid export. |
 | `requestedTargets`, `measurements`, `loudnessCompliance` | Requested LUFS/true-peak targets, measurement availability and independent compliance status. |
 | `diagnostics`, `privacy` | Separate native stdout/stderr, processing/output/cleanup errors, local report paths and a privacy notice. |
+
+Preset identity is additive in schema version 1. It describes the filter values
+and order, separately from `toolVersion` (currently `2.3`), mode and export
+format. JSON, text and the summary carry the effective identity. Redacted
+diagnostic exports continue to omit all preset/application version fields,
+including arbitrary values supplied in a report.
 
 Recording duration and elapsed rendering time are finite numbers or `null` with
 companion reason fields. Each loudness measurement uses `{ value, reason }`;
