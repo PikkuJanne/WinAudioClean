@@ -1,0 +1,821 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "AC-001",
+      "task_id": "WAC-M0-01",
+      "title": "Wrong checkout / dirty worktree",
+      "procedure": "Try the helper against a different origin, a dirty tree, and a detached HEAD.",
+      "expected": "Apply fails without modifying existing files or changing branches.",
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-01.md",
+        "evidence/WAC-M0-01-helper-tests.txt"
+      ]
+    },
+    {
+      "id": "AC-002",
+      "task_id": "WAC-M0-01",
+      "title": "Preview and collision safety",
+      "procedure": "Preview then apply on a clean feature branch; repeat. Introduce an existing different AGENTS.md in a separate fixture.",
+      "expected": "Preview is read-only; repeat is idempotent; differing files are reported, not overwritten.",
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M0-01.md",
+        "evidence/WAC-M0-01-helper-tests.txt"
+      ]
+    },
+    {
+      "id": "AC-003",
+      "task_id": "WAC-M0-01",
+      "title": "Initial checkpoint",
+      "procedure": "Compare runtime files before/after governance import; commit and push only intended handoff files. Run live sync-check.",
+      "expected": "Runtime content is unchanged; clean worktree, matching local/live-remote branch HEAD, and a real PR reference or explicit API blocker are recorded.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-004",
+      "task_id": "WAC-M0-02",
+      "title": "Compatibility entry points",
+      "procedure": "Invoke the original -inputPath call and the .bat entry point with controlled input in both available Windows shells.",
+      "expected": "Existing modes and entry points remain; unavailable shell runs are marked not-run, not passed.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-005",
+      "task_id": "WAC-M0-02",
+      "title": "No import side effects",
+      "procedure": "Load test helpers in a fresh process with FFmpeg/process-start mocked.",
+      "expected": "No menu, process, writes, or exit on import; tests can run unattended.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-006",
+      "task_id": "WAC-M0-02",
+      "title": "Useful checks",
+      "procedure": "Run the new Quick runner, deliberately break a tested helper in an isolated worktree, then restore it.",
+      "expected": "The runner fails for the deliberate defect and passes after restoration; no broad analyzer suppressions hide it.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-007",
+      "task_id": "WAC-M0-03",
+      "title": "Legacy filter identity",
+      "procedure": "Compare built filter strings for Raw and Zoom with BASELINE.json.",
+      "expected": "Parameter values and order match exactly; output-container changes are recorded separately.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-008",
+      "task_id": "WAC-M0-03",
+      "title": "Reproducible synthetic baseline",
+      "procedure": "Run characterization twice using the same local build and inputs.",
+      "expected": "Versions, commands, fixture hashes and output format are recorded; variation is investigated rather than masked.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-009",
+      "task_id": "WAC-M0-03",
+      "title": "Private corpus handling",
+      "procedure": "Check ignore rules and staged files before adding the listening-review record.",
+      "expected": "No private recordings or identifying local paths are staged; missing listening material is explicitly pending.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-010",
+      "task_id": "WAC-M0-04",
+      "title": "Baseline completeness",
+      "procedure": "Check source identities, filters, runnable test commands and environment inventory.",
+      "expected": "Each exists with actual evidence; unexecuted Windows/listening checks remain distinguishable.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-011",
+      "task_id": "WAC-M0-04",
+      "title": "Plan consistency",
+      "procedure": "Run the plan validator after changing task status.",
+      "expected": "No unknown dependency, duplicate ID, missing acceptance link, or done task without evidence.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-012",
+      "task_id": "WAC-M0-04",
+      "title": "Thread restart",
+      "procedure": "Start from a fresh Codex thread reading NEXT_MODEL_START_HERE.md and git.",
+      "expected": "The next task and unverified checks are clear without reconstructing prior chat or repeating the entire audit.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-013",
+      "task_id": "WAC-M1-01",
+      "title": "Literal path matrix",
+      "procedure": "Use files with spaces, square brackets, apostrophes, ä/ö/Å, ampersands, percent signs, exclamation marks and parentheses.",
+      "expected": "Each resolves to one intended file; no wildcard expansion or unexpected command execution.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-014",
+      "task_id": "WAC-M1-01",
+      "title": "Validation order",
+      "procedure": "Try no input, directory, nonexistent input, URL, unwritable destination and zero-byte corrupt media.",
+      "expected": "Clear preflight diagnostics; no mode prompt for invalid paths and no misleading successful export.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-015",
+      "task_id": "WAC-M1-01",
+      "title": "Menu correctness",
+      "procedure": "Enter empty, invalid, valid and cancel choices. Run missing mode with noninteractive semantics.",
+      "expected": "Invalid input cannot silently select Zoom; cancellation/noninteractive failure is explicit.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-016",
+      "task_id": "WAC-M1-02",
+      "title": "Argument fidelity",
+      "procedure": "Use a benign argv-echo test executable or equivalent recorder with the filename matrix through both the direct script and actual launcher.",
+      "expected": "The child receives exact arguments; command-like filenames cannot become commands; any CMD limitation gets a safe fallback and explicit notice.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-017",
+      "task_id": "WAC-M1-02",
+      "title": "Error propagation",
+      "procedure": "Simulate startup failure, FFmpeg nonzero exit, failed reporting, and successful execution.",
+      "expected": "Script and launcher return documented codes and retain useful diagnostic details without claiming success.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-018",
+      "task_id": "WAC-M1-02",
+      "title": "Output and stream handling",
+      "procedure": "Have a test child write large stdout/stderr streams, then exit; repeat with a known synthetic FFmpeg job.",
+      "expected": "No deadlock or truncation of essential errors; all handles are closed and completion is accurately observed.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-019",
+      "task_id": "WAC-M1-03",
+      "title": "Dependency resolution",
+      "procedure": "Test explicit, sibling and PATH locations; missing, incompatible and selected-mode-filter-deficient builds.",
+      "expected": "Precedence is deterministic, failures are actionable, and no download happens without consent.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-020",
+      "task_id": "WAC-M1-03",
+      "title": "Stream choice",
+      "procedure": "Use a container with two distinguishable tracks and a video-only container.",
+      "expected": "Selected absolute stream index maps to the expected audio; no-audio fails before cleaning; unattended ambiguity fails.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-021",
+      "task_id": "WAC-M1-03",
+      "title": "Probe safety",
+      "procedure": "Test malformed JSON, timeout, nonzero probe exit and local playlist referencing an external URL.",
+      "expected": "No false metadata or unbounded hang; unsupported network references are rejected/blocked and documented.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-022",
+      "task_id": "WAC-M1-04",
+      "title": "Collision and concurrency",
+      "procedure": "Run same input twice rapidly and two inputs with the same stem; run concurrent jobs targeting one destination.",
+      "expected": "Every completed output is unique and prior results/source hashes remain unchanged.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-023",
+      "task_id": "WAC-M1-04",
+      "title": "Failure before publication",
+      "procedure": "Inject encoder failure, disk-full simulation, invalid output, and a crash before rename.",
+      "expected": "No normal-looking final export is published; originals/prior exports remain untouched; partial files are identifiable.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-024",
+      "task_id": "WAC-M1-04",
+      "title": "Rename race / validation",
+      "procedure": "Create the intended final filename after name selection; simulate exit 0 with an empty or truncated output.",
+      "expected": "No existing file is replaced; validation blocks invalid output and reports the true failure.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-025",
+      "task_id": "WAC-M1-05",
+      "title": "Explicit output matrix",
+      "procedure": "Process 44.1/48 kHz mono and stereo fixtures in both modes and 16/24-bit choices; inspect with ffprobe.",
+      "expected": "Selected sample rate/codec/channels are correct; no accidental 192 kHz default export.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-026",
+      "task_id": "WAC-M1-05",
+      "title": "Timing and channels",
+      "procedure": "Use stereo channels with different signals and known impulses; compare start/end and duration before/after.",
+      "expected": "No unintended downmix, channel swap, silence removal, leading offset or unexplained timing drift.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-027",
+      "task_id": "WAC-M1-05",
+      "title": "Large-file and space policy",
+      "procedure": "Unit-test estimates around the WAV size boundary and inject low-space conditions; exercise an RF64 header with a small supported fixture.",
+      "expected": "Policy is deterministic and documented; full >4 GB stress is run only when risk warrants it, or clearly not claimed as tested.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-028",
+      "task_id": "WAC-M1-06",
+      "title": "Report fidelity",
+      "procedure": "Run success, encoder failure and validation failure; compare console, JSON, human log and process exit.",
+      "expected": "Statuses agree; recording duration differs from wall time; unsupported/nonfinite measurements become null plus reason.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-029",
+      "task_id": "WAC-M1-06",
+      "title": "Privacy export",
+      "procedure": "Generate a report containing user-directory names, filenames, container title and potential sensitive diagnostic text.",
+      "expected": "Redacted output omits sensitive values and warns about review; raw report remains local only.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-030",
+      "task_id": "WAC-M1-06",
+      "title": "Concurrent and failed logging",
+      "procedure": "Run concurrent exports and inject a log destination permission failure.",
+      "expected": "Reports do not overwrite/interleave incorrectly; audio is not deleted solely because reporting failed; outcome is unambiguous.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-031",
+      "task_id": "WAC-M1-07",
+      "title": "Cumulative regression",
+      "procedure": "Run the documented M0+M1 suite on the active Windows machine in available supported shells.",
+      "expected": "All mandatory local checks pass, or the milestone remains blocked with exact failures.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-032",
+      "task_id": "WAC-M1-07",
+      "title": "Non-destructive review",
+      "procedure": "Inspect all file-writing, rename and cleanup paths alongside fault-injection results.",
+      "expected": "No source/prior export overwrite, broad cleanup, silent output ambiguity or false-success path remains known.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-033",
+      "task_id": "WAC-M1-07",
+      "title": "Remote checkpoint",
+      "procedure": "Run live sync-check after pushing the implementation/evidence commit and inspect PR state.",
+      "expected": "Clean worktree and identical local/live remote HEAD; CI state is accurately separated from local results.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-034",
+      "task_id": "WAC-M2-01",
+      "title": "Claims audit",
+      "procedure": "Search all shipped docs/help/website drafts for old claims and compare parameter descriptions to official docs.",
+      "expected": "Units and limitations are accurate; -12 LUFS is a chosen preset, not a universal broadcast standard.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-035",
+      "task_id": "WAC-M2-01",
+      "title": "Preset compatibility",
+      "procedure": "Compare Original Raw/Zoom filter strings and synthetic output with the baseline on the same build/output settings.",
+      "expected": "Filter values/order remain; any differences are explained by explicit encoder behavior rather than silent retuning.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-036",
+      "task_id": "WAC-M2-01",
+      "title": "Preset version report",
+      "procedure": "Select Original from existing interactive paths and a test invocation.",
+      "expected": "The effective preset ID/version appears in the report and is not confused with the application version.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-037",
+      "task_id": "WAC-M2-02",
+      "title": "Pass consistency",
+      "procedure": "Capture both commands for Raw/Zoom, selected stream, mono/stereo and numeric locale variations.",
+      "expected": "Prechains, stream, channel policy and parameters match; second pass uses valid pass-1 measurements and invariant decimals.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-038",
+      "task_id": "WAC-M2-02",
+      "title": "Output measurements",
+      "procedure": "Run eligible full-length fixtures at -12 LUFS / -1.5 dBTP and verify final-file loudness/peak.",
+      "expected": "Achievable cases meet declared tolerances; constraints/fallbacks are reported and out-of-tolerance results are not called target-compliant.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-039",
+      "task_id": "WAC-M2-02",
+      "title": "Undefined and fallback cases",
+      "procedure": "Use silence, <1-second audio, restricted peak headroom, high LRA and malformed measurement output.",
+      "expected": "No unchecked nonfinite values, infinite retries, division errors, or false exact-target claims; fallback is logged.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-040",
+      "task_id": "WAC-M2-03",
+      "title": "Parameter validation",
+      "procedure": "Test valid bounds, invalid values, unknown settings and filter-like injected strings.",
+      "expected": "Only typed allowlisted settings construct the graph; no arbitrary filter/command injection through configuration.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-041",
+      "task_id": "WAC-M2-03",
+      "title": "Defaults unchanged",
+      "procedure": "Run the existing no-extra-options Raw and Zoom paths after adding presets.",
+      "expected": "Original filters remain the default; Zoom does not accidentally enable cleaning stages.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-042",
+      "task_id": "WAC-M2-03",
+      "title": "Listening candidate record",
+      "procedure": "Compare original/gentle on the approved local corpus or record why unavailable.",
+      "expected": "Reviewer evaluates words, consonants, breaths, voice character and artifacts; synthetic checks are not presented as listening approval.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-043",
+      "task_id": "WAC-M2-04",
+      "title": "Range and alignment",
+      "procedure": "Preview from start, middle and near end of a known timed fixture plus a very short recording.",
+      "expected": "Valid matched intervals only; no unexplained offset, overwrite or out-of-range processing.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-044",
+      "task_id": "WAC-M2-04",
+      "title": "Comparison gain",
+      "procedure": "Measure the original/processed comparison pair with the documented matching method.",
+      "expected": "Level matching is separate from the mastering preset and does not introduce clipping; unmeasurable cases are clearly labeled.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-045",
+      "task_id": "WAC-M2-04",
+      "title": "No hidden processing",
+      "procedure": "Create/cancel a preview and inspect files, current settings and process state.",
+      "expected": "No full recording starts implicitly, source is unchanged and only run-owned preview files are cleaned up.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-046",
+      "task_id": "WAC-M2-05",
+      "title": "Objective audio gate",
+      "procedure": "Run all applicable M2 numeric and structural checks.",
+      "expected": "Mandatory implemented-mode checks pass; ineligible/undefined metrics are explicitly classified.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-047",
+      "task_id": "WAC-M2-05",
+      "title": "Human gate integrity",
+      "procedure": "Inspect listening template, corpus consent and approval records.",
+      "expected": "Real reviewer results are attributable; missing listening approval prevents default promotion, not a fabricated pass.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-048",
+      "task_id": "WAC-M2-05",
+      "title": "Reproducible settings",
+      "procedure": "Recreate an output from the report using the same build/input/settings and push the checkpoint.",
+      "expected": "Preset/format choices are traceable and the exact accepted revision is recoverable from GitHub.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-049",
+      "task_id": "WAC-M3-01",
+      "title": "Precedence matrix",
+      "procedure": "Set conflicting built-in, saved and CLI values then reset settings.",
+      "expected": "Documented precedence wins; legacy input invocation remains valid.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-050",
+      "task_id": "WAC-M3-01",
+      "title": "Unattended behavior",
+      "procedure": "Run with all required values; omit a required mode/stream or supply invalid settings with redirected stdin.",
+      "expected": "No prompt/pause or hang; valid jobs run and invalid jobs fail with a useful exit code.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-051",
+      "task_id": "WAC-M3-01",
+      "title": "Config durability",
+      "procedure": "Test malformed JSON, unknown schema, wrong types, interrupted save and German/Finnish decimal culture.",
+      "expected": "Safe diagnostics, previous valid config preserved and invariant FFmpeg serialization; no arbitrary code execution.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-052",
+      "task_id": "WAC-M3-02",
+      "title": "Real drag/drop matrix",
+      "procedure": "Drop one and several files, including spaces, Unicode, brackets, %, !, &, apostrophes and parentheses, onto the actual launcher.",
+      "expected": "Each intended input appears once in the queue without truncation, corruption or command execution.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-053",
+      "task_id": "WAC-M3-02",
+      "title": "Aggregate result",
+      "procedure": "Process a list containing valid and invalid items.",
+      "expected": "Per-item results persist; overall exit code reflects failure; single-file behavior remains compatible.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-054",
+      "task_id": "WAC-M3-02",
+      "title": "Boundary handling",
+      "procedure": "Test many/long paths and double-click with no files.",
+      "expected": "No silently lost inputs; actionable safe fallback for launcher limits and clear no-input guidance.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-055",
+      "task_id": "WAC-M3-03",
+      "title": "Folder selection",
+      "procedure": "Process a mixed folder including output files, nested folders and a junction/symlink loop fixture.",
+      "expected": "Recursion is off by default; no loop or generated-output reprocessing; unsupported files are explained/skipped.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-056",
+      "task_id": "WAC-M3-03",
+      "title": "Queue stability",
+      "procedure": "Select duplicate paths and inputs with identical stems; place the destination inside the input folder.",
+      "expected": "Inputs are deduplicated, names remain collision-safe and newly generated output never enters the running queue.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-057",
+      "task_id": "WAC-M3-03",
+      "title": "Failure continuation",
+      "procedure": "Fail a middle item and process remaining items; repeat with cancellation.",
+      "expected": "Failure does not discard other results; cancellation stops new jobs and aggregate status is truthful.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-058",
+      "task_id": "WAC-M3-04",
+      "title": "Progress semantics",
+      "procedure": "Run fast/accurate/preview jobs, variable-speed data and unknown duration.",
+      "expected": "Progress is bounded, stage labels correct, and 100% is not shown before validation/publication.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-059",
+      "task_id": "WAC-M3-04",
+      "title": "Owned-process cancellation",
+      "procedure": "Run two independent jobs, cancel one at analysis/render/verification in separate tests.",
+      "expected": "Only the cancelled run stops; no new queued job starts; originals/other exports remain intact.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-060",
+      "task_id": "WAC-M3-04",
+      "title": "Abnormal child / console",
+      "procedure": "Force unexpected child exit, truncated progress lines and closed/redirected console.",
+      "expected": "No deadlock, misleading success or unbounded wait; final status remains in the report.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-061",
+      "task_id": "WAC-M3-05",
+      "title": "Destination choices",
+      "procedure": "Run Music/default, custom, per-job and unavailable redirected Music-folder scenarios.",
+      "expected": "Predictable paths with safe fallback/error; no writes to unexpected current directories.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-062",
+      "task_id": "WAC-M3-05",
+      "title": "No-GUI operation",
+      "procedure": "Run from a terminal/redirected session without desktop interaction.",
+      "expected": "Processing and diagnostics work with no file-picker or Explorer dependency.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-063",
+      "task_id": "WAC-M3-05",
+      "title": "Explicit follow-up actions",
+      "procedure": "Complete success/failure runs and exercise optional open-folder/cancel-picker actions.",
+      "expected": "Only requested safe actions occur; failures do not falsely offer a completed output.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-064",
+      "task_id": "WAC-M3-06",
+      "title": "Original workflow",
+      "procedure": "Drop a typical interview file, select 1/2 and inspect the result/report.",
+      "expected": "Same simple front-door experience remains; new settings do not overwhelm the default menu.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-065",
+      "task_id": "WAC-M3-06",
+      "title": "Automation workflow",
+      "procedure": "Invoke unattended batch with explicit parameters and examine process codes/files/reports.",
+      "expected": "No prompt, missing file, misleading aggregate result or timing change.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-066",
+      "task_id": "WAC-M3-06",
+      "title": "Reentry workflow",
+      "procedure": "Restart in a new thread or clean checkout with recorded settings intentionally absent.",
+      "expected": "Built-in defaults suffice; state and remaining tasks are recovered from Git, not hidden machine settings.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-067",
+      "task_id": "WAC-M4-01",
+      "title": "Coverage traceability",
+      "procedure": "Map every implemented acceptance ID to a test command/report or a named manual review.",
+      "expected": "No implemented behavior relies solely on a roadmap checkbox; mandatory gaps remain visible.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-068",
+      "task_id": "WAC-M4-01",
+      "title": "Mutation / fault checks",
+      "procedure": "Inject representative overwrite, bad exit and wrong-sample-rate defects in an isolated test tree.",
+      "expected": "Relevant tests detect them; test fixture cleanup cannot remove real user files.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-069",
+      "task_id": "WAC-M4-01",
+      "title": "Efficient repeatability",
+      "procedure": "Run Quick and selected Targeted suites after a narrow change, then one Full gate.",
+      "expected": "Runners are reusable and evidence tied to revision; no repetitive all-project audit is required for every small edit.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-070",
+      "task_id": "WAC-M4-02",
+      "title": "CI/local parity",
+      "procedure": "Compare workflow commands and versions to local runners; run a PR check.",
+      "expected": "Same checks are invoked, versions recorded, real green/failure status linked to the tested SHA.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-071",
+      "task_id": "WAC-M4-02",
+      "title": "Workflow permissions",
+      "procedure": "Review permissions, triggers, pinned actions, downloads and secrets exposure.",
+      "expected": "Untrusted PR tests cannot publish releases/access private recordings/secrets; no broad write token by default.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-072",
+      "task_id": "WAC-M4-02",
+      "title": "Truthful fallback",
+      "procedure": "Simulate unavailable CI or one unsupported local shell.",
+      "expected": "Local and CI results remain distinct; neither an API outage nor an unrun job becomes a passed gate.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-073",
+      "task_id": "WAC-M4-03",
+      "title": "Package contents",
+      "procedure": "Build twice from the same inputs; inspect archive entries and metadata/checksums.",
+      "expected": "Version and content manifest agree; reproducibility claims match actual results; no private/development-only files.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-074",
+      "task_id": "WAC-M4-03",
+      "title": "Fresh package use",
+      "procedure": "Extract into a clean user-writable folder with spaces/Unicode; supply approved local dependencies.",
+      "expected": "The documented .bat and PowerShell paths work without a repo, Python or test modules installed.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-075",
+      "task_id": "WAC-M4-03",
+      "title": "Licensing and integrity",
+      "procedure": "Review included notices, dependency provenance and generated hashes.",
+      "expected": "MIT notice is preserved; bundled third-party build obligations are checked or bundling remains explicitly blocked.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-076",
+      "task_id": "WAC-M4-04",
+      "title": "Examples execute",
+      "procedure": "Follow installation and commands from a clean release ZIP on the active machine.",
+      "expected": "Examples run without hidden setup; help contains valid parameter descriptions and actual defaults.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-077",
+      "task_id": "WAC-M4-04",
+      "title": "Support and privacy",
+      "procedure": "Walk through missing dependency, corrupt media, permissions, output collision and redacted-report guidance.",
+      "expected": "User can diagnose without uploading private audio or changing machine-wide security settings.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-078",
+      "task_id": "WAC-M4-04",
+      "title": "Claims consistency",
+      "procedure": "Compare README/Get-Help/preset labels/reports and website draft metadata.",
+      "expected": "Versions, LUFS/peak units, local-processing statement and limitations agree.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-079",
+      "task_id": "WAC-M5-01",
+      "title": "Architecture boundary",
+      "procedure": "Inspect page code, browser requests and runtime script behavior.",
+      "expected": "Website only presents/distributes; tool never needs the website to process audio; no upload endpoint/telemetry is introduced.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-080",
+      "task_id": "WAC-M5-01",
+      "title": "Metadata correctness",
+      "procedure": "Validate draft and published-like fixture metadata against packaging output.",
+      "expected": "No fabricated release link/hash; draft/unpublished assets cannot appear as a working stable download.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-081",
+      "task_id": "WAC-M5-01",
+      "title": "Accessible presentation",
+      "procedure": "Test keyboard navigation, meaningful labels, readable layout and sample consent records.",
+      "expected": "Page is usable and honest; missing real assets are marked pending without fake screenshots/reviews.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-082",
+      "task_id": "WAC-M5-02",
+      "title": "GitHub reconstruction",
+      "procedure": "Fetch the checkpoint and create a clean detached worktree/clone for the explicit SHA.",
+      "expected": "Project builds/tests using documented prerequisites; no hidden local edits or untracked runtime dependencies are required.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-083",
+      "task_id": "WAC-M5-02",
+      "title": "Candidate integrity",
+      "procedure": "Compare candidate contents, hashes and version across packaging and website metadata.",
+      "expected": "All artifacts identify the same source revision/version; invalid checksum/version inputs fail validation.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-084",
+      "task_id": "WAC-M5-02",
+      "title": "Privacy and rollback",
+      "procedure": "Review candidate files and documented rollback to a prior release/source tag.",
+      "expected": "No confidential content ships and rollback does not erase source recordings/settings without consent.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-085",
+      "task_id": "WAC-M5-03",
+      "title": "Complete traceability",
+      "procedure": "Audit TRACEABILITY.md, TASKS.yaml, evidence and release checklist once.",
+      "expected": "All improvements are implemented/verified or explicitly deferred with owner approval; no placeholder is reported as complete.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-086",
+      "task_id": "WAC-M5-03",
+      "title": "Safe acceptance",
+      "procedure": "Review mandatory safety tests and all pending subjective/platform checks.",
+      "expected": "Known data-loss/security/false-success regressions block acceptance; unreviewed sound changes stay opt-in/experimental.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-087",
+      "task_id": "WAC-M5-03",
+      "title": "Delivery checkpoint",
+      "procedure": "Verify clean worktree, live remote SHA, PR/check status and candidate artifact manifest.",
+      "expected": "Owner receives a recoverable, approval-ready checkpoint, not a claim that unapproved release/deployment already occurred.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-088",
+      "task_id": "WAC-M5-04",
+      "title": "Approval boundary",
+      "procedure": "Attempt to plan merge/tag/release/settings change/deployment without a matching approval record.",
+      "expected": "Action stays blocked; no side effect. Ordinary feature commits/pushes/draft PR updates remain permitted.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-089",
+      "task_id": "WAC-M5-04",
+      "title": "Exact target check",
+      "procedure": "Compare approved SHA/artifact/target to the live candidate immediately before action.",
+      "expected": "Mismatch stops publication and returns an updated proposal; no force push or surprise main push.",
+      "status": "not_run",
+      "evidence": []
+    },
+    {
+      "id": "AC-090",
+      "task_id": "WAC-M5-04",
+      "title": "Post-action verification",
+      "procedure": "For each approved action, check actual remote state and downloaded asset hash/site metadata.",
+      "expected": "Recorded result matches what was published; outstanding approvals and rollback route are explicit.",
+      "status": "not_run",
+      "evidence": []
+    }
+  ]
+}

@@ -1,0 +1,911 @@
+{
+  "schema_version": 1,
+  "project": "WinAudioClean",
+  "repository": "PikkuJanne/WinAudioClean",
+  "reviewed_commit": "7dfe43361395908a277d7b513b1c9a4fd3cd192a",
+  "created": "2026-10-02",
+  "task_semantics": "done means engineering criteria are evidenced; local/GitHub synchronization must be freshly verified separately before advancing. Publication remains approval-gated.",
+  "milestones": [
+    {
+      "id": "M0",
+      "title": "Baseline and governance",
+      "suggested_branch": "codex/wac-m0-handoff",
+      "gate": "Governance-only checkpoint first, then a fresh implementation thread."
+    },
+    {
+      "id": "M1",
+      "title": "Reliability and safe exports",
+      "suggested_branch": "codex/wac-m1-reliability",
+      "gate": "No known overwrite, false-success or unbounded process defect."
+    },
+    {
+      "id": "M2",
+      "title": "Audio accuracy and optional refinements",
+      "suggested_branch": "codex/wac-m2-audio",
+      "gate": "Original default sound preserved; objective evidence and honest listening status."
+    },
+    {
+      "id": "M3",
+      "title": "Local workflow polish",
+      "suggested_branch": "codex/wac-m3-workflow",
+      "gate": "Original drag/drop plus reliable unattended and batch paths."
+    },
+    {
+      "id": "M4",
+      "title": "Testing, packaging and documentation",
+      "suggested_branch": "codex/wac-m4-distribution",
+      "gate": "Local testable release candidate; CI supplementary; no publication."
+    },
+    {
+      "id": "M5",
+      "title": "Website assets and final delivery",
+      "suggested_branch": "codex/wac-m5-release-readiness",
+      "gate": "Static distribution only; actual release/deployment is separately approval-gated."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "WAC-M0-01",
+      "milestone": "M0",
+      "title": "Reconcile and install the handoff without changing runtime behavior",
+      "improvements": [
+        16,
+        17
+      ],
+      "depends_on": [],
+      "status": "in_progress",
+      "approval_required": false,
+      "scope": "AGENTS.md and docs/codex/winaudioclean; inspect the existing checkout and GitHub before installing.",
+      "implementation": [
+        "Inspect all applicable AGENTS.md files, git status, branch, origin fetch/push URLs, current HEAD, and open PRs. Reconcile drift from BASELINE.json; do not reset to the reviewed commit.",
+        "Preview the importer. Work on codex/wac-m0-handoff or an already established matching work branch. Merge existing governance additively; never replace the product README, live tasks, or decisions.",
+        "Record the active machine tools and baseline; install governance only, add narrowly scoped generated-file ignores, commit/push, verify remote HEAD, and open or update one draft milestone PR. End the session before runtime changes."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-001",
+        "AC-002",
+        "AC-003"
+      ],
+      "evidence": [
+        "evidence/WAC-M0-01.md"
+      ],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M0-02",
+      "milestone": "M0",
+      "title": "Create minimal test seams and local PowerShell test runners",
+      "improvements": [
+        16
+      ],
+      "depends_on": [
+        "WAC-M0-01"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "WinAudioClean.ps1, small internal helper file only when useful, tests/, scripts/Invoke-Tests.ps1.",
+      "implementation": [
+        "Add Pester and PSScriptAnalyzer as development-only dependencies with pinned versions and explicit setup, not runtime installation.",
+        "Extract only path/filter/command/report helpers needed to test existing behavior. Dot-sourcing testable code must not prompt, launch FFmpeg, clear a console, or exit the test host.",
+        "Create Quick, Targeted, and Full runners. Characterization tests describe known bugs without treating them as desirable product requirements."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-004",
+        "AC-005",
+        "AC-006"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M0-03",
+      "milestone": "M0",
+      "title": "Capture synthetic and permission-cleared audio baselines",
+      "improvements": [
+        9,
+        16
+      ],
+      "depends_on": [
+        "WAC-M0-02"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Fixture generator, tests/fixtures metadata, baseline reports; private audio stays untracked.",
+      "implementation": [
+        "Reuse or adapt the bundled standard-library synthetic generator; it is development tooling, not a new application dependency.",
+        "Characterize both original filter chains on the active Windows machine, recording FFmpeg build, rates, channels, duration and metrics. Preserve the exact legacy filter strings.",
+        "Prepare an owner-supplied listening corpus checklist without uploading interview audio. Reproduce the 192 kHz behavior rather than copying prior chat claims as test evidence."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-007",
+        "AC-008",
+        "AC-009"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M0-04",
+      "milestone": "M0",
+      "title": "Baseline gate and continuation checkpoint",
+      "improvements": [
+        16,
+        17
+      ],
+      "depends_on": [
+        "WAC-M0-03"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Baseline evidence, task state, decisions and next-model handoff.",
+      "implementation": [
+        "Reconcile all M0 evidence once and resolve actual characterization blockers.",
+        "Record approved implementation contracts and pending human decisions. Test on the active machine; CI is supplementary.",
+        "Push the complete checkpoint, verify live remote HEAD, update the draft PR and choose WAC-M1-01 as the exact next task."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-010",
+        "AC-011",
+        "AC-012"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M1-01",
+      "milestone": "M1",
+      "title": "Validate local input, mode and destination before prompting",
+      "improvements": [
+        2
+      ],
+      "depends_on": [
+        "WAC-M0-04"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Existing input checks, menu and path-resolution helpers.",
+      "implementation": [
+        "Use literal file paths; reject directories, nonexistent/unreadable files, URLs and unsupported nonlocal input forms before spawning tools.",
+        "Resolve the destination, check that it can be created/written, and only then request a mode. Reprompt on invalid input and provide cancellation.",
+        "For missing interactive input show a useful usage/picker route; automation must fail without prompting. Keep network-share policy explicit rather than claiming every path is offline storage."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-013",
+        "AC-014",
+        "AC-015"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M1-02",
+      "milestone": "M1",
+      "title": "Harden native process execution, exit codes and diagnostics",
+      "improvements": [
+        4,
+        14
+      ],
+      "depends_on": [
+        "WAC-M1-01"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "FFmpeg process wrapper and .bat exit-code propagation; NATIVE_PROCESS_CONTRACT.md.",
+      "implementation": [
+        "Use a small tested native-process wrapper that captures stdout/stderr independently and drains both without deadlock.",
+        "Do not use Invoke-Expression, shell-built user commands, or assume Start-Process string arrays solve Windows quoting. Test the PS5.1 and PS7 paths explicitly.",
+        "Set -nostdin for unattended FFmpeg, handle start failures/exceptions, and define application exit codes. Preserve the script result before any interactive pause in the launcher."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-016",
+        "AC-017",
+        "AC-018"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M1-03",
+      "milestone": "M1",
+      "title": "Resolve dependencies and probe/map audio streams",
+      "improvements": [
+        5,
+        6
+      ],
+      "depends_on": [
+        "WAC-M1-02"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Dependency discovery, ffprobe JSON inspection and explicit -map construction.",
+      "implementation": [
+        "Retain sibling and PATH FFmpeg resolution; add an explicit-path override with known precedence and ffprobe discovery.",
+        "Log full resolved executable paths and versions; check selected-mode filters without quietly downloading or installing tools.",
+        "Inspect audio streams and choose explicitly. For multiple streams prompt interactively; require explicit selection unattended. Scope local-media protocols to prevent unexpected remote media fetching."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-019",
+        "AC-020",
+        "AC-021"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M1-04",
+      "milestone": "M1",
+      "title": "Make output publication transactional and collision safe",
+      "improvements": [
+        1,
+        4
+      ],
+      "depends_on": [
+        "WAC-M1-03"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Output naming, run-owned temporary files, validation and final rename.",
+      "implementation": [
+        "Use unique job identifiers, a temporary WAV on the destination volume, and exclusive creation/no-clobber semantics; do not rely on minute/second timestamps alone.",
+        "Require a successful process plus a nonempty readable audio stream and plausible timing before publishing. Ensure the input can never equal any output/temp destination.",
+        "Rename without replacing an existing final file. On failure remove only this job’s owned partial files; handle abrupt-crash leftovers explicitly without broad cleanup."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-022",
+        "AC-023",
+        "AC-024"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M1-05",
+      "milestone": "M1",
+      "title": "Specify PCM output, channel policy and large-file behavior",
+      "improvements": [
+        3,
+        15
+      ],
+      "depends_on": [
+        "WAC-M1-04"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Output encoder settings, disk estimation and RF64 choice.",
+      "implementation": [
+        "Make 48 kHz / 16-bit PCM WAV the proposed explicit export default; document this intentional format change and retain the legacy filters unchanged.",
+        "Offer 24-bit PCM for editing; preserve the selected track’s channel count/layout, with explicit mono conversion only. Establish clear policy for unsupported layouts.",
+        "Estimate destination/temp space with safety headroom; offer/test RF64 for >4 GB, or fail early with guidance. Never silently cut duration or split tracks."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-025",
+        "AC-026",
+        "AC-027"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M1-06",
+      "milestone": "M1",
+      "title": "Produce readable, structured, privacy-aware run reports",
+      "improvements": [
+        14
+      ],
+      "depends_on": [
+        "WAC-M1-05"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Per-run text/JSON report writer and retained summary log.",
+      "implementation": [
+        "Keep a human summary and add versioned per-run JSON with status, versions, stream, settings, exact filters, input duration, processing elapsed time, output format and metrics availability.",
+        "Retain native diagnostics on failure, keep job IDs unique, and distinguish processing success from report-write warnings using documented policy.",
+        "Provide an explicit redacted diagnostic export that removes user paths and sensitive metadata; never upload logs automatically."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-028",
+        "AC-029",
+        "AC-030"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M1-07",
+      "milestone": "M1",
+      "title": "Reliability regression gate",
+      "improvements": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        14,
+        15,
+        16
+      ],
+      "depends_on": [
+        "WAC-M1-06"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "M1 test reconciliation, compatibility review and synchronization evidence.",
+      "implementation": [
+        "Run cumulative Quick and M1 targeted tests; run one Full gate rather than restarting the whole suite after every cosmetic change.",
+        "Review all intentional behavior changes and preserved command-line/drag-drop entry points; resolve known data-loss or false-success defects.",
+        "Update task evidence and checkpoint; push the matching branch and refresh the draft PR with exact tested revision and environment."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-031",
+        "AC-032",
+        "AC-033"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M2-01",
+      "milestone": "M2",
+      "title": "Correct audio claims and name the Original preset",
+      "improvements": [
+        7,
+        9,
+        19
+      ],
+      "depends_on": [
+        "WAC-M1-07"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "README, comment-based help, preset metadata and exact legacy filters.",
+      "implementation": [
+        "Correct LUFS versus RMS, dynaudnorm p, afftdn nf/nr and gate attenuation descriptions using SOURCES.md.",
+        "Name and version the Original/Legacy preset while retaining its exact filters; distinguish filter identity from encoder format changes.",
+        "Remove unsupported universal-broadcast, exact-result, Audition-equivalence and 95%-success claims. Do not replace them with invented benchmark percentages."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-034",
+        "AC-035",
+        "AC-036"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M2-02",
+      "milestone": "M2",
+      "title": "Add measured loudness without changing the default fast path",
+      "improvements": [
+        8
+      ],
+      "depends_on": [
+        "WAC-M2-01"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Optional two-pass pipeline and final-file measurement; AUDIO_CONTRACT.md.",
+      "implementation": [
+        "Keep Fast as the default. Accurate mode measures the exact post-cleaning/post-leveling/post-channel-conversion signal that the final normalization receives.",
+        "Re-run the identical deterministic prechain for pass 2, parse measured fields invariantly, apply validated values, and record linear versus dynamic fallback. Do not clean or normalize twice accidentally.",
+        "Inspect the final encoded file after final resampling/quantization. Report requested and achieved values separately; silence/short/unmeasurable audio is explicit, not NaN/Infinity JSON or fake success."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-037",
+        "AC-038",
+        "AC-039"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M2-03",
+      "milestone": "M2",
+      "title": "Add optional gentle cleaning with validated parameters",
+      "improvements": [
+        9
+      ],
+      "depends_on": [
+        "WAC-M2-02"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Preset schema, bounded advanced options and listening candidates.",
+      "implementation": [
+        "Add a conservatively named optional gentle preset with documented settings, not a promise that it is objectively better.",
+        "Make declip/declick/denoise/gate toggles optional and validate numeric ranges; keep original Raw/Zoom as defaults.",
+        "Track candidate settings and permission-cleared listening results; do not infer speech quality from tones or automatically detect the best preset."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-040",
+        "AC-041",
+        "AC-042"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M2-04",
+      "milestone": "M2",
+      "title": "Add safe excerpt preview and level-matched comparison",
+      "improvements": [
+        10
+      ],
+      "depends_on": [
+        "WAC-M2-03"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Optional local preview path, excerpt selection and comparison metadata.",
+      "implementation": [
+        "Accept an explicit start/duration with useful 30–60 second defaults where input length permits; validate ranges and short files.",
+        "Apply pre-roll/post-roll when needed for stateful filters and trim comparison outputs to matching positions; label edge limitations.",
+        "Create an original excerpt and a separately level-matched processed comparison without changing full-render settings. Playback is explicit; preview metrics never stand for full-program loudness."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-043",
+        "AC-044",
+        "AC-045"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M2-05",
+      "milestone": "M2",
+      "title": "Audio gate with honest listening status",
+      "improvements": [
+        7,
+        8,
+        9,
+        10,
+        16
+      ],
+      "depends_on": [
+        "WAC-M2-04"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Listening review, measurement evidence, decisions and compatibility checkpoint.",
+      "implementation": [
+        "Run numeric/audio-format regressions and complete a permission-cleared listening review when material is available.",
+        "Do not block unrelated reliability delivery solely because optional gentle-preset/default promotion lacks a listening corpus. Keep candidates opt-in/experimental and defaults unchanged.",
+        "Any proposal to change default sound requires explicit owner approval referencing settings, evidence and revision. Record pending reviews instead of inventing acceptance."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-046",
+        "AC-047",
+        "AC-048"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M3-01",
+      "milestone": "M3",
+      "title": "Add noninteractive parameters and saved settings",
+      "improvements": [
+        12
+      ],
+      "depends_on": [
+        "WAC-M2-05"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Backward-compatible parameters, local JSON settings and help.",
+      "implementation": [
+        "Add -Mode, -Preset, -OutputDirectory and -NonInteractive while retaining -inputPath. Avoid a breaking positional-parameter redesign.",
+        "Use typed versioned JSON under the user profile; precedence is explicit CLI > saved settings > built-in defaults. Show effective settings and provide reset.",
+        "Validate and atomically save configuration; do not treat it as executable PowerShell or pass arbitrary filter strings. Unattended mode never calls Read-Host or pauses."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-049",
+        "AC-050",
+        "AC-051"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M3-02",
+      "milestone": "M3",
+      "title": "Support multiple dropped files through the existing launcher",
+      "improvements": [
+        11
+      ],
+      "depends_on": [
+        "WAC-M3-01"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": ".bat launcher and compatible file-list handoff; not a replacement GUI.",
+      "implementation": [
+        "Preserve single-drop behavior and extend to ordered multi-file input, choosing mode once.",
+        "Test actual CMD-to-PowerShell forwarding in PS5.1/PS7; a naive %* or -File array handoff is not assumed correct. Use a safe structured handoff only when required.",
+        "Handle command-line length and special-character limitations explicitly, provide folder/manifest fallback, and preserve exit status around interactive pause."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-052",
+        "AC-053",
+        "AC-054"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M3-03",
+      "milestone": "M3",
+      "title": "Add sequential folder queues and batch summaries",
+      "improvements": [
+        11
+      ],
+      "depends_on": [
+        "WAC-M3-02"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Queue builder, optional recursion and per-file result aggregation.",
+      "implementation": [
+        "Default to sequential processing, with explicit recursion and supported local file selection.",
+        "Materialize and deduplicate the queue before processing; exclude this tool’s outputs/temp files and avoid symlink/junction traversal loops.",
+        "Continue after per-file failure, preserve per-file reports and emit a final successful/failed/skipped/cancelled summary. No automatic audio re-cleaning."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-055",
+        "AC-056",
+        "AC-057"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M3-04",
+      "milestone": "M3",
+      "title": "Add stage-aware progress and controlled cancellation",
+      "improvements": [
+        13
+      ],
+      "depends_on": [
+        "WAC-M3-03"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Process progress parser, queue cancellation and cleanup.",
+      "implementation": [
+        "Use FFmpeg structured progress output rather than scraping human statistics; keep logs on the separate diagnostic stream.",
+        "Show stage labels and per-file position; Accurate analysis/render/verification have separate ranges. Use indeterminate progress when duration is unknown.",
+        "Implement cancellation against this run’s owned child process only, with bounded cleanup and no global kill-by-name command."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-058",
+        "AC-059",
+        "AC-060"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M3-05",
+      "milestone": "M3",
+      "title": "Polish output organization and simple local interaction",
+      "improvements": [
+        2,
+        15
+      ],
+      "depends_on": [
+        "WAC-M3-04"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Music default, optional per-job destination and explicit open-folder action.",
+      "implementation": [
+        "Keep Music as default; allow chosen output and optional job folders with media/report separation.",
+        "Provide no-input usage and an optional file picker without adding a mandatory desktop framework; all functions remain accessible through the console.",
+        "Offer opening the destination only interactively/explicitly; never auto-open files or start external playback in noninteractive runs."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-061",
+        "AC-062",
+        "AC-063"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M3-06",
+      "milestone": "M3",
+      "title": "Workflow and automation gate",
+      "improvements": [
+        2,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "depends_on": [
+        "WAC-M3-05"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "End-to-end local workflow review and thread checkpoint.",
+      "implementation": [
+        "Exercise the original single-file workflow alongside multi-file, folder, preview and noninteractive flows.",
+        "Run cumulative targeted tests once, focusing on launcher boundaries, cancellation and configuration migration.",
+        "Document remaining platform constraints, push the checkpoint and update the exact next task."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-064",
+        "AC-065",
+        "AC-066"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M4-01",
+      "milestone": "M4",
+      "title": "Complete regression and fault-injection coverage",
+      "improvements": [
+        16
+      ],
+      "depends_on": [
+        "WAC-M3-06"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Pester suites, local runners and small repeatable native-process fixtures.",
+      "implementation": [
+        "Consolidate tests developed with each feature; add missing edge/failure coverage from ACCEPTANCE.json.",
+        "Run PS5.1 and available PS7 locally on the active Windows machine; use deterministic synthetic fixtures for objective checks.",
+        "Separate subjective listening, platform/manual and stress results from unit tests. Record skips with reasons and gates; do not claim untested Windows releases."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-067",
+        "AC-068",
+        "AC-069"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M4-02",
+      "milestone": "M4",
+      "title": "Add GitHub CI that supplements local validation",
+      "improvements": [
+        17
+      ],
+      "depends_on": [
+        "WAC-M4-01"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": ".github/workflows, development dependency lock/manifest and local parity.",
+      "implementation": [
+        "Pin tool/module versions and third-party Actions to verified full commit SHAs; verify downloaded binaries against trusted checksums.",
+        "Use least-privilege read-only checks on PR/push, safe triggers and no secret access for untrusted PR code. Avoid pull_request_target execution of contributed code.",
+        "Exercise supported shells/builds on Windows CI and upload only synthetic/redacted artifacts with retention limits. CI must call the same local test runners."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-070",
+        "AC-071",
+        "AC-072"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M4-03",
+      "milestone": "M4",
+      "title": "Build a versioned portable release package",
+      "improvements": [
+        17,
+        18
+      ],
+      "depends_on": [
+        "WAC-M4-02"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "scripts/Build-Release.ps1, allowlisted payload, checksums and dependency notices.",
+      "implementation": [
+        "Build locally from an explicit clean revision with one authoritative version; zip only allowlisted runtime files/docs/icons.",
+        "Produce a tool-only ZIP first. Do not bundle FFmpeg until exact-build license/source/notice obligations and owner approval are satisfied.",
+        "Generate checksums/provenance and validate install from a fresh extracted ZIP; keep development assets, logs, recordings and handoff tests out of runtime packages."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-073",
+        "AC-074",
+        "AC-075"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M4-04",
+      "milestone": "M4",
+      "title": "Finish user-facing help, setup and troubleshooting",
+      "improvements": [
+        6,
+        7,
+        19
+      ],
+      "depends_on": [
+        "WAC-M4-03"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Product README, comment-based Get-Help, examples, support/security documentation.",
+      "implementation": [
+        "Write a short first-run guide with modes, requirements, dependency resolution, privacy and clear no-admin installation.",
+        "Document options, reports, exit codes, limits, track extraction, timing preservation, RF64 compatibility and download verification.",
+        "Test examples exactly as written; do not tell users to disable security globally or promise unsupported operating-system/build compatibility."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-076",
+        "AC-077",
+        "AC-078"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M5-01",
+      "milestone": "M5",
+      "title": "Prepare static website assets and release metadata",
+      "improvements": [
+        20
+      ],
+      "depends_on": [
+        "WAC-M4-04"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "An isolated static product-page draft and schema; no deployment or other tools changed.",
+      "implementation": [
+        "Prepare a portable static page/content package for the future tools website, not a new hosting platform. Reuse existing branding where rights are clear.",
+        "Show real screenshots and permission-cleared audio samples only; unfinished assets remain explicitly unavailable, not invented.",
+        "Use versioned release metadata with status, version, date, URL, checksum and requirements; draft status must disable download claims. No uploads/accounts/processing backend or automatic local updater."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-079",
+        "AC-080",
+        "AC-081"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M5-02",
+      "milestone": "M5",
+      "title": "Rehearse clean-checkout and release-candidate reconstruction",
+      "improvements": [
+        17,
+        18,
+        20
+      ],
+      "depends_on": [
+        "WAC-M5-01"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Temporary clean clone/worktree on the same active machine and release-candidate evidence.",
+      "implementation": [
+        "Recover from the exact pushed revision using a temporary clean checkout on this machine, not another machine or a hosted processing service.",
+        "Run documented development setup, selected tests and build; compare content manifest and website metadata.",
+        "Check staging and artifacts for secrets, personal paths, private audio and accidentally included binaries; do not publish anything."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-082",
+        "AC-083",
+        "AC-084"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M5-03",
+      "milestone": "M5",
+      "title": "Final acceptance and approval-ready handoff",
+      "improvements": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20
+      ],
+      "depends_on": [
+        "WAC-M5-02"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "Final traceability, evidence summary and narrowly scoped pending approvals.",
+      "implementation": [
+        "Reconcile all 20 improvement groups and 90 acceptance cases. Every unmet or optional/unavailable check has a concrete disposition and risk.",
+        "Require mandatory safety/compatibility gates; do not silently remove requirements or call untested listening/platform checks passed.",
+        "Push all intended code/docs/test evidence and prepare the release/merge/deployment proposal with exact revision/assets. Leave actual publication pending approval."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-085",
+        "AC-086",
+        "AC-087"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    {
+      "id": "WAC-M5-04",
+      "milestone": "M5",
+      "title": "Execute only explicitly approved merge and publication actions",
+      "improvements": [
+        17,
+        18,
+        20
+      ],
+      "depends_on": [
+        "WAC-M5-03"
+      ],
+      "status": "todo",
+      "approval_required": true,
+      "scope": "Approved GitHub merge/tag/release and approved website deployment only.",
+      "implementation": [
+        "Before any action obtain the owner’s approval specifying action, revision, target and artifact. A request to build this handoff is not publication approval.",
+        "Re-read live PR/branch status and approved artifact hashes; carry out only the approved subset. Rebuild/revalidate if a merge changes source contents.",
+        "Verify published release files/metadata or deployed page as applicable; record URLs and hashes. Leave unapproved actions blocked without pretending the project failed."
+      ],
+      "guardrails": "Never merge, tag, publish, change repository settings, delete branches, rewrite history, or deploy without explicit owner approval for that action.",
+      "acceptance_ids": [
+        "AC-088",
+        "AC-089",
+        "AC-090"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    }
+  ]
+}
