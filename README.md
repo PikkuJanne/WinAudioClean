@@ -132,7 +132,7 @@ requires an explicit `-AudioStreamIndex` when more than one audio track exists:
 The index is the file's absolute stream index, including any video streams. For
 example, video at index 0 and audio at indexes 1 and 2 means `-AudioStreamIndex 2`
 selects the second audio track. The selected track is explicitly mapped and its
-channel count is preserved. Video-only input fails before cleaning. Use the
+channel count is preserved unless `-Mono` is requested. Video-only input fails before cleaning. Use the
 PowerShell entry point for unattended stream selection or explicit tool paths;
 the batch launcher's `/unattended` route supports a single audio track.
 
@@ -146,6 +146,51 @@ mapped drives can still use network storage. Malformed metadata, failed probes,
 and inputs without a usable audio codec, channel count and sample rate fail
 before rendering. The selected audio track must also expose a usable duration;
 files with unknown track timing fail safely before rendering.
+
+**Output format and channels**
+
+Exports use **48 kHz, 16-bit signed PCM WAV**. This intentionally replaces the
+previous unspecified encoder output, which produced 192 kHz PCM16 with the tested
+FFmpeg build. The original Raw/Zoom filters are unchanged; exported samples are
+not bit-identical to the earlier files. Use `-BitDepth 24` for 24-bit editing files:
+
+```powershell
+.\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -BitDepth 24 -NonInteractive
+```
+
+Mono stays mono; stereo preserves left/right order. If a mono/stereo file has no
+layout label, the channel count defines the standard mono/stereo layout. Other
+layouts, mismatched labels and more than two channels fail before rendering.
+Prepare a standard mono/stereo track explicitly for these inputs. `-Mono` opts
+into an equal-weight left/right mix before the original processing chain; it
+does not enable multichannel input. Source metadata and chapters are omitted
+from the audio export. Use the PowerShell entry point for these export options;
+drag-and-drop retains the defaults.
+
+**Large files and destination space**
+
+Ordinary RIFF WAV is the default. Before rendering, the script estimates PCM
+bytes from the selected track's duration, allows 101 ms for rounding/padding and
+1 MiB for headers, then adds the greater of 64 MiB or 10% as free-space headroom.
+The temporary file becomes the final file by rename, so only one audio copy is
+budgeted. Available space is checked for the actual destination and current
+user's quota. Unknown capacity and insufficient space fail with exit `5`.
+Other jobs can consume space after this check; a later failure still cannot
+publish a partial export.
+
+An estimate above the conservative RIFF limit (4,294,967,295 bytes including
+the header allowance) fails before rendering. Use `-Rf64` to request RF64 WAV
+explicitly, even for a small file. Check that your editor supports RF64:
+
+```powershell
+.\WinAudioClean.ps1 -inputPath 'C:\Audio\long-session.wav' -Mode Zoom -BitDepth 24 -Rf64 -NonInteractive
+```
+
+No duration is silently cut and files are never split automatically. RF64 header
+handling and size-boundary estimates are tested with small synthetic files;
+full exports larger than 4 GB and real disk exhaustion have not been stress-tested.
+The [FFmpeg WAV documentation](https://ffmpeg.org/ffmpeg-formats.html#wav)
+describes RF64 compatibility.
 
 **Safe exports**
 
@@ -166,7 +211,8 @@ timing; it does not certify perceived quality or achieved loudness.
 Failures remove only the current run's owned partial. An abrupt crash may leave
 a `.wac-<job-id>.partial` file. It is not a completed export; inspect it and remove
 it manually once that job has stopped. Later runs preserve these leftovers.
-RF64 and files beyond RIFF's size limit are rejected pending large-file support.
+RIFF and explicitly requested RF64 sizes, PCM format and sample counts are checked
+on the held file before publication.
 
 **Native results and launcher automation**
 
@@ -177,10 +223,10 @@ console and local report. Processing and reporting results use these exit codes:
 | Code | Meaning |
 | --- | --- |
 | 0 | Audio was validated and published; reporting completed. |
-| 2 | Invalid input, destination, mode, audio selection or launcher usage; ambiguous unattended tracks. |
+| 2 | Invalid input, destination, mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks. |
 | 3 | Missing, incompatible or filter-deficient dependency, or render process start failure. |
 | 4 | Probe/metadata failure, no audio, or processing/capture/cleanup failure. Native failures retain diagnostics. |
-| 5 | Output allocation, validation, publication or owned-file cleanup failed. |
+| 5 | Output allocation, space/size check, validation, publication or owned-file cleanup failed. |
 | 7 | Audio was published, but reporting was incomplete. Audio is retained. |
 | 130 | Cancelled at the mode or audio-track menu. |
 

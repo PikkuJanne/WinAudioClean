@@ -1,0 +1,28 @@
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 80 tests in 612ms.
+Filter 'FullName' set to ('*uses mode*').
+Filters selected 16 tests to run.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-017: actual native execution reports success, failure and reporting warnings
+  [+] uses mode 1, native exit 0, blocked log False in powershell.exe 3.25s (3.17s|78ms)
+  [+] uses mode 1, native exit 0, blocked log True in powershell.exe 2.76s (2.76s|3ms)
+  [+] uses mode 1, native exit 7, blocked log False in powershell.exe 2.09s (2.09s|2ms)
+  [+] uses mode 1, native exit 7, blocked log True in powershell.exe 2.16s (2.16s|3ms)
+  [+] uses mode 2, native exit 0, blocked log False in powershell.exe 2.33s (2.33s|3ms)
+  [+] uses mode 2, native exit 0, blocked log True in powershell.exe 2.58s (2.58s|3ms)
+  [+] uses mode 2, native exit 7, blocked log False in powershell.exe 2.58s (2.58s|3ms)
+  [+] uses mode 2, native exit 7, blocked log True in powershell.exe 2.14s (2.14s|2ms)
+  [+] uses mode 1, native exit 0, blocked log False in pwsh.exe 3.75s (3.75s|3ms)
+  [+] uses mode 1, native exit 0, blocked log True in pwsh.exe 3.45s (3.45s|3ms)
+  [+] uses mode 1, native exit 7, blocked log False in pwsh.exe 3.04s (3.04s|4ms)
+  [+] uses mode 1, native exit 7, blocked log True in pwsh.exe 3.03s (3.03s|3ms)
+  [+] uses mode 2, native exit 0, blocked log False in pwsh.exe 3.24s (3.24s|2ms)
+  [+] uses mode 2, native exit 0, blocked log True in pwsh.exe 3.3s (3.29s|3ms)
+  [+] uses mode 2, native exit 7, blocked log False in pwsh.exe 3.15s (3.15s|4ms)
+  [+] uses mode 2, native exit 7, blocked log True in pwsh.exe 3.07s (3.07s|1ms)
+Tests completed in 47.91s
+Tests Passed: 16, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 64

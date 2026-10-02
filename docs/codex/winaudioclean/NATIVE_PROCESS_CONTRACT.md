@@ -28,7 +28,7 @@ Current application codes:
 | 2 | Input/configuration/destination or launcher usage error. |
 | 3 | Missing dependency or process start failure. |
 | 4 | Native nonzero exit or process/capture/cleanup failure. |
-| 5 | Output allocation, validation, publication or owned-partial cleanup failure. |
+| 5 | Output allocation, space/size check, validation, publication or owned-partial cleanup failure. |
 | 7 | Published audio with report-write or report-metadata failure; audio is retained. |
 | 130 | Mode-menu cancellation; running-render Ctrl+C exit semantics are not certified. |
 
@@ -125,3 +125,23 @@ The original proposed map was 0 success; 2 invalid input/config; 3 missing/incom
 Allocate a unique job directory/temp filename in the final destination volume, explicitly choose WAV even if the filename ends in .partial, and use no-clobber semantics. Only after exit 0 and successful probe/format/duration checks may a no-overwrite move publish the final name. Defend the rename race, not just Test-Path before launch. Timestamp seconds alone are not a concurrency guarantee.
 
 No input/output alias, including normalized paths and supported link/file-identity cases. Cancellation targets the owned process object/ID for that run, not every ffmpeg.exe. Remove only files whose ownership was established by that run. Do not sweep user directories, delete prior exports, or clean unrelated processes. Crash leftovers need explicit identification and optional cleanup, not an unsafe startup purge.
+
+## Implemented in WAC-M1-05 (2026-10-02)
+
+The export policy in AUDIO_CONTRACT.md now requires explicit 48 kHz PCM16/24,
+mono/stereo layout preservation and optional prechain stereo-to-mono conversion.
+The process receives separate codec/rate/channel/layout/container arguments;
+source metadata/chapters are omitted. Default RIFF exports that exceed the
+conservative size boundary fail before rendering with `-Rf64` guidance. RF64 is
+explicit, including small files, and its ds64 sizes/sample counts are validated
+on the held file. Earlier M1-04 statements that RF64 was unsupported remain
+historical; this section supersedes that limitation.
+
+`Get-WacAvailableOutputBytes` queries GetDiskFreeSpaceExW using the resolved held
+destination directory, not the input drive or an unpinned user path. Use caller
+available bytes (quota aware), not total free space. Unknown capacity or an
+estimate larger than availability fails with code 5 and owned cleanup. The
+same-volume partial/final rename needs one audio allocation plus headroom;
+concurrent writers can still consume space afterward. Invalid export settings
+or unsupported layouts use code 2. Missing `pan` for requested stereo-to-mono
+uses code 3. All native diagnostics/publication/cleanup guarantees above remain.

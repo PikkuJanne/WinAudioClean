@@ -327,7 +327,7 @@
       "depends_on": [
         "WAC-M1-04"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Output encoder settings, disk estimation and RF64 choice.",
       "implementation": [
@@ -341,7 +341,17 @@
         "AC-026",
         "AC-027"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ],
       "blocked_reason": null
     },
     {

@@ -231,3 +231,37 @@ Use code 5 for allocation/validation/publication failures; preserve earlier nati
 codes 3/4 and separate diagnostics. No filters, launcher/CLI parameters, sound presets,
 security settings or publication permissions change. Evidence is in
 `evidence/WAC-M1-04.md`.
+
+### 2026-10-02 — WAC-M1-05 explicit exports and capacity
+
+D24. Implement D10 as 48 kHz signed PCM16 WAV by default and optional
+`-BitDepth 24`. Preserve the exact Raw/Zoom profile strings; the encoder change
+is release-noted and does not claim bit-identical legacy output. Support standard
+mono/stereo only; infer a missing layout from one/two channels and reject
+conflicting layouts or multichannel input. `-Mono` explicitly averages stereo
+left/right before the original chain. Drop source metadata/chapters from exports.
+
+Default RIFF fails before rendering when the conservative estimated file size
+exceeds 4,294,967,295 bytes. `-Rf64` explicitly requests RF64, even for small files;
+users need compatible readers. Support FFmpeg's single-data-chunk ds64 form and
+validate 64-bit lengths/frame counts, requested PCM format and channel layout on
+the existing held validation handle. Preserve no-clobber publication and owned
+cleanup. Never truncate or split audio automatically.
+
+Estimate frames at 48 kHz with 101 ms rounding/padding allowance plus 1 MiB for
+headers; reserve max(64 MiB, ceil(10% of estimated file bytes)). One partial
+becomes one final by rename. Query caller-available space on the pinned destination
+so directory redirection and quotas are respected. Fail closed if capacity is
+unknown; concurrent writers can still cause a later render failure. Duration
+estimation accepts positive finite values through 1 billion seconds to bound
+arithmetic. Invalid export/layout is code 2; space/size failure is code 5.
+
+AC-025/026/027 evidence is in `evidence/WAC-M1-05.md`. Small RF64/size boundaries
+and injected low space establish policy, not full >4 GB stress or real disk
+exhaustion. No speech-quality approval, default filter promotion, merge, release,
+security change or deployment is added.
+
+M1-05 timing evidence also identifies the preserved Raw filter delay (about 25 ms).
+A legacy unspecified-encoding render confirms it predates explicit 48 kHz output;
+the marker difference is under 0.009 ms. AC-026 records unchanged channel/timing
+behavior and no added offset; it does not approve a filter-delay correction.

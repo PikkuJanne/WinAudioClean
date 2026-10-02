@@ -297,3 +297,26 @@ Keep WAVs, portable binaries and raw local logs ignored. Commit only sanitized
 reports and metadata. Use the [listening checklist](../docs/codex/winaudioclean/evidence/WAC-M0-03-listening.md)
 when owner-supplied, permission-cleared speech is available; listening remains
 pending until that review actually occurs.
+
+## Explicit output encoding (WAC-M1-05)
+
+Run `tests/WinAudioClean.Encoding.Tests.ps1` for export/channel policy, RIFF
+boundaries, headroom, pinned destination capacity and injected early failures.
+`tests/WinAudioClean.Validation.Tests.ps1` checks requested PCM format/layout and
+small RF64 ds64 fixtures, including malformed sizes/tables/sample counts.
+
+The real audio matrix is optional development tooling using installed tools:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-OutputEncoding.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe"
+```
+
+It generates synthetic 44.1/48 kHz mono/stereo signals, runs both original modes
+and PCM16/24 in PS5.1/7, then inspects final format, channel content, timing and
+source hashes. Extra cases exercise explicit mono and small RF64 output. An
+independently encoded frozen legacy chain establishes existing filter delay;
+the harness rejects unexplained residual shifts and altered sample data. Raw's
+existing approximately 25 ms marker delay is recorded, not silently corrected.
+These checks do not certify speech quality, full >4 GB output or real disk
+exhaustion. Keep generated media and raw logs under `.wac-local`.

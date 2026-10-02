@@ -360,8 +360,18 @@
       "title": "Explicit output matrix",
       "procedure": "Process 44.1/48 kHz mono and stereo fixtures in both modes and 16/24-bit choices; inspect with ffprobe.",
       "expected": "Selected sample rate/codec/channels are correct; no accidental 192 kHz default export.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ]
     },
     {
       "id": "AC-026",
@@ -369,8 +379,18 @@
       "title": "Timing and channels",
       "procedure": "Use stereo channels with different signals and known impulses; compare start/end and duration before/after.",
       "expected": "No unintended downmix, channel swap, silence removal, leading offset or unexplained timing drift.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ]
     },
     {
       "id": "AC-027",
@@ -378,8 +398,18 @@
       "title": "Large-file and space policy",
       "procedure": "Unit-test estimates around the WAV size boundary and inject low-space conditions; exercise an RF64 header with a small supported fixture.",
       "expected": "Policy is deterministic and documented; full >4 GB stress is run only when risk warrants it, or clearly not claimed as tested.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M1-05.md",
+        "evidence/WAC-M1-05-source.json",
+        "evidence/WAC-M1-05-full-ps7.txt",
+        "evidence/WAC-M1-05-full-ps51.txt",
+        "evidence/WAC-M1-05-real-encoding.json",
+        "evidence/WAC-M1-05-legacy-delay.json",
+        "evidence/WAC-M1-05-sensitivity.json",
+        "evidence/WAC-M1-05-transaction-regression.json",
+        "evidence/WAC-M1-05-development.json"
+      ]
     },
     {
       "id": "AC-028",

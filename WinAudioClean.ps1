@@ -65,6 +65,8 @@ USAGE
         - Open PowerShell.
         - Run: .\WinAudioClean.ps1 -inputPath "C:\Path\To\Audio.wav"
         - Optional: -FfmpegPath/-FfprobePath for tool paths, -AudioStreamIndex for an absolute audio track index.
+        - Exports 48 kHz PCM16 WAV. Use -BitDepth 24 for editing, -Mono for an explicit stereo mix,
+          or -Rf64 for a large WAV (requires an RF64-compatible reader).
 
 NOTES
     - The Noise Gate settings use linear math, not decibels. This conversion is handled internally.
@@ -95,6 +97,9 @@ param(
     [string]$FfmpegPath,
     [string]$FfprobePath,
     [string]$AudioStreamIndex,
+    [string]$BitDepth = '16',
+    [switch]$Mono,
+    [switch]$Rf64,
     [switch]$NonInteractive
 )
 
@@ -234,13 +239,74 @@ function Get-WacOutputPath {
 
 function Get-WacFfmpegArguments {
     param([string]$InputPath, [string]$FilterChain, [string]$OutputFile,
-        [Parameter(Mandatory = $true)][ValidateRange(0, 2147483647)][int]$AudioStreamIndex)
+        [Parameter(Mandatory = $true)][ValidateRange(0, 2147483647)][int]$AudioStreamIndex,
+        $OutputPolicy = (Get-WacOutputPolicy -InputAudio ([pscustomobject]@{ Channels = 1; ChannelLayout = 'mono' })))
 
     # Runtime passes only the exclusively created, held transaction partial.
     # -y lets FFmpeg fill that owned file; it never receives the final path.
     @('-nostdin') + (Get-WacLocalMediaArguments) + @('-i', $InputPath,
-        '-map', ('0:' + $AudioStreamIndex.ToString([Globalization.CultureInfo]::InvariantCulture)), '-vn', '-af', $FilterChain, '-f', 'wav', $OutputFile,
+        '-map', ('0:' + $AudioStreamIndex.ToString([Globalization.CultureInfo]::InvariantCulture)), '-vn', '-af', ($OutputPolicy.FilterPrefix + $FilterChain),
+        '-ar', '48000', '-c:a', $OutputPolicy.Codec, '-ac', [string]$OutputPolicy.Channels,
+        '-channel_layout', $OutputPolicy.Layout, '-map_metadata', '-1', '-map_chapters', '-1',
+        '-f', 'wav', '-rf64', $(if ($OutputPolicy.Rf64) { 'always' } else { 'never' }), $OutputFile,
         '-y', '-hide_banner', '-loglevel', 'error', '-stats')
+}
+
+function Get-WacOutputPolicy {
+    param([Parameter(Mandatory = $true)]$InputAudio,
+        [ValidateSet('16', '24')][string]$BitDepth = '16', [switch]$Mono, [switch]$Rf64)
+
+    if ($InputAudio.Channels -notin @(1, 2)) {
+        throw 'Only mono and stereo input tracks are supported. Prepare a mono/stereo track explicitly before processing; multichannel audio is never downmixed automatically.'
+    }
+    $layout = if ($InputAudio.Channels -eq 1) { 'mono' } else { 'stereo' }
+    if ($null -ne $InputAudio.ChannelLayout -and
+        ($InputAudio.ChannelLayout -isnot [string] -or
+        (-not [string]::IsNullOrWhiteSpace($InputAudio.ChannelLayout) -and $InputAudio.ChannelLayout -cne $layout))) {
+        throw "Unsupported channel layout. Expected $layout for $($InputAudio.Channels) channel(s); prepare a standard mono/stereo track explicitly."
+    }
+    $channels = if ($Mono) { 1 } else { $InputAudio.Channels }
+    [pscustomobject]@{
+        SampleRate = 48000; Bits = [int]$BitDepth; Codec = ('pcm_s' + $BitDepth + 'le')
+        Channels = [int]$channels; Layout = $(if ($channels -eq 1) { 'mono' } else { 'stereo' }); Rf64 = [bool]$Rf64
+        # Explicit mono is an equal-weight stereo mix before the original chain.
+        FilterPrefix = $(if ($Mono -and $InputAudio.Channels -eq 2) { 'pan=mono|c0=0.5*c0+0.5*c1,' } else { '' })
+    }
+}
+
+function Get-WacOutputSpaceEstimate {
+    param([Parameter(Mandatory = $true)][double]$DurationSeconds,
+        [Parameter(Mandatory = $true)]$OutputPolicy)
+
+    if ([double]::IsNaN($DurationSeconds) -or [double]::IsInfinity($DurationSeconds) -or
+        $DurationSeconds -le 0 -or $DurationSeconds -gt 1000000000) {
+        throw 'Cannot estimate output space from this duration (supported range: greater than zero through 1 billion seconds).'
+    }
+    if ($OutputPolicy.SampleRate -ne 48000 -or $OutputPolicy.Bits -notin @(16, 24) -or $OutputPolicy.Channels -notin @(1, 2)) {
+        throw 'Invalid output format for disk estimation.'
+    }
+    # Include compressed padding/timing tolerance and one sample of rounding.
+    # Decimal arithmetic avoids 32-bit overflow and floating-point size boundaries.
+    $frames = [decimal]::Ceiling(([decimal]$DurationSeconds + [decimal]0.101) * 48000)
+    $dataBytes = [long]($frames * $OutputPolicy.Channels * ($OutputPolicy.Bits / 8))
+    $fileBytes = $dataBytes + [long]1MB
+    if (-not $OutputPolicy.Rf64 -and $fileBytes -gt [long][uint32]::MaxValue) {
+        throw 'Estimated WAV size exceeds the safe RIFF limit. Use -Rf64 with an RF64-compatible editor, or explicitly choose mono/16-bit when suitable. Audio will not be truncated or split.'
+    }
+    $reserveBytes = [long][math]::Max([decimal]64MB, [decimal]::Ceiling([decimal]$fileBytes / 10))
+    [pscustomobject]@{
+        DataBytes = $dataBytes; FileBytes = $fileBytes; ReserveBytes = $reserveBytes
+        RequiredBytes = ($fileBytes + $reserveBytes)
+    }
+}
+
+function Assert-WacOutputSpace {
+    param([Parameter(Mandatory = $true)]$Transaction, [Parameter(Mandatory = $true)]$Estimate)
+    $available = Get-WacAvailableOutputBytes -Transaction $Transaction
+    if ($available -lt $Estimate.RequiredBytes) {
+        throw "Insufficient destination space: need $($Estimate.RequiredBytes) bytes including headroom; $available bytes available. Free space or choose another -OutputDirectory."
+    }
+    $available
 }
 
 function Get-WacLocalMediaArguments {
@@ -340,7 +406,8 @@ function Get-WacStreamDuration {
 function Assert-WacWaveOutput {
     param([Parameter(Mandatory = $true)][IO.Stream]$Stream,
         [Parameter(Mandatory = $true)]$InputAudio,
-        [Parameter(Mandatory = $true)]$OutputAudio)
+        [Parameter(Mandatory = $true)]$OutputAudio,
+        $OutputPolicy)
 
     # Read the same object held against writes/deletion through publication.
     # Chunk lengths and frame alignment detect truncation that ffprobe can accept.
@@ -349,9 +416,36 @@ function Assert-WacWaveOutput {
     try {
         $Stream.Position = 0
         $signature = [Text.Encoding]::ASCII.GetString($reader.ReadBytes(4))
-        if ($signature -ne 'RIFF') { throw 'Output must be a RIFF WAV; RF64/large-file policy is not supported yet.' }
-        $riffLength = [long]$reader.ReadUInt32() + 8
-        if ([Text.Encoding]::ASCII.GetString($reader.ReadBytes(4)) -ne 'WAVE' -or $riffLength -ne $Stream.Length) {
+        if ($signature -cnotin @('RIFF', 'RF64')) { throw 'Output must be a RIFF or RF64 WAV.' }
+        $isRf64 = $signature -ceq 'RF64'
+        $declaredLength = $reader.ReadUInt32()
+        $riffLength = [long]$declaredLength + 8
+        if ([Text.Encoding]::ASCII.GetString($reader.ReadBytes(4)) -cne 'WAVE') {
+            throw 'Output WAV declared size does not match the file (incomplete or invalid output).'
+        }
+        $rf64DataBytes = [long]0
+        $rf64Frames = [long]0
+        if ($isRf64) {
+            # Support the single-data-chunk RF64 form emitted by FFmpeg. Additional
+            # 64-bit chunk tables are deliberately rejected, never partly parsed.
+            if ($declaredLength -ne [uint32]::MaxValue -or $Stream.Length -lt 80 -or
+                [Text.Encoding]::ASCII.GetString($reader.ReadBytes(4)) -cne 'ds64' -or $reader.ReadUInt32() -ne 28) {
+                throw 'Invalid RF64 header: expected size sentinel and a first 28-byte ds64 chunk.'
+            }
+            $riffSize64 = $reader.ReadUInt64()
+            $dataSize64 = $reader.ReadUInt64()
+            $sampleCount64 = $reader.ReadUInt64()
+            $tableCount = $reader.ReadUInt32()
+            if ($tableCount -ne 0) { throw 'Unsupported RF64 ds64 chunk table; only one PCM data chunk is supported.' }
+            if ($riffSize64 -gt [uint64]([long]::MaxValue - 8) -or $dataSize64 -gt [uint64][long]::MaxValue -or
+                $sampleCount64 -gt [uint64][long]::MaxValue) { throw 'Invalid RF64 ds64 size or sample count exceeds supported 64-bit bounds.' }
+            $riffLength = [long]$riffSize64 + 8
+            $rf64DataBytes = [long]$dataSize64
+            $rf64Frames = [long]$sampleCount64
+        } elseif ($declaredLength -eq [uint32]::MaxValue) {
+            throw 'Invalid RIFF size sentinel; use RF64 for large WAV output.'
+        }
+        if ($riffLength -ne $Stream.Length) {
             throw 'Output WAV declared size does not match the file (incomplete or invalid output).'
         }
         $format = $null
@@ -362,9 +456,20 @@ function Assert-WacWaveOutput {
             if (++$chunks -gt 4096 -or $riffLength - $Stream.Position -lt 8) { throw 'Invalid WAV chunk table.' }
             $name = [Text.Encoding]::ASCII.GetString($reader.ReadBytes(4))
             $length = [long]$reader.ReadUInt32()
-            $next = $Stream.Position + $length + ($length % 2)
-            if ($next -gt $riffLength) { throw 'Output WAV chunk is truncated.' }
-            if ($name -eq 'fmt ') {
+            if ($name -ceq 'ds64') { throw 'Unexpected or duplicate RF64 ds64 chunk.' }
+            if ($isRf64 -and $name -ceq 'data') {
+                if ($length -ne [uint32]::MaxValue) { throw 'Invalid RF64 data size: expected the ds64 size sentinel.' }
+                $length = $rf64DataBytes
+            } elseif ($length -eq [uint32]::MaxValue) {
+                throw 'Unsupported WAV chunk size sentinel.'
+            }
+            # Compare before adding: a hostile 64-bit length must never overflow
+            # or promote integer arithmetic to an imprecise floating-point value.
+            $remaining = $riffLength - $Stream.Position
+            $padding = $length % 2
+            if ($length -gt $remaining -or $padding -gt ($remaining - $length)) { throw 'Output WAV chunk is truncated.' }
+            $next = $Stream.Position + $length + $padding
+            if ($name -ceq 'fmt ') {
                 if ($null -ne $format -or $length -lt 16) { throw 'Invalid WAV format chunk.' }
                 $tag = $reader.ReadUInt16()
                 $channels = $reader.ReadUInt16()
@@ -372,12 +477,14 @@ function Assert-WacWaveOutput {
                 $byteRate = $reader.ReadUInt32()
                 $align = $reader.ReadUInt16()
                 $bits = $reader.ReadUInt16()
+                $validBits = $bits
+                $channelMask = [uint32]0
                 if ($tag -eq 65534) {
                     if ($length -lt 40) { throw 'Invalid extensible WAV format.' }
                     $extraSize = $reader.ReadUInt16()
                     if ($extraSize -lt 22 -or $extraSize -gt ($length - 18)) { throw 'Invalid extensible WAV format length.' }
                     $validBits = $reader.ReadUInt16()
-                    $null = $reader.ReadUInt32()
+                    $channelMask = $reader.ReadUInt32()
                     $subtype = [guid]::new($reader.ReadBytes(16))
                     if ($subtype -ne [guid]'00000001-0000-0010-8000-00aa00389b71' -or $validBits -le 0 -or $validBits -gt $bits) {
                         throw 'Unsupported WAV PCM subtype.'
@@ -388,8 +495,11 @@ function Assert-WacWaveOutput {
                     $align -ne ($channels * ($bits / 8)) -or $byteRate -ne ([long]$rate * $align)) {
                     throw 'Output WAV has invalid or unsupported PCM parameters.'
                 }
-                $format = [pscustomobject]@{ Channels = [int]$channels; SampleRate = [int]$rate; BlockAlign = [int]$align; Bits = [int]$bits }
-            } elseif ($name -eq 'data') {
+                $format = [pscustomobject]@{
+                    Channels = [int]$channels; SampleRate = [int]$rate; BlockAlign = [int]$align
+                    Bits = [int]$bits; ValidBits = [int]$validBits; ChannelMask = $channelMask
+                }
+            } elseif ($name -ceq 'data') {
                 if ($seenData -or $length -eq 0) { throw 'Output WAV has empty or duplicate sample data.' }
                 $seenData = $true
                 $dataBytes = $length
@@ -399,11 +509,36 @@ function Assert-WacWaveOutput {
         if ($null -eq $format -or -not $seenData -or $dataBytes % $format.BlockAlign -ne 0) {
             throw 'Output WAV has missing or incomplete PCM samples.'
         }
-        $frames = $dataBytes / $format.BlockAlign
-        $seconds = $frames / $format.SampleRate
+        $frames = [long]([decimal]$dataBytes / $format.BlockAlign)
+        if ($isRf64 -and $rf64Frames -ne $frames) { throw 'RF64 ds64 sample count disagrees with PCM samples.' }
+        $seconds = [double]$frames / $format.SampleRate
         $expectedCodec = if ($format.Bits -eq 8) { 'pcm_u8' } else { 'pcm_s' + $format.Bits + 'le' }
+        $expectedChannels = $InputAudio.Channels
+        if ($null -ne $OutputPolicy) {
+            $policyCodec = 'pcm_s' + $OutputPolicy.Bits + 'le'
+            $policyLayout = if ($OutputPolicy.Channels -eq 1) { 'mono' } else { 'stereo' }
+            if ($OutputPolicy.SampleRate -ne 48000 -or $OutputPolicy.Bits -notin @(16, 24) -or
+                $OutputPolicy.Channels -notin @(1, 2) -or $OutputPolicy.Codec -cne $policyCodec -or
+                $OutputPolicy.Layout -cne $policyLayout -or $OutputPolicy.Rf64 -isnot [bool]) {
+                throw 'Invalid requested output encoding policy.'
+            }
+            if ($OutputPolicy.Channels -eq 1) { $expectedChannels = 1 }
+            if ($format.SampleRate -ne $OutputPolicy.SampleRate -or $format.Bits -ne $OutputPolicy.Bits -or
+                $format.ValidBits -ne $OutputPolicy.Bits -or $expectedCodec -cne $OutputPolicy.Codec -or
+                $format.Channels -ne $OutputPolicy.Channels -or $isRf64 -ne $OutputPolicy.Rf64) {
+                throw 'Output WAV does not match the requested encoding, channel count or RF64 policy.'
+            }
+            $expectedMask = if ($OutputPolicy.Channels -eq 1) { 4 } else { 3 }
+            # Classic mono/stereo WAV has no layout field; zero/absent masks and
+            # missing probe layouts use the same conventional channel inference.
+            if (($format.ChannelMask -ne 0 -and $format.ChannelMask -ne $expectedMask) -or
+                (-not [string]::IsNullOrWhiteSpace($OutputAudio.ChannelLayout) -and
+                    $OutputAudio.ChannelLayout -cne $OutputPolicy.Layout)) {
+                throw 'Output WAV channel layout does not match the requested layout.'
+            }
+        }
         if ($OutputAudio.Codec -ne $expectedCodec -or $OutputAudio.Channels -ne $format.Channels -or
-            $OutputAudio.SampleRate -ne $format.SampleRate -or $InputAudio.Channels -ne $format.Channels -or
+            $OutputAudio.SampleRate -ne $format.SampleRate -or $expectedChannels -ne $format.Channels -or
             $null -eq $OutputAudio.DurationSeconds -or [math]::Abs($OutputAudio.DurationSeconds - $seconds) -gt 0.001) {
             throw 'Output probe and PCM samples disagree, or selected channel count changed.'
         }
@@ -413,7 +548,10 @@ function Assert-WacWaveOutput {
             [math]::Abs($InputAudio.DurationSeconds - $seconds) -gt ($tolerance + 0.000001)) {
             throw "Output duration $seconds s differs from selected input duration $($InputAudio.DurationSeconds) s (tolerance $tolerance s)."
         }
-        [pscustomobject]@{ Frames = [long]$frames; DurationSeconds = $seconds; Channels = $format.Channels; SampleRate = $format.SampleRate; Bits = $format.Bits }
+        [pscustomobject]@{
+            Frames = $frames; DurationSeconds = $seconds; Channels = $format.Channels
+            SampleRate = $format.SampleRate; Bits = $format.Bits; Rf64 = $isRf64
+        }
     } finally { $reader.Dispose() }
 }
 
@@ -643,6 +781,7 @@ try {
             throw 'Audio stream index must be a nonnegative absolute stream index shown by ffprobe.'
         }
     }
+    if ($BitDepth -cnotin @('16', '24')) { throw 'Bit depth must be 16 or 24. Supply -BitDepth 16 or -BitDepth 24.' }
     $outFolder = Get-WacOutputDirectory -Path $OutputDirectory
     if (-not $Mode -and -not $interactive) {
         throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.'
@@ -740,6 +879,28 @@ if ($null -eq $selectedStream.DurationSeconds) {
     exit 4
 }
 Write-Host "Audio stream: $($selectedStream.Index) ($($selectedStream.Codec), $($selectedStream.Channels) channel(s), $($selectedStream.SampleRate) Hz)"
+try { $outputPolicy = Get-WacOutputPolicy -InputAudio $selectedStream -BitDepth $BitDepth -Mono:$Mono -Rf64:$Rf64 }
+catch {
+    Write-Error -Message ("Output settings failed: " + $_.Exception.Message) -ErrorAction Continue
+    exit 2
+}
+if ($outputPolicy.FilterPrefix) {
+    try { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain 'pan' }
+    catch {
+        Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
+        exit 3
+    }
+}
+try {
+    $spaceEstimate = Get-WacOutputSpaceEstimate -DurationSeconds $selectedStream.DurationSeconds -OutputPolicy $outputPolicy
+    $availableBytes = Assert-WacOutputSpace -Transaction $transaction -Estimate $spaceEstimate
+} catch {
+    Write-Error -Message ("Output space check failed: " + $_.Exception.Message) -ErrorAction Continue
+    exit 5
+}
+$containerName = if ($outputPolicy.Rf64) { 'RF64' } else { 'RIFF' }
+Write-Host "Export: 48000 Hz, $($outputPolicy.Bits)-bit PCM, $($outputPolicy.Layout), $containerName WAV"
+Write-Host "Destination space: $availableBytes bytes available; $($spaceEstimate.RequiredBytes) bytes required including headroom."
 
 $inputSizeMB = "{0:N2} MB" -f ($inputFileItem.Length / 1MB)
 
@@ -750,7 +911,7 @@ Write-Host "Chain: $modeName" -ForegroundColor Gray
 $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
 
 # FFmpeg Command
-$argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $transaction.TempPath -AudioStreamIndex $selectedStream.Index
+$argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $transaction.TempPath -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
 $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList
 
 $stopWatch.Stop()
@@ -766,7 +927,7 @@ if ($applicationExitCode -eq 0) {
         $outputStreams = @(Get-WacAudioStreams -FfprobePath $ffprobePath -InputPath $transaction.TempPath)
         if ($outputStreams.Count -ne 1) { throw 'Output must contain exactly one readable audio stream.' }
         $validationStream = Freeze-WacOutputTransaction -Transaction $transaction
-        $verifiedAudio = Assert-WacWaveOutput -Stream $validationStream -InputAudio $selectedStream -OutputAudio $outputStreams[0]
+        $verifiedAudio = Assert-WacWaveOutput -Stream $validationStream -InputAudio $selectedStream -OutputAudio $outputStreams[0] -OutputPolicy $outputPolicy
         Publish-WacOutputTransaction -Transaction $transaction
     } catch {
         $validationError = $_.Exception.Message
@@ -817,7 +978,9 @@ PARTIAL FILE   : $($transaction.TempPath)
 PUBLISHED      : $($transaction.Published)
 VERIFIED AUDIO : $($verifiedAudio.DurationSeconds) s; $($verifiedAudio.Frames) frames; $($verifiedAudio.SampleRate) Hz; $($verifiedAudio.Bits) bits
 
-ACTIVE FILTERS : $filterChain
+ACTIVE FILTERS : $($outputPolicy.FilterPrefix)$filterChain
+EXPORT FORMAT  : 48000 Hz; $($outputPolicy.Codec); $($outputPolicy.Bits) bits; $($outputPolicy.Layout); $containerName WAV
+SPACE ESTIMATE : $($spaceEstimate.FileBytes) file bytes + $($spaceEstimate.ReserveBytes) reserve bytes; $availableBytes available before rendering
 EXECUTABLE     : $ffmpegPath
 FFMPEG VERSION : $ffmpegVersion
 FFPROBE        : $ffprobePath

@@ -328,7 +328,7 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $filters = 'adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,' + $filters
             $modeName = 'RAW (Clean+Level)'
         }
-        $argv.Count | Should -Be 20
+        $argv.Count | Should -Be 34
         $argv[0] | Should -BeExactly '-nostdin'
         $argv[[Array]::IndexOf($argv, '-protocol_whitelist') + 1] | Should -BeExactly 'file'
         $argv[[Array]::IndexOf($argv, '-format_whitelist') + 1] | Should -BeExactly 'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi'
@@ -336,6 +336,9 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $argv[[Array]::IndexOf($argv, '-map') + 1] | Should -BeExactly '0:0'
         $argv[[Array]::IndexOf($argv, '-af') + 1] | Should -BeExactly $filters
         $argv[[Array]::IndexOf($argv, '-f') + 1] | Should -BeExactly 'wav'
+        foreach ($pair in @(@('-ar', '48000'), @('-c:a', 'pcm_s16le'), @('-ac', '1'), @('-channel_layout', 'mono'), @('-rf64', 'never'), @('-map_metadata', '-1'), @('-map_chapters', '-1'))) {
+            $argv[[Array]::IndexOf($argv, $pair[0]) + 1] | Should -BeExactly $pair[1]
+        }
         $outputFile = $argv[[Array]::IndexOf($argv, '-y') - 1]
         [IO.Path]::GetDirectoryName($outputFile) | Should -BeExactly $outputDirectory
         $status = if ($expectedExit -eq 0) { 'SUCCESS' } elseif ($expectedExit -eq 7) { 'WARNING' } else { 'FAILED' }

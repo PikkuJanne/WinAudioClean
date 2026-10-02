@@ -63,7 +63,8 @@ Describe 'Output naming and command construction preserve extraction behavior' -
         $arguments = Get-WacFfmpegArguments -InputPath 'C:\WAC input\speaker [1].wav' -FilterChain $rawFilters -OutputFile 'C:\WAC output\.wac-0123456789abcdef0123456789abcdef.partial' -AudioStreamIndex 3
         $expected = @('-nostdin', '-protocol_whitelist', 'file', '-format_whitelist',
             'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi', '-i', 'C:\WAC input\speaker [1].wav', '-map', '0:3', '-vn', '-af',
-            $rawFilters, '-f', 'wav', 'C:\WAC output\.wac-0123456789abcdef0123456789abcdef.partial', '-y', '-hide_banner', '-loglevel', 'error', '-stats')
+            $rawFilters, '-ar', '48000', '-c:a', 'pcm_s16le', '-ac', '1', '-channel_layout', 'mono', '-map_metadata', '-1', '-map_chapters', '-1',
+            '-f', 'wav', '-rf64', 'never', 'C:\WAC output\.wac-0123456789abcdef0123456789abcdef.partial', '-y', '-hide_banner', '-loglevel', 'error', '-stats')
         $arguments | Should -BeExactly $expected
     }
 

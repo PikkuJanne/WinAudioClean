@@ -26,6 +26,19 @@ namespace WinAudioClean
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern uint GetFinalPathNameByHandleW(SafeFileHandle file,
             StringBuilder path, uint size, uint flags);
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+        private static extern bool GetDiskFreeSpaceExW(string directory, out ulong available,
+            out ulong total, out ulong free);
+
+        public static ulong AvailableBytes(SafeFileHandle directory)
+        {
+            string path = ResolvedPath(directory);
+            if (!path.EndsWith(@"\", StringComparison.Ordinal)) path += @"\";
+            ulong available, total, free;
+            if (!GetDiskFreeSpaceExW(path, out available, out total, out free))
+                throw Failure("Cannot inspect available destination space");
+            return available;
+        }
 
         private static IOException Failure(string operation)
         {
@@ -149,6 +162,14 @@ namespace WinAudioClean
     }
 }
 '@ -ErrorAction Stop
+}
+
+function Get-WacAvailableOutputBytes {
+    param([Parameter(Mandatory = $true)]$Transaction)
+    if ($Transaction.Closed -or $null -eq $Transaction.OutputDirectoryHandle -or $Transaction.OutputDirectoryHandle.IsClosed) {
+        throw 'Cannot check space without a pinned destination directory.'
+    }
+    [WinAudioClean.NativeFileIO]::AvailableBytes($Transaction.OutputDirectoryHandle)
 }
 
 function New-WacOutputTransaction {
