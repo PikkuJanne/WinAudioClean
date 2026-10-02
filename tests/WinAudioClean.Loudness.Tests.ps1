@@ -145,9 +145,12 @@ Describe 'AC-039: loudnorm diagnostics have a bounded strict schema' -Tag 'Loudn
         @{ Case = 'comma decimal'; Field = 'input_i'; Value = '-21,5' }
         @{ Case = 'thousands separator'; Field = 'input_i'; Value = '-2,150' }
         @{ Case = 'out of range integrated loudness'; Field = 'input_i'; Value = '-200' }
+        @{ Case = 'positive input integrated loudness'; Field = 'input_i'; Value = '0.51' }
+        @{ Case = 'positive output integrated loudness'; Field = 'output_i'; Value = '0.01' }
         @{ Case = 'out of range peak'; Field = 'input_tp'; Value = '100' }
         @{ Case = 'negative range'; Field = 'input_lra'; Value = '-0.01' }
         @{ Case = 'positive threshold'; Field = 'input_thresh'; Value = '0.01' }
+        @{ Case = 'positive output threshold'; Field = 'output_thresh'; Value = '0.01' }
         @{ Case = 'out of range offset'; Field = 'target_offset'; Value = '100' }
         @{ Case = 'unsupported normalization type'; Field = 'normalization_type'; Value = 'guessed' }
         @{ Case = 'array'; Field = 'input_i'; Value = @(-21.5) }

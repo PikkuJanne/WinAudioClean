@@ -610,7 +610,7 @@
       "depends_on": [
         "WAC-M2-04"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Listening review, measurement evidence, decisions and compatibility checkpoint.",
       "implementation": [
@@ -624,7 +624,25 @@
         "AC-047",
         "AC-048"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M2-05-classifications.json",
+        "evidence/WAC-M2-05-encoding.json",
+        "evidence/WAC-M2-05-full-ps51.txt",
+        "evidence/WAC-M2-05-full-ps7.txt",
+        "evidence/WAC-M2-05-gentle.json",
+        "evidence/WAC-M2-05-listening.md",
+        "evidence/WAC-M2-05-measured.json",
+        "evidence/WAC-M2-05-original.json",
+        "evidence/WAC-M2-05-preview.json",
+        "evidence/WAC-M2-05-reproduction-preview-correction.json",
+        "evidence/WAC-M2-05-reproduction-smoke-initial.json",
+        "evidence/WAC-M2-05-reproduction-smoke-layout.json",
+        "evidence/WAC-M2-05-reproduction.json",
+        "evidence/WAC-M2-05-source.json",
+        "evidence/WAC-M2-05-targeted-ps51.txt",
+        "evidence/WAC-M2-05-targeted-ps7.txt",
+        "evidence/WAC-M2-05.md"
+      ],
       "blocked_reason": null
     },
     {

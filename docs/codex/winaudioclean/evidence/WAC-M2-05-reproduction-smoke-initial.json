@@ -1,0 +1,347 @@
+{
+  "task": "WAC-M2-05",
+  "acceptance": "AC-048",
+  "created_utc": "20261002T181258462426Z",
+  "notice": "Report-driven direct FFmpeg reproduction on synthetic inputs; no speech listening, independent meter calibration or cross-build guarantee.",
+  "method": "The unchanged app produces local reports in two hosts. Replay ignores seed CLI choices and rebuilds graphs from each report. Leveling has the fixed application-2.3 recipe; exact reported graphs must agree before execution. Comparison WAVs use the recreated excerpts as binary stdin.",
+  "path_policy": "Commands retain actual argument order/content with audio/report/log paths replaced by opaque aliases. The ignored scratch directory holds the full local artifacts. Aliases are linked by file hashes, not shareable media paths.",
+  "source_revision": "ca512d08bdb806d5c1900ecd9b6d8ba0c1e7037d",
+  "source_sha256_before": {
+    "WinAudioClean.ps1": "68351cd1eea4e7082c49bfbf4bf4e33c853a3025f46fa88404aec97330c09992",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.Preview.ps1": "0d446a37ba8172b23c44ec009359e0a69abb04ea1ad7250f72da799119ed9cda",
+    "scripts/Test-AudioReproduction.py": "9d27129cc6fce8015dd9970993cad5ca9c73c71c463a79753752e730e79b0c57",
+    "scripts/Test-MeasuredLoudness.py": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762",
+    "scripts/Test-GentleCleaning.py": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87"
+  },
+  "harness_invocation": [
+    "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-X",
+    "utf8",
+    "scripts/Test-AudioReproduction.py",
+    "--ffmpeg",
+    ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe",
+    "--ffprobe",
+    ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffprobe.exe",
+    "--output",
+    ".wac-local/WAC-M2-05/reproduction-smoke",
+    "--shell",
+    "ps51",
+    "--case",
+    "original-fast-stereo16",
+    "--case",
+    "custom-accurate-selected24-rf64",
+    "--case",
+    "silence-original-accurate16",
+    "--case",
+    "preview-gentle-accurate-selected24"
+  ],
+  "scope": {
+    "selected_cases": [
+      "original-fast-stereo16",
+      "custom-accurate-selected24-rf64",
+      "silence-original-accurate16",
+      "preview-gentle-accurate-selected24"
+    ],
+    "shell": "ps51",
+    "full_matrix": false
+  },
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.6",
+    "child_psmodulepath_removed": true,
+    "ps51": "5.1.26100.9444"
+  },
+  "tools": {
+    "ffmpeg": {
+      "id": "ffmpeg",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    "ffprobe": {
+      "id": "ffprobe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+    }
+  },
+  "fixtures": [
+    {
+      "id": "fixture:stereo",
+      "channels": 2,
+      "seconds": 12,
+      "kind": "eligible",
+      "sample_rate": 48000,
+      "frames": 576000,
+      "sha256": "82ac84a7a2efd437fa53d573602ada7df36e794a1bc201b82a44586302f2840e",
+      "bytes": 2304044
+    },
+    {
+      "id": "fixture:mono",
+      "channels": 1,
+      "seconds": 12,
+      "kind": "eligible",
+      "sample_rate": 48000,
+      "frames": 576000,
+      "sha256": "5ba8e499cf67f13effeec47cc098930879a3f3f23db5533ececfeddaef8336a0",
+      "bytes": 1152044
+    },
+    {
+      "id": "fixture:silence",
+      "channels": 1,
+      "seconds": 3,
+      "kind": "silence",
+      "sample_rate": 48000,
+      "frames": 144000,
+      "sha256": "5cffdd4793d2c7986a33d893ef9f6e29f84420b47f145c3669ecc971581941e7",
+      "bytes": 288044
+    },
+    {
+      "id": "fixture:selected",
+      "sha256": "9d37795309d6b49bb5d55190d7982267f8b40bc82212f2d69aa43a1f32a7b4d9",
+      "bytes": 3458889,
+      "description": "Stream0 mono, stream1 stereo; selected stream1."
+    }
+  ],
+  "cases": [],
+  "commands": [
+    {
+      "id": "ffmpeg-version",
+      "command": [
+        "<ffmpeg>",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.028,
+      "stdout_sha256": "711056f2bc922237113d5defe7da4dbd97beaab41098e5f8d425753dbfea99ff",
+      "stdout_bytes": 1500,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "ffprobe-version",
+      "command": [
+        "<ffprobe>",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.029,
+      "stdout_sha256": "c28ec08933e2c9eeac8a7341b1fced84e23745c7ca69e26e7ca83226714ef209",
+      "stdout_bytes": 1473,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "mux-selected",
+      "command": [
+        "<ffmpeg>",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<fixture:mono>",
+        "-i",
+        "<fixture:stereo>",
+        "-map",
+        "0:a:0",
+        "-map",
+        "1:a:0",
+        "-c:a",
+        "copy",
+        "<fixture:selected>"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.081,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "ps51-version",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$PSVersionTable.PSVersion.ToString()"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.252,
+      "stdout_sha256": "20e955843dca875613392595b8b605fe7c7ddeb5dd374f8eea4f6f2820fcf270",
+      "stdout_bytes": 16,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "app-ps51-original-fast-stereo16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$cultureInfo=[Globalization.CultureInfo]::GetCultureInfo('en-US'); [Threading.Thread]::CurrentThread.CurrentCulture=$cultureInfo; [Threading.Thread]::CurrentThread.CurrentUICulture=$cultureInfo; Write-Host ('WAC_HARNESS_CULTURE:' + [Threading.Thread]::CurrentThread.CurrentCulture.Name); & '<repo>\\WinAudioClean.ps1' -inputPath '<fixture:stereo>' -OutputDirectory '<case-output:ps51-original-fast-stereo16>' -FfmpegPath '<ffmpeg>' -FfprobePath '<ffprobe>' -Mode Raw -Preset Original -LoudnessMode Fast -BitDepth 16 -AudioStreamIndex 0 -NonInteractive; exit $LASTEXITCODE"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 3.853,
+      "stdout_sha256": "10fa690009bc6c8961bf72db7220263bd2877605e796cda682a5a7a1735eef5f",
+      "stdout_bytes": 1644,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "source-probe-ps51-original-fast-stereo16",
+      "command": [
+        "<ffprobe>",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<fixture:stereo>"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.059,
+      "stdout_sha256": "fb33f0991c751595c61b8a0fb9ab1d48fc380d7fd6d89e64e338cddd8c362f6a",
+      "stdout_bytes": 1383,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "recreate-ps51-original-fast-stereo16-Export",
+      "command": [
+        "<ffmpeg>",
+        "-nostdin",
+        "-i",
+        "<fixture:stereo>",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "2",
+        "-channel_layout",
+        "stereo",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<recreated:ps51-original-fast-stereo16:Export>",
+        "-n",
+        "-hide_banner",
+        "-loglevel",
+        "info",
+        "-nostats"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.771,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "559bdeae70007b20c78e0e5fae63a1e2aa65bf39cc69c7a5eebd19faa72a4f68",
+      "stderr_bytes": 1173
+    },
+    {
+      "id": "probe-ps51-original-fast-stereo16-published-Export",
+      "command": [
+        "<ffprobe>",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<published:ps51-original-fast-stereo16:Export>"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.077,
+      "stdout_sha256": "fb33f0991c751595c61b8a0fb9ab1d48fc380d7fd6d89e64e338cddd8c362f6a",
+      "stdout_bytes": 1383,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "decode-ps51-original-fast-stereo16-published-Export",
+      "command": [
+        "<ffmpeg>",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<published:ps51-original-fast-stereo16:Export>",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.081,
+      "stdout_sha256": "83bec0955cd063e18c8ab225dc6dc1a39145c4a094c069a3e6e7d8620e5a2002",
+      "stdout_bytes": 2304000,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_bytes": 0
+    },
+    {
+      "id": "meter-ps51-original-fast-stereo16-published-Export",
+      "command": [
+        "<ffmpeg>",
+        "-nostdin",
+        "-hide_banner",
+        "-i",
+        "<published:ps51-original-fast-stereo16:Export>",
+        "-map",
+        "0:a:0",
+        "-af",
+        "loudnorm=I=-12:TP=-1.5:LRA=7:print_format=json",
+        "-f",
+        "null",
+        "NUL"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.62,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr_sha256": "14a1ce9dd1d774a8a3ba2b5efcf01e8856f8f7b1c0f077a2fff24d28af712844",
+      "stderr_bytes": 1347
+    }
+  ],
+  "limitations": [
+    "No audio/listening approval or default promotion.",
+    "Positive integrated/threshold LUFS remains an unsupported fail-closed parser domain.",
+    "Same-build exact PCM does not establish cross-build reproducibility or full-program Preview equivalence."
+  ],
+  "status": "error",
+  "error": "'channel_layout'",
+  "source_sha256_after": {
+    "WinAudioClean.ps1": "68351cd1eea4e7082c49bfbf4bf4e33c853a3025f46fa88404aec97330c09992",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.Preview.ps1": "0d446a37ba8172b23c44ec009359e0a69abb04ea1ad7250f72da799119ed9cda",
+    "scripts/Test-AudioReproduction.py": "9d27129cc6fce8015dd9970993cad5ca9c73c71c463a79753752e730e79b0c57",
+    "scripts/Test-MeasuredLoudness.py": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762",
+    "scripts/Test-GentleCleaning.py": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87"
+  },
+  "sources_unchanged_during_run": true
+}

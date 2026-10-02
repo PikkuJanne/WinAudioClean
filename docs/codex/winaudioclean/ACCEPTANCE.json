@@ -721,8 +721,12 @@
       "title": "Objective audio gate",
       "procedure": "Run all applicable M2 numeric and structural checks.",
       "expected": "Mandatory implemented-mode checks pass; ineligible/undefined metrics are explicitly classified.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-05.md",
+        "evidence/WAC-M2-05-source.json",
+        "evidence/WAC-M2-05-classifications.json"
+      ]
     },
     {
       "id": "AC-047",
@@ -730,8 +734,12 @@
       "title": "Human gate integrity",
       "procedure": "Inspect listening template, corpus consent and approval records.",
       "expected": "Real reviewer results are attributable; missing listening approval prevents default promotion, not a fabricated pass.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-05.md",
+        "evidence/WAC-M2-05-source.json",
+        "evidence/WAC-M2-05-listening.md"
+      ]
     },
     {
       "id": "AC-048",
@@ -739,8 +747,12 @@
       "title": "Reproducible settings",
       "procedure": "Recreate an output from the report using the same build/input/settings and push the checkpoint.",
       "expected": "Preset/format choices are traceable and the exact accepted revision is recoverable from GitHub.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-05.md",
+        "evidence/WAC-M2-05-source.json",
+        "evidence/WAC-M2-05-reproduction.json"
+      ]
     },
     {
       "id": "AC-049",

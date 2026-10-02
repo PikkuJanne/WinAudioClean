@@ -458,3 +458,23 @@ Private speech listening remains unperformed; synthetic mechanics are not
 approval to promote a default sound. No merge/release/deployment/security
 approval is added. Evidence: `evidence/WAC-M2-04-latency.json` and the final
 task evidence/media matrix.
+
+### 2026-10-02 — WAC-M2-05 objective gate and pending human review
+
+D31. Accept the implemented M2 mechanics/format gate and same-input/build
+report-driven reproduction. Runtime, Original defaults and experimental Gentle
+settings remain unchanged from M2-04. Fast unmeasured status, Accurate fallback,
+target misses, short/silent/undefined metrics and positive-LUFS parser rejection
+retain explicit classifications; numeric success is not universal target compliance.
+
+No cleared speech corpus or attributable listening result was supplied. AC-047
+accepts the integrity of that pending record, not an audition or owner approval.
+Default promotion still requires exact settings/evidence/revision approval under
+D07. Optional missing candidate review does not block M3 reliability/preferences.
+The new reproduction utility proves selected recorded configurations with pinned
+input/report/source/tool hashes and exact decoded PCM, not arbitrary cross-build
+or high-precision formatter compatibility. Positive meter domain, codec seek,
+calibration and manual/stress limits remain explicit. Preserve all earlier
+evidence and M1-02 history; no merge/release/security/deployment approval is added.
+Evidence: `evidence/WAC-M2-05.md`, source/classification/reproduction manifests
+and `evidence/WAC-M2-05-listening.md`. Next: WAC-M3-01, separately synchronized.

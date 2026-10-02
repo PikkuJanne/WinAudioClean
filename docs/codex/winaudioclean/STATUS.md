@@ -1,72 +1,60 @@
 # Current status
 
-Date: 2026-10-02. **WAC-M2-04 is complete.** M0, M1 and four M2 tasks are done.
-AC-001 through AC-045 pass. Fifteen tasks are done; 15 remain todo.
+Date: 2026-10-02. **WAC-M2-05 and milestone M2 are complete.** M0, M1 and M2
+engineering checkpoints are done. AC-001 through AC-048 pass their contracts.
+Sixteen tasks are done; 14 remain todo. Human listening is unperformed.
 
-**Next: WAC-M2-05 — Audio gate with honest listening status.** Start separately
-after fresh synchronization verification.
+**Next: WAC-M3-01 — Add noninteractive parameters and saved settings.** Start
+separately after fresh synchronization; no merge is required to unlock it.
 
-## Bounded preview and comparison
+## M2 audio gate
 
-Explicit `-Preview` defaults to 0/45 seconds, clipping only the omitted duration
-to available selected audio. Validate invariant ranges through 60 seconds and
-round to output samples. Five-second pre/post context is bounded by stream ends;
-all four encoded assets have exactly the requested frame count. Selected-track
-origins use absolute timestamp seeking. Declared container timing uncertainty
-is bounded by 10 ms; unsupported origins/precision fail closed. Known Original/
-Gentle Raw delay is preserved, approximately 25 ms on the tested build.
+Runtime/main/IO/Preview/BAT hashes equal M2-04. Original remains exact default;
+Gentle stays opt-in experimental. The new development-only report-reproduction
+utility and three positive-LUFS rejection test cases change no product sound.
 
-Original/Processed retain the selected full-profile settings. Separate
-CompareOriginal/CompareProcessed copies use attenuation only, planned with
--1.7 dBTP headroom. Final comparison requires finite TP<=-1.5 dBTP and available
-integrated difference<=0.2 LU. Short/silent/undefined matching is WARNING/7.
-Preview metrics describe excerpts/context, never the full recording. No full
-render, playback or upload starts implicitly; no settings are saved.
+- Targeted: **523 Pester each**. Full: **1018 Pester +61 Python each**,
+  one Python privilege skip per shell, no failures. Parser/static/plan pass;
+  179 visible advisories. Both capture wrappers exit0 with stable code.
+- **116 fresh media cases** pass:20 Original,16 measured,16 Gentle/custom,
+  24 preview,40 encoding. Exact frozen/direct PCM references, frame counts,
+  channel/container checks, held native input, typed settings and locale pairs
+  remain covered. Target misses/fallbacks retain WARNING7; Fast is NOT_MEASURED.
+- **16 report-driven reproductions /22 assets** pass exact decoded PCM,
+  frames, encoding and classified meters on retained synthetic input/build.
+  Reports are pinned before parsing; source, input/report/assets/tools stay
+  unchanged. Selected configurations and exact graph checks bound this proof.
+- **AC-047 integrity passes with listening NOT PERFORMED**: no cleared corpus,
+  attributed reviewer or default promotion approval. No speech was rendered or
+  played; candidate/consent/playback/results remain pending.
 
-Four held transactions validate/measure before no-replace publication and
-roll back only owned files on failure/cancellation. Completed audio survives
-report failure as WARNING/7. Preview JSON/text reports are separate from normal
-summaries. IO and launcher remain unchanged; the optional sibling is required
-only for Preview.
+[Evidence](evidence/WAC-M2-05.md), [source manifest](evidence/WAC-M2-05-source.json),
+[classifications](evidence/WAC-M2-05-classifications.json),
+[reproduction](evidence/WAC-M2-05-reproduction.json),
+[human record](evidence/WAC-M2-05-listening.md). Preserve all prior evidence and
+M1-02 policy/resumption history, including clearly labeled preliminary failures.
 
-- Final Targeted passes **322 Pester per shell**; Full passes
-  **1015 Pester and 61 Python per shell**, one Python privilege skip,
-  zero failures. Parser/static/plan gates pass; 179 advisories remain.
-- **24 preview cases**, four direct references each and 12 identical
-  locale PCM pairs pass. Independent source slices disclose any seek rounding;
-  all assets retain matched frame counts and no added preview filter shift.
-- **20 Original cases plus ten frozen references** pass at zero lag with exact
-  decoded PCM. Main/full defaults, Fast arguments and Accurate contracts remain.
-- Initial gain/long-offset overload bugs, a temporary test discovery mistake
-  and the media timestamp refinement are preserved with exact preliminary scope.
+## Preserved behavior and limits
 
-[Task evidence](evidence/WAC-M2-04.md), [source manifest](evidence/WAC-M2-04-source.json),
-[preview matrix](evidence/WAC-M2-04-preview.json),
-[Original preservation](evidence/WAC-M2-04-original-preservation.json), and
-[latency reference](evidence/WAC-M2-04-latency.json).
-Preserve all earlier evidence and M1-02 policy/resumption history.
+Application2.3/schema1; Original original/1.0.0; Gentle gentle/0.1.0 Raw-only;
+strict typed cleaning, repeated Accurate prechain, held final-file meter,
+PCM16/24/mono/RF64 and owned no-replace publication/report warnings remain.
+Preview is explicit and bounded, with four assets, attenuation-only comparisons,
+exact frames and no automatic playback/full render. Fast remains ordinary default.
 
-## Preserved audio contracts and limits
-
-Original `original`/`1.0.0` remains default. Gentle `gentle`/`0.1.0` stays Raw-only
-and experimental, with no listening approval. Typed cleaning controls and
-strict Accurate profile reconstruction remain. Fast ordinary export performs
-no added analysis. Full-file Accurate targets I=-12/TP=-1.5/LRA=7, final finite
-tolerance +/-0.5 LU and TP<=-1.3 dBTP, explicit reasons and WARNING/7 semantics.
-Application2.3/report schema1 and PCM16 default/optional24/mono/RF64 remain.
-
-Speech listening, independent meter calibration, full >4 GB output, disk
-exhaustion, long-file/memory stress and running-render Ctrl+C are unverified.
-Container seek precision and stateful edges limit preview/full equivalence.
-The inherited meter parser rejects positive integrated source loudness; the
-lower-amplitude peak fixture does not certify that unsupported domain.
-Capture is in memory, capacity is not reserved and publication/report sets lack
-multi-file atomicity/power-loss guarantees. Failed previews use console details.
+Finite positive integrated/threshold values remain unsupported parser failures;
+they are not silent/undefined results. Preview source seek has declared <=10ms
+fixture-tested uncertainty and preserved approximately25ms Raw graph delay;
+custom/build/edge/full-render equivalence remains limited. Report reproduction
+does not promise universal numerical formatter parity or cross-build PCM.
+Speech listening, independent calibration, full >4GB, real disk exhaustion,
+long-file/memory stress and active-render Ctrl+C remain unverified. Capacity is
+not reserved, capture is in memory, sets are not multi-file atomic/power-loss durable.
 
 ## Checkout and delivery
 
-Use WinAudioClean-governance on `codex/wac-m2-audio`; preserve the source-only
-original folder. Origin is `https://github.com/PikkuJanne/WinAudioClean.git`.
-Draft PR#3 is stacked on `codex/wac-m1-reliability`, whose draft PR#2 is stacked
-on M0. Verify actual completion SHA through live sync/PR after push. No CI
-workflow/checks exist. No merge/release/default promotion/security/deployment.
+Maintained WinAudioClean-governance, `codex/wac-m2-audio`; source-only original
+folder untouched. Exact origin: `https://github.com/PikkuJanne/WinAudioClean.git`.
+Draft PR#3 remains stacked on unmerged `codex/wac-m1-reliability` draft#2/M0.
+Verify the actual M2-05 SHA through live sync/PR after push. No CI workflow/checks.
+No default promotion, merge/release/security setting change or deployment.

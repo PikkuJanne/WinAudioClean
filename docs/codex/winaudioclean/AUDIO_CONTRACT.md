@@ -281,3 +281,24 @@ the preliminary failure and this limitation for later edge-case work.
 ## Listening gate
 
 Owner-approved local speech material is needed to judge voice quality. Review quiet words, consonants, breathing, pumping, musical/noisy artifacts and voice character on the same playback setup, with level-matched A/B samples. Synthetic tones test mechanics, not intelligibility. Keep private recordings out of Git and CI. No default-sound promotion without explicit owner approval of exact preset/settings/revision.
+
+
+### Objective M2 checkpoint — WAC-M2-05 (2026-10-02)
+
+The implemented M2 domain passes fresh numeric/structural/format regressions
+and selected same-input/build report-driven reproduction. No runtime graph,
+default, export or report behavior changes in this checkpoint. A valid export
+and a passing mechanics test are separate from measured target compliance:
+Fast remains NOT_MEASURED; Accurate misses/fallback and short/silent/undefined
+results retain truthful warning classifications. Positive finite integrated/
+threshold measurements remain rejected rather than treated as unavailable.
+
+Human-gate integrity is accepted with listening explicitly unperformed and no
+cleared corpus admitted. No speech-quality or default-promotion approval follows.
+The reproduction utility retains input/report/source/executable hashes separately
+from ordinary reports and requires exact reconstructed graphs/PCM on the tested
+build. Its selected configurations do not certify every highly precise control,
+codec seek, different build or full-program preview equivalence. Existing seek,
+filter-delay, calibration, storage/cancellation/stress and privacy limits remain.
+Evidence: `evidence/WAC-M2-05.md`, classifications/reproduction/source artifacts
+and `evidence/WAC-M2-05-listening.md`.

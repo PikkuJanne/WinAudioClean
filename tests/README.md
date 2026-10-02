@@ -540,3 +540,41 @@ Playback is explicit. Keep generated audio and raw local reports out of Git.
 The inherited loudness parser rejects integrated values above 0 LUFS. The
 preliminary hot square exposed that limit; the final lower-amplitude peak-guard
 case does not establish support for positive integrated source loudness.
+
+## M2 objective gate and report reproduction (WAC-M2-05)
+
+Run the Preset, Loudness, LoudnessRuntime, NativeInput, Cleaning, Preview and
+Encoding suites in both shells before the unfiltered Full gate. The Loudness
+suite also checks that positive input/output integrated values and positive
+thresholds remain explicit parser failures, including on short input; they
+must not be relabeled as silence or unavailable measurements.
+
+Run all five real-media matrices separately: `Test-OriginalPreset.py`,
+`Test-MeasuredLoudness.py`, `Test-GentleCleaning.py`, `Test-Preview.py` and
+`Test-OutputEncoding.py`. Use fresh ignored output directories and the same
+pinned FFmpeg/ffprobe. Omit investigative case/shell/prepare-only filters.
+Passing mechanics does not mean every export reaches the loudness targets:
+Fast is NOT_MEASURED, and Accurate fallback, target misses and undefined
+metrics retain their documented warnings and reasons.
+
+`Test-AudioReproduction.py` is a development-only check of reproduction from
+local reports, using deterministic synthetic inputs and the installed build:
+
+```powershell
+$bin = '.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'
+python -X utf8 scripts/Test-AudioReproduction.py --ffmpeg "$bin/ffmpeg.exe" --ffprobe "$bin/ffprobe.exe" --output .wac-local/WAC-M2-05/reproduction-final
+```
+
+It checks preset identity/effective settings, processing graphs, stream/channel
+selection, encoding, Accurate measurements and preview range/gains against
+the report before direct same-build replay. Decode and compare the reproduced
+PCM and frame counts; retain input, report, source and tool hashes.
+The matrix covers its selected configurations; reconstructed literals and
+graphs must agree exactly before replay. It does not promise formatter parity
+for every highly precise custom value or independently revalidate every
+preview range-policy field; those policy checks remain in the preview suite.
+Ordinary reports do not embed a source revision or input/executable hashes, so the
+evidence harness supplies that provenance separately. Reproduction depends
+on the same retained input and build; it does not certify different builds,
+speech quality, playback or default promotion. Keep audio and raw reports
+ignored. Record listening status separately from objective acceptance.
