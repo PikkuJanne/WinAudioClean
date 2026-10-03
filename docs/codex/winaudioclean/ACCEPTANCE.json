@@ -985,14 +985,14 @@
       "title": "Original workflow",
       "procedure": "Drop a typical interview file, select 1/2 and inspect the result/report.",
       "expected": "Same simple front-door experience remains; new settings do not overwhelm the default menu.",
-      "status": "blocked",
+      "status": "pass",
       "evidence": [
         "evidence/WAC-M3-06.md",
         "evidence/WAC-M3-06-gates.json",
         "evidence/WAC-M3-06-source.json",
-        "evidence/WAC-M3-06-menu.json"
-      ],
-      "reason": "AC-064 requires the actual manual interview drag-and-drop workflow in modes 1 and 2. No permission-cleared interview file or manual result was supplied; synthetic BAT/PTY checks do not accept that procedure. Complete this gate before M4-01."
+        "evidence/WAC-M3-06-menu.json",
+        "evidence/WAC-M3-06-manual.json"
+      ]
     },
     {
       "id": "AC-065",

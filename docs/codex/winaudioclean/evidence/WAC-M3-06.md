@@ -1,3 +1,52 @@
+# WAC-M3-06 — completed manual workflow gate
+
+2026-10-03. **WAC-M3-06 is complete; AC-064 now passes.** The user supplied
+actual manual Explorer/menu/playback observations for selections 1 and 2 and the
+two local detailed JSON reports. Agent verification confirms Raw and Zoom,
+SUCCESS, application/processing/native exit 0, published valid WAVs, complete
+JSON/text reporting and no warnings. Each WAV header matches its report's frame
+count/format; reported input/output duration agrees within the compressed-input
+tolerance. Original 1.0.0/Fast/PCM 16 stereo defaults remain.
+
+[Sanitized manual evidence](WAC-M3-06-manual.json) attributes human observations
+separately from report/header checks. Nine copied runtime files match tested
+checkpoint `a30e235a8857d9b4ecde75423701d9ebd85946fa`; all 66 cumulative source hashes remain unchanged.
+Reports do not embed a revision, so source provenance comes from those verified
+copies rather than an invented report SHA. Pinned FFmpeg/ffprobe 9.0.2 hashes match.
+Raw reports, interview metadata/paths, recording and diagnostic/copy hashes stay
+local/ignored. The manual runs use the ordinary Music destination; the older
+isolated engineering runs below did not write user Music or preferences.
+
+The first actual drop was rejected before mode selection/media processing:
+Explorer supplied a parentheses-containing recording path unquoted. A
+byte-identical copy with a neutral name and unchanged extension allowed the user
+to retry both selections successfully. The original is unchanged. No launcher
+guard or runtime changed; this does not claim universal punctuation support.
+
+Canonical: **22 done, 8 todo, 0 blocked; 66 AC pass, 24 not run.** AC-065/066
+retain their previous scoped evidence. No completed cumulative/Full/media suite
+was repeated for this documentation-only closure. Plan validation and narrow
+report/source/header/privacy checks were run. Earlier 749/0/1 per-host Targeted,
+ten accepted automation cases (8 + 2 recoveries), synthetic menus 4/4 and reentry
+2/2 remain evidence for unchanged source, with all earlier failures preserved.
+
+The closure publisher initially used the host's default text encoding and failed
+while reading a historical document. Its partial derivatives remain private;
+only its own five documentation writes were recovered from the verified Git
+baseline with the existing checkout line endings. The publisher then used
+explicit UTF-8. Prior canonical rows and historical text were checked unchanged;
+no application or manual run was repeated for this publication repair.
+
+User playback accepts this workflow, not a formal sound/preset promotion. Manual
+picker, broad stress/crash/power-loss and the inherited Preview writer-close fault
+remain unverified. **Next: WAC-M4-01 — regression and fault-injection coverage.**
+It is unlocked but not started; no merge/release/deployment is performed.
+
+## Historical blocked engineering checkpoint (superseded by the closure above)
+
+The following narrative is preserved from `a30e235a8857d9b4ecde75423701d9ebd85946fa`. Its blocked/manual-
+unperformed statements describe that earlier checkpoint, not current task state.
+
 # WAC-M3-06 — workflow and automation gate
 
 Checkpoint from synchronized `dfcbd559f91c1cf2adf09a9ff581a5dac359ea73` on `codex/wac-m3-settings`,

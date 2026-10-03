@@ -1,5 +1,27 @@
 # Current status
 
+Date: 2026-10-03. **WAC-M3-06 is complete.** AC-064 now passes: user-reported
+actual Explorer drops/menu/playback in modes 1/2 and independent verification of
+both local SUCCESS/exit-0/complete reports and published WAV headers. Canonical:
+22 done/8 todo/0 blocked; 66 AC pass, 24 not run. **Next: WAC-M4-01**, unlocked
+but not started. AC-065/066 retain their earlier evidence.
+
+The initial unquoted-parentheses drop rejection and neutral-name copy/retry are
+recorded; no punctuation guard, runtime, test, filter or default changed. All nine
+manual runtime copies match a30e235; all 66 tested physical source hashes remain
+unchanged. The manual runs used ordinary Music output. Raw reports, interview
+paths/metadata and audio remain private/local; saved preferences remain absent.
+No formal sound promotion, picker gesture, broad stress/crash/power-loss or
+inherited Preview writer-close fault acceptance is added. The previous cumulative
+gate was not repeated; closure used report/header/source/privacy and plan checks.
+
+[Current evidence](evidence/WAC-M3-06.md),
+[manual outcomes](evidence/WAC-M3-06-manual.json).
+
+## Historical M3-06 blocked checkpoint (superseded on 2026-10-03)
+
+# Current status
+
 Date: 2026-10-03. **WAC-M3-06 engineering checks are complete; the task remains
 blocked on AC-064's manual interview drag-and-drop workflow.** AC-065 automation
 and AC-066 fresh clean-checkout/absent-preference reentry pass. Canonical:

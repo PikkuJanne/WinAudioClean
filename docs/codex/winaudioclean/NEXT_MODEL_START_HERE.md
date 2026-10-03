@@ -1,3 +1,61 @@
+# Next model: WAC-M4-01 — regression and fault-injection coverage
+
+**M3-06 is complete. Start only WAC-M4-01 when requested.** Canonical 22 done/
+8 todo; 66 AC pass/24 not run. M4-01 remains todo, AC-067..069 not_run; it was
+not implemented in this closure. Read AGENTS, current STATUS, DECISIONS, TASKS,
+ACCEPTANCE, SYNC_PROTOCOL, tasks/WAC-M4-01 and evidence/WAC-M3-06 first.
+
+## Reentry and synchronization
+
+Use maintained WinAudioClean-governance; preserve the source-only original.
+The M3 closure is on `codex/wac-m3-settings`, with exact effective origin
+`https://github.com/PikkuJanne/WinAudioClean.git`. Recover its newer completion
+SHA from the live branch/open draft PR #4, based on `codex/wac-m2-audio`.
+The manual tested checkpoint was `a30e235a8857d9b4ecde75423701d9ebd85946fa`; the later closure changes
+documentation/state only. Inspect clean/current checkout, authenticate/fetch,
+sync-check, validate-plan and next. Expected ready [WAC-M4-01], blocked [].
+Check live PR/head/CI separately. Do not reset/clean/stash/force-push or merge to
+unlock work. Follow the milestone branch/draft-PR workflow for M4.
+
+## Completed M3 gate and retained constraints
+
+AC-064 now has the user's actual Explorer/menu/full-playable-output observations
+for both modes and independently checked Raw/Zoom SUCCESS/exit-0/complete reports
+and valid published WAV headers. Nine tested runtime copies match the checkpoint;
+all 66 gate source hashes are unchanged. Report revisions are not embedded.
+The first unquoted-parentheses filename was rejected before processing; a
+byte-identical neutral-name copy permitted both actual retries. Preserve that
+limitation; do not infer universal punctuation support or remove safety checks.
+Manual audio/reports/private identifiers and diagnostic/copy proof remain local/
+ignored. Built-in Music was used; no saved preferences were introduced.
+
+Keep the prior engineering scopes: Targeted once per host 749 pass/0 fail/1
+file-symlink privilege skip, 273 non-gating advisories, automation ten accepted
+cases (8 initial +2 corrected manifest recoveries), synthetic menus 4/4 and clean
+reentry 2/2. Preserve every earlier failed capture and source/tool hashes. No
+cumulative/Full suite was repeated merely to close the manual evidence. APPDATA
+alone does not relocate Windows known-folder settings; use explicit isolated
+SettingsPath for automated work. User playback does not promote default sound.
+
+## Only next task's scope
+
+WAC-M4-01 maps implemented acceptance IDs to tests or named manual reviews,
+checks representative overwrite/bad-exit/wrong-sample-rate mutations in isolated
+trees, and runs reusable Quick/selected Targeted then one Full gate on PS5.1 and
+available PS7. Keep objective, manual/listening and stress evidence separate.
+Review the inherited Preview writer-close fault and other documented gaps within
+that scope; do not silently accept picker/stress/crash/power-loss behavior.
+Reuse existing pinned dependencies and preserve Original/Fast defaults and all
+ownership/cancellation/configuration contracts retained below. No packaging,
+release or website task starts here. Checkpoint intended changes, push and verify
+live equality before advancing. No merge/tag/release/default-sound promotion,
+security/settings change or deployment is authorized.
+
+## Historical M3 blocked handoff (superseded by current guidance above)
+
+The older instructions below describe earlier checkpoints and do not override
+the completed M3 state or current M4-01 next-task scope.
+
 # Next model: WAC-M3-06 — manual workflow evidence required
 
 **Do not start M4-01. M3-06 remains blocked on AC-064.** AC-065/066 and the narrow

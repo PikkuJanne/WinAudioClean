@@ -907,7 +907,7 @@
       "depends_on": [
         "WAC-M3-05"
       ],
-      "status": "blocked",
+      "status": "done",
       "approval_required": false,
       "scope": "End-to-end local workflow review and thread checkpoint.",
       "implementation": [
@@ -943,9 +943,10 @@
         "evidence/WAC-M3-06-reentry-ps7.txt",
         "evidence/WAC-M3-06-reentry.json",
         "evidence/WAC-M3-06-source.json",
-        "evidence/WAC-M3-06.md"
+        "evidence/WAC-M3-06.md",
+        "evidence/WAC-M3-06-manual.json"
       ],
-      "blocked_reason": "AC-064 requires the actual manual interview drag-and-drop workflow in modes 1 and 2. No permission-cleared interview file or manual result was supplied; synthetic BAT/PTY checks do not accept that procedure. Complete this gate before M4-01."
+      "blocked_reason": null
     },
     {
       "id": "WAC-M4-01",

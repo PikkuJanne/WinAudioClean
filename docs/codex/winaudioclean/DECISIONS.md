@@ -650,3 +650,22 @@ convert absent human input to approval or silently waive the procedure.
 Preserve previous history and all failures/corrections. No listening/default
 promotion, merge/release/security/settings/deployment approval is introduced.
 Evidence: `evidence/WAC-M3-06.md`. Next: finish M3-06's manual gate only.
+
+### 2026-10-03 — WAC-M3-06 manual workflow closure
+
+D38. Accept AC-064 from the user's actual Explorer/menu/playback observations
+in Raw/Zoom and independent local SUCCESS/exit-0/complete-report, published-WAV
+header and unchanged-runtime/tool verification. Keep human observations distinct
+from objective agent checks. A first parentheses-containing unquoted input was
+rejected before processing; a byte-identical neutral-name copy with the same
+extension allowed both real retries. Preserve the guard and this limitation;
+no universal punctuation support or formal sound/preset promotion is implied.
+
+Raw reports, interview metadata/paths/audio and diagnostic/copy provenance stay
+private/local. Publish only allowlisted outcomes and runtime/tool hashes. M3-06
+is done, AC-064 passes, previous AC-065/066 engineering evidence is unchanged;
+22 tasks done/8 todo, 66 AC pass/24 not_run. Keep D37 and its blocked narrative
+as history. Do not repeat unchanged-source suites solely for this closure.
+Next WAC-M4-01 is unlocked, not started. Picker/stress/crash/power-loss and the
+inherited Preview writer-close path remain unverified. No merge/release/security
+settings/deployment approval is added. Evidence: `evidence/WAC-M3-06-manual.json`.
