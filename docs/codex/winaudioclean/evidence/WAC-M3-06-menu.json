@@ -1,0 +1,850 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-06",
+  "baseline": "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73",
+  "scope": "Actual unmodified BAT/CMD launch, real interactive console Read-Host choices through exec_command PTY, and real pinned FFmpeg. Synthetic media only; supplementary engineering evidence for AC-064, not its manual interview/Explorer acceptance.",
+  "counts": {
+    "finalCases": 4,
+    "passed": 4,
+    "audioAssets": 4,
+    "pcmMatches": 4,
+    "priorProbeFailures": 1
+  },
+  "guards": {
+    "runtimeAndCopyUnchanged": true,
+    "fixtureUnchanged": true,
+    "isolatedSettingsUnchanged": true,
+    "toolsUnchanged": true
+  },
+  "prepared": {
+    "baseline": "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73",
+    "runtime": {
+      "WinAudioClean.bat": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "WinAudioClean.Batch.ps1": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "WinAudioClean.Launcher.ps1": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5",
+      "WinAudioClean.Output.ps1": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+      "WinAudioClean.Preview.ps1": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "WinAudioClean.ps1": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "WinAudioClean.Queue.ps1": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "WinAudioClean.Settings.ps1": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea"
+    },
+    "fixture_sha256": "e7c6d012afad030ac0ba222bbbc56b96afcfb31d2df1e54f8c4fa2ab3caaae71",
+    "tools": {
+      "ffmpeg.exe": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "ffprobe.exe": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+    },
+    "settings": {
+      "ps51-1-settings.json": "0f4a7d9d445a6dd041fe2f51e459f5d22a2539d01c179ee1df8b285e3b6ca551",
+      "ps51-2-settings.json": "4371efd9a5036a80fa484ce4de3ba32308e4a12666c8b4bf9d03a4d3d58fc622",
+      "ps7-1-settings.json": "1be1acc700b619f7416b1b3fd828f73112551e264759a1a05a768fd5ed0bdaf1",
+      "ps7-2-settings.json": "bce75400d18ad4615a068d316040d490ca6354346dcdc29da2fd8a8727f98e83"
+    },
+    "fixture": "deterministic synthetic stereo tones, eight seconds; no interview or listening evidence"
+  },
+  "capture": {
+    "path": ".wac-local/WAC-M3-06/menu/pty-captures.json",
+    "sha256": "d8da26f9154de2fd3c2cd8ff61e26390bd19d9a438deb14efb97c6b29719d008",
+    "format": "Tool-returned decoded UTF-8 terminal output chunks, including ANSI/OSC repaint controls; tool metadata and input actions retained. Not a direct byte-stream recording."
+  },
+  "harnesses": {
+    ".wac-local\\WAC-M3-06\\prepare-menu.py": "6f749c73c97113c4c0fff0ac160e092fe12255e74f1027f4f36916b69f54aa11",
+    ".wac-local\\WAC-M3-06\\publish-menu.py": "3e7ebf5f959de9533f9ecdb1e0a99a6c57d13fe10e1088308526f73897cae7b4"
+  },
+  "cases": [
+    {
+      "id": "menuPs51Choice1",
+      "launch_command": "$env:PATH='<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin;'+$env:PATH; $env:WAC_LAUNCH_SETTINGS_PATH='<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-1-settings.json'; & $env:ComSpec /d /s /c '\"\"<repo>\\.wac-local\\WAC-M3-06\\menu\\app\\WinAudioClean.bat\" \"<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav\"\"'; exit $LASTEXITCODE",
+      "terminal_actions": [
+        "launch",
+        "1\\r",
+        "poll",
+        "space"
+      ],
+      "exit_code": 0,
+      "log": "evidence/WAC-M3-06-menu-menuPs51Choice1.txt",
+      "log_sha256": "f33d8a964517e5f5f4765c450507da9eb1cd18b88f9cbba7fd603653f9e23d7a",
+      "terminal_chunks": 4,
+      "host": "ps51",
+      "choice": "1",
+      "mode": "Raw",
+      "presetId": "original",
+      "presetVersion": "1.0.0",
+      "settings": {
+        "mode": "Raw",
+        "modeName": "RAW (Clean+Level)",
+        "bitDepth": 16,
+        "loudnessMode": "Fast",
+        "mono": false,
+        "rf64": false,
+        "cleaning": {
+          "schemaVersion": 1,
+          "Declip": true,
+          "Declick": true,
+          "Denoise": true,
+          "Gate": true,
+          "HighpassHz": 80,
+          "NoiseFloorDb": -25,
+          "NoiseReductionDb": 12,
+          "GateThresholdDb": -45,
+          "GateRangeDb": -25
+        },
+        "exactFilters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+      },
+      "outputVerified": {
+        "Frames": 384000,
+        "DurationSeconds": 8,
+        "Channels": 2,
+        "SampleRate": 48000,
+        "Bits": 16,
+        "Rf64": false
+      },
+      "audio_sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9",
+      "report_sha256": "27e9c48e5601ab8046ac564c86fb6ed784fdc804df3d0285a9a4fb5cf0e7c3ea",
+      "text_report_sha256": "ef6cf6db0b09b8a83b8f1231b32601b304de7a430d9b5463fdd4cc4ddb2a12c2",
+      "reference_sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9",
+      "exact_pcm_sha256": "7048733d822f9afd48cb57ba61962aad9a52779ef856cb570e693f5271bff9b3",
+      "exact_pcm_match": true,
+      "reporting": {
+        "complete": true,
+        "errors": []
+      },
+      "reportProgress": {
+        "stages": [
+          {
+            "stage": "Inspecting",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Rendering",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 90,
+            "processedSeconds": 8,
+            "durationSeconds": 8,
+            "structuredEnd": true,
+            "updates": 9,
+            "processId": 26144,
+            "snapshot": {
+              "OutTimeMicroseconds": 8000000,
+              "End": true,
+              "Blocks": 2,
+              "InvalidLines": 0,
+              "TruncatedLines": 0
+            }
+          },
+          {
+            "stage": "Validating",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Publishing",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Completed",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 100,
+            "processedSeconds": 0,
+            "durationSeconds": 1,
+            "structuredEnd": false,
+            "updates": 2,
+            "processId": null,
+            "snapshot": null
+          }
+        ],
+        "completed": true,
+        "cancellationRequested": false,
+        "cancellationStage": null
+      }
+    },
+    {
+      "id": "menuPs51Choice2",
+      "launch_command": "$env:PATH='<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin;'+$env:PATH; $env:WAC_LAUNCH_SETTINGS_PATH='<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-2-settings.json'; & $env:ComSpec /d /s /c '\"\"<repo>\\.wac-local\\WAC-M3-06\\menu\\app\\WinAudioClean.bat\" \"<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav\"\"'; exit $LASTEXITCODE",
+      "terminal_actions": [
+        "launch",
+        "2\\r",
+        "space"
+      ],
+      "exit_code": 0,
+      "log": "evidence/WAC-M3-06-menu-menuPs51Choice2.txt",
+      "log_sha256": "19b8dcb626deb4ee30069fae10f98036d51ba93087088692bd0280a7bf19eb7f",
+      "terminal_chunks": 3,
+      "host": "ps51",
+      "choice": "2",
+      "mode": "Zoom",
+      "presetId": "original",
+      "presetVersion": "1.0.0",
+      "settings": {
+        "mode": "Zoom",
+        "modeName": "ZOOM (Level Only)",
+        "bitDepth": 16,
+        "loudnessMode": "Fast",
+        "mono": false,
+        "rf64": false,
+        "cleaning": null,
+        "exactFilters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+      },
+      "outputVerified": {
+        "Frames": 384000,
+        "DurationSeconds": 8,
+        "Channels": 2,
+        "SampleRate": 48000,
+        "Bits": 16,
+        "Rf64": false
+      },
+      "audio_sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c",
+      "report_sha256": "dd932637a9eacba9f5cda1b3cfd88d378b0b12312fc7fa115c2c3a3437037af4",
+      "text_report_sha256": "20f4aaeddabf3b228c3adc01410b55c9355755ca4aca2fc3dd1597a70cd94b14",
+      "reference_sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c",
+      "exact_pcm_sha256": "daf946754ff358b68be3055db12d1b6ab9db70a3ddfdb92e7ab842a854c7e705",
+      "exact_pcm_match": true,
+      "reporting": {
+        "complete": true,
+        "errors": []
+      },
+      "reportProgress": {
+        "stages": [
+          {
+            "stage": "Inspecting",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Rendering",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 90,
+            "processedSeconds": 8,
+            "durationSeconds": 8,
+            "structuredEnd": true,
+            "updates": 5,
+            "processId": 30728,
+            "snapshot": {
+              "OutTimeMicroseconds": 8000000,
+              "End": true,
+              "Blocks": 1,
+              "InvalidLines": 0,
+              "TruncatedLines": 0
+            }
+          },
+          {
+            "stage": "Validating",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Publishing",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Completed",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 100,
+            "processedSeconds": 0,
+            "durationSeconds": 1,
+            "structuredEnd": false,
+            "updates": 2,
+            "processId": null,
+            "snapshot": null
+          }
+        ],
+        "completed": true,
+        "cancellationRequested": false,
+        "cancellationStage": null
+      }
+    },
+    {
+      "id": "menuPs7Choice1Corrected",
+      "launch_command": "$env:PATH='<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin;'+$env:PATH; $env:WAC_LAUNCH_SETTINGS_PATH='<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-1-settings.json'; $env:WAC_LAUNCH_POWERSHELL=(Get-Command pwsh.exe -CommandType Application | Select-Object -First 1).Source; & $env:ComSpec /d /s /c '\"\"<repo>\\.wac-local\\WAC-M3-06\\menu\\app\\WinAudioClean.bat\" \"<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav\"\"'; exit $LASTEXITCODE",
+      "terminal_actions": [
+        "launch",
+        "1\\r",
+        "space"
+      ],
+      "exit_code": 0,
+      "log": "evidence/WAC-M3-06-menu-menuPs7Choice1Corrected.txt",
+      "log_sha256": "1633a1d4bf2ae3c4645d3d471584241f943ad4173e78a2aae636c648bed0d520",
+      "terminal_chunks": 3,
+      "host": "ps7",
+      "choice": "1",
+      "mode": "Raw",
+      "presetId": "original",
+      "presetVersion": "1.0.0",
+      "settings": {
+        "mode": "Raw",
+        "modeName": "RAW (Clean+Level)",
+        "bitDepth": 16,
+        "loudnessMode": "Fast",
+        "mono": false,
+        "rf64": false,
+        "cleaning": {
+          "schemaVersion": 1,
+          "Declip": true,
+          "Declick": true,
+          "Denoise": true,
+          "Gate": true,
+          "HighpassHz": 80.0,
+          "NoiseFloorDb": -25.0,
+          "NoiseReductionDb": 12.0,
+          "GateThresholdDb": -45.0,
+          "GateRangeDb": -25.0
+        },
+        "exactFilters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+      },
+      "outputVerified": {
+        "Frames": 384000,
+        "DurationSeconds": 8.0,
+        "Channels": 2,
+        "SampleRate": 48000,
+        "Bits": 16,
+        "Rf64": false
+      },
+      "audio_sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9",
+      "report_sha256": "fde02d24be9f19a8c675cf251d7d83aaa25183bf401409ab65dceda5eacba5c8",
+      "text_report_sha256": "ec9110b6c7aa2595264cd56ee8213700a68caadeb972e669b8c8e99d22cd3d85",
+      "reference_sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9",
+      "exact_pcm_sha256": "7048733d822f9afd48cb57ba61962aad9a52779ef856cb570e693f5271bff9b3",
+      "exact_pcm_match": true,
+      "reporting": {
+        "complete": true,
+        "errors": []
+      },
+      "reportProgress": {
+        "stages": [
+          {
+            "stage": "Inspecting",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0.0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Rendering",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 90,
+            "processedSeconds": 8.0,
+            "durationSeconds": 8.0,
+            "structuredEnd": true,
+            "updates": 10,
+            "processId": 6744,
+            "snapshot": {
+              "OutTimeMicroseconds": 8000000,
+              "End": true,
+              "Blocks": 2,
+              "InvalidLines": 0,
+              "TruncatedLines": 0
+            }
+          },
+          {
+            "stage": "Validating",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0.0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Publishing",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0.0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Completed",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 100,
+            "processedSeconds": 0.0,
+            "durationSeconds": 1.0,
+            "structuredEnd": false,
+            "updates": 2,
+            "processId": null,
+            "snapshot": null
+          }
+        ],
+        "completed": true,
+        "cancellationRequested": false,
+        "cancellationStage": null
+      }
+    },
+    {
+      "id": "menuPs7Choice2",
+      "launch_command": "$env:PATH='<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin;'+$env:PATH; $env:WAC_LAUNCH_SETTINGS_PATH='<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-2-settings.json'; $env:WAC_LAUNCH_POWERSHELL=(Get-Command pwsh.exe -CommandType Application | Select-Object -First 1).Source; & $env:ComSpec /d /s /c '\"\"<repo>\\.wac-local\\WAC-M3-06\\menu\\app\\WinAudioClean.bat\" \"<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav\"\"'; exit $LASTEXITCODE",
+      "terminal_actions": [
+        "launch",
+        "2\\r",
+        "space"
+      ],
+      "exit_code": 0,
+      "log": "evidence/WAC-M3-06-menu-menuPs7Choice2.txt",
+      "log_sha256": "368c27c0b78d0284636c833d87cf603b37c3ae507ef5a6d294587acfe27bb795",
+      "terminal_chunks": 3,
+      "host": "ps7",
+      "choice": "2",
+      "mode": "Zoom",
+      "presetId": "original",
+      "presetVersion": "1.0.0",
+      "settings": {
+        "mode": "Zoom",
+        "modeName": "ZOOM (Level Only)",
+        "bitDepth": 16,
+        "loudnessMode": "Fast",
+        "mono": false,
+        "rf64": false,
+        "cleaning": null,
+        "exactFilters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+      },
+      "outputVerified": {
+        "Frames": 384000,
+        "DurationSeconds": 8.0,
+        "Channels": 2,
+        "SampleRate": 48000,
+        "Bits": 16,
+        "Rf64": false
+      },
+      "audio_sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c",
+      "report_sha256": "66502b530a2073d5be68782e17d16bf109245071f08ff81bae2229b231afa86c",
+      "text_report_sha256": "c65d1b3c3d64af6c111285f3743535f8ffb95eb19fac5cb028261a71c9dd8a15",
+      "reference_sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c",
+      "exact_pcm_sha256": "daf946754ff358b68be3055db12d1b6ab9db70a3ddfdb92e7ab842a854c7e705",
+      "exact_pcm_match": true,
+      "reporting": {
+        "complete": true,
+        "errors": []
+      },
+      "reportProgress": {
+        "stages": [
+          {
+            "stage": "Inspecting",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0.0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Rendering",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 90,
+            "processedSeconds": 8.0,
+            "durationSeconds": 8.0,
+            "structuredEnd": true,
+            "updates": 5,
+            "processId": 11784,
+            "snapshot": {
+              "OutTimeMicroseconds": 8000000,
+              "End": true,
+              "Blocks": 1,
+              "InvalidLines": 0,
+              "TruncatedLines": 0
+            }
+          },
+          {
+            "stage": "Validating",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0.0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Publishing",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": -1,
+            "processedSeconds": 0.0,
+            "durationSeconds": null,
+            "structuredEnd": false,
+            "updates": 1,
+            "processId": null,
+            "snapshot": null
+          },
+          {
+            "stage": "Completed",
+            "fileIndex": 1,
+            "fileCount": 1,
+            "percent": 100,
+            "processedSeconds": 0.0,
+            "durationSeconds": 1.0,
+            "structuredEnd": false,
+            "updates": 2,
+            "processId": null,
+            "snapshot": null
+          }
+        ],
+        "completed": true,
+        "cancellationRequested": false,
+        "cancellationStage": null
+      }
+    }
+  ],
+  "retainedFailures": [
+    {
+      "id": "menuPs7Choice1",
+      "launch_command": "$env:PATH='<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin;'+$env:PATH; $env:WAC_LAUNCH_SETTINGS_PATH='<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-1-settings.json'; $env:WAC_LAUNCH_POWERSHELL=(Get-Command pwsh.exe -CommandType Application).Source; & $env:ComSpec /d /s /c '\"\"<repo>\\.wac-local\\WAC-M3-06\\menu\\app\\WinAudioClean.bat\" \"<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav\"\"'; exit $LASTEXITCODE",
+      "terminal_actions": [
+        "launch",
+        "space"
+      ],
+      "exit_code": 2,
+      "log": "evidence/WAC-M3-06-menu-menuPs7Choice1.txt",
+      "log_sha256": "c0cfa57e07eead3ac5a85945bf2f111aca41ba2d2ce8d77cd25e440397c5c076",
+      "terminal_chunks": 2,
+      "cause": "Root probe Get-Command returned multiple pwsh paths; selected one host with Select-Object -First 1. Runtime unchanged."
+    }
+  ],
+  "referenceAndDecodeCommands": [
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav",
+      "-map",
+      "0:a:0",
+      "-vn",
+      "-sn",
+      "-dn",
+      "-af",
+      "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "-ar",
+      "48000",
+      "-acodec",
+      "pcm_s16le",
+      "-map_metadata",
+      "-1",
+      "-map_chapters",
+      "-1",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-1-reference.wav"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-1\\synthetic_Cleaned_20261003-140036302_bc5d77599a5e446b91c80dc6c382035d.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-1-reference.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav",
+      "-map",
+      "0:a:0",
+      "-vn",
+      "-sn",
+      "-dn",
+      "-af",
+      "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "-ar",
+      "48000",
+      "-acodec",
+      "pcm_s16le",
+      "-map_metadata",
+      "-1",
+      "-map_chapters",
+      "-1",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-2-reference.wav"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-2\\synthetic_Cleaned_20261003-140129938_c4c6edc5bb834a9b9a2ad8d3b9cf8bae.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps51-2-reference.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav",
+      "-map",
+      "0:a:0",
+      "-vn",
+      "-sn",
+      "-dn",
+      "-af",
+      "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "-ar",
+      "48000",
+      "-acodec",
+      "pcm_s16le",
+      "-map_metadata",
+      "-1",
+      "-map_chapters",
+      "-1",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-1-reference.wav"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-1\\synthetic_Cleaned_20261003-140234150_966536baa03944e193123341cd8baf0c.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-1-reference.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-n",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\synthetic.wav",
+      "-map",
+      "0:a:0",
+      "-vn",
+      "-sn",
+      "-dn",
+      "-af",
+      "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "-ar",
+      "48000",
+      "-acodec",
+      "pcm_s16le",
+      "-map_metadata",
+      "-1",
+      "-map_chapters",
+      "-1",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-2-reference.wav"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-2\\synthetic_Cleaned_20261003-140315979_d3bca7708f0b4836a2210e22e0b2c08d.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ],
+    [
+      "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "-nostdin",
+      "-hide_banner",
+      "-loglevel",
+      "error",
+      "-i",
+      "<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-2-reference.wav",
+      "-map",
+      "0:a:0",
+      "-f",
+      "s16le",
+      "-acodec",
+      "pcm_s16le",
+      "pipe:1"
+    ]
+  ],
+  "limitations": [
+    "No human interview file supplied; fixture is deterministic synthetic stereo tones.",
+    "No Explorer drag-and-drop, picker gesture or human speech-quality listening was performed.",
+    "Explicit isolated SettingsPath contains only outputDirectory to keep menu mode unset and avoid actual user Music/preferences.",
+    "PTY input was supplied by the agent through write_stdin; this is actual console interaction, not a human UI check.",
+    "Exact report-graph PCM matching preserves existing graph delay; it does not establish zero input/output lag."
+  ],
+  "derivativePrivacyCorrection": {
+    "cause": "Terminal repaint/truncated path fragments did not contain the complete repository prefix and escaped the first sanitizer. Generic remaining Windows drive-path fragments are now redacted. Raw PTY captures and runtime are unchanged.",
+    "command": "python -X utf8 .wac-local/WAC-M3-06/fix-menu-privacy.py",
+    "harness_sha256": "757350a589e4d80d1b98780cecb2e33ec1472c8bafccd579e689f302be2ee3ad",
+    "prior_menu_ledger_sha256": "5ac74562342fdfaf87b2c2250f46a12cd81ee5f5eceb14c5c1dd121ec58a4bcb",
+    "prior_derivative_archive": ".wac-local/WAC-M3-06/menu-public-before-privacy",
+    "changes": [
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs51Choice1.txt",
+        "before_sha256": "d07c42a79482259adafed0b474a8614454a7762a7cdfea721262738904d8694a",
+        "after_sha256": "f33d8a964517e5f5f4765c450507da9eb1cd18b88f9cbba7fd603653f9e23d7a",
+        "fragment_replacements": 1
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs51Choice2.txt",
+        "before_sha256": "3f3dbaf76803088ba68e4b1bac397da49b27d3195f9297dc64374651a028e1fb",
+        "after_sha256": "19b8dcb626deb4ee30069fae10f98036d51ba93087088692bd0280a7bf19eb7f",
+        "fragment_replacements": 1
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs7Choice1Corrected.txt",
+        "before_sha256": "52e0381fb202b2c74081da6dd622eea2c035b89ed027a019de64a066fda23048",
+        "after_sha256": "1633a1d4bf2ae3c4645d3d471584241f943ad4173e78a2aae636c648bed0d520",
+        "fragment_replacements": 1
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs7Choice2.txt",
+        "before_sha256": "368c27c0b78d0284636c833d87cf603b37c3ae507ef5a6d294587acfe27bb795",
+        "after_sha256": "368c27c0b78d0284636c833d87cf603b37c3ae507ef5a6d294587acfe27bb795",
+        "fragment_replacements": 0
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs7Choice1.txt",
+        "before_sha256": "c0cfa57e07eead3ac5a85945bf2f111aca41ba2d2ce8d77cd25e440397c5c076",
+        "after_sha256": "c0cfa57e07eead3ac5a85945bf2f111aca41ba2d2ce8d77cd25e440397c5c076",
+        "fragment_replacements": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-06",
+  "harnesses": [
+    {
+      "path": ".wac-local/WAC-M3-06/prepare-menu.py",
+      "raw_sha256": "6f749c73c97113c4c0fff0ac160e092fe12255e74f1027f4f36916b69f54aa11",
+      "public_source_sha256": "6f749c73c97113c4c0fff0ac160e092fe12255e74f1027f4f36916b69f54aa11",
+      "source": "from pathlib import Path\nimport hashlib,json,math,shutil,struct,subprocess,wave\nroot=Path.cwd(); base=root/'.wac-local/WAC-M3-06/menu'\nassert not base.exists(), 'Do not overwrite earlier menu evidence.'\napp=base/'app'; app.mkdir(parents=True)\nruntime={}\ndigest=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nfor p in sorted(root.glob('WinAudioClean*')):\n    if p.suffix not in ('.ps1','.bat'): continue\n    q=app/p.name;shutil.copyfile(p,q);runtime[p.name]=digest(p)\n    assert digest(q)==runtime[p.name]\nfixture=base/'synthetic.wav'\nwith wave.open(str(fixture),'wb') as w:\n    w.setnchannels(2);w.setsampwidth(2);w.setframerate(48000)\n    values=bytearray()\n    for i in range(48000*8):\n        t=i/48000; a=0.12*(0.5+0.5*math.sin(2*math.pi*1.7*t)**2)\n        left=a*(math.sin(2*math.pi*317*t)+0.25*math.sin(2*math.pi*913*t))\n        right=a*(math.sin(2*math.pi*419*t)+0.2*math.sin(2*math.pi*1103*t))\n        values.extend(struct.pack('<hh',round(left*32767),round(right*32767)))\n    w.writeframes(values)\nfor host in ('ps51','ps7'):\n    for choice in ('1','2'):\n        out=base/(host+'-'+choice);out.mkdir()\n        config=base/(host+'-'+choice+'-settings.json')\n        config.write_text(json.dumps({'schemaVersion':1,'settings':{'outputDirectory':str(out)}}),encoding='utf-8')\ntools=root/'.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin'\nstate={'baseline':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'runtime':runtime,'fixture_sha256':digest(fixture),'tools':{n:digest(tools/n) for n in ('ffmpeg.exe','ffprobe.exe')},'settings':{p.name:digest(p) for p in base.glob('*-settings.json')},'fixture':'deterministic synthetic stereo tones, eight seconds; no interview or listening evidence'}\n(base/'prepared.json').write_text(json.dumps(state,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps({'runtimeCount':len(runtime),'fixtureFrames':48000*8,'fixture_sha256':state['fixture_sha256']}))\n",
+      "transformations": [],
+      "raw_bytes_retained_locally": true
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/publish-menu.py",
+      "raw_sha256": "3e7ebf5f959de9533f9ecdb1e0a99a6c57d13fe10e1088308526f73897cae7b4",
+      "public_source_sha256": "942b937e000399938c2fff717e82034b3f88b0e2220cb6a90d61b75d783defab",
+      "source": "from pathlib import Path\nimport hashlib,json,re,subprocess\nroot=Path.cwd();base=root/'.wac-local/WAC-M3-06/menu';public=root/'docs/codex/winaudioclean/evidence'\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nprepared=json.loads((base/'prepared.json').read_text())\ncapture=json.loads((base/'pty-captures.json').read_text())\nffmpeg=root/'.wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe'\ndef clean(s):\n    s=re.sub(r'\\x1b\\][^\\x07]*(?:\\x07|\\x1b\\\\)','',s)\n    s=re.sub(r'\\x1b\\[[0-?]*[ -/]*[@-~]','',s)\n    for old,new in [(str(root),'<repo>'),(str(Path.home()),'<user-profile>')]:\n        pattern=r'[\\\\/]+'.join(re.escape(part) for part in re.split(r'[\\\\/]+',old))\n        s=re.sub(pattern,lambda m:new,s,flags=re.I)\n    return '\\n'.join(x.rstrip() for x in s.splitlines()).strip()+'\\n'\ndef sanitized(value):\n    if isinstance(value,str):return clean(value).strip()\n    if isinstance(value,dict):return {k:sanitized(v) for k,v in value.items()}\n    if isinstance(value,list):return [sanitized(v) for v in value]\n    return value\ndef run(command):\n    p=subprocess.run(command,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=60)\n    assert p.returncode==0,p.stderr.decode(errors='replace')\n    commands.append(command)\n    return p.stdout\ncommands=[];cases=[];history=[]\nmapping={'menuPs51Choice1':('ps51','1'),'menuPs51Choice2':('ps51','2'),'menuPs7Choice1Corrected':('ps7','1'),'menuPs7Choice2':('ps7','2')}\nfor row in capture['records']:\n    key=row['key'];text=''.join(x['output'] for x in row['chunks'])\n    log=public/('WAC-M3-06-menu-'+key+'.txt')\n    if log.exists(): assert log.read_text(encoding='utf-8')==clean(text)\n    else: log.write_text(clean(text),encoding='utf-8',newline='\\n')\n    info={'id':key,'launch_command':row['cmd'],'terminal_actions':row['actions'],'exit_code':row['finalExit'],'log':log.relative_to(public.parent).as_posix(),'log_sha256':sha(log),'terminal_chunks':len(row['chunks'])}\n    if key not in mapping:\n        assert row['finalExit']==2 and 'Launcher paths must use an ordinary Windows drive path.' in text\n        info['cause']='Root probe Get-Command returned multiple pwsh paths; selected one host with Select-Object -First 1. Runtime unchanged.'\n        history.append(info);continue\n    host,choice=mapping[key];folder=base/(host+'-'+choice)\n    assert row['finalExit']==0\n    assert 'Select Processing Mode (Original preset)' in text and '[1] RAW RECORDING' in text and '[2] ZOOM/TEAMS' in text and '[Q] Cancel' in text\n    assert 'Press any key to continue' in text\n    reports=list(folder.glob('*.json'));waves=list(folder.glob('*.wav'));txts=[p for p in folder.glob('*.txt') if p.name!='WinAudioClean_Log.txt']\n    assert len(reports)==len(waves)==len(txts)==1\n    assert sha(folder/'WinAudioClean_Log.txt')==sha(txts[0])\n    assert not list(folder.glob('*.partial'))\n    report=json.loads(reports[0].read_text(encoding='utf-8-sig'))\n    assert report['status']==report['processingStatus']=='SUCCESS' and report['applicationExitCode']==0\n    assert report['reporting']['complete'] and not report['reporting']['errors']\n    assert report['presetId']=='original' and report['presetVersion']=='1.0.0'\n    assert report['settings']['mode']==('Raw' if choice=='1' else 'Zoom')\n    assert report['settings']['loudnessMode']=='Fast' and report['settings']['bitDepth']==16\n    assert report['output']['published'] and report['output']['verified']['Frames']==384000\n    assert report['output']['verified']['DurationSeconds']==8\n    assert report['progress']['currentStage']=='Completed' if 'currentStage' in report['progress'] else True\n    ref=base/(host+'-'+choice+'-reference.wav')\n    run([str(ffmpeg),'-nostdin','-hide_banner','-loglevel','error','-n','-i',str(base/'synthetic.wav'),'-map','0:a:0','-vn','-sn','-dn','-af',report['settings']['exactFilters'],'-ar','48000','-acodec','pcm_s16le','-map_metadata','-1','-map_chapters','-1',str(ref)])\n    decode=lambda path:run([str(ffmpeg),'-nostdin','-hide_banner','-loglevel','error','-i',str(path),'-map','0:a:0','-f','s16le','-acodec','pcm_s16le','pipe:1'])\n    actual=decode(waves[0]);reference=decode(ref);assert actual==reference and len(actual)==384000*2*2\n    info.update({'host':host,'choice':choice,'mode':report['settings']['mode'],'presetId':report['presetId'],'presetVersion':report['presetVersion'],'settings':report['settings'],'outputVerified':report['output']['verified'],'audio_sha256':sha(waves[0]),'report_sha256':sha(reports[0]),'text_report_sha256':sha(txts[0]),'reference_sha256':sha(ref),'exact_pcm_sha256':hashlib.sha256(actual).hexdigest(),'exact_pcm_match':True,'reporting':report['reporting'],'reportProgress':report['progress']})\n    cases.append(info)\nassert len(cases)==4\nassert all(sha(root/name)==digest==sha(base/'app'/name) for name,digest in prepared['runtime'].items())\nassert sha(base/'synthetic.wav')==prepared['fixture_sha256']\nassert all(sha(base/name)==digest for name,digest in prepared['settings'].items())\nassert all(sha(ffmpeg.parent/name)==digest for name,digest in prepared['tools'].items())\nresult={'schemaVersion':1,'task':'WAC-M3-06','baseline':prepared['baseline'],'scope':'Actual unmodified BAT/CMD launch, real interactive console Read-Host choices through exec_command PTY, and real pinned FFmpeg. Synthetic media only; supplementary engineering evidence for AC-064, not its manual interview/Explorer acceptance.','counts':{'finalCases':4,'passed':4,'audioAssets':4,'pcmMatches':4,'priorProbeFailures':1},'guards':{'runtimeAndCopyUnchanged':True,'fixtureUnchanged':True,'isolatedSettingsUnchanged':True,'toolsUnchanged':True},'prepared':prepared,'capture':{'path':'.wac-local/WAC-M3-06/menu/pty-captures.json','sha256':sha(base/'pty-captures.json'),'format':'Tool-returned decoded UTF-8 terminal output chunks, including ANSI/OSC repaint controls; tool metadata and input actions retained. Not a direct byte-stream recording.'},'harnesses':{str(p.relative_to(root)):sha(p) for p in [root/'.wac-local/WAC-M3-06/prepare-menu.py',Path(__file__).resolve()]},'cases':cases,'retainedFailures':history,'referenceAndDecodeCommands':commands,'limitations':['No human interview file supplied; fixture is deterministic synthetic stereo tones.','No Explorer drag-and-drop, picker gesture or human speech-quality listening was performed.','Explicit isolated SettingsPath contains only outputDirectory to keep menu mode unset and avoid actual user Music/preferences.','PTY input was supplied by the agent through write_stdin; this is actual console interaction, not a human UI check.','Exact report-graph PCM matching preserves existing graph delay; it does not establish zero input/output lag.']}\nencoded=json.dumps(sanitized(result),indent=2,ensure_ascii=True)+'\\n'\nassert not re.search(r'C:[\\\\/]+Users|<user-name>|C:[\\\\/]+projects',encoded,re.I)\ntarget=public/'WAC-M3-06-menu.json';assert not target.exists();target.write_text(encoded,encoding='utf-8',newline='\\n')\nprint(json.dumps({'menuCases':4,'exactPcmMatches':4,'retainedFailedProbe':1,'allGuards':True,'publicSha256':sha(target)}))\n",
+      "transformations": [
+        "Replaced a literal local username in the publisher privacy assertion; render/validation code unchanged."
+      ],
+      "raw_bytes_retained_locally": true
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/fix-menu-privacy.py",
+      "raw_sha256": "757350a589e4d80d1b98780cecb2e33ec1472c8bafccd579e689f302be2ee3ad",
+      "public_source_sha256": "757350a589e4d80d1b98780cecb2e33ec1472c8bafccd579e689f302be2ee3ad",
+      "source": "from pathlib import Path\nimport hashlib,json,re,shutil\nroot=Path.cwd();ev=root/'docs/codex/winaudioclean/evidence';archive=root/'.wac-local/WAC-M3-06/menu-public-before-privacy'\nassert not archive.exists();archive.mkdir()\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nnames=['WAC-M3-06-menu.json','WAC-M3-06-menu-harness.json']+[p.name for p in ev.glob('WAC-M3-06-menu-*.txt')]\nfor name in names:shutil.copyfile(ev/name,archive/name)\nj=json.loads((ev/'WAC-M3-06-menu.json').read_text());changes=[]\nfor row in j['cases']+j['retainedFailures']:\n    p=ev.parent/row['log'];old=sha(p);assert old==row['log_sha256']\n    text=p.read_text(encoding='utf-8')\n    fixed,count=re.subn(r'(?i)[A-Z]:[\\\\/]+[^\\s,;\"\\x1b]+','<local-path-fragment>',text)\n    assert not re.search(r'(?i)[A-Z]:[\\\\/]',fixed)\n    if count:p.write_text(fixed,encoding='utf-8',newline='\\n')\n    row['log_sha256']=sha(p)\n    changes.append({'log':row['log'],'before_sha256':old,'after_sha256':sha(p),'fragment_replacements':count})\nhistory={'cause':'Terminal repaint/truncated path fragments did not contain the complete repository prefix and escaped the first sanitizer. Generic remaining Windows drive-path fragments are now redacted. Raw PTY captures and runtime are unchanged.','command':'python -X utf8 .wac-local/WAC-M3-06/fix-menu-privacy.py','harness_sha256':sha(Path(__file__)),'prior_menu_ledger_sha256':sha(archive/'WAC-M3-06-menu.json'),'prior_derivative_archive':'.wac-local/WAC-M3-06/menu-public-before-privacy','changes':changes}\nj['derivativePrivacyCorrection']=history\n(ev/'WAC-M3-06-menu.json').write_text(json.dumps(j,indent=2)+'\\n',encoding='utf-8',newline='\\n')\nh=json.loads((ev/'WAC-M3-06-menu-harness.json').read_text());source=Path(__file__).read_text(encoding='utf-8')\nh['harnesses'].append({'path':'.wac-local/WAC-M3-06/fix-menu-privacy.py','raw_sha256':sha(Path(__file__)),'public_source_sha256':hashlib.sha256(source.encode()).hexdigest(),'source':source,'transformations':[],'raw_bytes_retained_locally':True})\nh['derivativePrivacyCorrection']=history\nh['prior_support_ledger_sha256']=sha(archive/'WAC-M3-06-menu-harness.json')\nfor name in names:h['raw_artifacts'].append({'path':'.wac-local/WAC-M3-06/menu-public-before-privacy/'+name,'bytes':(archive/name).stat().st_size,'sha256':sha(archive/name)})\n(ev/'WAC-M3-06-menu-harness.json').write_text(json.dumps(h,indent=2)+'\\n',encoding='utf-8',newline='\\n')\nprint(json.dumps({'corrected_fragments':sum(c['fragment_replacements'] for c in changes),'menu_sha256':sha(ev/'WAC-M3-06-menu.json'),'support_sha256':sha(ev/'WAC-M3-06-menu-harness.json')}))\n",
+      "transformations": [],
+      "raw_bytes_retained_locally": true
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.bat",
+      "bytes": 3621,
+      "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.Batch.ps1",
+      "bytes": 19936,
+      "sha256": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.IO.ps1",
+      "bytes": 26826,
+      "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.Launcher.ps1",
+      "bytes": 14635,
+      "sha256": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.Output.ps1",
+      "bytes": 11376,
+      "sha256": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.Preview.ps1",
+      "bytes": 46671,
+      "sha256": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.ps1",
+      "bytes": 151060,
+      "sha256": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.Queue.ps1",
+      "bytes": 14293,
+      "sha256": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/app/WinAudioClean.Settings.ps1",
+      "bytes": 28724,
+      "sha256": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/prepared.json",
+      "bytes": 1775,
+      "sha256": "ba27716d1b0429d5f7c367b84518d463fd1028730b41ad417e40cad4a2a60d27"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-1/synthetic_Cleaned_20261003-140036302_bc5d77599a5e446b91c80dc6c382035d.wav",
+      "bytes": 1536078,
+      "sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-1/WinAudioClean_bc5d77599a5e446b91c80dc6c382035d.json",
+      "bytes": 12491,
+      "sha256": "27e9c48e5601ab8046ac564c86fb6ed784fdc804df3d0285a9a4fb5cf0e7c3ea"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-1/WinAudioClean_bc5d77599a5e446b91c80dc6c382035d.txt",
+      "bytes": 3784,
+      "sha256": "ef6cf6db0b09b8a83b8f1231b32601b304de7a430d9b5463fdd4cc4ddb2a12c2"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-1/WinAudioClean_Log.txt",
+      "bytes": 3784,
+      "sha256": "ef6cf6db0b09b8a83b8f1231b32601b304de7a430d9b5463fdd4cc4ddb2a12c2"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-1-reference.wav",
+      "bytes": 1536078,
+      "sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-1-settings.json",
+      "bytes": 132,
+      "sha256": "0f4a7d9d445a6dd041fe2f51e459f5d22a2539d01c179ee1df8b285e3b6ca551"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-2/synthetic_Cleaned_20261003-140129938_c4c6edc5bb834a9b9a2ad8d3b9cf8bae.wav",
+      "bytes": 1536078,
+      "sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-2/WinAudioClean_c4c6edc5bb834a9b9a2ad8d3b9cf8bae.json",
+      "bytes": 11708,
+      "sha256": "dd932637a9eacba9f5cda1b3cfd88d378b0b12312fc7fa115c2c3a3437037af4"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-2/WinAudioClean_c4c6edc5bb834a9b9a2ad8d3b9cf8bae.txt",
+      "bytes": 3552,
+      "sha256": "20f4aaeddabf3b228c3adc01410b55c9355755ca4aca2fc3dd1597a70cd94b14"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-2/WinAudioClean_Log.txt",
+      "bytes": 3552,
+      "sha256": "20f4aaeddabf3b228c3adc01410b55c9355755ca4aca2fc3dd1597a70cd94b14"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-2-reference.wav",
+      "bytes": 1536078,
+      "sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps51-2-settings.json",
+      "bytes": 132,
+      "sha256": "4371efd9a5036a80fa484ce4de3ba32308e4a12666c8b4bf9d03a4d3d58fc622"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-1/synthetic_Cleaned_20261003-140234150_966536baa03944e193123341cd8baf0c.wav",
+      "bytes": 1536078,
+      "sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-1/WinAudioClean_966536baa03944e193123341cd8baf0c.json",
+      "bytes": 6905,
+      "sha256": "fde02d24be9f19a8c675cf251d7d83aaa25183bf401409ab65dceda5eacba5c8"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-1/WinAudioClean_966536baa03944e193123341cd8baf0c.txt",
+      "bytes": 3789,
+      "sha256": "ec9110b6c7aa2595264cd56ee8213700a68caadeb972e669b8c8e99d22cd3d85"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-1/WinAudioClean_Log.txt",
+      "bytes": 3789,
+      "sha256": "ec9110b6c7aa2595264cd56ee8213700a68caadeb972e669b8c8e99d22cd3d85"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-1-reference.wav",
+      "bytes": 1536078,
+      "sha256": "f0adf56296852623d819b9c4b8cc4434ebc990ac2f3d00eb514514c39bd204f9"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-1-settings.json",
+      "bytes": 131,
+      "sha256": "1be1acc700b619f7416b1b3fd828f73112551e264759a1a05a768fd5ed0bdaf1"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-2/synthetic_Cleaned_20261003-140315979_d3bca7708f0b4836a2210e22e0b2c08d.wav",
+      "bytes": 1536078,
+      "sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-2/WinAudioClean_d3bca7708f0b4836a2210e22e0b2c08d.json",
+      "bytes": 6473,
+      "sha256": "66502b530a2073d5be68782e17d16bf109245071f08ff81bae2229b231afa86c"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-2/WinAudioClean_d3bca7708f0b4836a2210e22e0b2c08d.txt",
+      "bytes": 3548,
+      "sha256": "c65d1b3c3d64af6c111285f3743535f8ffb95eb19fac5cb028261a71c9dd8a15"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-2/WinAudioClean_Log.txt",
+      "bytes": 3548,
+      "sha256": "c65d1b3c3d64af6c111285f3743535f8ffb95eb19fac5cb028261a71c9dd8a15"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-2-reference.wav",
+      "bytes": 1536078,
+      "sha256": "128d4f87677d97ce0e0438907bb682ac67f4a0e80632a1f39b7542da4fe0211c"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/ps7-2-settings.json",
+      "bytes": 131,
+      "sha256": "bce75400d18ad4615a068d316040d490ca6354346dcdc29da2fd8a8727f98e83"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/pty-captures.json",
+      "bytes": 68740,
+      "sha256": "d8da26f9154de2fd3c2cd8ff61e26390bd19d9a438deb14efb97c6b29719d008"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu/synthetic.wav",
+      "bytes": 1536044,
+      "sha256": "e7c6d012afad030ac0ba222bbbc56b96afcfb31d2df1e54f8c4fa2ab3caaae71"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu-public-before-privacy/WAC-M3-06-menu.json",
+      "bytes": 27366,
+      "sha256": "5ac74562342fdfaf87b2c2250f46a12cd81ee5f5eceb14c5c1dd121ec58a4bcb"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu-public-before-privacy/WAC-M3-06-menu-harness.json",
+      "bytes": 18307,
+      "sha256": "4f5a218c11a8298a7a315007adf4dafac4bad0af8eba082e956d7cb93e28f1eb"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu-public-before-privacy/WAC-M3-06-menu-menuPs51Choice1.txt",
+      "bytes": 15877,
+      "sha256": "d07c42a79482259adafed0b474a8614454a7762a7cdfea721262738904d8694a"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu-public-before-privacy/WAC-M3-06-menu-menuPs51Choice2.txt",
+      "bytes": 12575,
+      "sha256": "3f3dbaf76803088ba68e4b1bac397da49b27d3195f9297dc64374651a028e1fb"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu-public-before-privacy/WAC-M3-06-menu-menuPs7Choice1.txt",
+      "bytes": 521,
+      "sha256": "c0cfa57e07eead3ac5a85945bf2f111aca41ba2d2ce8d77cd25e440397c5c076"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu-public-before-privacy/WAC-M3-06-menu-menuPs7Choice1Corrected.txt",
+      "bytes": 8677,
+      "sha256": "52e0381fb202b2c74081da6dd622eea2c035b89ed027a019de64a066fda23048"
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/menu-public-before-privacy/WAC-M3-06-menu-menuPs7Choice2.txt",
+      "bytes": 7783,
+      "sha256": "368c27c0b78d0284636c833d87cf603b37c3ae507ef5a6d294587acfe27bb795"
+    }
+  ],
+  "command": "python -X utf8 .wac-local/WAC-M3-06/prepare-menu.py; actual per-case PTY launch commands/actions are in menu.json; python -X utf8 .wac-local/WAC-M3-06/publish-menu.py",
+  "publisher_correction": {
+    "initial_exit_code": 1,
+    "cause": "First publisher assertion expected one text file; ordinary reports include a per-run text file and WinAudioClean_Log.txt summary. Corrected harness distinguishes them and checks equal content for each isolated one-run destination.",
+    "application_or_test_source_change": false,
+    "application_rerun_for_publisher_fix": false,
+    "initial_publisher_bytes_archived": false,
+    "limit": "The initial exact publisher bytes were not archived before this assertion correction; final complete publisher bytes and all five actual application terminal captures remain retained."
+  },
+  "limits": [
+    "No manual interview/Explorer or listening proof.",
+    "Terminal captures are decoded tool-returned strings, not independently recovered PTY bytes.",
+    "Runtime copies and configuration bytes are held in the ignored evidence directory; no media is published."
+  ],
+  "derivativePrivacyCorrection": {
+    "cause": "Terminal repaint/truncated path fragments did not contain the complete repository prefix and escaped the first sanitizer. Generic remaining Windows drive-path fragments are now redacted. Raw PTY captures and runtime are unchanged.",
+    "command": "python -X utf8 .wac-local/WAC-M3-06/fix-menu-privacy.py",
+    "harness_sha256": "757350a589e4d80d1b98780cecb2e33ec1472c8bafccd579e689f302be2ee3ad",
+    "prior_menu_ledger_sha256": "5ac74562342fdfaf87b2c2250f46a12cd81ee5f5eceb14c5c1dd121ec58a4bcb",
+    "prior_derivative_archive": ".wac-local/WAC-M3-06/menu-public-before-privacy",
+    "changes": [
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs51Choice1.txt",
+        "before_sha256": "d07c42a79482259adafed0b474a8614454a7762a7cdfea721262738904d8694a",
+        "after_sha256": "f33d8a964517e5f5f4765c450507da9eb1cd18b88f9cbba7fd603653f9e23d7a",
+        "fragment_replacements": 1
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs51Choice2.txt",
+        "before_sha256": "3f3dbaf76803088ba68e4b1bac397da49b27d3195f9297dc64374651a028e1fb",
+        "after_sha256": "19b8dcb626deb4ee30069fae10f98036d51ba93087088692bd0280a7bf19eb7f",
+        "fragment_replacements": 1
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs7Choice1Corrected.txt",
+        "before_sha256": "52e0381fb202b2c74081da6dd622eea2c035b89ed027a019de64a066fda23048",
+        "after_sha256": "1633a1d4bf2ae3c4645d3d471584241f943ad4173e78a2aae636c648bed0d520",
+        "fragment_replacements": 1
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs7Choice2.txt",
+        "before_sha256": "368c27c0b78d0284636c833d87cf603b37c3ae507ef5a6d294587acfe27bb795",
+        "after_sha256": "368c27c0b78d0284636c833d87cf603b37c3ae507ef5a6d294587acfe27bb795",
+        "fragment_replacements": 0
+      },
+      {
+        "log": "evidence/WAC-M3-06-menu-menuPs7Choice1.txt",
+        "before_sha256": "c0cfa57e07eead3ac5a85945bf2f111aca41ba2d2ce8d77cd25e440397c5c076",
+        "after_sha256": "c0cfa57e07eead3ac5a85945bf2f111aca41ba2d2ce8d77cd25e440397c5c076",
+        "fragment_replacements": 0
+      }
+    ]
+  },
+  "prior_support_ledger_sha256": "4f5a218c11a8298a7a315007adf4dafac4bad0af8eba082e956d7cb93e28f1eb"
+}

@@ -985,8 +985,14 @@
       "title": "Original workflow",
       "procedure": "Drop a typical interview file, select 1/2 and inspect the result/report.",
       "expected": "Same simple front-door experience remains; new settings do not overwhelm the default menu.",
-      "status": "not_run",
-      "evidence": []
+      "status": "blocked",
+      "evidence": [
+        "evidence/WAC-M3-06.md",
+        "evidence/WAC-M3-06-gates.json",
+        "evidence/WAC-M3-06-source.json",
+        "evidence/WAC-M3-06-menu.json"
+      ],
+      "reason": "AC-064 requires the actual manual interview drag-and-drop workflow in modes 1 and 2. No permission-cleared interview file or manual result was supplied; synthetic BAT/PTY checks do not accept that procedure. Complete this gate before M4-01."
     },
     {
       "id": "AC-065",
@@ -994,8 +1000,13 @@
       "title": "Automation workflow",
       "procedure": "Invoke unattended batch with explicit parameters and examine process codes/files/reports.",
       "expected": "No prompt, missing file, misleading aggregate result or timing change.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-06.md",
+        "evidence/WAC-M3-06-gates.json",
+        "evidence/WAC-M3-06-source.json",
+        "evidence/WAC-M3-06-automation.json"
+      ]
     },
     {
       "id": "AC-066",
@@ -1003,8 +1014,13 @@
       "title": "Reentry workflow",
       "procedure": "Restart in a new thread or clean checkout with recorded settings intentionally absent.",
       "expected": "Built-in defaults suffice; state and remaining tasks are recovered from Git, not hidden machine settings.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-06.md",
+        "evidence/WAC-M3-06-gates.json",
+        "evidence/WAC-M3-06-source.json",
+        "evidence/WAC-M3-06-reentry.json"
+      ]
     },
     {
       "id": "AC-067",

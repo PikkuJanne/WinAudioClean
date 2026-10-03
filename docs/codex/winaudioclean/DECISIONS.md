@@ -628,3 +628,25 @@ Music/settings writes, manual dialog/Explorer/listening/default promotion or
 long stress/crash durability is claimed. Prior M3-04 native-console proof was not
 rerun. Evidence: `evidence/WAC-M3-05.md`. Next WAC-M3-06 only, after fresh live
 synchronization; no merge/release/security/settings/deployment approval is added.
+
+### 2026-10-03 — WAC-M3-06 workflow evidence and explicit manual gate
+
+D37. Keep runtime, tests, launcher, filter sound/defaults and contracts unchanged.
+Accept AC-065's scoped unattended batch/folder/Preview and controlled pre-request
+cancellation evidence, and AC-066's clean detached local Git reconstruction with
+preferences intentionally absent. Retain exact source/tool/command hashes,
+separate application outcomes from harness assertions, and describe the final
+automation acceptance as eight earlier passing cases plus two narrow recovered
+manifest cases. Anchored relative paths require resolved equivalence checks;
+no application rewrite is needed. APPDATA alone does not relocate the Windows
+known-folder settings lookup; use explicit isolated absent SettingsPath.
+
+Cumulative Targeted once per host passes 749/0 with one privilege skip on 66
+unchanged physical code files; parser/static/plan pass and 273 advisories remain.
+Actual synthetic BAT/PTY menu 4/4 with four exact PCM matches supplements workflow
+evidence. It cannot accept AC-064's unperformed manual interview drop procedure.
+Keep AC-064/M3-06 blocked with a concrete reason and M4-01 locked, rather than
+convert absent human input to approval or silently waive the procedure.
+Preserve previous history and all failures/corrections. No listening/default
+promotion, merge/release/security/settings/deployment approval is introduced.
+Evidence: `evidence/WAC-M3-06.md`. Next: finish M3-06's manual gate only.

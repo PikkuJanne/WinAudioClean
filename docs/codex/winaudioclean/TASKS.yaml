@@ -907,7 +907,7 @@
       "depends_on": [
         "WAC-M3-05"
       ],
-      "status": "todo",
+      "status": "blocked",
       "approval_required": false,
       "scope": "End-to-end local workflow review and thread checkpoint.",
       "implementation": [
@@ -921,8 +921,31 @@
         "AC-065",
         "AC-066"
       ],
-      "evidence": [],
-      "blocked_reason": null
+      "evidence": [
+        "evidence/WAC-M3-06-automation-harness.json",
+        "evidence/WAC-M3-06-automation-manifest.json",
+        "evidence/WAC-M3-06-automation.json",
+        "evidence/WAC-M3-06-cumulative-ps51.txt",
+        "evidence/WAC-M3-06-cumulative-ps7.txt",
+        "evidence/WAC-M3-06-gates.json",
+        "evidence/WAC-M3-06-menu-harness.json",
+        "evidence/WAC-M3-06-menu-menuPs51Choice1.txt",
+        "evidence/WAC-M3-06-menu-menuPs51Choice2.txt",
+        "evidence/WAC-M3-06-menu-menuPs7Choice1.txt",
+        "evidence/WAC-M3-06-menu-menuPs7Choice1Corrected.txt",
+        "evidence/WAC-M3-06-menu-menuPs7Choice2.txt",
+        "evidence/WAC-M3-06-menu.json",
+        "evidence/WAC-M3-06-readiness-ps51.txt",
+        "evidence/WAC-M3-06-readiness-ps7.txt",
+        "evidence/WAC-M3-06-reentry-harness.json",
+        "evidence/WAC-M3-06-reentry-manifest.json",
+        "evidence/WAC-M3-06-reentry-ps51.txt",
+        "evidence/WAC-M3-06-reentry-ps7.txt",
+        "evidence/WAC-M3-06-reentry.json",
+        "evidence/WAC-M3-06-source.json",
+        "evidence/WAC-M3-06.md"
+      ],
+      "blocked_reason": "AC-064 requires the actual manual interview drag-and-drop workflow in modes 1 and 2. No permission-cleared interview file or manual result was supplied; synthetic BAT/PTY checks do not accept that procedure. Complete this gate before M4-01."
     },
     {
       "id": "WAC-M4-01",

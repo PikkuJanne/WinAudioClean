@@ -1,0 +1,1817 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-06",
+  "baseline": "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73",
+  "scope": "Fresh detached local clone and absent-preference synthetic single-file exports on both Windows hosts.",
+  "limits": [
+    "No new thread, remote fetch, installation or release build is performed by this harness.",
+    "Clone objects come from the maintained local Git repository at the parent-verified pushed revision.",
+    "Explicit output and an absent SettingsPath under isolated APPDATA avoid user Music and preferences.",
+    "Mode Raw and dependency/output/absent-settings paths are explicit; preset, loudness mode, encoding and cleaning are built-ins.",
+    "No manual Explorer drop, interview recording, UI gesture, listening or default-sound promotion is claimed."
+  ],
+  "commands": [
+    {
+      "id": "baseline-object-type",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "cat-file",
+        "-t",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.057,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-object-type-stdout.txt",
+        "sha256": "50836eee574ecff79dea3b4fd40673d7d000f7a5f177d8a6a3000b59c78383b8",
+        "bytes": 7
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-object-type-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "clone",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "clone",
+        "--no-hardlinks",
+        "--no-checkout",
+        "<repo>",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.784,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-stderr.txt",
+        "sha256": "757cc5f4b5f05cefa300da4ba0f1550388e49adc3a919d7bdcc4b2230b1b3caf",
+        "bytes": 113
+      }
+    },
+    {
+      "id": "checkout",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "-C",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+        "checkout",
+        "--detach",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.553,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/checkout-stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/checkout-stderr.txt",
+        "sha256": "d6f823e67a0cbf3573cc094e485f150bb10bdb9ddf5b4b009a4da2e60ec32855",
+        "bytes": 82
+      }
+    },
+    {
+      "id": "clone-head",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 0.036,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-stdout.txt",
+        "sha256": "cf71773b28e2754b9d7b3eee19d767bea9f720e1422bd8ce18f6c5b2ca877524",
+        "bytes": 41
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "clone-status-before",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "status",
+        "--porcelain"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 0.352,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-before-stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-before-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "clone-branch",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "branch",
+        "--show-current"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 0.03,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-branch-stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-branch-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "validate-plan",
+      "argv": [
+        "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout\\docs\\codex\\winaudioclean\\tools\\handoff.py",
+        "validate-plan",
+        "--plan-root",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout\\docs\\codex\\winaudioclean"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 0.335,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/validate-plan-stdout.txt",
+        "sha256": "a5dbec61e7e667cb2596f6ac6d02efb47f3212f79e3b8b57cdf021bfc08eab1b",
+        "bytes": 89
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/validate-plan-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "next",
+      "argv": [
+        "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout\\docs\\codex\\winaudioclean\\tools\\handoff.py",
+        "next",
+        "--plan-root",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout\\docs\\codex\\winaudioclean"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 0.309,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/next-stdout.txt",
+        "sha256": "fa4cf2629d339b216ff02505d37d524488cce336ab35cf662a41040bedd90daf",
+        "bytes": 163
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/next-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.037,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.ps1-stdout.txt",
+        "sha256": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+        "bytes": 151060
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.IO.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.IO.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.033,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.IO.ps1-stdout.txt",
+        "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+        "bytes": 26826
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.IO.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.Settings.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.Settings.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.038,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Settings.ps1-stdout.txt",
+        "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755",
+        "bytes": 28208
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Settings.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.Preview.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.Preview.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.034,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Preview.ps1-stdout.txt",
+        "sha256": "6731138cc1b0342daff5f06636f98e939bbafb062cccf7a2061f2fb5f4c623f0",
+        "bytes": 46055
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Preview.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.Batch.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.Batch.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.034,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Batch.ps1-stdout.txt",
+        "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7",
+        "bytes": 19634
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Batch.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.Queue.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.Queue.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.037,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Queue.ps1-stdout.txt",
+        "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8",
+        "bytes": 14069
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Queue.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.Output.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.Output.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.032,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Output.ps1-stdout.txt",
+        "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4",
+        "bytes": 11184
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Output.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.Launcher.ps1",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.Launcher.ps1"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.032,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Launcher.ps1-stdout.txt",
+        "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026",
+        "bytes": 14397
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Launcher.ps1-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "baseline-WinAudioClean.bat",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "show",
+        "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73:WinAudioClean.bat"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.032,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.bat-stdout.txt",
+        "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+        "bytes": 3621
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.bat-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "ffmpeg-version",
+      "argv": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-version"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.027,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffmpeg-version-stdout.txt",
+        "sha256": "711056f2bc922237113d5defe7da4dbd97beaab41098e5f8d425753dbfea99ff",
+        "bytes": 1500
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffmpeg-version-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "ffprobe-version",
+      "argv": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-version"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.028,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffprobe-version-stdout.txt",
+        "sha256": "c28ec08933e2c9eeac8a7341b1fced84e23745c7ca69e26e7ca83226714ef209",
+        "bytes": 1473
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffprobe-version-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "git-version",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "--version"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.035,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/git-version-stdout.txt",
+        "sha256": "a031b30b91db21fe63f22de9306958f84106fc84243c2f8f92918e423ce274e0",
+        "bytes": 29
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/git-version-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "ps51-environment",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "[ordered]@{version=$PSVersionTable.PSVersion.ToString();edition=$PSVersionTable.PSEdition;environmentApplicationData=$env:APPDATA;knownApplicationData=[Environment]::GetFolderPath('ApplicationData')} | ConvertTo-Json -Compress"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.285,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-environment-stdout.txt",
+        "sha256": "50f8771355ee11d0e59c885f6c0ad111844e7b1c9e6f0c82022f63bf9c63cf24",
+        "bytes": 242
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-environment-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "ps51-application",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\synthetic-stereo.wav",
+        "-Mode",
+        "Raw",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\output",
+        "-SettingsPath",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\appdata\\WinAudioClean\\settings.json",
+        "-NonInteractive",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 2.933,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stdout.txt",
+        "sha256": "de21fdb81a5b06ac9ec4b9532f998d4a698489520338d61fe9bf06b1db3fa2c9",
+        "bytes": 1626
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "ps7-environment",
+      "argv": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "[ordered]@{version=$PSVersionTable.PSVersion.ToString();edition=$PSVersionTable.PSEdition;environmentApplicationData=$env:APPDATA;knownApplicationData=[Environment]::GetFolderPath('ApplicationData')} | ConvertTo-Json -Compress"
+      ],
+      "cwd": "<repo>",
+      "exit_code": 0,
+      "elapsed_seconds": 0.944,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-environment-stdout.txt",
+        "sha256": "5dbc4eae8d8943c88a38e431a381353788a303b23f8e310ebfa0e6b47a9b61d2",
+        "bytes": 229
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-environment-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "ps7-application",
+      "argv": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\synthetic-stereo.wav",
+        "-Mode",
+        "Raw",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\output",
+        "-SettingsPath",
+        "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\appdata\\WinAudioClean\\settings.json",
+        "-NonInteractive",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 3.674,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stdout.txt",
+        "sha256": "88013f4e7119342a3f9c33108518cf3923f64258dd790ae7f8baf2d2f810adaf",
+        "bytes": 1651
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "clone-status-after",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "status",
+        "--porcelain"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 0.316,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-after-stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-after-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    },
+    {
+      "id": "clone-head-after",
+      "argv": [
+        "C:\\Program Files\\Git\\cmd\\git.exe",
+        "rev-parse",
+        "HEAD"
+      ],
+      "cwd": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+      "exit_code": 0,
+      "elapsed_seconds": 0.028,
+      "stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-after-stdout.txt",
+        "sha256": "cf71773b28e2754b9d7b3eee19d767bea9f720e1422bd8ce18f6c5b2ca877524",
+        "bytes": 41
+      },
+      "stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-after-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "ps51-clean-defaults",
+      "host": {
+        "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "sha256": "8bb6fa8c283b4d92120b1ef249a9b311b0f804d4cabbe9981159976c8be76a5e",
+        "version": "5.1.26100.9444",
+        "edition": "Desktop",
+        "environmentApplicationData": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\appdata",
+        "knownApplicationData": "<user-profile>\\AppData\\Roaming"
+      },
+      "environment": {
+        "APPDATA": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\appdata",
+        "LOCALAPPDATA": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\localappdata"
+      },
+      "appdata_matches_known_folder": false,
+      "settings_path": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\appdata\\WinAudioClean\\settings.json",
+      "settings_absent_before": true,
+      "application_exit": 0,
+      "settings_absent_after": true,
+      "isolated_preferences_file_count": 0,
+      "report": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/WinAudioClean_e79d2deffd44482d9ef3461120d47b59.json",
+        "sha256": "1501745a9054ac1a72b8558b3c0a42fa28bc5a05a4f70ce5c6e111076e52933f",
+        "bytes": 12619,
+        "fields": {
+          "schemaVersion": 1,
+          "jobId": "e79d2deffd44482d9ef3461120d47b59",
+          "toolVersion": "2.3",
+          "presetId": "original",
+          "presetName": "Original",
+          "presetVersion": "1.0.0",
+          "presetVersionReason": null,
+          "presetExperimental": false,
+          "presetCustomized": false,
+          "sourceRevision": null,
+          "sourceRevisionReason": "not_embedded",
+          "status": "SUCCESS",
+          "processingStatus": "SUCCESS",
+          "processingExitCode": 0,
+          "applicationExitCode": 0,
+          "nativeExitCode": 0,
+          "reasonCodes": [],
+          "warningCodes": [],
+          "timing": {
+            "startedAtUtc": "2026-10-03T12:03:56.6249863Z",
+            "endedAtUtc": "2026-10-03T12:03:57.8241427Z",
+            "processingElapsedSeconds": 1.1590988,
+            "processingElapsedSecondsReason": null
+          },
+          "dependencies": {
+            "ffmpeg": {
+              "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+              "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+            },
+            "ffprobe": {
+              "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+              "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+            }
+          },
+          "input": {
+            "path": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\synthetic-stereo.wav",
+            "sizeBytes": 1536044,
+            "durationSeconds": 8,
+            "durationSecondsReason": null,
+            "stream": {
+              "index": 0,
+              "codec": "pcm_s16le",
+              "channels": 2,
+              "sampleRate": 48000,
+              "channelLayout": null,
+              "language": null,
+              "title": null
+            }
+          },
+          "settings": {
+            "mode": "Raw",
+            "modeName": "RAW (Clean+Level)",
+            "bitDepth": 16,
+            "loudnessMode": "Fast",
+            "mono": false,
+            "rf64": false,
+            "cleaning": {
+              "schemaVersion": 1,
+              "Declip": true,
+              "Declick": true,
+              "Denoise": true,
+              "Gate": true,
+              "HighpassHz": 80,
+              "NoiseFloorDb": -25,
+              "NoiseReductionDb": 12,
+              "GateThresholdDb": -45,
+              "GateRangeDb": -25
+            },
+            "exactFilters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+          },
+          "output": {
+            "path": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\output\\synthetic-stereo_Cleaned_20261003-140356190_e79d2deffd44482d9ef3461120d47b59.wav",
+            "partialPath": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\output\\.wac-e79d2deffd44482d9ef3461120d47b59.partial",
+            "published": true,
+            "sizeBytes": 1536078,
+            "sizeReason": null,
+            "validity": "PASSED",
+            "format": {
+              "sampleRate": 48000,
+              "bitDepth": 16,
+              "codec": "pcm_s16le",
+              "channels": 2,
+              "channelLayout": "stereo",
+              "container": "RIFF"
+            },
+            "verified": {
+              "Frames": 384000,
+              "DurationSeconds": 8,
+              "Channels": 2,
+              "SampleRate": 48000,
+              "Bits": 16,
+              "Rf64": false
+            }
+          },
+          "requestedTargets": {
+            "integratedLufs": -12,
+            "truePeakDbtp": -1.5,
+            "loudnessRangeLu": 7
+          },
+          "loudnessTolerances": {
+            "integratedLufs": 0.5,
+            "truePeakDbtp": 0.2
+          },
+          "normalization": {
+            "requestedMode": "Fast",
+            "prechain": null,
+            "analysisFilter": null,
+            "renderFilter": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+            "finalMeasurementFilter": null,
+            "linearRequested": false,
+            "fallbackReason": null,
+            "actualType": null,
+            "analysis": null,
+            "render": null,
+            "final": null
+          },
+          "measurements": {
+            "integratedLufs": {
+              "value": null,
+              "reason": "not_measured"
+            },
+            "truePeakDbtp": {
+              "value": null,
+              "reason": "not_measured"
+            },
+            "loudnessRangeLu": {
+              "value": null,
+              "reason": "not_measured"
+            }
+          },
+          "loudnessCompliance": {
+            "status": "NOT_MEASURED",
+            "reason": "no_independent_measurement"
+          },
+          "space": {
+            "estimatedFileBytes": 2603968,
+            "reserveBytes": 67108864,
+            "availableBytesBeforeRender": 834218377216
+          },
+          "diagnostics": {
+            "standardOutput": "",
+            "standardError": "",
+            "processError": null,
+            "nativeCleanupError": null,
+            "outputError": null,
+            "outputCleanupErrors": [],
+            "jsonPath": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\output\\WinAudioClean_e79d2deffd44482d9ef3461120d47b59.json",
+            "textPath": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\output\\WinAudioClean_e79d2deffd44482d9ef3461120d47b59.txt"
+          },
+          "reporting": {
+            "complete": true,
+            "errors": []
+          },
+          "privacy": "Local detailed report: may contain paths, filenames, metadata and sensitive diagnostics. Use explicit redacted export and review before sharing.",
+          "progress": {
+            "stages": [
+              {
+                "stage": "Inspecting",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": -1,
+                "processedSeconds": 0,
+                "durationSeconds": null,
+                "structuredEnd": false,
+                "updates": 1,
+                "processId": null,
+                "snapshot": null
+              },
+              {
+                "stage": "Rendering",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": 90,
+                "processedSeconds": 8,
+                "durationSeconds": 8,
+                "structuredEnd": true,
+                "updates": 9,
+                "processId": 31772,
+                "snapshot": {
+                  "OutTimeMicroseconds": 8000000,
+                  "End": true,
+                  "Blocks": 2,
+                  "InvalidLines": 0,
+                  "TruncatedLines": 0
+                }
+              },
+              {
+                "stage": "Validating",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": -1,
+                "processedSeconds": 0,
+                "durationSeconds": null,
+                "structuredEnd": false,
+                "updates": 1,
+                "processId": null,
+                "snapshot": null
+              },
+              {
+                "stage": "Publishing",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": -1,
+                "processedSeconds": 0,
+                "durationSeconds": null,
+                "structuredEnd": false,
+                "updates": 1,
+                "processId": null,
+                "snapshot": null
+              },
+              {
+                "stage": "Completed",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": 100,
+                "processedSeconds": 0,
+                "durationSeconds": 1,
+                "structuredEnd": false,
+                "updates": 2,
+                "processId": null,
+                "snapshot": null
+              }
+            ],
+            "completed": true,
+            "cancellationRequested": false,
+            "cancellationStage": null
+          }
+        }
+      },
+      "asset": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/synthetic-stereo_Cleaned_20261003-140356190_e79d2deffd44482d9ef3461120d47b59.wav",
+        "sha256": "b7e506ba9bd4343185413eb59d907843ed51f35956a337ecc70652506dea547c",
+        "bytes": 1536078,
+        "rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "frames": 384000,
+        "pcm_sha256": "23606252df9201d5fd975985307f71abebb3e477d1b555bfaf5a093e97b94b26"
+      },
+      "checks": {
+        "success": true,
+        "default_preset": true,
+        "default_fast": true,
+        "default_encoding": true,
+        "default_graph": true,
+        "original_cleaning": true,
+        "settings_still_absent": true,
+        "published_valid": true,
+        "default_riff48k16_stereo": true,
+        "exact_duration": true,
+        "source_unchanged": true,
+        "reports_complete": true,
+        "no_job_folder": true,
+        "no_partials": true,
+        "no_cancellation": true,
+        "completed_after_publication": true
+      },
+      "passed": true
+    },
+    {
+      "id": "ps7-clean-defaults",
+      "host": {
+        "path": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "sha256": "362a356ce7f0940ec74f73a8fc2c990a2cc24a38a11c90bbd8eca947110ad139",
+        "version": "7.6.5",
+        "edition": "Core",
+        "environmentApplicationData": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\appdata",
+        "knownApplicationData": "<user-profile>\\AppData\\Roaming"
+      },
+      "environment": {
+        "APPDATA": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\appdata",
+        "LOCALAPPDATA": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\localappdata"
+      },
+      "appdata_matches_known_folder": false,
+      "settings_path": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\appdata\\WinAudioClean\\settings.json",
+      "settings_absent_before": true,
+      "application_exit": 0,
+      "settings_absent_after": true,
+      "isolated_preferences_file_count": 0,
+      "report": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/WinAudioClean_78db1fbd86754eab90f4d8cc44f1937f.json",
+        "sha256": "8c5a00a60abb7eb0ef50f45452491a0754448b6993dd7a5b153e9a8a349098b3",
+        "bytes": 7034,
+        "fields": {
+          "schemaVersion": 1,
+          "jobId": "78db1fbd86754eab90f4d8cc44f1937f",
+          "toolVersion": "2.3",
+          "presetId": "original",
+          "presetName": "Original",
+          "presetVersion": "1.0.0",
+          "presetVersionReason": null,
+          "presetExperimental": false,
+          "presetCustomized": false,
+          "sourceRevision": null,
+          "sourceRevisionReason": "not_embedded",
+          "status": "SUCCESS",
+          "processingStatus": "SUCCESS",
+          "processingExitCode": 0,
+          "applicationExitCode": 0,
+          "nativeExitCode": 0,
+          "reasonCodes": [],
+          "warningCodes": [],
+          "timing": {
+            "startedAtUtc": "2026-10-03T12:04:01.2566788Z",
+            "endedAtUtc": "2026-10-03T12:04:02.3987258Z",
+            "processingElapsedSeconds": 1.1130226,
+            "processingElapsedSecondsReason": null
+          },
+          "dependencies": {
+            "ffmpeg": {
+              "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+              "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+            },
+            "ffprobe": {
+              "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+              "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+            }
+          },
+          "input": {
+            "path": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\synthetic-stereo.wav",
+            "sizeBytes": 1536044,
+            "durationSeconds": 8.0,
+            "durationSecondsReason": null,
+            "stream": {
+              "index": 0,
+              "codec": "pcm_s16le",
+              "channels": 2,
+              "sampleRate": 48000,
+              "channelLayout": null,
+              "language": null,
+              "title": null
+            }
+          },
+          "settings": {
+            "mode": "Raw",
+            "modeName": "RAW (Clean+Level)",
+            "bitDepth": 16,
+            "loudnessMode": "Fast",
+            "mono": false,
+            "rf64": false,
+            "cleaning": {
+              "schemaVersion": 1,
+              "Declip": true,
+              "Declick": true,
+              "Denoise": true,
+              "Gate": true,
+              "HighpassHz": 80.0,
+              "NoiseFloorDb": -25.0,
+              "NoiseReductionDb": 12.0,
+              "GateThresholdDb": -45.0,
+              "GateRangeDb": -25.0
+            },
+            "exactFilters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+          },
+          "output": {
+            "path": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\output\\synthetic-stereo_Cleaned_20261003-140400978_78db1fbd86754eab90f4d8cc44f1937f.wav",
+            "partialPath": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\output\\.wac-78db1fbd86754eab90f4d8cc44f1937f.partial",
+            "published": true,
+            "sizeBytes": 1536078,
+            "sizeReason": null,
+            "validity": "PASSED",
+            "format": {
+              "sampleRate": 48000,
+              "bitDepth": 16,
+              "codec": "pcm_s16le",
+              "channels": 2,
+              "channelLayout": "stereo",
+              "container": "RIFF"
+            },
+            "verified": {
+              "Frames": 384000,
+              "DurationSeconds": 8.0,
+              "Channels": 2,
+              "SampleRate": 48000,
+              "Bits": 16,
+              "Rf64": false
+            }
+          },
+          "requestedTargets": {
+            "integratedLufs": -12,
+            "truePeakDbtp": -1.5,
+            "loudnessRangeLu": 7
+          },
+          "loudnessTolerances": {
+            "integratedLufs": 0.5,
+            "truePeakDbtp": 0.2
+          },
+          "normalization": {
+            "requestedMode": "Fast",
+            "prechain": null,
+            "analysisFilter": null,
+            "renderFilter": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+            "finalMeasurementFilter": null,
+            "linearRequested": false,
+            "fallbackReason": null,
+            "actualType": null,
+            "analysis": null,
+            "render": null,
+            "final": null
+          },
+          "measurements": {
+            "integratedLufs": {
+              "value": null,
+              "reason": "not_measured"
+            },
+            "truePeakDbtp": {
+              "value": null,
+              "reason": "not_measured"
+            },
+            "loudnessRangeLu": {
+              "value": null,
+              "reason": "not_measured"
+            }
+          },
+          "loudnessCompliance": {
+            "status": "NOT_MEASURED",
+            "reason": "no_independent_measurement"
+          },
+          "space": {
+            "estimatedFileBytes": 2603968,
+            "reserveBytes": 67108864,
+            "availableBytesBeforeRender": 834216747008
+          },
+          "diagnostics": {
+            "standardOutput": "",
+            "standardError": "",
+            "processError": null,
+            "nativeCleanupError": null,
+            "outputError": null,
+            "outputCleanupErrors": [],
+            "jsonPath": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\output\\WinAudioClean_78db1fbd86754eab90f4d8cc44f1937f.json",
+            "textPath": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps7\\output\\WinAudioClean_78db1fbd86754eab90f4d8cc44f1937f.txt"
+          },
+          "reporting": {
+            "complete": true,
+            "errors": []
+          },
+          "privacy": "Local detailed report: may contain paths, filenames, metadata and sensitive diagnostics. Use explicit redacted export and review before sharing.",
+          "progress": {
+            "stages": [
+              {
+                "stage": "Inspecting",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": -1,
+                "processedSeconds": 0.0,
+                "durationSeconds": null,
+                "structuredEnd": false,
+                "updates": 1,
+                "processId": null,
+                "snapshot": null
+              },
+              {
+                "stage": "Rendering",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": 90,
+                "processedSeconds": 8.0,
+                "durationSeconds": 8.0,
+                "structuredEnd": true,
+                "updates": 10,
+                "processId": 6720,
+                "snapshot": {
+                  "OutTimeMicroseconds": 8000000,
+                  "End": true,
+                  "Blocks": 2,
+                  "InvalidLines": 0,
+                  "TruncatedLines": 0
+                }
+              },
+              {
+                "stage": "Validating",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": -1,
+                "processedSeconds": 0.0,
+                "durationSeconds": null,
+                "structuredEnd": false,
+                "updates": 1,
+                "processId": null,
+                "snapshot": null
+              },
+              {
+                "stage": "Publishing",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": -1,
+                "processedSeconds": 0.0,
+                "durationSeconds": null,
+                "structuredEnd": false,
+                "updates": 1,
+                "processId": null,
+                "snapshot": null
+              },
+              {
+                "stage": "Completed",
+                "fileIndex": 1,
+                "fileCount": 1,
+                "percent": 100,
+                "processedSeconds": 0.0,
+                "durationSeconds": 1.0,
+                "structuredEnd": false,
+                "updates": 2,
+                "processId": null,
+                "snapshot": null
+              }
+            ],
+            "completed": true,
+            "cancellationRequested": false,
+            "cancellationStage": null
+          }
+        }
+      },
+      "asset": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/synthetic-stereo_Cleaned_20261003-140400978_78db1fbd86754eab90f4d8cc44f1937f.wav",
+        "sha256": "b7e506ba9bd4343185413eb59d907843ed51f35956a337ecc70652506dea547c",
+        "bytes": 1536078,
+        "rate": 48000,
+        "channels": 2,
+        "bits": 16,
+        "frames": 384000,
+        "pcm_sha256": "23606252df9201d5fd975985307f71abebb3e477d1b555bfaf5a093e97b94b26"
+      },
+      "checks": {
+        "success": true,
+        "default_preset": true,
+        "default_fast": true,
+        "default_encoding": true,
+        "default_graph": true,
+        "original_cleaning": true,
+        "settings_still_absent": true,
+        "published_valid": true,
+        "default_riff48k16_stereo": true,
+        "exact_duration": true,
+        "source_unchanged": true,
+        "reports_complete": true,
+        "no_job_folder": true,
+        "no_partials": true,
+        "no_cancellation": true,
+        "completed_after_publication": true
+      },
+      "passed": true
+    }
+  ],
+  "raw_artifacts": [
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-object-type-stdout.txt",
+      "sha256": "50836eee574ecff79dea3b4fd40673d7d000f7a5f177d8a6a3000b59c78383b8",
+      "bytes": 7
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-object-type-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-stderr.txt",
+      "sha256": "757cc5f4b5f05cefa300da4ba0f1550388e49adc3a919d7bdcc4b2230b1b3caf",
+      "bytes": 113
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/checkout-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/checkout-stderr.txt",
+      "sha256": "d6f823e67a0cbf3573cc094e485f150bb10bdb9ddf5b4b009a4da2e60ec32855",
+      "bytes": 82
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-stdout.txt",
+      "sha256": "cf71773b28e2754b9d7b3eee19d767bea9f720e1422bd8ce18f6c5b2ca877524",
+      "bytes": 41
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-before-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-before-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-branch-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-branch-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/validate-plan-stdout.txt",
+      "sha256": "a5dbec61e7e667cb2596f6ac6d02efb47f3212f79e3b8b57cdf021bfc08eab1b",
+      "bytes": 89
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/validate-plan-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/next-stdout.txt",
+      "sha256": "fa4cf2629d339b216ff02505d37d524488cce336ab35cf662a41040bedd90daf",
+      "bytes": 163
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/next-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.ps1-stdout.txt",
+      "sha256": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "bytes": 151060
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.IO.ps1-stdout.txt",
+      "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "bytes": 26826
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.IO.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Settings.ps1-stdout.txt",
+      "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755",
+      "bytes": 28208
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Settings.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Preview.ps1-stdout.txt",
+      "sha256": "6731138cc1b0342daff5f06636f98e939bbafb062cccf7a2061f2fb5f4c623f0",
+      "bytes": 46055
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Preview.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Batch.ps1-stdout.txt",
+      "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7",
+      "bytes": 19634
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Batch.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Queue.ps1-stdout.txt",
+      "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8",
+      "bytes": 14069
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Queue.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Output.ps1-stdout.txt",
+      "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4",
+      "bytes": 11184
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Output.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Launcher.ps1-stdout.txt",
+      "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026",
+      "bytes": 14397
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Launcher.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.bat-stdout.txt",
+      "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "bytes": 3621
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.bat-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffmpeg-version-stdout.txt",
+      "sha256": "711056f2bc922237113d5defe7da4dbd97beaab41098e5f8d425753dbfea99ff",
+      "bytes": 1500
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffmpeg-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffprobe-version-stdout.txt",
+      "sha256": "c28ec08933e2c9eeac8a7341b1fced84e23745c7ca69e26e7ca83226714ef209",
+      "bytes": 1473
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffprobe-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/git-version-stdout.txt",
+      "sha256": "a031b30b91db21fe63f22de9306958f84106fc84243c2f8f92918e423ce274e0",
+      "bytes": 29
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/git-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-environment-stdout.txt",
+      "sha256": "50f8771355ee11d0e59c885f6c0ad111844e7b1c9e6f0c82022f63bf9c63cf24",
+      "bytes": 242
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-environment-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stdout.txt",
+      "sha256": "de21fdb81a5b06ac9ec4b9532f998d4a698489520338d61fe9bf06b1db3fa2c9",
+      "bytes": 1626
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/WinAudioClean_e79d2deffd44482d9ef3461120d47b59.json",
+      "sha256": "1501745a9054ac1a72b8558b3c0a42fa28bc5a05a4f70ce5c6e111076e52933f",
+      "bytes": 12619
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/synthetic-stereo_Cleaned_20261003-140356190_e79d2deffd44482d9ef3461120d47b59.wav",
+      "sha256": "b7e506ba9bd4343185413eb59d907843ed51f35956a337ecc70652506dea547c",
+      "bytes": 1536078
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/WinAudioClean_e79d2deffd44482d9ef3461120d47b59.txt",
+      "sha256": "77cac39cdca6582ce6bd795bcd94ffc72c6155527e016b5036e162e1c94af4e2",
+      "bytes": 3903
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/WinAudioClean_Log.txt",
+      "sha256": "77cac39cdca6582ce6bd795bcd94ffc72c6155527e016b5036e162e1c94af4e2",
+      "bytes": 3903
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-environment-stdout.txt",
+      "sha256": "5dbc4eae8d8943c88a38e431a381353788a303b23f8e310ebfa0e6b47a9b61d2",
+      "bytes": 229
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-environment-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stdout.txt",
+      "sha256": "88013f4e7119342a3f9c33108518cf3923f64258dd790ae7f8baf2d2f810adaf",
+      "bytes": 1651
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/WinAudioClean_78db1fbd86754eab90f4d8cc44f1937f.json",
+      "sha256": "8c5a00a60abb7eb0ef50f45452491a0754448b6993dd7a5b153e9a8a349098b3",
+      "bytes": 7034
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/synthetic-stereo_Cleaned_20261003-140400978_78db1fbd86754eab90f4d8cc44f1937f.wav",
+      "sha256": "b7e506ba9bd4343185413eb59d907843ed51f35956a337ecc70652506dea547c",
+      "bytes": 1536078
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/WinAudioClean_78db1fbd86754eab90f4d8cc44f1937f.txt",
+      "sha256": "f7a9efca37105b41fd04780726ddb517917c347876125a42aa2b82f5d731c61c",
+      "bytes": 3909
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/WinAudioClean_Log.txt",
+      "sha256": "f7a9efca37105b41fd04780726ddb517917c347876125a42aa2b82f5d731c61c",
+      "bytes": 3909
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-after-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-after-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-after-stdout.txt",
+      "sha256": "cf71773b28e2754b9d7b3eee19d767bea9f720e1422bd8ce18f6c5b2ca877524",
+      "bytes": 41
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-after-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "harness": {
+    "path": ".wac-local/WAC-M3-06/reentry/run-reentry.py",
+    "sha256": "52300440ceadbebd008b90d89dc3095301f2872444b6680156f18dcd24edb24f",
+    "bytes": 17361
+  },
+  "harness_argv": [
+    ".wac-local\\WAC-M3-06\\reentry\\run-reentry.py",
+    "--repo",
+    ".",
+    "--git",
+    "C:\\Program Files\\Git\\cmd\\git.exe",
+    "--ps51",
+    "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+    "--ps7",
+    "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+    "--ffmpeg",
+    ".wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+    "--ffprobe",
+    ".wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe"
+  ],
+  "elapsed_seconds": 12.121,
+  "clone": {
+    "path": "<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\checkout",
+    "head": "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73",
+    "detached": true,
+    "clean_before": true,
+    "origin_kind": "local object copy, not a new remote verification",
+    "clean_after": true,
+    "head_after": "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73"
+  },
+  "validate-plan": {
+    "valid": true,
+    "tasks": 30,
+    "acceptance_cases": 90,
+    "improvements": 20
+  },
+  "next": {
+    "ready": [
+      {
+        "id": "WAC-M3-06",
+        "title": "Workflow and automation gate",
+        "approval_needed": false
+      }
+    ],
+    "blocked": []
+  },
+  "recovered_state": {
+    "tasks": 30,
+    "cases": 90,
+    "done": 21,
+    "todo": 9,
+    "M3-06": {
+      "id": "WAC-M3-06",
+      "milestone": "M3",
+      "title": "Workflow and automation gate",
+      "improvements": [
+        2,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "depends_on": [
+        "WAC-M3-05"
+      ],
+      "status": "todo",
+      "approval_required": false,
+      "scope": "End-to-end local workflow review and thread checkpoint.",
+      "implementation": [
+        "Exercise the original single-file workflow alongside multi-file, folder, preview and noninteractive flows.",
+        "Run cumulative targeted tests once, focusing on launcher boundaries, cancellation and configuration migration.",
+        "Document remaining platform constraints, push the checkpoint and update the exact next task."
+      ],
+      "guardrails": "No unrelated refactor, default-sound change, or publication.",
+      "acceptance_ids": [
+        "AC-064",
+        "AC-065",
+        "AC-066"
+      ],
+      "evidence": [],
+      "blocked_reason": null
+    },
+    "acceptance": [
+      {
+        "id": "AC-064",
+        "task_id": "WAC-M3-06",
+        "title": "Original workflow",
+        "procedure": "Drop a typical interview file, select 1/2 and inspect the result/report.",
+        "expected": "Same simple front-door experience remains; new settings do not overwhelm the default menu.",
+        "status": "not_run",
+        "evidence": []
+      },
+      {
+        "id": "AC-065",
+        "task_id": "WAC-M3-06",
+        "title": "Automation workflow",
+        "procedure": "Invoke unattended batch with explicit parameters and examine process codes/files/reports.",
+        "expected": "No prompt, missing file, misleading aggregate result or timing change.",
+        "status": "not_run",
+        "evidence": []
+      },
+      {
+        "id": "AC-066",
+        "task_id": "WAC-M3-06",
+        "title": "Reentry workflow",
+        "procedure": "Restart in a new thread or clean checkout with recorded settings intentionally absent.",
+        "expected": "Built-in defaults suffice; state and remaining tasks are recovered from Git, not hidden machine settings.",
+        "status": "not_run",
+        "evidence": []
+      }
+    ],
+    "read_first": [
+      {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/checkout/AGENTS.md",
+        "sha256": "56294c086ad185060c68033e17f6b7ee53b8727146226754afa751aed3337111",
+        "bytes": 2779
+      },
+      {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/checkout/docs/codex/winaudioclean/STATUS.md",
+        "sha256": "e5a9b8ee662e183080d3a4be7d2d4cd45bd544605d35b9f21e1d7e5c7c6a0c72",
+        "bytes": 9651
+      },
+      {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/checkout/docs/codex/winaudioclean/NEXT_MODEL_START_HERE.md",
+        "sha256": "09c461ea5ec165f071072244dbb64b66d27b4bbb0e4579280784230b15ab299c",
+        "bytes": 6321
+      },
+      {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/checkout/docs/codex/winaudioclean/DECISIONS.md",
+        "sha256": "8bf2a93e13dadd91ccd550a133e324a60082504eb9e41faebbad3e24454abd1c",
+        "bytes": 42018
+      },
+      {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/checkout/docs/codex/winaudioclean/TASKS.yaml",
+        "sha256": "f03055b3a703d0ead24c5537af4962d3de620009b19c257da6b2e0ff7eba1ea0",
+        "bytes": 48734
+      },
+      {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/checkout/docs/codex/winaudioclean/SYNC_PROTOCOL.md",
+        "sha256": "c8ad3d0dcc1022f1afe61e045cc57cf3655a0d71e5d368fb279db7b85525373b",
+        "bytes": 5087
+      },
+      {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/checkout/docs/codex/winaudioclean/tasks/WAC-M3-06.md",
+        "sha256": "3a4498eb316949a8d4c10902d6aa063d420490e3df268d0beec7ff3499da7cb3",
+        "bytes": 2451
+      }
+    ]
+  },
+  "runtime": [
+    {
+      "file": "WinAudioClean.ps1",
+      "git_blob_sha256": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "checkout_sha256": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "bytes_equal": true,
+      "normalized_equal": true,
+      "normalized_sha256": "afa7f25d6a1571c6bc6a34c4282cb40bcac5fbea472f076dcae6e2bff262e5ac"
+    },
+    {
+      "file": "WinAudioClean.IO.ps1",
+      "git_blob_sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "checkout_sha256": "ef987f752945d12334fe03c4ef5f5696a1920874c4f2a153625668ec911143c0",
+      "bytes_equal": false,
+      "normalized_equal": true,
+      "normalized_sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "git_blob_sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755",
+      "checkout_sha256": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+      "bytes_equal": false,
+      "normalized_equal": true,
+      "normalized_sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "git_blob_sha256": "6731138cc1b0342daff5f06636f98e939bbafb062cccf7a2061f2fb5f4c623f0",
+      "checkout_sha256": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "bytes_equal": false,
+      "normalized_equal": true,
+      "normalized_sha256": "6731138cc1b0342daff5f06636f98e939bbafb062cccf7a2061f2fb5f4c623f0"
+    },
+    {
+      "file": "WinAudioClean.Batch.ps1",
+      "git_blob_sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7",
+      "checkout_sha256": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "bytes_equal": false,
+      "normalized_equal": true,
+      "normalized_sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+    },
+    {
+      "file": "WinAudioClean.Queue.ps1",
+      "git_blob_sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8",
+      "checkout_sha256": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "bytes_equal": false,
+      "normalized_equal": true,
+      "normalized_sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+    },
+    {
+      "file": "WinAudioClean.Output.ps1",
+      "git_blob_sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4",
+      "checkout_sha256": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+      "bytes_equal": false,
+      "normalized_equal": true,
+      "normalized_sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+    },
+    {
+      "file": "WinAudioClean.Launcher.ps1",
+      "git_blob_sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026",
+      "checkout_sha256": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5",
+      "bytes_equal": false,
+      "normalized_equal": true,
+      "normalized_sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+    },
+    {
+      "file": "WinAudioClean.bat",
+      "git_blob_sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "checkout_sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "bytes_equal": true,
+      "normalized_equal": true,
+      "normalized_sha256": "b91cf9ff826fd7bf1b10a253b1610178f69baeccd123aeaef62f7ba7b5bbaae0"
+    }
+  ],
+  "tools": {
+    "ffmpeg": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    "ffprobe": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+    },
+    "git": {
+      "path": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "sha256": "7cd588850959546663c81077af076835558c6a6af33506a64a65784743df92a1",
+      "version": "git version 2.56.0.windows.1"
+    },
+    "python": {
+      "path": "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "sha256": "03168c01b7b7491423350e82c26fee71f35b43694d1319d3c668bda6903a0c38",
+      "version": "3.14.6"
+    }
+  },
+  "fixture": {
+    "path": ".wac-local/WAC-M3-06/reentry/capture-final/synthetic-stereo.wav",
+    "sha256": "5cb6519c55abaf65fec544cc469b82f19a8a66df4dbc28e705ff059ead80546c",
+    "bytes": 1536044,
+    "kind": "deterministic synthetic stereo tones with amplitude modulation",
+    "rate": 48000,
+    "channels": 2,
+    "frames": 384000,
+    "seconds": 8.0
+  },
+  "same_build_pcm_equal": true,
+  "runtime_unchanged_after": true,
+  "tools_unchanged_after": true,
+  "status": "pass",
+  "acceptance_ids": [
+    "AC-066"
+  ],
+  "acceptance_scope": "Objective reentry only; no claim that all WAC-M3-06 acceptance cases are complete.",
+  "raw_capture": {
+    "path": ".wac-local/WAC-M3-06/reentry/capture-final/summary.json",
+    "sha256": "a7fb829ef524bffe5a8d4d98aaa9103c9f32a3e1ce35b79f74a0d6cbe1b15306",
+    "bytes": 72583
+  },
+  "publication_history": {
+    "scope": "Derivative publication only; no clone/application recapture",
+    "command": [
+      "python",
+      "-X",
+      "utf8",
+      ".wac-local/WAC-M3-06/reentry/publish-reentry.py"
+    ],
+    "observed_exit_code": 1,
+    "failure": "Privacy guard rejected harness derivative because sanitizer source contained its own literal private username pattern. Rejection occurred before that file was written.",
+    "source": {
+      "path": ".wac-local/WAC-M3-06/reentry/publisher-initial.py",
+      "sha256": "f0b1bc4c21c3d457d5efd2cc0e966157e8d051ab3999c6f8e209db0353885343",
+      "bytes": 5681
+    }
+  },
+  "appdata_observation": "APPDATA/LOCALAPPDATA were isolated, but both actual .NET ApplicationData known-folder reads retained the OS profile location. An explicit absent SettingsPath within the isolated APPDATA directory was supplied for both actual applications, so no personal configuration was read and no preferences were created. This does not claim environment variables redirected the OS known folder.",
+  "counts": {
+    "cases": 2,
+    "passed": 2,
+    "runtime_files": 9,
+    "published_case_wavs": 2,
+    "detailed_reports": 2,
+    "same_build_cross_host_pcm_equal": true
+  },
+  "published_logs": [
+    {
+      "raw_stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stdout.txt",
+        "sha256": "de21fdb81a5b06ac9ec4b9532f998d4a698489520338d61fe9bf06b1db3fa2c9",
+        "bytes": 1626
+      },
+      "raw_stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "published": {
+        "path": "docs/codex/winaudioclean/evidence/WAC-M3-06-reentry-ps51.txt",
+        "sha256": "51377ff10da683c052414fe959d8b2d114748ab3687ba4176c2b001e11220a36",
+        "bytes": 1606
+      }
+    },
+    {
+      "raw_stdout": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stdout.txt",
+        "sha256": "88013f4e7119342a3f9c33108518cf3923f64258dd790ae7f8baf2d2f810adaf",
+        "bytes": 1651
+      },
+      "raw_stderr": {
+        "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "published": {
+        "path": "docs/codex/winaudioclean/evidence/WAC-M3-06-reentry-ps7.txt",
+        "sha256": "e1afb8abe66cbd89a0da5bad58b0ff8a4cb9c77d8b4d265c0704f9451599a7c2",
+        "bytes": 1613
+      }
+    }
+  ]
+}

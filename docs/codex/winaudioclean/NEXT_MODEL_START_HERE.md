@@ -1,3 +1,49 @@
+# Next model: WAC-M3-06 — manual workflow evidence required
+
+**Do not start M4-01. M3-06 remains blocked on AC-064.** AC-065/066 and the narrow
+cumulative engineering gate are complete. Read AGENTS, STATUS, DECISIONS, TASKS,
+ACCEPTANCE, SYNC_PROTOCOL, tasks/WAC-M3-06 and evidence/WAC-M3-06 first.
+Preserve all prior history and exact failed/recovery captures.
+
+## Reenter from Git and verify live delivery
+
+Use maintained WinAudioClean-governance and `codex/wac-m3-settings`; source-only
+original stays untouched. Effective origin is exactly
+`https://github.com/PikkuJanne/WinAudioClean.git`. This task began at
+`dfcbd559f91c1cf2adf09a9ff581a5dac359ea73`; recover its newer evidence checkpoint SHA from the live branch
+and open/draft PR #4, stacked on `codex/wac-m2-audio`. Inspect clean/current branch,
+authenticated fetch --prune, sync-check, validate-plan and next. Expected:
+ready [], blocked [WAC-M3-06]. Do not force/reset/clean/stash or merge to unlock.
+Inspect PR/head/CI separately; cached origin refs are not live verification.
+
+## Only remaining acceptance
+
+AC-064 preserves its original procedure: drop a typical permission-cleared
+interview file onto the actual BAT, select modes 1 and 2, and inspect the media
+and complete reports. No cleared interview/manual result was supplied here.
+Actual unmodified BAT/CMD+PTY menu 4/4 and four synthetic PCM matches prove their
+engineering scope; they do not establish manual Explorer drag-and-drop or
+speech-quality listening. Obtain the missing result with exact revision/tool/
+settings/scopes, or an explicit approved disposition before changing that case.
+Silence or a preference to keep the check unverified is not acceptance/waiver.
+
+Do not repeat the completed cumulative suite merely to collect another green
+capture. Runtime and tests remain unchanged from the baseline; only new runtime
+changes, failures or unresolved concerns justify additional checks. Preserve
+AC-065's ten accepted cases (eight from the first scope plus two narrow manifest
+recoveries), actual app codes distinct from harness pass, and AC-066's fresh local
+clone/absent-settings proof. Reentry uses explicit absent SettingsPath because
+APPDATA alone does not relocate .NET ApplicationData on this Windows machine.
+Use only supplied cleared material and isolate test destination/preferences.
+
+Once the missing acceptance is established, update only M3-06/AC-064 and current
+handoff/history/evidence, validate-plan, stage explicit paths, inspect/commit/push,
+verify local/upstream/live equality and draft/CI at the actual post-push SHA.
+Then WAC-M4-01 becomes the next task; stop before starting it. No merge, release,
+default-sound promotion, security/settings change or deployment is authorized.
+
+## Prior M3-05 handoff retained for contract continuity
+
 # Next model: WAC-M3-06
 
 **M3-05 is complete. Start only WAC-M3-06: Workflow and automation gate.**

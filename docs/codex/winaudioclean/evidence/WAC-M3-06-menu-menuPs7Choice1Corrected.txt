@@ -1,0 +1,60 @@
+WinAudioClean - file 1 of 1 [Inspecting
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WinAudioClean 2.3
+============================
+Input: <repo>\.wac-local\WAC-M3-06\menu\synthetic.wav                                                                             FFmpeg: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)
+FFprobe: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)
+
+Select Processing Mode (Original preset):
+[1] RAW RECORDING (Clean + Level)
+    -> Cleaning plus leveling for mic recordings. Listen for speech changes.
+[2] ZOOM/TEAMS (Level Only)
+    -> Leveling for meeting audio; skips the Raw cleaning filters.
+[Q] Cancel
+
+Enter selection (1 or 2; Q to cancel):
+
+
+
+
+1
+                                                                                WinAudioClean - file 1 of 1 [Inspecting                                                                                                              Effective settings: {"mode":"Raw","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-1","audioStreamIndex":null,"cleaningOptions":{}}
+Input: <repo>\.wac-local\WAC-M3-06\menu\synthetic.wav                                                                             FFmpeg: <repo>\.wac-local\ffmpeg-setup\portable-cuPreset: Original (ID: original; version: 1.0.0)
+wav                                                                             FFmpeg: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffmpeg.exe (ffmpeg version 9.0.2-essentialsCleaning: {"schemaVersion":1,"Declip":true,"Declick":true,"Denoise":true,"Gate":
+:true,"HighpassHz":80.0,"NoiseFloorDb":-25.0,"NoiseReductionDb":12.0,"GateThresho
+oldDb":-45.0,"GateRangeDb":-25.0}
+                                                                                WinAudioClean - file 1 of 1 [Inspecting                                                                                                              _build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)              FFprobe: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffprobe.exe (ffprobe version 9.0.2-essentiAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)
+                                                                                WinAudioClean - file 1 of 1 [Inspecting                                                                                                              FFprobe: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)           Export: 48000 Hz, 16-bit PCM, stereo, RIFF WAV
+url\ffmpeg-9.0.2-essentials_build\bin\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)                                                                                           Destination space: 834279391232 bytes available; 69712832 bytes required includi
+ing headroom.
+                                                                                Select Processing Mode (Original preset):                                       [1] RAW RECORDING (Clean + Level)
+Running WinAudioClean...
+[1] RAW RECORDING (Clean + Level)                                                   -> Cleaning plus leveling for mic recordings. Listen for speech changes.    [2] ZOOM/TEAMS (Level Only)                                                     Chain: RAW (Clean+Level)
+                                                                                 WinAudioClean - file 1 of 1                                                        Rendering                                                                       [                                                                    ]                                                                                                                                                                       WinAudioClean - file 1 of 1                                                        Rendering                                                                       [                                                                    ]                                                                                                                                                                       WinAudioClean - file 1 of 1                                                        Rendering                                                                       [                                                                    ]                                                                                                                                                                       WinAudioClean - file 1 of 1                                                        Rendering                                                                       [                                                                    ]                                                                                                                                                                       WinAudioClean - file 1 of 1                                                        Rendering                                                                       [oooo                                                                ]                                                                                                                                                                       WinAudioClean - file 1 of 1                                                        Rendering                                                                       [oooo                                                                ]                                                                                          -> Cleaning plus leveling for mic recordings. Listen for speech changes.    [2] ZOOM/TEAMS (Level Only)                                                         -> Leveling for meeting audio; skips the Raw cleaning filters.              [Q] Cancel                                                                                                                                                                                                                                       WinAudioClean - file 1 of 1                                                        Publishing                                                                                                                                                      -> Cleaning plus leveling for mic recordings. Listen for speech changes.    [2] ZOOM/TEAMS (Level Only)                                                         -> Leveling for meeting audio; skips the Raw cleaning filters.              [Q] Cancel
+DONE: SUCCESS
+    -> Leveling for meeting audio; skips the Raw cleaning filters.              [Q] Cancel                                                                                                                                                      Enter selection (1 or 2; Q to cancel): 1                                        Time Elapsed : 00:00:01.1267940
+[Q] Cancel                                                                                                                                                      Enter selection (1 or 2; Q to cancel): 1                                        Effective settings: {"mode":"Raw","preset":"Original","loudnessMode":"Fast","bitOutput Size  : 1,46 MB
+                                                                                Enter selection (1 or 2; Q to cancel): 1                                        Effective settings: {"mode":"Raw","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<local-path-fragment> saved to: <repo>\.wac-local\WAC-M3-06\menu\ps
+s7-1\synthetic_Cleaned_20261003-140234150_966536baa03944e193123341cd8baf0c.wav
+Effective settings: {"mode":"Raw","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<repo>\\.wac-local\\WAC-M3-06\\menu\\ps7-1","audioStreamIndex":null,"cleaningOptions":{}}                                                                Press any key to continue . . .

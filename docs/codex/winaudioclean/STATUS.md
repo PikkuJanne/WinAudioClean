@@ -1,5 +1,31 @@
 # Current status
 
+Date: 2026-10-03. **WAC-M3-06 engineering checks are complete; the task remains
+blocked on AC-064's manual interview drag-and-drop workflow.** AC-065 automation
+and AC-066 fresh clean-checkout/absent-preference reentry pass. Canonical:
+21 done/8 todo/1 blocked; 65 AC pass, AC-064 blocked, 24 not run. M4-01 is locked.
+
+Runtime, tests, sound/defaults, launcher and product contracts are unchanged.
+Cumulative Targeted once per host: 749 pass/0 fail/1 file-symlink privilege skip;
+parser/static/plan pass, 273 non-gating advisories remain. Full/Python unittest
+suite were not rerun. Actual synthetic BAT/PTY modes 1/2 passed 4/4 across both
+hosts with four PCM matches. Combined automation accepts ten cases (eight initial
+plus two corrected manifest probes); fresh detached-clone reentry passes 2/2.
+Initial menu-host and harness-only report-count/path/prompt corrections remain
+recorded. Explicit isolated SettingsPath is required: APPDATA alone does not
+relocate the Windows known folder. No actual user Music/settings writes.
+
+No cleared interview/manual Explorer result was supplied; synthetic console
+proof does not waive that acceptance. No human listening/default promotion,
+picker gesture, broad stress/crash or inherited Preview writer-close fault
+recovery is claimed. **Next: finish WAC-M3-06/AC-064 only.**
+
+[Evidence](evidence/WAC-M3-06.md), [gates](evidence/WAC-M3-06-gates.json),
+[source](evidence/WAC-M3-06-source.json), [menu](evidence/WAC-M3-06-menu.json),
+[automation](evidence/WAC-M3-06-automation.json), [reentry](evidence/WAC-M3-06-reentry.json).
+
+## Prior M3-05 checkpoint
+
 Date: 2026-10-03. **WAC-M3-05 is complete.** Canonical 21 done/9 todo;
 AC-001..063 pass their recorded engineering scopes. **Next: WAC-M3-06 only.**
 
