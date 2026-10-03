@@ -1,0 +1,11 @@
+<repo>\.wac-local\WAC-M3-06\menu\app\WinAudioClea
+n.Launcher.ps1 : Launcher paths must use an ordinary Windows drive path.
+At line:1 char:100
++ ... :WAC_LAUNCH_HELPER -PathType Leaf) { & $env:WAC_LAUNCH_HELPER; exit $ ...
++                                          ~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorExcep
+   tion
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorExceptio
+   n,WinAudioClean.Launcher.ps1
+
+Press any key to continue . . .

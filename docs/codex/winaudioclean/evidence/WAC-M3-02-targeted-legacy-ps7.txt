@@ -1,0 +1,81 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (40 files; shell 7.6.5).
+Static gate passed; 228 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 58 tests in 391ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Launcher.Tests.ps1'
+Describing AC-016: actual launcher keeps environment paths literal through both Windows shells
+  [+] passes meeting with spaces.wav exactly from powershell.exe through inner PS5.1 to the native child 4.54s (4.49s|57ms)
+  [+] passes meeting [draft].wav exactly from powershell.exe through inner PS5.1 to the native child 4.32s (4.31s|6ms)
+  [+] passes speaker's recording.wav exactly from powershell.exe through inner PS5.1 to the native child 4.79s (4.79s|1ms)
+  [+] passes meeting äöÅ.wav exactly from powershell.exe through inner PS5.1 to the native child 5.13s (5.13s|1ms)
+  [+] passes speaker & guest.wav exactly from powershell.exe through inner PS5.1 to the native child 5.16s (5.16s|2ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from powershell.exe through inner PS5.1 to the native child 5.78s (5.78s|2ms)
+  [+] passes meeting !important!.wav exactly from powershell.exe through inner PS5.1 to the native child 5.96s (5.95s|3ms)
+  [+] passes meeting (take 1).wav exactly from powershell.exe through inner PS5.1 to the native child 3.43s (3.43s|1ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from powershell.exe through inner PS5.1 to the native child 3.44s (3.44s|1ms)
+  [+] passes meeting with spaces.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.35s (4.35s|2ms)
+  [+] passes meeting [draft].wav exactly from pwsh.exe through inner PS5.1 to the native child 4.01s (4.01s|2ms)
+  [+] passes speaker's recording.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.81s (3.81s|1ms)
+  [+] passes meeting äöÅ.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.21s (4.21s|1ms)
+  [+] passes speaker & guest.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.13s (4.13s|1ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.45s (4.45s|1ms)
+  [+] passes meeting !important!.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.08s (4.08s|2ms)
+  [+] passes meeting (take 1).wav exactly from pwsh.exe through inner PS5.1 to the native child 4.26s (4.26s|1ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.99s (3.99s|1ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from powershell.exe 1.2s (1.2s|1ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from powershell.exe 1.22s (1.22s|1ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from powershell.exe 1.12s (1.12s|1ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from powershell.exe 1.11s (1.11s|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from powershell.exe 1.12s (1.12s|1ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from powershell.exe 1.12s (1.11s|1ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from powershell.exe 1.2s (1.2s|4ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from pwsh.exe 1.89s (1.89s|1ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from pwsh.exe 1.82s (1.82s|1ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from pwsh.exe 1.91s (1.91s|1ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from pwsh.exe 2.09s (2.09s|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from pwsh.exe 1.99s (1.99s|1ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from pwsh.exe 1.93s (1.93s|1ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from pwsh.exe 1.92s (1.91s|1ms)
+  [+] accepts an environment destination with a trailing backslash from powershell.exe 3.65s (3.65s|1ms)
+  [+] accepts an environment destination with a trailing backslash from pwsh.exe 4.32s (4.32s|1ms)
+  [+] passes a 240-character input path exactly from powershell.exe 3.25s (3.24s|1ms)
+  [+] passes a 240-character input path exactly from pwsh.exe 3.86s (3.86s|1ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in powershell.exe 1.09s (1.09s|1ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in pwsh.exe 1.75s (1.75s|1ms)
+
+Describing AC-017: launcher preserves application status and has a bounded unattended route
+  [+] preserves status for successful child from powershell.exe 3.02s (3.02s|2ms)
+  [+] preserves status for nonzero child from powershell.exe 2.89s (2.89s|1ms)
+  [+] preserves status for failed report after native success from powershell.exe 3.14s (3.13s|6ms)
+  [+] preserves status for invalid executable from powershell.exe 1.34s (1.34s|1ms)
+  [+] preserves status for successful child from pwsh.exe 4.54s (4.53s|1ms)
+  [+] preserves status for nonzero child from pwsh.exe 3.78s (3.78s|1ms)
+  [+] preserves status for failed report after native success from pwsh.exe 3.55s (3.54s|4ms)
+  [+] preserves status for invalid executable from pwsh.exe 1.96s (1.96s|1ms)
+  [+] rejects InvalidMode without starting native processing from powershell.exe 868ms (868ms|1ms)
+  [+] rejects MissingEnvironment without starting native processing from powershell.exe 850ms (849ms|1ms)
+  [+] rejects ExtraArgument without starting native processing from powershell.exe 847ms (847ms|1ms)
+  [+] rejects ExtraFile without starting native processing from powershell.exe 870ms (869ms|1ms)
+  [+] rejects InvalidMode without starting native processing from pwsh.exe 1.43s (1.43s|1ms)
+  [+] rejects MissingEnvironment without starting native processing from pwsh.exe 1.55s (1.55s|1ms)
+  [+] rejects ExtraArgument without starting native processing from pwsh.exe 1.56s (1.56s|1ms)
+  [+] rejects ExtraFile without starting native processing from pwsh.exe 1.63s (1.63s|1ms)
+  [+] preserves missing-input failure after the default pause in powershell.exe 1.1s (1.1s|1ms)
+  [+] preserves missing-input failure after the default pause in pwsh.exe 1.83s (1.83s|1ms)
+  [+] preserves a controlled application cancellation status after pause in powershell.exe 1.16s (1.16s|1ms)
+  [+] preserves a controlled application cancellation status after pause in pwsh.exe 1.73s (1.73s|1ms)
+Tests completed in 162.47s
+Tests Passed: 58, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 58 Pester passed, 0 skipped, 0 outside scope.

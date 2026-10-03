@@ -1,0 +1,24 @@
+{
+  "task": "WAC-M3-03",
+  "status": "pass",
+  "derivation": {
+    "publisher_source_sha256": "bc75ee6864c492cca8467aec4a8226628a72afaa76ab74ef78c908008419072f",
+    "policy": "Public compact case/command/hash ledger; paths/user/CLIXML identities redacted across arbitrary slash-escape levels. Raw filesystem volume/file identity is represented by SHA256. No audio, binary PCM, full local report or duplicated full log is published."
+  },
+  "public_files": [
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-03-media.json",
+      "sha256": "80cab52f3a2d406d9e69c6da2fb2cc9990916a5fb084dd106463c05c9037d5a0",
+      "bytes": 527942
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-03-media-harness.json",
+      "sha256": "e3c91c3c1f38ad5511b0e7e2c26785d0bbcc53e6e036548b1fe3c7af57515c23",
+      "bytes": 54760
+    }
+  ],
+  "local_capture_sha256": {
+    ".wac-local/WAC-M3-03/media-candidate/summary.json": "8dc8bae97047fffa7d1cb4cc3fdb6b66173da67d3d3db67d167d2f58d7ee5936",
+    ".wac-local/WAC-M3-03/media-overlap-corrected/summary.json": "1ba24bffefd4d9425669a917f17a72328a373f1b6cf501a77c43a93022ff4fa2"
+  }
+}

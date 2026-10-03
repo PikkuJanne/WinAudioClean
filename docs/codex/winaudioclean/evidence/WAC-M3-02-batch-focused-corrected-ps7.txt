@@ -1,0 +1,209 @@
+Focused shell: 7.6.5
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 73 tests in 289ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Batch.Tests.ps1'
+Describing AC-052/054: explicit input lists are ordered bounded data
+  [+] preserves character-rich paths and repeated explicit entries in order without execution 1.03s (997ms|32ms)
+  [+] anchors relative entries beside the manifest rather than the calling working directory 61ms (60ms|1ms)
+  [+] preserves invalid filesystem/URL strings for separate per-item failures 21ms (19ms|1ms)
+  [+] rejects truncated manifests without changing their bytes 77ms (73ms|4ms)
+  [+] rejects trailing data manifests without changing their bytes 44ms (42ms|2ms)
+  [+] rejects root array manifests without changing their bytes 19ms (17ms|2ms)
+  [+] rejects missing version manifests without changing their bytes 13ms (12ms|1ms)
+  [+] rejects unknown version manifests without changing their bytes 10ms (9ms|1ms)
+  [+] rejects string version manifests without changing their bytes 14ms (12ms|1ms)
+  [+] rejects decimal version manifests without changing their bytes 12ms (10ms|2ms)
+  [+] rejects boolean version manifests without changing their bytes 15ms (13ms|2ms)
+  [+] rejects wrong key case manifests without changing their bytes 12ms (10ms|2ms)
+  [+] rejects unknown key manifests without changing their bytes 21ms (19ms|2ms)
+  [+] rejects duplicate root key manifests without changing their bytes 10ms (9ms|1ms)
+  [+] rejects escaped duplicate root key manifests without changing their bytes 48ms (46ms|1ms)
+  [+] rejects case-coalescing keys manifests without changing their bytes 11ms (10ms|1ms)
+  [+] rejects missing inputs manifests without changing their bytes 11ms (9ms|2ms)
+  [+] rejects null inputs manifests without changing their bytes 23ms (21ms|2ms)
+  [+] rejects scalar inputs manifests without changing their bytes 14ms (12ms|2ms)
+  [+] rejects empty array manifests without changing their bytes 14ms (12ms|2ms)
+  [+] rejects empty entry manifests without changing their bytes 14ms (12ms|2ms)
+  [+] rejects whitespace entry manifests without changing their bytes 13ms (12ms|2ms)
+  [+] rejects null entry manifests without changing their bytes 9ms (8ms|1ms)
+  [+] rejects numeric entry manifests without changing their bytes 11ms (10ms|1ms)
+  [+] rejects boolean entry manifests without changing their bytes 12ms (10ms|1ms)
+  [+] rejects nested array manifests without changing their bytes 9ms (8ms|1ms)
+  [+] rejects object entry manifests without changing their bytes 39ms (37ms|2ms)
+  [+] rejects malformed UTF8 and UTF16 bytes 18ms (14ms|4ms)
+  [+] rejects malformed UTF8 and UTF16 bytes 7ms (6ms|1ms)
+  [+] accepts exactly 1 MiB including a UTF8 BOM and rejects the next byte 561ms (560ms|1ms)
+  [+] materializes all 1024 entries including payload beyond a CMD command line and rejects 1025 102ms (101ms|1ms)
+  [+] accepts the direct list ceiling without deduplicating and rejects count/byte excess 76ms (75ms|1ms)
+  [+] rejects neither source input-source combinations before materializing a queue 18ms (15ms|2ms)
+  [+] rejects both sources input-source combinations before materializing a queue 7ms (5ms|2ms)
+  [+] rejects legacy input with list input-source combinations before materializing a queue 7ms (5ms|2ms)
+  [+] rejects null array input-source combinations before materializing a queue 15ms (13ms|2ms)
+  [+] rejects empty array input-source combinations before materializing a queue 7ms (5ms|2ms)
+  [+] rejects empty item input-source combinations before materializing a queue 8ms (5ms|3ms)
+  [+] rejects numeric item input-source combinations before materializing a queue 7ms (5ms|2ms)
+  [+] accepts a real PSBoundParametersDictionary without ambiguous Contains overloads 23ms (22ms|1ms)
+
+Describing AC-053: held JSONL journal retains completed records when a suffix append fails
+  [+] flushes independent compact UTF8 records with escaped diagnostic newlines and no BOM 84ms (81ms|2ms)
+  [+] rolls back only the newly written suffix after an actual partial stream write 92ms (91ms|1ms)
+  [+] refuses to append batch records to a pre-existing nonexclusive writer 22ms (21ms|1ms)
+
+Describing AC-053: sequential batch orchestration freezes choices and aggregates per-item outcomes
+Select one processing mode for all 3 inputs: [1] Raw; [2] Zoom/Teams; [Q] Cancel.
+Processing input 1 of 3: a.wav
+Processing input 2 of 3: a.wav
+Processing input 3 of 3: b.wav
+Batch results saved to: <test-drive>\186e16c984204345b161818d0ae681d8\results.jsonl
+  [+] runs ordered repeated entries with one mode selection and frozen child settings 597ms (593ms|4ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <test-drive>\b3a70a0e6ef24a22816862a9411f2fd5\results.jsonl
+  [+] retains captured choices when the isolated saved config changes after the first child 182ms (179ms|4ms)
+  [+] rejects an omitted unattended mode before journal allocation, output creation or children 52ms (51ms|1ms)
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:300
+Line |
+ 300 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot create batch result journal: Batch result journal must differ from every requested input.
+  [+] rejects a journal path equal to a missing requested input before creating it or starting children 137ms (136ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\2928610ef0bb446caad92fce2c6594a5\results.jsonl
+  [+] retains an ordinary one-item exit 0 62ms (60ms|3ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\3d08886a0c0f45fba85da4332b60f523\results.jsonl
+  [+] retains an ordinary one-item exit 2 47ms (46ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\a8bff5357a9e41a59d2182a796e8081c\results.jsonl
+  [+] retains an ordinary one-item exit 3 47ms (46ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\e07c4af4fc2442e48cc54d0500f6887b\results.jsonl
+  [+] retains an ordinary one-item exit 4 52ms (51ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\511e7a5ab408423983612a50b9d4e22d\results.jsonl
+  [+] retains an ordinary one-item exit 5 54ms (53ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\e5051a6d99a445ae86c740a6e3f479bc\results.jsonl
+  [+] retains an ordinary one-item exit 7 67ms (65ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\c7d7647064894742ba5474ebccdadc38\results.jsonl
+  [+] retains an ordinary one-item exit 130 57ms (56ms|1ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <test-drive>\65ca71c0fa074bbaba4d3ff6757f3511\results.jsonl
+  [+] continues after a per-item failure and records multi-item failure code 6 80ms (79ms|1ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <test-drive>\c22f9c3b404b4ca3bfdfa416ecf086e7\results.jsonl
+  [+] records warning-only batches as code 7 61ms (60ms|1ms)
+Processing input 1 of 3: first.wav
+Batch results saved to: <test-drive>\827d6e127303470c92c6ffa5c7511d77\results.jsonl
+  [+] stops after child cancellation and records later entries as not started 58ms (57ms|1ms)
+Select one processing mode for all 3 inputs: [1] Raw; [2] Zoom/Teams; [Q] Cancel.
+Batch results saved to: <test-drive>\739b0f7962a448ab93a64b994e14601d\results.jsonl
+  [+] cancels the common menu before any child while preserving every not-started entry 75ms (74ms|1ms)
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:371
+Line |
+ 371 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot create batch result journal: Exception calling "OpenReportWriter" with "3" argument(s): "Cannot open
+     | report writer: The file exists. (Win32 80)."
+  [+] fails result allocation before starting any child and preserves foreign bytes 60ms (59ms|1ms)
+Processing input 1 of 3: first.wav
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:394
+Line |
+ 394 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Batch stopped; result journal is incomplete. Prior outputs/results are retained: injected journal persistence
+     | failure
+  [+] stops new jobs after first item persistence failure and retains prior records and exports 99ms (98ms|1ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:394
+Line |
+ 394 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Batch stopped; result journal is incomplete. Prior outputs/results are retained: injected journal persistence
+     | failure
+  [+] stops new jobs after summary persistence failure and retains prior records and exports 127ms (126ms|1ms)
+
+Describing AC-052/053/054: isolated batch entry points run actual single-file children
+  [-] processes valid-missing-valid in manifest order with durable results and unchanged sources/config 3.5s (3.5s|5ms)
+   Expected strings to be the same, but they were different.
+   Expected length: 22
+   Actual length:   20
+   Strings differ at index 0.
+   Expected: 'SUCCESS,FAILED,SUCCESS'
+   But was:  'FAILED,FAILED,FAILED'
+              ^
+   at @($records[1..3] | ForEach-Object { $_.status }) -join ',' | Should -BeExactly 'SUCCESS,FAILED,SUCCESS', <repo>\tests\WinAudioClean.Batch.Tests.ps1:445
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Batch.Tests.ps1:445
+  [-] preserves repeated direct-list requests and creates one export/result for each 3.77s (3.76s|8ms)
+   Expected 0, because Processing input 1 of 2: <test-drive>\6a7d1aab8ce943ba9d05a1e8332ab580\repeated [draft] ��� & guest.wav
+   Processing input 2 of 2: <test-drive>\6a7d1aab8ce943ba9d05a1e8332ab580\repeated [draft] ��� & guest.wav
+   Batch results saved to: <test-drive>\6a7d1aab8ce943ba9d05a1e8332ab580\results.jsonl
+   Write-Error: <test-drive>\6a7d1aab8ce943ba9d05a1e8332ab580\WinAudioClean.Batch.ps1:199
+   Line |
+    199 |  .   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Batch item failed unexpectedly: Cannot use tag 'PSHOST'. The 'PS' prefix is reserved.
+   Write-Error: <test-drive>\6a7d1aab8ce943ba9d05a1e8332ab580\WinAudioClean.Batch.ps1:199
+   Line |
+    199 |  .   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Batch item failed unexpectedly: Cannot use tag 'PSHOST'. The 'PS' prefix is reserved., but got 6.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <repo>\tests\WinAudioClean.Batch.Tests.ps1:465
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Batch.Tests.ps1:465
+  [-] uses isolated saved choices once and saved choices without autosaving 3.5s (3.5s|1ms)
+   Expected 0, because Processing input 1 of 2: <test-drive>\e9c4982ab4cd4b18abc4c289d43d7d04\first.wav
+   Processing input 2 of 2: <test-drive>\e9c4982ab4cd4b18abc4c289d43d7d04\first.wav
+   Batch results saved to: <test-drive>\e9c4982ab4cd4b18abc4c289d43d7d04\results.jsonl
+   Write-Error: <test-drive>\e9c4982ab4cd4b18abc4c289d43d7d04\WinAudioClean.Batch.ps1:199
+   Line |
+    199 |  .   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Batch item failed unexpectedly: Cannot use tag 'PSHOST'. The 'PS' prefix is reserved.
+   Write-Error: <test-drive>\e9c4982ab4cd4b18abc4c289d43d7d04\WinAudioClean.Batch.ps1:199
+   Line |
+    199 |  .   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Batch item failed unexpectedly: Cannot use tag 'PSHOST'. The 'PS' prefix is reserved., but got 6.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <repo>\tests\WinAudioClean.Batch.Tests.ps1:488
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Batch.Tests.ps1:488
+  [-] uses isolated saved choices once and explicit overrides without autosaving 3.18s (3.18s|1ms)
+   Expected 0, because Processing input 1 of 2: <test-drive>\fa5e938e424248d0ab34fc216529f224\first.wav
+   Processing input 2 of 2: <test-drive>\fa5e938e424248d0ab34fc216529f224\first.wav
+   Batch results saved to: <test-drive>\fa5e938e424248d0ab34fc216529f224\results.jsonl
+   Write-Error: <test-drive>\fa5e938e424248d0ab34fc216529f224\WinAudioClean.Batch.ps1:199
+   Line |
+    199 |  .   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Batch item failed unexpectedly: Cannot use tag 'PSHOST'. The 'PS' prefix is reserved.
+   Write-Error: <test-drive>\fa5e938e424248d0ab34fc216529f224\WinAudioClean.Batch.ps1:199
+   Line |
+    199 |  .   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Batch item failed unexpectedly: Cannot use tag 'PSHOST'. The 'PS' prefix is reserved., but got 6.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <repo>\tests\WinAudioClean.Batch.Tests.ps1:488
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Batch.Tests.ps1:488
+  [+] rejects both lists before native/journal work 2.09s (2.09s|1ms)
+  [+] rejects legacy conflict before native/journal work 1.75s (1.74s|9ms)
+  [+] rejects preview conflict before native/journal work 1.47s (1.47s|1ms)
+  [+] rejects range conflict before native/journal work 1.43s (1.43s|1ms)
+  [+] rejects result without list before native/journal work 1.37s (1.37s|0ms)
+  [+] rejects corrupt saved before native/journal work 2.08s (2.08s|1ms)
+  [-] retains one-item native failure code4 and persistent failure diagnostics 2.38s (2.38s|0ms)
+   Expected regular expression 'batch controlled native failure' to match 'Cannot use tag 'PSHOST'. The 'PS' prefix is reserved.', but it did not match.
+   at ($records[1].diagnostics -join '') | Should -Match 'batch controlled native failure', <repo>\tests\WinAudioClean.Batch.Tests.ps1:526
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Batch.Tests.ps1:526
+  [+] preserves an occupied result path before native processing or input mutation 1.76s (1.76s|1ms)
+Tests completed in 34.62s
+Tests Passed: 68, Failed: 5, Skipped: 0, Inconclusive: 0, NotRun: 0

@@ -45,7 +45,8 @@ Describe 'AC-017: metadata reporting failures preserve native outcome' -Tag 'Rep
             (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument $outputDirectory), $CallerPreference
         $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables @{
             WAC_TEST_EXIT_CODE = [string]$NativeExit; WAC_TEST_FFMPEG_OUTPUT = '1'
-            WAC_TEST_STDOUT = 'Native stdout retained'; WAC_TEST_STDERR = 'Native stderr retained'
+            WAC_TEST_STDOUT = "out_time_us=1500000`nprogress=continue`nout_time_us=3000000`nprogress=end`n"
+            WAC_TEST_STDERR = 'Native stderr retained'
         }
 
         $expectedExit = if ($NativeExit -eq 0) { 7 } else { 4 }
@@ -66,8 +67,19 @@ Describe 'AC-017: metadata reporting failures preserve native outcome' -Tag 'Rep
         $log | Should -Match "STATUS\s+: $expectedStatus \(Native Exit Code: $NativeExit; Application Exit Code: $expectedExit\)"
         $log | Should -Match 'OUTPUT SIZE\s+: N/A'
         if ($NativeExit -eq 0) { $log | Should -Match 'REPORT ERROR\s+: simulated metadata access failure' }
-        $log | Should -Match 'Native stdout retained'
+        $log | Should -Not -Match '(?m)^out_time_us=|^progress=(continue|end)'
         $log | Should -Match 'Native stderr retained'
+        $jsonFiles = @(Get-ChildItem -LiteralPath $outputDirectory -Filter 'WinAudioClean_*.json')
+        $jsonFiles.Count | Should -Be 1
+        $report = Get-Content -Raw -LiteralPath $jsonFiles[0].FullName | ConvertFrom-Json
+        $report.diagnostics.standardOutput | Should -BeNullOrEmpty
+        $report.diagnostics.standardError | Should -BeExactly 'Native stderr retained'
+        $rendering = @($report.progress.stages | Where-Object { $_.stage -eq 'Rendering' })
+        $rendering.Count | Should -Be 1
+        $rendering[0].snapshot.OutTimeMicroseconds | Should -Be 3000000
+        $rendering[0].snapshot.Blocks | Should -Be 2
+        $rendering[0].percent | Should -BeLessThan 100
+        $report.progress.completed | Should -Be ($NativeExit -eq 0)
         $published = @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav' | Where-Object { $_.FullName -ne $priorOutput })
         if ($NativeExit -eq 0) {
             $published.Count | Should -Be 1

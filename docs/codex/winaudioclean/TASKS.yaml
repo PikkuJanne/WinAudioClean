@@ -655,7 +655,7 @@
       "depends_on": [
         "WAC-M2-05"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Backward-compatible parameters, local JSON settings and help.",
       "implementation": [
@@ -669,7 +669,26 @@
         "AC-050",
         "AC-051"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-01-full-ps51.txt",
+        "evidence/WAC-M3-01-full-ps7.txt",
+        "evidence/WAC-M3-01-original-run.txt",
+        "evidence/WAC-M3-01-original.json",
+        "evidence/WAC-M3-01-settings-final-ps51.txt",
+        "evidence/WAC-M3-01-settings-final-ps7.txt",
+        "evidence/WAC-M3-01-settings-final.json",
+        "evidence/WAC-M3-01-settings-initial-ps51.txt",
+        "evidence/WAC-M3-01-settings-initial-ps7.txt",
+        "evidence/WAC-M3-01-settings-initial.json",
+        "evidence/WAC-M3-01-settings-media.json",
+        "evidence/WAC-M3-01-smoke-ps51.txt",
+        "evidence/WAC-M3-01-smoke-ps7.txt",
+        "evidence/WAC-M3-01-smoke.json",
+        "evidence/WAC-M3-01-source.json",
+        "evidence/WAC-M3-01-targeted-ps51.txt",
+        "evidence/WAC-M3-01-targeted-ps7.txt",
+        "evidence/WAC-M3-01.md"
+      ],
       "blocked_reason": null
     },
     {
@@ -682,7 +701,7 @@
       "depends_on": [
         "WAC-M3-01"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": ".bat launcher and compatible file-list handoff; not a replacement GUI.",
       "implementation": [
@@ -696,7 +715,49 @@
         "AC-053",
         "AC-054"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-02-batch-evidence.json",
+        "evidence/WAC-M3-02-batch-focused-corrected-ps51.txt",
+        "evidence/WAC-M3-02-batch-focused-corrected-ps7.txt",
+        "evidence/WAC-M3-02-batch-focused-corrected.json",
+        "evidence/WAC-M3-02-batch-focused-final73-ps51.txt",
+        "evidence/WAC-M3-02-batch-focused-final73-ps7.txt",
+        "evidence/WAC-M3-02-batch-focused-final73.json",
+        "evidence/WAC-M3-02-batch-focused-initial-ps51.txt",
+        "evidence/WAC-M3-02-batch-focused-initial-ps7.txt",
+        "evidence/WAC-M3-02-batch-focused-initial.json",
+        "evidence/WAC-M3-02-batch-invalid-path-final-ps51.txt",
+        "evidence/WAC-M3-02-batch-invalid-path-final-ps7.txt",
+        "evidence/WAC-M3-02-batch-invalid-path-final.json",
+        "evidence/WAC-M3-02-full-final-ps51.txt",
+        "evidence/WAC-M3-02-full-final-ps7.txt",
+        "evidence/WAC-M3-02-launcher-evidence.json",
+        "evidence/WAC-M3-02-launcher-focused-final-ps51.txt",
+        "evidence/WAC-M3-02-launcher-focused-final-ps7.txt",
+        "evidence/WAC-M3-02-launcher-focused-initial-ps51.txt",
+        "evidence/WAC-M3-02-launcher-focused-initial-ps7.txt",
+        "evidence/WAC-M3-02-launcher-focused.json",
+        "evidence/WAC-M3-02-launcher-harness.json",
+        "evidence/WAC-M3-02-launcher-notes.txt",
+        "evidence/WAC-M3-02-launcher-probes.json",
+        "evidence/WAC-M3-02-media-api.json",
+        "evidence/WAC-M3-02-media-harnesses.json",
+        "evidence/WAC-M3-02-media-launcher.json",
+        "evidence/WAC-M3-02-media-logs.json",
+        "evidence/WAC-M3-02-media-manifest.json",
+        "evidence/WAC-M3-02-media-preliminary.json",
+        "evidence/WAC-M3-02-smoke-first-corrected-ps51.txt",
+        "evidence/WAC-M3-02-smoke-first-corrected-ps7.txt",
+        "evidence/WAC-M3-02-smoke-initial-ps51.txt",
+        "evidence/WAC-M3-02-smoke-initial-ps7.txt",
+        "evidence/WAC-M3-02-smoke-relay-corrected-ps51.txt",
+        "evidence/WAC-M3-02-smoke-relay-corrected-ps7.txt",
+        "evidence/WAC-M3-02-smoke.json",
+        "evidence/WAC-M3-02-source.json",
+        "evidence/WAC-M3-02-targeted-legacy-ps51.txt",
+        "evidence/WAC-M3-02-targeted-legacy-ps7.txt",
+        "evidence/WAC-M3-02.md"
+      ],
       "blocked_reason": null
     },
     {
@@ -709,7 +770,7 @@
       "depends_on": [
         "WAC-M3-02"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Queue builder, optional recursion and per-file result aggregation.",
       "implementation": [
@@ -723,7 +784,11 @@
         "AC-056",
         "AC-057"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-03.md",
+        "evidence/WAC-M3-03-source.json",
+        "evidence/WAC-M3-03-media.json"
+      ],
       "blocked_reason": null
     },
     {
@@ -736,7 +801,7 @@
       "depends_on": [
         "WAC-M3-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Process progress parser, queue cancellation and cleanup.",
       "implementation": [
@@ -750,7 +815,46 @@
         "AC-059",
         "AC-060"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-04-console-harness.json",
+        "evidence/WAC-M3-04-console-logs.json",
+        "evidence/WAC-M3-04-console-manifest.json",
+        "evidence/WAC-M3-04-console.json",
+        "evidence/WAC-M3-04-full-final-corrected-ps51.txt",
+        "evidence/WAC-M3-04-full-final-corrected-ps7.txt",
+        "evidence/WAC-M3-04-full-final-ps51.txt",
+        "evidence/WAC-M3-04-full-final-ps7.txt",
+        "evidence/WAC-M3-04-gates.json",
+        "evidence/WAC-M3-04-media-harness.json",
+        "evidence/WAC-M3-04-media-manifest.json",
+        "evidence/WAC-M3-04-media.json",
+        "evidence/WAC-M3-04-preservation.json",
+        "evidence/WAC-M3-04-preset-diagnosis.json",
+        "evidence/WAC-M3-04-progress-focused-corrected-scope-ps51.txt",
+        "evidence/WAC-M3-04-progress-focused-corrected-scope-ps7.txt",
+        "evidence/WAC-M3-04-progress-focused-final-corrected-ps51.txt",
+        "evidence/WAC-M3-04-progress-focused-final-corrected-ps7.txt",
+        "evidence/WAC-M3-04-progress-focused-final-ps51.txt",
+        "evidence/WAC-M3-04-progress-focused-final-ps7.txt",
+        "evidence/WAC-M3-04-progress-focused-final-recovery-ps51.txt",
+        "evidence/WAC-M3-04-progress-focused-final-recovery-ps7.txt",
+        "evidence/WAC-M3-04-progress-focused-initial-ps51.txt",
+        "evidence/WAC-M3-04-progress-focused-initial-ps7.txt",
+        "evidence/WAC-M3-04-progress-focused.json",
+        "evidence/WAC-M3-04-targeted-final-corrected-ps51.txt",
+        "evidence/WAC-M3-04-targeted-final-corrected-ps7.txt",
+        "evidence/WAC-M3-04-targeted-final-preview-batch-ps51.txt",
+        "evidence/WAC-M3-04-targeted-final-preview-batch-ps7.txt",
+        "evidence/WAC-M3-04-targeted-first-corrected-preview-batch-ps51.txt",
+        "evidence/WAC-M3-04-targeted-first-corrected-preview-batch-ps7.txt",
+        "evidence/WAC-M3-04-targeted-initial-preview-batch-ps51.txt",
+        "evidence/WAC-M3-04-targeted-initial-preview-batch-ps7.txt",
+        "evidence/WAC-M3-04-targeted-second-corrected-preview-batch-ps51.txt",
+        "evidence/WAC-M3-04-targeted-second-corrected-preview-batch-ps7.txt",
+        "evidence/WAC-M3-04.md",
+        "evidence/WAC-M3-04-source.json",
+        "evidence/WAC-M3-04-plan.json"
+      ],
       "blocked_reason": null
     },
     {
@@ -764,7 +868,7 @@
       "depends_on": [
         "WAC-M3-04"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Music default, optional per-job destination and explicit open-folder action.",
       "implementation": [
@@ -778,7 +882,14 @@
         "AC-062",
         "AC-063"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-05.md",
+        "evidence/WAC-M3-05-source.json",
+        "evidence/WAC-M3-05-gates.json",
+        "evidence/WAC-M3-05-focused.json",
+        "evidence/WAC-M3-05-media.json",
+        "evidence/WAC-M3-05-preservation.json"
+      ],
       "blocked_reason": null
     },
     {
@@ -796,7 +907,7 @@
       "depends_on": [
         "WAC-M3-05"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "End-to-end local workflow review and thread checkpoint.",
       "implementation": [
@@ -810,7 +921,31 @@
         "AC-065",
         "AC-066"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-06-automation-harness.json",
+        "evidence/WAC-M3-06-automation-manifest.json",
+        "evidence/WAC-M3-06-automation.json",
+        "evidence/WAC-M3-06-cumulative-ps51.txt",
+        "evidence/WAC-M3-06-cumulative-ps7.txt",
+        "evidence/WAC-M3-06-gates.json",
+        "evidence/WAC-M3-06-menu-harness.json",
+        "evidence/WAC-M3-06-menu-menuPs51Choice1.txt",
+        "evidence/WAC-M3-06-menu-menuPs51Choice2.txt",
+        "evidence/WAC-M3-06-menu-menuPs7Choice1.txt",
+        "evidence/WAC-M3-06-menu-menuPs7Choice1Corrected.txt",
+        "evidence/WAC-M3-06-menu-menuPs7Choice2.txt",
+        "evidence/WAC-M3-06-menu.json",
+        "evidence/WAC-M3-06-readiness-ps51.txt",
+        "evidence/WAC-M3-06-readiness-ps7.txt",
+        "evidence/WAC-M3-06-reentry-harness.json",
+        "evidence/WAC-M3-06-reentry-manifest.json",
+        "evidence/WAC-M3-06-reentry-ps51.txt",
+        "evidence/WAC-M3-06-reentry-ps7.txt",
+        "evidence/WAC-M3-06-reentry.json",
+        "evidence/WAC-M3-06-source.json",
+        "evidence/WAC-M3-06.md",
+        "evidence/WAC-M3-06-manual.json"
+      ],
       "blocked_reason": null
     },
     {

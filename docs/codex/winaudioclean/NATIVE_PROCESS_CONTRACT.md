@@ -5,6 +5,30 @@ Use small PowerShell helpers; do not build a new application framework. Maintain
 Dated implementation sections retain their original scope. Later sections
 supersede earlier limitations; M2-02 adds optional binary stdin and Accurate
 stage deadlines while preserving Fast's original native path.
+M3-04 adds structured stdout progress and per-run console cancellation; its
+section supersedes earlier progress/active-cancellation limitations.
+
+## Optional organized destinations — WAC-M3-05 (2026-10-03)
+
+`JobFolder` retains the existing audio transaction and no-replace publication.
+The optional Output sibling pins the selected canonical local base and its
+ordinary ancestors. Generated job/media/report children are created atomically
+with native `NtCreateFile` `FILE_CREATE` relative to an already-held parent;
+creation returns the owned directory handle and refuses existing names.
+No-follow directory validation, canonical hierarchy and stable identity checks
+retain those leases through media publication and report/journal completion.
+Sequential children borrow the parent's layout; only its owner closes it.
+Failure cleanup closes handles and never sweeps/deletes directories or contents.
+
+Music remains the default. An empty, relative or unsupported redirected known
+folder fails with explicit output-directory guidance; chosen/saved destinations
+retain their earlier precedence and never silently fall back to the cwd.
+The optional file picker loads Windows Forms only after an explicit interactive
+STA request. Console usage and ordinary processing do not load a desktop UI.
+The optional directory action uses a resolved existing directory as literal
+`ProcessStartInfo.FileName` with the shell's directory `open` verb, without
+command construction, file playback or process waiting. Unattended actions are
+rejected before processing. Action failures preserve the primary audio outcome.
 
 ## Implemented in WAC-M1-02 (2026-10-02)
 
@@ -304,3 +328,84 @@ publication is not atomic and has no crash/power-loss guarantee.
 Full-render settings, exact Original defaults and the original launcher
 route remain unchanged. Running-render Ctrl+C, full-duration stress and
 speech playback/listening are not certified by these preview checks.
+
+## Implemented in WAC-M3-04: progress and per-run cancellation
+
+Monitored FFmpeg stages add `-progress pipe:1` and `-nostats`; cleaning,
+normalization, selection and encoding arguments retain their existing meaning.
+The structured stdout reader drains on a .NET task without PowerShell callbacks
+or a background runspace. Its line buffer is limited to 4096 characters and a
+block to 64 fields. Overlong lines, malformed/duplicate timestamps and rejected
+blocks are counted; the terminator is still consumed so later valid blocks can
+recover. Only invariant nonnegative Int64 `out_time_us` values from complete
+`progress=continue|end` blocks update media time, in microseconds. Time remains
+monotonic. An `end` block does not establish a successful exit, valid output,
+loudness compliance or publication. The native result's structured `Progress`
+snapshot replaces raw progress stdout; nonmonitored probes retain the previous
+stdout capture. Diagnostic stderr, including loudnorm JSON, remains separately
+captured in memory. These progress bounds do not impose a total diagnostic
+memory limit or certify long-duration memory stress.
+
+Each stage has an explicit label, file index/count, duration and percentage
+range. Fast rendering uses 0-90. Accurate analysis uses 0-30, rendering 30-80
+and encoded-file verification uses 80-95. PCM validation reserves the 80
+boundary and publication reserves 95-99; both display indeterminate progress
+because these operations have no measured duration. Preview's eight excerpt/
+comparison render and meter
+steps divide 0-95, or 15-95 after Accurate context analysis at 0-15;
+preview validation reserves the associated step's start and publishing reserves
+95-99, with indeterminate display for both. `Completed` reaches 100 only after
+held publication (all four assets for
+preview). Report writing may still warn or fail after that audio completion.
+Processed media time controls percentages, independently of processing speed;
+there is no wall-clock ETA. Missing/nonfinite stage duration produces
+indeterminate display. Inspection also uses indeterminate progress. This does
+not broaden input timing support: ordinary unknown media duration still fails
+preflight before full rendering. Display errors are advisory and do not decide
+native or publication success.
+
+The entry point creates one `WinAudioClean.RunControl` per invocation. A queue
+passes that same controller to its sequential children; children borrow it and
+do not unregister its console handler. Independent invocations have independent
+cancellation flags. The retained native `SetConsoleCtrlHandler` delegate handles
+only CTRL_C/CTRL_BREAK by setting its instance flag and returning TRUE; it runs
+no PowerShell or file/process cleanup on the control thread. With an attached
+console this prevents the host's lower-priority handler from aborting the
+pipeline before normal cleanup/reporting. The wrapper polls the flag while
+waiting and stops only its held `Process` object using `Kill`, with the existing
+five-second exit wait and bounded stream-close/copy cleanup. It never enumerates
+or terminates unrelated processes by name. Earlier published queue items remain
+valid; no later pending item starts after cancellation is observed.
+
+The handler is unregistered in the owning invocation's `finally`. It is
+temporarily removed while `Read-Host` waits, then restored, preserving host
+prompt behavior and the existing Q-menu cancellation. A redirected display
+does not by itself prove the absence of an attached console. Registration may
+be unavailable without a console; no Ctrl+C delivery guarantee applies there.
+Console close/logoff, forced PowerShell termination and power loss are outside
+the cleanup/report guarantee. Native handler ordering and event targeting follow
+[SetConsoleCtrlHandler](https://learn.microsoft.com/en-us/windows/console/setconsolectrlhandler)
+and [GenerateConsoleCtrlEvent](https://learn.microsoft.com/en-us/windows/console/generateconsolectrlevent).
+These tests establish actual native events in private consoles, separately from
+an unperformed UI keystroke or Explorer test.
+
+The native result adds `Cancelled`, `OwnedProcessId`, `Progress` and
+`CancellationInputError`. Expected binary-input IOException after owned
+cancellation is recorded in `CancellationInputError`; genuine kill, reader,
+close and timeout failures remain in `Error`/`CleanupError`. Cancellation maps
+to application 130 and a terminal CANCELLED report where report storage is
+available. Accurate analysis/render/final stage records can be CANCELLED.
+Cancellation during final verification prevents publication rather than
+becoming a retained-audio loudness warning. Unexpected native failure still
+uses the existing failure codes and report diagnostics. Owned partial cleanup
+precedes the ordinary terminal report; preview failure/cancellation reports
+describe unsuccessful attempts after owned asset rollback and partial cleanup
+have settled. Source/directory pins remain held through that report writing.
+Inspection/tool/filter/media/pan-probe cancellation returns 130 with console
+diagnostics when no processing-attempt report exists. A request after completed
+publication retains valid audio and its completed processing outcome; the
+context snapshot can still record that request. Earlier
+ordinary pre-render input/dependency/probe errors remain console-only, including
+errors after an ordinary transaction was allocated but before processing.
+Preview can write its smaller failure record after preview transaction creation.
+The existing report-failure and no-replace publication policies still apply.

@@ -1,0 +1,345 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-06",
+  "scope": "Two-host objective clean-checkout reentry derivatives only.",
+  "public_artifacts": [
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-06-reentry.json",
+      "sha256": "b466a01ad8ccf2121a85cbc44ae748e799f90eef58a818f8cd4a72d658181bbb",
+      "bytes": 73315
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-06-reentry-harness.json",
+      "sha256": "39b6aebc1c43780720e446ee93815fffdf02ea03d8192d80fcaa029b9ec7da32",
+      "bytes": 26139
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-06-reentry-ps51.txt",
+      "sha256": "51377ff10da683c052414fe959d8b2d114748ab3687ba4176c2b001e11220a36",
+      "bytes": 1606
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-06-reentry-ps7.txt",
+      "sha256": "e1afb8abe66cbd89a0da5bad58b0ff8a4cb9c77d8b4d265c0704f9451599a7c2",
+      "bytes": 1613
+    }
+  ],
+  "raw_capture": {
+    "path": ".wac-local/WAC-M3-06/reentry/capture-final/summary.json",
+    "sha256": "a7fb829ef524bffe5a8d4d98aaa9103c9f32a3e1ce35b79f74a0d6cbe1b15306",
+    "bytes": 72583
+  },
+  "tested_harness": {
+    "path": ".wac-local/WAC-M3-06/reentry/run-reentry.py",
+    "sha256": "52300440ceadbebd008b90d89dc3095301f2872444b6680156f18dcd24edb24f",
+    "bytes": 17361
+  },
+  "publisher": {
+    "path": ".wac-local/WAC-M3-06/reentry/publish-reentry.py",
+    "sha256": "f88f66ca4493367fbab575533d72ba0e23dd0d095306ca3e18be3cca6e6b596f",
+    "bytes": 5813
+  },
+  "raw_local_artifacts": [
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-object-type-stdout.txt",
+      "sha256": "50836eee574ecff79dea3b4fd40673d7d000f7a5f177d8a6a3000b59c78383b8",
+      "bytes": 7
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-object-type-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-stderr.txt",
+      "sha256": "757cc5f4b5f05cefa300da4ba0f1550388e49adc3a919d7bdcc4b2230b1b3caf",
+      "bytes": 113
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/checkout-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/checkout-stderr.txt",
+      "sha256": "d6f823e67a0cbf3573cc094e485f150bb10bdb9ddf5b4b009a4da2e60ec32855",
+      "bytes": 82
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-stdout.txt",
+      "sha256": "cf71773b28e2754b9d7b3eee19d767bea9f720e1422bd8ce18f6c5b2ca877524",
+      "bytes": 41
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-before-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-before-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-branch-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-branch-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/validate-plan-stdout.txt",
+      "sha256": "a5dbec61e7e667cb2596f6ac6d02efb47f3212f79e3b8b57cdf021bfc08eab1b",
+      "bytes": 89
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/validate-plan-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/next-stdout.txt",
+      "sha256": "fa4cf2629d339b216ff02505d37d524488cce336ab35cf662a41040bedd90daf",
+      "bytes": 163
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/next-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.ps1-stdout.txt",
+      "sha256": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "bytes": 151060
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.IO.ps1-stdout.txt",
+      "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "bytes": 26826
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.IO.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Settings.ps1-stdout.txt",
+      "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755",
+      "bytes": 28208
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Settings.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Preview.ps1-stdout.txt",
+      "sha256": "6731138cc1b0342daff5f06636f98e939bbafb062cccf7a2061f2fb5f4c623f0",
+      "bytes": 46055
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Preview.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Batch.ps1-stdout.txt",
+      "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7",
+      "bytes": 19634
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Batch.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Queue.ps1-stdout.txt",
+      "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8",
+      "bytes": 14069
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Queue.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Output.ps1-stdout.txt",
+      "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4",
+      "bytes": 11184
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Output.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Launcher.ps1-stdout.txt",
+      "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026",
+      "bytes": 14397
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.Launcher.ps1-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.bat-stdout.txt",
+      "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "bytes": 3621
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/baseline-WinAudioClean.bat-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffmpeg-version-stdout.txt",
+      "sha256": "711056f2bc922237113d5defe7da4dbd97beaab41098e5f8d425753dbfea99ff",
+      "bytes": 1500
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffmpeg-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffprobe-version-stdout.txt",
+      "sha256": "c28ec08933e2c9eeac8a7341b1fced84e23745c7ca69e26e7ca83226714ef209",
+      "bytes": 1473
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ffprobe-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/git-version-stdout.txt",
+      "sha256": "a031b30b91db21fe63f22de9306958f84106fc84243c2f8f92918e423ce274e0",
+      "bytes": 29
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/git-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-environment-stdout.txt",
+      "sha256": "50f8771355ee11d0e59c885f6c0ad111844e7b1c9e6f0c82022f63bf9c63cf24",
+      "bytes": 242
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-environment-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stdout.txt",
+      "sha256": "de21fdb81a5b06ac9ec4b9532f998d4a698489520338d61fe9bf06b1db3fa2c9",
+      "bytes": 1626
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps51-application-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/WinAudioClean_e79d2deffd44482d9ef3461120d47b59.json",
+      "sha256": "1501745a9054ac1a72b8558b3c0a42fa28bc5a05a4f70ce5c6e111076e52933f",
+      "bytes": 12619
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/synthetic-stereo_Cleaned_20261003-140356190_e79d2deffd44482d9ef3461120d47b59.wav",
+      "sha256": "b7e506ba9bd4343185413eb59d907843ed51f35956a337ecc70652506dea547c",
+      "bytes": 1536078
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/WinAudioClean_e79d2deffd44482d9ef3461120d47b59.txt",
+      "sha256": "77cac39cdca6582ce6bd795bcd94ffc72c6155527e016b5036e162e1c94af4e2",
+      "bytes": 3903
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps51/output/WinAudioClean_Log.txt",
+      "sha256": "77cac39cdca6582ce6bd795bcd94ffc72c6155527e016b5036e162e1c94af4e2",
+      "bytes": 3903
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-environment-stdout.txt",
+      "sha256": "5dbc4eae8d8943c88a38e431a381353788a303b23f8e310ebfa0e6b47a9b61d2",
+      "bytes": 229
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-environment-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stdout.txt",
+      "sha256": "88013f4e7119342a3f9c33108518cf3923f64258dd790ae7f8baf2d2f810adaf",
+      "bytes": 1651
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/ps7-application-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/WinAudioClean_78db1fbd86754eab90f4d8cc44f1937f.json",
+      "sha256": "8c5a00a60abb7eb0ef50f45452491a0754448b6993dd7a5b153e9a8a349098b3",
+      "bytes": 7034
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/synthetic-stereo_Cleaned_20261003-140400978_78db1fbd86754eab90f4d8cc44f1937f.wav",
+      "sha256": "b7e506ba9bd4343185413eb59d907843ed51f35956a337ecc70652506dea547c",
+      "bytes": 1536078
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/WinAudioClean_78db1fbd86754eab90f4d8cc44f1937f.txt",
+      "sha256": "f7a9efca37105b41fd04780726ddb517917c347876125a42aa2b82f5d731c61c",
+      "bytes": 3909
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/ps7/output/WinAudioClean_Log.txt",
+      "sha256": "f7a9efca37105b41fd04780726ddb517917c347876125a42aa2b82f5d731c61c",
+      "bytes": 3909
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-after-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-status-after-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-after-stdout.txt",
+      "sha256": "cf71773b28e2754b9d7b3eee19d767bea9f720e1422bd8ce18f6c5b2ca877524",
+      "bytes": 41
+    },
+    {
+      "path": ".wac-local/WAC-M3-06/reentry/capture-final/logs/clone-head-after-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "notice": "Raw paths identify ignored local synthetic audio/reports/logs by byte hashes. No binary, recording, source checkout or personal path is published. Raw and sanitized hashes are distinct."
+}

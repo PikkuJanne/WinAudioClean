@@ -578,3 +578,197 @@ evidence harness supplies that provenance separately. Reproduction depends
 on the same retained input and build; it does not certify different builds,
 speech quality, playback or default promotion. Keep audio and raw reports
 ignored. Record listening status separately from objective acceptance.
+
+## Local JSON settings and unattended precedence (WAC-M3-01)
+
+`WinAudioClean.Settings.Tests.ps1` covers the optional settings helper,
+schema-1 JSON types and keys, complete saved-file validation, explicit
+CLI > saved > built-in precedence, and settings management without audio or
+native execution. It checks actual bound-key presence for explicit false
+switches and empty cleaning dictionaries, saved mode/stream selection,
+malformed/unknown-version recovery, locale-independent numbers, atomic writes
+and preservation of the prior valid file on injected save failures.
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1
+```
+
+Keep input/import, preset/cleaning and entry-point regressions in the focused
+compatibility group, then run the unfiltered Full gate in both supported shells.
+Importing the main script remains IO-only. A missing settings sibling is
+compatible when the default file is absent and no explicit SettingsPath or
+settings action requires it. Unattended input
+still fails promptly when neither CLI nor saved choices resolve a required
+mode or an ambiguous audio stream; it must never fall back to Read-Host.
+
+Settings tests use isolated JSON paths and temporary outputs. The task's real
+FFmpeg matrix uses synthetic fixtures under ignored `.wac-local/WAC-M3-01`
+and an explicit isolated `-SettingsPath` for every run. It compares saved
+preferences with equivalent explicit CLI renders on the same pinned build,
+including PCM16/24, mono false overriding saved true, RF64 selection, a saved
+second-stream index, whole-dictionary cleaning replacement and `@{}` clearing.
+German/Finnish decimal-culture cases use actual JSON numbers with decimal dots.
+Malformed settings fail with code 2 even if a CLI override names the invalid
+field; Ignore and Reset exercise the documented recovery routes. Management
+cases verify no audio publication, while source/settings hashes and exact
+decoded PCM/frame checks establish preservation and precedence. A direct
+Original reference checks the unchanged built-in graph separately.
+
+Record the actual matrix command, cases, exits, source/tool/configuration hashes
+and sanitized results with the task evidence. Counts describe completed runs,
+not planned coverage. Keep generated audio, full local reports and raw logs
+ignored; do not read or overwrite the user's own preferences. These checks do
+not approve speech quality, retune Original or certify cross-build PCM.
+
+## Ordered launcher lists and persistent item results (WAC-M3-02)
+
+Test the actual CMD launcher transport independently from audio processing.
+Check one/many ordered paths, spaces/Unicode/brackets/ampersands/apostrophes/
+parentheses, literal percent/exclamation limitations, malformed and oversized
+handoffs, no-input guidance and preserving status across pause. Use explicit
+manifest fallback where CMD cannot preserve a name or list; never replace an
+unrun Explorer drop with a claim that it was tested.
+
+The accepted positional transport is a fresh CMD `/c` frame whose original
+tokens exactly match the numbered environment captures, below 7,600 characters
+and at most 1,024 inputs. Existing/nested CMD frames and observable `%`/`!`
+positional text fail closed. `/manifest` reads only the literal
+`WAC_LAUNCH_INPUT_LIST_PATH` environment value; `/unattended Raw|Zoom` requires
+that value or `WAC_LAUNCH_INPUT`, exclusively, plus a destination. Exercise both
+default PS5.1 and explicitly selected PS7 inner hosts, isolated settings,
+interactive one-pause and unattended no-pause behavior. Keep transport probes
+distinct from full application/FFmpeg integration results.
+
+Batch tests cover mutually exclusive legacy input/typed `InputPaths`/
+`InputListPath`, schema-1 UTF-8 manifest bounds and relative paths, retained
+explicit repeats, frozen shared settings, one mode selection, and rejection of
+preview/settings/support actions. A held CreateNew JSONL writer records header,
+ordered per-item results and aggregate summary; injected persistence failures
+stop later work. One-item lists preserve the item code; multiple failed items
+produce code 6, warning-only results 7, cancellation 130, and successful lists 0.
+Cancellation marks remaining inputs NOT_STARTED. Explicit-list checks retain
+repeats; folder discovery and deduplication have separate coverage below.
+The M3-02 checks did not establish active-render cancellation; the M3-04 scope
+below tests that behavior separately.
+
+The ignored `.wac-local/WAC-M3-02` real-media matrix uses synthetic inputs and
+isolated saved settings in both PS5.1/PS7. It compares ordered batch items with
+equivalent single-file renders using exact decoded PCM, frames, format, graph,
+stream and effective report settings. Valid/invalid continuation, warning
+retention, literal-name manifests, saved choices and controlled cancellation
+are separate outcomes. Capture hashes, actual commands/exits, JSONL records and
+sanitized evidence; a simulated cancellation seam is labeled explicitly and
+does not certify active Ctrl+C. Preserve failed preliminary runs. No user
+preferences/audio, listening approval, retuning or cross-build claim is involved.
+
+## Sequential folder discovery and source snapshots (WAC-M3-03)
+
+Run the folder suite in both supported shells:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.FolderQueue.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.FolderQueue.Tests.ps1
+```
+
+Test the direct PowerShell `InputDirectories` route separately from explicit
+lists and the BAT. Recursion defaults off; `Recurse` requires folder input.
+Folders are mutually exclusive with other input routes and preview/settings/
+diagnostic actions. Importing the main script and running ordinary single-file
+or explicit-list requests must retain their optional-component contracts.
+
+Queue coverage must establish complete materialization before child jobs,
+supplied-root order, breadth-first traversal with ordinal entry ordering,
+identity deduplication and unchanged explicit-list repeats. Use mixed folders
+with supported candidate extensions, unsupported files, duplicate/overlapping
+roots, hardlink aliases, identical stems, generated exports/previews/reports/
+journals/partials, nested directories and reparse entries. Verify a generated
+name discovered later also excludes its earlier identity alias; arbitrary
+renamed outputs without a marker alias remain a documented limitation.
+
+Reject reparse roots/ancestors without following them; encountered reparse
+entries are skipped. Keep junction/symlink fixtures owned and clean up only the
+link entry. If privileges prevent a fixture, record the actual skip and reason.
+Test destination containment by path components, a proper descendant output
+subtree, destination equal to a selected root, and a nearby sibling whose name
+shares a prefix. New outputs or children created after materialization must
+never enter the running queue.
+
+Check root/entry/directory/ancestor/path-byte bounds and enumeration failures
+before any child call. The limits are 64 roots, 1,024 recorded entries including
+skips/failures, 1,024 visited directories, 2,048 pinned ancestors and 1 MiB of
+UTF-8 paths for recorded entries. Source snapshots include stable identity,
+length and last-write time; mutation/replacement before dispatch produces a
+failed entry with code 2,
+while the current source stays held through its child invocation. Test denial
+of source replacement/write during that held interval and safe release after
+success, failure and cancellation.
+
+Folder-only schema-2 journals must record selection provenance, fixed selection/
+source reasons, source snapshots and skipped counts. Intentional skips are
+not successful renders. Empty/all-skipped selections need no mode prompt or
+FFmpeg/ffprobe call and return 0. A middle failure continues later jobs and gives aggregate 6;
+warnings alone give 7. Controlled child cancellation gives 130, stops new jobs,
+preserves known skips/failures and marks pending entries NOT_STARTED. Persistence
+failures stop later work with 5, preserving completed audio and flushed records.
+Keep explicit-list schema 1, its one-item exit behavior and repeat semantics
+unchanged. A simulated cancellation seam does not establish active Ctrl+C.
+
+Use synthetic media and isolated settings for real folder integration in both
+PS5.1 and PS7. Compare queued exports with equivalent single-file renders on
+the same pinned FFmpeg build, including exact decoded PCM/frame counts and
+effective report settings. Record actual cases, commands, exits and source/
+tool/journal hashes; preserve failed preliminary captures. Keep audio/raw
+reports and fixture trees ignored, publish only sanitized evidence, and do not
+infer listening approval or default promotion from objective checks. Run the
+smallest relevant suites before the required unfiltered Full gate in both
+supported shells; count only completed coverage.
+
+## Structured progress and owned cancellation (WAC-M3-04)
+
+Run the focused suite in both supported shells before cumulative gates:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Progress.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Progress.Tests.ps1
+```
+
+The native fixture emits valid, malformed, oversized, truncated and flooding
+stdout blocks plus independent stderr. Verify the 4,096-character line and
+64-field block limits, recovery at block terminators, microsecond timestamps,
+indeterminate unknown-duration states, bounded stage percentages and explicit
+process/stream failures. A progress `end` block is not publication or success.
+Display failure must not decide processing outcome. A throwing progress-display
+double is a unit fault; captured redirected stdout/stderr are real redirection
+checks. Neither demonstrates graceful handling of an actual console window
+close or forced host kill. Test parser/display behavior separately from real
+FFmpeg rendering.
+
+Use per-invocation contexts for active cancellation. Exercise Accurate
+analysis/render/verification, Fast and preview paths, held binary input,
+abnormal native exit and queued `NOT_STARTED` suffixes. An independent native
+job must stay alive and complete, with originals, foreign files and completed
+exports preserved. Timer or `Request-WacCancellation` injection is labeled as
+a controlled request; it is not evidence of an actual console signal.
+
+`tests/fixtures/Invoke-ConsoleCancellationCase.ps1` and the ignored
+`.wac-local/WAC-M3-04/check-console.py` harness exercise actual Windows
+`CTRL_C_EVENT` and `CTRL_BREAK_EVENT` in separate hidden private consoles on
+PS5.1 and PS7. The fixture uses synthetic media, isolated settings and source
+copies, adds only input pacing and observation, and delegates native work to
+the product helper. A detached sender attaches to the owned console and sends
+the event to group 0. Verify exit 130, a persisted cancellation report, removal
+of owned partials, an unaffected concurrent survivor and no 100% before held
+publication. A second event after `Dispose` must reach a lower-priority test
+observer, establishing handler removal without terminating the fixture host.
+This is a native signal check, not a UI typing or Explorer-drop claim. It does
+not certify console-close/logoff, forced host termination or power-loss
+cleanup. Keep readiness PIDs, actual commands, raw log hashes, source/tool
+hashes and failed preliminary attempts; publish only sanitized derivatives.
+
+The real-media progress harness records variable-speed rendering, stage
+durations, preview assets, independent survivors and same-build PCM parity.
+Keep unknown-duration unit states separate from a real live-WebM helper/null-
+sink progress check and the application's rejection of unknown media timing
+with code 4 before a full render. These scopes do not broaden supported input
+timing. Distinguish objective output checks from unperformed listening review.

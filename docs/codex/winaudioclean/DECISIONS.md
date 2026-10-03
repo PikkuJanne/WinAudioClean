@@ -478,3 +478,194 @@ calibration and manual/stress limits remain explicit. Preserve all earlier
 evidence and M1-02 history; no merge/release/security/deployment approval is added.
 Evidence: `evidence/WAC-M2-05.md`, source/classification/reproduction manifests
 and `evidence/WAC-M2-05-listening.md`. Next: WAC-M3-01, separately synchronized.
+
+### 2026-10-02 — WAC-M3-01 explicit local preferences
+
+D32. Extend existing Mode/Preset/OutputDirectory/NonInteractive parameters and
+retain positional inputPath, menu, launcher and PS5.1 support. Add optional
+per-user ApplicationData JSON preferences, schema 1, with explicit bound CLI
+values above saved preferences above built-ins. Persist only already-supported
+processing choices; use existing preset names in the allowlist rather than
+introducing target/sample-rate controls. Save is explicit and never automatic.
+No application/report version bump or default audio change is required.
+
+Keep the Settings sibling optional when no saved file/action/path is used.
+Imports remain IO-only and return without configuration reads. Invalid complete
+saved files fail closed before precedence; no automatic unknown-version migration.
+Explicit IgnoreSavedSettings bypasses them and ResetSettings atomically writes
+an empty supported settings object. Management has no audio input/native/prompt
+side effects. Explicit false switches and an empty cleaning dictionary override
+saved values; cleaning overrides replace as a unit, retaining base preset identity.
+
+Typed bounded JSON never executes code or passes arbitrary FFmpeg options.
+Validate before same-directory flushed atomic publication; retain previous bytes
+on pre-publication failure and remove only owned temporary files. Reject reparse
+settings storage. Complete-file replacement does not certify power-loss durability.
+Human listening/default promotion remains pending under D07/D31. Feature-branch
+delivery is authorized; no merge/release/settings/security/deployment approval
+is added. Evidence: `evidence/WAC-M3-01.md`. Next: WAC-M3-02 only.
+
+### 2026-10-03 — WAC-M3-02 ordered explicit file-list handoff
+
+D33. Preserve the positional single-string input and existing BAT. Add optional
+InputPaths/InputListPath through a narrow Batch sibling, using existing settings
+validation and ordinary single-file execution. Materialize the explicit list,
+resolve preferences once and choose an omitted interactive mode once. Supply
+the frozen choices to children with saved reads disabled. Preserve explicit
+repeats and order; folder discovery, recursion, deduplication and automatic
+generated-output exclusion remain WAC-M3-03.
+
+Use a strict schema-1 UTF-8 manifest (1 MiB, 1..1024 nonempty strings), with
+relative paths anchored beside it. JSON is data; reject malformed/unknown/typed
+schema failures before jobs. Legal percent/exclamation filenames and long lists
+use direct PowerShell or a short manifest/environment handoff. A folder selection
+example may generate an explicit manifest, without implementing folder traversal.
+
+The optional Launcher sibling verifies a narrow fresh CMD /c frame against
+independently captured numbered arguments. Reject observable percent/exclamation,
+ambiguous quoting/count/provenance and a 7600-character positional budget before
+application work. CMD's own earlier expansion cannot be repaired or prevented by
+the BAT after it starts; retain the controlled expansion/sentinel proof and safe
+fallback instructions. Preserve helper-less single/environment routes, default
+inner PS5.1, optional explicitly selected PS7, and saved exit status around pause.
+No path is interpolated into PowerShell command text.
+
+Persist header, each item and terminal summary as flushed JSON Lines through
+an exclusively created held writer. Keep existing detailed render reports.
+Bound item diagnostics, including native-failure context; do not infer report
+ownership by scanning a destination. One-item lists retain ordinary exit codes;
+multi-item failure is 6, warnings alone 7, cancellation 130 and result-storage
+failure 5. A cancelled child stops new jobs; journal append failure rolls back
+only its new suffix where possible and preserves earlier results/exports.
+Disclose incomplete journals and retain crash/storage/manual-cancellation limits.
+
+Preserve the captured development failures and corrections rather than replace
+them with final green history. Main's earlier helper bodies, IO/Settings/Preview,
+application2.3/report1 and Original/Gentle versions remain unchanged. Engineering
+CMD/queue checks do not establish a performed Explorer gesture, active-render
+Ctrl+C test, power-loss guarantee or speech listening/default promotion. Evidence:
+`evidence/WAC-M3-02.md`. Next: WAC-M3-03, separately synchronized; no merge,
+release, default promotion, security change or deployment is authorized here.
+
+### 2026-10-03 — WAC-M3-03 frozen folder selection
+
+D34. Add an explicit direct-PowerShell folder route through optional Queue/Batch
+helpers. Keep positional single input, explicit-list repeats/schema1 and BAT
+transport intact. Recursion stays off; one ordered breadth-first snapshot uses
+ordinary local directories without reparse descent, identity deduplication,
+known generated-name/alias exclusions and proper descendant destination skips.
+Bound selection before media jobs; reject incomplete scans rather than truncate.
+Record skipped entries and unavailable sources with reasons. Revalidate each
+pending source's identity, size and modification time and hold its ordinary
+ancestors/read lease through the existing child job. Continue per-file failure,
+retain prior audio/reports and stop pending starts on returned cancellation.
+
+Use schema2 only for folder journals: selection provenance, source snapshot and
+skip reasons/counts extend the existing held CreateNew, flushed incremental
+records. Explicit folder roots equal to the destination can select ordinary
+sources; newly created files never enter an existing snapshot. Empty/all-skipped
+selections write truthful summaries without mode selection/native work. Folder
+aggregate precedence is cancel130, failed6, warning7, success0; journal failure5
+remains distinct. Static skips/preflight failures survive later cancellation.
+
+Exact generated names cannot identify arbitrarily renamed exports without a
+recognized alias. Extension selection does not replace native media validation;
+metadata checks do not promise content hashing, crash recovery or resistance to
+adversarial timestamp restoration. Controlled cancellation tests concern returned
+item exit130; active-render Ctrl+C/progress belongs to WAC-M3-04. Preserve all
+prior audio helpers, IO/Settings/Preview, launcher and filter versions/defaults.
+Evidence: `evidence/WAC-M3-03.md`. No listening/default promotion, merge, release,
+security/settings change or deployment approval is introduced.
+
+### 2026-10-03 — WAC-M3-04 bounded progress and owned active cancellation
+
+D35. Add structured FFmpeg stdout progress with bounded complete-block parsing,
+separate diagnostic capture, explicit stage/file position and media-time ranges.
+Only validated held publication reaches100; unknown stage duration is
+indeterminate, while ordinary input timing requirements stay unchanged. Keep
+existing sound/encoder/selection helpers and ownership mechanisms.
+
+Use one instance cancellation flag per invocation, shared by sequential queue
+children. A retained native Ctrl+C/Break handler marks it and leaves the main
+pipeline available for bounded owned-child cleanup and reporting. Unregister in
+finally and suspend interception during Read-Host. Cancellation130 prevents final
+verification from becoming a retained-audio warning and stops pending starts;
+earlier exports/static results remain. Add typed progress/CANCELLED outcomes and
+compact failed-preview reports without inferring artifact ownership by filename.
+
+Final focused77, cumulative Full, private-console OS signals4/4 and frozen real
+media20/20 support AC-058/059/060. Preserve preliminary fixture/harness/runtime
+corrections and exact content hashes. No UI typing/shared-console isolation,
+console-close/crash/power-loss durability, diagnostic memory sandbox or speech
+listening claim is added. Original/Gentle/Fast defaults, settings, launcher and
+queue policies remain. Feature delivery is authorized; no merge/release/default
+promotion, security/settings change or deployment is approved. Evidence:
+`evidence/WAC-M3-04.md`. Next: WAC-M3-05 only.
+
+### 2026-10-03 — WAC-M3-05 organized output and explicit local actions
+
+D36. Preserve Music/default, explicit chosen destinations and the legacy flat
+layout. Add unsaved JobFolder for one invocation, including a queue, with atomic
+new generated children and held canonical base/ordinary ancestor/media/report
+identities. Share write only on media where existing publication requires it;
+deny DELETE on all pins. Borrow one parent-owned layout through sequential
+children; release after all reports. Keep no-overwrite/owned cleanup and never
+reuse/sweep/delete job directories. Flat report paths stay canonical; explicit
+journal overrides remain and exact known job folders are excluded from discovery.
+
+No-input use prints console guidance. Picker and destination opening are explicit
+optional interactive actions, with lazy STA Forms, cancellation before output,
+no unattended UI and no automatic playback/file opening. Verify completed
+directory identity under a held reopened handle before the shell action. Action
+failure preserves audio outcome; organization/report faults preserve published
+assets or primary cancellation/failure and unconditional cleanup. Do not persist
+actions as preferences or add a required desktop framework.
+
+Final focused/Targeted/Full/media support AC-061..063 within recorded engineering
+scopes. Preserve policy/sharing/reopen, legacy preflight, long-path/nested-array
+fixture, media-summary and source-unstable preliminary captures. No actual user
+Music/settings writes, manual dialog/Explorer/listening/default promotion or
+long stress/crash durability is claimed. Prior M3-04 native-console proof was not
+rerun. Evidence: `evidence/WAC-M3-05.md`. Next WAC-M3-06 only, after fresh live
+synchronization; no merge/release/security/settings/deployment approval is added.
+
+### 2026-10-03 — WAC-M3-06 workflow evidence and explicit manual gate
+
+D37. Keep runtime, tests, launcher, filter sound/defaults and contracts unchanged.
+Accept AC-065's scoped unattended batch/folder/Preview and controlled pre-request
+cancellation evidence, and AC-066's clean detached local Git reconstruction with
+preferences intentionally absent. Retain exact source/tool/command hashes,
+separate application outcomes from harness assertions, and describe the final
+automation acceptance as eight earlier passing cases plus two narrow recovered
+manifest cases. Anchored relative paths require resolved equivalence checks;
+no application rewrite is needed. APPDATA alone does not relocate the Windows
+known-folder settings lookup; use explicit isolated absent SettingsPath.
+
+Cumulative Targeted once per host passes 749/0 with one privilege skip on 66
+unchanged physical code files; parser/static/plan pass and 273 advisories remain.
+Actual synthetic BAT/PTY menu 4/4 with four exact PCM matches supplements workflow
+evidence. It cannot accept AC-064's unperformed manual interview drop procedure.
+Keep AC-064/M3-06 blocked with a concrete reason and M4-01 locked, rather than
+convert absent human input to approval or silently waive the procedure.
+Preserve previous history and all failures/corrections. No listening/default
+promotion, merge/release/security/settings/deployment approval is introduced.
+Evidence: `evidence/WAC-M3-06.md`. Next: finish M3-06's manual gate only.
+
+### 2026-10-03 — WAC-M3-06 manual workflow closure
+
+D38. Accept AC-064 from the user's actual Explorer/menu/playback observations
+in Raw/Zoom and independent local SUCCESS/exit-0/complete-report, published-WAV
+header and unchanged-runtime/tool verification. Keep human observations distinct
+from objective agent checks. A first parentheses-containing unquoted input was
+rejected before processing; a byte-identical neutral-name copy with the same
+extension allowed both real retries. Preserve the guard and this limitation;
+no universal punctuation support or formal sound/preset promotion is implied.
+
+Raw reports, interview metadata/paths/audio and diagnostic/copy provenance stay
+private/local. Publish only allowlisted outcomes and runtime/tool hashes. M3-06
+is done, AC-064 passes, previous AC-065/066 engineering evidence is unchanged;
+22 tasks done/8 todo, 66 AC pass/24 not_run. Keep D37 and its blocked narrative
+as history. Do not repeat unchanged-source suites solely for this closure.
+Next WAC-M4-01 is unlocked, not started. Picker/stress/crash/power-loss and the
+inherited Preview writer-close path remain unverified. No merge/release/security
+settings/deployment approval is added. Evidence: `evidence/WAC-M3-06-manual.json`.

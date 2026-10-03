@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "status": "pass",
+  "artifacts": [
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-04-console.json",
+      "sha256": "3e3ee9f54aa5974e399e8b1f9f95e8930b464df086e8ab2676ad072628498111",
+      "size_bytes": 719053
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-04-console-logs.json",
+      "sha256": "1defa485fb80a56e6ecea6c8f6588dcdd7ff02b4166de52f340b9f1555813445",
+      "size_bytes": 69075
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-04-console-harness.json",
+      "sha256": "fda3139e438ff546b6433ccd11f2aca722e1dfbd2ff8403f7ad40d4b1944ee1a",
+      "size_bytes": 33602
+    }
+  ]
+}

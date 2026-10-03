@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-06",
+  "acceptance": "AC-064",
+  "date": "2026-10-03",
+  "status": "pass",
+  "testedCheckpoint": "a30e235a8857d9b4ecde75423701d9ebd85946fa",
+  "runtimeUnchangedFrom": "dfcbd559f91c1cf2adf09a9ff581a5dac359ea73",
+  "procedure": "Drop a typical interview file, select 1/2 and inspect the result/report.",
+  "attribution": {
+    "gestureMenuAndPlayback": "User explicitly reported actual manual retry results in this chat for both selections.",
+    "reportAndArtifactChecks": "Agent read the two user-supplied local JSON reports and WAV headers; no agent audio processing or listening.",
+    "sourceRevision": "Reports say not_embedded; nine copied runtime files were independently SHA256-matched to the unchanged tested checkout."
+  },
+  "cases": [
+    {
+      "case": "manual-raw",
+      "selection": 1,
+      "userObservations": {
+        "menuAppeared": true,
+        "success": true,
+        "completePlayableOutput": true,
+        "issues": "none"
+      },
+      "verifiedReportFacts": {
+        "schemaVersion": 1,
+        "mode": "Raw",
+        "status": "SUCCESS",
+        "processingStatus": "SUCCESS",
+        "applicationExitCode": 0,
+        "processingExitCode": 0,
+        "nativeExitCode": 0,
+        "reportingComplete": true,
+        "reportingErrors": [],
+        "warningCodes": [],
+        "reasonCodes": [],
+        "published": true,
+        "outputValidity": "PASSED",
+        "presetId": "original",
+        "presetVersion": "1.0.0",
+        "loudnessMode": "Fast",
+        "outputFormat": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "sourceRevision": null,
+        "sourceRevisionReason": "not_embedded"
+      },
+      "independentLocalChecks": {
+        "jsonAndTextReportsExist": true,
+        "sameByteIdenticalNeutralNamedInput": true,
+        "outputExistsAndSizeMatchesReport": true,
+        "wavHeaderFramesAndFormatMatchReport": true,
+        "inputToOutputDurationWithinCompressedInputTolerance": true
+      }
+    },
+    {
+      "case": "manual-zoom",
+      "selection": 2,
+      "userObservations": {
+        "menuAppeared": true,
+        "success": true,
+        "completePlayableOutput": true,
+        "issues": "none"
+      },
+      "verifiedReportFacts": {
+        "schemaVersion": 1,
+        "mode": "Zoom",
+        "status": "SUCCESS",
+        "processingStatus": "SUCCESS",
+        "applicationExitCode": 0,
+        "processingExitCode": 0,
+        "nativeExitCode": 0,
+        "reportingComplete": true,
+        "reportingErrors": [],
+        "warningCodes": [],
+        "reasonCodes": [],
+        "published": true,
+        "outputValidity": "PASSED",
+        "presetId": "original",
+        "presetVersion": "1.0.0",
+        "loudnessMode": "Fast",
+        "outputFormat": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "sourceRevision": null,
+        "sourceRevisionReason": "not_embedded"
+      },
+      "independentLocalChecks": {
+        "jsonAndTextReportsExist": true,
+        "sameByteIdenticalNeutralNamedInput": true,
+        "outputExistsAndSizeMatchesReport": true,
+        "wavHeaderFramesAndFormatMatchReport": true,
+        "inputToOutputDurationWithinCompressedInputTolerance": true
+      }
+    }
+  ],
+  "runtimePhysicalHashes": {
+    "WinAudioClean.Batch.ps1": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.Launcher.ps1": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5",
+    "WinAudioClean.Output.ps1": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+    "WinAudioClean.Preview.ps1": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+    "WinAudioClean.Queue.ps1": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+    "WinAudioClean.Settings.ps1": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+    "WinAudioClean.bat": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+    "WinAudioClean.ps1": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76"
+  },
+  "dependencies": {
+    "version": "9.0.2",
+    "executableHashes": {
+      "ffmpeg.exe": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "ffprobe.exe": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+    }
+  },
+  "sourceGuard": {
+    "physicalFiles": 66,
+    "allUnchangedFromCumulativeGate": true
+  },
+  "initialAttempt": {
+    "status": "rejected_before_processing",
+    "cause": "Explorer passed a parentheses-containing input path unquoted; the existing launcher punctuation guard rejected it.",
+    "recovery": "A byte-identical neutral-named copy with the original extension was prepared; the user repeated the actual Explorer drops.",
+    "runtimeOrGuardChanged": false,
+    "limit": "This retry does not establish universal positional punctuation support. The original failed attempt remains recorded."
+  },
+  "privacy": "Raw reports, interview names/paths/metadata, timestamps, file hashes, diagnostics and audio stay local/ignored. Public evidence uses only allowlisted outcomes and source/tool hashes.",
+  "scopeLimits": [
+    "User playback observations accept this original workflow; they are not a formal listening corpus or default-sound promotion.",
+    "No new parser/static/Pester/media processing/Full/Python unittest runs; unchanged-code engineering evidence is retained.",
+    "No manual picker, new Windows-release coverage, broad stress/crash/power-loss or inherited Preview writer-close fault claim."
+  ]
+}

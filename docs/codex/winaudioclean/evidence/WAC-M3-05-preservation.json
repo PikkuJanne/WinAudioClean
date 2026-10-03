@@ -1,0 +1,487 @@
+{
+  "baseline": "83e41830a3b2a7f15ece4efa972f2d824ab716c6",
+  "normalization": "UTF-8 text with CRLF normalized to LF; separate manifests record physical hashes",
+  "functions": [
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Add-WacProgressStage",
+      "normalized_sha256": "14096239eb020e46ee4b31661dedbb618e28a44224ce2b6a1305e3afa472995d",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Add-WacReportFailure",
+      "normalized_sha256": "606791153b16617284fdbee8fb62feebc8743e97acf9a60cae85b9276276a6a5",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Assert-WacInspectionResult",
+      "normalized_sha256": "289ac365501aa0fa63859d201cb7a456a0d8aaa2921026efd35905579ec498c3",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Assert-WacOutputSpace",
+      "normalized_sha256": "1f2d095e3dc95b08ebd909a97f30ff760a636a4abe31ca235b31fc76161eb915",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Assert-WacWaveOutput",
+      "normalized_sha256": "276c28df0c6cf8ee2c1f7c69d33261217a0117d7455d36536c9ea51017151c69",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Complete-WacProgress",
+      "normalized_sha256": "8af2fc6679c116f437a74f09b212671a265da43fd33be8ae87b770c3afbf4b20",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "ConvertFrom-WacLoudnormJson",
+      "normalized_sha256": "72d76854f02a37844e06e58645fca0004d9265e1810fe15f63c345edbb3db0c8",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "ConvertTo-WacFinalLoudness",
+      "normalized_sha256": "9a9814e2d29b21b712aaf84294de626bd2d52c3e7050fecbdb07115615535f6b",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "ConvertTo-WacLoudnessStage",
+      "normalized_sha256": "d2d0f71be3d8bd3aed03d377c49b4176371172ccd2c1e649866689cdc72c082f",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "ConvertTo-WacMeasurement",
+      "normalized_sha256": "6ff46670e65b452df8e291a41834a49d5c18167b5e64d4c51ef01ce718a89505",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "ConvertTo-WacNativeArgument",
+      "normalized_sha256": "98bc9b791ce70aa86c56d4c3962f615d06e1908991ca8fbf6522bac889b1fdb2",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "ConvertTo-WacRedactedReport",
+      "normalized_sha256": "8628413d42ef38765ba102df756e03b539f841d82b13e321e3939cf4a3719318",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Export-WacDiagnostic",
+      "normalized_sha256": "77d638fb33b3b1c2d98b3bbcbafd5e9ce6f69ef47e611aa5fdefa6b32aac24f6",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Format-WacReportLabel",
+      "normalized_sha256": "d76a1db112e0b517516b00ff46795b4a28b5770cd98dd9e0cf37d141036b1602",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Format-WacRunReport",
+      "normalized_sha256": "6aacb3cb77ea144e8c5ff0c6ddbe2e82e6668543c8a0e3d22fdb55f32d7ce5e9",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacAudioStreams",
+      "normalized_sha256": "69b9453c154b84da08228608a04d8173887a32953f1d06d79d20cfe1cdd2279e",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacCleaningSettings",
+      "normalized_sha256": "762a061f7c85ee12b4a81c1e9979685653b33eb0ed52b2fc27effd10b48b4ca0",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacFfmpegArguments",
+      "normalized_sha256": "23b5a0d47d009be0867fbbbd2792f263a5bc12d63b2e81508461fb5fb889a3c8",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacInputFile",
+      "normalized_sha256": "32f1100f31fe0462e687afd6574f710660dcba8aebebc5946a71e319d9fb8510",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacLocalMediaArguments",
+      "normalized_sha256": "9054246c41d110e5c2962991fa350e2feb84da5d2ea1b4b06c27431310c1ac99",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacLoudnessArguments",
+      "normalized_sha256": "3b1967438c48bedfd79821c743095aba38de0391ccf9dcc437c75fe969ce7139",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacLoudnessPlan",
+      "normalized_sha256": "402bd36d0f1021a760dc5da1f0df27cef7600fc3cef6f33564423e6e46ca2c5a",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacOutputPath",
+      "normalized_sha256": "f93b977d0e874f30a4fdd92470866a590ec36f0ea82b04ce9eaed0615581aaed",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacOutputPolicy",
+      "normalized_sha256": "33c3c6b90b9f764e25992d5f33e4b8dc449d028e9dbcbf04cacefb8cf720a32b",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacOutputSpaceEstimate",
+      "normalized_sha256": "a0d77e4e70e90dd1de53064eb7ab2fa19b1d8366d779a8bcfb1f6a97426b0248",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacProcessingProfile",
+      "normalized_sha256": "fdd3ac7b1e88bcda16be034408ccb5a1441e6d25b192d1873dd7da39fe2ac790",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacProgressArguments",
+      "normalized_sha256": "fd8ac87be54050f8a95b11e1f950242cdc3739d89d9802790f8713b2da42ec47",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacProgressReport",
+      "normalized_sha256": "1e6be05a2201eb26c52f4660f1c717126bfffdd8547da6e4461b9fb7fbf7a6e9",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacStreamDuration",
+      "normalized_sha256": "11dc3f36ce879e4b4718471dfc168f61c51a5b310f8b75fccc73939331037441",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Get-WacToolVersion",
+      "normalized_sha256": "571463a1f310ae513a7f260264ff35f1122af058374431db17582c713e8376c2",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Initialize-WacProgressRuntime",
+      "normalized_sha256": "7a41f114b37261dedf1b5576dcc107527c09a114c445aac3f2c6f8ba0c13bedf",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Invoke-WacNativeProcess",
+      "normalized_sha256": "5531d9933771eb98da64221e1da88cc50bc3201df1cd7163c17c29a792a06817",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "New-WacProgressState",
+      "normalized_sha256": "edefe70bf205fb01c2de70f954458bf795e4131457103be554644a05ee2d8cd1",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "New-WacRunContext",
+      "normalized_sha256": "9f5067a9cf6448aef37d348491d31c116ab93d7724f2c29d73afe2fcd65dfea2",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Read-WacHostSelection",
+      "normalized_sha256": "22bc73f4c8b8402ed7b4ef43e34d22a3776b95b41625a9e7b6054a0b7706b5ea",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Read-WacMode",
+      "normalized_sha256": "4d6be5ec89c1391043369f81723d4e73762dacb211ec2458f5304e6f440ae453",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Request-WacCancellation",
+      "normalized_sha256": "f77432135da51a7f6944c3ea06ccc385ec369afccdb73a4ef9d949fa327316df",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Resolve-WacExecutable",
+      "normalized_sha256": "32682f6c70df3c25ff36a546c9ea0fe1cdc3308ac40538dd470b79fda2e594de",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Resolve-WacFileSystemPath",
+      "normalized_sha256": "46c9f426d02eb5bc79f01c5cf544f6bfc7f2002945692613632f6a5e9a3b9ded",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Select-WacAudioStream",
+      "normalized_sha256": "fa28819c2df0552da61959023eef19d4bff6cac9766ad3ccba68a222d4564f5f",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Test-WacInteractive",
+      "normalized_sha256": "c642b954757895ca65cb56e8777735ef84e66b5ddc2dfb19e5078cdad7b2b12d",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Test-WacRequiredFilters",
+      "normalized_sha256": "22d16c1965be0a83b165af93debbba709dfe55ef1595dbff905b2ddc24e1dd43",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Update-WacProgress",
+      "normalized_sha256": "b4abb8158ba1f6680e0c4216f593f63596b365581d1d0b1d38c6326541e7b075",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Update-WacReportOutcome",
+      "normalized_sha256": "a54857bce19a90b22e558e2451645e23fa1fb03b5925bcfd922a576de6101242",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Write-WacProgress",
+      "normalized_sha256": "8aa1ab0971ff09491c76c373111a10a4ef450423aabdd4b54c62fca3dbe227ef",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.ps1",
+      "function": "Write-WacRunReports",
+      "normalized_sha256": "33bfe2db56f716ec233dfef4a5a95e17f88c0db811e74245cae2cd3fe4fd6286",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Add-WacPreviewWindowArguments",
+      "normalized_sha256": "4df3835ea26663c90a86cf3dc624c9fea6043d12d69addc070fd58cb4dfb29c8",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Assert-WacPreviewProcess",
+      "normalized_sha256": "743bc5a7e47f4887a38ee8ae24241efaa3bc72aa73755a12250710c4785798de",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "ConvertTo-WacPreviewSeconds",
+      "normalized_sha256": "6d95ff2b9842fd24cada4b4c7d8f721077cc041760bf9755761c8141a9ee27ab",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "ConvertTo-WacPreviewTimestamp",
+      "normalized_sha256": "4b08384bafd9fb2640e8691c484c566dc362fef44bf811994e0c6cbe824d6fb6",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewAlignment",
+      "normalized_sha256": "d3bd5766889546763fa54c6c48050b0b8f6b29e2dc15f30534b011bc3b89da12",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewAssetMeasurement",
+      "normalized_sha256": "979047995536cedf5737136e1b66a58d2d389113c0a736afcf871e7b4a8820fc",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewMatchPlan",
+      "normalized_sha256": "9ef1e6ab875e527c7e0c081842f5240d7cc1c6cc67a57ebceb120d3d529a1ece",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewRange",
+      "normalized_sha256": "40718b9b893f8d1eccafcf766f699897339410fbaddd6df4c72c62dac9ce5ef4",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewRenderArguments",
+      "normalized_sha256": "56840930efffe58e2dce6c6d708da2016133ef278e876aebeac0876a84427850",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewSpaceEstimate",
+      "normalized_sha256": "2b1f9011598b68af0a6ab9142b3d86ffdb222e3c7b29caf32465e813c50a9b8e",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewTimeline",
+      "normalized_sha256": "5c762c4762281a37e60c16018df5a9ce8b6129fbec4005245b0cfaf65eee5493",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Get-WacPreviewTrimFilter",
+      "normalized_sha256": "bd9008bcd453fffd6f399385588b5fbe473cdf10ad8902af8142559fab07bacf",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Remove-WacPreviewOwnedAsset",
+      "normalized_sha256": "6acb90508938ab4cee8f5e2bf104e97405a41079d55f8f1769f7091daad1528c",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Test-WacPreviewNumber",
+      "normalized_sha256": "7485c0434c968396f8ccad268938abdc4980a1573004b9549bab534858e58ff6",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Preview.ps1",
+      "function": "Write-WacPreviewReports",
+      "normalized_sha256": "94f24cd864776a9da922a42cabbe9685db73b0e1fa60b0427ef5c2a05db2719e",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Assert-WacSettingsCombination",
+      "normalized_sha256": "fcbf9818acba048cfa24a74faac7e2162e236ae2389463f6d73b8a4ea1ba8e7e",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Assert-WacSettingsPath",
+      "normalized_sha256": "04eb6227e6d08c64328306c292334e579a053e30500a8972ac012c595990d652",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "ConvertTo-WacSettingsJson",
+      "normalized_sha256": "482e2fffafc391813256156690ac6c57662c20e6429ee878b8b1ddd6d577bd28",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "ConvertTo-WacValidatedSettingsValues",
+      "normalized_sha256": "b39996a6796a02b7de82f9d87f72a9af606184bce590570b6f13c23fc1fede45",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Get-WacDefaultSettingsPath",
+      "normalized_sha256": "1b3a25839508726b0a8224f717aa685bed27b9ff4b2aac7145f21b424c98975d",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Get-WacSettingsNames",
+      "normalized_sha256": "ff867c61ec6578cc5e08c110a83dc36f29b0d0ba879e6c535fd4fc3eef18ef55",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Initialize-WacSettingsTypes",
+      "normalized_sha256": "f6e4bcc49e429cb8f87c9157991366a0b511f2f95d68581a8011d376db4557a3",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Publish-WacSettingsFile",
+      "normalized_sha256": "17aa59c8257191d06d25063aefef58ccf7540087a83dfe23f09cfb0f2b04cfc1",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Read-WacSettings",
+      "normalized_sha256": "bf4948f34fab40a38336523c38bf3d525f45383528ef31f6c96657062df42fcd",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Settings.ps1",
+      "function": "Save-WacSettings",
+      "normalized_sha256": "816b3553ae94c7097e58a191984ffb5ab4eb85fca632c941db65e5486cc50cb7",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Queue.ps1",
+      "function": "Add-WacQueueDirectory",
+      "normalized_sha256": "99851c14a65936332ce670f2b66f582aeacc657e3dce1a2c935a29ed7a0169c7",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Queue.ps1",
+      "function": "Close-WacQueuedInput",
+      "normalized_sha256": "cdd0cb1ec555e0bc801bbdeade8a5136e0dcb0ba51de1fcd10b32a276bd57e5e",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Queue.ps1",
+      "function": "Initialize-WacQueueFileIO",
+      "normalized_sha256": "166d1366cd6bc676f5ce6a2e24d447530f2dd34c853362d516b66e7b4682b9e8",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Queue.ps1",
+      "function": "Open-WacQueuedInput",
+      "normalized_sha256": "6e105013a22737e30f506abb30055b778eada9cd04affb72fc709f717baf2a90",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Queue.ps1",
+      "function": "Resolve-WacFolderSelection",
+      "normalized_sha256": "a3fa7736c7a0667b455c0ceeed849af70c52c3ada47647b29609e516b0e80924",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Queue.ps1",
+      "function": "Test-WacGeneratedArtifact",
+      "normalized_sha256": "2b3e7dba12857ebba1c1e2b3133f93f69c229414ff93fdac9fc10bdebb680559",
+      "unchanged": true
+    }
+  ],
+  "files": [
+    {
+      "file": "WinAudioClean.IO.ps1",
+      "normalized_sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.Launcher.ps1",
+      "normalized_sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026",
+      "unchanged": true
+    },
+    {
+      "file": "WinAudioClean.bat",
+      "normalized_sha256": "b91cf9ff826fd7bf1b10a253b1610178f69baeccd123aeaef62f7ba7b5bbaae0",
+      "unchanged": true
+    }
+  ],
+  "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-05/check-preservation.ps1",
+  "harness_sha256": "a6ed5b63f5fb905aa476ebb45b3d1e37897198972c19d3f302e15c0d0a1a0bda"
+}

@@ -1,0 +1,24 @@
+[
+  {
+    "command": [
+      "python",
+      "docs/codex/winaudioclean/tools/handoff.py",
+      "validate-plan",
+      "--plan-root",
+      "docs/codex/winaudioclean"
+    ],
+    "exit_code": 0,
+    "output": "{\n  \"valid\": true,\n  \"tasks\": 30,\n  \"acceptance_cases\": 90,\n  \"improvements\": 20\n}\n"
+  },
+  {
+    "command": [
+      "python",
+      "docs/codex/winaudioclean/tools/handoff.py",
+      "next",
+      "--plan-root",
+      "docs/codex/winaudioclean"
+    ],
+    "exit_code": 0,
+    "output": "{\n  \"ready\": [\n    {\n      \"id\": \"WAC-M3-04\",\n      \"title\": \"Add stage-aware progress and controlled cancellation\",\n      \"approval_needed\": false\n    }\n  ],\n  \"blocked\": []\n}\n"
+  }
+]

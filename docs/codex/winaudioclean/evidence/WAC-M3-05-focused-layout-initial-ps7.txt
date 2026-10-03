@@ -1,0 +1,26 @@
+Sanitized selected focused log. Initial layout helper scope. PS5.1 was blocked by host execution policy before loading the runner (exit1, no Pester counts). PS7 ran10 cases:9 passed/1 failed because a READ-only media-directory pin blocked existing IO RenameNoReplace with Win32 32. The helper was corrected to the minimal media READ|WRITE share.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 10 tests in 164ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputLayout.Tests.ps1'
+Describing Optional held output layout
+  [-] allows media publication and separate held report writing while denying directory replacement 627ms (593ms|34ms)
+   IOException: Cannot publish output without replacing an existing file: The process cannot access the file because it is being used by another process. (Win32 32).
+   MethodInvocationException: Exception calling "RenameNoReplace" with "3" argument(s): "Cannot publish output without replacing an existing file: The process cannot access the file because it is being used by another process. (Win32 32)."
+   at Publish-WacOutputTransaction, <REPO>\WinAudioClean.IO.ps1:307
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputLayout.Tests.ps1:25
+  [+] does not reuse a prior job directory or alter its foreign contents 66ms (65ms|2ms)
+  [+] preserves a file occupying the generated job directory name 21ms (20ms|1ms)
+  [+] resolves a supported existing base junction and rejects a generated child junction collision 37ms (36ms|1ms)
+  [+] rejects paths changed in a borrowed layout while preserving the original held hierarchy 24ms (23ms|2ms)
+  [+] rejects a closed directory lease before further use 20ms (19ms|1ms)
+  [+] releases every directory after an allocation assertion fails and retains empty directories 225ms (223ms|1ms)
+  [+] continues releasing handles after a disposal failure and closes idempotently 26ms (22ms|4ms)
+  [+] does not create a missing base or fall back to the current directory 39ms (38ms|1ms)
+  [+] rejects an existing regular file used as the base without modifying it 39ms (37ms|2ms)
+Tests completed in 2.65s
+Tests Passed: 9, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 0

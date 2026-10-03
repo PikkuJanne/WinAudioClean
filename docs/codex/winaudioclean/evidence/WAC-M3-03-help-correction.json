@@ -1,0 +1,71 @@
+{
+  "scope": "After successful frozen-source Full/Targeted/media captures, clarify one comment-help line only; no executable tokens, parameters, dispatch, helper bodies or processing suffix changed. No suite/media rerender is needed for this documentation correction.",
+  "tested_main_sha256": "2dfe569090193a5e24c2ec9423dfaeed79fa37586da114453a04975eca540ada",
+  "final_main_sha256": "b2ae6ed964de189ae32ed041f79c4f5014b98caf13385348ffddab97fe487160",
+  "exact_only_change": {
+    "removed": "the next starts. One-item exit status remains compatible; multiple failed items",
+    "added": "the next starts. One-item explicit lists retain their exit; other failed batches"
+  },
+  "runs": [
+    {
+      "command": [
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M3-03\\verify-help.ps1",
+        "-Before",
+        "<repo>\\.wac-local\\WAC-M3-03\\main-before-help.ps1",
+        "-After",
+        "<repo>\\WinAudioClean.ps1"
+      ],
+      "exit_code": 0,
+      "result": {
+        "shell": "5.1.26100.9444",
+        "parserPassed": true,
+        "executableTokensUnchanged": true,
+        "before": {
+          "tokenCount": 14124,
+          "sha256": "533ef70a7be620729a62076f80a4aabe65270b576fe5b0914d05e5c17522ea8e"
+        },
+        "after": {
+          "tokenCount": 14124,
+          "sha256": "533ef70a7be620729a62076f80a4aabe65270b576fe5b0914d05e5c17522ea8e"
+        }
+      }
+    },
+    {
+      "command": [
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M3-03\\verify-help.ps1",
+        "-Before",
+        "<repo>\\.wac-local\\WAC-M3-03\\main-before-help.ps1",
+        "-After",
+        "<repo>\\WinAudioClean.ps1"
+      ],
+      "exit_code": 0,
+      "result": {
+        "shell": "7.6.5",
+        "parserPassed": true,
+        "executableTokensUnchanged": true,
+        "before": {
+          "tokenCount": 14124,
+          "sha256": "0ca0eb0a47e016644d7055ed4d7f6c59c4a1e24c33567edfe070677162ffa800"
+        },
+        "after": {
+          "tokenCount": 14124,
+          "sha256": "0ca0eb0a47e016644d7055ed4d7f6c59c4a1e24c33567edfe070677162ffa800"
+        }
+      }
+    }
+  ],
+  "verification_harness_sha256": "7cde3e976c7a27f2ebbaabc36956873886d4b3fde4b824557e492f300cae0f19",
+  "verification_harness": "param([string]$Before, [string]$After)\n$ErrorActionPreference = 'Stop'\nfunction Get-TokenFingerprint {\n    param([string]$Path)\n    $tokens = $null; $errors = $null\n    [void][Management.Automation.Language.Parser]::ParseFile($Path, [ref]$tokens, [ref]$errors)\n    if ($errors.Count) { throw ($errors | Out-String) }\n    $semantic = @($tokens | Where-Object { [string]$_.Kind -notin @('Comment','NewLine','LineContinuation','EndOfInput') } | ForEach-Object { [ordered]@{ kind = [string]$_.Kind; text = $_.Text } })\n    $bytes = [Text.UTF8Encoding]::new($false).GetBytes(($semantic | ConvertTo-Json -Depth 4 -Compress))\n    $hash = [Security.Cryptography.SHA256]::Create()\n    try { [pscustomobject]@{ tokenCount = $semantic.Count; sha256 = [BitConverter]::ToString($hash.ComputeHash($bytes)).Replace('-','').ToLowerInvariant() } }\n    finally { $hash.Dispose() }\n}\n$a = Get-TokenFingerprint -Path $Before; $b = Get-TokenFingerprint -Path $After\nif ($a.sha256 -ne $b.sha256 -or $a.tokenCount -ne $b.tokenCount) { throw 'Executable tokens changed in help correction.' }\n[pscustomobject]@{ shell = [string]$PSVersionTable.PSVersion; parserPassed = $true; executableTokensUnchanged = $true; before = $a; after = $b } | ConvertTo-Json -Depth 5 -Compress\n"
+}

@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-02",
+  "scope": "Four BatchInvalidPath-tagged cases only from the77-case Batch suite; unit anchoring + actual valid-invalid-valid single-file child continuation using isolated native double. No Full/static gate claimed.",
+  "discovered": 77,
+  "selected": 4,
+  "notes": [
+    "Four selected regressions pass on Batch C2CF/test4462: exact anchored pipe/NUL data and actual success/failure2/success continuation. Other73 cases are not executed here."
+  ],
+  "followUp": "Root cumulative gates cover the complete final source.",
+  "modules": {
+    "Pester": "5.7.1"
+  },
+  "sourceSnapshot": {
+    "capturedUtc": "2026-10-03T06:32:47.2103716Z",
+    "scope": "Four BatchInvalidPath-tagged cases only from the77-case Batch suite; unit anchoring + actual valid-invalid-valid single-file child continuation using isolated native double. No Full/static gate claimed.",
+    "sources": [
+      {
+        "path": "WinAudioClean.ps1",
+        "sha256": "F01C1CE86C5AF96FDA8B7B116F56A8E552378289C6FC9F822D952EA939326178"
+      },
+      {
+        "path": "WinAudioClean.Batch.ps1",
+        "sha256": "C2CF3A3923E8608AAF0F010B18503D7CB282F040F465BB0C4F1B6CE89A0ACDFC"
+      },
+      {
+        "path": "WinAudioClean.Settings.ps1",
+        "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA"
+      },
+      {
+        "path": "WinAudioClean.IO.ps1",
+        "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      {
+        "path": "tests/WinAudioClean.Batch.Tests.ps1",
+        "sha256": "4462F1531BF171624CD922253B516A414E15DF5D3AED5BAB584D3350583B8BAB"
+      },
+      {
+        "path": "tests/fixtures/Invoke-BatchCase.ps1",
+        "sha256": "4C40D8C3E74C846910B3C9C9A35E49E03FAC05FDA54964953FE20F987D3479B7"
+      },
+      {
+        "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+        "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+      },
+      {
+        "path": "tests/fixtures/NativeProcessFixture.cs",
+        "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+      },
+      {
+        "path": "tests/fixtures/TestProcess.ps1",
+        "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+      }
+    ],
+    "commands": [
+      "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/batch-invalid-path-focused/Invoke-Focused.ps1 -Repository <repo>",
+      "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/batch-invalid-path-focused/Invoke-Focused.ps1 -Repository <repo>"
+    ],
+    "harnessSha256": "F9285FBBEBDBE9536894C1C890D65B1349925BD231A3B9115174FCF7BE0C8571"
+  },
+  "sourceHashesAfter": [
+    {
+      "path": "WinAudioClean.ps1",
+      "sha256": "F01C1CE86C5AF96FDA8B7B116F56A8E552378289C6FC9F822D952EA939326178",
+      "unchanged": true
+    },
+    {
+      "path": "WinAudioClean.Batch.ps1",
+      "sha256": "C2CF3A3923E8608AAF0F010B18503D7CB282F040F465BB0C4F1B6CE89A0ACDFC",
+      "unchanged": true
+    },
+    {
+      "path": "WinAudioClean.Settings.ps1",
+      "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA",
+      "unchanged": true
+    },
+    {
+      "path": "WinAudioClean.IO.ps1",
+      "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+      "unchanged": true
+    },
+    {
+      "path": "tests/WinAudioClean.Batch.Tests.ps1",
+      "sha256": "4462F1531BF171624CD922253B516A414E15DF5D3AED5BAB584D3350583B8BAB",
+      "unchanged": true
+    },
+    {
+      "path": "tests/fixtures/Invoke-BatchCase.ps1",
+      "sha256": "4C40D8C3E74C846910B3C9C9A35E49E03FAC05FDA54964953FE20F987D3479B7",
+      "unchanged": true
+    },
+    {
+      "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+      "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+      "unchanged": true
+    },
+    {
+      "path": "tests/fixtures/NativeProcessFixture.cs",
+      "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+      "unchanged": true
+    },
+    {
+      "path": "tests/fixtures/TestProcess.ps1",
+      "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+      "unchanged": true
+    }
+  ],
+  "sourceHashesUnchangedDuringRun": true,
+  "results": [
+    {
+      "shell": "Windows PowerShell 5.1.26100.9444",
+      "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/batch-invalid-path-focused/Invoke-Focused.ps1 -Repository <repo>",
+      "exitCode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0,
+      "notRun": 73,
+      "durationSeconds": 19.7,
+      "rawLog": {
+        "ignoredPath": ".wac-local/WAC-M3-02/batch-invalid-path-focused/final-ps51.log",
+        "sha256": "F226B0C9BB9D0E647FDBA835E247599A5EF1CFC66BC670FF5D41F61DF5FB4A5E"
+      },
+      "publishedLog": {
+        "path": "evidence/WAC-M3-02-batch-invalid-path-final-ps51.txt",
+        "sha256": "004EB34E62BC6D12A3B81825E5CDD55301957DDFD8256443753D21CA3F085AD4"
+      }
+    },
+    {
+      "shell": "PowerShell 7.6.5",
+      "command": "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/batch-invalid-path-focused/Invoke-Focused.ps1 -Repository <repo>",
+      "exitCode": 0,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0,
+      "notRun": 73,
+      "durationSeconds": 21.96,
+      "rawLog": {
+        "ignoredPath": ".wac-local/WAC-M3-02/batch-invalid-path-focused/final-ps7.log",
+        "sha256": "A02B471F77F9E2D587EFCDE17DE3545920B700AD4B0FAE41B1D75F46A06F9B92"
+      },
+      "publishedLog": {
+        "path": "evidence/WAC-M3-02-batch-invalid-path-final-ps7.txt",
+        "sha256": "6AB3B7407FC3EAED02B6A73568CD3A861CB9FC1F808B8CC658530B844E59B2CF"
+      }
+    }
+  ],
+  "findings": [
+    null
+  ],
+  "harness": {
+    "ignoredPath": ".wac-local/WAC-M3-02/batch-invalid-path-focused/Invoke-Focused.ps1",
+    "sha256": "F9285FBBEBDBE9536894C1C890D65B1349925BD231A3B9115174FCF7BE0C8571",
+    "text": "param([string]$Repository)\r\n$ErrorActionPreference = 'Stop'\r\nImport-Module (Join-Path $Repository '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\r\nWrite-Output ('Focused shell: ' + $PSVersionTable.PSVersion)\r\n$result = Invoke-Pester -Path (Join-Path $Repository 'tests/WinAudioClean.Batch.Tests.ps1') -TagFilter 'BatchInvalidPath' -Output Detailed -PassThru\r\nif ($result.PassedCount -ne 4 -or $result.FailedCount -gt 0 -or $result.FailedContainersCount -gt 0 -or $result.FailedBlocksCount -gt 0) { exit 1 }\r\nexit 0\r\n",
+    "reproduction": "Save this exact harness text outside the tracked tree, supply the repository path, and use matching recorded source files plus pinned Pester5.7.1. Historical source hashes differ from the current tree; historical results are not reinterpreted as current-source results."
+  },
+  "fixtureScope": "Source hashes identify the isolated typed driver, native boundary double, and process helper. Inputs/preferences/output are generated under TestDrive. This is not a real-media measurement gate.",
+  "sanitization": [
+    "Repo absolute paths, personal profile/user paths and temporary test roots replaced with placeholders.",
+    "Credential-like key/value and bearer <redacted> redacted if present; synthetic long D payload condensed without deleting the failure marker.",
+    "ANSI controls removed; other control bytes escaped; trailing whitespace and EOF normalized to one CRLF; UTF8 without BOM.",
+    "Raw and published log hashes are recorded separately; published bytes are not claimed to match raw bytes."
+  ],
+  "excludedClaims": [
+    "No parser/static/governance/Full gate claimed by these wrappers.",
+    "No desktop Explorer drop or actual FFmpeg encoding claimed by these native-double cases."
+  ]
+}

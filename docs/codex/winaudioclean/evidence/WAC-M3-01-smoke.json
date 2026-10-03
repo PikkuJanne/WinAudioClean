@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "helperSha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA",
+  "smokeScriptSha256": "63E3DD7FD157399A76C17F9F118E61E51D20CEE5D70D255256829B7F8D680423",
+  "scope": "Nine parser/precedence/typed locale/atomic ownership cases per shell; isolated ignored paths only; no actual per-user settings written.",
+  "static": {
+    "command": "Invoke-ScriptAnalyzer -Path .\\WinAudioClean.Settings.ps1 -Settings .\\scripts\\PSScriptAnalyzerSettings.psd1",
+    "exitCode": 0,
+    "safetyFindings": 0,
+    "compatibilityFindings": 0,
+    "advisories": 6,
+    "advisoryRules": [
+      "PSUseSingularNouns"
+    ]
+  },
+  "runs": [
+    {
+      "shell": "Windows PowerShell",
+      "version": "5.1.26100.9444",
+      "command": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\\.wac-local\\WAC-M3-01\\settings-helper-smoke.ps1",
+      "log": ".wac-local/WAC-M3-01/settings-helper-smoke-ps51.txt",
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "sanitized_log": "evidence/WAC-M3-01-smoke-ps51.txt",
+      "sanitized_log_sha256": "f0e1ca37b619e1c1a6bad64e701f5ed0c05bcde68ea72b84c9db265644e92b5c"
+    },
+    {
+      "shell": "PowerShell",
+      "version": "7.6.5",
+      "command": "pwsh.exe -NoProfile -File .\\.wac-local\\WAC-M3-01\\settings-helper-smoke.ps1",
+      "log": ".wac-local/WAC-M3-01/settings-helper-smoke-ps7.txt",
+      "exitCode": 0,
+      "passed": 9,
+      "failed": 0,
+      "sanitized_log": "evidence/WAC-M3-01-smoke-ps7.txt",
+      "sanitized_log_sha256": "614c393fb2d26c40c26b9a53dbee392b0a06764546a9b345526e16e0db76e39b"
+    }
+  ],
+  "preliminary": {
+    "status": "superseded development smoke failures, not final gate results",
+    "description": "Initial C# String method shadow, generic Dictionary.Contains and File.Replace null-binding were corrected. A direct four-case File.Replace experiment (closed/held replacement, unpinned/pinned directory) passed only closed replacement cases. Even READ/WRITE/DELETE sharing on held data-access replacement failed; Microsoft ReplaceFileW opens replacement with no sharing. Root selected held SetFileInformationByHandle rename matching existing IO structure instead; both final hosts prove actual replacement, ownership denial and rollback.",
+    "primarySource": "https://learn.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-replacefilew",
+    "experiment_sketch_not_exact_execution_record": "foreach($test in 1..4) { WriteAllText(old); WriteAllText(temp); if(test 2/4) hold temp FileStream(ReadWrite, ReadWrite|Delete); if(test 3/4) hold NativeFileIO.OpenDirectory; File.Replace(temp, old, NullString.Value); finally dispose all holds }"
+  },
+  "smokeScriptSource": "$ErrorActionPreference = 'Stop'\n$repository = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\\..'))\nSet-Location -LiteralPath $repository\n. (Join-Path $repository 'WinAudioClean.ps1')\n. (Join-Path $repository 'WinAudioClean.Settings.ps1')\n$sourceHash = (Get-FileHash -LiteralPath (Join-Path $repository 'WinAudioClean.Settings.ps1') -Algorithm SHA256).Hash\n$expectedHash = 'BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA'\nif ($sourceHash -ne $expectedHash) { throw 'Smoke source changed.' }\nWrite-Output ('Host=' + $PSVersionTable.PSVersion + '; helperSha256=' + $sourceHash)\n$work = Join-Path $PSScriptRoot ('helper-smoke-' + [guid]::NewGuid().ToString('N'))\n$path = Join-Path $work 'settings.json'\n$utf8 = [Text.UTF8Encoding]::new($false)\n$passed = 0\n$oldCulture = [Threading.Thread]::CurrentThread.CurrentCulture\n$oldUiCulture = [Threading.Thread]::CurrentThread.CurrentUICulture\nfunction Assert-Smoke { param([bool]$Condition, [string]$Message) if (-not $Condition) { throw $Message } }\ntry {\n    $missing = Read-WacSettings -Path $path\n    Assert-Smoke ($missing.Count -eq 0 -and -not [IO.Directory]::Exists($work)) 'Missing settings created a path.'\n    $passed++; Write-Output 'PASS missing file is empty and does not create directories'\n    $resolved = Resolve-WacSettings -Explicit @{ Mono = [Management.Automation.SwitchParameter]::new($false); CleaningOptions = @{}; inputPath = 'ignored.wav' } -Saved @{ Mode = 'Raw'; Mono = $true; BitDepth = '24'; CleaningOptions = @{ Gate = $false } }\n    Assert-Smoke ($resolved.Values.Mono -is [bool] -and -not $resolved.Values.Mono -and $resolved.Values.CleaningOptions.Count -eq 0 -and $resolved.Origins.Mono -eq 'CLI' -and $resolved.Origins.Mode -eq 'Saved') 'Precedence failed.'\n    $passed++; Write-Output 'PASS explicit false and empty cleaning dictionary replace saved preferences'\n    foreach ($culture in @('de-DE', 'fi-FI')) {\n        [Threading.Thread]::CurrentThread.CurrentCulture = [Globalization.CultureInfo]::GetCultureInfo($culture)\n        [Threading.Thread]::CurrentThread.CurrentUICulture = [Globalization.CultureInfo]::GetCultureInfo($culture)\n        $values = @{ Mode = 'Raw'; Preset = 'Gentle'; BitDepth = '24'; Mono = $false; AudioStreamIndex = '0'; CleaningOptions = @{ NoiseReductionDb = 4.5 } }\n        $null = Save-WacSettings -Path $path -Values $values\n        $read = Read-WacSettings -Path $path\n        Assert-Smoke ($read.BitDepth -ceq '24' -and $read.AudioStreamIndex -ceq '0' -and $read.CleaningOptions.NoiseReductionDb -eq 4.5 -and $read.Mono -is [bool]) 'Roundtrip lost settings types.'\n        Assert-Smoke ([IO.File]::ReadAllText($path).Contains('4.5')) 'Locale changed JSON decimal serialization.'\n        $passed++; Write-Output ('PASS atomic save/read typed decimal roundtrip ' + $culture)\n    }\n    $rejected = $false\n    try { $null = Resolve-WacSettings -Explicit @{ Mode = 'Raw' } -Saved @{ Mode = 'Zoom'; Preset = 'Gentle' } } catch { $rejected = $true }\n    Assert-Smoke $rejected 'Saved invalid profile escaped validation.'\n    $passed++; Write-Output 'PASS whole saved profile validates before CLI override'\n    $bad = Join-Path $work 'bad.json'\n    [IO.File]::WriteAllText($bad, '{\"schemaVersion\":1,\"settings\":{\"mode\":\"Raw\",\"mo\\u0064e\":\"Zoom\"}}', $utf8)\n    $rejected = $false\n    try { $null = Read-WacSettings -Path $bad } catch { $rejected = $true }\n    Assert-Smoke $rejected 'Escaped duplicate key was accepted.'\n    $passed++; Write-Output 'PASS duplicate decoded JSON keys reject'\n    [IO.File]::WriteAllBytes($bad, [byte[]]@(0x7b, 0xff, 0x7d))\n    $rejected = $false\n    try { $null = Read-WacSettings -Path $bad } catch { $rejected = $true }\n    Assert-Smoke $rejected 'Malformed UTF-8 was accepted.'\n    $passed++; Write-Output 'PASS malformed UTF-8 rejects'\n    $before = [IO.File]::ReadAllText($path)\n    $originalPublisher = (Get-Command Publish-WacSettingsFile).ScriptBlock\n    $script:DeleteDenied = $false; $script:RenameDenied = $false; $script:WriteDenied = $false\n    function Publish-WacSettingsFile {\n        param($TempPath, $Path, $DestinationExists, $Writer, $Directory)\n        try { [IO.File]::Delete($TempPath) } catch [IO.IOException] { $script:DeleteDenied = $true }\n        try { [IO.File]::Move($TempPath, ($TempPath + '.foreign')) } catch [IO.IOException] { $script:RenameDenied = $true }\n        $foreignWriter = $null\n        try { $foreignWriter = [IO.FileStream]::new($TempPath, [IO.FileMode]::Open, [IO.FileAccess]::Write, [IO.FileShare]::ReadWrite -bor [IO.FileShare]::Delete) }\n        catch [IO.IOException] { $script:WriteDenied = $true }\n        finally { if ($null -ne $foreignWriter) { $foreignWriter.Dispose() } }\n        throw [OperationCanceledException]::new('Injected publication interruption.')\n    }\n    $rejected = $false\n    try { $null = Save-WacSettings -Path $path -Values @{} } catch { $rejected = $true }\n    finally { Set-Item -LiteralPath Function:\\Publish-WacSettingsFile -Value $originalPublisher }\n    Assert-Smoke ($rejected -and $script:DeleteDenied -and $script:RenameDenied -and $script:WriteDenied) 'Foreign operations were not denied.'\n    Assert-Smoke ([IO.File]::ReadAllText($path) -ceq $before) 'Interrupted save changed prior bytes.'\n    Assert-Smoke (@(Get-ChildItem -LiteralPath $work -Filter '.wac-settings-*.tmp').Count -eq 0) 'Interrupted save leaked its owned temp.'\n    $passed++; Write-Output 'PASS interrupted publish preserves prior bytes, denies foreign temp writes/rename/delete, and cleans owned temp'\n    $null = Save-WacSettings -Path $path -Values @{}\n    Assert-Smoke ([IO.File]::ReadAllText($path) -ceq '{\"schemaVersion\":1,\"settings\":{}}') 'Reset did not save empty versioned settings.'\n    Assert-Smoke ((Read-WacSettings -Path $path).Count -eq 0) 'Reset read is not empty.'\n    $passed++; Write-Output 'PASS atomic reset writes valid empty settings'\n    Write-Output ('RESULT passed=' + $passed + '; failed=0')\n} finally {\n    [Threading.Thread]::CurrentThread.CurrentCulture = $oldCulture\n    [Threading.Thread]::CurrentThread.CurrentUICulture = $oldUiCulture\n}\n"
+}

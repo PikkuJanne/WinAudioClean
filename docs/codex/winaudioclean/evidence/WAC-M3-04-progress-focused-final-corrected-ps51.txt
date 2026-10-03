@@ -1,0 +1,180 @@
+Selected sanitized Pester log. All 77 selected cases passed on stable mainA29E6 after cancellation-input classification was narrowed to the actually caught copy-task exception and inspection cancellation exits were corrected. Includes the new ordinary-app prerequested borrowed-context inspection130/no native startup/no new export/source preservation regression.
+
+Pester v5.7.1
+
+Starting discovery in 3 files.
+Discovery found 77 tests in 465ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.Progress.Tests.ps1'
+Describing M3-04 structured progress and owned cancellation
+ Describing AC-058: bounded stage progress without premature completion
+   [+] keeps Analysis within its range and preserves file position
+ 682ms (470ms|211ms)
+   [+] keeps Rendering within its range and preserves file position
+ 177ms (175ms|2ms)
+   [+] keeps Verification within its range and preserves file position
+ 208ms (205ms|2ms)
+   [+] keeps Rendering within its range and preserves file position
+ 207ms (204ms|3ms)
+   [+] keeps preview original within its range and preserves file position
+ 193ms (189ms|3ms)
+   [+] keeps preview processed within its range and preserves file position
+ 176ms (171ms|4ms)
+   [+] keeps preview comparison within its range and preserves file position
+ 182ms (179ms|3ms)
+   [+] keeps preview verification within its range and preserves file position
+ 240ms (236ms|3ms)
+   [+] leaves unknown duration indeterminate even after structured end
+ 58ms (51ms|7ms)
+   [+] leaves negative duration indeterminate even after structured end
+ 55ms (51ms|4ms)
+   [+] leaves NaN duration indeterminate even after structured end
+ 49ms (47ms|2ms)
+   [+] leaves infinite duration indeterminate even after structured end
+ 52ms (48ms|3ms)
+   [+] does not infer completion from a snapshot without a measured time
+ 34ms (33ms|2ms)
+   [+] formats progress consistently under de-DE
+ 112ms (108ms|3ms)
+   [+] formats progress consistently under fi-FI
+ 35ms (27ms|8ms)
+   [+] isolates a closed or failing progress sink from processing state
+ 570ms (568ms|2ms)
+   [+] adds only structured transport flags while preserving the constructed graph
+ 105ms (101ms|5ms)
+   [+] rejects start above publication boundary progress ranges before creating a false completion state
+ 40ms (36ms|3ms)
+   [+] rejects end at premature completion progress ranges before creating a false completion state
+ 14ms (10ms|4ms)
+   [+] rejects descending progress ranges before creating a false completion state
+ 15ms (11ms|4ms)
+ Describing AC-058/060: actual bounded structured pipe and separate diagnostics
+   [+] parses fragmented complete blocks and never converts diagnostic time text into progress
+ 378ms (369ms|8ms)
+   [+] retains only complete structured blocks for unterminated final marker
+ 165ms (156ms|9ms)
+   [+] retains only complete structured blocks for time without block terminator
+ 117ms (112ms|5ms)
+   [+] retains only complete structured blocks for human statistics
+ 125ms (123ms|2ms)
+   [+] retains only complete structured blocks for negative time
+ 124ms (121ms|3ms)
+   [+] retains only complete structured blocks for nonfinite time
+ 158ms (153ms|4ms)
+   [+] retains only complete structured blocks for overflow time
+ 220ms (216ms|4ms)
+   [+] retains only complete structured blocks for expression time
+ 133ms (130ms|3ms)
+   [+] retains only complete structured blocks for duplicate time
+ 117ms (114ms|3ms)
+   [+] retains only complete structured blocks for locale decimal time
+ 117ms (114ms|3ms)
+   [+] retains only complete structured blocks for fractional integer time
+ 217ms (214ms|3ms)
+   [+] retains only complete structured blocks for missing time
+ 114ms (111ms|3ms)
+   [+] retains only complete structured blocks for complete block then truncated newer block
+ 448ms (431ms|17ms)
+   [+] drains overlong malformed lines and a diagnostic flood without poisoning the next block
+ 345ms (342ms|3ms)
+   [+] applies the structured block field limit at 64 fields
+ 165ms (161ms|4ms)
+   [+] applies the structured block field limit at 65 fields
+ 207ms (201ms|6ms)
+   [+] applies the structured line limit at 4096 characters
+ 148ms (139ms|9ms)
+   [+] applies the structured line limit at 4097 characters
+ 124ms (122ms|3ms)
+   [+] recovers valid progress after discarding an overflowing block
+ 131ms (128ms|3ms)
+   [+] retains native nonzero status even when it emitted a completed progress block
+ 123ms (121ms|3ms)
+   [+] preserves ordinary stdout behavior when no progress state is supplied
+ 109ms (106ms|3ms)
+ Describing AC-059/060: active owned cancellation and bounded stream cleanup
+   [+] cancels the owned analysis process while an independent job stays alive
+ 900ms (895ms|5ms)
+   [+] cancels the owned render process while an independent job stays alive
+ 950ms (948ms|2ms)
+   [+] cancels the owned verification process while an independent job stays alive
+ 921ms (919ms|3ms)
+   [+] returns cancellation before startup without creating a native record
+ 22ms (20ms|2ms)
+   [+] honours a prerequested borrowed context during ordinary application inspection
+ 1.65s (1.65s|2ms)
+   [+] cancels an unread input pipe without disposing the caller-held source
+ 1.03s (1.02s|3ms)
+   [+] keeps early exit zero distinguishable from a failed held-input transfer
+ 210ms (208ms|2ms)
+
+Running tests from '<REPO>\tests\WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv
+ 379ms (375ms|3ms)
+  [+] preserves square brackets in actual child argv
+ 137ms (136ms|2ms)
+  [+] preserves apostrophe in actual child argv
+ 200ms (196ms|4ms)
+  [+] preserves Unicode in actual child argv
+ 219ms (216ms|3ms)
+  [+] preserves ampersand in actual child argv
+ 198ms (193ms|4ms)
+  [+] preserves percent signs in actual child argv
+ 216ms (195ms|21ms)
+  [+] preserves exclamation marks in actual child argv
+ 194ms (191ms|3ms)
+  [+] preserves parentheses in actual child argv
+ 183ms (179ms|4ms)
+  [+] preserves empty argument in actual child argv
+ 107ms (103ms|4ms)
+  [+] preserves embedded quotes in actual child argv
+ 109ms (107ms|2ms)
+  [+] preserves a quote alone in actual child argv
+ 109ms (107ms|2ms)
+  [+] preserves trailing backslash after spaces in actual child argv
+ 112ms (109ms|3ms)
+  [+] preserves multiple trailing backslashes in actual child argv
+ 110ms (107ms|3ms)
+  [+] preserves backslashes before an embedded quote in actual child argv
+ 110ms (107ms|3ms)
+  [+] starts with no child arguments and no render timeout
+ 105ms (103ms|2ms)
+  [+] keeps native nonzero status and both diagnostic streams
+ 89ms (87ms|2ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input
+ 98ms (96ms|2ms)
+  [+] returns structured startup failure for a missing executable
+ 26ms (23ms|3ms)
+  [+] returns structured startup failure for a file that is not an executable
+ 22ms (21ms|2ms)
+  [+] rejects a NUL argument before starting the child
+ 22ms (19ms|3ms)
+  [+] rejects an excessive command line before starting the child
+ 37ms (36ms|2ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity
+ 122ms (119ms|2ms)
+  [+] terminates the timed-out child and retains prior diagnostics
+ 1.74s (1.73s|3ms)
+
+Running tests from '<REPO>\tests\WinAudioClean.NativeInput.Tests.ps1'
+Describing AC-038/039: held-stream input transfer and native cleanup
+  [+] transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream
+ 469ms (465ms|3ms)
+  [+] drains both output pipes after a large input transfer and retains every diagnostic character
+ 179ms (176ms|3ms)
+  [+] rejects an unreadable caller stream before creating the child
+ 37ms (34ms|2ms)
+  [+] retains a source read error and stops the child without disposing the caller stream
+ 171ms (168ms|3ms)
+  [+] does not treat an early native exit zero as success when the input copy failed
+ 257ms (255ms|2ms)
+  [+] times out an unread input pipe, drains diagnostics and preserves an unrelated process
+ 1.3s (1.29s|3ms)
+Tests completed in 23.53s
+Tests Passed: 77,
+Failed: 0,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 0

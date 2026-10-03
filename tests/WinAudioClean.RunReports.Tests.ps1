@@ -72,8 +72,8 @@ function Add-WacSummaryReportContent {
         param($Sandbox, [string]$Outcome = 'success', [string]$ReportFault = '', [string]$ProbeJson = '')
         $environment = @{
             WAC_TEST_FFMPEG_OUTPUT = '1'; WAC_TEST_SLEEP_MS = '50'
-            WAC_TEST_STDOUT = 'PRIVATE_STDOUT_TOKEN source C:\PRIVATE_USER_TOKEN\PRIVATE_FILENAME_TOKEN.wav'
-            WAC_TEST_STDERR = 'PRIVATE_STDERR_TOKEN title PRIVATE_TITLE_TOKEN'
+            WAC_TEST_STDOUT = "out_time_us=1500000`nprogress=continue`nout_time_us=3000000`nprogress=end`n"
+            WAC_TEST_STDERR = 'PRIVATE_STDERR_TOKEN source C:\PRIVATE_USER_TOKEN\PRIVATE_FILENAME_TOKEN.wav title PRIVATE_TITLE_TOKEN'
             WAC_TEST_EXIT_CODE = $(if ($Outcome -eq 'encoder') { '17' } else { '0' })
             WAC_TEST_OUTPUT_MODE = $(if ($Outcome -eq 'validation') { 'short' } else { 'valid' })
             WAC_REPORT_TEST_FAULT = $ReportFault; PSMODULEPATH = $null
@@ -163,8 +163,18 @@ Describe 'AC-028: per-run JSON, text, summary, console and exit agree' -Tag 'Run
         $json.timing.endedAtUtc | Should -Not -BeNullOrEmpty
         $json.output.published | Should -Be $Published
         $json.output.validity | Should -BeExactly $(if ($Published) { 'PASSED' } else { 'FAILED' })
-        $json.diagnostics.standardOutput | Should -Match 'PRIVATE_STDOUT_TOKEN'
+        $json.diagnostics.standardOutput | Should -BeNullOrEmpty
         $json.diagnostics.standardError | Should -Match 'PRIVATE_STDERR_TOKEN'
+        $json.diagnostics.standardError | Should -Match 'PRIVATE_FILENAME_TOKEN'
+        $rendering = @($json.progress.stages | Where-Object { $_.stage -eq 'Rendering' })
+        $rendering.Count | Should -Be 1
+        $rendering[0].snapshot.Blocks | Should -Be 2
+        $rendering[0].snapshot.OutTimeMicroseconds | Should -Be 3000000
+        $rendering[0].structuredEnd | Should -BeTrue
+        $rendering[0].percent | Should -BeGreaterOrEqual 0
+        $rendering[0].percent | Should -BeLessOrEqual 90
+        $json.progress.completed | Should -Be $Published
+        if (-not $Published) { @($json.progress.stages | Where-Object { $_.percent -eq 100 }).Count | Should -Be 0 }
         foreach ($name in @('integratedLufs', 'truePeakDbtp', 'loudnessRangeLu')) {
             $json.measurements.$name.value | Should -BeNullOrEmpty
             $json.measurements.$name.reason | Should -BeExactly 'not_measured'
@@ -183,8 +193,9 @@ Describe 'AC-028: per-run JSON, text, summary, console and exit agree' -Tag 'Run
             $human | Should -Match ('STATUS\s+: ' + $Status + ' \(Native Exit Code: ' + $Native + '; Application Exit Code: ' + $Exit + '\)')
             $human | Should -Match ([regex]::Escape($json.jobId))
             $human | Should -Match ([regex]::Escape($reportLevelFilters))
-            $human | Should -Match 'PRIVATE_STDOUT_TOKEN'
+            $human | Should -Not -Match '(?m)^out_time_us=|^progress=(continue|end)'
             $human | Should -Match 'PRIVATE_STDERR_TOKEN'
+            $human | Should -Match 'PRIVATE_FILENAME_TOKEN'
         }
         Assert-WacReportAudioOwnership -Sandbox $sandbox -Published $Published
     }
@@ -273,7 +284,7 @@ Describe 'AC-030: reporting failures preserve the primary outcome and audio' -Ta
                 $startInfo.RedirectStandardInput = $true
                 $startInfo.EnvironmentVariables.Remove('PSMODULEPATH')
                 $startInfo.EnvironmentVariables['WAC_TEST_FFMPEG_OUTPUT'] = '1'
-                $startInfo.EnvironmentVariables['WAC_TEST_STDOUT'] = $token
+                $startInfo.EnvironmentVariables['WAC_TEST_STDOUT'] = "out_time_us=1500000`nprogress=continue`nout_time_us=3000000`nprogress=end`n"
                 $startInfo.EnvironmentVariables['WAC_TEST_STDERR'] = ('stderr ' + $token)
                 $startInfo.EnvironmentVariables['WAC_TEST_SLEEP_MS'] = '1000'
                 $process = New-Object Diagnostics.Process
@@ -301,7 +312,13 @@ Describe 'AC-030: reporting failures preserve the primary outcome and audio' -Ta
                 $report.applicationExitCode | Should -Be 0
                 $text = Get-Content -Raw -LiteralPath (Join-Path $sandbox.Output ('WinAudioClean_' + $report.jobId + '.txt'))
                 $summary.Contains($text.Trim()) | Should -BeTrue -Because 'each complete per-run entry must occur contiguously in the shared summary'
-                $matches = @($pending | Where-Object { $report.diagnostics.standardOutput -match $_.Token })
+                $report.diagnostics.standardOutput | Should -BeNullOrEmpty
+                $rendering = @($report.progress.stages | Where-Object { $_.stage -eq 'Rendering' })
+                $rendering.Count | Should -Be 1
+                $rendering[0].snapshot.Blocks | Should -Be 2
+                $rendering[0].percent | Should -BeLessThan 100
+                $report.progress.completed | Should -BeTrue
+                $matches = @($pending | Where-Object { $report.diagnostics.standardError -match $_.Token })
                 $matches.Count | Should -Be 1
             }
             ([regex]::Matches($summary, 'STATUS\s+: SUCCESS')).Count | Should -Be 2

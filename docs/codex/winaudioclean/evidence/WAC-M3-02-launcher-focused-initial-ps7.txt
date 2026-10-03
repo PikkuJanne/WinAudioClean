@@ -1,0 +1,51 @@
+Focused shell: 7.6.5
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 32 tests in 550ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.LauncherTransport.Tests.ps1'
+Describing AC-052/054: launcher request parsing accepts narrow verified CMD frames
+  [+] retains every quoted safe character-rich path in order and maps multiple inputs as typed data 398ms (338ms|59ms)
+  [+] rejects percent token before application invocation 125ms (117ms|8ms)
+  [+] rejects exclamation token before application invocation 11ms (8ms|3ms)
+  [+] rejects different original token before application invocation 11ms (9ms|3ms)
+  [+] rejects existing CMD session before application invocation 10ms (7ms|3ms)
+  [+] rejects unquoted operator before application invocation 20ms (18ms|2ms)
+  [+] rejects unbalanced quote before application invocation 11ms (8ms|3ms)
+  [+] rejects capture unavailable before application invocation 8ms (5ms|3ms)
+  [+] accepts a 7599-character original frame and rejects 7600 with manifest guidance 39ms (37ms|2ms)
+  [+] accepts 1024 captured arguments and rejects excess or an explicit capture-overflow marker 180ms (178ms|2ms)
+  [+] keeps special-character manifest and single-environment paths literal without CMD evaluation 19ms (17ms|1ms)
+  [-] rejects ambiguous or incomplete control routes 71ms (65ms|6ms)
+   Expected an exception to be thrown, but no exception was thrown.
+   at { Get-WacLauncherRequest -Arguments $Arguments -InputPath $Input -InputListPath $List -OutputDirectory $Output } | Should -Throw, <repo>\tests\WinAudioClean.LauncherTransport.Tests.ps1:112
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.LauncherTransport.Tests.ps1:112
+  [+] rejects ambiguous or incomplete control routes 8ms (5ms|2ms)
+  [+] rejects ambiguous or incomplete control routes 8ms (6ms|2ms)
+  [-] rejects ambiguous or incomplete control routes 9ms (7ms|2ms)
+   Expected an exception to be thrown, but no exception was thrown.
+   at { Get-WacLauncherRequest -Arguments $Arguments -InputPath $Input -InputListPath $List -OutputDirectory $Output } | Should -Throw, <repo>\tests\WinAudioClean.LauncherTransport.Tests.ps1:112
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.LauncherTransport.Tests.ps1:112
+  [+] rejects ambiguous or incomplete control routes 7ms (5ms|2ms)
+  [+] rejects ambiguous or incomplete control routes 8ms (6ms|2ms)
+  [+] rejects ambiguous or incomplete control routes 10ms (7ms|3ms)
+  [+] forwards exactly one legacy string or one typed array and preserves status 541ms (537ms|4ms)
+  [+] forwards exactly one legacy string or one typed array and preserves status 44ms (41ms|4ms)
+
+Describing AC-052/054: real CMD and the actual BAT forward to both inner PowerShell hosts
+  [+] passes the safe single and ordered multiple-file matrix exactly to powershell.exe 2.37s (2.36s|8ms)
+  [+] passes the safe single and ordered multiple-file matrix exactly to pwsh.exe 4.76s (4.76s|2ms)
+  [+] passes all special names and >8191 manifest payload literally to powershell.exe 1.09s (1.09s|1ms)
+  [+] passes all special names and >8191 manifest payload literally to pwsh.exe 2.35s (2.35s|1ms)
+  [+] rejects defined percent-token expansion before processing a decoy through powershell.exe 838ms (838ms|1ms)
+  [+] rejects defined percent-token expansion before processing a decoy through pwsh.exe 805ms (804ms|1ms)
+  [+] forwards 30 long paths without loss and rejects 32 before work through powershell.exe 2.39s (2.39s|1ms)
+  [+] forwards 30 long paths without loss and rejects 32 before work through pwsh.exe 3.18s (3.18s|1ms)
+  [+] shows no-input guidance and starts no app through powershell.exe 988ms (987ms|1ms)
+  [+] shows no-input guidance and starts no app through pwsh.exe 1.13s (1.13s|1ms)
+  [+] preserves cancellation130 after the interactive-route pause through powershell.exe 916ms (915ms|1ms)
+  [+] preserves cancellation130 after the interactive-route pause through pwsh.exe 2.15s (2.15s|1ms)
+Tests completed in 26.21s
+Tests Passed: 30, Failed: 2, Skipped: 0, Inconclusive: 0, NotRun: 0

@@ -21,6 +21,7 @@ BeforeAll {
             # This is bounded menu integration, not Explorer/keyboard validation.
             $injection = @'
 function Test-WacInteractive { param([switch]$NonInteractive) $true }
+function Clear-Host {}
 function Read-Host {
     param([string]$Prompt)
     if ($script:WacPresetPrompted) { throw 'Unexpected extra menu prompt.' }
@@ -29,7 +30,7 @@ function Read-Host {
     $env:WAC_PRESET_TEST_CHOICE
 }
 '@
-            $marker = '# --- CONFIGURATION ---'
+            $marker = '# Explicit local support export bypasses media/dependency initialization.'
             if (-not $source.Contains($marker)) { throw 'Cannot locate the test-only host boundary.' }
             $source = $source.Replace($marker, ($injection + "`n" + $marker))
         }

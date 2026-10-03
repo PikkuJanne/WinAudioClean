@@ -1,0 +1,24 @@
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: failed.wav
+Invoke-WacBatchItem: <repo>\WinAudioClean.Batch.ps1:176
+Line |
+ 176 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Controlled item failure
+Processing input 3 of 3: last.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-d1a139cb03d54e6fa68ce79c52634c81\continuation.jsonl
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: cancelled.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-d1a139cb03d54e6fa68ce79c52634c81\cancellation.jsonl
+Processing input 1 of 1: warning.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-d1a139cb03d54e6fa68ce79c52634c81\single-warning.jsonl
+Write-Error: <repo>\.wac-local\WAC-M3-02\batch-smoke.ps1:40
+Line |
+  40 |  & (Join-Path $RepositoryRoot 'WinAudioClean.ps1') -InputPaths @((Join …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Input list failed: Cannot find an overload for "Contains" and the argument count: "1".
+Exception: <repo>\.wac-local\WAC-M3-02\batch-smoke.ps1:41
+Line |
+  41 |  if ($LASTEXITCODE -ne 6) { throw 'Actual main list route failed.' }
+     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Actual main list route failed.

@@ -1,0 +1,11 @@
+Host=5.1.26100.9444; helperSha256=BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA
+PASS missing file is empty and does not create directories
+PASS explicit false and empty cleaning dictionary replace saved preferences
+PASS atomic save/read typed decimal roundtrip de-DE
+PASS atomic save/read typed decimal roundtrip fi-FI
+PASS whole saved profile validates before CLI override
+PASS duplicate decoded JSON keys reject
+PASS malformed UTF-8 rejects
+PASS interrupted publish preserves prior bytes, denies foreign temp writes/rename/delete, and cleans owned temp
+PASS atomic reset writes valid empty settings
+RESULT passed=9; failed=0

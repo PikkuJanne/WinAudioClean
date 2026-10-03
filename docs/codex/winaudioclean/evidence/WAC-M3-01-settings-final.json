@@ -1,0 +1,122 @@
+{
+  "completedUtc": "2026-10-02T19:19:40.1079004Z",
+  "scope": "Targeted Settings suite only: 123 discovered/executed cases; plus parser/analyzer/plan gates. No Full run performed by test agent.",
+  "sourceSnapshot": "final-snapshot.json",
+  "sourcesAfter": [
+    {
+      "path": "WinAudioClean.ps1",
+      "sha256": "880AF42241854CFD3952855C59996C3E15377453392FF4531704D6C02DD08A3B",
+      "unchanged": true
+    },
+    {
+      "path": "WinAudioClean.Settings.ps1",
+      "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA",
+      "unchanged": true
+    },
+    {
+      "path": "WinAudioClean.IO.ps1",
+      "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+      "unchanged": true
+    },
+    {
+      "path": "tests/WinAudioClean.Settings.Tests.ps1",
+      "sha256": "1DCD28C7FD734A9BA044A39A1E201C43618026ABBA63B44C3360F87C8C99DEAB",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/Invoke-Tests.ps1",
+      "sha256": "153636E8FA21875B98FCFDA3FA1253CD737301B971AF43A756D2973D182F994B",
+      "unchanged": true
+    }
+  ],
+  "sourcesUnchanged": true,
+  "testEncoding": {
+    "utf8": true,
+    "hasBom": false,
+    "onlyCrLf": true
+  },
+  "modules": {
+    "Pester": "5.7.1",
+    "PSScriptAnalyzer": "1.24.0"
+  },
+  "results": [
+    {
+      "shell": "Windows PowerShell 5.1.26100.9444",
+      "executable": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1",
+      "exitCode": 0,
+      "passed": 123,
+      "failed": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "pesterDurationSeconds": 40.69,
+      "parserGate": "PASS (34 files)",
+      "staticGate": "PASS (197 non-gating findings)",
+      "planGate": "PASS",
+      "log": "final-ps51.log",
+      "logSha256": "91F17BB0FFF547BCA7E5B7E38F59537E28BCBE9139930B01E75D7103707C3D49",
+      "sanitized_log": "evidence/WAC-M3-01-settings-final-ps51.txt",
+      "sanitized_log_sha256": "bbbe8db2e7f070def48f3a9f10f78bc8ba97d78a93e50c41fb5e3ffa028fe773"
+    },
+    {
+      "shell": "PowerShell 7.6.5",
+      "executable": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "command": "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1",
+      "exitCode": 0,
+      "passed": 123,
+      "failed": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "pesterDurationSeconds": 54.49,
+      "parserGate": "PASS (34 files)",
+      "staticGate": "PASS (197 non-gating findings)",
+      "planGate": "PASS",
+      "log": "final-ps7.log",
+      "logSha256": "D733BE1D3DD5EF5E6B59FEB951229F6BCE0ED95110865A854DA6E5D8B152819B",
+      "sanitized_log": "evidence/WAC-M3-01-settings-final-ps7.txt",
+      "sanitized_log_sha256": "94fdec47f27fb788ff6ec1b42c18dc04b4fb5e97e69d1918b78da330687c8d0b"
+    }
+  ],
+  "preliminaryEvidence": [
+    "initial-snapshot.json",
+    "initial-results.json",
+    "initial-ps51.log",
+    "initial-ps7.log"
+  ],
+  "runtimeFindings": [],
+  "frozen": true,
+  "source_snapshot": {
+    "capturedUtc": "2026-10-02T19:18:02.1949701Z",
+    "scope": "Targeted: tests/WinAudioClean.Settings.Tests.ps1 only; 123 Pester cases; plus runner parser/analyzer/governance plan gates",
+    "correctionsFromInitial": [
+      "Replace PS5.1 failing Remove-Item junction cleanup with nonrecursive IO.Directory.Delete and confirm target bytes after cleanup.",
+      "Require late foreign-destination race test to fail specifically in actual native atomic publication, excluding mock/scriptblock binding errors."
+    ],
+    "sources": [
+      {
+        "path": "WinAudioClean.ps1",
+        "sha256": "880AF42241854CFD3952855C59996C3E15377453392FF4531704D6C02DD08A3B"
+      },
+      {
+        "path": "WinAudioClean.Settings.ps1",
+        "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA"
+      },
+      {
+        "path": "WinAudioClean.IO.ps1",
+        "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      {
+        "path": "tests/WinAudioClean.Settings.Tests.ps1",
+        "sha256": "1DCD28C7FD734A9BA044A39A1E201C43618026ABBA63B44C3360F87C8C99DEAB"
+      },
+      {
+        "path": "scripts/Invoke-Tests.ps1",
+        "sha256": "153636E8FA21875B98FCFDA3FA1253CD737301B971AF43A756D2973D182F994B"
+      }
+    ],
+    "commands": [
+      "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1",
+      "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1"
+    ]
+  }
+}
