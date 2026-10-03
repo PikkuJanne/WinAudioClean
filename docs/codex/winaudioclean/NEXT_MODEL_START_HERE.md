@@ -1,3 +1,22 @@
+# Next model: finish WAC-M4-03 validation
+
+M4-03 is active. Canonical task/AC statuses remain todo/not_run. Read current
+STATUS, evidence/WAC-M4-03, portable package instructions and COVERAGE. Work
+only in maintained WinAudioClean-governance on codex/wac-m4-regression; preserve
+the source-only original. Parent f32cf1591a288ff356f69aa3a2320adf62959808
+is synchronized and its four PR CI jobs are green.
+
+Builder takes explicit clean HEAD, preserves committed payload bytes/version2.3,
+and writes a tool-only ZIP plus checksums/provenance. Require actual two builds
+per host and cross-host byte comparison; then fresh spaces/Unicode extraction
+with approved existing FFmpeg, real BAT/PowerShell cases and separate restricted
+builtin-module cases. New development fixtures are not runtime dependencies.
+Stabilize targeted tests before both local Full gates. Preserve all failures,
+hashes, scopes and eight broader gaps. No FFmpeg bundling/publication/merge/tag
+or M4-04 work is authorized by this implementation checkpoint.
+
+## Historical M4-02 closure handoff (superseded)
+
 # Next model: WAC-M4-03 — Build a versioned portable release package
 
 **M4-02 is complete. Start only WAC-M4-03 when requested.** Canonical24 done/

@@ -1,5 +1,20 @@
 # Current status
 
+Date:2026-10-03. **WAC-M4-03 implementation and validation are in progress.**
+Canonical24 done/6 todo,72 AC pass/18 not_run remain unchanged. Build tooling,
+portable instructions and tool-only dependency notices are being validated.
+Clean-revision repeated packages, extracted-package processing and both local
+Full gates are required before acceptance. Next remains completion of M4-03;
+M4-04 has not started. All eight retained gaps and runtime defaults remain.
+Parent f32cf159 PR run37148623973 completed all four jobs successfully;
+this does not stand in for M4-03 evidence.
+
+[Current evidence](evidence/WAC-M4-03.md).
+
+## Historical M4-02 closure (superseded)
+
+# Current status
+
 Date:2026-10-03. **WAC-M4-02 is complete.** Canonical24 done/6 todo/0 blocked;
 72 AC pass/18 not_run. **Next: WAC-M4-03 — Build a versioned portable release
 package**, unlocked and not started. Coverage retains all eight broader gaps.

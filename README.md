@@ -67,6 +67,9 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 
 **Installation**
 
+For a tool-only ZIP, follow the [portable package guide](docs/PORTABLE_PACKAGE.md)
+to verify its checksum, extract the complete payload and supply FFmpeg.
+
 1. Copy the files to a folder of your choice, e.g.: C:\Tools\WinAudioClean\
 
 2. Put ffmpeg.exe and ffprobe.exe inside that folder, or configure their paths as described below.

@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "task": "WAC-M4-03",
+  "parent": "f32cf1591a288ff356f69aa3a2320adf62959808",
+  "acceptance_ids": [
+    "AC-073",
+    "AC-074",
+    "AC-075"
+  ],
+  "status": "in_progress",
+  "targeted_runs": [
+    {
+      "host": "ps51",
+      "exit_code": 0,
+      "source": {
+        "commit": "f32cf1591a288ff356f69aa3a2320adf62959808",
+        "dirty": true,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "ddafaa8f0f1683a3cb37f0a7d926347b176162622f6b7d71e29ffc2f26365dd1",
+          "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "55488375655c24f4d62d7ee4b76a3dec9f7e7b85708633db968303fe59ba0cdb"
+        }
+      },
+      "source_after": {
+        "commit": "f32cf1591a288ff356f69aa3a2320adf62959808",
+        "dirty": true,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "ddafaa8f0f1683a3cb37f0a7d926347b176162622f6b7d71e29ffc2f26365dd1",
+          "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "55488375655c24f4d62d7ee4b76a3dec9f7e7b85708633db968303fe59ba0cdb"
+        }
+      },
+      "counts": {
+        "passed": 16,
+        "skipped": 0,
+        "outside_scope": 0
+      },
+      "source_unchanged": true,
+      "command": "<host> -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Release.Tests.ps1 -PythonPath <pinned-python>"
+    },
+    {
+      "host": "ps7",
+      "exit_code": 0,
+      "source": {
+        "commit": "f32cf1591a288ff356f69aa3a2320adf62959808",
+        "dirty": true,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "ddafaa8f0f1683a3cb37f0a7d926347b176162622f6b7d71e29ffc2f26365dd1",
+          "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "55488375655c24f4d62d7ee4b76a3dec9f7e7b85708633db968303fe59ba0cdb"
+        }
+      },
+      "source_after": {
+        "commit": "f32cf1591a288ff356f69aa3a2320adf62959808",
+        "dirty": true,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "ddafaa8f0f1683a3cb37f0a7d926347b176162622f6b7d71e29ffc2f26365dd1",
+          "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "55488375655c24f4d62d7ee4b76a3dec9f7e7b85708633db968303fe59ba0cdb"
+        }
+      },
+      "counts": {
+        "passed": 16,
+        "skipped": 0,
+        "outside_scope": 0
+      },
+      "source_unchanged": true,
+      "command": "<host> -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Release.Tests.ps1 -PythonPath <pinned-python>"
+    }
+  ],
+  "zip_probe": {
+    "scope": "in_memory_empty_binary_unicode_names",
+    "hosts": [
+      "5.1.26100.9444",
+      "7.6.5"
+    ],
+    "bytes": 327,
+    "sha256": "c490a70513e05198596ae12c7fec7f26c20df30cdf22ff589980367717a8aade",
+    "independent_crc_and_content_check": true
+  },
+  "runtime_changed": false,
+  "third_party_binaries_bundled": false,
+  "published": false,
+  "retained_gap_count": 8,
+  "dependencies": {
+    "scope": "approved_existing_local_build_not_bundled",
+    "version": "9.0.2-essentials_build-www.gyan.dev",
+    "ffmpeg_sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+    "ffprobe_sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+    "version_exit_codes": [
+      0,
+      0
+    ],
+    "license_exit_codes": [
+      0,
+      0
+    ],
+    "observed_license": "GPL version3 or later",
+    "observed_flags": [
+      "--enable-gpl",
+      "--enable-version3",
+      "--enable-static"
+    ],
+    "nonfree_flag_present": false,
+    "license_source": "https://ffmpeg.org/legal.html"
+  },
+  "license": {
+    "bytes": 1070,
+    "sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+    "notice_preserved": true,
+    "source": "https://opensource.org/license/mit"
+  },
+  "peer_review": {
+    "builder": "passed",
+    "fixtures": "passed",
+    "docs_notices": "passed",
+    "controller": "passed",
+    "scope": "read_only_review_and_recorded_probes_not_full_gate"
+  },
+  "controller_offline_tests": {
+    "command": "<pinned-python> docs/codex/winaudioclean/tests/test_release_package.py -v",
+    "python_version": "3.14.6",
+    "exit_code": 0,
+    "ran": 8,
+    "skipped": 0,
+    "harness_physical_sha256": "8cdb4c233a5d8ac524555bb0b68a5cf5a4fc1a81be25906432d425cef36a3092",
+    "test_physical_sha256": "2f631c780ef17798986af4be88ec68ec57a8b15849b7fb7f2136aaa8c74dd4c9",
+    "script_cache_before": 0,
+    "script_cache_after": 0
+  }
+}

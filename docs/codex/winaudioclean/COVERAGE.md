@@ -1,9 +1,9 @@
 # Acceptance coverage and retained gates
 
-[COVERAGE.json](COVERAGE.json) maps AC-001..069 and the current WAC-M4-02
-AC-070..072 to concrete commands, existing reports or named reviews. It keeps
+[COVERAGE.json](COVERAGE.json) maps AC-001..072 and the current WAC-M4-03
+AC-073..075 to concrete commands, existing reports or named reviews. It keeps
 historical evidence in place rather than duplicating its detailed case logs.
-The map contains 72 cases, 38 command scopes, eight named reviews and eight
+The map contains 75 cases, 41 command scopes, eight named reviews and eight
 retained gaps.
 
 Canonical acceptance remains [ACCEPTANCE.json](ACCEPTANCE.json). A command in
