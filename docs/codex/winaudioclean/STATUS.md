@@ -1,13 +1,40 @@
 # Current status
 
-Date: 2026-10-03. **WAC-M3-02 is complete.** M0/M1/M2 remain complete;
-AC-001 through AC-054 pass their engineering contracts. Eighteen tasks are
-done;12 remain todo. Human listening/default promotion remain unperformed.
+Date: 2026-10-03. **WAC-M3-03 is complete.** M0/M1/M2 remain complete;
+AC-001 through AC-057 pass their engineering contracts. Nineteen tasks are
+done;11 remain todo. Human listening/default promotion remain unperformed.
 
-**Next: WAC-M3-03 — Add sequential folder queues and batch summaries.**
+**Next: WAC-M3-04 — Add stage-aware progress and controlled cancellation.**
 Start separately after fresh synchronization. No merge is required to unlock it.
 
-## M3-02 ordered launcher and list checkpoint
+## M3-03 frozen folder queue checkpoint
+
+Direct PowerShell InputDirectories adds opt-in Recurse through optional Queue,
+with a bounded snapshot before jobs. Local ordinary directory/file handles,
+volume/file identity deduplication, strict generated-name/alias exclusions,
+destination-subtree skips and source identity/size/mtime checks preserve queue
+membership. Reparse entries are explained/skipped without descent; invalid roots,
+enumeration failures or incomplete scans reject before native jobs. Explicit
+lists retain repeats/schema1 and BAT/Launcher remain unchanged.
+
+Folder schema2 adds selection provenance/source snapshot, skip reasons/counts.
+Per-file failures continue; returned cancellation stops pending starts while
+static skips/preflight failures remain. Aggregate cancel130/failed6/warning7/
+success0; journal failure5 retains earlier audio/records and discloses incomplete
+reporting. Empty/allskipped snapshots write summaries without mode/native work.
+
+Final focused 156 pass/1 skip and cumulative
+Full 1330 pass/1 skip Pester per host, exit0. Python62
+discovered each:61 pass, one Windows symlink-privilege skip. Parser/static/plan
+pass; non-gating advisories remain visible. Final real-media folder scope,
+retained preliminary corrections and exact hashes/commands are linked below.
+Default user settings were never written; audio/ownership/filter defaults stay
+frozen. Returned-exit130 tests do not establish active Ctrl+C or listening.
+
+[Evidence](evidence/WAC-M3-03.md), [manifest](evidence/WAC-M3-03-source.json),
+[media](evidence/WAC-M3-03-media.json). Canonical19 done/11todo; nextM3-04 only.
+
+## Prior M3-02 ordered launcher and list checkpoint
 
 Existing BAT now captures ordered paths as environment data through an optional
 Launcher sibling. Fresh CMD framing/count/token checks reject ambiguity and
@@ -24,7 +51,7 @@ once. Ordinary single-file jobs retain sound/report/ownership behavior. A held
 CreateNew JSONL journal flushes header/items/summary, continuing ordinary failures,
 stopping cancelled/persistence-failed lists and preserving prior outputs/results.
 One-item exits remain compatible; multi failure6/warnings7/success0/cancel130,
-journal failure5. Explicit repeats/order remain; folder queue construction waits.
+journal failure5. Explicit repeats/order remain; its historical folder queue scope is now covered by M3-03.
 
 - Final Batch focused73 and additional invalid-path4 per host, transport33,
   legacy Launcher targeted58; required Full1251 Pester +62 Python discovered

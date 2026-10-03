@@ -850,8 +850,12 @@
       "title": "Folder selection",
       "procedure": "Process a mixed folder including output files, nested folders and a junction/symlink loop fixture.",
       "expected": "Recursion is off by default; no loop or generated-output reprocessing; unsupported files are explained/skipped.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-03.md",
+        "evidence/WAC-M3-03-source.json",
+        "evidence/WAC-M3-03-media.json"
+      ]
     },
     {
       "id": "AC-056",
@@ -859,8 +863,12 @@
       "title": "Queue stability",
       "procedure": "Select duplicate paths and inputs with identical stems; place the destination inside the input folder.",
       "expected": "Inputs are deduplicated, names remain collision-safe and newly generated output never enters the running queue.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-03.md",
+        "evidence/WAC-M3-03-source.json",
+        "evidence/WAC-M3-03-media.json"
+      ]
     },
     {
       "id": "AC-057",
@@ -868,8 +876,12 @@
       "title": "Failure continuation",
       "procedure": "Fail a middle item and process remaining items; repeat with cancellation.",
       "expected": "Failure does not discard other results; cancellation stops new jobs and aggregate status is truthful.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-03.md",
+        "evidence/WAC-M3-03-source.json",
+        "evidence/WAC-M3-03-media.json"
+      ]
     },
     {
       "id": "AC-058",

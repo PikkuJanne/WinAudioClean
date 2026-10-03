@@ -546,3 +546,33 @@ CMD/queue checks do not establish a performed Explorer gesture, active-render
 Ctrl+C test, power-loss guarantee or speech listening/default promotion. Evidence:
 `evidence/WAC-M3-02.md`. Next: WAC-M3-03, separately synchronized; no merge,
 release, default promotion, security change or deployment is authorized here.
+
+### 2026-10-03 — WAC-M3-03 frozen folder selection
+
+D34. Add an explicit direct-PowerShell folder route through optional Queue/Batch
+helpers. Keep positional single input, explicit-list repeats/schema1 and BAT
+transport intact. Recursion stays off; one ordered breadth-first snapshot uses
+ordinary local directories without reparse descent, identity deduplication,
+known generated-name/alias exclusions and proper descendant destination skips.
+Bound selection before media jobs; reject incomplete scans rather than truncate.
+Record skipped entries and unavailable sources with reasons. Revalidate each
+pending source's identity, size and modification time and hold its ordinary
+ancestors/read lease through the existing child job. Continue per-file failure,
+retain prior audio/reports and stop pending starts on returned cancellation.
+
+Use schema2 only for folder journals: selection provenance, source snapshot and
+skip reasons/counts extend the existing held CreateNew, flushed incremental
+records. Explicit folder roots equal to the destination can select ordinary
+sources; newly created files never enter an existing snapshot. Empty/all-skipped
+selections write truthful summaries without mode selection/native work. Folder
+aggregate precedence is cancel130, failed6, warning7, success0; journal failure5
+remains distinct. Static skips/preflight failures survive later cancellation.
+
+Exact generated names cannot identify arbitrarily renamed exports without a
+recognized alias. Extension selection does not replace native media validation;
+metadata checks do not promise content hashing, crash recovery or resistance to
+adversarial timestamp restoration. Controlled cancellation tests concern returned
+item exit130; active-render Ctrl+C/progress belongs to WAC-M3-04. Preserve all
+prior audio helpers, IO/Settings/Preview, launcher and filter versions/defaults.
+Evidence: `evidence/WAC-M3-03.md`. No listening/default promotion, merge, release,
+security/settings change or deployment approval is introduced.

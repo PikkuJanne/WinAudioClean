@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-03",
+  "scope": "Pester-only new FolderQueue suite with preserved initial Unit scope and corrected complete80-case scope. Native fixture is a boundary double; real media and cumulative gates are recorded separately by root.",
+  "modules": {
+    "Pester": "5.7.1"
+  },
+  "scopes": [
+    {
+      "stage": "initial-unit",
+      "scope": "Pester-only FolderQueue Unit-tagged initial scope; CLI cases discovered but filtered out. No Full/static gate claimed.",
+      "discovered": 80,
+      "selected": 65,
+      "sourceSnapshot": {
+        "capturedUtc": "2026-10-03T07:35:00.3216863Z",
+        "scope": "Pester-only FolderQueue Unit-tagged initial scope; CLI cases discovered but filtered out. No Full/static gate claimed.",
+        "sources": [
+          {
+            "path": "WinAudioClean.ps1",
+            "sha256": "2DFE569090193A5E24C2EC9423DFAEED79FA37586DA114453A04975ECA540ADA"
+          },
+          {
+            "path": "WinAudioClean.Queue.ps1",
+            "sha256": "A92550CF279BECD93E9C5C6EFF78E95AB4FDF8260B57D273C1A2F14F4CD381C3"
+          },
+          {
+            "path": "WinAudioClean.Batch.ps1",
+            "sha256": "F9F4F77D36FBAFD67A255DA0591815159BE700A41E22886607E835BAEC3ECFB8"
+          },
+          {
+            "path": "WinAudioClean.IO.ps1",
+            "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+          },
+          {
+            "path": "WinAudioClean.Settings.ps1",
+            "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA"
+          },
+          {
+            "path": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+            "sha256": "31A5908F2C8DFAB6D207013DB77C4B331D67294F2C265DFFC59A85B8BFAC56DC"
+          },
+          {
+            "path": "tests/fixtures/Invoke-FolderQueueCase.ps1",
+            "sha256": "2F04EF7DD698ED796B2B8708632E274A1DEA464B0C85104425141552DF4D9523"
+          },
+          {
+            "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+            "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+          },
+          {
+            "path": "tests/fixtures/NativeProcessFixture.cs",
+            "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+          },
+          {
+            "path": "tests/fixtures/TestProcess.ps1",
+            "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+          }
+        ],
+        "harnessSha256": "3AFCC8D8B5AC4B01765133FB8D24BCE6F448EF3A5B832BE186E2E6F826F5F2AA",
+        "commands": [
+          "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag Unit",
+          "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag Unit"
+        ]
+      },
+      "sourceHashesAfter": [
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "2DFE569090193A5E24C2EC9423DFAEED79FA37586DA114453A04975ECA540ADA",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "A92550CF279BECD93E9C5C6EFF78E95AB4FDF8260B57D273C1A2F14F4CD381C3",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "F9F4F77D36FBAFD67A255DA0591815159BE700A41E22886607E835BAEC3ECFB8",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA",
+          "unchanged": true
+        },
+        {
+          "path": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+          "sha256": "31A5908F2C8DFAB6D207013DB77C4B331D67294F2C265DFFC59A85B8BFAC56DC",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/Invoke-FolderQueueCase.ps1",
+          "sha256": "2F04EF7DD698ED796B2B8708632E274A1DEA464B0C85104425141552DF4D9523",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "unchanged": true
+        }
+      ],
+      "sourceHashesUnchangedDuringRun": true,
+      "results": [
+        {
+          "shell": "Windows PowerShell 5.1.26100.9444",
+          "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag Unit",
+          "exitCode": 0,
+          "passed": 64,
+          "failed": 0,
+          "skipped": 1,
+          "inconclusive": 0,
+          "notRun": 15,
+          "durationSeconds": 10.47,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-03/folder-focused/initial-unit-ps51.log",
+            "sha256": "D8705B4400D2C11587B18419FCAD888F5A6C2408558B501F5EA6F06142872C4E"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-03-folder-focused-initial-unit-ps51.txt",
+            "sha256": "2DB061B03FA3685747A7980F98D0D041AC5934C6D046FAA9D3AB541876968122"
+          }
+        },
+        {
+          "shell": "PowerShell 7.6.5",
+          "command": "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag Unit",
+          "exitCode": 1,
+          "passed": 63,
+          "failed": 1,
+          "skipped": 1,
+          "inconclusive": 0,
+          "notRun": 15,
+          "durationSeconds": 9.79,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-03/folder-focused/initial-unit-ps7.log",
+            "sha256": "FE8C97F3913240E995DBCA2F1731466812C3D17F2499C5E160DD39E80FB722F7"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-03-folder-focused-initial-unit-ps7.txt",
+            "sha256": "79A8AE221D1B1FB6FBCD52958185B672E8AE6B06272A80B4C2C280D67427421C"
+          }
+        }
+      ],
+      "findings": "PS7 test-only timestamp type comparison: ConvertFrom-Json automatically converts the ISO timestamp to DateTime, while capturedAt remains an ISO string. The actual UTC value matches; normalize the parsed test value only.",
+      "skips": [
+        "The current token cannot create a file symbolic link; real junction loop/root/ancestor and hardlink tests all execute."
+      ]
+    },
+    {
+      "stage": "final",
+      "scope": "Pester-only complete new FolderQueue suite:80 discovered/selected cases, including helper/ownership/orchestration and isolated CLI/native-double entry points. No Full/static gate claimed.",
+      "discovered": 80,
+      "selected": 80,
+      "sourceSnapshot": {
+        "capturedUtc": "2026-10-03T07:36:08.1421041Z",
+        "scope": "Pester-only complete new FolderQueue suite:80 discovered/selected cases, including helper/ownership/orchestration and isolated CLI/native-double entry points. No Full/static gate claimed.",
+        "sources": [
+          {
+            "path": "WinAudioClean.ps1",
+            "sha256": "2DFE569090193A5E24C2EC9423DFAEED79FA37586DA114453A04975ECA540ADA"
+          },
+          {
+            "path": "WinAudioClean.Queue.ps1",
+            "sha256": "A92550CF279BECD93E9C5C6EFF78E95AB4FDF8260B57D273C1A2F14F4CD381C3"
+          },
+          {
+            "path": "WinAudioClean.Batch.ps1",
+            "sha256": "F9F4F77D36FBAFD67A255DA0591815159BE700A41E22886607E835BAEC3ECFB8"
+          },
+          {
+            "path": "WinAudioClean.IO.ps1",
+            "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+          },
+          {
+            "path": "WinAudioClean.Settings.ps1",
+            "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA"
+          },
+          {
+            "path": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+            "sha256": "35BEBFC0654AA63D80EB635DF8F2273495CE967B3BFC2F2ED47E7A350E0C7F03"
+          },
+          {
+            "path": "tests/fixtures/Invoke-FolderQueueCase.ps1",
+            "sha256": "2F04EF7DD698ED796B2B8708632E274A1DEA464B0C85104425141552DF4D9523"
+          },
+          {
+            "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+            "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+          },
+          {
+            "path": "tests/fixtures/NativeProcessFixture.cs",
+            "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+          },
+          {
+            "path": "tests/fixtures/TestProcess.ps1",
+            "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+          }
+        ],
+        "harnessSha256": "3AFCC8D8B5AC4B01765133FB8D24BCE6F448EF3A5B832BE186E2E6F826F5F2AA",
+        "commands": [
+          "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag FolderQueue",
+          "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag FolderQueue"
+        ],
+        "corrections": [
+          "Normalize parsed PS7 DateTime to invariant UTC string only in the test assertion; runtime wire timestamp stays unchanged."
+        ]
+      },
+      "sourceHashesAfter": [
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "2DFE569090193A5E24C2EC9423DFAEED79FA37586DA114453A04975ECA540ADA",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "A92550CF279BECD93E9C5C6EFF78E95AB4FDF8260B57D273C1A2F14F4CD381C3",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "F9F4F77D36FBAFD67A255DA0591815159BE700A41E22886607E835BAEC3ECFB8",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "unchanged": true
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA",
+          "unchanged": true
+        },
+        {
+          "path": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+          "sha256": "35BEBFC0654AA63D80EB635DF8F2273495CE967B3BFC2F2ED47E7A350E0C7F03",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/Invoke-FolderQueueCase.ps1",
+          "sha256": "2F04EF7DD698ED796B2B8708632E274A1DEA464B0C85104425141552DF4D9523",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "unchanged": true
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "unchanged": true
+        }
+      ],
+      "sourceHashesUnchangedDuringRun": true,
+      "results": [
+        {
+          "shell": "Windows PowerShell 5.1.26100.9444",
+          "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag FolderQueue",
+          "exitCode": 0,
+          "passed": 79,
+          "failed": 0,
+          "skipped": 1,
+          "inconclusive": 0,
+          "notRun": 0,
+          "durationSeconds": 40.09,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-03/folder-focused/final-ps51.log",
+            "sha256": "7E3AD6ED791486E50EA111FF29EA21815F1FBB849FFF42A2ADC2EEC3DCFCF2AC"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-03-folder-focused-final-ps51.txt",
+            "sha256": "D740730391B60AC95ABCD58FE65348162F910007842DD6719E013F084C6D83A7"
+          }
+        },
+        {
+          "shell": "PowerShell 7.6.5",
+          "command": "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1 -Repository <repo> -Tag FolderQueue",
+          "exitCode": 0,
+          "passed": 79,
+          "failed": 0,
+          "skipped": 1,
+          "inconclusive": 0,
+          "notRun": 0,
+          "durationSeconds": 48.98,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-03/folder-focused/final-ps7.log",
+            "sha256": "16A4D46E4DEE8384A64FAC2287025FE82E258B41251F5C1B825B980885D7DBD6"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-03-folder-focused-final-ps7.txt",
+            "sha256": "6E71DE2695605AE2DB8536C7FD59EE106C7FB6578B8DA501121D14BE836489CA"
+          }
+        }
+      ],
+      "findings": null,
+      "skips": [
+        "One file-symlink test per host is skipped because this token lacks creation privilege. Real junction loop/root/ancestor and hardlink cases execute."
+      ]
+    }
+  ],
+  "testCorrection": "Initial PS7 DateTime/string assertion failure was a test-only JSON-reader type difference at the same UTC value. Final assertion normalizes the parsed test value; no runtime correction or wire-format change.",
+  "harness": {
+    "ignoredPath": ".wac-local/WAC-M3-03/folder-focused/Invoke-Focused.ps1",
+    "sha256": "3AFCC8D8B5AC4B01765133FB8D24BCE6F448EF3A5B832BE186E2E6F826F5F2AA",
+    "text": "param([string]$Repository, [string]$Tag = 'Unit')\r\n$ErrorActionPreference = 'Stop'\r\nImport-Module (Join-Path $Repository '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\r\nWrite-Output ('Focused shell: ' + $PSVersionTable.PSVersion)\r\n$result = Invoke-Pester -Path (Join-Path $Repository 'tests/WinAudioClean.FolderQueue.Tests.ps1') -TagFilter $Tag -Output Detailed -PassThru\r\nif ($result.PassedCount -eq 0 -or $result.FailedCount -gt 0 -or $result.FailedContainersCount -gt 0 -or $result.FailedBlocksCount -gt 0) { exit 1 }\r\nexit 0\r\n",
+    "reproduction": "Save exact harness text outside the tracked tree, use the recorded matching source and pinned Pester5.7.1, supply Repository and Tag Unit or FolderQueue as recorded. Initial historical test hash differs from final source."
+  },
+  "coverage": [
+    "Extension allowlist, ordinal all-root BFS, default nonrecursion, strict generated artifact patterns and legitimate near misses, nested destination boundary,64-root and1024-entry/visited-directory limits.",
+    "Real hardlinks, generated-identity aliases, junction loop/outside target/root/ancestor rejection, source identity/length/mtime snapshots and held input/ancestor immutability.",
+    "Stale identity/length/timestamp/missing source and ancestor replacement refusal; frozen late/new files; truthful static skipped/failed records after cancellation; lease release on persistence failure.",
+    "Schema2 selection/reason/source fields, empty/all-skip noMode/noNative, folder one-file failure6, middle failure continuation, warning7, cancellation130 and persistence5.",
+    "Fifteen isolated fresh-shell CLI cases using a native double: default selection, same-stem unique owned exports with nested destination, empty/no-mode jobs, invalid flags/settings/root/component, and IO-only imports."
+  ],
+  "limitations": [
+    "One file-symlink privilege skip per shell; actual junction cases still execute. This is separate from the existing Python symlink skip.",
+    "2048 pinned-ancestor and1MiB cumulative-path guards were reviewed in source but not empirically exhausted by this suite.",
+    "No real FFmpeg media-quality/encoding claim, Explorer gesture, active-render Ctrl+C, crash or power-loss claim.",
+    "No cumulative parser/static/governance/Full gate was run by this test agent; root records those independently."
+  ],
+  "fixtureIsolation": "All input/preferences/output/live-link targets use TestDrive; CLI copies explicitly bind an isolated SettingsPath. Prior77 Batch cases and their fixtures are unchanged. Unicode source names are constructed from ASCII code points for PS5.1.",
+  "sanitization": [
+    "Repo/profile/username/temp test roots replaced with placeholders; credential-like text redacted if present.",
+    "ANSI removed, remaining controls escaped, trailing whitespace stripped; CRLF UTF8 without BOM and exactly one final newline.",
+    "Raw and published log hashes are recorded separately; published bytes are not claimed identical to raw bytes."
+  ]
+}

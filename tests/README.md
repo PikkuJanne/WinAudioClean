@@ -647,8 +647,9 @@ preview/settings/support actions. A held CreateNew JSONL writer records header,
 ordered per-item results and aggregate summary; injected persistence failures
 stop later work. One-item lists preserve the item code; multiple failed items
 produce code 6, warning-only results 7, cancellation 130, and successful lists 0.
-Cancellation marks remaining inputs NOT_STARTED. Folder traversal/deduplication
-and active-render cancellation remain owned by later tasks.
+Cancellation marks remaining inputs NOT_STARTED. Explicit-list checks retain
+repeats; folder discovery and deduplication have separate coverage below.
+Active-render cancellation remains owned by a later task.
 
 The ignored `.wac-local/WAC-M3-02` real-media matrix uses synthetic inputs and
 isolated saved settings in both PS5.1/PS7. It compares ordered batch items with
@@ -659,3 +660,65 @@ are separate outcomes. Capture hashes, actual commands/exits, JSONL records and
 sanitized evidence; a simulated cancellation seam is labeled explicitly and
 does not certify active Ctrl+C. Preserve failed preliminary runs. No user
 preferences/audio, listening approval, retuning or cross-build claim is involved.
+
+## Sequential folder discovery and source snapshots (WAC-M3-03)
+
+Run the folder suite in both supported shells:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.FolderQueue.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.FolderQueue.Tests.ps1
+```
+
+Test the direct PowerShell `InputDirectories` route separately from explicit
+lists and the BAT. Recursion defaults off; `Recurse` requires folder input.
+Folders are mutually exclusive with other input routes and preview/settings/
+diagnostic actions. Importing the main script and running ordinary single-file
+or explicit-list requests must retain their optional-component contracts.
+
+Queue coverage must establish complete materialization before child jobs,
+supplied-root order, breadth-first traversal with ordinal entry ordering,
+identity deduplication and unchanged explicit-list repeats. Use mixed folders
+with supported candidate extensions, unsupported files, duplicate/overlapping
+roots, hardlink aliases, identical stems, generated exports/previews/reports/
+journals/partials, nested directories and reparse entries. Verify a generated
+name discovered later also excludes its earlier identity alias; arbitrary
+renamed outputs without a marker alias remain a documented limitation.
+
+Reject reparse roots/ancestors without following them; encountered reparse
+entries are skipped. Keep junction/symlink fixtures owned and clean up only the
+link entry. If privileges prevent a fixture, record the actual skip and reason.
+Test destination containment by path components, a proper descendant output
+subtree, destination equal to a selected root, and a nearby sibling whose name
+shares a prefix. New outputs or children created after materialization must
+never enter the running queue.
+
+Check root/entry/directory/ancestor/path-byte bounds and enumeration failures
+before any child call. The limits are 64 roots, 1,024 recorded entries including
+skips/failures, 1,024 visited directories, 2,048 pinned ancestors and 1 MiB of
+UTF-8 paths for recorded entries. Source snapshots include stable identity,
+length and last-write time; mutation/replacement before dispatch produces a
+failed entry with code 2,
+while the current source stays held through its child invocation. Test denial
+of source replacement/write during that held interval and safe release after
+success, failure and cancellation.
+
+Folder-only schema-2 journals must record selection provenance, fixed selection/
+source reasons, source snapshots and skipped counts. Intentional skips are
+not successful renders. Empty/all-skipped selections need no mode prompt or
+FFmpeg/ffprobe call and return 0. A middle failure continues later jobs and gives aggregate 6;
+warnings alone give 7. Controlled child cancellation gives 130, stops new jobs,
+preserves known skips/failures and marks pending entries NOT_STARTED. Persistence
+failures stop later work with 5, preserving completed audio and flushed records.
+Keep explicit-list schema 1, its one-item exit behavior and repeat semantics
+unchanged. A simulated cancellation seam does not establish active Ctrl+C.
+
+Use synthetic media and isolated settings for real folder integration in both
+PS5.1 and PS7. Compare queued exports with equivalent single-file renders on
+the same pinned FFmpeg build, including exact decoded PCM/frame counts and
+effective report settings. Record actual cases, commands, exits and source/
+tool/journal hashes; preserve failed preliminary captures. Keep audio/raw
+reports and fixture trees ignored, publish only sanitized evidence, and do not
+infer listening approval or default promotion from objective checks. Run the
+smallest relevant suites before the required unfiltered Full gate in both
+supported shells; count only completed coverage.

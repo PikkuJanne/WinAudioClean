@@ -1,0 +1,150 @@
+Focused shell: 7.6.5
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 80 tests in 289ms.
+Filter 'Tag' set to ('FolderQueue').
+Filters selected 80 tests to run.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.FolderQueue.Tests.ps1'
+Describing AC-055: folder discovery is bounded deterministic local data
+  [+] selects every allowlisted extension case-insensitively and explains unsupported files 1.3s (1.25s|46ms)
+  [+] leaves recursion off and records the omitted ordinary subdirectory 42ms (41ms|1ms)
+  [+] uses root order and breadth-first traversal with ordinal entry ordering 60ms (58ms|2ms)
+  [+] skips the generated artifact voice_Cleaned_20261003-1234_0123456789abcdef0123456789abcdef.wav using the actual naming contract 34ms (30ms|4ms)
+  [+] skips the generated artifact voice_Cleaned_20261003-123456_0123456789abcdef0123456789abcdef.wav using the actual naming contract 22ms (19ms|2ms)
+  [+] skips the generated artifact voice_Cleaned_20261003-123456789_0123456789abcdef0123456789abcdef.wav using the actual naming contract 28ms (26ms|2ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_Original.wav using the actual naming contract 25ms (22ms|3ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_Processed.wav using the actual naming contract 19ms (17ms|2ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_CompareOriginal.wav using the actual naming contract 24ms (19ms|5ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_CompareProcessed.wav using the actual naming contract 29ms (28ms|2ms)
+  [+] skips the generated artifact .wac-0123456789abcdef0123456789abcdef.partial using the actual naming contract 25ms (23ms|2ms)
+  [+] skips the generated artifact .wac-write-check-0123456789abcdef0123456789abcdef.tmp using the actual naming contract 18ms (16ms|2ms)
+  [+] skips the generated artifact .wac-settings-0123456789abcdef0123456789abcdef.tmp using the actual naming contract 21ms (19ms|2ms)
+  [+] skips the generated artifact WinAudioClean_0123456789abcdef0123456789abcdef.json using the actual naming contract 25ms (23ms|2ms)
+  [+] skips the generated artifact WinAudioClean_0123456789abcdef0123456789abcdef.txt using the actual naming contract 26ms (24ms|2ms)
+  [+] skips the generated artifact WinAudioClean_Preview_0123456789abcdef0123456789abcdef.json using the actual naming contract 30ms (28ms|2ms)
+  [+] skips the generated artifact WinAudioClean_Batch_0123456789abcdef0123456789abcdef.jsonl using the actual naming contract 24ms (22ms|2ms)
+  [+] skips the generated artifact WinAudioClean_Log.txt using the actual naming contract 63ms (61ms|3ms)
+  [+] keeps legitimate sources that merely resemble generated filenames 31ms (29ms|2ms)
+  [+] excludes the nested destination subtree while keeping a similarly prefixed sibling 37ms (35ms|2ms)
+  [+] allows source root equal to the destination without selecting existing generated audio 21ms (20ms|1ms)
+  [+] accepts the64-root limit before deduplication and rejects65 188ms (186ms|1ms)
+  [+] accepts1024 materialized entries including skipped files and rejects the next entry 1.36s (1.36s|2ms)
+  [+] rejects more than1024 recursively visited directories even when they contain no files 2.49s (2.49s|1ms)
+  [+] rejects a missing root as a global selection failure 22ms (20ms|1ms)
+  [+] rejects a file root as a global selection failure 7ms (6ms|1ms)
+  [+] rejects a UNC root as a global selection failure 8ms (7ms|1ms)
+  [+] rejects a URL root as a global selection failure 5ms (3ms|1ms)
+  [+] rejects a provider root as a global selection failure 7ms (5ms|1ms)
+  [+] rejects a empty root as a global selection failure 7ms (4ms|2ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 11ms (7ms|3ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 4ms (3ms|1ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 5ms (3ms|1ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 8ms (7ms|1ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 4ms (3ms|1ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 9ms (8ms|1ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 5ms (4ms|2ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 9ms (8ms|1ms)
+  [+] accepts actual bound folder parameters without ambiguous dictionary methods 30ms (29ms|2ms)
+
+Describing AC-055/056: real filesystem identities and links cannot expand the queue
+  [+] deduplicates repeated roots and overlapping ordinary directories 25ms (23ms|1ms)
+  [+] deduplicates real hardlink aliases using the volume and file identity 32ms (31ms|1ms)
+  [+] records a junction loop and outside junction without visiting either target 31ms (30ms|1ms)
+  [+] rejects an explicitly selected reparse root before traversal 21ms (20ms|1ms)
+  [+] rejects an explicitly selected reparse ancestor before traversal 12ms (11ms|1ms)
+  [!] never follows a file symlink when the local token permits creating it is skipped, because This local token cannot create a symbolic link; junction coverage runs separately. 38ms (35ms|3ms)
+  [+] retains captured identity length and timestamp in each pending entry 34ms (33ms|1ms)
+  [+] holds the exact input and ordinary ancestors against foreign write rename and deletion until close 91ms (90ms|1ms)
+  [+] rejects a captured source after replacement without returning a usable lease 34ms (34ms|1ms)
+  [+] rejects a captured source after length without returning a usable lease 22ms (21ms|1ms)
+  [+] rejects a captured source after timestamp without returning a usable lease 25ms (24ms|1ms)
+  [+] rejects a captured source after removal without returning a usable lease 19ms (18ms|1ms)
+  [+] records a supported file that cannot be opened as a failed source rather than a global root error 27ms (26ms|1ms)
+  [+] excludes a renamed hardlink alias of a generated audio identity even when the alias sorts first 18ms (17ms|1ms)
+  [+] rejects a captured ordinary ancestor that was replaced with a junction before a child starts 22ms (22ms|1ms)
+
+Describing AC-056/057: folder journals summarize the frozen queue and stop safely
+SKIPPED: <test-drive>\73915cc203f7434a949de82a9b752fda\notes.txt (unsupported_extension)
+Processing input 2 of 2: <test-drive>\73915cc203f7434a949de82a9b752fda\source.wav
+Folder summary: 1 successful, 0 warning, 0 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\e863ba96c4c94665878c63186582bf3a\results.jsonl
+  [+] writes schema2 folder selection and skipped counts while keeping per-source identities 715ms (712ms|4ms)
+Folder summary: 0 successful, 0 warning, 0 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\1762ec86a07a404cab34cbc2860c0fed\results.jsonl
+  [+] does not request mode or start children for empty selections 253ms (248ms|5ms)
+SKIPPED: <test-drive>\bcb7efd53c6c4f7caa2605c28956dfaa\notes.txt (unsupported_extension)
+Folder summary: 0 successful, 0 warning, 0 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\4f654cce07ef430bae58b7b0b2d1fc2b\results.jsonl
+  [+] does not request mode or start children for all skipped selections 86ms (85ms|1ms)
+Processing input 1 of 1: <test-drive>\ac5bf224979c40bbb125d9cfa8706146\source.wav
+Folder summary: 0 successful, 0 warning, 1 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\2e31eaba29e24b21b95cf1f2288fdcf2\results.jsonl
+  [+] treats a one-file folder failure as aggregate6 while preserving the ordinary failed-item code 90ms (89ms|1ms)
+Processing input 1 of 4: <test-drive>\c2500619caa541339362df4ea1ba3de8\a.wav
+Processing input 2 of 4: <test-drive>\c2500619caa541339362df4ea1ba3de8\b.wav
+Processing input 3 of 4: <test-drive>\c2500619caa541339362df4ea1ba3de8\c.wav
+SKIPPED: <test-drive>\c2500619caa541339362df4ea1ba3de8\notes.txt (unsupported_extension)
+Folder summary: 2 successful, 0 warning, 1 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\0855618dc652478683ef670c47e26c06\results.jsonl
+  [+] continues a middle failure and retains success/failure/skipped records and exports 175ms (174ms|1ms)
+SKIPPED: <test-drive>\768b423656904295abb5f1104b24d416\notes.txt (unsupported_extension)
+Processing input 2 of 2: <test-drive>\768b423656904295abb5f1104b24d416\source.wav
+Folder summary: 0 successful, 1 warning, 0 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\bba8ef674875499b8d66966b94964a03\results.jsonl
+  [+] keeps a warning-only folder at7 and counts static skips separately 84ms (83ms|1ms)
+Processing input 1 of 2: <test-drive>\e2587a40367f403488c9c2a75902dd44\a.wav
+Processing input 2 of 2: <test-drive>\e2587a40367f403488c9c2a75902dd44\b.wav
+Folder summary: 2 successful, 0 warning, 0 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\d62db84981fc45489def39d0695b61d3\results.jsonl
+  [+] does not add ordinary late arrivals or newly generated outputs to the materialized queue 109ms (108ms|1ms)
+Processing input 1 of 3: <test-drive>\00eaa5288c65488e9d93895474eec3d1\a.wav
+Processing input 2 of 3: <test-drive>\00eaa5288c65488e9d93895474eec3d1\b.wav
+Processing input 3 of 3: <test-drive>\00eaa5288c65488e9d93895474eec3d1\c.wav
+Folder summary: 2 successful, 0 warning, 1 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <test-drive>\a396e9512b054d7d98e93386539d3697\results.jsonl
+  [+] fails a later replaced identity before invoking it and continues to the final original 163ms (162ms|1ms)
+Processing input 1 of 4: <test-drive>\5cf60ad86cd348e89f14e87f69cb27cc\a.wav
+SKIPPED: <test-drive>\5cf60ad86cd348e89f14e87f69cb27cc\b.txt (unsupported_extension)
+FAILED: <test-drive>\5cf60ad86cd348e89f14e87f69cb27cc\c.wav (source_unavailable)
+Folder summary: 0 successful, 0 warning, 1 failed, 1 skipped, 1 cancelled, 1 not started.
+Batch results saved to: <test-drive>\56b37cc429bf4213916b89904286f981\results.jsonl
+  [+] preserves static skips/failures after cancellation while pending entries become not started 179ms (178ms|1ms)
+Processing input 1 of 2: <test-drive>\4d26f73022874b6dab4c6659d23b27d3\a.wav
+Write-Error: <repo>\tests\WinAudioClean.FolderQueue.Tests.ps1:62
+Line |
+  62 |          Invoke-WacBatch -Inputs @($Queue.Entries | ForEach-Object { $ …
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Batch stopped; result journal is incomplete. Prior outputs/results are retained: controlled folder journal
+     | persistence failure
+  [+] closes source leases when item journal persistence fails and retains completed exports 254ms (252ms|2ms)
+Processing input 1 of 2: <test-drive>\d9c75c96dc4e40e1ad72c2d5bb4d23a4\a.wav
+Processing input 2 of 2: <test-drive>\d9c75c96dc4e40e1ad72c2d5bb4d23a4\b.wav
+Write-Error: <repo>\tests\WinAudioClean.FolderQueue.Tests.ps1:62
+Line |
+  62 |          Invoke-WacBatch -Inputs @($Queue.Entries | ForEach-Object { $ …
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Batch stopped; result journal is incomplete. Prior outputs/results are retained: controlled folder journal
+     | persistence failure
+  [+] closes source leases when summary journal persistence fails and retains completed exports 193ms (192ms|1ms)
+
+Describing AC-055/056: isolated folder CLI preserves single-file publication and preference isolation
+  [+] defaults to top-level selection and explains unsupported nested and generated exclusions 5.69s (5.68s|5ms)
+  [+] publishes identical stems from different folders to unique names without overwriting a prior export or requeuing the destination 4.97s (4.97s|1ms)
+  [+] does not require mode or media tools for a CLI empty selection 2.45s (2.45s|1ms)
+  [+] does not require mode or media tools for a CLI all skipped selection 2.72s (2.72s|1ms)
+  [+] rejects CLI single conflict before native invocation or result allocation 2.22s (2.21s|1ms)
+  [+] rejects CLI explicit list conflict before native invocation or result allocation 1.89s (1.89s|1ms)
+  [+] rejects CLI manifest conflict before native invocation or result allocation 1.77s (1.77s|1ms)
+  [+] rejects CLI recursion without folder false before native invocation or result allocation 1.88s (1.88s|1ms)
+  [+] rejects CLI preview conflict before native invocation or result allocation 1.87s (1.87s|2ms)
+  [+] rejects CLI range conflict before native invocation or result allocation 1.67s (1.67s|1ms)
+  [+] rejects CLI show settings conflict before native invocation or result allocation 1.54s (1.54s|1ms)
+  [+] rejects CLI missing root before native invocation or result allocation 2.36s (2.35s|1ms)
+  [+] rejects CLI corrupt saved before native invocation or result allocation 2.21s (2.21s|0ms)
+  [+] rejects CLI missing helper before native invocation or result allocation 1.65s (1.65s|1ms)
+  [+] keeps main imports IO-only even when folder parameters are present and optional siblings are absent 1.29s (1.29s|1ms)
+Tests completed in 48.98s
+Tests Passed: 79, Failed: 0, Skipped: 1, Inconclusive: 0, NotRun: 0

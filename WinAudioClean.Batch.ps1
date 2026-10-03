@@ -1,5 +1,5 @@
-# Optional explicit file-list orchestration. Importing defines helpers only.
-# Folder traversal and deduplication belong to a separate queue-builder task.
+# Optional sequential orchestration. Importing defines helpers only.
+# Explicit lists preserve repeats; optional folder snapshots supply skip reasons.
 function Read-WacInputList {
     param([Parameter(Mandatory = $true)][string]$Path)
     $resolved = Assert-WacSettingsPath -Path $Path
@@ -136,25 +136,28 @@ function Invoke-WacBatchItem {
 }
 
 function Get-WacBatchExitCode {
-    param([Parameter(Mandatory = $true)][object[]]$Items)
+    param([Parameter(Mandatory = $true)][AllowEmptyCollection()][object[]]$Items, [switch]$Folder)
     if (@($Items | Where-Object { $_.status -eq 'CANCELLED' }).Count -gt 0) { return 130 }
-    if ($Items.Count -eq 1) { return [int]$Items[0].exitCode }
+    if (-not $Folder -and $Items.Count -eq 1) { return [int]$Items[0].exitCode }
     if (@($Items | Where-Object { $_.status -eq 'FAILED' }).Count -gt 0) { return 6 }
     if (@($Items | Where-Object { $_.status -eq 'WARNING' }).Count -gt 0) { return 7 }
     0
 }
 
 function Invoke-WacBatch {
-    param([Parameter(Mandatory = $true)][string[]]$Inputs,
+    param([Parameter(Mandatory = $true)][AllowEmptyCollection()][string[]]$Inputs,
         [Parameter(Mandatory = $true)][System.Collections.IDictionary]$Parameters,
         [Parameter(Mandatory = $true)]$ResolvedSettings,
-        [Parameter(Mandatory = $true)][string]$ApplicationPath)
+        [Parameter(Mandatory = $true)][string]$ApplicationPath, $FolderQueue)
+    $isFolder = $null -ne $FolderQueue
+    if ($isFolder -and $FolderQueue.Entries.Count -ne $Inputs.Count) { throw 'Folder queue and input count differ.' }
+    $hasPending = -not $isFolder -or @($FolderQueue.Entries | Where-Object { $_.Status -eq 'PENDING' }).Count -gt 0
     $options = @{}
     foreach ($name in $ResolvedSettings.Values.Keys) {
         if ($null -ne $ResolvedSettings.Values[$name]) { $options[$name] = $ResolvedSettings.Values[$name] }
     }
     $interactive = Test-WacInteractive -NonInteractive:([bool]$Parameters.NonInteractive)
-    if (-not $options.Mode -and -not $interactive) { throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom, or save a mode.' }
+    if ($hasPending -and -not $options.Mode -and -not $interactive) { throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom, or save a mode.' }
     $outputFolder = Get-WacOutputDirectory -Path $options.OutputDirectory
     $options.OutputDirectory = $outputFolder
     $id = [guid]::NewGuid().ToString('N')
@@ -165,7 +168,7 @@ function Invoke-WacBatch {
     $exitCode = 0; $cancelled = $false; $reportingComplete = $false
     $origins = @{}
     foreach ($name in $ResolvedSettings.Origins.Keys) { $origins[$name] = $ResolvedSettings.Origins[$name] }
-    if (-not $options.Mode) {
+    if ($hasPending -and -not $options.Mode) {
         Write-Host "Select one processing mode for all $($Inputs.Count) inputs: [1] Raw; [2] Zoom/Teams; [Q] Cancel."
         $options.Mode = Read-WacMode
         if (-not $options.Mode) { $cancelled = $true }
@@ -190,9 +193,13 @@ function Invoke-WacBatch {
         } catch { Write-Error -Message ('Cannot create batch result journal: ' + $_.Exception.Message) -ErrorAction Continue; return [pscustomobject]@{ ExitCode = 5; ResultPath = $path; ReportingComplete = $false } }
         $displayOptions = @{}
         foreach ($name in $options.Keys) { $displayOptions[$name] = $options[$name] }
-        $header = [ordered]@{ type = 'batch'; schemaVersion = 1; batchId = $id; startedAt = [DateTime]::UtcNow.ToString('o')
+        $header = [ordered]@{ type = 'batch'; schemaVersion = $(if ($isFolder) { 2 } else { 1 }); batchId = $id; startedAt = [DateTime]::UtcNow.ToString('o')
             inputCount = $Inputs.Count; settings = (ConvertTo-WacSettingsJson -Values $displayOptions | ConvertFrom-Json).settings
             origins = $origins }
+        if ($isFolder) {
+            $header.selection = [ordered]@{ kind = 'folders'; directories = @($FolderQueue.Directories); recurse = [bool]$FolderQueue.Recurse
+                extensions = @($FolderQueue.Extensions); capturedAt = $FolderQueue.CapturedAt }
+        }
         Add-WacBatchRecord -Writer $writer -Record $header
         $options.IgnoreSavedSettings = $true
         if ($Parameters.Keys -contains 'NonInteractive') { $options.NonInteractive = [bool]$Parameters.NonInteractive }
@@ -200,12 +207,33 @@ function Invoke-WacBatch {
         for ($index = 0; $index -lt $Inputs.Count; $index++) {
             $item = [ordered]@{ type = 'item'; index = $index + 1; inputPath = $Inputs[$index]
                 status = 'NOT_STARTED'; exitCode = $null; diagnostics = @(); finishedAt = $null }
-            if (-not $cancelled) {
+            $entry = $null
+            if ($isFolder) {
+                $entry = $FolderQueue.Entries[$index]
+                $item.reasonCode = $entry.ReasonCode; $item.sourceIdentity = $entry.Identity
+                $item.sourceLength = $entry.Length; $item.sourceLastWriteTimeUtc = $entry.LastWriteTimeUtc
+                if ($entry.Status -in @('SKIPPED', 'FAILED')) {
+                    $item.status = $entry.Status; $item.exitCode = $(if ($entry.Status -eq 'FAILED') { 2 } else { $null })
+                    $item.diagnostics = @($entry.Diagnostics); $item.finishedAt = [DateTime]::UtcNow.ToString('o')
+                    Write-Host ("{0}: {1} ({2})" -f $item.status, $item.inputPath, $item.reasonCode)
+                }
+            }
+            if (-not $cancelled -and ($null -eq $entry -or $entry.Status -eq 'PENDING')) {
                 Write-Host ("Processing input {0} of {1}: {2}" -f ($index + 1), $Inputs.Count, $Inputs[$index])
                 $arguments = @{}
                 foreach ($name in $options.Keys) { $arguments[$name] = $options[$name] }
                 $arguments.inputPath = $Inputs[$index]
-                $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Arguments $arguments
+                $lease = $null; $result = $null
+                try {
+                    if ($isFolder) {
+                        try { $lease = Open-WacQueuedInput -Entry $entry }
+                        catch {
+                            $item.reasonCode = 'source_changed'
+                            $result = [pscustomobject]@{ ExitCode = 2; Diagnostics = @('Queued source is no longer available with its captured identity, size and modification time: ' + $_.Exception.GetBaseException().Message) }
+                        }
+                    }
+                    if ($null -eq $result) { $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Arguments $arguments }
+                } finally { if ($isFolder) { Close-WacQueuedInput -Lease $lease } }
                 $item.exitCode = $result.ExitCode
                 $item.diagnostics = @($result.Diagnostics)
                 $item.status = switch ($result.ExitCode) { 0 { 'SUCCESS' } 7 { 'WARNING' } 130 { 'CANCELLED' } default { 'FAILED' } }
@@ -215,16 +243,18 @@ function Invoke-WacBatch {
             $items.Add($item)
             Add-WacBatchRecord -Writer $writer -Record $item
         }
-        $exitCode = if ($cancelled) { 130 } else { Get-WacBatchExitCode -Items $items.ToArray() }
+        $exitCode = if ($cancelled) { 130 } else { Get-WacBatchExitCode -Items $items.ToArray() -Folder:$isFolder }
         $counts = [ordered]@{ success = 0; warning = 0; failed = 0; cancelled = 0; notStarted = 0 }
+        if ($isFolder) { $counts.skipped = 0 }
         foreach ($item in $items) {
-            $key = switch ($item.status) { 'SUCCESS' { 'success' } 'WARNING' { 'warning' } 'FAILED' { 'failed' } 'CANCELLED' { 'cancelled' } default { 'notStarted' } }
+            $key = switch ($item.status) { 'SUCCESS' { 'success' } 'WARNING' { 'warning' } 'FAILED' { 'failed' } 'CANCELLED' { 'cancelled' } 'SKIPPED' { 'skipped' } default { 'notStarted' } }
             $counts[$key]++
         }
         $status = switch ($exitCode) { 0 { 'SUCCESS' } 7 { 'WARNING' } 130 { 'CANCELLED' } default { 'FAILED' } }
         Add-WacBatchRecord -Writer $writer -Record ([ordered]@{ type = 'summary'; status = $status; exitCode = $exitCode
             counts = $counts; finishedAt = [DateTime]::UtcNow.ToString('o'); reportingComplete = $true })
         $reportingComplete = $true
+        if ($isFolder) { Write-Host ("Folder summary: {0} successful, {1} warning, {2} failed, {3} skipped, {4} cancelled, {5} not started." -f $counts.success, $counts.warning, $counts.failed, $counts.skipped, $counts.cancelled, $counts.notStarted) }
         Write-Host ('Batch results saved to: ' + $path)
     } catch {
         Write-Error -Message ('Batch stopped; result journal is incomplete. Prior outputs/results are retained: ' + $_.Exception.Message) -ErrorAction Continue

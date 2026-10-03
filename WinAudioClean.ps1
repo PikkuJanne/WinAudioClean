@@ -93,11 +93,20 @@ Local UTF-8 JSON manifest: {"schemaVersion":1,"inputs":["recording.wav"]}.
 Requires 1..1024 nonempty path strings and at most 1 MiB including optional BOM.
 Relative paths resolve beside the manifest. Use this instead of a long CMD line
 or positional percent/exclamation paths. No folder traversal or shell evaluation.
+.PARAMETER InputDirectories
+One through 64 local folders. Freeze the selection before sequential processing;
+deduplicate by file identity and record unsupported/generated/reparse entries as
+skipped. Mutually exclusive with inputPath, InputPaths and InputListPath. Requires
+the sibling Queue, Batch and Settings components. Explicit lists retain repeats.
+.PARAMETER Recurse
+Opt in to ordinary subfolders for InputDirectories. Default: immediate entries
+only. Never follow symbolic links, junctions or other reparse entries. A proper
+descendant destination subtree is excluded; new files never enter a running queue.
 .PARAMETER BatchResultPath
-Optional new JSON Lines journal for InputPaths/InputListPath. The parent must
+Optional new JSON Lines journal for explicit lists or folder queues. The parent must
 already exist; an existing file is never replaced. Default: a unique
 WinAudioClean_Batch_<id>.jsonl in the destination. Each item is flushed before
-the next starts. One-item exit status remains compatible; multiple failed items
+the next starts. One-item explicit lists retain their exit; other failed batches
 produce 6, warnings alone 7, cancellation 130. Journal failure stops new jobs
 with 5 and preserves prior outputs/results with incomplete-report diagnostics.
 .PARAMETER Preview
@@ -199,6 +208,8 @@ param(
     [switch]$ResetSettings,
     [string[]]$InputPaths,
     [string]$InputListPath,
+    [string[]]$InputDirectories,
+    [switch]$Recurse,
     [string]$BatchResultPath
 )
 
@@ -1665,25 +1676,37 @@ try {
 
 # Explicit lists reuse the ordinary single-file path, with preferences frozen
 # once and no child configuration reads. Legacy installations/imports need no
-# batch component. Folder discovery belongs to the next queue-builder task.
+# batch component. Folder discovery is a separate, explicitly selected route.
 $batchRequested = $PSBoundParameters.ContainsKey('InputPaths') -or $PSBoundParameters.ContainsKey('InputListPath')
-if ($batchRequested -or $PSBoundParameters.ContainsKey('BatchResultPath')) {
+$folderRequested = $PSBoundParameters.ContainsKey('InputDirectories')
+if ($batchRequested -or $folderRequested -or $PSBoundParameters.ContainsKey('BatchResultPath') -or $PSBoundParameters.ContainsKey('Recurse')) {
     try {
-        if (-not $batchRequested) { throw 'BatchResultPath requires InputPaths or InputListPath.' }
+        if (-not $batchRequested -and -not $folderRequested) { throw 'BatchResultPath requires an explicit list or InputDirectories; Recurse requires InputDirectories.' }
+        if ($PSBoundParameters.ContainsKey('Recurse') -and -not $folderRequested) { throw 'Recurse requires InputDirectories.' }
         if ($Preview -or $PSBoundParameters.ContainsKey('PreviewStartSeconds') -or $PSBoundParameters.ContainsKey('PreviewDurationSeconds')) {
-            throw 'Explicit lists support ordinary full renders; preview requires one inputPath.'
+            throw 'Lists and folders support ordinary full renders; preview requires one inputPath.'
         }
         foreach ($component in @('WinAudioClean.Settings.ps1', 'WinAudioClean.Batch.ps1')) {
             $componentPath = Join-Path $PSScriptRoot $component
             if (-not (Test-Path -LiteralPath $componentPath -PathType Leaf)) { throw "Keep $component beside the main script to use input lists." }
             . $componentPath
         }
-        $batchInputs = @(Resolve-WacBatchInputs -Parameters $PSBoundParameters)
         if ($null -eq $resolvedSettings) { $resolvedSettings = Resolve-WacSettings -Explicit $PSBoundParameters }
-        $batchResult = Invoke-WacBatch -Inputs $batchInputs -Parameters $PSBoundParameters -ResolvedSettings $resolvedSettings -ApplicationPath $PSCommandPath
+        $batchArguments = @{ Parameters = $PSBoundParameters; ResolvedSettings = $resolvedSettings; ApplicationPath = $PSCommandPath }
+        if ($folderRequested) {
+            $componentPath = Join-Path $PSScriptRoot 'WinAudioClean.Queue.ps1'
+            if (-not (Test-Path -LiteralPath $componentPath -PathType Leaf)) { throw 'Keep WinAudioClean.Queue.ps1 beside the main script to use folder queues.' }
+            . $componentPath
+            $directories = @(Resolve-WacFolderSelection -Parameters $PSBoundParameters)
+            $outputFolder = Get-WacOutputDirectory -Path $resolvedSettings.Values.OutputDirectory
+            $queue = New-WacFolderQueue -Directories $directories -OutputDirectory $outputFolder -Recurse:$Recurse
+            $batchArguments.FolderQueue = $queue
+            $batchInputs = @($queue.Entries | ForEach-Object { $_.InputPath })
+        } else { $batchInputs = @(Resolve-WacBatchInputs -Parameters $PSBoundParameters) }
+        $batchResult = Invoke-WacBatch -Inputs $batchInputs @batchArguments
         exit $batchResult.ExitCode
     } catch {
-        Write-Error -Message ('Input list failed: ' + $_.Exception.Message) -ErrorAction Continue
+        Write-Error -Message ('Input selection failed: ' + $_.Exception.Message) -ErrorAction Continue
         exit 2
     }
 }

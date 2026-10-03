@@ -1,19 +1,19 @@
-# Next model: WAC-M3-03
+# Next model: WAC-M3-04
 
-**M3-02 is complete. Start only WAC-M3-03: Add sequential folder queues and batch
-summaries.** Read AGENTS, STATUS, DECISIONS, TASKS, SYNC_PROTOCOL, tasks/WAC-M3-03,
-DATA_FORMATS, AUDIO_CONTRACT/NATIVE_PROCESS_CONTRACT and M3-02 evidence/source/
-Batch/launcher/media scope records. Preserve canonical history, especially
-M1-02 policy/resumption and honest M2/M3 preliminary failures/limits. Do not
-change the source-only original checkout.
+**M3-03 is complete. Start only WAC-M3-04: Add stage-aware progress and controlled
+cancellation.** Read AGENTS, STATUS, DECISIONS, TASKS, SYNC_PROTOCOL,
+tasks/WAC-M3-04, DATA_FORMATS, AUDIO_CONTRACT/NATIVE_PROCESS_CONTRACT and M3-03
+evidence/source/media records. Preserve canonical history, especially M1-02
+policy/resumption and prior M2/M3 failures/limits. Do not change the source-only
+original checkout.
 
 ## Synchronize the current checkpoint
 
 Use maintained WinAudioClean-governance, `codex/wac-m3-settings`, exact effective
-fetch/push origin `https://github.com/PikkuJanne/WinAudioClean.git`. M3-02 began
-at `33dc8b1dde8bb957fc221442e027991a895a85f6` (M3-01); inspect live M3 branch/draft#4
+fetch/push origin `https://github.com/PikkuJanne/WinAudioClean.git`. M3-03 began
+at `8d033079dde925abd48c87d9b4f71784756c146d` (M3-02); inspect live M3 branch/draft#4
 for its actual completed SHA. Run inspect, authenticated fetch --prune,
-sync-check, validate-plan and next. Only M3-03 should be ready. Process-only gh
+sync-check, validate-plan and next. Only M3-04 should be ready. Process-only gh
 credentials are available; never print/persist them. Verify live draft/head/CI
 separately; no workflows/checks currently exist. Completion SHA belongs in the
 PR/final response, not itself.
@@ -54,23 +54,33 @@ authorization. Never force-push/reset/clean/stash.
   pause (including cancellation/worker start3), no unattended pause. Real CMD
   probes do not imply a manual Explorer gesture was performed.
 
-## M3-03 scope
+## Preserve folder queues; M3-04 scope
 
-Extend the current explicit sequential orchestration with a bounded local folder
-queue builder; inspect existing code before extracting another helper. Recursion
-is off by default. Materialize/deduplicate the folder queue before jobs, explain
-unsupported selections, exclude this tool's generated outputs/temp artifacts,
-and avoid symlink/junction traversal loops. Preserve per-file continuation,
-reports and final successful/failed/skipped/cancelled summary. No automatic audio
-re-cleaning. Do not silently change explicit-list repeated-item semantics while
-adding folder deduplication. Reconcile stable queue identities/output exclusion
-with current schema carefully and document any additive report contract.
-No GUI/server/default sound retune or later milestone implementation.
+Preserve explicit InputDirectories/Recurse, root-seeded ordinal/BFS ordering,
+bound snapshot before jobs, ordinary no-follow ancestor/source handles,
+volume/file identity deduplication, strict generated-name/alias exclusions and
+proper descendant destination skips. Root==destination explicit selection wins.
+Folder schema2 captures selection/source metadata/reasons/skips; explicit lists
+retain repeats/schema1. Source identity/length/UTCmtime is checked and held through
+each ordinary child. Per-file failures continue and report ownership is unchanged.
+Empty/allskipped selections need no mode/native job; aggregate folder failed6,
+warning7, success0 and returned cancel130 preserve static skips/preflight failures.
+Journal failure5 stops starts and discloses incomplete reporting. New files never
+enter running snapshots. Extension candidates are not media proof; renamed
+outputs/metadata-restoration/crash claims remain bounded in DATA_FORMATS.
+
+M3-04 adds FFmpeg structured progress with separate diagnostic logging, stage
+labels/file position and Accurate analysis/render/verification ranges. Unknown
+duration stays indeterminate. Controlled cancellation must target only this
+run's owned child process with bounded cleanup and no kill-by-name. Preserve
+queue persistence, original sources/prior results and frozen sound defaults.
+Current labeled returned-exit130 tests do not prove active-render Ctrl+C. Do not
+implement a later task, GUI/server, retune, merge, release or deployment.
 
 ## Audio and gates
 
-M3-02 final source preserved normalized pre-existing main helper bodies/full
-processing suffix and IO/Settings/Preview bytes from M3-01. Original1.0.0 stays
+M3-03 final source preserved normalized pre-existing main helper bodies/full
+processing suffix and IO/Settings/Preview/BAT/Launcher bytes from M3-02. Original1.0.0 stays
 built-in; Gentle0.1.0 opt-in experimental Raw-only. Application2.3/report1, Fast
 default, Accurate repeated prechain/held meter/warnings, PCM16/24/mono/RF64,
 owned output/report transactions and bounded preview remain. Positive integrated/
@@ -78,7 +88,7 @@ threshold measurements fail rather than becoming UNMEASURABLE. Preserve M2
 seek/latency/formatter and same-input/build reproduction limits. Numeric/synthetic
 checks provide no listening/default-promotion approval.
 
-Final selected checks:73 Batch plus4 invalid-path cases,33 Transport,58 legacy
+Prior M3-02 selected checks:73 Batch plus4 invalid-path cases,33 Transport,58 legacy
 Launcher per host. Full:1251 Pester pass +62 Python discovered per host (61 pass,
 one symlink-privilege skip); parser/static/plan pass with visible non-gating
 advisories. API28/28 calls,32 assets,26 PCM/frame/graph matches +6 direct refs;
@@ -94,5 +104,13 @@ Manual Explorer gesture, active-render Ctrl+C, power-loss, speech listening/
 calibration/>4GB/disk exhaustion/long-file memory/codec-seek limits remain.
 Media cancellation is a labeled copied dispatch simulation. Update canonical
 state/evidence/handoff only for the selected task, stage/review/commit/push
-explicitly, verify clean upstream/live/draft equality, and stop after M3-03.
+explicitly, verify clean upstream/live/draft equality, and stop after M3-04.
 No merge/release/default promotion/deployment.
+
+Current M3-03 final focused 156 pass/1 skip;
+Full 1330 pass/1 skip Pester per host plus Python62
+discovered/61pass/oneprivilegeskip. Exact final commands/hash/scopes, media
+comparisons, cancellation seams and preliminary fixes are in M3-03 evidence.
+Use existing pinned modules/tools and isolate preferences. Code must freeze
+before final gates/media; do not claim listening or active cancellation from
+synthetic/copied-dispatch checks.

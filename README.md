@@ -45,7 +45,10 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
   - Sibling helper for loading and managing optional local JSON preferences. Loading an existing saved file, an explicit SettingsPath or a settings action requires it.
 
 - WinAudioClean.Batch.ps1
-  - Sibling helper for ordered file lists, manifest input and a persistent per-item result journal. Lists also require the Settings sibling; single-file rendering does not require Batch.
+  - Sibling helper for ordered file lists, manifest input, folder queues and a persistent per-item result journal. These routes also require the Settings sibling; single-file rendering does not require Batch.
+
+- WinAudioClean.Queue.ps1
+  - Sibling helper for optional folder discovery, exclusions, identity deduplication and source snapshots. Keep it beside the main script when using InputDirectories.
 
 - WinAudioClean.Launcher.ps1
   - Sibling helper for ordered launcher paths, manifest handoffs and selecting an inner PowerShell host. Keep it beside the BAT for these routes; legacy single-file launching has a fallback without it.
@@ -125,14 +128,14 @@ Use a typed PowerShell string array for several explicit inputs:
 & .\WinAudioClean.ps1 -InputPaths @('C:\Audio\first.wav', 'C:\Audio\second [mix].wav') -Mode Raw -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
 ```
 
-`-InputPaths`, `-InputListPath` and the original positional/`-inputPath` route
+`-InputPaths`, `-InputListPath`, `-InputDirectories` and the original positional/`-inputPath` route
 are mutually exclusive. File-list runs process inputs in the supplied order,
 including repeated entries. They resolve the shared preferences once using
 CLI > saved > built-ins and choose mode once. Each item uses the ordinary
 full-render path with those frozen choices; saved preferences are not read
 again between items. An invalid item is recorded and later items continue.
 Batch input cannot accompany preview, settings-management or diagnostic-export
-actions. Folder traversal and deduplication are separate future workflows.
+actions. Folder selection has the separate discovery rules below.
 
 For long lists or names that CMD may change, use `-InputListPath` with a UTF-8
 JSON manifest. Its only fields are integer `schemaVersion: 1` and `inputs`, an
@@ -148,9 +151,10 @@ The manifest is data; filter text and scripts are never executed.
 & .\WinAudioClean.ps1 -InputListPath 'C:\Audio\inputs.json' -Mode Raw -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
 ```
 
-To select files from a folder without a long command line, create an explicit
-manifest in PowerShell, review it, and run the command above. This example
-selects only that folder's WAV files and preserves the sorted list:
+To review an explicit selection before processing, create a manifest in
+PowerShell and run the command above. This example selects only one folder's
+WAV files and preserves the sorted list; it retains the explicit-list rules,
+including repeats and no generated-output exclusion:
 
 ```powershell
 $paths = @(Get-ChildItem -LiteralPath 'C:\Audio\Inputs' -File -Filter '*.wav' | Sort-Object Name | ForEach-Object { $_.FullName })
@@ -174,6 +178,69 @@ A one-item list retains the ordinary item's exit code. A multi-item list returns
 Cancellation returns `130` and leaves later items unattempted. Malformed list
 or shared settings fail before processing with code `2`. These queue results do
 not add active-render Ctrl+C guarantees or change the audio recipe.
+
+**Folder queues**
+
+Use `-InputDirectories` from PowerShell to discover supported filename
+extensions in one or several ordinary local directories:
+
+```powershell
+& .\WinAudioClean.ps1 -InputDirectories @('C:\Audio\Inputs', 'C:\Audio\More') -Mode Raw -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
+```
+
+Only the selected directories' direct files are considered by default. Add
+`-Recurse` to include nested directories:
+
+```powershell
+& .\WinAudioClean.ps1 -InputDirectories @('C:\Audio\Inputs') -Recurse -Mode Zoom -OutputDirectory 'C:\Audio\Inputs\Cleaned' -NonInteractive
+```
+
+`-Recurse` requires `-InputDirectories`. The BAT does not convert a dropped
+directory into this route. Folder requests cannot accompany another input
+route, preview, settings-management or diagnostic export. Folder choices are
+not saved as preferences.
+
+Discovery completes before any media processing. Roots enter one breadth-first
+traversal in the supplied order, with each directory's entries sorted using
+ordinal comparisons. File identities are deduplicated, so repeated roots,
+overlapping roots and hardlink aliases produce one pending job per source.
+The supported candidate extensions are `.aac`, `.aif`, `.aiff`, `.avi`, `.flac`,
+`.m4a`, `.mkv`, `.mov`, `.mp3`, `.mp4`, `.ogg`, `.opus`, `.wav`, `.webm` and `.wma`.
+An extension selects a candidate; ordinary per-file probing still determines
+whether its media is readable and has audio. Unsupported files are recorded
+as skipped.
+
+Reparse roots or ancestors are rejected; discovered reparse files and
+directories are skipped without following them. Exact generated WinAudioClean
+export, preview, report, journal and temporary names, including
+`.wac-settings-<id>.tmp`, are excluded. Descent into a destination strictly
+inside an input root is excluded. When the destination is itself an explicitly
+selected root, ordinary sources remain eligible and generated-name exclusions
+still apply. The completed snapshot admits no newly
+created child or output files. Arbitrarily renamed exports cannot be recognized
+as prior outputs unless a generated-name alias with the same file identity is
+also present in the snapshot; use a separate input directory when that matters.
+
+Each pending source records its identity, length and last-write time. Those
+values are checked under a held source handle before its ordinary child render;
+a changed source becomes a failed entry with code `2`, and later jobs continue.
+The complete selection is limited to 64 roots, 1,024 recorded entries including
+skips/failures, 1,024 visited directories, 2,048 pinned ancestors and 1 MiB of
+UTF-8 paths for recorded entries. Invalid roots, enumeration failures or
+exceeding a bound fail with code `2` before any child job starts. Split larger
+selections into smaller folder requests.
+
+Folder runs use the same new-journal `-BatchResultPath` policy with schema version
+2. The journal includes selection provenance, fixed `reasonCode` labels, source
+identity/length/last-write snapshots and a final skipped count. Intentional skips
+do not imply successful audio renders. An empty or entirely skipped selection
+returns `0` without requiring mode or invoking FFmpeg. Otherwise shared choices
+and mode are resolved once, and files run sequentially. Folder results return
+`6` if any entry fails, `7` for warnings only, or `0` when all pending jobs succeed;
+cancellation returns `130`, preserves known skips/failures and leaves remaining
+pending jobs unstarted. Journal failures return `5` and retain completed audio
+and already-flushed results. Review these local paths and diagnostics before
+sharing. Active-render Ctrl+C handling remains a separate future change.
 
 **Local saved settings and unattended runs**
 
@@ -617,14 +684,14 @@ and local report. Processing and reporting results use these exit codes:
 
 | Code | Meaning |
 | --- | --- |
-| 0 | Audio was validated and published without loudness or reporting warnings, or settings inspect/save/reset completed successfully. |
-| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout, saved JSON/settings, file list/manifest or launcher usage; ambiguous unattended tracks; settings-management or diagnostic export failure. |
+| 0 | Audio was validated and published without loudness or reporting warnings, settings inspect/save/reset completed successfully, or a folder selection had no pending jobs. |
+| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout, saved JSON/settings, file list/manifest, folder selection or launcher usage; ambiguous unattended tracks; settings-management or diagnostic export failure. |
 | 3 | Missing, incompatible or filter-deficient dependency, or analysis/render process start failure. |
 | 4 | Probe/metadata failure, no audio, or analysis/processing/capture/cleanup failure. Malformed first-pass measurements fail here. Native failures retain diagnostics. |
 | 5 | Output allocation, space/size check, validation, publication, owned-file cleanup or batch-journal persistence failed. |
-| 6 | A multi-item list completed with failed items; per-item codes remain in its journal. |
+| 6 | A multi-item explicit list or a folder queue completed with failed entries; per-entry codes remain in its journal. |
 | 7 | Valid audio was published with loudness or reporting warnings. Audio is retained; inspect the report for the reason. |
-| 130 | Cancelled at the mode or audio-track menu, or a list item cancelled and remaining inputs were not started. |
+| 130 | Cancelled at the mode or audio-track menu, or a queued item cancelled and remaining pending inputs were not started. |
 
 A reporting failure never changes an existing processing failure to success.
 An invalid output is never presented as a completed export. Native diagnostics

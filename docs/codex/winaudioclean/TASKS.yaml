@@ -770,7 +770,7 @@
       "depends_on": [
         "WAC-M3-02"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Queue builder, optional recursion and per-file result aggregation.",
       "implementation": [
@@ -784,7 +784,11 @@
         "AC-056",
         "AC-057"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-03.md",
+        "evidence/WAC-M3-03-source.json",
+        "evidence/WAC-M3-03-media.json"
+      ],
       "blocked_reason": null
     },
     {

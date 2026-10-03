@@ -352,10 +352,9 @@ BOM. Read the file through the ordinary held settings-reader policy, including
 reparse/hardlink rejection; no JSON text executes. Relative entries are anchored
 to the manifest directory, with root-relative entries on that directory's drive.
 Invalid/missing media paths become ordinary per-item failures. A malformed list
-is a global exit 2 before jobs. Explicit repeats retain their order; folder
-discovery, recursion, deduplication and generated-output exclusion belong to
-WAC-M3-03. A folder-to-manifest example is a bounded explicit selection, not a
-claim that the application's folder queue builder is implemented.
+is a global exit 2 before jobs. Explicit repeats retain their order. These
+schema-1 explicit lists do not acquire folder traversal or deduplication;
+the separate WAC-M3-03 route below builds a folder snapshot.
 
 Resolve and validate preferences once, choose an omitted interactive mode once,
 then supply those same existing choices to every ordinary child invocation.
@@ -392,6 +391,80 @@ preserve earlier result bytes and audio exports, and disclose incomplete reporti
 A terminal summary is required to claim complete reporting. This is incremental
 local recording, without a crash/power-loss guarantee or a multi-file commit.
 No upload, automatic re-cleaning, sound retuning or saved batch/action flag occurs.
+
+## Frozen local folder queues — WAC-M3-03
+
+Direct PowerShell `InputDirectories` selects 1 through 64 nonempty local folder paths,
+mutually exclusive with `inputPath`, `InputPaths` and `InputListPath`. `Recurse`
+is an opt-in switch valid only with InputDirectories, including bound false.
+Preview/settings management/support export remain separate. Queue, Batch and
+Settings siblings are optional for legacy single-file use. The BAT keeps its
+existing explicit-file transport; it does not automatically convert folders.
+
+Materialize all selection records before starting media jobs. Seed one breadth-
+first traversal with supplied roots in order, sorting each folder's immediate
+entries with StringComparer.Ordinal. Without Recurse, ordinary nested folders
+produce one skipped record each; descendants are not counted as selected files.
+Supported extension candidates (case insensitive) are `.aac`, `.aif`, `.aiff`,
+`.avi`, `.flac`, `.m4a`, `.mkv`, `.mov`, `.mp3`, `.mp4`, `.ogg`, `.opus`, `.wav`,
+`.webm`, `.wma`. They remain subject to ordinary probe/decode validation; an
+extension does not certify media. Unsupported entries receive an explanation.
+
+Open ordinary directory ancestors without following reparse points and retain
+those handles through discovery. A missing/inaccessible root, reparse root or
+ancestor, unsupported path, or enumeration error rejects the entire selection
+with exit2 before jobs. Encountered reparse entries are skipped without descent,
+so junction/symlink loops and outside targets cannot enter this traversal. Dedup
+ordinary visited directories and candidate files by volume/file identity.
+Hardlink aliases and overlapping/case/relative folder selections do not create
+additional jobs. Explicit lists still preserve deliberate repeats.
+
+Exclude exact current generated names: Cleaned WAVs with the 8-digit date,
+4/6/9-digit time and 32-hex job ID; four Preview WAV roles with 32-hex ID;
+ordinary/Preview JSON/text reports; Batch ID JSONL; WinAudioClean_Log.txt;
+`.wac-ID.partial`, `.wac-write-check-ID.tmp`, `.wac-settings-ID.tmp`.
+Candidate aliases sharing an identity with a recognized generated filename
+anywhere in the snapshot are also excluded. Near-miss names remain candidates.
+Arbitrarily renamed exports without a recognized alias cannot be identified.
+A destination encountered as a proper descendant of a selected root produces
+one skipped directory record without scanning its subtree. An explicitly
+supplied destination root can still select its ordinary sources; generated
+markers remain excluded. Newly created files never enter this frozen queue.
+
+Reject incomplete selections rather than truncate: at most 1024 emitted entries
+including skips/failures, 1024 immediate entries per folder, 1024 visited
+directories, 2048 unique held ancestor directories, and 1 MiB cumulative UTF-8
+entry path bytes. Split larger selections. No native job starts on these errors.
+Capture each readable candidate's canonical path, 48-hex volume/file identity,
+length and UTC last-write time. A candidate that cannot be held is a per-entry
+FAILED/2, so other entries continue. Release discovery handles before processing.
+Before each pending job, reopen its ordinary ancestors and source without
+following reparse points; compare captured identity, size and modification time.
+Retain the read/share-read source lease and ancestor handles through the child
+invocation, then release them. Missing/changed sources fail2 and others continue.
+This is a bounded filesystem snapshot check, not a full content hash or a crash,
+power-loss or adversarial metadata-restoration guarantee.
+
+Folders use journal schema2, retaining schema1's header/item/summary contract
+and held CreateNew/flush/error behavior, with these additions:
+
+| Record | Additional fields |
+| --- | --- |
+| `batch` | `schemaVersion:2`, `selection:{kind:"folders",directories,recurse,extensions,capturedAt}`; UTC capturedAt; inputCount counts every selected record. |
+| `item` | nullable `reasonCode`, `sourceIdentity`, `sourceLength`, `sourceLastWriteTimeUtc`; `SKIPPED` has null exitCode and a reason; unavailable/changed sources FAILED/2. |
+| `summary` | `counts.skipped` in addition to success, warning, failed, cancelled, notStarted. |
+
+Reason codes are `recursion_disabled`, `output_directory`, `reparse_point`,
+`duplicate_directory`, `duplicate_file`, `unsupported_extension`,
+`generated_artifact`, `source_unavailable`, `source_changed`. Static skipped
+and selection-failed records remain truthful after cancellation; only pending
+jobs become NOT_STARTED. No re-clean/retry occurs. Folder aggregation gives
+cancel130, otherwise any failed6, warnings alone7, success/empty/all-skipped0.
+The one-item explicit-list code exception does not apply to folders. Empty or
+all-skipped folders still write a complete zero-job summary without selecting
+mode or invoking native tools. Preferences are fully validated first. Journal
+failure5 stops future jobs and preserves earlier audio/records with incomplete
+reporting disclosed. Progress/active Ctrl+C handling belongs to WAC-M3-04.
 
 ## Website release metadata
 
