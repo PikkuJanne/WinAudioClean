@@ -958,7 +958,7 @@
       "depends_on": [
         "WAC-M3-06"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Pester suites, local runners and small repeatable native-process fixtures.",
       "implementation": [
@@ -972,7 +972,13 @@
         "AC-068",
         "AC-069"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ],
       "blocked_reason": null
     },
     {

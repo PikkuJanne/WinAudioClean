@@ -1,0 +1,378 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (53 files; shell 5.1.26100.9444).
+Static gate passed; 280 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+{
+  "mapped_cases": 69,
+  "required_cases": 69,
+  "commands": 35,
+  "named_reviews": 8,
+  "retained_gaps": 8,
+  "scope": "Structural traceability only; commands are available coverage, not execution results."
+}
+Coverage traceability passed
+Pester v5.7.1
+
+Starting discovery in 7 files.
+Discovery found 290 tests in 663ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.PreviewReportClose.Tests.ps1'
+Describing AC-030/045/068: Preview report close faults retain flushed outcomes and primary errors
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ json report release diagnostic."
+  [+] closes every writer after a post-dispose fault in the first JSON writer 1.11s (1.06s|52ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ txt report release diagnostic."
+  [+] closes every writer after a post-dispose fault in the second text writer 95ms (91ms|4ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ json report release diagnostic."
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ txt report release diagnostic."
+  [+] closes every writer after a post-dispose fault in both writers 97ms (95ms|2ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ json report release diagnostic."
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ txt report release diagnostic."
+  [+] keeps release advisories nonterminating when the caller stops on warnings 82ms (79ms|2ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ json report release diagnostic."
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ txt report release diagnostic."
+  [+] retains the primary write exception and rolls back both owned reports despite both close faults 221ms (219ms|1ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose
+ json report release diagnostic."
+  [+] retains a second-writer collision and foreign bytes when the first writer close faults 68ms (64ms|4ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preview.Tests.ps1'
+Describing AC-043: preview ranges are finite bounded sample-aligned excerpts
+  [+] rejects negative start 51ms (43ms|8ms)
+  [+] rejects empty start 18ms (16ms|2ms)
+  [+] rejects blank start 5ms (3ms|2ms)
+  [+] rejects null start 7ms (4ms|3ms)
+  [+] rejects locale decimal start 6ms (3ms|3ms)
+  [+] rejects exponent start 8ms (6ms|2ms)
+  [+] rejects NaN start 8ms (5ms|2ms)
+  [+] rejects infinite start 18ms (15ms|2ms)
+  [+] rejects filter injection start 10ms (5ms|5ms)
+  [+] rejects argument injection start 7ms (5ms|2ms)
+  [+] rejects expression start 8ms (7ms|1ms)
+  [+] rejects start at end 28ms (26ms|2ms)
+  [+] rejects start beyond end 8ms (6ms|2ms)
+  [+] rejects negative duration 11ms (9ms|2ms)
+  [+] rejects zero duration 9ms (8ms|1ms)
+  [+] rejects duration over maximum 8ms (6ms|2ms)
+  [+] rejects duration shorter than half a sample 19ms (18ms|1ms)
+  [+] rejects empty duration 7ms (6ms|1ms)
+  [+] rejects blank duration 5ms (4ms|1ms)
+  [+] rejects null duration 5ms (3ms|1ms)
+  [+] rejects locale decimal duration 4ms (3ms|1ms)
+  [+] rejects exponent duration 5ms (3ms|1ms)
+  [+] rejects NaN duration 4ms (3ms|1ms)
+  [+] rejects infinite duration 4ms (3ms|1ms)
+  [+] rejects filter injection duration 7ms (6ms|1ms)
+  [+] rejects argument injection duration 7ms (5ms|2ms)
+  [+] rejects expression duration 17ms (15ms|2ms)
+  [+] rejects unavailable input duration zero 24ms (20ms|4ms)
+  [+] rejects unavailable input duration negative 6ms (3ms|3ms)
+  [+] rejects unavailable input duration NaN 7ms (5ms|2ms)
+  [+] rejects unavailable input duration positive infinity 6ms (4ms|1ms)
+  [+] rejects unavailable input duration negative infinity 6ms (4ms|2ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at start 84ms (83ms|1ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at middle 27ms (24ms|3ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at near end 16ms (15ms|1ms)
+  [+] clips only the implicit default for a 0.2-second short file 26ms (24ms|2ms)
+  [+] clips only the implicit default for a 3-second short file 11ms (10ms|1ms)
+  [+] clips only the implicit default for a 44-second short file 13ms (12ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 7ms (6ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 4ms (3ms|1ms)
+  [+] accepts an exact explicit end boundary and the 60-second maximum 11ms (10ms|1ms)
+  [+] records clipping only when an implicit requested duration was actually shortened 7ms (6ms|1ms)
+  [+] preserves long-file sample offsets beyond Int32 without overflow 25ms (24ms|1ms)
+  [+] quantizes start and duration to 48 kHz samples using nearest rounding 15ms (14ms|1ms)
+  [+] parses invariant fractional input in en-US 19ms (17ms|2ms)
+  [+] parses invariant fractional input in de-DE 8ms (7ms|1ms)
+  [+] parses invariant fractional input in fi-FI 9ms (7ms|1ms)
+
+Describing AC-044: comparison gain is separate, common and attenuation only
+  [+] matches normal pair at a common target with the true-peak safety margin 57ms (54ms|3ms)
+  [+] matches quiet source at a common target with the true-peak safety margin 24ms (22ms|2ms)
+  [+] matches source peak guard at a common target with the true-peak safety margin 17ms (16ms|1ms)
+  [+] matches fractional guard below one dB at a common target with the true-peak safety margin 20ms (18ms|2ms)
+  [+] matches processed peak guard at a common target with the true-peak safety margin 16ms (15ms|1ms)
+  [+] matches already matched at a common target with the true-peak safety margin 18ms (16ms|1ms)
+  [+] labels unavailable too_short without inventing integrated loudness 20ms (19ms|1ms)
+  [+] labels unavailable silence without inventing integrated loudness 8ms (7ms|1ms)
+  [+] labels unavailable undefined_loudness without inventing integrated loudness 10ms (7ms|3ms)
+  [+] leaves silent null peaks at zero gain and gives too_short priority 20ms (18ms|2ms)
+  [+] rejects invalid measured Available for string availability 16ms (14ms|2ms)
+  [+] rejects invalid measured InputI for numeric string 9ms (8ms|1ms)
+  [+] rejects invalid measured InputI for boolean 12ms (7ms|5ms)
+  [+] rejects invalid measured InputI for array 10ms (7ms|3ms)
+  [+] rejects invalid measured InputI for null 7ms (6ms|1ms)
+  [+] rejects invalid measured InputI for NaN 5ms (4ms|1ms)
+  [+] rejects invalid measured InputI for infinity 4ms (3ms|1ms)
+  [+] rejects invalid measured InputTP for numeric string 6ms (5ms|1ms)
+  [+] rejects invalid measured InputTP for boolean 7ms (6ms|1ms)
+  [+] rejects invalid measured InputTP for array 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for null 6ms (5ms|1ms)
+  [+] rejects invalid measured InputTP for NaN 8ms (6ms|1ms)
+  [+] rejects invalid measured InputTP for infinity 5ms (3ms|1ms)
+  [+] rejects unknown unavailable reasons rather than copying an arbitrary label 9ms (8ms|1ms)
+
+Describing AC-043: preview timeline metadata binds seeking to the selected track
+  [+] uses the selected stream origin and retains a negative container origin only as metadata 205ms (197ms|8ms)
+  [+] uses sample zero only when WAV does not report a presentation origin 35ms (34ms|1ms)
+  [+] rejects unsupported selected timestamp negative 24ms (22ms|2ms)
+  [+] rejects unsupported selected timestamp NaN 14ms (12ms|1ms)
+  [+] rejects unsupported selected timestamp infinity 20ms (19ms|1ms)
+  [+] rejects unsupported selected timestamp N/A 18ms (16ms|1ms)
+  [+] rejects unsupported selected timestamp locale decimal 24ms (23ms|1ms)
+  [+] rejects unsupported selected timestamp filter-like string 14ms (13ms|1ms)
+  [+] rejects unsupported selected timestamp JSON number 16ms (14ms|1ms)
+  [+] rejects unsupported selected timestamp boolean 14ms (13ms|1ms)
+  [+] rejects unsupported selected timestamp array 40ms (38ms|2ms)
+  [+] rejects unsupported selected timestamp beyond supported bound 24ms (22ms|2ms)
+  [+] rejects unsupported selected timestamp null for non-WAV 21ms (19ms|2ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/48000 27ms (26ms|1ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/1000 18ms (17ms|1ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/101 35ms (33ms|2ms)
+  [+] rejects unsupported time_base for zero numerator 32ms (27ms|5ms)
+  [+] rejects unsupported time_base for zero denominator 15ms (14ms|1ms)
+  [+] rejects unsupported time_base for negative numerator 14ms (13ms|1ms)
+  [+] rejects unsupported time_base for negative denominator 15ms (14ms|1ms)
+  [+] rejects unsupported time_base for fractional numerator 35ms (31ms|4ms)
+  [+] rejects unsupported time_base for exponent denominator 38ms (37ms|2ms)
+  [+] rejects unsupported time_base for too coarse including one-sample allowance 26ms (21ms|5ms)
+  [+] rejects unsupported time_base for missing non-WAV rational 29ms (27ms|2ms)
+  [+] rejects unsupported time_base for NaN 19ms (17ms|1ms)
+  [+] rejects unsupported time_base for injection 16ms (14ms|3ms)
+  [+] rejects unsupported time_base for JSON number 16ms (15ms|1ms)
+  [+] rejects unsupported time_base for array 16ms (15ms|1ms)
+  [+] rejects unsupported sample_rate for zero 16ms (13ms|2ms)
+  [+] rejects unsupported sample_rate for negative 14ms (13ms|1ms)
+  [+] rejects unsupported sample_rate for fractional string 15ms (14ms|1ms)
+  [+] rejects unsupported sample_rate for NaN 11ms (9ms|1ms)
+  [+] rejects unsupported sample_rate for missing 20ms (19ms|1ms)
+  [+] rejects unsupported sample_rate for integer overflow 29ms (27ms|2ms)
+  [+] rejects unsupported sample_rate for JSON number 19ms (17ms|2ms)
+  [+] rejects unsupported sample_rate for array 14ms (12ms|2ms)
+  [+] rejects malformed or ambiguous timeline metadata for malformed JSON 26ms (24ms|2ms)
+  [+] rejects malformed or ambiguous timeline metadata for root array 13ms (12ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing streams 12ms (11ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing selected stream 13ms (12ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for duplicate stream index 15ms (14ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for string stream index 15ms (14ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing non-WAV origin 13ms (12ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for invalid container timestamp 12ms (10ms|1ms)
+
+Describing AC-043/045: preview commands bound one selected input and preserve mastering settings
+  [+] uses a bounded window and exact sample trim in en-US 95ms (90ms|5ms)
+  [+] uses a bounded window and exact sample trim in de-DE 28ms (27ms|1ms)
+  [+] uses a bounded window and exact sample trim in fi-FI 38ms (37ms|1ms)
+  [+] uses held pipe PCM and only comparison gain for a separately matched asset 20ms (18ms|2ms)
+  [+] adds the selected stream timestamp origin to the source-relative seek 15ms (14ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 11ms (10ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 4ms (3ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 6ms (3ms|3ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 4ms (3ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 1 channels and 16 bits 60ms (59ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 2 channels and 24 bits 11ms (10ms|1ms)
+
+Describing AC-043/045: CLI preview arguments fail before dependency and output side effects
+  [+] returns configuration exit 2 before native startup for start without preview 780ms (774ms|6ms)
+  [+] returns configuration exit 2 before native startup for duration without preview 716ms (715ms|1ms)
+  [+] returns configuration exit 2 before native startup for negative start 847ms (846ms|1ms)
+  [+] returns configuration exit 2 before native startup for empty start 861ms (859ms|1ms)
+  [+] returns configuration exit 2 before native startup for locale decimal start 823ms (821ms|1ms)
+  [+] returns configuration exit 2 before native startup for infinite start 781ms (780ms|1ms)
+  [+] returns configuration exit 2 before native startup for zero duration 845ms (843ms|1ms)
+  [+] returns configuration exit 2 before native startup for duration beyond maximum 843ms (841ms|2ms)
+  [+] returns configuration exit 2 before native startup for injected duration 855ms (853ms|2ms)
+  [+] returns configuration exit 2 before native startup for expression duration 801ms (800ms|1ms)
+
+Describing AC-043/044/045: preview orchestration retains ownership through faults and cancellation
+  [+] retains flushed SUCCESS reports and releases all Preview leases after both writer close faults 1.12s (1.11s|8ms)
+  [+] retains flushed FAILED reports and releases all Preview leases after both writer close faults 209ms (208ms|1ms)
+  [+] retains flushed CANCELLED reports and releases all Preview leases after both writer close faults 153ms (152ms|1ms)
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 4 172ms (170ms|2ms)
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 5 177ms (175ms|2ms)
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 130 142ms (140ms|2ms)
+  [+] retains all published assets and snapshots a request after the fourth publication 332ms (331ms|1ms)
+  [+] settles and releases Preview leases when output organization fails after publication 600ms (599ms|1ms)
+  [+] settles and releases Preview leases when output organization fails after cancellation 177ms (176ms|1ms)
+  [+] handles valid with exit 0, 4 completed or foreign preview assets and no full export 354ms (353ms|1ms)
+  [+] handles cancel with exit 130, 0 completed or foreign preview assets and no full export 76ms (74ms|1ms)
+  [+] handles range-invalid with exit 2, 0 completed or foreign preview assets and no full export 97ms (96ms|1ms)
+  [+] handles render-start with exit 3, 0 completed or foreign preview assets and no full export 161ms (158ms|3ms)
+  [+] handles render-exit with exit 4, 0 completed or foreign preview assets and no full export 91ms (90ms|1ms)
+  [+] handles measurement-malformed with exit 4, 0 completed or foreign preview assets and no full export 147ms (145ms|2ms)
+  [+] handles measurement-exit with exit 4, 0 completed or foreign preview assets and no full export 150ms (149ms|1ms)
+  [+] handles one-sample-short with exit 5, 0 completed or foreign preview assets and no full export 127ms (126ms|1ms)
+  [+] handles comparison-peak with exit 5, 0 completed or foreign preview assets and no full export 236ms (233ms|2ms)
+  [+] handles publication-race with exit 5, 1 completed or foreign preview assets and no full export 255ms (254ms|1ms)
+  [+] handles report-failure with exit 7, 4 completed or foreign preview assets and no full export 264ms (262ms|1ms)
+  [+] handles silence with exit 7, 4 completed or foreign preview assets and no full export 356ms (355ms|1ms)
+  [+] handles short-preview with exit 7, 4 completed or foreign preview assets and no full export 275ms (274ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.FaultChecks.Tests.ps1'
+Describing AC-068: fault-check fixture ownership and cleanup containment
+  [+] deletes only its newly allocated tree and leaves preexisting sibling files intact 34ms (31ms|3ms)
+  [+] pins the root and ordinary ancestors against path replacement until release 29ms (27ms|2ms)
+  [+] refuses an escaping junction before deleting any item and retains the outside sentinel 24ms (23ms|1ms)
+  [+] rejects a junction scratch parent without touching the external target 24ms (23ms|1ms)
+  [+] retains a released tree instead of falling back to recursive path deletion 17ms (15ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv 250ms (247ms|3ms)
+  [+] preserves square brackets in actual child argv 83ms (82ms|1ms)
+  [+] preserves apostrophe in actual child argv 76ms (74ms|2ms)
+  [+] preserves Unicode in actual child argv 81ms (80ms|1ms)
+  [+] preserves ampersand in actual child argv 84ms (83ms|1ms)
+  [+] preserves percent signs in actual child argv 75ms (74ms|1ms)
+  [+] preserves exclamation marks in actual child argv 88ms (87ms|1ms)
+  [+] preserves parentheses in actual child argv 135ms (133ms|1ms)
+  [+] preserves empty argument in actual child argv 158ms (156ms|2ms)
+  [+] preserves embedded quotes in actual child argv 146ms (143ms|3ms)
+  [+] preserves a quote alone in actual child argv 115ms (112ms|3ms)
+  [+] preserves trailing backslash after spaces in actual child argv 123ms (121ms|2ms)
+  [+] preserves multiple trailing backslashes in actual child argv 100ms (99ms|1ms)
+  [+] preserves backslashes before an embedded quote in actual child argv 81ms (80ms|2ms)
+  [+] starts with no child arguments and no render timeout 68ms (66ms|2ms)
+  [+] keeps native nonzero status and both diagnostic streams 62ms (61ms|1ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input 56ms (55ms|1ms)
+  [+] returns structured startup failure for a missing executable 14ms (12ms|1ms)
+  [+] returns structured startup failure for a file that is not an executable 19ms (18ms|1ms)
+  [+] rejects a NUL argument before starting the child 15ms (13ms|2ms)
+  [+] rejects an excessive command line before starting the child 23ms (21ms|2ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity 137ms (134ms|3ms)
+  [+] terminates the timed-out child and retains prior diagnostics 1.63s (1.62s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Transaction.Tests.ps1'
+Describing AC-022/AC-023/AC-024: owned output allocation, publication and cleanup
+  [+] allocates an exclusively owned partial in the final destination 29ms (27ms|3ms)
+  [+] allows the encoder to overwrite only the reserved partial while preventing its rename 20ms (19ms|1ms)
+  [+] pins the physical output directory against rename until the transaction closes 20ms (19ms|1ms)
+  [+] never overwrites a preexisting partial reservation 17ms (16ms|1ms)
+  [+] rejects a partial path that is the input itself 19ms (18ms|1ms)
+  [+] allocates unique names for rapid same-input runs and equal stems while all jobs remain open 45ms (43ms|1ms)
+  [+] freezes the exact owned bytes against writers and external rename until publication 55ms (54ms|1ms)
+  [+] refuses publication without freezing the output 14ms (12ms|1ms)
+  [+] rejects another publish or freeze after successful publication 26ms (24ms|1ms)
+  [+] does not replace a final file created after allocation 23ms (21ms|1ms)
+  [+] retains input and prior export when either is hardlinked to the final name 29ms (27ms|1ms)
+  [+] retains input and prior export when either is hardlinked to the final name 26ms (25ms|1ms)
+  [+] protects input hardlink and shared-log aliases until the transaction closes 38ms (37ms|1ms)
+  [+] removes only its own partial on normal failure and preserves unrelated crash leftovers 34ms (32ms|2ms)
+  [+] retains a foreign file replacing the partial between render and freeze 21ms (19ms|2ms)
+  [+] rejects tampered publication paths outside the pinned output directory 16ms (15ms|1ms)
+  [+] reports a cleanup sharing failure and still releases the input lock 22ms (21ms|1ms)
+  [+] returns a resolved input path so changing its junction cannot change the rendered file 22ms (21ms|1ms)
+  [+] resolves a junction destination and retains that physical target if the junction changes 20ms (19ms|1ms)
+  [+] rejects unsafe identifiers before allocating partial files 19ms (18ms|1ms)
+  [+] rejects unsafe identifiers before allocating partial files 8ms (7ms|1ms)
+  [+] rejects unsafe identifiers before allocating partial files 14ms (10ms|4ms)
+
+Describing AC-005: transaction helper import has no side effects
+  [+] defines functions without compiling native declarations, writing files or starting a child 938ms (935ms|3ms)
+
+Describing AC-023: report writes cannot follow filesystem aliases into existing audio
+  [+] allows Add-Content on a new or existing singly linked report while its guard is held 20ms (18ms|3ms)
+  [+] allows Add-Content on a new or existing singly linked report while its guard is held 11ms (10ms|1ms)
+  [+] refuses a report hardlink to a prior audio export without changing either path 19ms (18ms|1ms)
+  [+] does not redirect a held report guard when its directory junction changes 14ms (13ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Encoding.Tests.ps1'
+Describing AC-025/AC-026: explicit PCM and selected-channel policy
+  [+] preserves 1 channels with 16-bit PCM at 48 kHz 35ms (32ms|3ms)
+  [+] preserves 1 channels with 24-bit PCM at 48 kHz 16ms (15ms|1ms)
+  [+] preserves 2 channels with 16-bit PCM at 48 kHz 19ms (17ms|2ms)
+  [+] preserves 2 channels with 24-bit PCM at 48 kHz 22ms (18ms|4ms)
+  [+] infers conventional layout for 1 channels with a missing layout 27ms (25ms|3ms)
+  [+] infers conventional layout for 2 channels with a missing layout 8ms (7ms|1ms)
+  [+] infers conventional layout for 1 channels with a empty layout 10ms (8ms|2ms)
+  [+] infers conventional layout for 2 channels with a blank layout 15ms (13ms|2ms)
+  [+] rejects unsupported or inconsistent input zero channels, including with explicit mono 15ms (13ms|1ms)
+  [+] rejects unsupported or inconsistent input 2.1, including with explicit mono 7ms (6ms|1ms)
+  [+] rejects unsupported or inconsistent input 5.1, including with explicit mono 6ms (5ms|1ms)
+  [+] rejects unsupported or inconsistent input one channel labeled stereo, including with explicit mono 6ms (4ms|1ms)
+  [+] rejects unsupported or inconsistent input two channels labeled mono, including with explicit mono 7ms (5ms|2ms)
+  [+] rejects unsupported or inconsistent input downmix channel positions, including with explicit mono 7ms (6ms|1ms)
+  [+] rejects unsupported or inconsistent input numeric layout, including with explicit mono 6ms (5ms|1ms)
+  [+] mixes stereo equally before the exact original processing chain only when mono is requested 19ms (17ms|2ms)
+  [+] leaves an already-mono filter path unchanged under explicit mono 9ms (6ms|3ms)
+  [+] pins output encoding and keeps selected stereo channels without trimming or splitting 24ms (23ms|1ms)
+  [+] rejects unsupported bit depth  8ms (7ms|1ms)
+  [+] rejects unsupported bit depth 8 5ms (4ms|1ms)
+  [+] rejects unsupported bit depth 32 6ms (5ms|1ms)
+  [+] rejects unsupported bit depth 16.0 5ms (3ms|2ms)
+
+Describing AC-027: conservative output-size and available-space policy
+  [+] reserves one output file, 101 ms timing slack, a 1 MiB header and at least 64 MiB headroom 24ms (18ms|6ms)
+  [+] uses ten percent headroom when greater than 64 MiB 13ms (12ms|1ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 1 channels/16 bits 27ms (26ms|1ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 2 channels/16 bits 21ms (19ms|2ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 1 channels/24 bits 17ms (14ms|3ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 2 channels/24 bits 10ms (7ms|2ms)
+  [+] uses 64-bit byte counts for a supported very long RF64 estimate 12ms (9ms|3ms)
+  [+] rejects a duration that cannot be estimated: zero 12ms (10ms|1ms)
+  [+] rejects a duration that cannot be estimated: negative 8ms (6ms|2ms)
+  [+] rejects a duration that cannot be estimated: NaN 7ms (5ms|1ms)
+  [+] rejects a duration that cannot be estimated: infinity 9ms (7ms|2ms)
+  [+] rejects a duration that cannot be estimated: above supported bound 5ms (4ms|1ms)
+  [+] rejects invalid requested format in the estimator 13ms (11ms|1ms)
+  [+] rejects invalid requested format in the estimator 8ms (6ms|2ms)
+  [+] rejects invalid requested format in the estimator 9ms (8ms|1ms)
+  [+] rejects one byte below the required space and accepts the exact requirement 53ms (52ms|1ms)
+  [+] does not turn a failed destination query into an available-space result 25ms (23ms|2ms)
+
+Describing AC-027: the native space query uses the held destination directory
+  [+] queries a pinned junction target and rejects the transaction after close 41ms (35ms|5ms)
+
+Describing AC-025/AC-027: the application rejects settings and space before rendering
+  [+] fails safely before render for insufficient space 1.96s (1.96s|5ms)
+  [+] fails safely before render for unavailable space query 1.9s (1.9s|1ms)
+  [+] fails safely before render for RIFF oversized estimate 2.02s (2.02s|2ms)
+  [+] fails safely before render for multichannel input 1.88s (1.87s|3ms)
+  [+] fails safely before render for multichannel input with mono requested 1.84s (1.84s|1ms)
+  [+] fails safely before render for mismatched layout 2.05s (2.05s|1ms)
+  [+] fails safely before render for unsupported bit depth 780ms (775ms|4ms)
+  [+] fails safely before render for missing explicit mono filter 2.07s (2.07s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.ReportIO.Tests.ps1'
+Describing AC-030: held report writers and summary rollback
+  [+] creates a unique report and writes UTF-8 without a BOM through its held stream 32ms (29ms|2ms)
+  [+] replaces only its own newly created content without stale trailing bytes 17ms (15ms|1ms)
+  [+] refuses to overwrite a pre-existing report file 12ms (11ms|1ms)
+  [+] rejects mutation or removal of a prior summary through the owned-file APIs 26ms (25ms|1ms)
+  [+] appends and rolls back only the bytes added while it holds the summary writer 36ms (34ms|2ms)
+  [+] creates a missing summary without requiring an earlier file 17ms (13ms|3ms)
+  [+] preserves a prior UTF-8 BOM summary encoding and BOM when appending 25ms (24ms|1ms)
+  [+] preserves a prior UTF-16 LE summary encoding and BOM when appending 22ms (21ms|1ms)
+  [+] preserves a prior UTF-16 BE summary encoding and BOM when appending 18ms (15ms|2ms)
+  [+] preserves a prior UTF-32 LE summary encoding and BOM when appending 23ms (21ms|2ms)
+  [+] preserves a prior UTF-32 BE summary encoding and BOM when appending 14ms (12ms|2ms)
+  [+] detects and preserves a valid UTF-8 summary without a BOM 20ms (19ms|2ms)
+  [+] detects UTF-8 when a four-byte character crosses the decoding buffer boundary 22ms (21ms|1ms)
+  [+] preserves a legacy ANSI summary that is not valid UTF-8 32ms (31ms|1ms)
+  [+] rejects rollback beyond its original summary or current end 20ms (19ms|1ms)
+  [+] restores the exact original summary bytes after an injected partial write failure 86ms (85ms|1ms)
+  [+] prevents another writer, rename or deletion while held and bounds contention retry 161ms (160ms|1ms)
+  [+] refuses a multiple-hardlink summary without changing its target 17ms (15ms|1ms)
+  [+] refuses an existing directory reparse leaf 15ms (14ms|1ms)
+  [+] deletes only its held newly created report and closes idempotently 22ms (21ms|1ms)
+  [+] serializes concurrent process summary entries without interleaving 756ms (755ms|1ms)
+
+Describing AC-028/030: finish output cleanup before reporting while retaining source protection
+  [+] cleans the owned partial and holds input/destination until final close 57ms (53ms|4ms)
+  [+] surfaces cleanup failure once before reporting and preserves the blocking partial 21ms (20ms|1ms)
+Tests completed in 44s
+Tests Passed: 290, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 290 Pester passed, 0 skipped, 0 outside scope.

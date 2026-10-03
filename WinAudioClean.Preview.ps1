@@ -344,7 +344,12 @@ Detailed settings, arguments and native diagnostics are in the local JSON; inspe
         }
         throw
     } finally {
-        foreach ($writer in $writers.Values) { Close-WacReportWriter -Writer $writer }
+        foreach ($writer in $writers.Values) {
+            # Content was durably flushed above. Release advisories must not
+            # replace that outcome or a primary write error, or skip a writer.
+            try { Close-WacReportWriter -Writer $writer }
+            catch { Write-Warning ('Preview report handle release failed: ' + $_.Exception.Message) -WarningAction Continue }
+        }
     }
 }
 

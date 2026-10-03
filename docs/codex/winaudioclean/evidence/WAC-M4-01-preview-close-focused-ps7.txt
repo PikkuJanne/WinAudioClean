@@ -1,0 +1,33 @@
+Pester v5.7.1
+
+Starting discovery in 2 files.
+Discovery found 164 tests in 341ms.
+Filter 'Tag' set to ('ReportCloseFault').
+Filters selected 9 tests to run.
+Running tests.
+
+Running tests from '<REPOSITORY>\tests\WinAudioClean.Preview.Tests.ps1'
+Describing AC-043/044/045: preview orchestration retains ownership through faults and cancellation
+  [+] retains flushed SUCCESS reports and releases all Preview leases after both writer close faults 2.29s (2.25s|39ms)
+  [+] retains flushed FAILED reports and releases all Preview leases after both writer close faults 208ms (179ms|29ms)
+  [+] retains flushed CANCELLED reports and releases all Preview leases after both writer close faults 177ms (174ms|3ms)
+
+Running tests from '<REPOSITORY>\tests\WinAudioClean.PreviewReportClose.Tests.ps1'
+Describing AC-030/045/068: Preview report close faults retain flushed outcomes and primary errors
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+  [+] closes every writer after a post-dispose fault in the first JSON writer 113ms (108ms|5ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose txt report release diagnostic."
+  [+] closes every writer after a post-dispose fault in the second text writer 64ms (63ms|1ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose txt report release diagnostic."
+  [+] closes every writer after a post-dispose fault in both writers 70ms (68ms|1ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose txt report release diagnostic."
+  [+] keeps release advisories nonterminating when the caller stops on warnings 62ms (61ms|1ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose txt report release diagnostic."
+  [+] retains the primary write exception and rolls back both owned reports despite both close faults 109ms (108ms|1ms)
+WARNING: Preview report handle release failed: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+  [+] retains a second-writer collision and foreign bytes when the first writer close faults 51ms (49ms|2ms)
+Tests completed in 4.39s
+Tests Passed: 9, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 155

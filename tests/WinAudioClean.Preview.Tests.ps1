@@ -37,6 +37,7 @@ BeforeAll {
     . (Join-Path $previewRepository 'WinAudioClean.ps1')
     . (Join-Path $previewRepository 'WinAudioClean.Preview.ps1')
     . (Join-Path $PSScriptRoot 'fixtures\TestProcess.ps1')
+    . (Join-Path $PSScriptRoot 'fixtures\ReportCloseFault.ps1')
     function New-WacPreviewTestMeasurement {
         param([double]$Integrated = -20, [double]$Peak = -3, [bool]$Available = $true, [string]$Reason)
         [pscustomobject]@{ Available = $Available; Reason = $Reason; InputI = $(if ($Available) { $Integrated } else { $null }); InputTP = $Peak }
@@ -510,6 +511,7 @@ Describe 'AC-043/044/045: preview orchestration retains ownership through faults
         $realPreviewPublish = ${function:Publish-WacOutputTransaction}
         $realPreviewWriteReports = ${function:Write-WacPreviewReports}
         $realPreviewComplete = ${function:Complete-WacOutputTransaction}
+        $realPreviewOpenReport = ${function:Open-WacReportWriter}
     }
     BeforeEach {
         $previewCaseRoot = Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
@@ -591,6 +593,69 @@ Describe 'AC-043/044/045: preview orchestration retains ownership through faults
             param($Report, [string]$OutputFolder)
             if ($script:previewFault -eq 'report-failure') { throw 'Injected preview report failure.' }
             & $realPreviewWriteReports -Report $Report -OutputFolder $OutputFolder
+        }
+    }
+
+    It 'retains flushed <Status> reports and releases all Preview leases after both writer close faults' -Tag 'ReportCloseFault', 'FaultInjection' -ForEach @(
+        @{ Fault = 'valid'; Exit = 0; Status = 'SUCCESS'; ExpectedAssets = 4 }
+        @{ Fault = 'render-exit'; Exit = 4; Status = 'FAILED'; ExpectedAssets = 0 }
+        @{ Fault = 'native-cancellation'; Exit = 130; Status = 'CANCELLED'; ExpectedAssets = 0 }
+    ) {
+        $priorContext = $script:WacRunContext
+        $context = New-WacRunContext
+        $script:WacRunContext = $context
+        $script:previewCloseFaultWriters = New-Object 'System.Collections.Generic.List[object]'
+        $script:previewCloseFaultStreams = New-Object 'System.Collections.Generic.List[object]'
+        Mock Write-Warning {}
+        Mock Open-WacReportWriter {
+            param([string]$Path, [switch]$CreateNew)
+            $writer = & $realPreviewOpenReport -Path $Path -CreateNew:$CreateNew
+            $writer.Stream = New-WacReportCloseFaultStream -RealStream $writer.Stream -Label ([IO.Path]::GetExtension($Path).TrimStart('.'))
+            $script:previewCloseFaultStreams.Add($writer.Stream)
+            $script:previewCloseFaultWriters.Add($writer)
+            $writer
+        }
+        if ($Fault -eq 'native-cancellation') {
+            Mock Invoke-WacNativeProcess {
+                Request-WacCancellation -RunContext $script:WacRunContext
+                [pscustomobject]@{ Started = $true; ExitCode = 19; StandardOutput = ''; StandardError = ''
+                    Error = $null; TimedOut = $false; CleanupError = $null; Cancelled = $true }
+            }
+        }
+        try {
+            $result = Invoke-WacPreview -InputPath $previewCaseInput -OutputFolder $previewCaseOutput -FfmpegPath 'unused.exe' -FfprobePath 'unused.exe' -ProcessingProfile (Get-WacProcessingProfile -Choice 2)
+            @($result).Count | Should -Be 1
+            $result.ExitCode | Should -Be $Exit
+            $result.Status | Should -BeExactly $Status
+            $result.Report.reporting.complete | Should -BeTrue
+            $result.Report.reporting.errors.Count | Should -Be 0
+            $result.CleanupErrors.Count | Should -Be 0
+            $script:previewCloseFaultWriters.Count | Should -Be 2
+            foreach ($writer in $script:previewCloseFaultWriters) {
+                $writer.Closed | Should -BeTrue
+                $writer.Stream | Should -BeNullOrEmpty
+            }
+            foreach ($stream in $script:previewCloseFaultStreams) {
+                $stream.DisposeCalls | Should -Be 1
+                $stream.Real.CanWrite | Should -BeFalse
+            }
+            $json = Get-Content -Raw -LiteralPath $result.ReportPaths.JsonPath | ConvertFrom-Json
+            $json.status | Should -BeExactly $Status
+            $json.applicationExitCode | Should -Be $Exit
+            $json.reporting.complete | Should -BeTrue
+            $json.progress.completed | Should -Be ($ExpectedAssets -eq 4)
+            @($json.assets.PSObject.Properties).Count | Should -Be $ExpectedAssets
+            @(Get-ChildItem -LiteralPath $previewCaseOutput -Filter '*_Preview_*.wav').Count | Should -Be $ExpectedAssets
+            @(Get-ChildItem -LiteralPath $previewCaseOutput -Filter '*_Cleaned_*.wav').Count | Should -Be 0
+            @(Get-ChildItem -LiteralPath $previewCaseOutput -Filter '*.partial' -Force).Count | Should -Be 1
+            [Convert]::ToBase64String([IO.File]::ReadAllBytes($previewForeignPartial)) | Should -BeExactly 'BwgJ'
+            [Convert]::ToBase64String([IO.File]::ReadAllBytes($previewPrior)) | Should -BeExactly 'CwwN'
+            $sourceHandle = [IO.File]::Open($previewCaseInput, 'Open', 'ReadWrite', 'None')
+            $sourceHandle.Dispose()
+            Should -Invoke Write-Warning -Times 2 -Exactly -ParameterFilter { $Message -like 'Preview report handle release failed:*' }
+        } finally {
+            foreach ($stream in $script:previewCloseFaultStreams) { $stream.ThrowOnDispose = $false; $stream.Dispose() }
+            $context.Dispose(); $script:WacRunContext = $priorContext
         }
     }
 

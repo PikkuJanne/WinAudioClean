@@ -1,0 +1,1205 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M4-01",
+  "acceptance": "AC-068",
+  "status": "pass",
+  "summary": {
+    "hosts": 2,
+    "baselineTestsPassed": 6,
+    "detectedMutants": 6,
+    "cleanupSafetyTestsPassed": 10,
+    "failedBaselineTests": 0,
+    "skipped": 0
+  },
+  "scope": "Existing regression tests execute unmodified runtime baselines and three copy-only representative mutants on Windows PowerShell 5.1 and PowerShell 7. Every final mutant fails its intended assertion, with no fixture/container/block error. Final source digests agree across hosts.",
+  "cleanupContract": "Atomically allocate an unpredictable new child beneath held ordinary repository/.wac-local ancestry; no caller-supplied deletion root. Hold root identity and deny shared DELETE. Enumerate and pin every descendant before the first deletion, reject reparse points, check identity and delete by held handle bottom-up. On refusal retain the tree and release pins without a recursive path-delete fallback.",
+  "limits": [
+    "Three representative defects only, not exhaustive mutation coverage.",
+    "Wrong sample rate checks the ordinary encoder argv contract, not an actual FFmpeg render or media result.",
+    "Bad-exit uses the real installed-compiler synthetic native fixture returning 7, not a mocked process result.",
+    "No user audio, saved settings, application output, listening, broad stress, crash, power-loss or other Windows-release result is claimed."
+  ],
+  "finalCaptures": [
+    {
+      "status": "pass",
+      "sourceRevision": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "startedUtc": "2026-10-03T15:04:39.3446070Z",
+      "finishedUtc": "2026-10-03T15:04:58.3827255Z",
+      "shellVersion": "5.1.26100.9444",
+      "hostSha256": "8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E",
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-FaultChecks.ps1 -ReportPath \".wac-local/WAC-M4-01-faultchecks-ps51-final.json\"",
+      "pesterVersion": "5.7.1",
+      "sourceHashesBefore": {
+        "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+        "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+        "tests/WinAudioClean.Transaction.Tests.ps1": "660992C4F0F1FF84354E73C22583F7173B1FC0536B49C6A1808EADB81E4575CE",
+        "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+        "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+        "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+        "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+        "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+        "scripts/Invoke-FaultChecks.ps1": "4F5681FEC0CFEB19925021861458EAB02245ADF0A99FFC230ADB32E56D19A35B",
+        "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+        "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+      },
+      "sourceHashesAfter": {
+        "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+        "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+        "tests/WinAudioClean.Transaction.Tests.ps1": "660992C4F0F1FF84354E73C22583F7173B1FC0536B49C6A1808EADB81E4575CE",
+        "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+        "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+        "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+        "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+        "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+        "scripts/Invoke-FaultChecks.ps1": "4F5681FEC0CFEB19925021861458EAB02245ADF0A99FFC230ADB32E56D19A35B",
+        "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+        "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+      },
+      "sourceUnchanged": true,
+      "cleanup": "passed: held identities removed; no path-recursive fallback",
+      "childHarnessSha256": "7D107EBE82A9126FE1CB954CFFD4D760E1BAF806C4C7574605BA10F988D12E06",
+      "rawLocalReport": {
+        "path": ".wac-local/WAC-M4-01-faultchecks-ps51-final.json",
+        "sha256": "5627d5f1bf6527b4c429d91fd56b3bd17339a66919335a08038215f7d6b64b83",
+        "bytes": 44703
+      },
+      "pesterManifestSha256": "C6DCE1CDD85A9236A9A628DCAAF3E6F07B0AC4173FB25F620FA466F4402EC341",
+      "pesterModuleSha256": "49E9E839447703F7B6A6A320A3C65A6DD5A17F4E33372FE02C7D32AD26A2D3CA",
+      "nativeCompiler": {
+        "path": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe",
+        "fileVersion": "4.8.9221.0 built by: NET481REL1LAST_25H2",
+        "sha256": "46809206887326D2D24DB1EFF1F3064DE972C3451ABE766B49111450A5E08E00"
+      },
+      "cases": [
+        {
+          "id": "overwrite",
+          "acceptance": [
+            "AC-022",
+            "AC-023",
+            "AC-024"
+          ],
+          "defect": "Opening an occupied partial reservation with Create truncates foreign bytes instead of rejecting it.",
+          "source": "WinAudioClean.IO.ps1",
+          "before": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::CreateNew,",
+          "after": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::Create,",
+          "testPath": "tests/WinAudioClean.Transaction.Tests.ps1",
+          "filter": "*never overwrites a preexisting partial reservation",
+          "phases": [
+            {
+              "phase": "baseline",
+              "exitCode": 0,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "5.1.26100.9444",
+                "passed": 1,
+                "failed": 0,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                    "result": "Passed",
+                    "errors": []
+                  }
+                ]
+              },
+              "testedSourceSha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+              "selectedCommand": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-baseline\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-baseline\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [+] never overwrites a preexisting partial reservation 464ms (421ms|42ms)",
+                "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 26"
+              ],
+              "stderr": ""
+            },
+            {
+              "phase": "mutant",
+              "exitCode": 1,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "5.1.26100.9444",
+                "passed": 0,
+                "failed": 1,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                    "result": "Failed",
+                    "errors": [
+                      "Expected an exception to be thrown, but no exception was thrown."
+                    ]
+                  }
+                ]
+              },
+              "testedSourceSha256": "96E78D120B80B7C2B254DE8215B729B0DAB7227A62C4BA7EE312927982087B77",
+              "selectedCommand": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-mutant\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-mutant\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [-] never overwrites a preexisting partial reservation 501ms (440ms|61ms)",
+                "   Expected an exception to be thrown, but no exception was thrown.",
+                "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 26"
+              ],
+              "stderr": ""
+            }
+          ]
+        },
+        {
+          "id": "bad-exit",
+          "acceptance": [
+            "AC-017"
+          ],
+          "defect": "Losing the real native exit code converts a fixture exit 7 into apparent success 0.",
+          "source": "WinAudioClean.ps1",
+          "before": "$result.ExitCode = $process.ExitCode",
+          "after": "$result.ExitCode = 0",
+          "testPath": "tests/WinAudioClean.Native.Tests.ps1",
+          "filter": "*keeps native nonzero status and both diagnostic streams",
+          "phases": [
+            {
+              "phase": "baseline",
+              "exitCode": 0,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "5.1.26100.9444",
+                "passed": 1,
+                "failed": 0,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-016/AC-017/AC-018: real native process arguments, results and streams.keeps native nonzero status and both diagnostic streams",
+                    "result": "Passed",
+                    "errors": []
+                  }
+                ]
+              },
+              "testedSourceSha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+              "selectedCommand": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\bad-exit-baseline\\tests\\WinAudioClean.Native.Tests.ps1\" -Filter \"*keeps native nonzero status and both diagnostic streams\" -OutputPath \"<scratch>\\bad-exit-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\bad-exit-baseline\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [+] keeps native nonzero status and both diagnostic streams 292ms (248ms|44ms)",
+                "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 22"
+              ],
+              "stderr": ""
+            },
+            {
+              "phase": "mutant",
+              "exitCode": 1,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "5.1.26100.9444",
+                "passed": 0,
+                "failed": 1,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-016/AC-017/AC-018: real native process arguments, results and streams.keeps native nonzero status and both diagnostic streams",
+                    "result": "Failed",
+                    "errors": [
+                      "Expected 7, but got 0."
+                    ]
+                  }
+                ]
+              },
+              "testedSourceSha256": "C2506D1112A40E709B4630AFFB681F3ED68A35B6E4D50CE47B30BE4FA3C1A1FC",
+              "selectedCommand": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\bad-exit-mutant\\tests\\WinAudioClean.Native.Tests.ps1\" -Filter \"*keeps native nonzero status and both diagnostic streams\" -OutputPath \"<scratch>\\bad-exit-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\bad-exit-mutant\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [-] keeps native nonzero status and both diagnostic streams 307ms (263ms|45ms)",
+                "   Expected 7, but got 0.",
+                "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 22"
+              ],
+              "stderr": ""
+            }
+          ]
+        },
+        {
+          "id": "wrong-sample-rate",
+          "acceptance": [
+            "AC-025"
+          ],
+          "defect": "Changing the ordinary render encoder argv to 44100 violates the explicit 48 kHz output contract.",
+          "source": "WinAudioClean.ps1",
+          "before": "'-ar', '48000', '-c:a', $OutputPolicy.Codec",
+          "after": "'-ar', '44100', '-c:a', $OutputPolicy.Codec",
+          "testPath": "tests/WinAudioClean.Encoding.Tests.ps1",
+          "filter": "*pins output encoding and keeps selected stereo channels without trimming or splitting",
+          "phases": [
+            {
+              "phase": "baseline",
+              "exitCode": 0,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "5.1.26100.9444",
+                "passed": 1,
+                "failed": 0,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-025/AC-026: explicit PCM and selected-channel policy.pins output encoding and keeps selected stereo channels without trimming or splitting",
+                    "result": "Passed",
+                    "errors": []
+                  }
+                ]
+              },
+              "testedSourceSha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+              "selectedCommand": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\wrong-sample-rate-baseline\\tests\\WinAudioClean.Encoding.Tests.ps1\" -Filter \"*pins output encoding and keeps selected stereo channels without trimming or splitting\" -OutputPath \"<scratch>\\wrong-sample-rate-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\wrong-sample-rate-baseline\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [+] pins output encoding and keeps selected stereo channels without trimming or splitting 205ms (156ms|49ms)",
+                "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 47"
+              ],
+              "stderr": ""
+            },
+            {
+              "phase": "mutant",
+              "exitCode": 1,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "5.1.26100.9444",
+                "passed": 0,
+                "failed": 1,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-025/AC-026: explicit PCM and selected-channel policy.pins output encoding and keeps selected stereo channels without trimming or splitting",
+                    "result": "Failed",
+                    "errors": [
+                      "Expected strings to be the same, but they were different.\nString lengths are both 5.\nStrings differ at index 1.\nExpected: '48000'\nBut was:  '44100'\n           -^"
+                    ]
+                  }
+                ]
+              },
+              "testedSourceSha256": "D5EB4097892A7CD39087AC4FC50DBA96A7C33F25A26CEF8F27330557CCD9F32F",
+              "selectedCommand": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\wrong-sample-rate-mutant\\tests\\WinAudioClean.Encoding.Tests.ps1\" -Filter \"*pins output encoding and keeps selected stereo channels without trimming or splitting\" -OutputPath \"<scratch>\\wrong-sample-rate-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\wrong-sample-rate-mutant\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [-] pins output encoding and keeps selected stereo channels without trimming or splitting 233ms (190ms|43ms)",
+                "   Expected strings to be the same, but they were different.",
+                "   Expected: '48000'",
+                "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 47"
+              ],
+              "stderr": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "status": "pass",
+      "sourceRevision": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "startedUtc": "2026-10-03T15:04:41.8949251Z",
+      "finishedUtc": "2026-10-03T15:05:03.4272762Z",
+      "shellVersion": "7.6.5",
+      "hostSha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+      "command": "pwsh -NoProfile -File scripts/Invoke-FaultChecks.ps1 -ReportPath \".wac-local/WAC-M4-01-faultchecks-ps7-toolhash.json\"",
+      "pesterVersion": "5.7.1",
+      "sourceHashesBefore": {
+        "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+        "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+        "tests/WinAudioClean.Transaction.Tests.ps1": "660992C4F0F1FF84354E73C22583F7173B1FC0536B49C6A1808EADB81E4575CE",
+        "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+        "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+        "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+        "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+        "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+        "scripts/Invoke-FaultChecks.ps1": "4F5681FEC0CFEB19925021861458EAB02245ADF0A99FFC230ADB32E56D19A35B",
+        "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+        "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+      },
+      "sourceHashesAfter": {
+        "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+        "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+        "tests/WinAudioClean.Transaction.Tests.ps1": "660992C4F0F1FF84354E73C22583F7173B1FC0536B49C6A1808EADB81E4575CE",
+        "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+        "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+        "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+        "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+        "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+        "scripts/Invoke-FaultChecks.ps1": "4F5681FEC0CFEB19925021861458EAB02245ADF0A99FFC230ADB32E56D19A35B",
+        "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+        "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+      },
+      "sourceUnchanged": true,
+      "cleanup": "passed: held identities removed; no path-recursive fallback",
+      "childHarnessSha256": "7D107EBE82A9126FE1CB954CFFD4D760E1BAF806C4C7574605BA10F988D12E06",
+      "rawLocalReport": {
+        "path": ".wac-local/WAC-M4-01-faultchecks-ps7-toolhash.json",
+        "sha256": "fec7df7fc7fdf152d2ceefe178eec6dcdaaa85eacd60078a6b39dde5a70b2ef8",
+        "bytes": 30032
+      },
+      "pesterManifestSha256": "C6DCE1CDD85A9236A9A628DCAAF3E6F07B0AC4173FB25F620FA466F4402EC341",
+      "pesterModuleSha256": "49E9E839447703F7B6A6A320A3C65A6DD5A17F4E33372FE02C7D32AD26A2D3CA",
+      "nativeCompiler": {
+        "path": "C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe",
+        "fileVersion": "4.8.9221.0 built by: NET481REL1LAST_25H2",
+        "sha256": "46809206887326D2D24DB1EFF1F3064DE972C3451ABE766B49111450A5E08E00"
+      },
+      "cases": [
+        {
+          "id": "overwrite",
+          "acceptance": [
+            "AC-022",
+            "AC-023",
+            "AC-024"
+          ],
+          "defect": "Opening an occupied partial reservation with Create truncates foreign bytes instead of rejecting it.",
+          "source": "WinAudioClean.IO.ps1",
+          "before": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::CreateNew,",
+          "after": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::Create,",
+          "testPath": "tests/WinAudioClean.Transaction.Tests.ps1",
+          "filter": "*never overwrites a preexisting partial reservation",
+          "phases": [
+            {
+              "phase": "baseline",
+              "exitCode": 0,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "7.6.5",
+                "passed": 1,
+                "failed": 0,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                    "result": "Passed",
+                    "errors": []
+                  }
+                ]
+              },
+              "testedSourceSha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+              "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-baseline\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-baseline\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [+] never overwrites a preexisting partial reservation 1.12s (1.08s|34ms)",
+                "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 26"
+              ],
+              "stderr": ""
+            },
+            {
+              "phase": "mutant",
+              "exitCode": 1,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "7.6.5",
+                "passed": 0,
+                "failed": 1,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                    "result": "Failed",
+                    "errors": [
+                      "Expected an exception to be thrown, but no exception was thrown."
+                    ]
+                  }
+                ]
+              },
+              "testedSourceSha256": "96E78D120B80B7C2B254DE8215B729B0DAB7227A62C4BA7EE312927982087B77",
+              "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-mutant\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-mutant\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [-] never overwrites a preexisting partial reservation 896ms (868ms|28ms)",
+                "   Expected an exception to be thrown, but no exception was thrown.",
+                "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 26"
+              ],
+              "stderr": ""
+            }
+          ]
+        },
+        {
+          "id": "bad-exit",
+          "acceptance": [
+            "AC-017"
+          ],
+          "defect": "Losing the real native exit code converts a fixture exit 7 into apparent success 0.",
+          "source": "WinAudioClean.ps1",
+          "before": "$result.ExitCode = $process.ExitCode",
+          "after": "$result.ExitCode = 0",
+          "testPath": "tests/WinAudioClean.Native.Tests.ps1",
+          "filter": "*keeps native nonzero status and both diagnostic streams",
+          "phases": [
+            {
+              "phase": "baseline",
+              "exitCode": 0,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "7.6.5",
+                "passed": 1,
+                "failed": 0,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-016/AC-017/AC-018: real native process arguments, results and streams.keeps native nonzero status and both diagnostic streams",
+                    "result": "Passed",
+                    "errors": []
+                  }
+                ]
+              },
+              "testedSourceSha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+              "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\bad-exit-baseline\\tests\\WinAudioClean.Native.Tests.ps1\" -Filter \"*keeps native nonzero status and both diagnostic streams\" -OutputPath \"<scratch>\\bad-exit-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\bad-exit-baseline\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [+] keeps native nonzero status and both diagnostic streams 270ms (216ms|54ms)",
+                "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 22"
+              ],
+              "stderr": ""
+            },
+            {
+              "phase": "mutant",
+              "exitCode": 1,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "7.6.5",
+                "passed": 0,
+                "failed": 1,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-016/AC-017/AC-018: real native process arguments, results and streams.keeps native nonzero status and both diagnostic streams",
+                    "result": "Failed",
+                    "errors": [
+                      "Expected 7, but got 0."
+                    ]
+                  }
+                ]
+              },
+              "testedSourceSha256": "C2506D1112A40E709B4630AFFB681F3ED68A35B6E4D50CE47B30BE4FA3C1A1FC",
+              "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\bad-exit-mutant\\tests\\WinAudioClean.Native.Tests.ps1\" -Filter \"*keeps native nonzero status and both diagnostic streams\" -OutputPath \"<scratch>\\bad-exit-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\bad-exit-mutant\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [-] keeps native nonzero status and both diagnostic streams 260ms (225ms|35ms)",
+                "   Expected 7, but got 0.",
+                "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 22"
+              ],
+              "stderr": ""
+            }
+          ]
+        },
+        {
+          "id": "wrong-sample-rate",
+          "acceptance": [
+            "AC-025"
+          ],
+          "defect": "Changing the ordinary render encoder argv to 44100 violates the explicit 48 kHz output contract.",
+          "source": "WinAudioClean.ps1",
+          "before": "'-ar', '48000', '-c:a', $OutputPolicy.Codec",
+          "after": "'-ar', '44100', '-c:a', $OutputPolicy.Codec",
+          "testPath": "tests/WinAudioClean.Encoding.Tests.ps1",
+          "filter": "*pins output encoding and keeps selected stereo channels without trimming or splitting",
+          "phases": [
+            {
+              "phase": "baseline",
+              "exitCode": 0,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "7.6.5",
+                "passed": 1,
+                "failed": 0,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-025/AC-026: explicit PCM and selected-channel policy.pins output encoding and keeps selected stereo channels without trimming or splitting",
+                    "result": "Passed",
+                    "errors": []
+                  }
+                ]
+              },
+              "testedSourceSha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+              "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\wrong-sample-rate-baseline\\tests\\WinAudioClean.Encoding.Tests.ps1\" -Filter \"*pins output encoding and keeps selected stereo channels without trimming or splitting\" -OutputPath \"<scratch>\\wrong-sample-rate-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\wrong-sample-rate-baseline\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [+] pins output encoding and keeps selected stereo channels without trimming or splitting 152ms (124ms|28ms)",
+                "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 47"
+              ],
+              "stderr": ""
+            },
+            {
+              "phase": "mutant",
+              "exitCode": 1,
+              "result": {
+                "pesterVersion": "5.7.1",
+                "shellVersion": "7.6.5",
+                "passed": 0,
+                "failed": 1,
+                "skipped": 0,
+                "failedContainers": 0,
+                "failedBlocks": 0,
+                "tests": [
+                  {
+                    "name": "AC-025/AC-026: explicit PCM and selected-channel policy.pins output encoding and keeps selected stereo channels without trimming or splitting",
+                    "result": "Failed",
+                    "errors": [
+                      "Expected strings to be the same, but they were different.\nString lengths are both 5.\nStrings differ at index 1.\nExpected: '48000'\nBut was:  '44100'\n           -^"
+                    ]
+                  }
+                ]
+              },
+              "testedSourceSha256": "D5EB4097892A7CD39087AC4FC50DBA96A7C33F25A26CEF8F27330557CCD9F32F",
+              "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\wrong-sample-rate-mutant\\tests\\WinAudioClean.Encoding.Tests.ps1\" -Filter \"*pins output encoding and keeps selected stereo channels without trimming or splitting\" -OutputPath \"<scratch>\\wrong-sample-rate-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\wrong-sample-rate-mutant\\temp\"",
+              "copiedSourcesMatchCapturedSourceHashes": true,
+              "stdoutSelection": [
+                "  [-] pins output encoding and keeps selected stereo channels without trimming or splitting 183ms (155ms|28ms)",
+                "   Expected strings to be the same, but they were different.",
+                "   Expected: '48000'",
+                "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 47"
+              ],
+              "stderr": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cleanupSafety": [
+    {
+      "host": "ps51",
+      "exitCode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        "[+] deletes only its newly allocated tree and leaves preexisting sibling files intact 200ms (147ms|53ms)",
+        "[+] pins the root and ordinary ancestors against path replacement until release 75ms (72ms|3ms)",
+        "[+] refuses an escaping junction before deleting any item and retains the outside sentinel 40ms (37ms|3ms)",
+        "[+] rejects a junction scratch parent without touching the external target 36ms (34ms|2ms)",
+        "[+] retains a released tree instead of falling back to recursive path deletion 20ms (18ms|2ms)"
+      ],
+      "rawLocalLog": {
+        "path": ".wac-local/WAC-M4-01-faultchecks-safety-ps51.txt",
+        "sha256": "c8dd6dd480e70300e6fa609e0ff0cde42372a908bf29445d98df5072b5ad34fe",
+        "bytes": 880
+      },
+      "command": "powershell -NoProfile -ExecutionPolicy Bypass -Command 'Import-Module ./.wac-local/Modules/Pester/5.7.1/Pester.psd1; $configuration = New-PesterConfiguration; $configuration.Run.Path = \"tests/WinAudioClean.FaultChecks.Tests.ps1\"; $configuration.Run.Exit = $true; $configuration.Output.Verbosity = \"Detailed\"; Invoke-Pester -Configuration $configuration'"
+    },
+    {
+      "host": "ps7",
+      "exitCode": 0,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "cases": [
+        "[+] deletes only its newly allocated tree and leaves preexisting sibling files intact 116ms (89ms|27ms)",
+        "[+] pins the root and ordinary ancestors against path replacement until release 44ms (43ms|1ms)",
+        "[+] refuses an escaping junction before deleting any item and retains the outside sentinel 30ms (29ms|1ms)",
+        "[+] rejects a junction scratch parent without touching the external target 29ms (28ms|1ms)",
+        "[+] retains a released tree instead of falling back to recursive path deletion 13ms (12ms|1ms)"
+      ],
+      "rawLocalLog": {
+        "path": ".wac-local/WAC-M4-01-faultchecks-safety-ps7.txt",
+        "sha256": "f51305832b728455f4d9cebbafc05f91fe1960f9524f81844b6542a465d2b1b2",
+        "bytes": 879
+      },
+      "command": "pwsh -NoProfile -Command 'Import-Module ./.wac-local/Modules/Pester/5.7.1/Pester.psd1; $configuration = New-PesterConfiguration; $configuration.Run.Path = \"tests/WinAudioClean.FaultChecks.Tests.ps1\"; $configuration.Run.Exit = $true; $configuration.Output.Verbosity = \"Detailed\"; Invoke-Pester -Configuration $configuration'"
+    }
+  ],
+  "preliminaryHistory": [
+    {
+      "explanation": "The intended overwrite assertion detected CreateNew-to-Create, but an unexpectedly returned unregistered transaction leaked its held handles and caused a Pester TestDrive cleanup container error. The harness refused acceptance. The existing regression test now registers an unexpected allocation for normal AfterEach cleanup.",
+      "capture": {
+        "status": "fail",
+        "sourceRevision": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+        "startedUtc": "2026-10-03T15:01:56.6539871Z",
+        "finishedUtc": "2026-10-03T15:02:04.5805728Z",
+        "shellVersion": "7.6.5",
+        "hostSha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+        "command": "pwsh -NoProfile -File scripts/Invoke-FaultChecks.ps1",
+        "pesterVersion": "5.7.1",
+        "sourceHashesBefore": {
+          "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+          "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+          "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+          "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+          "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+          "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+          "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+          "tests/WinAudioClean.Transaction.Tests.ps1": "169E07F490582BD6F0DF9B79F9B394985F8384BE6A0D95F5CEB35BEF2CE4A0E2",
+          "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+          "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+          "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "scripts/Invoke-FaultChecks.ps1": "6A72B53DA74478A0C19CF9BE3463B8255628BE4466F0BD723AB1FAF16FA2FC91",
+          "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+          "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+        },
+        "sourceHashesAfter": {
+          "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+          "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+          "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+          "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+          "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+          "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+          "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+          "tests/WinAudioClean.Transaction.Tests.ps1": "169E07F490582BD6F0DF9B79F9B394985F8384BE6A0D95F5CEB35BEF2CE4A0E2",
+          "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+          "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+          "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "scripts/Invoke-FaultChecks.ps1": "6A72B53DA74478A0C19CF9BE3463B8255628BE4466F0BD723AB1FAF16FA2FC91",
+          "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+          "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+        },
+        "sourceUnchanged": true,
+        "cleanup": "passed: held identities removed; no path-recursive fallback",
+        "childHarnessSha256": "7D107EBE82A9126FE1CB954CFFD4D760E1BAF806C4C7574605BA10F988D12E06",
+        "rawLocalReport": {
+          "path": ".wac-local/WAC-M4-01-faultchecks-ps7-initial.json",
+          "sha256": "2dcbc64fd1d0aaf62541dc18ab863e328dbe55cff2ebb4baf277cd8b8d32971e",
+          "bytes": 15638
+        },
+        "error": "Mutation failed for a fixture/container/selection reason.",
+        "cases": [
+          {
+            "id": "overwrite",
+            "acceptance": [
+              "AC-022",
+              "AC-023",
+              "AC-024"
+            ],
+            "defect": "Opening an occupied partial reservation with Create truncates foreign bytes instead of rejecting it.",
+            "source": "WinAudioClean.IO.ps1",
+            "before": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::CreateNew,",
+            "after": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::Create,",
+            "testPath": "tests/WinAudioClean.Transaction.Tests.ps1",
+            "filter": "*never overwrites a preexisting partial reservation",
+            "phases": [
+              {
+                "phase": "baseline",
+                "exitCode": 0,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 1,
+                  "failed": 0,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                      "result": "Passed",
+                      "errors": []
+                    }
+                  ]
+                },
+                "testedSourceSha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-baseline\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-baseline\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [+] never overwrites a preexisting partial reservation 908ms (875ms|33ms)",
+                  "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 26"
+                ],
+                "stderr": ""
+              },
+              {
+                "phase": "mutant",
+                "exitCode": 1,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 0,
+                  "failed": 1,
+                  "skipped": 0,
+                  "failedContainers": 1,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                      "result": "Failed",
+                      "errors": [
+                        "Expected an exception to be thrown, but no exception was thrown."
+                      ]
+                    }
+                  ]
+                },
+                "testedSourceSha256": "96E78D120B80B7C2B254DE8215B729B0DAB7227A62C4BA7EE312927982087B77",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-mutant\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-mutant\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [-] never overwrites a preexisting partial reservation 666ms (637ms|29ms)",
+                  "   Expected an exception to be thrown, but no exception was thrown.",
+                  "[-] <scratch>\\overwrite-mutant\\tests\\WinAudioClean.Transaction.Tests.ps1 failed with:",
+                  "System.Management.Automation.RuntimeException: Framework failed:",
+                  "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 26",
+                  "Container failed: 1"
+                ],
+                "stderr": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "explanation": "A tentative native FILE_RENAME_INFO ReplaceIfExists-flag mutation still failed publication on this Windows filesystem, so the existing occupied-final test passed. The harness refused the surviving mutant. This candidate was discarded; it is not an accepted mutation result.",
+      "capture": {
+        "status": "fail",
+        "sourceRevision": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+        "startedUtc": "2026-10-03T15:03:05.6034685Z",
+        "finishedUtc": "2026-10-03T15:03:12.5711840Z",
+        "shellVersion": "7.6.5",
+        "hostSha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+        "command": "pwsh -NoProfile -File scripts/Invoke-FaultChecks.ps1",
+        "pesterVersion": "5.7.1",
+        "sourceHashesBefore": {
+          "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+          "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+          "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+          "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+          "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+          "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+          "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+          "tests/WinAudioClean.Transaction.Tests.ps1": "169E07F490582BD6F0DF9B79F9B394985F8384BE6A0D95F5CEB35BEF2CE4A0E2",
+          "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+          "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+          "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "scripts/Invoke-FaultChecks.ps1": "A9CA2F64D3120D7D3AC81CFECD291265304B3CCA36433379735F400EE92BBD25",
+          "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+          "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+        },
+        "sourceHashesAfter": {
+          "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+          "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+          "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+          "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+          "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+          "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+          "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+          "tests/WinAudioClean.Transaction.Tests.ps1": "169E07F490582BD6F0DF9B79F9B394985F8384BE6A0D95F5CEB35BEF2CE4A0E2",
+          "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+          "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+          "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "scripts/Invoke-FaultChecks.ps1": "A9CA2F64D3120D7D3AC81CFECD291265304B3CCA36433379735F400EE92BBD25",
+          "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+          "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+        },
+        "sourceUnchanged": true,
+        "cleanup": "passed: held identities removed; no path-recursive fallback",
+        "childHarnessSha256": "7D107EBE82A9126FE1CB954CFFD4D760E1BAF806C4C7574605BA10F988D12E06",
+        "rawLocalReport": {
+          "path": ".wac-local/WAC-M4-01-faultchecks-ps7-final.json",
+          "sha256": "a6c0db58997a19379870589452780fb055b0c63efad8829acd89abeb8b6f1883",
+          "bytes": 12600
+        },
+        "error": "Relevant test did not detect the intended mutation: overwrite / ",
+        "cases": [
+          {
+            "id": "overwrite",
+            "acceptance": [
+              "AC-022",
+              "AC-023",
+              "AC-024"
+            ],
+            "defect": "Setting native FILE_RENAME_INFO.ReplaceIfExists true replaces an occupied final path during publication.",
+            "source": "WinAudioClean.IO.ps1",
+            "before": "Marshal.WriteIntPtr(information, rootOffset, IntPtr.Zero);",
+            "after": "Marshal.WriteByte(information, 1); Marshal.WriteIntPtr(information, rootOffset, IntPtr.Zero);",
+            "testPath": "tests/WinAudioClean.Transaction.Tests.ps1",
+            "filter": "*does not replace a final file created after allocation",
+            "phases": [
+              {
+                "phase": "baseline",
+                "exitCode": 0,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 1,
+                  "failed": 0,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.does not replace a final file created after allocation",
+                      "result": "Passed",
+                      "errors": []
+                    }
+                  ]
+                },
+                "testedSourceSha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-baseline\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*does not replace a final file created after allocation\" -OutputPath \"<scratch>\\overwrite-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-baseline\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [+] does not replace a final file created after allocation 766ms (737ms|29ms)",
+                  "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 26"
+                ],
+                "stderr": ""
+              },
+              {
+                "phase": "mutant",
+                "exitCode": 0,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 1,
+                  "failed": 0,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.does not replace a final file created after allocation",
+                      "result": "Passed",
+                      "errors": []
+                    }
+                  ]
+                },
+                "testedSourceSha256": "2BF4B12857648ADF3F097C0C2B8ACAECF9E0C883F5999FF8ABE1B0D3CC581279",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-mutant\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*does not replace a final file created after allocation\" -OutputPath \"<scratch>\\overwrite-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-mutant\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [+] does not replace a final file created after allocation 779ms (743ms|36ms)",
+                  "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 26"
+                ],
+                "stderr": ""
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "explanation": "Corrected CreateNew-to-Create with resource-safe existing test: all three baseline/mutant pairs passed before tool-identity metadata was added. This is a preliminary successful scope, separate from final matching-source captures.",
+      "capture": {
+        "status": "pass",
+        "sourceRevision": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+        "startedUtc": "2026-10-03T15:03:46.9539686Z",
+        "finishedUtc": "2026-10-03T15:04:07.4094050Z",
+        "shellVersion": "7.6.5",
+        "hostSha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+        "command": "pwsh -NoProfile -File scripts/Invoke-FaultChecks.ps1",
+        "pesterVersion": "5.7.1",
+        "sourceHashesBefore": {
+          "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+          "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+          "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+          "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+          "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+          "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+          "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+          "tests/WinAudioClean.Transaction.Tests.ps1": "660992C4F0F1FF84354E73C22583F7173B1FC0536B49C6A1808EADB81E4575CE",
+          "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+          "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+          "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "scripts/Invoke-FaultChecks.ps1": "3DEB4F33B7BA7B26FB2C2951D243BDEB116EE14E5AA937F2D7E4A85AF3641947",
+          "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+          "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+        },
+        "sourceHashesAfter": {
+          "WinAudioClean.Batch.ps1": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA",
+          "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+          "WinAudioClean.Launcher.ps1": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5",
+          "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+          "WinAudioClean.Preview.ps1": "FD3C46BA3DF1ACABD9542CF9E2910554138EE34F87673D4B4C6A41AC188E1E95",
+          "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+          "WinAudioClean.Queue.ps1": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0",
+          "WinAudioClean.Settings.ps1": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA",
+          "tests/WinAudioClean.Transaction.Tests.ps1": "660992C4F0F1FF84354E73C22583F7173B1FC0536B49C6A1808EADB81E4575CE",
+          "tests/WinAudioClean.Native.Tests.ps1": "C15C97AE29FAF6C1547E7F145B869A4345B3C0D60A24162A327993E6884282E2",
+          "tests/WinAudioClean.Encoding.Tests.ps1": "C1FE3C4AB96C701595DBA43A2C4FB29E76F9B151E5F8638435BC0DCEC6CAEC37",
+          "tests/fixtures/TestProcess.ps1": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1",
+          "tests/fixtures/New-NativeProcessFixture.ps1": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8",
+          "tests/fixtures/NativeProcessFixture.cs": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE",
+          "scripts/Invoke-FaultChecks.ps1": "3DEB4F33B7BA7B26FB2C2951D243BDEB116EE14E5AA937F2D7E4A85AF3641947",
+          "tests/fixtures/FaultCheckScratch.cs": "3C20B7F867E7F78BECF63379011C6859D9C0381D336C2A8ADB56287BCF5E6F6D",
+          "tests/WinAudioClean.FaultChecks.Tests.ps1": "95C6AC14103CBD6882F8A63DF09F9719F8D5C2C32404037066114B47EE213EC1"
+        },
+        "sourceUnchanged": true,
+        "cleanup": "passed: held identities removed; no path-recursive fallback",
+        "childHarnessSha256": "7D107EBE82A9126FE1CB954CFFD4D760E1BAF806C4C7574605BA10F988D12E06",
+        "rawLocalReport": {
+          "path": ".wac-local/WAC-M4-01-faultchecks-ps7-corrected.json",
+          "sha256": "f9b2973bec02250e190c81243b27f481ccd84a2117e4b2e3b1f4fe3eb9035c4f",
+          "bytes": 29525
+        },
+        "cases": [
+          {
+            "id": "overwrite",
+            "acceptance": [
+              "AC-022",
+              "AC-023",
+              "AC-024"
+            ],
+            "defect": "Opening an occupied partial reservation with Create truncates foreign bytes instead of rejecting it.",
+            "source": "WinAudioClean.IO.ps1",
+            "before": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::CreateNew,",
+            "after": "$transaction.TempHandle = [IO.File]::Open($transaction.TempPath, [IO.FileMode]::Create,",
+            "testPath": "tests/WinAudioClean.Transaction.Tests.ps1",
+            "filter": "*never overwrites a preexisting partial reservation",
+            "phases": [
+              {
+                "phase": "baseline",
+                "exitCode": 0,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 1,
+                  "failed": 0,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                      "result": "Passed",
+                      "errors": []
+                    }
+                  ]
+                },
+                "testedSourceSha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-baseline\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-baseline\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [+] never overwrites a preexisting partial reservation 699ms (665ms|35ms)",
+                  "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 26"
+                ],
+                "stderr": ""
+              },
+              {
+                "phase": "mutant",
+                "exitCode": 1,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 0,
+                  "failed": 1,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-022/AC-023/AC-024: owned output allocation, publication and cleanup.never overwrites a preexisting partial reservation",
+                      "result": "Failed",
+                      "errors": [
+                        "Expected an exception to be thrown, but no exception was thrown."
+                      ]
+                    }
+                  ]
+                },
+                "testedSourceSha256": "96E78D120B80B7C2B254DE8215B729B0DAB7227A62C4BA7EE312927982087B77",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\overwrite-mutant\\tests\\WinAudioClean.Transaction.Tests.ps1\" -Filter \"*never overwrites a preexisting partial reservation\" -OutputPath \"<scratch>\\overwrite-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\overwrite-mutant\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [-] never overwrites a preexisting partial reservation 720ms (689ms|32ms)",
+                  "   Expected an exception to be thrown, but no exception was thrown.",
+                  "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 26"
+                ],
+                "stderr": ""
+              }
+            ]
+          },
+          {
+            "id": "bad-exit",
+            "acceptance": [
+              "AC-017"
+            ],
+            "defect": "Losing the real native exit code converts a fixture exit 7 into apparent success 0.",
+            "source": "WinAudioClean.ps1",
+            "before": "$result.ExitCode = $process.ExitCode",
+            "after": "$result.ExitCode = 0",
+            "testPath": "tests/WinAudioClean.Native.Tests.ps1",
+            "filter": "*keeps native nonzero status and both diagnostic streams",
+            "phases": [
+              {
+                "phase": "baseline",
+                "exitCode": 0,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 1,
+                  "failed": 0,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-016/AC-017/AC-018: real native process arguments, results and streams.keeps native nonzero status and both diagnostic streams",
+                      "result": "Passed",
+                      "errors": []
+                    }
+                  ]
+                },
+                "testedSourceSha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\bad-exit-baseline\\tests\\WinAudioClean.Native.Tests.ps1\" -Filter \"*keeps native nonzero status and both diagnostic streams\" -OutputPath \"<scratch>\\bad-exit-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\bad-exit-baseline\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [+] keeps native nonzero status and both diagnostic streams 241ms (216ms|25ms)",
+                  "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 22"
+                ],
+                "stderr": ""
+              },
+              {
+                "phase": "mutant",
+                "exitCode": 1,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 0,
+                  "failed": 1,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-016/AC-017/AC-018: real native process arguments, results and streams.keeps native nonzero status and both diagnostic streams",
+                      "result": "Failed",
+                      "errors": [
+                        "Expected 7, but got 0."
+                      ]
+                    }
+                  ]
+                },
+                "testedSourceSha256": "C2506D1112A40E709B4630AFFB681F3ED68A35B6E4D50CE47B30BE4FA3C1A1FC",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\bad-exit-mutant\\tests\\WinAudioClean.Native.Tests.ps1\" -Filter \"*keeps native nonzero status and both diagnostic streams\" -OutputPath \"<scratch>\\bad-exit-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\bad-exit-mutant\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [-] keeps native nonzero status and both diagnostic streams 309ms (251ms|59ms)",
+                  "   Expected 7, but got 0.",
+                  "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 22"
+                ],
+                "stderr": ""
+              }
+            ]
+          },
+          {
+            "id": "wrong-sample-rate",
+            "acceptance": [
+              "AC-025"
+            ],
+            "defect": "Changing the ordinary render encoder argv to 44100 violates the explicit 48 kHz output contract.",
+            "source": "WinAudioClean.ps1",
+            "before": "'-ar', '48000', '-c:a', $OutputPolicy.Codec",
+            "after": "'-ar', '44100', '-c:a', $OutputPolicy.Codec",
+            "testPath": "tests/WinAudioClean.Encoding.Tests.ps1",
+            "filter": "*pins output encoding and keeps selected stereo channels without trimming or splitting",
+            "phases": [
+              {
+                "phase": "baseline",
+                "exitCode": 0,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 1,
+                  "failed": 0,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-025/AC-026: explicit PCM and selected-channel policy.pins output encoding and keeps selected stereo channels without trimming or splitting",
+                      "result": "Passed",
+                      "errors": []
+                    }
+                  ]
+                },
+                "testedSourceSha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\wrong-sample-rate-baseline\\tests\\WinAudioClean.Encoding.Tests.ps1\" -Filter \"*pins output encoding and keeps selected stereo channels without trimming or splitting\" -OutputPath \"<scratch>\\wrong-sample-rate-baseline\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\wrong-sample-rate-baseline\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [+] pins output encoding and keeps selected stereo channels without trimming or splitting 183ms (147ms|35ms)",
+                  "Tests Passed: 1, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 47"
+                ],
+                "stderr": ""
+              },
+              {
+                "phase": "mutant",
+                "exitCode": 1,
+                "result": {
+                  "pesterVersion": "5.7.1",
+                  "shellVersion": "7.6.5",
+                  "passed": 0,
+                  "failed": 1,
+                  "skipped": 0,
+                  "failedContainers": 0,
+                  "failedBlocks": 0,
+                  "tests": [
+                    {
+                      "name": "AC-025/AC-026: explicit PCM and selected-channel policy.pins output encoding and keeps selected stereo channels without trimming or splitting",
+                      "result": "Failed",
+                      "errors": [
+                        "Expected strings to be the same, but they were different.\nString lengths are both 5.\nStrings differ at index 1.\nExpected: '48000'\nBut was:  '44100'\n           -^"
+                      ]
+                    }
+                  ]
+                },
+                "testedSourceSha256": "D5EB4097892A7CD39087AC4FC50DBA96A7C33F25A26CEF8F27330557CCD9F32F",
+                "selectedCommand": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"<scratch>\\Invoke-SelectedPester.ps1\" -TestPath \"<scratch>\\wrong-sample-rate-mutant\\tests\\WinAudioClean.Encoding.Tests.ps1\" -Filter \"*pins output encoding and keeps selected stereo channels without trimming or splitting\" -OutputPath \"<scratch>\\wrong-sample-rate-mutant\\result.json\" -PesterManifest \"<repo>\\.wac-local\\Modules\\Pester\\5.7.1\\Pester.psd1\" -TempRoot \"<scratch>\\wrong-sample-rate-mutant\\temp\"",
+                "copiedSourcesMatchCapturedSourceHashes": true,
+                "stdoutSelection": [
+                  "  [-] pins output encoding and keeps selected stereo channels without trimming or splitting 247ms (210ms|38ms)",
+                  "   Expected strings to be the same, but they were different.",
+                  "   Expected: '48000'",
+                  "Tests Passed: 0, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 47"
+                ],
+                "stderr": ""
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "preliminarySafetyInvocation": {
+    "host": "ps7",
+    "actualPesterPassed": 5,
+    "actualPesterFailed": 0,
+    "note": "An initial shell command attempted New-PesterConfiguration before Import-Module, producing a nonterminating command-not-found diagnostic; after import, all five actual safety tests passed. Final clean invocations above omit that extra command."
+  }
+}
