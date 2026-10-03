@@ -669,3 +669,31 @@ as history. Do not repeat unchanged-source suites solely for this closure.
 Next WAC-M4-01 is unlocked, not started. Picker/stress/crash/power-loss and the
 inherited Preview writer-close path remain unverified. No merge/release/security
 settings/deployment approval is added. Evidence: `evidence/WAC-M3-06-manual.json`.
+
+### 2026-10-03 — WAC-M4-01 regression, traceability and isolated faults
+
+D39. Map AC-001..069 to concrete commands/reports/named reviews without copying
+canonical pass statuses or hiding broader manual/listening/stress gaps. Run the
+read-only validator in each existing test level; thirteen negative/read-only
+validator cases join Full. Preserve all earlier feature evidence and exact failed
+harness/fixture/publication captures. Available coverage is not executed proof.
+
+Use copy-only representative overwrite, native-exit and encoder-argv mutations,
+unmutated baseline controls and exact intended failed assertions. Held ordinary
+ancestry/tree identities and pre-delete reparse validation prohibit user-file
+cleanup/fallback deletion. Track unexpected mutant transaction handles solely
+for test teardown. Actual FFmpeg sample-rate rendering is not claimed by argv.
+
+Fix only Preview writer close: independent per-writer attempts, nonterminating
+advisories after durable flush, truthful persisted outcomes and primary errors.
+Real FileStream post-dispose fixture passes nine cases per host; inherited loop
+fails those nine. Do not infer real uncooperative OS release recovery. No other
+runtime/BAT LF content, sound/default, ownership or cancellation contract changes.
+
+Quick/selected Targeted then one Full gate per PS5.1/PS7 use final stable hashes;
+preserve privilege skips and non-gating advisories. Python capture's inherited
+PS7 module path is corrected only in child env; repeat its failed PS5.1 Quick
+alone, retain successful first PS7 Quick. No product/machine setting change.
+Only M4-01/AC-067..069 advance; 23 tasks done/7 todo,69 AC pass/21 not_run.
+Next M4-02 only, after live sync. No CI/package/merge/release/settings/deployment
+or sound-promotion approval is added. Evidence: `evidence/WAC-M4-01.md`.

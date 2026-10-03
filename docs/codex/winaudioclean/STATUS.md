@@ -1,5 +1,28 @@
 # Current status
 
+Date: 2026-10-03. **WAC-M4-01 is complete.** Canonical 23 done/7 todo/0 blocked;
+69 AC pass/21 not run. Coverage maps 69 cases, 35 command scopes, eight named
+reviews and eight retained broader-scope gaps. **Next: WAC-M4-02 only.**
+
+Both PS5.1/PS7: Quick 1070/0/1, selected Targeted 290/0/0,
+one Full 1456/0/1; Python 75 discovered successful with one privilege skip.
+Parser/static/plan/coverage gates pass; non-gating advisories remain. Three
+baseline passes and three intended mutant failures per host plus five cleanup
+safety cases certify isolated representative faults. Source is stable across
+accepted gates. Preview close-fault tests pass9/0 per host; old loop fails0/9.
+
+Only Preview report close handling changed; all other runtime/BAT LF contents,
+filters/defaults/ownership/configuration/cancellation contracts match M3 closure.
+Preserved initial harness/fixture/publication corrections and truthful scopes
+are in [evidence](evidence/WAC-M4-01.md) and its source/gate/fault ledgers.
+Saved settings remain absent; no user audio or personal logs are published.
+Listening/picker/platform/stress/crash/power-loss/real unreleased-writer and
+privileged-symlink gaps remain visible. No CI/package/merge/release/deployment.
+
+## Historical M3-06 closure (superseded by current status)
+
+# Current status
+
 Date: 2026-10-03. **WAC-M3-06 is complete.** AC-064 now passes: user-reported
 actual Explorer drops/menu/playback in modes 1/2 and independent verification of
 both local SUCCESS/exit-0/complete reports and published WAV headers. Canonical:

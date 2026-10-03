@@ -68,7 +68,12 @@ Describe 'AC-022/AC-023/AC-024: owned output allocation, publication and cleanup
         $jobId = 'b' * 32
         $partial = Join-Path $destination ('.wac-' + $jobId + '.partial')
         [IO.File]::WriteAllBytes($partial, [byte[]]@(7, 8, 9))
-        { New-WacOutputTransaction -InputPath $inputFile -OutputFolder $destination -JobId $jobId } | Should -Throw
+        {
+            # A mutant may unexpectedly allocate. Retain its handles for the
+            # normal AfterEach cleanup before the assertion reports the defect.
+            $unexpected = New-WacOutputTransaction -InputPath $inputFile -OutputFolder $destination -JobId $jobId
+            $transactions.Add($unexpected)
+        } | Should -Throw
         [Convert]::ToBase64String([IO.File]::ReadAllBytes($partial)) | Should -BeExactly 'BwgJ'
         # A failed allocation releases its source lock.
         $handle = [IO.File]::Open($inputFile, 'Open', 'Write', 'None')

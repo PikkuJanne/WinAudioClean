@@ -1,0 +1,61 @@
+Pester v5.7.1
+
+Starting discovery in 2 files.
+Discovery found 164 tests in 662ms.
+Filter 'Tag' set to ('ReportCloseFault').
+Filters selected 9 tests to run.
+Running tests.
+
+Running tests from '<REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.Preview.Tests.ps1'
+Describing AC-043/044/045: preview orchestration retains ownership through faults and cancellation
+  [-] retains flushed SUCCESS reports and releases all Preview leases after both writer close faults 3.48s (3.4s|85ms)
+   Expected 0, but got 7.
+   at $result.ExitCode | Should -Be $Exit, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.Preview.Tests.ps1:628
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.Preview.Tests.ps1:628
+  [-] retains flushed FAILED reports and releases all Preview leases after both writer close faults 386ms (380ms|6ms)
+   Expected $true, but got $false.
+   at $result.Report.reporting.complete | Should -BeTrue, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.Preview.Tests.ps1:630
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.Preview.Tests.ps1:630
+  [-] retains flushed CANCELLED reports and releases all Preview leases after both writer close faults 340ms (338ms|3ms)
+   Expected $true, but got $false.
+   at $result.Report.reporting.complete | Should -BeTrue, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.Preview.Tests.ps1:630
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.Preview.Tests.ps1:630
+
+Running tests from '<REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1'
+Describing AC-030/045/068: Preview report close faults retain flushed outcomes and primary errors
+  [-] closes every writer after a post-dispose fault in the first JSON writer 105ms (87ms|19ms)
+   IOException: Injected post-dispose json report release diagnostic.
+   MethodInvocationException: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+   at Close-WacReportWriter, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.IO.ps1:529
+   at Write-WacPreviewReports, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.Preview.ps1:347
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:60
+  [-] closes every writer after a post-dispose fault in the second text writer 64ms (61ms|3ms)
+   IOException: Injected post-dispose txt report release diagnostic.
+   MethodInvocationException: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose txt report release diagnostic."
+   at Close-WacReportWriter, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.IO.ps1:529
+   at Write-WacPreviewReports, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.Preview.ps1:347
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:60
+  [-] closes every writer after a post-dispose fault in both writers 97ms (92ms|6ms)
+   IOException: Injected post-dispose json report release diagnostic.
+   MethodInvocationException: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+   at Close-WacReportWriter, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.IO.ps1:529
+   at Write-WacPreviewReports, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.Preview.ps1:347
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:60
+  [-] keeps release advisories nonterminating when the caller stops on warnings 139ms (132ms|7ms)
+   IOException: Injected post-dispose json report release diagnostic.
+   MethodInvocationException: Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."
+   at Close-WacReportWriter, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.IO.ps1:529
+   at Write-WacPreviewReports, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.Preview.ps1:347
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:85
+  [-] retains the primary write exception and rolls back both owned reports despite both close faults 196ms (194ms|2ms)
+   Expected an exception with message like '*Injected primary text report write failure*' to be thrown, but the message was 'Exception calling "Dispose" with "0" argument(s): "Injected post-dispose json report release diagnostic."'. from <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\WinAudioClean.Preview.ps1:347 char:48
+       + ... $writer in $writers.Values) { Close-WacReportWriter -Writer $writer }
+       +                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   at { Write-WacPreviewReports -Report $previewReport -OutputFolder $previewReportFolder -WarningVariable +script:previewReportWarnings } | Should -Throw '*Injected primary text report write failure*', <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:98
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:98
+  [-] retains a second-writer collision and foreign bytes when the first writer close faults 120ms (118ms|2ms)
+   Expected 1, but got 0.
+   at $script:previewReportWarnings.Count | Should -Be 1, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:124
+   at <ScriptBlock>, <REPOSITORY>\.wac-local\m4-preview-close-old-corrected\tests\WinAudioClean.PreviewReportClose.Tests.ps1:124
+Tests completed in 7.47s
+Tests Passed: 0, Failed: 9, Skipped: 0, Inconclusive: 0, NotRun: 155

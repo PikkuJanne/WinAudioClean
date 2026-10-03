@@ -1028,8 +1028,14 @@
       "title": "Coverage traceability",
       "procedure": "Map every implemented acceptance ID to a test command/report or a named manual review.",
       "expected": "No implemented behavior relies solely on a roadmap checkbox; mandatory gaps remain visible.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ]
     },
     {
       "id": "AC-068",
@@ -1037,8 +1043,14 @@
       "title": "Mutation / fault checks",
       "procedure": "Inject representative overwrite, bad exit and wrong-sample-rate defects in an isolated test tree.",
       "expected": "Relevant tests detect them; test fixture cleanup cannot remove real user files.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ]
     },
     {
       "id": "AC-069",
@@ -1046,8 +1058,14 @@
       "title": "Efficient repeatability",
       "procedure": "Run Quick and selected Targeted suites after a narrow change, then one Full gate.",
       "expected": "Runners are reusable and evidence tied to revision; no repetitive all-project audit is required for every small edit.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ]
     },
     {
       "id": "AC-070",

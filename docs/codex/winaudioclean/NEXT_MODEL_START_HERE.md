@@ -1,3 +1,63 @@
+# Next model: WAC-M4-02 — GitHub CI supplements local validation
+
+**M4-01 is complete. Start only WAC-M4-02 when requested.** Canonical 23 done /
+7 todo; 69 AC pass / 21 not run. M4-02 remains todo, AC-070..072 not_run.
+Read AGENTS, current STATUS, DECISIONS, TASKS, ACCEPTANCE, SYNC_PROTOCOL,
+tasks/WAC-M4-02, COVERAGE and evidence/WAC-M4-01 before implementation.
+
+## Reentry and synchronization
+
+Use maintained WinAudioClean-governance; preserve source-only original.
+M4 uses `codex/wac-m4-regression`, exact effective origin
+`https://github.com/PikkuJanne/WinAudioClean.git`, stacked on `codex/wac-m3-settings`.
+Recover the newer completion SHA and open draft PR from the live branch.
+The parent verified checkpoint is `c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3`.
+Inspect clean/current checkout, authenticate/fetch, sync-check, validate-plan,
+coverage validator and next. Expected ready [WAC-M4-02], blocked []. Check
+live PR/head/CI separately; cached refs do not establish synchronization.
+No reset/clean/stash/force-push or merge to unlock work.
+
+## Preserve the completed gate and boundaries
+
+The six accepted gates share tested content hashes. Final EOF formatting hashes
+are separately recorded with unchanged Python AST/JSON values. Existing runner performs
+Quick, explicit Targeted and Full; coverage validator runs in every scope.
+M4-01 source ledger distinguishes parent SHA, physical bytes and LF contents.
+Do not repeat completed Full merely to obtain more green captures. New source,
+failures or unresolved concerns determine the smallest required repeat scope.
+Initial PS5.1 capture inherited PS7 PSModulePath; clear it only in a Python
+wrapper's child environment so the host reconstructs default modules. Preserve
+that failure and recovery. It was not a production runner fix or machine change.
+
+Only Preview's report close loop changed: every writer gets an independent
+attempt, release warning is explicitly nonterminating and durably flushed
+outcomes/primary write errors survive. Post-dispose real FileStream fixture
+passes9/0 per host; old path fails0/9. Actual refused OS-handle release remains
+unverified. Mutations are copy-only, source guarded and use pinned ordinary
+scratch identities; never add fallback recursive deletion or weaken assertions.
+
+COVERAGE maps current implemented cases and keeps eight mandatory broader-scope
+gaps visible. Do not convert inventory commands, synthetic fixtures, historical
+human-gate records or privilege skips into new listening/platform/stress proof.
+Original/Fast sound/defaults and all ownership/cancellation/configuration
+contracts remain. APPDATA alone does not relocate Windows known-folder settings;
+automated processing needs explicit isolated SettingsPath. No private recordings,
+personal reports/paths, credentials or user preferences in GitHub/CI.
+
+## Only next task scope
+
+Add least-privilege Windows PR/push CI that calls the same local runners, pins
+modules/tools and full Action commit IDs, verifies downloads and uploads only
+synthetic/redacted artifacts with retention. No pull_request_target execution
+of contributed code, release/deployment job or broad write token. Verify actual
+CI parity/results at the tested SHA; API outage/unsupported shells remain
+explicit unrun results. Update coverage for AC-070..072 as implemented.
+No packaging, user-doc finish or website work starts here. Checkpoint intended
+changes, push and verify live equality before advancing. No merge/tag/release,
+security/settings change, default-sound promotion or deployment is authorized.
+
+## Historical M4-01 handoff (superseded by current guidance)
+
 # Next model: WAC-M4-01 — regression and fault-injection coverage
 
 **M3-06 is complete. Start only WAC-M4-01 when requested.** Canonical 22 done/
