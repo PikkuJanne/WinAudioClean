@@ -1,0 +1,3522 @@
+{
+  "schema_version": 2,
+  "task": "WAC-M4-02",
+  "tested_code_commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+  "initial_local_full_commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+  "parent": "42cf8f24a9b1886b5a807bb74e7b299d9de9cb29",
+  "acceptance_ids": [
+    "AC-070",
+    "AC-071",
+    "AC-072"
+  ],
+  "local_runs": [
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps51",
+      "level": "Quick",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "5.1.26100.9444",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "42cf8f24a9b1886b5a807bb74e7b299d9de9cb29",
+        "dirty": true,
+        "trees": {
+          "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+          "scripts": "9458e9fa23a94ffb31d4f3745be832ce014163fa45c4e0e1db43c0471b4bdc93",
+          "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "50da0235117e03b5f96f129ea6fe011b64baf4e40dfb41a5417332bdedd90c9c",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "29ff83cf2ca6edc5a4c9f8710accd988c1b472030f7ffbc5bf9db266dced9542"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1075,
+          "skipped": 1,
+          "outside_scope": 386
+        },
+        "python": null
+      },
+      "command": "& $tools.Python -X utf8 scripts/Invoke-CIChecks.py --shell-path \"$env:SystemRoot/System32/WindowsPowerShell/v1.0/powershell.exe\" --shell-family ps51 --level Quick",
+      "raw_log_sha256": "b6930ebcb5600aaf7e2bc59fd45ffd3cee13cc8390a3c9db3644f25b2b3a5c17"
+    },
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps7",
+      "level": "Quick",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "7.6.5",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "42cf8f24a9b1886b5a807bb74e7b299d9de9cb29",
+        "dirty": true,
+        "trees": {
+          "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+          "scripts": "9458e9fa23a94ffb31d4f3745be832ce014163fa45c4e0e1db43c0471b4bdc93",
+          "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "50da0235117e03b5f96f129ea6fe011b64baf4e40dfb41a5417332bdedd90c9c",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "29ff83cf2ca6edc5a4c9f8710accd988c1b472030f7ffbc5bf9db266dced9542"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1075,
+          "skipped": 1,
+          "outside_scope": 386
+        },
+        "python": null
+      },
+      "command": "& $tools.Python -X utf8 scripts/Invoke-CIChecks.py --shell-path $tools.PowerShell --shell-family ps7 --level Quick",
+      "raw_log_sha256": "f687a0c623201318fb0ce54c13c0c01f74ca9a84518c3be238d82d95d7c3892c"
+    },
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps51",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "5.1.26100.9444",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+        "dirty": false,
+        "trees": {
+          "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+          "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+          "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1461,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 128,
+          "skipped": 1
+        }
+      },
+      "capture": {
+        "exit_code": 0,
+        "elapsed_seconds": 1088.4068913
+      },
+      "command": "& $tools.Python -X utf8 scripts/Invoke-CIChecks.py --shell-path \"$env:SystemRoot/System32/WindowsPowerShell/v1.0/powershell.exe\" --shell-family ps51 --level Full",
+      "raw_log_sha256": "4cacd55ec248ccb3bebb3421c210088a71774b6575598fa4ccb8eb08f679a344"
+    },
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps7",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "7.6.5",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+        "dirty": false,
+        "trees": {
+          "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+          "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+          "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1461,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 128,
+          "skipped": 1
+        }
+      },
+      "capture": {
+        "exit_code": 0,
+        "elapsed_seconds": 1073.2919635
+      },
+      "command": "& $tools.Python -X utf8 scripts/Invoke-CIChecks.py --shell-path $tools.PowerShell --shell-family ps7 --level Full",
+      "raw_log_sha256": "b333d0335663740cb61318bd62f300e48c297b8b96abc2c56ce7465ec81058c6"
+    }
+  ],
+  "final_local_runs": [
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps51",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "5.1.26100.9444",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+        "dirty": false,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+          "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1467,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 134,
+          "skipped": 1
+        }
+      },
+      "diagnostics": null,
+      "capture": {
+        "exit_code": 0,
+        "elapsed_seconds": 1097.05422
+      },
+      "command": "& $tools.Python -X utf8 scripts/Invoke-CIChecks.py --shell-path \"$env:SystemRoot/System32/WindowsPowerShell/v1.0/powershell.exe\" --shell-family ps51 --level Full",
+      "raw_log_sha256": "10e73a6075c4f33acb0d063a34f2d35c2d23ecb3e5307faa80c3fb20544d3c5e"
+    },
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps7",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "7.6.5",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+        "dirty": false,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+          "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1467,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 134,
+          "skipped": 1
+        }
+      },
+      "diagnostics": null,
+      "capture": {
+        "exit_code": 0,
+        "elapsed_seconds": 1085.8830757
+      },
+      "command": "& $tools.Python -X utf8 scripts/Invoke-CIChecks.py --shell-path $tools.PowerShell --shell-family ps7 --level Full",
+      "raw_log_sha256": "5bc5d0801d9adc61712c9e0d1bffa9939b3f86526ed333c801565cf05bf01507"
+    }
+  ],
+  "final_local_full_status": "passed",
+  "github_initial_failed": {
+    "capture": "ci-initial-pr",
+    "status": {
+      "repository": "PikkuJanne/WinAudioClean",
+      "headSha": "fd56b84c56b30575bd744d84751b88cad69333f9",
+      "event": "pull_request",
+      "workflow": "Windows validation",
+      "workflowPath": ".github/workflows/windows-validation.yml",
+      "run": {
+        "id": 37143282084,
+        "workflowId": 374090478,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37143282084",
+        "status": "completed",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "name": "Windows windows-2025 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2022 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2022 / ps51",
+            "status": "completed",
+            "conclusion": "failure"
+          },
+          {
+            "name": "Windows windows-2025 / ps51",
+            "status": "completed",
+            "conclusion": "failure"
+          }
+        ]
+      },
+      "state": "failed",
+      "reason": "The matching workflow did not conclude successfully."
+    },
+    "artifact_metadata": {
+      "run_id": 37143282084,
+      "total_count": 4,
+      "artifacts": [
+        {
+          "name": "checks-windows-2022-ps51",
+          "id": 11281012904,
+          "size_in_bytes": 821,
+          "expired": false,
+          "created_at": "2026-10-03T18:24:19Z",
+          "expires_at": "2026-10-10T18:24:19Z",
+          "digest": "sha256:ce9a89dbd1c2f0e3b18b98f7512687fff6e6c805af9aa973a98009a0b897dbbb",
+          "retention_days": 7.0
+        },
+        {
+          "name": "checks-windows-2022-ps7",
+          "id": 11281656919,
+          "size_in_bytes": 863,
+          "expired": false,
+          "created_at": "2026-10-03T18:27:07Z",
+          "expires_at": "2026-10-10T18:27:06Z",
+          "digest": "sha256:1c7b672d1f581c887ab9cb1b616e849b16b1e506d36ab50e55ba263fded2de5d",
+          "retention_days": 6.999988425925926
+        },
+        {
+          "name": "checks-windows-2025-ps51",
+          "id": 11281368143,
+          "size_in_bytes": 818,
+          "expired": false,
+          "created_at": "2026-10-03T18:26:04Z",
+          "expires_at": "2026-10-10T18:26:03Z",
+          "digest": "sha256:13d4f19a9ca5af37ebf2b8f94cd8a53aba29d64dd95fea5891874d7cf83fcb26",
+          "retention_days": 6.999988425925926
+        },
+        {
+          "name": "checks-windows-2025-ps7",
+          "id": 11281552425,
+          "size_in_bytes": 859,
+          "expired": false,
+          "created_at": "2026-10-03T18:28:13Z",
+          "expires_at": "2026-10-10T18:28:13Z",
+          "digest": "sha256:cd4202876bd535fcaae8125f7c7006442c28fad3fecc5f28a8cc121d6186d19b",
+          "retention_days": 7.0
+        }
+      ]
+    },
+    "complete_artifact_set": true,
+    "artifacts": [
+      {
+        "matrix_os": "windows-2022",
+        "name": "checks-windows-2022-ps51",
+        "sha256": "7413dd4f56ed93e6f52ca910553bb3eec0cea85431a7948d1c6c36d2057e51be",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps51",
+          "level": "Full",
+          "status": "failed",
+          "reason": "test_failed",
+          "exit_code": 1,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.20348.5622",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "source": {
+            "commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": null
+        }
+      },
+      {
+        "matrix_os": "windows-2022",
+        "name": "checks-windows-2022-ps7",
+        "sha256": "ec47b9d64b480faab07120a48583b96910e18b71db76e51c87251b26fd39b468",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps7",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "source": {
+            "commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1462,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 128,
+              "skipped": 0
+            }
+          }
+        }
+      },
+      {
+        "matrix_os": "windows-2025",
+        "name": "checks-windows-2025-ps51",
+        "sha256": "e83525673c1ee28761c47803ba49cda35a0f00d080de6df9bc426deb6485cb90",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps51",
+          "level": "Full",
+          "status": "failed",
+          "reason": "test_failed",
+          "exit_code": 1,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.26100.33438",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "source": {
+            "commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": null
+        }
+      },
+      {
+        "matrix_os": "windows-2025",
+        "name": "checks-windows-2025-ps7",
+        "sha256": "b8112e273f0ebe622b54d2aa1b77f110b812a217b1b4c220e89efc3ed6460348",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps7",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "source": {
+            "commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1462,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 128,
+              "skipped": 0
+            }
+          }
+        }
+      }
+    ]
+  },
+  "github_diagnostic": {
+    "capture": "ci-diagnostic-pr",
+    "status": {
+      "repository": "PikkuJanne/WinAudioClean",
+      "headSha": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+      "event": "pull_request",
+      "workflow": "Windows validation",
+      "workflowPath": ".github/workflows/windows-validation.yml",
+      "run": {
+        "id": 37144796506,
+        "workflowId": 374090478,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37144796506",
+        "status": "completed",
+        "conclusion": "failure",
+        "jobs": [
+          {
+            "name": "Windows windows-2022 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2022 / ps51",
+            "status": "completed",
+            "conclusion": "failure"
+          },
+          {
+            "name": "Windows windows-2025 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2025 / ps51",
+            "status": "completed",
+            "conclusion": "failure"
+          }
+        ]
+      },
+      "state": "failed",
+      "reason": "The matching workflow did not conclude successfully."
+    },
+    "artifact_metadata": {
+      "run_id": 37144796506,
+      "total_count": 4,
+      "artifacts": [
+        {
+          "name": "checks-windows-2022-ps51",
+          "id": 11281793760,
+          "size_in_bytes": 1075,
+          "expired": false,
+          "created_at": "2026-10-03T18:45:55Z",
+          "expires_at": "2026-10-10T18:45:55Z",
+          "digest": "sha256:860a38b5a902b8e23146469d14b3a970f918ee515b794bc9344189305c1b3af1",
+          "retention_days": 7.0
+        },
+        {
+          "name": "checks-windows-2022-ps7",
+          "id": 11281454921,
+          "size_in_bytes": 876,
+          "expired": false,
+          "created_at": "2026-10-03T18:49:15Z",
+          "expires_at": "2026-10-10T18:49:15Z",
+          "digest": "sha256:3b91ba2995a31e1b2dd52cfdc6e829fc9dc7c16f4b40f9d53c116d8264236dc2",
+          "retention_days": 7.0
+        },
+        {
+          "name": "checks-windows-2025-ps51",
+          "id": 11281953104,
+          "size_in_bytes": 1071,
+          "expired": false,
+          "created_at": "2026-10-03T18:45:05Z",
+          "expires_at": "2026-10-10T18:45:05Z",
+          "digest": "sha256:db93ed8a778cabe374e6c7090bba672ae20a5ba6d9efc592597a50d3baf35b1a",
+          "retention_days": 7.0
+        },
+        {
+          "name": "checks-windows-2025-ps7",
+          "id": 11281064889,
+          "size_in_bytes": 871,
+          "expired": false,
+          "created_at": "2026-10-03T18:49:26Z",
+          "expires_at": "2026-10-10T18:49:26Z",
+          "digest": "sha256:0ec243af7450d1778e5e3fcb0ac19d6919cbcf2e32016eb2e29caef0d587aa26",
+          "retention_days": 7.0
+        }
+      ]
+    },
+    "complete_artifact_set": true,
+    "artifacts": [
+      {
+        "matrix_os": "windows-2022",
+        "name": "checks-windows-2022-ps51",
+        "sha256": "b9be463bd4eb1975de1f7affadaa8f631a1b9cce4f50f51897b8ba7641c9af84",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps51",
+          "level": "Full",
+          "status": "failed",
+          "reason": "test_failed",
+          "exit_code": 1,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.20348.5622",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "source": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": null,
+          "diagnostics": {
+            "phase": "pester",
+            "pester": {
+              "passed": 1459,
+              "failed": 3,
+              "skipped": 0,
+              "inconclusive": 0,
+              "outside_scope": 0
+            },
+            "locations": [
+              {
+                "file": "tests/WinAudioClean.Native.Tests.ps1",
+                "line": 99,
+                "category": "assertion"
+              },
+              {
+                "file": "tests/WinAudioClean.NativeInput.Tests.ps1",
+                "line": 71,
+                "category": "assertion"
+              },
+              {
+                "file": "tests/WinAudioClean.NativeInput.Tests.ps1",
+                "line": 94,
+                "category": "assertion"
+              },
+              {
+                "file": "tests/WinAudioClean.Batch.Tests.ps1",
+                "line": 319,
+                "category": "unknown"
+              },
+              {
+                "file": "tests/WinAudioClean.Batch.Tests.ps1",
+                "line": 390,
+                "category": "exception"
+              },
+              {
+                "file": "tests/WinAudioClean.Batch.Tests.ps1",
+                "line": 413,
+                "category": "exception"
+              },
+              {
+                "file": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+                "line": 62,
+                "category": "exception"
+              },
+              {
+                "file": "scripts/Invoke-Tests.ps1",
+                "line": 130,
+                "category": "exception"
+              }
+            ],
+            "truncated": false
+          }
+        }
+      },
+      {
+        "matrix_os": "windows-2022",
+        "name": "checks-windows-2022-ps7",
+        "sha256": "b7b98b8d39da41e025227d0ddf88e603e43e39c2f2d6fcd053bad1a793a55aae",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps7",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "source": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1462,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 134,
+              "skipped": 0
+            }
+          },
+          "diagnostics": null
+        }
+      },
+      {
+        "matrix_os": "windows-2025",
+        "name": "checks-windows-2025-ps51",
+        "sha256": "cabadd77b8a0bf2656440ed4feb5a7967ec57b13f69e8450681813986fa68867",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps51",
+          "level": "Full",
+          "status": "failed",
+          "reason": "test_failed",
+          "exit_code": 1,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.26100.33438",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "source": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": null,
+          "diagnostics": {
+            "phase": "pester",
+            "pester": {
+              "passed": 1459,
+              "failed": 3,
+              "skipped": 0,
+              "inconclusive": 0,
+              "outside_scope": 0
+            },
+            "locations": [
+              {
+                "file": "tests/WinAudioClean.Native.Tests.ps1",
+                "line": 99,
+                "category": "assertion"
+              },
+              {
+                "file": "tests/WinAudioClean.NativeInput.Tests.ps1",
+                "line": 71,
+                "category": "assertion"
+              },
+              {
+                "file": "tests/WinAudioClean.NativeInput.Tests.ps1",
+                "line": 94,
+                "category": "assertion"
+              },
+              {
+                "file": "tests/WinAudioClean.Batch.Tests.ps1",
+                "line": 319,
+                "category": "unknown"
+              },
+              {
+                "file": "tests/WinAudioClean.Batch.Tests.ps1",
+                "line": 390,
+                "category": "exception"
+              },
+              {
+                "file": "tests/WinAudioClean.Batch.Tests.ps1",
+                "line": 413,
+                "category": "exception"
+              },
+              {
+                "file": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+                "line": 62,
+                "category": "exception"
+              },
+              {
+                "file": "scripts/Invoke-Tests.ps1",
+                "line": 130,
+                "category": "exception"
+              }
+            ],
+            "truncated": false
+          }
+        }
+      },
+      {
+        "matrix_os": "windows-2025",
+        "name": "checks-windows-2025-ps7",
+        "sha256": "d3bb5e599a682ad5a38f92c27487217667020d8aa3e1fd0ed1624886dbeb9929",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps7",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "source": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": false,
+            "trees": {
+              "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1462,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 134,
+              "skipped": 0
+            }
+          },
+          "diagnostics": null
+        }
+      }
+    ]
+  },
+  "github_pr": {
+    "capture": "ci-final-pr",
+    "status": {
+      "repository": "PikkuJanne/WinAudioClean",
+      "headSha": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+      "event": "pull_request",
+      "workflow": "Windows validation",
+      "workflowPath": ".github/workflows/windows-validation.yml",
+      "run": {
+        "id": 37147112528,
+        "workflowId": 374090478,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37147112528",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Windows windows-2022 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2025 / ps51",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2022 / ps51",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2025 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ]
+      },
+      "state": "passed",
+      "reason": "Exact workflow SHA and all required shell/build jobs succeeded."
+    },
+    "artifact_metadata": {
+      "run_id": 37147112528,
+      "total_count": 4,
+      "artifacts": [
+        {
+          "name": "checks-windows-2022-ps51",
+          "id": 11282648235,
+          "size_in_bytes": 880,
+          "expired": false,
+          "created_at": "2026-10-03T19:27:13Z",
+          "expires_at": "2026-10-10T19:27:12Z",
+          "digest": "sha256:e8fe1b7ff6a2b8a85e4cf1d38e4148bd9c3537afbb70cb2e3dac38ce7ff11a20",
+          "retention_days": 6.999988425925926
+        },
+        {
+          "name": "checks-windows-2022-ps7",
+          "id": 11283166888,
+          "size_in_bytes": 874,
+          "expired": false,
+          "created_at": "2026-10-03T19:22:49Z",
+          "expires_at": "2026-10-10T19:22:48Z",
+          "digest": "sha256:76d1fc36abd17c5ff56cb35081b2015c84c49c9de7eeb173448c4339d53af655",
+          "retention_days": 6.999988425925926
+        },
+        {
+          "name": "checks-windows-2025-ps51",
+          "id": 11282197335,
+          "size_in_bytes": 875,
+          "expired": false,
+          "created_at": "2026-10-03T19:24:00Z",
+          "expires_at": "2026-10-10T19:23:59Z",
+          "digest": "sha256:0917c6b9065939b518dbabe69dc27c1d6b55c282bf6448e215902a50c3b97957",
+          "retention_days": 6.999988425925926
+        },
+        {
+          "name": "checks-windows-2025-ps7",
+          "id": 11282668475,
+          "size_in_bytes": 869,
+          "expired": false,
+          "created_at": "2026-10-03T19:29:00Z",
+          "expires_at": "2026-10-10T19:28:59Z",
+          "digest": "sha256:ef1f965c239bf85267ccf4c066421ba8460528884d083d170ff442e85b672aa1",
+          "retention_days": 6.999988425925926
+        }
+      ]
+    },
+    "complete_artifact_set": true,
+    "artifacts": [
+      {
+        "matrix_os": "windows-2022",
+        "name": "checks-windows-2022-ps51",
+        "sha256": "82e247ee13715417af604896283b55c4300075aa91dcaac383025872302d65c6",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps51",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.20348.5622",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "source": {
+            "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+            "dirty": false,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1468,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 134,
+              "skipped": 0
+            }
+          },
+          "diagnostics": null
+        }
+      },
+      {
+        "matrix_os": "windows-2022",
+        "name": "checks-windows-2022-ps7",
+        "sha256": "56b49e8021b0db7bc68d71bb0142413908360a20f71d6462a44e58b0fa3b91da",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps7",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "source": {
+            "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+            "dirty": false,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1468,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 134,
+              "skipped": 0
+            }
+          },
+          "diagnostics": null
+        }
+      },
+      {
+        "matrix_os": "windows-2025",
+        "name": "checks-windows-2025-ps51",
+        "sha256": "d312ed6ab24a9bc782d96403034982f8bf28df372b8a2d73cab7776a3d7ec5e4",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps51",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.26100.33438",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "source": {
+            "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+            "dirty": false,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1468,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 134,
+              "skipped": 0
+            }
+          },
+          "diagnostics": null
+        }
+      },
+      {
+        "matrix_os": "windows-2025",
+        "name": "checks-windows-2025-ps7",
+        "sha256": "53ab9d03184102d7a2cf8104be3723b8e5d5a986815c62879bca755079abd83d",
+        "summary": {
+          "schema_version": 1,
+          "scope": "github_actions",
+          "shell_family": "ps7",
+          "level": "Full",
+          "status": "passed",
+          "reason": "completed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "source": {
+            "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+            "dirty": false,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            },
+            "content_unchanged": true
+          },
+          "checks": {
+            "pester": {
+              "passed": 1468,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 134,
+              "skipped": 0
+            }
+          },
+          "diagnostics": null
+        }
+      }
+    ]
+  },
+  "source_inventories": [
+    {
+      "commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+      "trees": {
+        "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+        "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+        "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593",
+        "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+        "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+        "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+        "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81"
+      },
+      "sources": [
+        {
+          "group": "github",
+          "path": ".github/workflows/windows-validation.yml",
+          "sha256_lf": "ea6be267706e29203f2be446ebc654a574ff5748547fb55d60aea251d502f534"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/ACCEPTANCE.json",
+          "sha256_lf": "bfbdb230a0b0100c627ebdad783396edcb65c19674411151f80c0f310c180379"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/BASELINE.json",
+          "sha256_lf": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/COVERAGE.json",
+          "sha256_lf": "93edde00c401fc27e1a68f38b599df9494bba3c8a32b11a267171f2528a86f26"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+          "sha256_lf": "08f6aff34a7ff82b7b7a7c576b49dca21c9f7f126a1629a6e55716c8d0826f78"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/TASKS.yaml",
+          "sha256_lf": "80a1df30d50b3ccaf7f25923d872b50a438023021777683c9b8d23a9d6e92253"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_characterize_filters.py",
+          "sha256_lf": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_policy.py",
+          "sha256_lf": "c7f22713110a9c25295357f87e63b5e39e996673bf23d900d857387489a2a511"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_runner.py",
+          "sha256_lf": "da23937255bae4896cfc02c617caa3ea5e6b1a4cd4c8e9ae95003e18a05e9ead"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_status.py",
+          "sha256_lf": "013af6ea4fcc7ba73f473f11ce76eb3b57b68b86ec303c643fb5cd4deced0bd6"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_coverage.py",
+          "sha256_lf": "109400f0cdb7c88e80d98a5e854b9199111ae30dcdfb2ab392764761a5be2490"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_handoff.py",
+          "sha256_lf": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/characterize_filters.py",
+          "sha256_lf": "98939802337629ef8939c2266940bf17bc06010dc395f379ee750b3b05b60fb6"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/generate_fixtures.py",
+          "sha256_lf": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/handoff.py",
+          "sha256_lf": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256_lf": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.IO.ps1",
+          "sha256_lf": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256_lf": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Output.ps1",
+          "sha256_lf": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256_lf": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256_lf": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256_lf": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.bat",
+          "sha256_lf": "b91cf9ff826fd7bf1b10a253b1610178f69baeccd123aeaef62f7ba7b5bbaae0"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.ps1",
+          "sha256_lf": "afa7f25d6a1571c6bc6a34c4282cb40bcac5fbea472f076dcae6e2bff262e5ac"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/CIDependencies.json",
+          "sha256_lf": "12cc36efb9ced7b0e288d52dcedb6422a11e8cd2a91642a7c2799afe7436d326"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/DevDependencies.psd1",
+          "sha256_lf": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Get-CIStatus.py",
+          "sha256_lf": "9d3c6b6a7ef7aaec60468a0c70451739aba694ff0d8a8b3890fcc1397f48dfbc"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Install-CIDependencies.ps1",
+          "sha256_lf": "59c38381f177164ed31912956d90a37f66fe7c79b95afa4cc0e1ebeacf695f49"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Install-DevDependencies.ps1",
+          "sha256_lf": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-CIChecks.py",
+          "sha256_lf": "8c2fa9bb59c8f90e0e955e70b1b7f0776fe542ebaaabee75237151f8fbfbeb81"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-FaultChecks.ps1",
+          "sha256_lf": "4f5681fec0cfeb19925021861458eab02245adf0a99ffc230adb32e56d19a35b"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-Tests.ps1",
+          "sha256_lf": "7211fbf7b07c433833521dd3265011e583e4228b804306ea7cbdf4e2d54d4e9f"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/PSScriptAnalyzerSettings.psd1",
+          "sha256_lf": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-AudioReproduction.py",
+          "sha256_lf": "285c3ea339e88cf1e30430a650f31f326332355159a9142c6ad241cdb4de84a2"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-Coverage.py",
+          "sha256_lf": "92eb5db7b2e03bed9b2ff2cb7d7d2e99837aacc1f607c453651738104e1364ad"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-GentleCleaning.py",
+          "sha256_lf": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-MeasuredLoudness.py",
+          "sha256_lf": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-MediaPreflight.py",
+          "sha256_lf": "320fed0042a856fdca3a09d5be13dbbda28abc9835af1c2aace3b3934348183b"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OriginalPreset.py",
+          "sha256_lf": "02722c09f8e24364706fcdab27418ff84e0208def80d21c48fc61d3817ce3a31"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OutputEncoding.py",
+          "sha256_lf": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OutputTransactions.py",
+          "sha256_lf": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-Preview.py",
+          "sha256_lf": "89065a5547a5e02d848f0d8e18e93fcc63db9ebda72a24ac529088c3cab1f724"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-RunReports.py",
+          "sha256_lf": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f"
+        },
+        {
+          "group": "tests",
+          "path": "tests/README.md",
+          "sha256_lf": "2e57f81a9452f538af0ab86fbb83335737fa73f6b387ac5218156ee20080b9ab"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Batch.Tests.ps1",
+          "sha256_lf": "451c358da9c1c02e3a893e3cf6105ef32d7f7383b32ac842be647491741e3c3d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.CISetup.Tests.ps1",
+          "sha256_lf": "96b3be97f261b56d09dc69ad10afd2ffd8608a0701e57bf6d26bad8fc192298c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Cleaning.Tests.ps1",
+          "sha256_lf": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Encoding.Tests.ps1",
+          "sha256_lf": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.EntryPoints.Tests.ps1",
+          "sha256_lf": "2ddcf606c89f05a292182f6efe3aaa7947f750686351e32aebcdc291fa8f2ece"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.FaultChecks.Tests.ps1",
+          "sha256_lf": "95c6ac14103cbd6882f8a63df09f9719f8d5c2c32404037066114b47ee213ec1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+          "sha256_lf": "2afd5f669747cb4477d6e54be1a3daaef69cb5e90f1f3c6cee7f85f138bebd5c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Helpers.Tests.ps1",
+          "sha256_lf": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Launcher.Tests.ps1",
+          "sha256_lf": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.LauncherTransport.Tests.ps1",
+          "sha256_lf": "0e0c89ffabced8f2c91289f689cf0b7bd6b797ee6e6e9663470de1a3e376458d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Loudness.Tests.ps1",
+          "sha256_lf": "878a920e74695edfd48bc4f3d6bfd8ded7d9abd8952e403ab66a6ab87a05be62"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.LoudnessRuntime.Tests.ps1",
+          "sha256_lf": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Media.Tests.ps1",
+          "sha256_lf": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Native.Tests.ps1",
+          "sha256_lf": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.NativeInput.Tests.ps1",
+          "sha256_lf": "da990a7254dff04914fbd8c5066ab897a2f6f7a321a9c422bdf4f2bf3c821a6e"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256_lf": "3203aa9fc4e2fd1b81fdf64550b47427ad9232d28ad472ad04cc3dd82ef9df13"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.OutputLayout.Tests.ps1",
+          "sha256_lf": "7b33fb6ce3bb93b1d4fa621a0cd3288f89c78ecc8eb5a7ed17ec483b9db95d76"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preflight.Tests.ps1",
+          "sha256_lf": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preset.Tests.ps1",
+          "sha256_lf": "7848e4ef7261b0cef321ccd6430d68c1bdfe3ccc4933d475c4fa29c57097d1ea"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preview.Tests.ps1",
+          "sha256_lf": "bbb234a9d322965351d0b5b16373065f2ea721fa3d90ddc0d5f418b2792893bc"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.PreviewReportClose.Tests.ps1",
+          "sha256_lf": "1ef65a676129bc3696990eb412a318a552387adf395badbaf4b462f7cc3e24e4"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Progress.Tests.ps1",
+          "sha256_lf": "d430c7ddb0c8e3ca40bf46db4731492380a27313ef97c961a10f749445c9509a"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.ReportIO.Tests.ps1",
+          "sha256_lf": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Reporting.Tests.ps1",
+          "sha256_lf": "3eacc3f78e2bfe229e1966fb3b28fa10c55a741c48aab5f3f977a281d409dd86"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.RunReports.Tests.ps1",
+          "sha256_lf": "c6ff1a0feb637682cf30247d15d1c92d409d7c0620455b5db7594f485e07fabe"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Settings.Tests.ps1",
+          "sha256_lf": "07e8cb3d658978f6795f48f6b81be4d863d3387c41a658b31ffdda3d37a4d8a7"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Transaction.Tests.ps1",
+          "sha256_lf": "660992c4f0f1ff84354e73c22583f7173b1fc0536b49c6a1808eadb81e4575ce"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Validation.Tests.ps1",
+          "sha256_lf": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/FaultCheckScratch.cs",
+          "sha256_lf": "3c20b7f867e7f78becf63379011c6859d9c0381d336c2a8adb56287bcf5e6f6d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Import-Safety.ps1",
+          "sha256_lf": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-BatchCase.ps1",
+          "sha256_lf": "9f60b1146afd022fa847a5adecd9199c1592df7128f7cd9151b8d95162538f2d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-ConsoleCancellationCase.ps1",
+          "sha256_lf": "3bfd822423afa31c004ddf050b1ef9453fe1dcb24765f00fe896b8ec069bbeb1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-FolderQueueCase.ps1",
+          "sha256_lf": "7f35a7b2dd9c5a6e90fcd759fde9dda85c52a8cd8adcdea624d9c0f25d797513"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-Launcher.ps1",
+          "sha256_lf": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-LauncherCase.ps1",
+          "sha256_lf": "6b6152bf403be102c3dd21dbec8c027e8fd4966afc568474c341aa60545c11c2"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-MetadataFailure.ps1",
+          "sha256_lf": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/LauncherApplicationStub.ps1",
+          "sha256_lf": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/LauncherMatrixApplicationStub.ps1",
+          "sha256_lf": "8cac1fcb00064e373d2ac4fc7bb2d2474f1347e42d3e8da54fc84615b23bd5bf"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256_lf": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/NativeProcessFixture.md",
+          "sha256_lf": "2c0585cd8e42af9cb7e4c408de6b5613a59480f6728fbe8a5d4736e5cc6c4309"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256_lf": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/New-ProgressProcessFixture.ps1",
+          "sha256_lf": "f71311c4e27cff2234d03cad20b095c15ed339f4656501c547e9c0e7315f85bb"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ProgressProcessFixture.cs",
+          "sha256_lf": "e469205357663953f5abe2e82f50f3c2e669e6063a94e561a5d70945dc449c9c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ProgressProcessFixture.md",
+          "sha256_lf": "f0e9f1c4e6959ce6e428d13fea40425e0010544308ac68cdef231b2494f359da"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/README.md",
+          "sha256_lf": "da5aafc0f0c99b2a0f6411fb7cef808a6a9afd9416e7b34acf18afa3631d7efd"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ReportCloseFault.ps1",
+          "sha256_lf": "6422069b5b2309a9936781680f09d89c2e511b0661a8bdfe57e024d2d4c2bdfb"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256_lf": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+        }
+      ]
+    },
+    {
+      "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+      "trees": {
+        "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+        "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+        "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593",
+        "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+        "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+        "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+        "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60"
+      },
+      "sources": [
+        {
+          "group": "github",
+          "path": ".github/workflows/windows-validation.yml",
+          "sha256_lf": "ea6be267706e29203f2be446ebc654a574ff5748547fb55d60aea251d502f534"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/ACCEPTANCE.json",
+          "sha256_lf": "bfbdb230a0b0100c627ebdad783396edcb65c19674411151f80c0f310c180379"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/BASELINE.json",
+          "sha256_lf": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/COVERAGE.json",
+          "sha256_lf": "93edde00c401fc27e1a68f38b599df9494bba3c8a32b11a267171f2528a86f26"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+          "sha256_lf": "08f6aff34a7ff82b7b7a7c576b49dca21c9f7f126a1629a6e55716c8d0826f78"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/TASKS.yaml",
+          "sha256_lf": "80a1df30d50b3ccaf7f25923d872b50a438023021777683c9b8d23a9d6e92253"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_characterize_filters.py",
+          "sha256_lf": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_policy.py",
+          "sha256_lf": "c7f22713110a9c25295357f87e63b5e39e996673bf23d900d857387489a2a511"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_runner.py",
+          "sha256_lf": "939a30183107b1cec8b5bdb398331e7ece63de617d8c403f75a724396afbf1ce"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_status.py",
+          "sha256_lf": "013af6ea4fcc7ba73f473f11ce76eb3b57b68b86ec303c643fb5cd4deced0bd6"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_coverage.py",
+          "sha256_lf": "109400f0cdb7c88e80d98a5e854b9199111ae30dcdfb2ab392764761a5be2490"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_handoff.py",
+          "sha256_lf": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/characterize_filters.py",
+          "sha256_lf": "98939802337629ef8939c2266940bf17bc06010dc395f379ee750b3b05b60fb6"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/generate_fixtures.py",
+          "sha256_lf": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/handoff.py",
+          "sha256_lf": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256_lf": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.IO.ps1",
+          "sha256_lf": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256_lf": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Output.ps1",
+          "sha256_lf": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256_lf": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256_lf": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256_lf": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.bat",
+          "sha256_lf": "b91cf9ff826fd7bf1b10a253b1610178f69baeccd123aeaef62f7ba7b5bbaae0"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.ps1",
+          "sha256_lf": "afa7f25d6a1571c6bc6a34c4282cb40bcac5fbea472f076dcae6e2bff262e5ac"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/CIDependencies.json",
+          "sha256_lf": "12cc36efb9ced7b0e288d52dcedb6422a11e8cd2a91642a7c2799afe7436d326"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/DevDependencies.psd1",
+          "sha256_lf": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Get-CIStatus.py",
+          "sha256_lf": "9d3c6b6a7ef7aaec60468a0c70451739aba694ff0d8a8b3890fcc1397f48dfbc"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Install-CIDependencies.ps1",
+          "sha256_lf": "59c38381f177164ed31912956d90a37f66fe7c79b95afa4cc0e1ebeacf695f49"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Install-DevDependencies.ps1",
+          "sha256_lf": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-CIChecks.py",
+          "sha256_lf": "a7c15c451d8d73dc030c62a3e2fd0b1b6ba29d2946932aa6e28aa0a00fc15b1f"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-FaultChecks.ps1",
+          "sha256_lf": "4f5681fec0cfeb19925021861458eab02245adf0a99ffc230adb32e56d19a35b"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-Tests.ps1",
+          "sha256_lf": "7211fbf7b07c433833521dd3265011e583e4228b804306ea7cbdf4e2d54d4e9f"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/PSScriptAnalyzerSettings.psd1",
+          "sha256_lf": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-AudioReproduction.py",
+          "sha256_lf": "285c3ea339e88cf1e30430a650f31f326332355159a9142c6ad241cdb4de84a2"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-Coverage.py",
+          "sha256_lf": "92eb5db7b2e03bed9b2ff2cb7d7d2e99837aacc1f607c453651738104e1364ad"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-GentleCleaning.py",
+          "sha256_lf": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-MeasuredLoudness.py",
+          "sha256_lf": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-MediaPreflight.py",
+          "sha256_lf": "320fed0042a856fdca3a09d5be13dbbda28abc9835af1c2aace3b3934348183b"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OriginalPreset.py",
+          "sha256_lf": "02722c09f8e24364706fcdab27418ff84e0208def80d21c48fc61d3817ce3a31"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OutputEncoding.py",
+          "sha256_lf": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OutputTransactions.py",
+          "sha256_lf": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-Preview.py",
+          "sha256_lf": "89065a5547a5e02d848f0d8e18e93fcc63db9ebda72a24ac529088c3cab1f724"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-RunReports.py",
+          "sha256_lf": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f"
+        },
+        {
+          "group": "tests",
+          "path": "tests/README.md",
+          "sha256_lf": "2e57f81a9452f538af0ab86fbb83335737fa73f6b387ac5218156ee20080b9ab"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Batch.Tests.ps1",
+          "sha256_lf": "451c358da9c1c02e3a893e3cf6105ef32d7f7383b32ac842be647491741e3c3d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.CISetup.Tests.ps1",
+          "sha256_lf": "96b3be97f261b56d09dc69ad10afd2ffd8608a0701e57bf6d26bad8fc192298c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Cleaning.Tests.ps1",
+          "sha256_lf": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Encoding.Tests.ps1",
+          "sha256_lf": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.EntryPoints.Tests.ps1",
+          "sha256_lf": "2ddcf606c89f05a292182f6efe3aaa7947f750686351e32aebcdc291fa8f2ece"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.FaultChecks.Tests.ps1",
+          "sha256_lf": "95c6ac14103cbd6882f8a63df09f9719f8d5c2c32404037066114b47ee213ec1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+          "sha256_lf": "2afd5f669747cb4477d6e54be1a3daaef69cb5e90f1f3c6cee7f85f138bebd5c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Helpers.Tests.ps1",
+          "sha256_lf": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Launcher.Tests.ps1",
+          "sha256_lf": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.LauncherTransport.Tests.ps1",
+          "sha256_lf": "0e0c89ffabced8f2c91289f689cf0b7bd6b797ee6e6e9663470de1a3e376458d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Loudness.Tests.ps1",
+          "sha256_lf": "878a920e74695edfd48bc4f3d6bfd8ded7d9abd8952e403ab66a6ab87a05be62"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.LoudnessRuntime.Tests.ps1",
+          "sha256_lf": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Media.Tests.ps1",
+          "sha256_lf": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Native.Tests.ps1",
+          "sha256_lf": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.NativeInput.Tests.ps1",
+          "sha256_lf": "da990a7254dff04914fbd8c5066ab897a2f6f7a321a9c422bdf4f2bf3c821a6e"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256_lf": "3203aa9fc4e2fd1b81fdf64550b47427ad9232d28ad472ad04cc3dd82ef9df13"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.OutputLayout.Tests.ps1",
+          "sha256_lf": "7b33fb6ce3bb93b1d4fa621a0cd3288f89c78ecc8eb5a7ed17ec483b9db95d76"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preflight.Tests.ps1",
+          "sha256_lf": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preset.Tests.ps1",
+          "sha256_lf": "7848e4ef7261b0cef321ccd6430d68c1bdfe3ccc4933d475c4fa29c57097d1ea"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preview.Tests.ps1",
+          "sha256_lf": "bbb234a9d322965351d0b5b16373065f2ea721fa3d90ddc0d5f418b2792893bc"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.PreviewReportClose.Tests.ps1",
+          "sha256_lf": "1ef65a676129bc3696990eb412a318a552387adf395badbaf4b462f7cc3e24e4"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Progress.Tests.ps1",
+          "sha256_lf": "d430c7ddb0c8e3ca40bf46db4731492380a27313ef97c961a10f749445c9509a"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.ReportIO.Tests.ps1",
+          "sha256_lf": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Reporting.Tests.ps1",
+          "sha256_lf": "3eacc3f78e2bfe229e1966fb3b28fa10c55a741c48aab5f3f977a281d409dd86"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.RunReports.Tests.ps1",
+          "sha256_lf": "c6ff1a0feb637682cf30247d15d1c92d409d7c0620455b5db7594f485e07fabe"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Settings.Tests.ps1",
+          "sha256_lf": "07e8cb3d658978f6795f48f6b81be4d863d3387c41a658b31ffdda3d37a4d8a7"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Transaction.Tests.ps1",
+          "sha256_lf": "660992c4f0f1ff84354e73c22583f7173b1fc0536b49c6a1808eadb81e4575ce"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Validation.Tests.ps1",
+          "sha256_lf": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/FaultCheckScratch.cs",
+          "sha256_lf": "3c20b7f867e7f78becf63379011c6859d9c0381d336c2a8adb56287bcf5e6f6d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Import-Safety.ps1",
+          "sha256_lf": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-BatchCase.ps1",
+          "sha256_lf": "9f60b1146afd022fa847a5adecd9199c1592df7128f7cd9151b8d95162538f2d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-ConsoleCancellationCase.ps1",
+          "sha256_lf": "3bfd822423afa31c004ddf050b1ef9453fe1dcb24765f00fe896b8ec069bbeb1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-FolderQueueCase.ps1",
+          "sha256_lf": "7f35a7b2dd9c5a6e90fcd759fde9dda85c52a8cd8adcdea624d9c0f25d797513"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-Launcher.ps1",
+          "sha256_lf": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-LauncherCase.ps1",
+          "sha256_lf": "6b6152bf403be102c3dd21dbec8c027e8fd4966afc568474c341aa60545c11c2"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-MetadataFailure.ps1",
+          "sha256_lf": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/LauncherApplicationStub.ps1",
+          "sha256_lf": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/LauncherMatrixApplicationStub.ps1",
+          "sha256_lf": "8cac1fcb00064e373d2ac4fc7bb2d2474f1347e42d3e8da54fc84615b23bd5bf"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256_lf": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/NativeProcessFixture.md",
+          "sha256_lf": "2c0585cd8e42af9cb7e4c408de6b5613a59480f6728fbe8a5d4736e5cc6c4309"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256_lf": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/New-ProgressProcessFixture.ps1",
+          "sha256_lf": "f71311c4e27cff2234d03cad20b095c15ed339f4656501c547e9c0e7315f85bb"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ProgressProcessFixture.cs",
+          "sha256_lf": "e469205357663953f5abe2e82f50f3c2e669e6063a94e561a5d70945dc449c9c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ProgressProcessFixture.md",
+          "sha256_lf": "f0e9f1c4e6959ce6e428d13fea40425e0010544308ac68cdef231b2494f359da"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/README.md",
+          "sha256_lf": "da5aafc0f0c99b2a0f6411fb7cef808a6a9afd9416e7b34acf18afa3631d7efd"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ReportCloseFault.ps1",
+          "sha256_lf": "6422069b5b2309a9936781680f09d89c2e511b0661a8bdfe57e024d2d4c2bdfb"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256_lf": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+        }
+      ]
+    },
+    {
+      "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+      "trees": {
+        "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+        "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+        "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593",
+        "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+        "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+        "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+        "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60"
+      },
+      "sources": [
+        {
+          "group": "github",
+          "path": ".github/workflows/windows-validation.yml",
+          "sha256_lf": "ea6be267706e29203f2be446ebc654a574ff5748547fb55d60aea251d502f534"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/ACCEPTANCE.json",
+          "sha256_lf": "bfbdb230a0b0100c627ebdad783396edcb65c19674411151f80c0f310c180379"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/BASELINE.json",
+          "sha256_lf": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/COVERAGE.json",
+          "sha256_lf": "93edde00c401fc27e1a68f38b599df9494bba3c8a32b11a267171f2528a86f26"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+          "sha256_lf": "08f6aff34a7ff82b7b7a7c576b49dca21c9f7f126a1629a6e55716c8d0826f78"
+        },
+        {
+          "group": "governance_inputs",
+          "path": "docs/codex/winaudioclean/TASKS.yaml",
+          "sha256_lf": "80a1df30d50b3ccaf7f25923d872b50a438023021777683c9b8d23a9d6e92253"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_characterize_filters.py",
+          "sha256_lf": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_policy.py",
+          "sha256_lf": "c7f22713110a9c25295357f87e63b5e39e996673bf23d900d857387489a2a511"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_runner.py",
+          "sha256_lf": "939a30183107b1cec8b5bdb398331e7ece63de617d8c403f75a724396afbf1ce"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_ci_status.py",
+          "sha256_lf": "013af6ea4fcc7ba73f473f11ce76eb3b57b68b86ec303c643fb5cd4deced0bd6"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_coverage.py",
+          "sha256_lf": "109400f0cdb7c88e80d98a5e854b9199111ae30dcdfb2ab392764761a5be2490"
+        },
+        {
+          "group": "governance_tests",
+          "path": "docs/codex/winaudioclean/tests/test_handoff.py",
+          "sha256_lf": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/characterize_filters.py",
+          "sha256_lf": "98939802337629ef8939c2266940bf17bc06010dc395f379ee750b3b05b60fb6"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/generate_fixtures.py",
+          "sha256_lf": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+        },
+        {
+          "group": "governance_tools",
+          "path": "docs/codex/winaudioclean/tools/handoff.py",
+          "sha256_lf": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256_lf": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.IO.ps1",
+          "sha256_lf": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256_lf": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Output.ps1",
+          "sha256_lf": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256_lf": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256_lf": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256_lf": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.bat",
+          "sha256_lf": "b91cf9ff826fd7bf1b10a253b1610178f69baeccd123aeaef62f7ba7b5bbaae0"
+        },
+        {
+          "group": "runtime",
+          "path": "WinAudioClean.ps1",
+          "sha256_lf": "d2a68f5887f863c56108b6e1b827aae117c318ed1783e40d122825fbfdbd5c57"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/CIDependencies.json",
+          "sha256_lf": "12cc36efb9ced7b0e288d52dcedb6422a11e8cd2a91642a7c2799afe7436d326"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/DevDependencies.psd1",
+          "sha256_lf": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Get-CIStatus.py",
+          "sha256_lf": "9d3c6b6a7ef7aaec60468a0c70451739aba694ff0d8a8b3890fcc1397f48dfbc"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Install-CIDependencies.ps1",
+          "sha256_lf": "59c38381f177164ed31912956d90a37f66fe7c79b95afa4cc0e1ebeacf695f49"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Install-DevDependencies.ps1",
+          "sha256_lf": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-CIChecks.py",
+          "sha256_lf": "a7c15c451d8d73dc030c62a3e2fd0b1b6ba29d2946932aa6e28aa0a00fc15b1f"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-FaultChecks.ps1",
+          "sha256_lf": "4f5681fec0cfeb19925021861458eab02245adf0a99ffc230adb32e56d19a35b"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Invoke-Tests.ps1",
+          "sha256_lf": "7211fbf7b07c433833521dd3265011e583e4228b804306ea7cbdf4e2d54d4e9f"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/PSScriptAnalyzerSettings.psd1",
+          "sha256_lf": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-AudioReproduction.py",
+          "sha256_lf": "285c3ea339e88cf1e30430a650f31f326332355159a9142c6ad241cdb4de84a2"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-Coverage.py",
+          "sha256_lf": "92eb5db7b2e03bed9b2ff2cb7d7d2e99837aacc1f607c453651738104e1364ad"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-GentleCleaning.py",
+          "sha256_lf": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-MeasuredLoudness.py",
+          "sha256_lf": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-MediaPreflight.py",
+          "sha256_lf": "320fed0042a856fdca3a09d5be13dbbda28abc9835af1c2aace3b3934348183b"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OriginalPreset.py",
+          "sha256_lf": "02722c09f8e24364706fcdab27418ff84e0208def80d21c48fc61d3817ce3a31"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OutputEncoding.py",
+          "sha256_lf": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-OutputTransactions.py",
+          "sha256_lf": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-Preview.py",
+          "sha256_lf": "89065a5547a5e02d848f0d8e18e93fcc63db9ebda72a24ac529088c3cab1f724"
+        },
+        {
+          "group": "scripts",
+          "path": "scripts/Test-RunReports.py",
+          "sha256_lf": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f"
+        },
+        {
+          "group": "tests",
+          "path": "tests/README.md",
+          "sha256_lf": "2e57f81a9452f538af0ab86fbb83335737fa73f6b387ac5218156ee20080b9ab"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Batch.Tests.ps1",
+          "sha256_lf": "451c358da9c1c02e3a893e3cf6105ef32d7f7383b32ac842be647491741e3c3d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.CISetup.Tests.ps1",
+          "sha256_lf": "96b3be97f261b56d09dc69ad10afd2ffd8608a0701e57bf6d26bad8fc192298c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Cleaning.Tests.ps1",
+          "sha256_lf": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Encoding.Tests.ps1",
+          "sha256_lf": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.EntryPoints.Tests.ps1",
+          "sha256_lf": "2ddcf606c89f05a292182f6efe3aaa7947f750686351e32aebcdc291fa8f2ece"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.FaultChecks.Tests.ps1",
+          "sha256_lf": "95c6ac14103cbd6882f8a63df09f9719f8d5c2c32404037066114b47ee213ec1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+          "sha256_lf": "2afd5f669747cb4477d6e54be1a3daaef69cb5e90f1f3c6cee7f85f138bebd5c"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Helpers.Tests.ps1",
+          "sha256_lf": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Launcher.Tests.ps1",
+          "sha256_lf": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.LauncherTransport.Tests.ps1",
+          "sha256_lf": "0e0c89ffabced8f2c91289f689cf0b7bd6b797ee6e6e9663470de1a3e376458d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Loudness.Tests.ps1",
+          "sha256_lf": "878a920e74695edfd48bc4f3d6bfd8ded7d9abd8952e403ab66a6ab87a05be62"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.LoudnessRuntime.Tests.ps1",
+          "sha256_lf": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Media.Tests.ps1",
+          "sha256_lf": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Native.Tests.ps1",
+          "sha256_lf": "3518e9e16e6fe937a0aa6b7ab792a2ac2a7e2e7743a69108d004e167625c4a6e"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.NativeInput.Tests.ps1",
+          "sha256_lf": "2a255e7f187e9293245b581cdb6d2247969f18fccd21aae84f076de8912147f9"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256_lf": "3203aa9fc4e2fd1b81fdf64550b47427ad9232d28ad472ad04cc3dd82ef9df13"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.OutputLayout.Tests.ps1",
+          "sha256_lf": "7b33fb6ce3bb93b1d4fa621a0cd3288f89c78ecc8eb5a7ed17ec483b9db95d76"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preflight.Tests.ps1",
+          "sha256_lf": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preset.Tests.ps1",
+          "sha256_lf": "7848e4ef7261b0cef321ccd6430d68c1bdfe3ccc4933d475c4fa29c57097d1ea"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Preview.Tests.ps1",
+          "sha256_lf": "bbb234a9d322965351d0b5b16373065f2ea721fa3d90ddc0d5f418b2792893bc"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.PreviewReportClose.Tests.ps1",
+          "sha256_lf": "1ef65a676129bc3696990eb412a318a552387adf395badbaf4b462f7cc3e24e4"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Progress.Tests.ps1",
+          "sha256_lf": "31fcd84832fcb019a95ecf06bd66f103cd8d6fffc4e476e63e4d33c5802720c0"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.ReportIO.Tests.ps1",
+          "sha256_lf": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Reporting.Tests.ps1",
+          "sha256_lf": "3eacc3f78e2bfe229e1966fb3b28fa10c55a741c48aab5f3f977a281d409dd86"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.RunReports.Tests.ps1",
+          "sha256_lf": "c6ff1a0feb637682cf30247d15d1c92d409d7c0620455b5db7594f485e07fabe"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Settings.Tests.ps1",
+          "sha256_lf": "07e8cb3d658978f6795f48f6b81be4d863d3387c41a658b31ffdda3d37a4d8a7"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Transaction.Tests.ps1",
+          "sha256_lf": "660992c4f0f1ff84354e73c22583f7173b1fc0536b49c6a1808eadb81e4575ce"
+        },
+        {
+          "group": "tests",
+          "path": "tests/WinAudioClean.Validation.Tests.ps1",
+          "sha256_lf": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/FaultCheckScratch.cs",
+          "sha256_lf": "3c20b7f867e7f78becf63379011c6859d9c0381d336c2a8adb56287bcf5e6f6d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Import-Safety.ps1",
+          "sha256_lf": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-BatchCase.ps1",
+          "sha256_lf": "9f60b1146afd022fa847a5adecd9199c1592df7128f7cd9151b8d95162538f2d"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-ConsoleCancellationCase.ps1",
+          "sha256_lf": "3bfd822423afa31c004ddf050b1ef9453fe1dcb24765f00fe896b8ec069bbeb1"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-FolderQueueCase.ps1",
+          "sha256_lf": "7f35a7b2dd9c5a6e90fcd759fde9dda85c52a8cd8adcdea624d9c0f25d797513"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-Launcher.ps1",
+          "sha256_lf": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-LauncherCase.ps1",
+          "sha256_lf": "6b6152bf403be102c3dd21dbec8c027e8fd4966afc568474c341aa60545c11c2"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-MetadataFailure.ps1",
+          "sha256_lf": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/Invoke-NativeInputEncodingFixture.ps1",
+          "sha256_lf": "e0380c220f2fa55dd5c2a9f8f135546046fb53bc81b9b629bd16b31b1c80c8eb"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/LauncherApplicationStub.ps1",
+          "sha256_lf": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/LauncherMatrixApplicationStub.ps1",
+          "sha256_lf": "8cac1fcb00064e373d2ac4fc7bb2d2474f1347e42d3e8da54fc84615b23bd5bf"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256_lf": "07cd8aa6615d6fdbf3359c8f1e51951e1a5d7555708dc52cb8d0625045647b6a"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/NativeProcessFixture.md",
+          "sha256_lf": "2c0585cd8e42af9cb7e4c408de6b5613a59480f6728fbe8a5d4736e5cc6c4309"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256_lf": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/New-ProgressProcessFixture.ps1",
+          "sha256_lf": "f71311c4e27cff2234d03cad20b095c15ed339f4656501c547e9c0e7315f85bb"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ProgressProcessFixture.cs",
+          "sha256_lf": "d867500e4635d23b0a28a8bdfaf62c89645e60109e9012c9b7b814df939fbd2b"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ProgressProcessFixture.md",
+          "sha256_lf": "f0e9f1c4e6959ce6e428d13fea40425e0010544308ac68cdef231b2494f359da"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/README.md",
+          "sha256_lf": "da5aafc0f0c99b2a0f6411fb7cef808a6a9afd9416e7b34acf18afa3631d7efd"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/ReportCloseFault.ps1",
+          "sha256_lf": "6422069b5b2309a9936781680f09d89c2e511b0661a8bdfe57e024d2d4c2bdfb"
+        },
+        {
+          "group": "tests",
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256_lf": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+        }
+      ]
+    }
+  ],
+  "source_changes_from_initial_full": [
+    {
+      "from_commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+      "to_commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+      "changed_source_paths": [],
+      "same_tree_groups": [
+        "github",
+        "governance_inputs",
+        "governance_tests",
+        "governance_tools",
+        "runtime",
+        "scripts",
+        "tests"
+      ]
+    },
+    {
+      "from_commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+      "to_commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+      "changed_source_paths": [
+        "docs/codex/winaudioclean/tests/test_ci_runner.py",
+        "scripts/Invoke-CIChecks.py"
+      ],
+      "same_tree_groups": [
+        "github",
+        "governance_inputs",
+        "governance_tools",
+        "runtime",
+        "tests"
+      ]
+    },
+    {
+      "from_commit": "fd56b84c56b30575bd744d84751b88cad69333f9",
+      "to_commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+      "changed_source_paths": [
+        "WinAudioClean.ps1",
+        "docs/codex/winaudioclean/tests/test_ci_runner.py",
+        "scripts/Invoke-CIChecks.py",
+        "tests/WinAudioClean.Native.Tests.ps1",
+        "tests/WinAudioClean.NativeInput.Tests.ps1",
+        "tests/WinAudioClean.Progress.Tests.ps1",
+        "tests/fixtures/Invoke-NativeInputEncodingFixture.ps1",
+        "tests/fixtures/NativeProcessFixture.cs",
+        "tests/fixtures/ProgressProcessFixture.cs"
+      ],
+      "same_tree_groups": [
+        "github",
+        "governance_inputs",
+        "governance_tools"
+      ]
+    }
+  ],
+  "fallback": {
+    "unsupported_local_shell": {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps51",
+      "level": "Full",
+      "status": "not_run",
+      "reason": "shell_unavailable",
+      "exit_code": null,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": null,
+        "modules": {
+          "Pester": null,
+          "PSScriptAnalyzer": null
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "42cf8f24a9b1886b5a807bb74e7b299d9de9cb29",
+        "dirty": true,
+        "trees": {
+          "runtime": "a7b7f2c5a24541d67d48f476218920085755226fa3012d2eba292a3ceb191c15",
+          "scripts": "d31930f8b1155b3bc80594c630fcfb416ac308a68074fd2177ab367ee9cda0a6",
+          "tests": "cd590487e9eb1c4069220db560a61333af26a0f63c00a81b3bde033a3f2ca2cb",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "5d36d222d4ade2de6875bd8520e0dbb6ed1138c0b520b1d40b3f9838f7a50b81",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "29ff83cf2ca6edc5a4c9f8710accd988c1b472030f7ffbc5bf9db266dced9542"
+        },
+        "content_unchanged": null
+      },
+      "checks": null
+    },
+    "prior_ci_not_run": {
+      "repository": "PikkuJanne/WinAudioClean",
+      "headSha": "42cf8f24a9b1886b5a807bb74e7b299d9de9cb29",
+      "event": "pull_request",
+      "workflow": "Windows validation",
+      "workflowPath": ".github/workflows/windows-validation.yml",
+      "state": "not_run",
+      "reason": "No matching workflow run was returned for this SHA and event."
+    },
+    "offline_api_tests": "20 status-reader tests cover timeout/API failure/wrong identity/incomplete jobs; unavailable evidence never passes."
+  },
+  "initial_focused": {
+    "python_cases": 53,
+    "setup_pester_ps7_cases": 5,
+    "failed": 0
+  },
+  "host_executable_sha256": {
+    "python_portable": "03168c01b7b7491423350e82c26fee71f35b43694d1319d3c668bda6903a0c38",
+    "ps7_portable": "362a356ce7f0940ec74f73a8fc2c990a2cc24a38a11c90bbd8eca947110ad139",
+    "ps51_windows": "8bb6fa8c283b4d92120b1ef249a9b311b0f804d4cabbe9981159976c8be76a5e"
+  },
+  "verified_archives": {
+    "python": {
+      "version": "3.14.6",
+      "sha256": "df901e84a896ff1ee720ad03377e0c8d8c2244fda79808aeeaff6316df1cb75c",
+      "source": "https://www.python.org/downloads/release/python-3146/"
+    },
+    "powershell": {
+      "version": "7.6.5",
+      "sha256": "32eb8f6cdce08f86e987d625a2733e54ac3e289ae7e1621b14c0b5bcec2434ea",
+      "source": "https://github.com/PowerShell/PowerShell/releases/tag/v7.6.5"
+    }
+  },
+  "diagnostic_focused": {
+    "python_cases": 59,
+    "failed": 0,
+    "raw_log_sha256": "3368fdfa962f2c775a5beb531c974cbe6def8912d6af2ea6bc186fb1bcba5237"
+  },
+  "native_input": {
+    "scope": "Two local synthetic8-case wire probes and performed Native/NativeInput Targeted gates; no speech/audio tuning evidence.",
+    "runtime_scope": {
+      "baseline_commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+      "changed_runtime_file": "WinAudioClean.ps1",
+      "changed_function": "Invoke-WacNativeProcess",
+      "outside_function_identical_physical_bytes": true,
+      "other_runtime_files_identical_lf_content": [
+        "WinAudioClean.bat",
+        "WinAudioClean.Batch.ps1",
+        "WinAudioClean.IO.ps1",
+        "WinAudioClean.Launcher.ps1",
+        "WinAudioClean.Output.ps1",
+        "WinAudioClean.Preview.ps1",
+        "WinAudioClean.Queue.ps1",
+        "WinAudioClean.Settings.ps1"
+      ],
+      "baseline_main_sha256_lf": "afa7f25d6a1571c6bc6a34c4282cb40bcac5fbea472f076dcae6e2bff262e5ac",
+      "corrected_main_sha256_lf": "d2a68f5887f863c56108b6e1b827aae117c318ed1783e40d122825fbfdbd5c57",
+      "baseline_function_sha256_lf": "48482047b64486d4a0212306ca39b71fabef1fe289df06336be36d323daa2055",
+      "corrected_function_sha256_lf": "f68d4b4a0bb8ff5ddfc409040a0123e1c2259a59b937024c1db852ee0cb0e9f5"
+    },
+    "runtime_scope_sha256": "53dd9f91c3cc59977be41f40466cd6b5f6cb987b93a59bf21a06b8c46c6612ac",
+    "probes": [
+      {
+        "corrected": false,
+        "sha256": "e660937d9acfd43701f1ded6383400227dfb651ba7313dbbf0d822ccf642b133",
+        "raw_log_sha256": "200af49275af079a7e11d43e1baf75957ca734f8c37465b0a949bf10149c447d",
+        "summary": {
+          "powershell": "5.1.26100.9444",
+          "results": [
+            {
+              "variant": "initial",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 0,
+              "first_hex": "",
+              "last_hex": "",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:0"
+            },
+            {
+              "variant": "initial",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 32,
+              "first_hex": "5353535353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:32"
+            },
+            {
+              "variant": "oem437",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 0,
+              "first_hex": "",
+              "last_hex": "",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:0"
+            },
+            {
+              "variant": "oem437",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 32,
+              "first_hex": "5353535353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:32"
+            },
+            {
+              "variant": "utf8_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "EFBBBF",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 3,
+              "first_hex": "EFBBBF",
+              "last_hex": "EFBBBF",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:3"
+            },
+            {
+              "variant": "utf8_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "EFBBBF",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 35,
+              "first_hex": "EFBBBF5353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:35"
+            },
+            {
+              "variant": "utf8_no_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 0,
+              "first_hex": "",
+              "last_hex": "",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:0"
+            },
+            {
+              "variant": "utf8_no_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 32,
+              "first_hex": "5353535353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:32"
+            }
+          ]
+        }
+      },
+      {
+        "corrected": true,
+        "sha256": "08c3705eb4ba8b535bc91921da661337d4273b2c6e870d70f573b180d54c6c66",
+        "raw_log_sha256": "1a13aaed60bb44e9c30e72e52c5eb7abca91064157cc8d1cdf972951543750f9",
+        "summary": {
+          "powershell": "5.1.26100.9444",
+          "results": [
+            {
+              "variant": "initial",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 0,
+              "first_hex": "",
+              "last_hex": "",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:0"
+            },
+            {
+              "variant": "initial",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 32,
+              "first_hex": "5353535353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:32"
+            },
+            {
+              "variant": "oem437",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 0,
+              "first_hex": "",
+              "last_hex": "",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:0"
+            },
+            {
+              "variant": "oem437",
+              "input_code_page": 437,
+              "input_preamble_hex": "",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 32,
+              "first_hex": "5353535353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:32"
+            },
+            {
+              "variant": "utf8_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "EFBBBF",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 0,
+              "first_hex": "",
+              "last_hex": "",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:0"
+            },
+            {
+              "variant": "utf8_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "EFBBBF",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 32,
+              "first_hex": "5353535353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:32"
+            },
+            {
+              "variant": "utf8_no_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "",
+              "payload_bytes": 0,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 0,
+              "first_hex": "",
+              "last_hex": "",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:0"
+            },
+            {
+              "variant": "utf8_no_bom",
+              "input_code_page": 65001,
+              "input_preamble_hex": "",
+              "payload_bytes": 32,
+              "raw_started": true,
+              "raw_exit": 0,
+              "raw_has_error": false,
+              "raw_timed_out": false,
+              "observed_bytes": 32,
+              "first_hex": "5353535353535353",
+              "last_hex": "5353535353535353",
+              "text_started": true,
+              "text_exit": 0,
+              "text_has_error": false,
+              "text_timed_out": false,
+              "text_output": "STDIN_EOF:32"
+            }
+          ]
+        }
+      }
+    ],
+    "broad_targeted_history": [
+      {
+        "sha256": "4e775516ab638a31f7a9b8f9b3b579f5865bdd1f16f73a91680628c463dddfdf",
+        "raw_log_sha256": "90e2fbc87e02765935a6f4119abf489a2e5c25858d44b1a59c1b2c45624bad8a",
+        "completed_pester_counts_from_raw_summary": {
+          "passed": 202,
+          "failed": 1,
+          "skipped": 0,
+          "inconclusive": 0,
+          "outside_scope": 1265
+        },
+        "tests_tree_equals_final": false,
+        "summary": {
+          "scope": "local",
+          "shell_family": "ps51",
+          "level": "Targeted",
+          "tags": [
+            "Native",
+            "NativeInput"
+          ],
+          "exit_code": 1,
+          "elapsed_seconds": 434.271,
+          "shell_version": "5.1.26100.9444",
+          "python_version": "3.14.6",
+          "source_before": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "eefbba1c8dbb77ae1881216810fdb9e726e7720fcf4f69e3101ce0036468ceee",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_after": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "eefbba1c8dbb77ae1881216810fdb9e726e7720fcf4f69e3101ce0036468ceee",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_content_unchanged": true,
+          "pester": null,
+          "diagnostics": {
+            "phase": "pester",
+            "pester": {
+              "passed": 202,
+              "failed": 1,
+              "skipped": 0,
+              "inconclusive": 0,
+              "outside_scope": 1265
+            },
+            "locations": [
+              {
+                "file": "tests/WinAudioClean.Progress.Tests.ps1",
+                "line": 346,
+                "category": "exception"
+              },
+              {
+                "file": "scripts/Invoke-Tests.ps1",
+                "line": 130,
+                "category": "unknown"
+              }
+            ],
+            "truncated": false
+          }
+        }
+      },
+      {
+        "sha256": "2cad63e24390111e625590e20aaeb4d9a68ed662bcff06fb22ca13611fe7888a",
+        "raw_log_sha256": "b2c6a35cfa31df4fc311ab2071c1276cbc3e0298eb7eeab2d60a0ca5693ed54e",
+        "completed_pester_counts_from_raw_summary": {
+          "passed": 203,
+          "failed": 0,
+          "skipped": 0,
+          "inconclusive": 0,
+          "outside_scope": 1265
+        },
+        "tests_tree_equals_final": false,
+        "summary": {
+          "scope": "local",
+          "shell_family": "ps7",
+          "level": "Targeted",
+          "tags": [
+            "Native",
+            "NativeInput"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 434.24,
+          "shell_version": "7.6.5",
+          "python_version": "3.14.6",
+          "source_before": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "eefbba1c8dbb77ae1881216810fdb9e726e7720fcf4f69e3101ce0036468ceee",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_after": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "eefbba1c8dbb77ae1881216810fdb9e726e7720fcf4f69e3101ce0036468ceee",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_content_unchanged": true,
+          "pester": {
+            "passed": 203,
+            "skipped": 0,
+            "outside_scope": 1265
+          }
+        }
+      }
+    ],
+    "progress_recovery": {
+      "sha256": "e664596b250ba9e49162792dcc3e8a23a98183dd8e40581b9e7781e614be6e26",
+      "raw_log_sha256": "8d90675b48e3efe7843956892e861011051b39e45424f25f375be08dfd8a5c34",
+      "summary": {
+        "scope": "local",
+        "shell_family": "ps51",
+        "level": "Targeted",
+        "tags": [
+          "Cancellation"
+        ],
+        "exit_code": 0,
+        "elapsed_seconds": 18.438,
+        "shell_version": "5.1.26100.9444",
+        "python_version": "3.14.6",
+        "source_before": {
+          "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+          "dirty": true,
+          "trees": {
+            "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+            "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+            "tests": "eefbba1c8dbb77ae1881216810fdb9e726e7720fcf4f69e3101ce0036468ceee",
+            "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+            "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+            "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+            "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+          }
+        },
+        "source_after": {
+          "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+          "dirty": true,
+          "trees": {
+            "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+            "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+            "tests": "eefbba1c8dbb77ae1881216810fdb9e726e7720fcf4f69e3101ce0036468ceee",
+            "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+            "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+            "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+            "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+          }
+        },
+        "source_content_unchanged": true,
+        "pester": {
+          "passed": 7,
+          "skipped": 0,
+          "outside_scope": 41
+        },
+        "paths": [
+          "tests/WinAudioClean.Progress.Tests.ps1"
+        ]
+      }
+    },
+    "final_narrow_targeted": [
+      {
+        "sha256": "d9e73a4b59d41ae7adb9801e4ece4dc76f16a3babda6a0f20cb9f1fe6c550ef3",
+        "raw_log_sha256": "284f8fc2150e6685c0923487ae8a4d41f4cc1c3414d1df262b6ec9be366c6c44",
+        "summary": {
+          "scope": "local",
+          "shell_family": "ps51",
+          "level": "Targeted",
+          "tags": [
+            "Native",
+            "NativeInput",
+            "Cancellation"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 37.589,
+          "shell_version": "5.1.26100.9444",
+          "python_version": "3.14.6",
+          "source_before": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_after": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_content_unchanged": true,
+          "pester": {
+            "passed": 63,
+            "skipped": 0,
+            "outside_scope": 20
+          },
+          "paths": [
+            "tests/WinAudioClean.Native.Tests.ps1",
+            "tests/WinAudioClean.NativeInput.Tests.ps1",
+            "tests/WinAudioClean.Progress.Tests.ps1"
+          ]
+        }
+      },
+      {
+        "sha256": "747be4cfc76312cdc647b2df1605b2c95cd3d18089507f28248a1403c3e32b04",
+        "raw_log_sha256": "bc75fbdd780b9f85bf7e38063f43476bd017be5ec87fec8bcf6f350e6cf443d4",
+        "summary": {
+          "scope": "local",
+          "shell_family": "ps7",
+          "level": "Targeted",
+          "tags": [
+            "Native",
+            "NativeInput",
+            "Cancellation"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 38.3,
+          "shell_version": "7.6.5",
+          "python_version": "3.14.6",
+          "source_before": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_after": {
+            "commit": "8af62ffe02aa3d7111ff1edbf39324f2eb73a241",
+            "dirty": true,
+            "trees": {
+              "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+              "scripts": "7f30dab3fab03e37b53adf228371633a4e1d379428e96ee428c9999bdd3a7811",
+              "tests": "3ea3d69031cd0b443c4c8088ad4ac693ee57841e067237999b16316351251a92",
+              "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+              "governance_tests": "a730461ebdd54ed24c62b67f9c47b1f9f1722e2cac4f34e66888bef965173c60",
+              "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+              "governance_inputs": "8fd08aa7cc0a0c7aa23cc13ab3d87c2d1fd171292ebb9278d674423ec41d4593"
+            }
+          },
+          "source_content_unchanged": true,
+          "pester": {
+            "passed": 63,
+            "skipped": 0,
+            "outside_scope": 20
+          },
+          "paths": [
+            "tests/WinAudioClean.Native.Tests.ps1",
+            "tests/WinAudioClean.NativeInput.Tests.ps1",
+            "tests/WinAudioClean.Progress.Tests.ps1"
+          ]
+        }
+      }
+    ],
+    "preliminary_probe_raw_log_sha256": "7b64c6270f4d63ba07675afa03f2af5162446736352c019dccc95585bd68dd36",
+    "harness_history": [
+      "The preliminary empty-hex formatting helper failed; this was not an application failure. Only its raw-log hash is retained.",
+      "The first runtime-scope helper compared physical Git LF with checkout CRLF and rejected Batch; corrected LF comparison proves unchanged content without another application run.",
+      "Broad PS5.1 Targeted failed one pre-readiness Progress case while PS7 passed. The unchanged-source7-case PS5.1 Progress retry passed in its own scope; it does not relabel the broad failure.",
+      "Final narrow gates use three explicit test paths with fixture-only native child readiness and a1000ms PID delay; their test content hashes remain separate from the preserved broad/recovery hashes."
+    ]
+  },
+  "diagnostic_review": {
+    "result": "no_actionable_findings",
+    "files": 3,
+    "scope": "Independent code/privacy review of fixed diagnostics and source locators; no Full rerun."
+  },
+  "root_staged_review": {
+    "files": 6,
+    "result": "reviewed",
+    "scope": "Diagnostic checkpoint at 8af62ffe02aa3d7111ff1edbf39324f2eb73a241 only; final closure review is recorded separately."
+  },
+  "native_checkpoint_review": {
+    "commit": "c5a107e825bfa087f6b21f96dd54e91e538b1890",
+    "files": 11,
+    "result": "no_actionable_findings",
+    "scope": "Root staged review plus independent code/privacy review of seven runtime/test files and four CI/progress documents before the clean code checkpoint.",
+    "pre_test_corrections": [
+      "Fixture helper requires an explicit zero delay default.",
+      "Nested finally cleanup preserves context/survivor/input disposal when timer teardown fails."
+    ]
+  },
+  "history": [
+    "Initial local Full passed at fd56b84 while both PS5.1 CI jobs failed; both PS7 CI jobs passed. Those distinct results remain.",
+    "Initial CI retained only fixed summaries; diagnostic revisions add checked-in source locators without raw logs.",
+    "Forced gh OAuth workflow push was rejected for missing workflow scope. Existing default Git credential pushed successfully; no permission/settings changes.",
+    "Quick tested content before the Full-completeness refinement; the initial focused53 cases covered the refinement before Full tested fd56b84.",
+    "The first no-run capture redirected into an absent ignored directory and never invoked the status reader; its corrected capture reported exit3/not_run."
+  ],
+  "limits": [
+    "Local Full results certify their exact initial SHA. Later CI revisions have separate source inventories; final local Full is not claimed unless supplied.",
+    "Only source groups with equal recorded digests are identified as unchanged.",
+    "Full uses synthetic fixtures/governance tests; no new FFmpeg matrix, speech listening or sound promotion.",
+    "Local privilege skips remain distinct from hosted cases. Actual serviced Windows image/shell versions are recorded.",
+    "Raw logs, downloaded archives, recordings and machine paths stay ignored. Only hashes and fixed sanitized projections are published."
+  ]
+}

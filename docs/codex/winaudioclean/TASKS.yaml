@@ -991,7 +991,7 @@
       "depends_on": [
         "WAC-M4-01"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": ".github/workflows, development dependency lock/manifest and local parity.",
       "implementation": [
@@ -1005,7 +1005,10 @@
         "AC-071",
         "AC-072"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ],
       "blocked_reason": null
     },
     {

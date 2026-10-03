@@ -1,3 +1,34 @@
+# Next model: WAC-M4-03 — Build a versioned portable release package
+
+**M4-02 is complete. Start only WAC-M4-03 when requested.** Canonical24 done/
+6 todo/0 blocked;72 AC pass/18 not_run. M4-03/AC-073..075 remain todo/not_run.
+Read AGENTS, STATUS, DECISIONS, TASKS, ACCEPTANCE, SYNC_PROTOCOL,
+tasks/WAC-M4-03, COVERAGE and evidence/WAC-M4-02 before work.
+
+Use maintained WinAudioClean-governance; preserve the source-only original.
+Branch `codex/wac-m4-regression`, exact origin
+`https://github.com/PikkuJanne/WinAudioClean.git`, draft PR#5 stacked on
+`codex/wac-m3-settings`. Recover the closure SHA from Git and live origin;
+tested code is `c5a107e825bfa087f6b21f96dd54e91e538b1890`. Inspect/fetch/sync-check, validate-plan/coverage/next,
+and verify live PR/head/CI separately. Expected ready[WAC-M4-03], blocked[].
+
+Keep both final local and four hosted Full results tied to their recorded
+versions/hashes/counts/skips. Retain initial `fd56b84`, diagnostic `8af62ff` and
+the broader/recovery/narrow native fixture captures separately. Metadata-only
+closure checks are distinct; pending/error/unrun CI is not a passed gate.
+Do not repeat stable Full solely for documentation; source changes, failures
+or unresolved concerns determine the required checks. The native input BOM fix
+and bounded fixture handshake are accepted; sound/defaults remain unchanged.
+
+Retain all eight COVERAGE gaps. Hosted privilege success does not erase local
+skips or establish listening/Explorer/picker/stress/crash/handle recovery. Use
+isolated SettingsPath in automated processing; APPDATA alone does not relocate
+the Windows known-folder lookup. Feature commits/pushes and draft-PR upkeep are
+in scope; merge, main push, tags/releases, settings changes, sound promotion
+and deployment retain the existing approval boundaries.
+
+## Historical M4-02 validation handoff (superseded)
+
 # Next model: finish WAC-M4-02 validation
 
 WAC-M4-02 implementation is on `codex/wac-m4-regression` / draft PR #5. Recover

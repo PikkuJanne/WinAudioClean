@@ -1073,8 +1073,11 @@
       "title": "CI/local parity",
       "procedure": "Compare workflow commands and versions to local runners; run a PR check.",
       "expected": "Same checks are invoked, versions recorded, real green/failure status linked to the tested SHA.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ]
     },
     {
       "id": "AC-071",
@@ -1082,8 +1085,11 @@
       "title": "Workflow permissions",
       "procedure": "Review permissions, triggers, pinned actions, downloads and secrets exposure.",
       "expected": "Untrusted PR tests cannot publish releases/access private recordings/secrets; no broad write token by default.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ]
     },
     {
       "id": "AC-072",
@@ -1091,8 +1097,11 @@
       "title": "Truthful fallback",
       "procedure": "Simulate unavailable CI or one unsupported local shell.",
       "expected": "Local and CI results remain distinct; neither an API outage nor an unrun job becomes a passed gate.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ]
     },
     {
       "id": "AC-073",

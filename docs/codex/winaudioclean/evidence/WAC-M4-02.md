@@ -1,3 +1,72 @@
+# WAC-M4-02 — completed Windows CI and local parity
+
+Completed 2026-10-03 from tested code `c5a107e825bfa087f6b21f96dd54e91e538b1890`. Both local Full gates and
+all four actual PR Full jobs passed; [PR run 37147112528](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37147112528) is completed/success at that
+exact SHA. Pre/post source identities stayed clean/unchanged and all seven
+source-group hashes match the exact commit inventory and downloaded artifacts.
+
+| Performed Full gate | PowerShell | Windows/image | Counts | Completion |
+| --- | --- | --- | --- | --- |
+| Local ps51 | 5.1.26100.9444 | build26300 | Pester 1467 passed/1 skipped; Python 134 ran/1 skipped | 1097.05s |
+| Local ps7 | 7.6.5 | build26300 | Pester 1467 passed/1 skipped; Python 134 ran/1 skipped | 1085.88s |
+| CI windows-2022 / ps51 | 5.1.20348.5622 | 20260927.320.1 | Pester 1468 passed/0 skipped; Python 134 ran/0 skipped | exit0 |
+| CI windows-2022 / ps7 | 7.6.5 | 20260927.320.1 | Pester 1468 passed/0 skipped; Python 134 ran/0 skipped | exit0 |
+| CI windows-2025 / ps51 | 5.1.26100.33438 | 20260925.250.1 | Pester 1468 passed/0 skipped; Python 134 ran/0 skipped | exit0 |
+| CI windows-2025 / ps7 | 7.6.5 | 20260925.250.1 | Pester 1468 passed/0 skipped; Python 134 ran/0 skipped | exit0 |
+
+All gates observed Python3.14.6, Pester5.7.1 and PSScriptAnalyzer1.24.0.
+Every Full gate has zero outside-scope cases and no test failure. The local
+file-symlink privilege skips remain visible; hosted fixture execution does not
+erase that local limitation. All four fixed result artifacts passed schema,
+source/tool identity and seven-day retention verification. The exact-SHA status
+reader returned passed/exit0 only after all expected jobs completed successfully.
+
+AC-070 passes from the shared existing runner, version/source comparisons and
+performed local/PR results above. AC-071 passes from verified Action/archive
+pins, read-only ordinary PR/push triggers, no persisted credentials/secrets/
+publication and fixed sanitized artifacts. AC-072 passes from actual missing
+local shell/not-run CI captures and controlled unavailable/API/false-pass tests.
+Missing, pending, skipped or API-error jobs remain distinct from a passed gate.
+
+The only runtime change prevents a .NET Framework-generated stdin preamble in
+Invoke-WacNativeProcess. Six fresh-process regressions preserve exact caller
+bytes and encoding restoration, including startup failure and intended leading
+BOM data. Cancellation fixture readiness is bounded and deterministic; owned
+PID, independent survivor and original timeout/elapsed assertions remain.
+Independent review covered all11 code-checkpoint files. The prior initial and
+diagnostic CI failures, broader PS5.1 Targeted failure, unchanged recovery and
+63-case stabilized gate remain separate in the history and validation ledger.
+
+Canonical closure advances only WAC-M4-02 and AC-070..072:24 done/6 todo,
+72 pass/18 not_run. All eight broader gaps remain: speech listening, Explorer
+matrix, picker gesture, large/storage stress, host crash/power loss, privileged
+file symlink, meter/seek domain and unreleased Preview writer. Audio defaults,
+BAT entry points, settings and source-only original remain unchanged. Next is
+WAC-M4-03 — Build a versioned portable release package; it has not started.
+
+[Machine-readable validation ledger](WAC-M4-02-validation.json) contains exact
+commands, numeric counts, source inventories, versions, fixed artifacts and
+local raw-log hashes. Raw logs, recordings and machine paths remain ignored.
+Metadata-only closure validation passed: `handoff.py validate-plan` (30 tasks,
+90 acceptance cases), `scripts/Test-Coverage.py --repo .` (72 mapped cases,
+38 commands, eight reviews/eight gaps), and `handoff.py next` (only WAC-M4-03
+ready, none blocked). Pinned Python3.14.6 ran unittest discovery with
+`-s docs/codex/winaudioclean/tests -p test_handoff.py -v`:54 tests in271.069s,
+OK with one privilege skip. Discovery with `-p test_coverage.py -v` passed13
+in0.418s, no skips. Every command exited0. All seven closure files received
+root/independent staged scope/privacy review, with no actionable findings.
+No application Full gate was repeated for this metadata-only closure.
+
+Tested canonical physical SHA256 values are TASKS.yaml
+`10cadea285a71002e45b64ef20ef6b5fa0fa820733e677dbb9b2a4666f4f12b6`
+and ACCEPTANCE.json
+`13cc75ad8740e1fea3f3108d7ece207d91333c7baefb4657a17945a13a112733`.
+Runtime/scripts/tests/workflow/governance-test/tool contents remain the tested
+code revision above. The post-push closure SHA, live equality and latest PR/CI
+state are recorded separately; no future commit SHA is embedded in itself.
+
+## Retained implementation and failure history
+
 # WAC-M4-02 — Windows CI and local parity
 
 Implementation checkpoint in progress, 2026-10-03. Parent is freshly verified

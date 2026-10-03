@@ -1,5 +1,28 @@
 # Current status
 
+Date:2026-10-03. **WAC-M4-02 is complete.** Canonical24 done/6 todo/0 blocked;
+72 AC pass/18 not_run. **Next: WAC-M4-03 — Build a versioned portable release
+package**, unlocked and not started. Coverage retains all eight broader gaps.
+
+Tested code `c5a107e825bfa087f6b21f96dd54e91e538b1890` passed both local Full gates (Pester 1467 passed/1 skipped; Python 134 ran/1 skipped) and
+all four Windows2022/2025 PS5.1/PS7 PR jobs (Pester 1468 passed/0 skipped; Python 134 ran/0 skipped): [PR run 37147112528](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37147112528).
+Every Full has zero outside-scope cases; hashes, pinned versions and sanitized
+seven-day artifacts agree. Missing shells/API errors/unrun CI cannot pass.
+Earlier failed captures and their separate source identities remain retained.
+
+CI uses verified Action/checksum pins, contents:read and the existing local
+runner. The necessary native-start fix prevents an injected stdin BOM and
+preserves intended input bytes/restores encoding. A bounded PID-ready fixture
+handshake preserves ownership and deadline assertions. Source-only original,
+BAT entry points, filters/defaults and settings remain unchanged. Local privilege
+skips and all broader listening/manual/stress/crash gaps retain their scope.
+
+[Evidence](evidence/WAC-M4-02.md), [validation ledger](evidence/WAC-M4-02-validation.json).
+
+## Historical M4-02 implementation checkpoint (superseded)
+
+# Current status
+
 Date: 2026-10-03. **WAC-M4-02 implementation validation is in progress.**
 Windows CI and its pinned setup/parity/status tooling are implemented. Both
 actual local Quick gates passed 1075/0/1; the five setup tests are included.

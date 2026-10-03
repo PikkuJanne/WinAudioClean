@@ -697,3 +697,33 @@ alone, retain successful first PS7 Quick. No product/machine setting change.
 Only M4-01/AC-067..069 advance; 23 tasks done/7 todo,69 AC pass/21 not_run.
 Next M4-02 only, after live sync. No CI/package/merge/release/settings/deployment
 or sound-promotion approval is added. Evidence: `evidence/WAC-M4-01.md`.
+
+### 2026-10-03 — WAC-M4-02 Windows CI supplements local validation
+
+D40. Run the existing Full runner on Windows2022/2025, PS5.1 and pinned
+PS7 7.6.5/Python3.14.6/Pester5.7.1/PSScriptAnalyzer1.24.0. Verify full Action
+commits and archive checksums from official sources. Hosted image/PS5.1 patch
+versions are observed servicing values. Ordinary PR/push, contents:read and
+nonpersisted credentials bound access; no secret/cache/publication jobs.
+
+Upload only fixed source/version/count JSON with seven-day retention. Failed
+gates may include bounded Git-listed source locations and fixed categories;
+handled fixture stack references are informational, not the failure inventory.
+Raw logs and private data stay local/ignored. Select exact SHA/event/workflow
+and require all four expected jobs; unavailable/missing/pending/skipped/API
+failures cannot become passes. Actual missing-shell/not-run captures and
+controlled status tests establish truthful fallback.
+
+CI exposed a Framework-created stdin BOM. Native startup chooses a child
+BOM-free encoding where available; PS5.1 scopes same-code-page BOM-free UTF-8
+to startup and restores the encoding in finally. That Console setter refreshes
+its cached reader; WAC native starts remain sequential. Own pipe handles before
+restoration. Exact raw-byte/start-failure regressions and bounded deterministic
+PID-ready cancellation fixtures preserve input/ownership/deadline contracts.
+
+Accept AC-070..072 from `c5a107e825bfa087f6b21f96dd54e91e538b1890`: both local Full gates (Pester 1467 passed/1 skipped; Python 134 ran/1 skipped)
+and four hosted Full jobs (Pester 1468 passed/0 skipped; Python 134 ran/0 skipped), [PR run 37147112528](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37147112528), matching source/pin/
+artifact/status evidence. Preserve earlier failures and recovery scopes. Only
+M4-02 advances:24 done/6 todo,72 pass/18 not_run. Retain eight broader gaps,
+unchanged audio defaults and existing approval boundaries. Next M4-03 only;
+no packaging started. Evidence: `evidence/WAC-M4-02.md` and validation ledger.
