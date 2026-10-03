@@ -175,6 +175,10 @@ function New-WacFolderQueue {
                     . $append (& $makeEntry $child 'SKIPPED' 'reparse_point' 'Symbolic links, junctions and other reparse entries are not followed.'); continue
                 }
                 if (($attributes -band [IO.FileAttributes]::Directory) -ne 0) {
+                    if ([IO.Path]::GetFileName($child) -match '^WinAudioClean_Job_[0-9a-f]{32}$') {
+                        . $append (& $makeEntry $child 'SKIPPED' 'generated_artifact' 'Known WinAudioClean job folder is excluded from discovery.')
+                        continue
+                    }
                     # Only exclude a proper descendant destination, never a root
                     # explicitly equal to it or located below an output ancestor.
                     if ($child.TrimEnd([char[]]'\/') -ieq $destination.TrimEnd([char[]]'\/') -and

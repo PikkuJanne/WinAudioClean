@@ -1,5 +1,31 @@
 # Current status
 
+Date: 2026-10-03. **WAC-M3-05 is complete.** Canonical 21 done/9 todo;
+AC-001..063 pass their recorded engineering scopes. **Next: WAC-M3-06 only.**
+
+Music/default and explicit chosen destinations remain. Optional JobFolder groups
+one invocation with held atomic new media/report directories. No-input console
+usage, explicit optional STA picker and identity-checked destination opening
+preserve ordinary unattended operation. Cancelled picker/unattended action/failure
+gates avoid processing or false completion. Flat reports retain the canonical
+held destination; explicit journal overrides and queue contracts remain.
+
+Interaction 48 cases pass per host within final Targeted;
+dedicated PS 5.1 capture's 47/1 timeout and isolated 1/0 recovery remain recorded. Layout 10
+and new Preview 2 selected pass per host. Final Targeted 222; required Full 1442 pass/1 file-symlink privilege skip Pester
+and Python 61 pass/1 separate privilege skip per host, exit 0 and frozen source guards.
+Real media 44/44, 38 PCM comparisons/38 WAVs; precise scopes/hashes
+and preliminary runtime/fixture/harness failures are retained. Original audio,
+native cancellation and launcher contracts remain. No actual user Music/settings
+writes, manual picker/Explorer gesture or listening approval is claimed.
+The prior M3-04 native-console proof was not rerun; crash/stress limits remain.
+
+[Evidence](evidence/WAC-M3-05.md), [source](evidence/WAC-M3-05-source.json),
+[gates](evidence/WAC-M3-05-gates.json), [focused](evidence/WAC-M3-05-focused.json),
+[media](evidence/WAC-M3-05-media.json), [preservation](evidence/WAC-M3-05-preservation.json).
+
+## Prior M3-04 checkpoint
+
 Date: 2026-10-03. **WAC-M3-04 is complete.** Canonical20 done/10todo;
 AC-001..060 pass their recorded engineering scopes. **Next: WAC-M3-05 only.**
 

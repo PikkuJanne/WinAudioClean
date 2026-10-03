@@ -408,7 +408,7 @@ function Resolve-WacSettings {
     Assert-WacSettingsCombination -Values $savedValues
     $cliValues = ConvertTo-WacValidatedSettingsValues -Values $Explicit -Explicit
     $values = @{ Mode = $null; Preset = 'Original'; LoudnessMode = 'Fast'; BitDepth = '16'; Mono = $false; Rf64 = $false;
-        OutputDirectory = [Environment]::GetFolderPath([Environment+SpecialFolder]::MyMusic); AudioStreamIndex = $null; CleaningOptions = @{} }
+        OutputDirectory = Get-WacDefaultOutputDirectory; AudioStreamIndex = $null; CleaningOptions = @{} }
     $origins = @{}
     foreach ($name in @(Get-WacSettingsNames)) {
         $origins[$name] = 'BuiltIn'

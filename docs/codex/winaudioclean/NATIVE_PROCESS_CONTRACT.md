@@ -8,6 +8,28 @@ stage deadlines while preserving Fast's original native path.
 M3-04 adds structured stdout progress and per-run console cancellation; its
 section supersedes earlier progress/active-cancellation limitations.
 
+## Optional organized destinations — WAC-M3-05 (2026-10-03)
+
+`JobFolder` retains the existing audio transaction and no-replace publication.
+The optional Output sibling pins the selected canonical local base and its
+ordinary ancestors. Generated job/media/report children are created atomically
+with native `NtCreateFile` `FILE_CREATE` relative to an already-held parent;
+creation returns the owned directory handle and refuses existing names.
+No-follow directory validation, canonical hierarchy and stable identity checks
+retain those leases through media publication and report/journal completion.
+Sequential children borrow the parent's layout; only its owner closes it.
+Failure cleanup closes handles and never sweeps/deletes directories or contents.
+
+Music remains the default. An empty, relative or unsupported redirected known
+folder fails with explicit output-directory guidance; chosen/saved destinations
+retain their earlier precedence and never silently fall back to the cwd.
+The optional file picker loads Windows Forms only after an explicit interactive
+STA request. Console usage and ordinary processing do not load a desktop UI.
+The optional directory action uses a resolved existing directory as literal
+`ProcessStartInfo.FileName` with the shell's directory `open` verb, without
+command construction, file playback or process waiting. Unattended actions are
+rejected before processing. Action failures preserve the primary audio outcome.
+
 ## Implemented in WAC-M1-02 (2026-10-02)
 
 `Get-WacFfmpegArguments` returns separate argument values and includes `-nostdin`.

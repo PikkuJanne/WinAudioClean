@@ -50,6 +50,9 @@ origins are rejected; WAV without timestamps uses its first sample as zero.
 
 The source and prior exports are preserved. New audio and per-run JSON/text
 reports are written to Music by default; WinAudioClean_Log.txt is the summary.
+Choose -JobFolder to group one invocation in a new local job folder, with media
+and reports subfolders. -PickFile and -OpenOutputFolder are explicit optional
+interactive actions. Ordinary console/unattended processing needs no desktop UI.
 Reports may contain local paths and metadata. Diagnostic export is a separate
 local action; review it before sharing. Nothing is automatically uploaded.
 .PARAMETER Preset
@@ -113,6 +116,25 @@ with 5 and preserves prior outputs/results with incomplete-report diagnostics.
 Create source/processed excerpts and separate level-matched comparison WAVs.
 The opt-in route ends after preview; it never starts a full render or playback.
 Requires the sibling WinAudioClean.Preview.ps1. Open comparison files explicitly.
+.PARAMETER JobFolder
+Group one invocation, including an entire queue, in a new WinAudioClean_Job_<id>
+folder under Music or the chosen destination. Audio goes into media; JSON/text
+reports, the summary and the default batch journal go into reports. An explicit
+BatchResultPath still overrides journal placement. Requires WinAudioClean.Output.ps1.
+Folders are never reused or swept. Failed attempts may retain empty directories.
+This option is not saved as a preference; the legacy flat layout remains default.
+.PARAMETER PickFile
+Explicitly show an optional single-file picker in an interactive Windows STA
+host. Windows Forms loads only for this action; console paths need no GUI.
+Cannot accompany any input/queue selection. Cancel returns 130 without processing.
+An unavailable picker fails with guidance to supply inputPath. No-input use shows
+console usage and never automatically opens a picker.
+.PARAMETER OpenOutputFolder
+Explicitly open only the completed destination directory after published success
+or warning. Requires an interactive console; unattended/redirected requests fail
+before processing. Failed/cancelled/mixed-failed queues never open a destination.
+An open failure prints a warning and preserves the processing exit. No file or
+playback is opened. JobFolder opens the job root once, including for queues.
 .PARAMETER PreviewStartSeconds
 Nonnegative finite seconds from the selected source's start, default 0.
 Use an invariant decimal point. Requires -Preview and a start inside the source.
@@ -185,7 +207,7 @@ https://ffmpeg.org/ffmpeg-filters.html
 param(
     [Parameter(Position = 0)][string]$inputPath,
     [string]$Mode,
-    [string]$OutputDirectory = [Environment]::GetFolderPath('MyMusic'),
+    [string]$OutputDirectory,
     [string]$FfmpegPath,
     [string]$FfprobePath,
     [string]$AudioStreamIndex,
@@ -211,6 +233,10 @@ param(
     [string[]]$InputDirectories,
     [switch]$Recurse,
     [string]$BatchResultPath,
+    [switch]$JobFolder,
+    [switch]$PickFile,
+    [switch]$OpenOutputFolder,
+    [Parameter(DontShow = $true)]$WacOutputLayout,
     [Parameter(DontShow = $true)]$WacRunContext
 )
 
@@ -269,7 +295,11 @@ function Get-WacInputFile {
 }
 
 function Get-WacOutputDirectory {
-    param([string]$Path)
+    param([string]$Path, [switch]$DefaultMusic)
+
+    if ($DefaultMusic -and ([string]::IsNullOrWhiteSpace($Path) -or $Path -notmatch '^[a-zA-Z]:[\\/]')) {
+        throw 'Music is unavailable or redirected to an unsupported location. Supply -OutputDirectory with a writable local folder.'
+    }
 
     $resolved = Resolve-WacFileSystemPath -Path $Path
     $probe = $null
@@ -286,6 +316,79 @@ function Get-WacOutputDirectory {
         if ($null -ne $probe) { $probe.Dispose() }
     }
     $resolved
+}
+
+function Get-WacDefaultOutputDirectory {
+    [Environment]::GetFolderPath('MyMusic')
+}
+
+function Show-WacUsage {
+    Write-Host 'No input file supplied. Drop files onto WinAudioClean.bat, or use one of these PowerShell commands:'
+    Write-Host '.\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav" -Mode Zoom -NonInteractive'
+    Write-Host '.\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav" -Mode Raw -OutputDirectory "C:\Audio\Exports" -JobFolder'
+    Write-Host '.\WinAudioClean.ps1 -PickFile -Mode Zoom -OpenOutputFolder'
+    Write-Host 'Music is the default. -JobFolder groups one invocation in a new job folder with media and reports subfolders.'
+    Write-Host 'Use -InputPaths, -InputListPath or -InputDirectories for queues. Picker/open actions require an interactive console.'
+}
+
+function Show-WacFilePicker {
+    if (-not (Test-WacInteractive)) { throw 'PickFile requires an interactive console. Supply -inputPath for terminal or unattended use.' }
+    if ([Threading.Thread]::CurrentThread.GetApartmentState() -ne [Threading.ApartmentState]::STA) {
+        throw 'The optional file picker requires an STA host. Start PowerShell with -STA, or supply -inputPath.'
+    }
+    $dialog = $null
+    try {
+        Add-Type -AssemblyName System.Windows.Forms -ErrorAction Stop
+        $dialog = New-Object System.Windows.Forms.OpenFileDialog
+        $dialog.Title = 'Choose one local recording for WinAudioClean'
+        $dialog.Filter = 'Media files|*.wav;*.mp3;*.flac;*.ogg;*.m4a;*.mp4;*.mkv;*.webm;*.aac;*.aif;*.aiff;*.wma;*.avi|All files|*.*'
+        $dialog.Multiselect = $false
+        $dialog.CheckFileExists = $true
+        $dialog.CheckPathExists = $true
+        $dialog.RestoreDirectory = $true
+        if ($dialog.ShowDialog() -eq 'OK') { return $dialog.FileName }
+        return $null
+    } catch { throw ('Optional file picker is unavailable: ' + $_.Exception.Message + ' Supply -inputPath instead.') }
+    finally { if ($null -ne $dialog) { $dialog.Dispose() } }
+}
+
+function Open-WacDestinationFolder {
+    param([Parameter(Mandatory = $true)][string]$Directory, [string]$ExpectedDirectoryIdentity)
+    $resolved = Resolve-WacFileSystemPath -Path $Directory
+    $item = Get-Item -LiteralPath $resolved -Force -ErrorAction Stop
+    if ($item -isnot [IO.DirectoryInfo]) { throw 'Only an existing destination directory can be opened.' }
+    Initialize-WacNativeFileIO
+    $handle = $null; $process = $null
+    try {
+        $handle = [WinAudioClean.NativeFileIO]::OpenDirectory($resolved)
+        if ($ExpectedDirectoryIdentity -and [WinAudioClean.NativeFileIO]::Identity($handle) -ne $ExpectedDirectoryIdentity) {
+            throw 'The completed destination directory changed; it will not be opened.'
+        }
+        $canonical = Resolve-WacFileSystemPath -Path ([WinAudioClean.NativeFileIO]::ResolvedPath($handle))
+        $start = New-Object Diagnostics.ProcessStartInfo
+        $start.FileName = $canonical
+        $start.UseShellExecute = $true
+        $start.Verb = 'open'
+        $process = [Diagnostics.Process]::Start($start)
+    } finally {
+        if ($null -ne $process) { $process.Dispose() }
+        if ($null -ne $handle) { $handle.Dispose() }
+    }
+}
+
+function Invoke-WacOutputFollowUp {
+    param([bool]$Requested, [bool]$Interactive, [int]$ExitCode, [bool]$Published, [string]$Directory, [string]$ExpectedDirectoryIdentity)
+    if (-not $Requested -or -not $Interactive -or -not $Published -or $ExitCode -notin @(0, 7)) { return }
+    try { Open-WacDestinationFolder -Directory $Directory -ExpectedDirectoryIdentity $ExpectedDirectoryIdentity }
+    catch { Write-Warning ('Destination could not be opened: ' + $_.Exception.Message + ' Audio outcome is unchanged; open the printed directory manually.') }
+}
+
+function Get-WacOutputOrganization {
+    param($Layout)
+    if ($null -eq $Layout) { return $null }
+    Assert-WacOutputLayout -Layout $Layout
+    [ordered]@{ jobId = $Layout.JobId; rootDirectory = $Layout.RootDirectory
+        mediaDirectory = $Layout.MediaDirectory; reportDirectory = $Layout.ReportDirectory }
 }
 
 function Test-WacInteractive {
@@ -1561,8 +1664,8 @@ function New-WacRunReport {
             standardOutput = $c.Process.StandardOutput; standardError = $c.Process.StandardError
             processError = $c.Process.Error; nativeCleanupError = $c.Process.CleanupError
             outputError = $c.ValidationError; outputCleanupErrors = @($c.CleanupErrors)
-            jsonPath = [IO.Path]::Combine($c.Transaction.OutputFolder, ('WinAudioClean_' + $c.Transaction.JobId + '.json'))
-            textPath = [IO.Path]::Combine($c.Transaction.OutputFolder, ('WinAudioClean_' + $c.Transaction.JobId + '.txt'))
+            jsonPath = [IO.Path]::Combine($(if ($c.ReportFolder) { $c.ReportFolder } else { $c.Transaction.OutputFolder }), ('WinAudioClean_' + $c.Transaction.JobId + '.json'))
+            textPath = [IO.Path]::Combine($(if ($c.ReportFolder) { $c.ReportFolder } else { $c.Transaction.OutputFolder }), ('WinAudioClean_' + $c.Transaction.JobId + '.txt'))
         }
         reporting = [ordered]@{ complete = $true; errors = @() }
         privacy = 'Local detailed report: may contain paths, filenames, metadata and sensitive diagnostics. Use explicit redacted export and review before sharing.'
@@ -1851,6 +1954,14 @@ if ($PSBoundParameters.ContainsKey('ExportDiagnostic') -or $PSBoundParameters.Co
 # return above without reading user configuration or requiring this component.
 # Explicit management never probes an input, resolves native tools or prompts.
 $settingsManagement = $ShowSettings -or $SaveSettings -or $ResetSettings
+if (-not $settingsManagement -and -not $PickFile -and [string]::IsNullOrWhiteSpace($inputPath) -and
+    -not $PSBoundParameters.ContainsKey('InputPaths') -and -not $PSBoundParameters.ContainsKey('InputListPath') -and
+    -not $PSBoundParameters.ContainsKey('InputDirectories') -and -not $PSBoundParameters.ContainsKey('BatchResultPath') -and
+    -not $PSBoundParameters.ContainsKey('Recurse')) {
+    Show-WacUsage
+    Write-Error -Message 'No input file supplied. See the console usage examples.' -ErrorAction Continue
+    exit 2
+}
 $audioStreamIndexSpecified = $PSBoundParameters.ContainsKey('AudioStreamIndex')
 $resolvedSettings = $null
 try {
@@ -1929,7 +2040,34 @@ $ownsRunContext = $null -eq $WacRunContext
 if ($ownsRunContext) { $WacRunContext = New-WacRunContext -CaptureConsole }
 $script:WacRunContext = $WacRunContext
 $script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]'
+$ownsOutputLayout = $false
+$script:WacOutputLayout = $WacOutputLayout
 try {
+
+$interactive = Test-WacInteractive -NonInteractive:$NonInteractive
+try {
+    if (($PickFile -or $OpenOutputFolder) -and -not $interactive) {
+        throw 'PickFile and OpenOutputFolder require an interactive console. Omit these actions for terminal or unattended use.'
+    }
+    if ($PickFile) {
+        foreach ($name in @('inputPath', 'InputPaths', 'InputListPath', 'InputDirectories', 'Recurse', 'BatchResultPath')) {
+            if ($PSBoundParameters.ContainsKey($name)) { throw 'PickFile cannot be combined with an input or queue selection.' }
+        }
+        $inputPath = Show-WacFilePicker
+        if ([string]::IsNullOrWhiteSpace($inputPath)) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
+    }
+    if ($JobFolder -or $null -ne $WacOutputLayout) {
+        $outputComponent = Join-Path $PSScriptRoot 'WinAudioClean.Output.ps1'
+        if (-not (Test-Path -LiteralPath $outputComponent -PathType Leaf)) {
+            throw 'Keep WinAudioClean.Output.ps1 beside the main script to use JobFolder.'
+        }
+        . $outputComponent
+        if ($null -ne $WacOutputLayout) { Assert-WacOutputLayout -Layout $WacOutputLayout }
+    }
+} catch {
+    Write-Error -Message ('Local interaction failed: ' + $_.Exception.Message) -ErrorAction Continue
+    exit 2
+}
 
 # Explicit lists reuse the ordinary single-file path, with preferences frozen
 # once and no child configuration reads. Legacy installations/imports need no
@@ -1955,12 +2093,19 @@ if ($batchRequested -or $folderRequested -or $PSBoundParameters.ContainsKey('Bat
             if (-not (Test-Path -LiteralPath $componentPath -PathType Leaf)) { throw 'Keep WinAudioClean.Queue.ps1 beside the main script to use folder queues.' }
             . $componentPath
             $directories = @(Resolve-WacFolderSelection -Parameters $PSBoundParameters)
-            $outputFolder = Get-WacOutputDirectory -Path $resolvedSettings.Values.OutputDirectory
+            $outputFolder = Get-WacOutputDirectory -Path $resolvedSettings.Values.OutputDirectory -DefaultMusic:($resolvedSettings.Origins.OutputDirectory -eq 'BuiltIn')
             $queue = New-WacFolderQueue -Directories $directories -OutputDirectory $outputFolder -Recurse:$Recurse
             $batchArguments.FolderQueue = $queue
             $batchInputs = @($queue.Entries | ForEach-Object { $_.InputPath })
         } else { $batchInputs = @(Resolve-WacBatchInputs -Parameters $PSBoundParameters) }
+        if ($JobFolder -and $null -eq $WacOutputLayout) {
+            $outputFolder = Get-WacOutputDirectory -Path $resolvedSettings.Values.OutputDirectory -DefaultMusic:($resolvedSettings.Origins.OutputDirectory -eq 'BuiltIn')
+            $WacOutputLayout = New-WacOutputLayout -BaseDirectory $outputFolder
+            $script:WacOutputLayout = $WacOutputLayout; $ownsOutputLayout = $true
+        }
+        if ($null -ne $WacOutputLayout) { $batchArguments.OutputLayout = $WacOutputLayout }
         $batchResult = Invoke-WacBatch -Inputs $batchInputs -RunContext $WacRunContext @batchArguments
+        Invoke-WacOutputFollowUp -Requested:$OpenOutputFolder -Interactive:$interactive -ExitCode $batchResult.ExitCode -Published:([bool]$batchResult.HasPublishedOutput) -Directory $batchResult.OutputDirectory -ExpectedDirectoryIdentity $batchResult.OutputDirectoryIdentity
         exit $batchResult.ExitCode
     } catch {
         Write-Error -Message ('Input selection failed: ' + $_.Exception.Message) -ErrorAction Continue
@@ -1970,7 +2115,6 @@ if ($batchRequested -or $folderRequested -or $PSBoundParameters.ContainsKey('Bat
 
 # --- CONFIGURATION ---
 $scriptVersion = "2.3"
-$interactive = Test-WacInteractive -NonInteractive:$NonInteractive
 
 # The preview component is optional for normal exports. Loading defines helpers;
 # it never renders or launches playback. Existing full-render installations and
@@ -2013,9 +2157,21 @@ try {
         # the actual selected stream is pinned/probed and checked by the preview.
         $null = Get-WacPreviewRange -InputDurationSeconds 1000000000 -Start $PreviewStartSeconds -Duration $PreviewDurationSeconds -DurationExplicit:($PSBoundParameters.ContainsKey('PreviewDurationSeconds'))
     }
-    $outFolder = Get-WacOutputDirectory -Path $OutputDirectory
+    $defaultMusic = -not $PSBoundParameters.ContainsKey('OutputDirectory') -and
+        ($null -eq $resolvedSettings -or $resolvedSettings.Origins.OutputDirectory -eq 'BuiltIn')
+    if ($defaultMusic) { $OutputDirectory = Get-WacDefaultOutputDirectory }
+    $outFolder = Get-WacOutputDirectory -Path $OutputDirectory -DefaultMusic:$defaultMusic
     if (-not $Mode -and -not $interactive) {
         throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.'
+    }
+    if ($JobFolder -and $null -eq $WacOutputLayout) {
+        $WacOutputLayout = New-WacOutputLayout -BaseDirectory $outFolder
+        $script:WacOutputLayout = $WacOutputLayout; $ownsOutputLayout = $true
+    }
+    $reportFolder = $outFolder
+    if ($null -ne $WacOutputLayout) {
+        Assert-WacOutputLayout -Layout $WacOutputLayout
+        $outFolder = $WacOutputLayout.MediaDirectory; $reportFolder = $WacOutputLayout.ReportDirectory
     }
 } catch {
     Write-Error -Message ("Preflight failed: " + $_.Exception.Message) -ErrorAction Continue
@@ -2106,6 +2262,7 @@ if ($Preview) {
         Interactive = $interactive; ToolVersion = $scriptVersion
         FfmpegVersion = $ffmpegVersion; FfprobeVersion = $ffprobeVersion
     }
+    if ($null -ne $WacOutputLayout) { $previewArguments.ReportFolder = $reportFolder; $previewArguments.OutputLayout = $WacOutputLayout }
     if ($audioStreamIndexSpecified) { $previewArguments.AudioStreamIndex = $AudioStreamIndex }
     try { $previewResult = Invoke-WacPreview @previewArguments }
     catch {
@@ -2117,6 +2274,9 @@ if ($Preview) {
     if ($previewResult.CleanupErrors) { Write-Warning ($previewResult.CleanupErrors -join ' ') }
     if ($previewResult.ReportPaths) { Write-Host ('Preview reports: ' + ($previewResult.ReportPaths | ConvertTo-Json -Compress)) }
     Write-Host 'Preview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.'
+    $followUpDirectory = if ($null -ne $WacOutputLayout) { $WacOutputLayout.RootDirectory } else { $previewResult.OutputDirectory }
+    $followUpIdentity = if ($null -ne $WacOutputLayout) { $WacOutputLayout.Identities.Root } else { $previewResult.OutputDirectoryIdentity }
+    Invoke-WacOutputFollowUp -Requested:$OpenOutputFolder -Interactive:$interactive -ExitCode $previewResult.ExitCode -Published:($previewResult.Status -in @('SUCCESS', 'WARNING')) -Directory $followUpDirectory -ExpectedDirectoryIdentity $followUpIdentity
     exit $previewResult.ExitCode
 }
 
@@ -2126,6 +2286,7 @@ try {
     $transaction = New-WacOutputTransaction -InputPath $inputPath -OutputFolder $outFolder
     $inputPath = $transaction.InputPath
     $outputFile = $transaction.FinalPath
+    if ($null -eq $WacOutputLayout) { $reportFolder = $transaction.OutputFolder }
 } catch {
     Write-Error -Message ("Output allocation failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 5
@@ -2335,10 +2496,20 @@ $report = New-WacRunReport -Context @{
     FfmpegPath = $ffmpegPath; FfmpegVersion = $ffmpegVersion; FfprobePath = $ffprobePath; FfprobeVersion = $ffprobeVersion
     SpaceEstimate = $spaceEstimate; AvailableBytes = $availableBytes
     ValidationError = $validationError; CleanupErrors = $outputCleanupErrors; MetadataError = $metadataError
+    ReportFolder = $reportFolder
 }
 $report.progress = [ordered]@{ stages = @(Get-WacProgressReport); completed = [bool]$transaction.Published
     cancellationRequested = $WacRunContext.IsCancellationRequested; cancellationStage = $WacRunContext.CancellationStage }
-Write-WacRunReports -Report $report -OutputFolder $transaction.OutputFolder
+$reportDirectoryAvailable = $true
+if ($null -ne $WacOutputLayout) {
+    try { $report.output.organization = Get-WacOutputOrganization -Layout $WacOutputLayout }
+    catch {
+        $reportDirectoryAvailable = $false
+        Add-WacReportFailure -Report $report -Code 'output_layout_unavailable' -Message $_.Exception.Message
+        Write-Warning ('Report layout could not be verified: ' + $_.Exception.Message)
+    }
+}
+if ($reportDirectoryAvailable) { Write-WacRunReports -Report $report -OutputFolder $reportFolder }
 $applicationExitCode = $report.applicationExitCode
 $status = $report.status
 
@@ -2368,9 +2539,15 @@ if ($status -eq "SUCCESS") {
     Write-Host "`nDONE: FAILED" -ForegroundColor Red
     Write-Host "Native exit: $nativeExitText. Application exit: $applicationExitCode. See diagnostics above."
 }
+$followUpDirectory = if ($null -ne $WacOutputLayout) { $WacOutputLayout.RootDirectory } else { $transaction.OutputFolder }
+$followUpIdentity = if ($null -ne $WacOutputLayout) { $WacOutputLayout.Identities.Root } else { $transaction.OutputDirectoryIdentity }
+Invoke-WacOutputFollowUp -Requested:$OpenOutputFolder -Interactive:$interactive -ExitCode $applicationExitCode -Published:([bool]$transaction.Published) -Directory $followUpDirectory -ExpectedDirectoryIdentity $followUpIdentity
 exit $applicationExitCode
 
 } finally {
+    if ($ownsOutputLayout) {
+        foreach ($message in @(Close-WacOutputLayout -Layout $WacOutputLayout)) { Write-Warning $message }
+    }
     if ($script:WacProgressStages.Count -gt 0) { Write-WacProgress -State $script:WacProgressStages[$script:WacProgressStages.Count - 1] -Completed }
     if ($ownsRunContext) {
         try { $WacRunContext.Dispose() }

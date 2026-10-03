@@ -1,0 +1,276 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (49 files; shell 7.6.5).
+Static gate passed; 273 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 3 files.
+Discovery found 214 tests in 626ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.OutputInteraction.Tests.ps1'
+Describing AC-061: default Music is explicit and never falls back to the current directory
+  [+] reads the existing Music registration without writing to it 202ms (133ms|69ms)
+  [+] rejects unavailable or unsupported default Music empty 111ms (73ms|39ms)
+  [+] rejects unavailable or unsupported default Music relative 7ms (5ms|2ms)
+  [+] rejects unavailable or unsupported default Music UNC 6ms (4ms|2ms)
+  [+] rejects unavailable or unsupported default Music provider 7ms (5ms|2ms)
+  [+] preserves explicit relative output resolution instead of applying the default Music guard 46ms (44ms|2ms)
+  [+] keeps action switches outside the saved preference schema 151ms (149ms|2ms)
+  [+] skips an exact prior job directory without traversing renamed media while traversing a near miss 605ms (603ms|2ms)
+
+Describing AC-063: follow-up action requires explicit interactive published success
+  [+] does not open for not requested 354ms (348ms|6ms)
+  [+] does not open for not interactive 27ms (19ms|8ms)
+  [+] does not open for not published 13ms (11ms|2ms)
+  [+] does not open for unpublished warning 29ms (15ms|14ms)
+  [+] does not open for preflight failure 18ms (15ms|2ms)
+  [+] does not open for dependency failure 22ms (20ms|2ms)
+  [+] does not open for processing failure 19ms (17ms|2ms)
+  [+] does not open for storage failure 16ms (14ms|2ms)
+  [+] does not open for mixed batch failure 18ms (15ms|3ms)
+  [+] does not open for cancellation 15ms (13ms|2ms)
+  [+] opens the selected directory once for published exit 0 243ms (240ms|3ms)
+  [+] opens the selected directory once for published exit 7 14ms (12ms|2ms)
+  [+] contains an explicit folder-open failure as an advisory 40ms (38ms|1ms)
+  [+] refuses an existing directory whose identity differs before launching the shell 36ms (34ms|2ms)
+
+Describing AC-062/063: actual picker body with isolated STA dialog doubles
+  [+] configures and disposes the optional picker for OK without loading a GUI assembly 2.01s (2s|6ms)
+  [+] configures and disposes the optional picker for cancel without loading a GUI assembly 1.67s (1.67s|2ms)
+  [+] configures and disposes the optional picker for throw without loading a GUI assembly 1.73s (1.73s|1ms)
+
+Describing AC-061/062: actual isolated destination and no-GUI entry points
+  [+] keeps default Music or chosen output flat (True) without a picker or Explorer 6.94s (6.93s|10ms)
+  [+] keeps default Music or chosen output flat (False) without a picker or Explorer 5.23s (5.23s|1ms)
+  [+] uses explicit output successfully when default Music is unavailable 4.72s (4.72s|1ms)
+  [+] uses saved custom output even when default Music is unavailable without rewriting preferences 5.18s (5.18s|1ms)
+  [+] keeps normal helper-less installs flat with explicitly false new action switches 5.23s (5.23s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (empty) 2.75s (2.75s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (relative) 2.79s (2.78s|2ms)
+  [+] rejects unavailable default Music before native work and cwd output (UNC) 2.68s (2.68s|1ms)
+  [+] shows no-input usage without a desktop dependency, prompt or destination creation 1.82s (1.82s|1ms)
+  [+] creates one job group with separate media and detailed reports 4.94s (4.94s|1ms)
+  [-] keeps all four bounded preview assets in media and the preview report in reports 6.16s (6.15s|4ms)
+   Expected 0, because WinAudioClean 2.3
+   ============================
+   Input: <user-profile>\AppData\Local\Temp\58cdfdb5-1c16-4077-be26-76b38d74a936\ibbe1a058\source.wav
+   FFmpeg: <user-profile>\AppData\Local\Temp\58cdfdb5-1c16-4077-be26-76b38d74a936\ibbe1a058\ffmpeg.exe (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <user-profile>\AppData\Local\Temp\58cdfdb5-1c16-4077-be26-76b38d74a936\ibbe1a058\ffprobe.exe (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<user-profile>\\AppData\\Local\\Temp\\58cdfdb5-1c16-4077-be26-76b38d74a936\\ibbe1a058\\out [1] & %PATH% !\\WinAudioClean_Job_61d62872ed7d4409ab0cc558f4b3e525\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Preview: FAILED
+   Preview reports: {"JsonPath":"<user-profile>\\AppData\\Local\\Temp\\58cdfdb5-1c16-4077-be26-76b38d74a936\\ibbe1a058\\out [1] & %PATH% !\\WinAudioClean_Job_61d62872ed7d4409ab0cc558f4b3e525\\reports\\WinAudioClean_Preview_55e89dff790941e1a83f06b8cf474c22.json","TextPath":"<user-profile>\\AppData\\Local\\Temp\\58cdfdb5-1c16-4077-be26-76b38d74a936\\ibbe1a058\\out [1] & %PATH% !\\WinAudioClean_Job_61d62872ed7d4409ab0cc558f4b3e525\\reports\\WinAudioClean_Preview_55e89dff790941e1a83f06b8cf474c22.txt"}
+   Preview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.
+   Write-Error: Preview native processing failed (native exit 97; timeout False; transport error reported True; cleanup error reported True)., but got 4.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <repo>\tests\WinAudioClean.OutputInteraction.Tests.ps1:433
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.OutputInteraction.Tests.ps1:433
+  [+] shares one job group across explicit list children and opens it once at the parent 6.08s (6.08s|2ms)
+
+Describing AC-062/063: requested UI boundaries in actual isolated hosts
+  [+] rejects persisting processing action -JobFolder without input, native work or config changes 1.85s (1.85s|3ms)
+  [+] rejects persisting processing action -PickFile without input, native work or config changes 1.8s (1.8s|1ms)
+  [+] rejects persisting processing action -OpenOutputFolder without input, native work or config changes 1.84s (1.84s|1ms)
+  [+] rejects unattended -PickFile before picker, Explorer or native work 2.95s (2.95s|1ms)
+  [+] rejects unattended -OpenOutputFolder before picker, Explorer or native work 2.4s (2.39s|1ms)
+  [+] returns 130 on picker cancellation without creating output or starting native tools 2.43s (2.43s|1ms)
+  [+] rejects PickFile combined with an explicit input before picker or native work 3.09s (3.09s|1ms)
+  [+] uses a picked file through normal validation and native rendering 5.41s (5.41s|1ms)
+  [+] rejects an unavailable picker without native work or a false completed result 2.84s (2.84s|1ms)
+  [+] opens only a published successful group and preserves success when opening fails 5.19s (5.19s|1ms)
+  [+] opens only a published successful group and preserves success when opening fails 5.16s (5.16s|1ms)
+  [+] never offers or opens a completed destination after native failure 5.03s (5.03s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.OutputLayout.Tests.ps1'
+Describing Optional held output layout
+  [+] allows media publication and separate held report writing while denying directory replacement 433ms (417ms|16ms)
+  [+] does not reuse a prior job directory or alter its foreign contents 31ms (30ms|1ms)
+  [+] preserves a file occupying the generated job directory name 60ms (59ms|1ms)
+  [+] resolves a supported existing base junction and rejects a generated child junction collision 46ms (46ms|1ms)
+  [+] rejects paths changed in a borrowed layout while preserving the original held hierarchy 24ms (24ms|1ms)
+  [+] rejects a closed directory lease before further use 27ms (26ms|1ms)
+  [+] releases every directory after an allocation assertion fails and retains empty directories 45ms (44ms|1ms)
+  [+] continues releasing handles after a disposal failure and closes idempotently 25ms (24ms|1ms)
+  [+] does not create a missing base or fall back to the current directory 29ms (28ms|1ms)
+  [+] rejects an existing regular file used as the base without modifying it 16ms (15ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preview.Tests.ps1'
+Describing AC-043: preview ranges are finite bounded sample-aligned excerpts
+  [+] rejects negative start 48ms (46ms|2ms)
+  [+] rejects empty start 4ms (3ms|1ms)
+  [+] rejects blank start 12ms (11ms|1ms)
+  [+] rejects null start 7ms (5ms|3ms)
+  [+] rejects locale decimal start 4ms (3ms|1ms)
+  [+] rejects exponent start 6ms (5ms|1ms)
+  [+] rejects NaN start 4ms (3ms|1ms)
+  [+] rejects infinite start 4ms (3ms|1ms)
+  [+] rejects filter injection start 9ms (8ms|1ms)
+  [+] rejects argument injection start 4ms (3ms|1ms)
+  [+] rejects expression start 4ms (3ms|1ms)
+  [+] rejects start at end 19ms (18ms|1ms)
+  [+] rejects start beyond end 5ms (4ms|1ms)
+  [+] rejects negative duration 22ms (21ms|1ms)
+  [+] rejects zero duration 5ms (4ms|1ms)
+  [+] rejects duration over maximum 4ms (3ms|1ms)
+  [+] rejects duration shorter than half a sample 24ms (23ms|1ms)
+  [+] rejects empty duration 5ms (3ms|1ms)
+  [+] rejects blank duration 3ms (2ms|1ms)
+  [+] rejects null duration 7ms (6ms|1ms)
+  [+] rejects locale decimal duration 4ms (3ms|1ms)
+  [+] rejects exponent duration 4ms (3ms|1ms)
+  [+] rejects NaN duration 5ms (4ms|1ms)
+  [+] rejects infinite duration 3ms (2ms|1ms)
+  [+] rejects filter injection duration 3ms (2ms|1ms)
+  [+] rejects argument injection duration 9ms (8ms|1ms)
+  [+] rejects expression duration 3ms (2ms|1ms)
+  [+] rejects unavailable input duration zero 27ms (24ms|3ms)
+  [+] rejects unavailable input duration negative 3ms (2ms|1ms)
+  [+] rejects unavailable input duration NaN 2ms (2ms|1ms)
+  [+] rejects unavailable input duration positive infinity 2ms (2ms|1ms)
+  [+] rejects unavailable input duration negative infinity 4ms (3ms|1ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at start 56ms (53ms|3ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at middle 10ms (8ms|1ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at near end 16ms (15ms|1ms)
+  [+] clips only the implicit default for a 0.2-second short file 25ms (24ms|1ms)
+  [+] clips only the implicit default for a 3-second short file 5ms (5ms|1ms)
+  [+] clips only the implicit default for a 44-second short file 8ms (7ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 7ms (6ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 3ms (3ms|1ms)
+  [+] accepts an exact explicit end boundary and the 60-second maximum 8ms (7ms|1ms)
+  [+] records clipping only when an implicit requested duration was actually shortened 6ms (5ms|1ms)
+  [+] preserves long-file sample offsets beyond Int32 without overflow 17ms (17ms|1ms)
+  [+] quantizes start and duration to 48 kHz samples using nearest rounding 10ms (9ms|1ms)
+  [+] parses invariant fractional input in en-US 32ms (31ms|1ms)
+  [+] parses invariant fractional input in de-DE 4ms (4ms|1ms)
+  [+] parses invariant fractional input in fi-FI 11ms (6ms|5ms)
+
+Describing AC-044: comparison gain is separate, common and attenuation only
+  [+] matches normal pair at a common target with the true-peak safety margin 76ms (74ms|2ms)
+  [+] matches quiet source at a common target with the true-peak safety margin 8ms (7ms|1ms)
+  [+] matches source peak guard at a common target with the true-peak safety margin 13ms (12ms|1ms)
+  [+] matches fractional guard below one dB at a common target with the true-peak safety margin 11ms (10ms|1ms)
+  [+] matches processed peak guard at a common target with the true-peak safety margin 13ms (12ms|1ms)
+  [+] matches already matched at a common target with the true-peak safety margin 12ms (11ms|1ms)
+  [+] labels unavailable too_short without inventing integrated loudness 29ms (29ms|1ms)
+  [+] labels unavailable silence without inventing integrated loudness 10ms (9ms|1ms)
+  [+] labels unavailable undefined_loudness without inventing integrated loudness 5ms (4ms|1ms)
+  [+] leaves silent null peaks at zero gain and gives too_short priority 8ms (7ms|1ms)
+  [+] rejects invalid measured Available for string availability 29ms (28ms|1ms)
+  [+] rejects invalid measured InputI for numeric string 6ms (5ms|1ms)
+  [+] rejects invalid measured InputI for boolean 10ms (9ms|1ms)
+  [+] rejects invalid measured InputI for array 9ms (6ms|3ms)
+  [+] rejects invalid measured InputI for null 5ms (4ms|1ms)
+  [+] rejects invalid measured InputI for NaN 5ms (4ms|1ms)
+  [+] rejects invalid measured InputI for infinity 4ms (3ms|1ms)
+  [+] rejects invalid measured InputTP for numeric string 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for boolean 10ms (9ms|1ms)
+  [+] rejects invalid measured InputTP for array 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for null 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for NaN 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for infinity 3ms (3ms|1ms)
+  [+] rejects unknown unavailable reasons rather than copying an arbitrary label 9ms (8ms|1ms)
+
+Describing AC-043: preview timeline metadata binds seeking to the selected track
+  [+] uses the selected stream origin and retains a negative container origin only as metadata 155ms (153ms|2ms)
+  [+] uses sample zero only when WAV does not report a presentation origin 31ms (30ms|1ms)
+  [+] rejects unsupported selected timestamp negative 48ms (47ms|1ms)
+  [+] rejects unsupported selected timestamp NaN 11ms (10ms|1ms)
+  [+] rejects unsupported selected timestamp infinity 31ms (30ms|1ms)
+  [+] rejects unsupported selected timestamp N/A 15ms (14ms|1ms)
+  [+] rejects unsupported selected timestamp locale decimal 22ms (20ms|1ms)
+  [+] rejects unsupported selected timestamp filter-like string 18ms (17ms|1ms)
+  [+] rejects unsupported selected timestamp JSON number 15ms (13ms|1ms)
+  [+] rejects unsupported selected timestamp boolean 21ms (19ms|2ms)
+  [+] rejects unsupported selected timestamp array 18ms (15ms|3ms)
+  [+] rejects unsupported selected timestamp beyond supported bound 13ms (12ms|1ms)
+  [+] rejects unsupported selected timestamp null for non-WAV 19ms (18ms|1ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/48000 44ms (43ms|1ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/1000 22ms (21ms|1ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/101 15ms (14ms|1ms)
+  [+] rejects unsupported time_base for zero numerator 46ms (44ms|2ms)
+  [+] rejects unsupported time_base for zero denominator 21ms (19ms|1ms)
+  [+] rejects unsupported time_base for negative numerator 14ms (12ms|1ms)
+  [+] rejects unsupported time_base for negative denominator 20ms (19ms|1ms)
+  [+] rejects unsupported time_base for fractional numerator 14ms (13ms|1ms)
+  [+] rejects unsupported time_base for exponent denominator 12ms (11ms|1ms)
+  [+] rejects unsupported time_base for too coarse including one-sample allowance 14ms (13ms|1ms)
+  [+] rejects unsupported time_base for missing non-WAV rational 10ms (9ms|1ms)
+  [+] rejects unsupported time_base for NaN 10ms (9ms|1ms)
+  [+] rejects unsupported time_base for injection 21ms (20ms|1ms)
+  [+] rejects unsupported time_base for JSON number 15ms (14ms|1ms)
+  [+] rejects unsupported time_base for array 13ms (12ms|1ms)
+  [+] rejects unsupported sample_rate for zero 17ms (16ms|1ms)
+  [+] rejects unsupported sample_rate for negative 14ms (13ms|1ms)
+  [+] rejects unsupported sample_rate for fractional string 17ms (16ms|1ms)
+  [+] rejects unsupported sample_rate for NaN 10ms (9ms|1ms)
+  [+] rejects unsupported sample_rate for missing 38ms (10ms|28ms)
+  [+] rejects unsupported sample_rate for integer overflow 28ms (17ms|11ms)
+  [+] rejects unsupported sample_rate for JSON number 27ms (15ms|11ms)
+  [+] rejects unsupported sample_rate for array 13ms (11ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for malformed JSON 38ms (36ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for root array 11ms (10ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing streams 13ms (12ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing selected stream 14ms (13ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for duplicate stream index 9ms (8ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for string stream index 12ms (10ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing non-WAV origin 14ms (13ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for invalid container timestamp 10ms (9ms|1ms)
+
+Describing AC-043/045: preview commands bound one selected input and preserve mastering settings
+  [+] uses a bounded window and exact sample trim in en-US 82ms (80ms|2ms)
+  [+] uses a bounded window and exact sample trim in de-DE 24ms (23ms|1ms)
+  [+] uses a bounded window and exact sample trim in fi-FI 15ms (14ms|1ms)
+  [+] uses held pipe PCM and only comparison gain for a separately matched asset 14ms (13ms|1ms)
+  [+] adds the selected stream timestamp origin to the source-relative seek 11ms (10ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 8ms (7ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 3ms (2ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 3ms (2ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 4ms (3ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 1 channels and 16 bits 127ms (126ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 2 channels and 24 bits 8ms (7ms|1ms)
+
+Describing AC-043/045: CLI preview arguments fail before dependency and output side effects
+  [+] returns configuration exit 2 before native startup for start without preview 3.36s (3.33s|33ms)
+  [+] returns configuration exit 2 before native startup for duration without preview 2.89s (2.89s|1ms)
+  [+] returns configuration exit 2 before native startup for negative start 2.21s (2.21s|1ms)
+  [+] returns configuration exit 2 before native startup for empty start 2.09s (2.09s|1ms)
+  [+] returns configuration exit 2 before native startup for locale decimal start 2.4s (2.4s|1ms)
+  [+] returns configuration exit 2 before native startup for infinite start 2.42s (2.42s|1ms)
+  [+] returns configuration exit 2 before native startup for zero duration 2.39s (2.39s|1ms)
+  [+] returns configuration exit 2 before native startup for duration beyond maximum 2.67s (2.67s|1ms)
+  [+] returns configuration exit 2 before native startup for injected duration 2.38s (2.38s|1ms)
+  [+] returns configuration exit 2 before native startup for expression duration 2.39s (2.39s|1ms)
+
+Describing AC-043/044/045: preview orchestration retains ownership through faults and cancellation
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 4 391ms (390ms|1ms)
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 5 256ms (256ms|1ms)
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 130 99ms (98ms|1ms)
+  [+] retains all published assets and snapshots a request after the fourth publication 260ms (259ms|1ms)
+  [+] settles and releases Preview leases when output organization fails after publication 300ms (299ms|1ms)
+  [+] settles and releases Preview leases when output organization fails after cancellation 159ms (158ms|1ms)
+  [+] handles valid with exit 0, 4 completed or foreign preview assets and no full export 281ms (280ms|1ms)
+  [+] handles cancel with exit 130, 0 completed or foreign preview assets and no full export 57ms (56ms|1ms)
+  [+] handles range-invalid with exit 2, 0 completed or foreign preview assets and no full export 56ms (55ms|1ms)
+  [+] handles render-start with exit 3, 0 completed or foreign preview assets and no full export 72ms (72ms|1ms)
+  [+] handles render-exit with exit 4, 0 completed or foreign preview assets and no full export 88ms (88ms|1ms)
+  [+] handles measurement-malformed with exit 4, 0 completed or foreign preview assets and no full export 103ms (102ms|1ms)
+  [+] handles measurement-exit with exit 4, 0 completed or foreign preview assets and no full export 96ms (96ms|1ms)
+  [+] handles one-sample-short with exit 5, 0 completed or foreign preview assets and no full export 86ms (85ms|1ms)
+  [+] handles comparison-peak with exit 5, 0 completed or foreign preview assets and no full export 167ms (166ms|1ms)
+  [+] handles publication-race with exit 5, 1 completed or foreign preview assets and no full export 186ms (185ms|1ms)
+  [+] handles report-failure with exit 7, 4 completed or foreign preview assets and no full export 207ms (207ms|1ms)
+  [+] handles silence with exit 7, 4 completed or foreign preview assets and no full export 229ms (227ms|2ms)
+  [+] handles short-preview with exit 7, 4 completed or foreign preview assets and no full export 244ms (243ms|1ms)
+Tests completed in 137.29s
+Tests Passed: 213, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 0
+Exception: <repo>\scripts\Invoke-Tests.ps1:128
+Line |
+ 128 |      throw "Pester failed: $($result.FailedCount) test(s), $($result.F …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Pester failed: 1 test(s), 0 container(s), 0 block(s).

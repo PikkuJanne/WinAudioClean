@@ -937,8 +937,15 @@
       "title": "Destination choices",
       "procedure": "Run Music/default, custom, per-job and unavailable redirected Music-folder scenarios.",
       "expected": "Predictable paths with safe fallback/error; no writes to unexpected current directories.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-05.md",
+        "evidence/WAC-M3-05-source.json",
+        "evidence/WAC-M3-05-gates.json",
+        "evidence/WAC-M3-05-focused.json",
+        "evidence/WAC-M3-05-media.json",
+        "evidence/WAC-M3-05-preservation.json"
+      ]
     },
     {
       "id": "AC-062",
@@ -946,8 +953,15 @@
       "title": "No-GUI operation",
       "procedure": "Run from a terminal/redirected session without desktop interaction.",
       "expected": "Processing and diagnostics work with no file-picker or Explorer dependency.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-05.md",
+        "evidence/WAC-M3-05-source.json",
+        "evidence/WAC-M3-05-gates.json",
+        "evidence/WAC-M3-05-focused.json",
+        "evidence/WAC-M3-05-media.json",
+        "evidence/WAC-M3-05-preservation.json"
+      ]
     },
     {
       "id": "AC-063",
@@ -955,8 +969,15 @@
       "title": "Explicit follow-up actions",
       "procedure": "Complete success/failure runs and exercise optional open-folder/cancel-picker actions.",
       "expected": "Only requested safe actions occur; failures do not falsely offer a completed output.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-05.md",
+        "evidence/WAC-M3-05-source.json",
+        "evidence/WAC-M3-05-gates.json",
+        "evidence/WAC-M3-05-focused.json",
+        "evidence/WAC-M3-05-media.json",
+        "evidence/WAC-M3-05-preservation.json"
+      ]
     },
     {
       "id": "AC-064",

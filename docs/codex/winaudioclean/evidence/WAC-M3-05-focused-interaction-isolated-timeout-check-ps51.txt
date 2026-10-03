@@ -1,0 +1,21 @@
+Sanitized selected focused log. Only the exact previously timed-out PS5.1 helper-less/false-actions row ran and passed;47 cases were outside the name filter (48 discovered). Test/runtime bytes and the30s deadline were unchanged. This is distinct validation, not a relabeling of the earlier47/1 whole-scope run.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 48 tests in 634ms.
+Filter 'FullName' set to ('*keeps normal helper-less installs flat with explicitly false new action switches*').
+Filters selected 1 tests to run.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1'
+Describing AC-061/062: actual isolated destination and no-GUI entry points
+  [+] keeps normal helper-less installs flat with explicitly false new action switches
+ 6.79s (6.62s|173ms)
+Tests completed in 9.62s
+Tests Passed: 1,
+Failed: 0,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 47

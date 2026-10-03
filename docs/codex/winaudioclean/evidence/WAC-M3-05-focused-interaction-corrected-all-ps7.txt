@@ -1,0 +1,136 @@
+Sanitized selected focused log. Stable49-case scope:48 passed and the unsupported synthetic Preview case failed in each host. The unchanged NativeProcessFixture requires a WAV output and does not model Preview null-sink/held-stdin measurements. This is a fixture limitation, not a runtime pass or failure proof. The redundant case was subsequently removed only after active cumulative gates stopped; dedicated Preview ownership and separate real-media four-asset checks provide its coverage.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 49 tests in 257ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1'
+Describing AC-061: default Music is explicit and never falls back to the current directory
+  [+] reads the existing Music registration without writing to it
+ 102ms (70ms|32ms)
+  [+] rejects unavailable or unsupported default Music empty
+ 41ms (39ms|2ms)
+  [+] rejects unavailable or unsupported default Music relative
+ 5ms (4ms|1ms)
+  [+] rejects unavailable or unsupported default Music UNC
+ 9ms (8ms|1ms)
+  [+] rejects unavailable or unsupported default Music provider
+ 3ms (2ms|1ms)
+  [+] preserves explicit relative output resolution instead of applying the default Music guard
+ 33ms (32ms|1ms)
+  [+] keeps action switches outside the saved preference schema
+ 118ms (117ms|1ms)
+  [+] skips an exact prior job directory without traversing renamed media while traversing a near miss
+ 847ms (846ms|1ms)
+
+Describing AC-063: follow-up action requires explicit interactive published success
+  [+] does not open for not requested
+ 201ms (191ms|10ms)
+  [+] does not open for not interactive
+ 20ms (16ms|5ms)
+  [+] does not open for not published
+ 22ms (21ms|1ms)
+  [+] does not open for unpublished warning
+ 9ms (7ms|1ms)
+  [+] does not open for preflight failure
+ 11ms (11ms|1ms)
+  [+] does not open for dependency failure
+ 14ms (13ms|2ms)
+  [+] does not open for processing failure
+ 14ms (12ms|2ms)
+  [+] does not open for storage failure
+ 17ms (15ms|2ms)
+  [+] does not open for mixed batch failure
+ 22ms (21ms|2ms)
+  [+] does not open for cancellation
+ 40ms (39ms|1ms)
+  [+] opens the selected directory once for published exit 0
+ 155ms (153ms|2ms)
+  [+] opens the selected directory once for published exit 7
+ 10ms (9ms|1ms)
+  [+] contains an explicit folder-open failure as an advisory
+ 25ms (24ms|1ms)
+  [+] refuses an existing directory whose identity differs before launching the shell
+ 25ms (24ms|1ms)
+
+Describing AC-062/063: actual picker body with isolated STA dialog doubles
+  [+] configures and disposes the optional picker for OK without loading a GUI assembly
+ 1.36s (1.36s|3ms)
+  [+] configures and disposes the optional picker for cancel without loading a GUI assembly
+ 1.12s (1.12s|6ms)
+  [+] configures and disposes the optional picker for throw without loading a GUI assembly
+ 1.06s (1.06s|1ms)
+
+Describing AC-061/062: actual isolated destination and no-GUI entry points
+  [+] keeps default Music or chosen output flat (True) without a picker or Explorer
+ 3.56s (3.56s|1ms)
+  [+] keeps default Music or chosen output flat (False) without a picker or Explorer
+ 3.55s (3.55s|1ms)
+  [+] uses explicit output successfully when default Music is unavailable
+ 3.57s (3.57s|1ms)
+  [+] uses saved custom output even when default Music is unavailable without rewriting preferences
+ 6.02s (6.02s|1ms)
+  [+] keeps normal helper-less installs flat with explicitly false new action switches
+ 6.08s (6.08s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (empty)
+ 3.37s (3.37s|2ms)
+  [+] rejects unavailable default Music before native work and cwd output (relative)
+ 2.83s (2.83s|6ms)
+  [+] rejects unavailable default Music before native work and cwd output (UNC)
+ 3.22s (3.21s|1ms)
+  [+] shows no-input usage without a desktop dependency, prompt or destination creation
+ 1.96s (1.95s|7ms)
+  [+] creates one job group with separate media and detailed reports
+ 6.67s (6.67s|1ms)
+  [-] keeps all four bounded preview assets in media and the preview report in reports
+ 6.54s (6.54s|2ms)
+   Expected 0, because WinAudioClean 2.3
+   ============================
+   Input: <TEST_TEMP>
+   FFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<TEST_TEMP> [1] & %PATH% !\\WinAudioClean_Job_3f0463dc533b4cc29ec9445278362983\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Preview: FAILED
+   Preview reports: {"JsonPath":"<TEST_TEMP> [1] & %PATH% !\\WinAudioClean_Job_3f0463dc533b4cc29ec9445278362983\\reports\\WinAudioClean_Preview_29ea399512db41d18357574cb8ffd27b.json","TextPath":"<TEST_TEMP> [1] & %PATH% !\\WinAudioClean_Job_3f0463dc533b4cc29ec9445278362983\\reports\\WinAudioClean_Preview_29ea399512db41d18357574cb8ffd27b.txt"}
+   Preview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.
+   Write-Error: Preview native processing failed (native exit 97; timeout False; transport error reported True; cleanup error reported True)., but got 4.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:433
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:433
+  [+] shares one job group across explicit list children and opens it once at the parent
+ 7.62s (7.62s|2ms)
+
+Describing AC-062/063: requested UI boundaries in actual isolated hosts
+  [+] rejects persisting processing action -JobFolder without input, native work or config changes
+ 1.91s (1.91s|3ms)
+  [+] rejects persisting processing action -PickFile without input, native work or config changes
+ 1.8s (1.8s|1ms)
+  [+] rejects persisting processing action -OpenOutputFolder without input, native work or config changes
+ 2.04s (2.04s|1ms)
+  [+] rejects unattended -PickFile before picker, Explorer or native work
+ 3.14s (3.13s|1ms)
+  [+] rejects unattended -OpenOutputFolder before picker, Explorer or native work
+ 2.86s (2.86s|1ms)
+  [+] returns 130 on picker cancellation without creating output or starting native tools
+ 2.84s (2.83s|1ms)
+  [+] rejects PickFile combined with an explicit input before picker or native work
+ 3.77s (3.77s|1ms)
+  [+] uses a picked file through normal validation and native rendering
+ 4.34s (4.34s|1ms)
+  [+] rejects an unavailable picker without native work or a false completed result
+ 2.44s (2.44s|1ms)
+  [+] opens only a published successful group and preserves success when opening fails
+ 4.26s (4.26s|1ms)
+  [+] opens only a published successful group and preserves success when opening fails
+ 4.39s (4.39s|1ms)
+  [+] never offers or opens a completed destination after native failure
+ 4.01s (4.01s|1ms)
+Tests completed in 100.15s
+Tests Passed: 48,
+Failed: 1,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 0

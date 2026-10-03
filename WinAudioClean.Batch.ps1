@@ -148,7 +148,7 @@ function Invoke-WacBatch {
     param([Parameter(Mandatory = $true)][AllowEmptyCollection()][string[]]$Inputs,
         [Parameter(Mandatory = $true)][System.Collections.IDictionary]$Parameters,
         [Parameter(Mandatory = $true)]$ResolvedSettings,
-        [Parameter(Mandatory = $true)][string]$ApplicationPath, $FolderQueue, $RunContext)
+        [Parameter(Mandatory = $true)][string]$ApplicationPath, $FolderQueue, $RunContext, $OutputLayout)
     $isFolder = $null -ne $FolderQueue
     if ($isFolder -and $FolderQueue.Entries.Count -ne $Inputs.Count) { throw 'Folder queue and input count differ.' }
     $hasPending = -not $isFolder -or @($FolderQueue.Entries | Where-Object { $_.Status -eq 'PENDING' }).Count -gt 0
@@ -158,12 +158,17 @@ function Invoke-WacBatch {
     }
     $interactive = Test-WacInteractive -NonInteractive:([bool]$Parameters.NonInteractive)
     if ($hasPending -and -not $options.Mode -and -not $interactive) { throw 'A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom, or save a mode.' }
-    $outputFolder = Get-WacOutputDirectory -Path $options.OutputDirectory
+    $outputFolder = Get-WacOutputDirectory -Path $options.OutputDirectory -DefaultMusic:($ResolvedSettings.Origins.OutputDirectory -eq 'BuiltIn')
+    $reportFolder = $outputFolder
+    if ($null -ne $OutputLayout) {
+        Assert-WacOutputLayout -Layout $OutputLayout
+        $outputFolder = $OutputLayout.MediaDirectory; $reportFolder = $OutputLayout.ReportDirectory
+    }
     $options.OutputDirectory = $outputFolder
     $id = [guid]::NewGuid().ToString('N')
     $path = if ($Parameters.Keys -contains 'BatchResultPath') { Resolve-WacFileSystemPath -Path $Parameters.BatchResultPath }
-        else { [IO.Path]::Combine($outputFolder, ('WinAudioClean_Batch_' + $id + '.jsonl')) }
-    $directory = $null; $writer = $null
+        else { [IO.Path]::Combine($reportFolder, ('WinAudioClean_Batch_' + $id + '.jsonl')) }
+    $directory = $null; $writer = $null; $outputDirectoryHandle = $null; $outputDirectoryIdentity = $null
     $items = New-Object 'System.Collections.Generic.List[object]'
     $exitCode = 0; $cancelled = $false; $reportingComplete = $false
     $origins = @{}
@@ -177,6 +182,13 @@ function Invoke-WacBatch {
     if (-not $cancelled) { Assert-WacSettingsCombination -Values $options }
     try {
         try {
+            if ($null -eq $OutputLayout) {
+                Initialize-WacNativeFileIO
+                $outputDirectoryHandle = [WinAudioClean.NativeFileIO]::OpenDirectory($outputFolder)
+                $outputDirectoryIdentity = [WinAudioClean.NativeFileIO]::Identity($outputDirectoryHandle)
+                $outputFolder = [WinAudioClean.NativeFileIO]::ResolvedPath($outputDirectoryHandle)
+                $options.OutputDirectory = $outputFolder
+            } else { $outputDirectoryIdentity = $OutputLayout.Identities.Root }
             foreach ($input in $Inputs) {
                 $candidate = $null
                 try { $candidate = Resolve-WacFileSystemPath -Path $input }
@@ -200,8 +212,10 @@ function Invoke-WacBatch {
             $header.selection = [ordered]@{ kind = 'folders'; directories = @($FolderQueue.Directories); recurse = [bool]$FolderQueue.Recurse
                 extensions = @($FolderQueue.Extensions); capturedAt = $FolderQueue.CapturedAt }
         }
+        if ($null -ne $OutputLayout) { $header.outputOrganization = Get-WacOutputOrganization -Layout $OutputLayout }
         Add-WacBatchRecord -Writer $writer -Record $header
         $options.IgnoreSavedSettings = $true
+        if ($null -ne $OutputLayout) { $options.WacOutputLayout = $OutputLayout }
         if ($Parameters.Keys -contains 'NonInteractive') { $options.NonInteractive = [bool]$Parameters.NonInteractive }
         foreach ($name in @('FfmpegPath', 'FfprobePath')) { if ($Parameters.Keys -contains $name) { $options[$name] = $Parameters[$name] } }
         for ($index = 0; $index -lt $Inputs.Count; $index++) {
@@ -276,6 +290,13 @@ function Invoke-WacBatch {
             try { $directory.Dispose() }
             catch { Write-Warning ('Batch directory handle could not be closed: ' + $_.Exception.Message) }
         }
+        if ($null -ne $outputDirectoryHandle) {
+            try { $outputDirectoryHandle.Dispose() }
+            catch { Write-Warning ('Batch output directory handle could not be closed: ' + $_.Exception.Message) }
+        }
     }
-    [pscustomobject]@{ ExitCode = $exitCode; ResultPath = $path; ReportingComplete = $reportingComplete }
+    [pscustomobject]@{ ExitCode = $exitCode; ResultPath = $path; ReportingComplete = $reportingComplete
+        HasPublishedOutput = @($items | Where-Object { $_.status -in @('SUCCESS', 'WARNING') }).Count -gt 0
+        OutputDirectory = $(if ($null -ne $OutputLayout) { $OutputLayout.RootDirectory } else { $outputFolder })
+        OutputDirectoryIdentity = $outputDirectoryIdentity }
 }

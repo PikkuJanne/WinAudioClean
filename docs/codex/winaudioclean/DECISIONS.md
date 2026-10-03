@@ -601,3 +601,30 @@ listening claim is added. Original/Gentle/Fast defaults, settings, launcher and
 queue policies remain. Feature delivery is authorized; no merge/release/default
 promotion, security/settings change or deployment is approved. Evidence:
 `evidence/WAC-M3-04.md`. Next: WAC-M3-05 only.
+
+### 2026-10-03 — WAC-M3-05 organized output and explicit local actions
+
+D36. Preserve Music/default, explicit chosen destinations and the legacy flat
+layout. Add unsaved JobFolder for one invocation, including a queue, with atomic
+new generated children and held canonical base/ordinary ancestor/media/report
+identities. Share write only on media where existing publication requires it;
+deny DELETE on all pins. Borrow one parent-owned layout through sequential
+children; release after all reports. Keep no-overwrite/owned cleanup and never
+reuse/sweep/delete job directories. Flat report paths stay canonical; explicit
+journal overrides remain and exact known job folders are excluded from discovery.
+
+No-input use prints console guidance. Picker and destination opening are explicit
+optional interactive actions, with lazy STA Forms, cancellation before output,
+no unattended UI and no automatic playback/file opening. Verify completed
+directory identity under a held reopened handle before the shell action. Action
+failure preserves audio outcome; organization/report faults preserve published
+assets or primary cancellation/failure and unconditional cleanup. Do not persist
+actions as preferences or add a required desktop framework.
+
+Final focused/Targeted/Full/media support AC-061..063 within recorded engineering
+scopes. Preserve policy/sharing/reopen, legacy preflight, long-path/nested-array
+fixture, media-summary and source-unstable preliminary captures. No actual user
+Music/settings writes, manual dialog/Explorer/listening/default promotion or
+long stress/crash durability is claimed. Prior M3-04 native-console proof was not
+rerun. Evidence: `evidence/WAC-M3-05.md`. Next WAC-M3-06 only, after fresh live
+synchronization; no merge/release/security/settings/deployment approval is added.

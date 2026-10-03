@@ -868,7 +868,7 @@
       "depends_on": [
         "WAC-M3-04"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Music default, optional per-job destination and explicit open-folder action.",
       "implementation": [
@@ -882,7 +882,14 @@
         "AC-062",
         "AC-063"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M3-05.md",
+        "evidence/WAC-M3-05-source.json",
+        "evidence/WAC-M3-05-gates.json",
+        "evidence/WAC-M3-05-focused.json",
+        "evidence/WAC-M3-05-media.json",
+        "evidence/WAC-M3-05-preservation.json"
+      ],
       "blocked_reason": null
     },
     {

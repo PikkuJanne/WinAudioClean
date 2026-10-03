@@ -358,19 +358,27 @@ function Invoke-WacPreview {
         [ValidateSet('16', '24')][string]$BitDepth = '16', [switch]$Mono, [switch]$Rf64,
         [string]$Start = '0', [string]$Duration = '45', [bool]$DurationExplicit = $false,
         [string]$AudioStreamIndex, [bool]$Interactive = $false,
-        [string]$ToolVersion = '2.3', [string]$FfmpegVersion, [string]$FfprobeVersion)
+        [string]$ToolVersion = '2.3', [string]$FfmpegVersion, [string]$FfprobeVersion,
+        [string]$ReportFolder, $OutputLayout)
     $script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]'
-    $transactions = [ordered]@{}; $assets = [ordered]@{}; $stages = [ordered]@{}
+    $transactions = [ordered]@{}; $assets = [ordered]@{}; $stages = [ordered]@{}; $primary = $null
     $warnings = New-Object 'System.Collections.Generic.List[string]'
     $cleanupErrors = New-Object 'System.Collections.Generic.List[string]'
     $exitCode = 5; $status = 'FAILED'; $errorText = $null; $report = $null; $reportPaths = $null
     $success = $false; $startedAt = [DateTime]::UtcNow
     $watch = [Diagnostics.Stopwatch]::StartNew()
     try {
+        if ($null -ne $OutputLayout) {
+            Assert-WacOutputLayout -Layout $OutputLayout
+            if ($OutputFolder -ine $OutputLayout.MediaDirectory -or $ReportFolder -ine $OutputLayout.ReportDirectory) {
+                throw 'Preview directories must match the held output layout.'
+            }
+        } elseif ($PSBoundParameters.ContainsKey('ReportFolder')) { throw 'Separate preview reports require a held output layout.' }
         # Allocation pins the input before probing and retains those locks until
         # reports finish. The other three assets hold the same source identity.
         $transactions.Original = New-WacOutputTransaction -InputPath $InputPath -OutputFolder $OutputFolder
         $primary = $transactions.Original; $InputPath = $primary.InputPath; $OutputFolder = $primary.OutputFolder
+        if ($null -eq $OutputLayout) { $ReportFolder = $OutputFolder }
         $previewId = $primary.JobId
         $exitCode = 4
         $streams = @(Get-WacAudioStreams -FfprobePath $FfprobePath -InputPath $InputPath)
@@ -554,7 +562,10 @@ function Invoke-WacPreview {
             $report.progress = [ordered]@{ stages = @(Get-WacProgressReport); completed = $true
                 cancellationRequested = ($null -ne $script:WacRunContext -and $script:WacRunContext.IsCancellationRequested)
                 cancellationStage = $(if ($null -ne $script:WacRunContext) { $script:WacRunContext.CancellationStage } else { $null }) }
-            try { $reportPaths = Write-WacPreviewReports -Report $report -OutputFolder $OutputFolder }
+            try {
+                if ($null -ne $OutputLayout) { $report.outputOrganization = Get-WacOutputOrganization -Layout $OutputLayout }
+                $reportPaths = Write-WacPreviewReports -Report $report -OutputFolder $ReportFolder
+            }
             catch {
                 $errorText = $_.Exception.Message
                 $warnings.Add('preview_reporting_failed'); $status = 'WARNING'; $exitCode = 7
@@ -588,7 +599,10 @@ function Invoke-WacPreview {
                     cancellationStage = $(if ($null -ne $script:WacRunContext) { $script:WacRunContext.CancellationStage } else { $null }) }
                 diagnostics = [ordered]@{ error = $errorText; cleanupErrors = @($cleanupErrors.ToArray()) }
                 reporting = [ordered]@{ complete = $true; paths = $null; errors = @() } }
-            try { $reportPaths = Write-WacPreviewReports -Report $report -OutputFolder $OutputFolder }
+            try {
+                if ($null -ne $OutputLayout) { $report.outputOrganization = Get-WacOutputOrganization -Layout $OutputLayout }
+                $reportPaths = Write-WacPreviewReports -Report $report -OutputFolder $ReportFolder
+            }
             catch { $report.reporting.complete = $false; $report.reporting.errors = @($_.Exception.Message) }
         }
         foreach ($transaction in $transactions.Values) {
@@ -596,5 +610,7 @@ function Invoke-WacPreview {
         }
     }
     [pscustomobject]@{ ExitCode = $exitCode; Status = $status; Report = $report; ReportPaths = $reportPaths
-        Error = $errorText; CleanupErrors = @($cleanupErrors.ToArray()) }
+        Error = $errorText; CleanupErrors = @($cleanupErrors.ToArray())
+        OutputDirectory = $(if ($null -ne $primary) { $primary.OutputFolder } else { $OutputFolder })
+        OutputDirectoryIdentity = $(if ($null -ne $primary) { $primary.OutputDirectoryIdentity } else { $null }) }
 }

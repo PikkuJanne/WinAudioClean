@@ -466,6 +466,34 @@ mode or invoking native tools. Preferences are fully validated first. Journal
 failure5 stops future jobs and preserves earlier audio/records with incomplete
 reporting disclosed. Progress/active Ctrl+C handling belongs to WAC-M3-04.
 
+## Optional output organization — WAC-M3-05
+
+The legacy flat layout remains the default. `JobFolder` is an explicit
+per-invocation switch and is never a saved preference. One generated
+`WinAudioClean_Job_<32 lowercase hex>` directory groups a single file, one
+Preview or an entire queue under Music or the chosen output base. `media`
+contains audio/owned partials; `reports` contains per-run JSON/text reports,
+the ordinary summary and default queue journal. An explicit `BatchResultPath`
+still selects its own existing parent. Failures can leave empty job directories;
+there is no directory reuse, recovery sweep or deletion by filename.
+
+Report schemas stay at their existing versions. Only organized invocations
+add a layout object: ordinary `output.organization`, Preview
+`outputOrganization` and queue header `outputOrganization`. Its fields are
+`jobId`, `rootDirectory`, `mediaDirectory`, `reportDirectory`; the grouping ID
+is distinct from each audio/run ID and a queue's batch ID. Detailed paths remain
+private local diagnostic data. Redacted diagnostic exports omit the layout.
+Flat reports have no added layout field.
+
+`PickFile` and `OpenOutputFolder` are unsaved explicit interactive actions.
+No-input use prints console usage and returns `2` without reading settings,
+opening a picker or creating output. Picker cancellation returns `130` before
+destination/native work. Unattended/input-redirected picker/open requests return `2`
+before processing. Only a published success/warning (`0`/`7`) is eligible for
+the requested directory action; empty, failed, mixed-failed or cancelled queues
+do not open it. An open failure warns without changing the persisted audio
+outcome or exit. No playback or output file opens automatically.
+
 ## Implemented progress and cancellation records — WAC-M3-04
 
 Ordinary and preview run schema `1` gain additive `progress`; older reports

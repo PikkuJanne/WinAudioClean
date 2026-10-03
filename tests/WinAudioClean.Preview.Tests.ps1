@@ -506,6 +506,7 @@ exit $LASTEXITCODE
 
 Describe 'AC-043/044/045: preview orchestration retains ownership through faults and cancellation' -Tag 'Preview', 'Runtime', 'OutputSafety' {
     BeforeAll {
+        . (Join-Path $previewRepository 'WinAudioClean.Output.ps1')
         $realPreviewPublish = ${function:Publish-WacOutputTransaction}
         $realPreviewWriteReports = ${function:Write-WacPreviewReports}
         $realPreviewComplete = ${function:Complete-WacOutputTransaction}
@@ -679,6 +680,76 @@ Describe 'AC-043/044/045: preview orchestration retains ownership through faults
             @($json.assets.PSObject.Properties).Count | Should -Be 4
             $result.CleanupErrors.Count | Should -Be 0
         } finally { $context.Dispose(); $script:WacRunContext = $priorContext }
+    }
+
+    It 'settles and releases Preview leases when output organization fails after <Outcome>' -ForEach @(
+        @{ Outcome = 'publication'; ExpectedExit = 7; ExpectedStatus = 'WARNING'; ExpectedAssets = 4; Cancel = $false }
+        @{ Outcome = 'cancellation'; ExpectedExit = 130; ExpectedStatus = 'CANCELLED'; ExpectedAssets = 0; Cancel = $true }
+    ) {
+        $priorContext = $script:WacRunContext
+        $context = New-WacRunContext
+        $script:WacRunContext = $context
+        $layout = $null
+        $script:previewOrganizationTransactions = New-Object 'System.Collections.Generic.List[object]'
+        $script:previewOrganizationPinsHeld = $false
+        $script:previewOrganizationCleanupSettled = $false
+        Mock Complete-WacOutputTransaction {
+            param($Transaction)
+            if (-not $Transaction.OutputCompleted) { $script:previewOrganizationTransactions.Add($Transaction) }
+            & $realPreviewComplete -Transaction $Transaction
+        }
+        Mock Get-WacOutputOrganization {
+            param($Layout)
+            $script:previewOrganizationPinsHeld = $script:previewOrganizationTransactions.Count -eq 4 -and
+                @($script:previewOrganizationTransactions | Where-Object {
+                    $null -eq $_.InputLock -or -not $_.InputLock.CanRead -or
+                    $null -eq $_.OutputDirectoryHandle -or $_.OutputDirectoryHandle.IsClosed
+                }).Count -eq 0
+            $script:previewOrganizationCleanupSettled = $script:previewOrganizationTransactions.Count -eq 4 -and
+                @($script:previewOrganizationTransactions | Where-Object { -not $_.OutputCompleted }).Count -eq 0
+            throw 'Injected output organization failure.'
+        }
+        if ($Cancel) {
+            Mock Invoke-WacNativeProcess {
+                Request-WacCancellation -RunContext $script:WacRunContext
+                [pscustomobject]@{ Started = $true; ExitCode = 19; StandardOutput = ''; StandardError = ''
+                    Error = $null; TimedOut = $false; CleanupError = $null; Cancelled = $true }
+            }
+        }
+        try {
+            $layout = New-WacOutputLayout -BaseDirectory $previewCaseOutput
+            $result = Invoke-WacPreview -InputPath $previewCaseInput -OutputFolder $layout.MediaDirectory -ReportFolder $layout.ReportDirectory -OutputLayout $layout -FfmpegPath 'unused.exe' -FfprobePath 'unused.exe' -ProcessingProfile (Get-WacProcessingProfile -Choice 2)
+            $result.ExitCode | Should -Be $ExpectedExit
+            $result.Status | Should -BeExactly $ExpectedStatus
+            $result.Report.reporting.complete | Should -BeFalse
+            $result.Report.reporting.errors | Should -Contain 'Injected output organization failure.'
+            $result.ReportPaths | Should -BeNullOrEmpty
+            $result.Report.assets.Count | Should -Be $ExpectedAssets
+            $result.Report.progress.completed | Should -Be (-not $Cancel)
+            $result.CleanupErrors.Count | Should -Be 0
+            $script:previewOrganizationPinsHeld | Should -BeTrue
+            $script:previewOrganizationCleanupSettled | Should -BeTrue
+            $script:previewOrganizationTransactions.Count | Should -Be 4
+            foreach ($transaction in $script:previewOrganizationTransactions) {
+                $transaction.Closed | Should -BeTrue
+                $transaction.InputLock | Should -BeNullOrEmpty
+                $transaction.OutputDirectoryHandle | Should -BeNullOrEmpty
+            }
+            @(Get-ChildItem -LiteralPath $layout.MediaDirectory -Filter '*_Preview_*.wav').Count | Should -Be $ExpectedAssets
+            @(Get-ChildItem -LiteralPath $layout.MediaDirectory -Filter '*.partial' -Force).Count | Should -Be 0
+            @(Get-ChildItem -LiteralPath $layout.ReportDirectory -File).Count | Should -Be 0
+            [Convert]::ToBase64String([IO.File]::ReadAllBytes($previewPrior)) | Should -BeExactly 'CwwN'
+            [Convert]::ToBase64String([IO.File]::ReadAllBytes($previewForeignPartial)) | Should -BeExactly 'BwgJ'
+            $released = [IO.File]::Open($previewCaseInput, 'Open', 'ReadWrite', 'None')
+            $released.Dispose()
+            $layout.Closed | Should -BeFalse
+            Assert-WacOutputLayout -Layout $layout
+            Should -Invoke Get-WacOutputOrganization -Times 1 -Exactly
+            Should -Invoke Write-WacPreviewReports -Times 0 -Exactly
+        } finally {
+            if ($layout) { Close-WacOutputLayout -Layout $layout }
+            $context.Dispose(); $script:WacRunContext = $priorContext
+        }
     }
 
     It 'handles <Fault> with exit <Exit>, <AssetCount> completed or foreign preview assets and no full export' -ForEach @(

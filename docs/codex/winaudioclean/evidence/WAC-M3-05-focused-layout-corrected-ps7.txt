@@ -1,0 +1,25 @@
+Sanitized selected focused log. 10-case helper scope:9 passed/1 failed per host. Corrected media sharing permitted actual publication; test readback then used an incompatible share while the validation/report handle remained held. Test-only readback now follows transaction completion and writer close.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 10 tests in 181ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputLayout.Tests.ps1'
+Describing Optional held output layout
+  [-] allows media publication and separate held report writing while denying directory replacement 628ms (592ms|36ms)
+   IOException: The process cannot access the file '<TEST_TEMP> base\WinAudioClean_Job_b7dbe0a803cc4b449f5c4d51524c8bbc\media\source_Cleaned_20261003-122713180_e47472a5cd144624b515a9f64c3b9aaa.wav' because it is being used by another process.
+   MethodInvocationException: Exception calling "ReadAllBytes" with "1" argument(s): "The process cannot access the file '<TEST_TEMP> base\WinAudioClean_Job_b7dbe0a803cc4b449f5c4d51524c8bbc\media\source_Cleaned_20261003-122713180_e47472a5cd144624b515a9f64c3b9aaa.wav' because it is being used by another process."
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputLayout.Tests.ps1:28
+  [+] does not reuse a prior job directory or alter its foreign contents 78ms (76ms|2ms)
+  [+] preserves a file occupying the generated job directory name 17ms (15ms|1ms)
+  [+] resolves a supported existing base junction and rejects a generated child junction collision 38ms (36ms|2ms)
+  [+] rejects paths changed in a borrowed layout while preserving the original held hierarchy 24ms (22ms|1ms)
+  [+] rejects a closed directory lease before further use 19ms (18ms|1ms)
+  [+] releases every directory after an allocation assertion fails and retains empty directories 195ms (194ms|1ms)
+  [+] continues releasing handles after a disposal failure and closes idempotently 24ms (22ms|3ms)
+  [+] does not create a missing base or fall back to the current directory 23ms (22ms|1ms)
+  [+] rejects an existing regular file used as the base without modifying it 22ms (20ms|1ms)
+Tests completed in 1.95s
+Tests Passed: 9, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 0

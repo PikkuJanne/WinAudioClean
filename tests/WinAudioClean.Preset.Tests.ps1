@@ -30,7 +30,7 @@ function Read-Host {
     $env:WAC_PRESET_TEST_CHOICE
 }
 '@
-            $marker = '# --- CONFIGURATION ---'
+            $marker = '# Explicit local support export bypasses media/dependency initialization.'
             if (-not $source.Contains($marker)) { throw 'Cannot locate the test-only host boundary.' }
             $source = $source.Replace($marker, ($injection + "`n" + $marker))
         }

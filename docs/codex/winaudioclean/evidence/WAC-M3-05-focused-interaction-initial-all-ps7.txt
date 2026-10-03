@@ -1,0 +1,235 @@
+Sanitized selected focused log. Preliminary48-case application scope while runtime integration changed during capture. PS5.1 had46 pass/2 fail; PS7 had43 pass/5 fail. Private fixture paths were shortened after actual Win32 206 publication failures in PS7; the PS5.1 picked-file argv assertion was corrected to avoid nested JSON arrays. The Preview native97 was the generic fixture null-sink/stdin limitation, not a path failure. No coherent-source acceptance is claimed.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 48 tests in 465ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1'
+Describing AC-061: default Music is explicit and never falls back to the current directory
+  [+] reads the existing Music registration without writing to it
+ 335ms (188ms|147ms)
+  [+] rejects unavailable or unsupported default Music empty
+ 152ms (113ms|39ms)
+  [+] rejects unavailable or unsupported default Music relative
+ 14ms (10ms|4ms)
+  [+] rejects unavailable or unsupported default Music UNC
+ 11ms (8ms|3ms)
+  [+] rejects unavailable or unsupported default Music provider
+ 19ms (16ms|3ms)
+  [+] preserves explicit relative output resolution instead of applying the default Music guard
+ 66ms (63ms|3ms)
+  [+] keeps action switches outside the saved preference schema
+ 226ms (223ms|3ms)
+  [+] skips an exact prior job directory without traversing renamed media while traversing a near miss
+ 1.7s (1.7s|3ms)
+
+Describing AC-063: follow-up action requires explicit interactive published success
+  [+] does not open for not requested
+ 479ms (458ms|21ms)
+  [+] does not open for not interactive
+ 44ms (27ms|17ms)
+  [+] does not open for not published
+ 31ms (27ms|4ms)
+  [+] does not open for unpublished warning
+ 35ms (31ms|4ms)
+  [+] does not open for preflight failure
+ 27ms (23ms|4ms)
+  [+] does not open for dependency failure
+ 84ms (80ms|3ms)
+  [+] does not open for processing failure
+ 20ms (17ms|3ms)
+  [+] does not open for storage failure
+ 23ms (20ms|3ms)
+  [+] does not open for mixed batch failure
+ 24ms (20ms|4ms)
+  [+] does not open for cancellation
+ 26ms (23ms|3ms)
+  [+] opens the selected directory once for published exit 0
+ 313ms (310ms|4ms)
+  [+] opens the selected directory once for published exit 7
+ 36ms (33ms|3ms)
+  [+] contains an explicit folder-open failure as an advisory
+ 106ms (102ms|4ms)
+
+Describing AC-062/063: actual picker body with isolated STA dialog doubles
+  [+] configures and disposes the optional picker for OK without loading a GUI assembly
+ 2.63s (2.62s|14ms)
+  [+] configures and disposes the optional picker for cancel without loading a GUI assembly
+ 2.08s (2.07s|4ms)
+  [+] configures and disposes the optional picker for throw without loading a GUI assembly
+ 1.94s (1.94s|2ms)
+
+Describing AC-061/062: actual isolated destination and no-GUI entry points
+  [+] keeps default Music or chosen output flat (True) without a picker or Explorer
+ 7.17s (7.17s|4ms)
+  [+] keeps default Music or chosen output flat (False) without a picker or Explorer
+ 5.62s (5.62s|1ms)
+  [+] uses explicit output successfully when default Music is unavailable
+ 5.6s (5.6s|1ms)
+  [+] uses saved custom output even when default Music is unavailable without rewriting preferences
+ 5.71s (5.71s|1ms)
+  [+] keeps normal helper-less installs flat with explicitly false new action switches
+ 5.14s (5.14s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (empty)
+ 2.74s (2.74s|2ms)
+  [+] rejects unavailable default Music before native work and cwd output (relative)
+ 2.81s (2.81s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (UNC)
+ 2.82s (2.82s|1ms)
+  [+] shows no-input usage without a desktop dependency, prompt or destination creation
+ 1.63s (1.63s|1ms)
+  [-] creates one job group with separate media and detailed reports
+ 4.62s (4.61s|2ms)
+   Expected 0, because WinAudioClean 2.3
+   ============================
+   Input: <TEST_TEMP> source.wav
+   FFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_2591dc540fd04e24adc49a035c8c4ccd\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Audio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)
+   Export: 48000 Hz, 16-bit PCM, mono, RIFF WAV
+   Destination space: 834629763072 bytes available; 68455136 bytes required including headroom.
+   Running WinAudioClean...
+   Chain: ZOOM (Level Only)
+   WAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC
+   DONE: FAILED
+   Native exit: 0. Application exit: 5. See diagnostics above.
+   Write-Error: Output validation/publication failed: Exception calling "RenameNoReplace" with "3" argument(s): "Cannot publish output without replacing an existing file: The filename or extension is too long. (Win32 206).", but got 5.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:377
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:377
+  [-] keeps all four bounded preview assets in media and the preview report in reports
+ 5.08s (5.07s|1ms)
+   Expected 0, because WinAudioClean 2.3
+   ============================
+   Input: <TEST_TEMP> source.wav
+   FFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_92c4bf4fce5947fc9eac37d4c6d79782\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Preview: FAILED
+   Preview reports: {"JsonPath":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_92c4bf4fce5947fc9eac37d4c6d79782\\reports\\WinAudioClean_Preview_c6b277471ba9490a9039d97f1742bd90.json","TextPath":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_92c4bf4fce5947fc9eac37d4c6d79782\\reports\\WinAudioClean_Preview_c6b277471ba9490a9039d97f1742bd90.txt"}
+   Preview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.
+   Write-Error: Preview native processing failed (native exit 97; timeout False; transport error reported True; cleanup error reported True)., but got 4.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:412
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:412
+  [-] shares one job group across explicit list children and opens it once at the parent
+ 5.83s (5.83s|1ms)
+   Expected 0, because Processing input 1 of 2: <TEST_TEMP> source.wav
+   WinAudioClean 2.3
+   ============================
+   Input: <TEST_TEMP> source.wav
+   FFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_b670df9ae47c43f49573698064ca8ade\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Audio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)
+   Export: 48000 Hz, 16-bit PCM, mono, RIFF WAV
+   Destination space: 834638266368 bytes available; 68455136 bytes required including headroom.
+   Running WinAudioClean...
+   Chain: ZOOM (Level Only)
+   WAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC
+   DONE: FAILED
+   Native exit: 0. Application exit: 5. See diagnostics above.
+   Processing input 2 of 2: <TEST_TEMP> synthetic source.wav
+   WinAudioClean 2.3
+   ============================
+   Input: <TEST_TEMP> synthetic source.wav
+   FFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_b670df9ae47c43f49573698064ca8ade\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Audio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)
+   Export: 48000 Hz, 16-bit PCM, mono, RIFF WAV
+   Destination space: 834638123008 bytes available; 68455136 bytes required including headroom.
+   Running WinAudioClean...
+   Chain: ZOOM (Level Only)
+   WAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC
+   DONE: FAILED
+   Native exit: 0. Application exit: 5. See diagnostics above.
+   Batch results saved to: <TEST_TEMP> output [literal]\WinAudioClean_Job_b670df9ae47c43f49573698064ca8ade\reports\WinAudioClean_Batch_6f03816f8dc946cd9b8eb3b334e68351.jsonl
+   Invoke-WacBatchItem: <TEST_TEMP>
+   Line |
+    257 |  . { $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Output validation/publication failed: Exception calling "RenameNoReplace" with "3" argument(s): "Cannot publish
+        | output without replacing an existing file: The filename or extension is too long. (Win32 206)."
+   Invoke-WacBatchItem: <TEST_TEMP>
+   Line |
+    257 |  . { $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar .
+        |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        | Output validation/publication failed: Exception calling "RenameNoReplace" with "3" argument(s): "Cannot publish
+        | output without replacing an existing file: The filename or extension is too long. (Win32 206).", but got 6.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:441
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:441
+
+Describing AC-062/063: requested UI boundaries in actual isolated hosts
+  [+] rejects persisting processing action -JobFolder without input, native work or config changes
+ 1.54s (1.54s|3ms)
+  [+] rejects persisting processing action -PickFile without input, native work or config changes
+ 1.68s (1.68s|1ms)
+  [+] rejects persisting processing action -OpenOutputFolder without input, native work or config changes
+ 1.35s (1.35s|1ms)
+  [+] rejects unattended -PickFile before picker, Explorer or native work
+ 2.31s (2.31s|1ms)
+  [+] rejects unattended -OpenOutputFolder before picker, Explorer or native work
+ 2.3s (2.3s|1ms)
+  [+] returns 130 on picker cancellation without creating output or starting native tools
+ 1.92s (1.92s|0ms)
+  [+] rejects PickFile combined with an explicit input before picker or native work
+ 1.95s (1.95s|1ms)
+  [+] uses a picked file through normal validation and native rendering
+ 2.78s (2.78s|0ms)
+  [+] rejects an unavailable picker without native work or a false completed result
+ 1.65s (1.65s|0ms)
+  [-] opens only a published successful group and preserves success when opening fails
+ 3s (3s|0ms)
+   Expected 0, because WinAudioClean 2.3
+   ============================
+   Input: <TEST_TEMP> source.wav
+   FFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_440db8f897384298ad5a44da7b476d6e\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Audio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)
+   Export: 48000 Hz, 16-bit PCM, mono, RIFF WAV
+   Destination space: 834642206720 bytes available; 68455136 bytes required including headroom.
+   Running WinAudioClean...
+   Chain: ZOOM (Level Only)
+   WAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC
+   DONE: FAILED
+   Native exit: 0. Application exit: 5. See diagnostics above.
+   Write-Error: Output validation/publication failed: Exception calling "RenameNoReplace" with "3" argument(s): "Cannot publish output without replacing an existing file: The filename or extension is too long. (Win32 206).", but got 5.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:547
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:547
+  [-] opens only a published successful group and preserves success when opening fails
+ 3.25s (3.25s|0ms)
+   Expected 0, because WinAudioClean 2.3
+   ============================
+   Input: <TEST_TEMP> source.wav
+   FFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)
+   FFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)
+   Effective settings: {"mode":"Zoom","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<TEST_TEMP> output [literal]\\WinAudioClean_Job_802a499f64a54ce5b97bd49735523511\\media","audioStreamIndex":null,"cleaningOptions":{}}
+   Preset: Original (ID: original; version: 1.0.0)
+   Audio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)
+   Export: 48000 Hz, 16-bit PCM, mono, RIFF WAV
+   Destination space: 834641805312 bytes available; 68455136 bytes required including headroom.
+   Running WinAudioClean...
+   Chain: ZOOM (Level Only)
+   WAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC
+   DONE: FAILED
+   Native exit: 0. Application exit: 5. See diagnostics above.
+   Write-Error: Output validation/publication failed: Exception calling "RenameNoReplace" with "3" argument(s): "Cannot publish output without replacing an existing file: The filename or extension is too long. (Win32 206).", but got 5.
+   at $result.ExitCode | Should -Be 0 -Because ($result.StandardOutput + $result.StandardError), <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:547
+   at <ScriptBlock>, <REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1:547
+  [+] never offers or opens a completed destination after native failure
+ 2.81s (2.81s|0ms)
+Tests completed in 94.84s
+Tests Passed: 43,
+Failed: 5,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 0

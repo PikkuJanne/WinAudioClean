@@ -1,0 +1,121 @@
+Sanitized selected focused log. 48-case OutputInteraction scope on stable final runtime/test bytes: PS7 passed48; PS5.1 passed47 with one30s test-child deadline failure in the helper-less/false-actions case. That exact row had passed the earlier stable49 scope and subsequently passed isolated on unchanged bytes. Simultaneous cumulative/media/focused work may have contributed, but contention is an inference. The timeout remains a failure in this whole-scope record.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 48 tests in 324ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1'
+Describing AC-061: default Music is explicit and never falls back to the current directory
+  [+] reads the existing Music registration without writing to it
+ 219ms (142ms|77ms)
+  [+] rejects unavailable or unsupported default Music empty
+ 87ms (82ms|5ms)
+  [+] rejects unavailable or unsupported default Music relative
+ 14ms (10ms|4ms)
+  [+] rejects unavailable or unsupported default Music UNC
+ 23ms (19ms|4ms)
+  [+] rejects unavailable or unsupported default Music provider
+ 10ms (7ms|3ms)
+  [+] preserves explicit relative output resolution instead of applying the default Music guard
+ 66ms (64ms|3ms)
+  [+] keeps action switches outside the saved preference schema
+ 212ms (209ms|3ms)
+  [+] skips an exact prior job directory without traversing renamed media while traversing a near miss
+ 1.12s (1.11s|3ms)
+
+Describing AC-063: follow-up action requires explicit interactive published success
+  [+] does not open for not requested
+ 467ms (444ms|23ms)
+  [+] does not open for not interactive
+ 35ms (24ms|11ms)
+  [+] does not open for not published
+ 48ms (44ms|4ms)
+  [+] does not open for unpublished warning
+ 28ms (23ms|5ms)
+  [+] does not open for preflight failure
+ 25ms (21ms|4ms)
+  [+] does not open for dependency failure
+ 30ms (27ms|3ms)
+  [+] does not open for processing failure
+ 25ms (20ms|5ms)
+  [+] does not open for storage failure
+ 25ms (21ms|4ms)
+  [+] does not open for mixed batch failure
+ 47ms (42ms|5ms)
+  [+] does not open for cancellation
+ 60ms (42ms|18ms)
+  [+] opens the selected directory once for published exit 0
+ 272ms (270ms|3ms)
+  [+] opens the selected directory once for published exit 7
+ 21ms (19ms|3ms)
+  [+] contains an explicit folder-open failure as an advisory
+ 45ms (37ms|8ms)
+  [+] refuses an existing directory whose identity differs before launching the shell
+ 47ms (45ms|2ms)
+
+Describing AC-062/063: actual picker body with isolated STA dialog doubles
+  [+] configures and disposes the optional picker for OK without loading a GUI assembly
+ 1.83s (1.82s|6ms)
+  [+] configures and disposes the optional picker for cancel without loading a GUI assembly
+ 1.72s (1.71s|3ms)
+  [+] configures and disposes the optional picker for throw without loading a GUI assembly
+ 1.85s (1.85s|2ms)
+
+Describing AC-061/062: actual isolated destination and no-GUI entry points
+  [+] keeps default Music or chosen output flat (True) without a picker or Explorer
+ 8.09s (8.09s|4ms)
+  [+] keeps default Music or chosen output flat (False) without a picker or Explorer
+ 9.82s (9.82s|2ms)
+  [+] uses explicit output successfully when default Music is unavailable
+ 11.39s (11.39s|1ms)
+  [+] uses saved custom output even when default Music is unavailable without rewriting preferences
+ 10.88s (10.88s|1ms)
+  [+] keeps normal helper-less installs flat with explicitly false new action switches
+ 9.78s (9.78s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (empty)
+ 4.09s (4.09s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (relative)
+ 4.03s (4.03s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (UNC)
+ 5.49s (5.49s|1ms)
+  [+] shows no-input usage without a desktop dependency, prompt or destination creation
+ 3.42s (3.42s|1ms)
+  [+] creates one job group with separate media and detailed reports
+ 11.1s (11.1s|1ms)
+  [+] shares one job group across explicit list children and opens it once at the parent
+ 12.1s (12.09s|2ms)
+
+Describing AC-062/063: requested UI boundaries in actual isolated hosts
+  [+] rejects persisting processing action -JobFolder without input, native work or config changes
+ 3.37s (3.32s|52ms)
+  [+] rejects persisting processing action -PickFile without input, native work or config changes
+ 4.32s (4.32s|1ms)
+  [+] rejects persisting processing action -OpenOutputFolder without input, native work or config changes
+ 3.76s (3.76s|1ms)
+  [+] rejects unattended -PickFile before picker, Explorer or native work
+ 4.82s (4.82s|1ms)
+  [+] rejects unattended -OpenOutputFolder before picker, Explorer or native work
+ 4.75s (4.75s|1ms)
+  [+] returns 130 on picker cancellation without creating output or starting native tools
+ 3.96s (3.96s|1ms)
+  [+] rejects PickFile combined with an explicit input before picker or native work
+ 4.09s (4.09s|1ms)
+  [+] uses a picked file through normal validation and native rendering
+ 7.16s (7.16s|1ms)
+  [+] rejects an unavailable picker without native work or a false completed result
+ 4.17s (4.17s|1ms)
+  [+] opens only a published successful group and preserves success when opening fails
+ 7.39s (7.39s|1ms)
+  [+] opens only a published successful group and preserves success when opening fails
+ 9.18s (9.18s|1ms)
+  [+] never offers or opens a completed destination after native failure
+ 9.71s (9.7s|1ms)
+Tests completed in 169.71s
+Tests Passed: 48,
+Failed: 0,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 0

@@ -50,6 +50,9 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 - WinAudioClean.Queue.ps1
   - Sibling helper for optional folder discovery, exclusions, identity deduplication and source snapshots. Keep it beside the main script when using InputDirectories.
 
+- WinAudioClean.Output.ps1
+  - Optional sibling helper for JobFolder groups with separate media and reports directories. The default flat layout works without it.
+
 - WinAudioClean.Launcher.ps1
   - Sibling helper for ordered launcher paths, manifest handoffs and selecting an inner PowerShell host. Keep it beside the BAT for these routes; legacy single-file launching has a fallback without it.
 
@@ -178,6 +181,46 @@ A one-item list retains the ordinary item's exit code. A multi-item list returns
 Cancellation returns `130` and leaves later items unattempted. Malformed list
 or shared settings fail before processing with code `2`. Progress and active
 cancellation follow the per-run rules below; the audio recipe is unchanged.
+
+**Output organization and optional local actions**
+
+The default layout keeps audio and reports directly in Music or your chosen
+`-OutputDirectory`. If Music is unavailable or redirected to an unsupported
+location, choose a writable local folder explicitly; processing never falls
+back to the current directory.
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\meeting.wav' -Mode Zoom -OutputDirectory 'C:\Audio\Exports' -JobFolder -NonInteractive
+```
+
+`-JobFolder` creates a fresh `WinAudioClean_Job_<id>` under that destination.
+Audio is in `media`; JSON/text reports, `WinAudioClean_Log.txt` and the default
+batch journal are in `reports`. One folder groups one invocation, including
+all inputs in a queue or the four preview assets. `-BatchResultPath` still
+chooses a separate journal explicitly. Keep the optional sibling
+`WinAudioClean.Output.ps1` beside the main script for this route. Earlier folders
+are never reused or cleaned; an unsuccessful attempt can leave empty directories.
+Discovery skips encountered generated job subfolders without entering them.
+
+Running without input prints console examples and returns usage code `2`.
+Supply a path, list or folder to work entirely from a terminal. For an optional
+Windows file dialog, explicitly use:
+
+```powershell
+& .\WinAudioClean.ps1 -PickFile -Mode Zoom -JobFolder -OpenOutputFolder
+```
+
+`-PickFile` selects one file and cannot accompany another selection. Cancel
+returns `130` before destination/native work. It requires an interactive STA
+host and lazily loads built-in Windows Forms; if unavailable, use `-inputPath`.
+No desktop framework is required for ordinary processing.
+
+`-OpenOutputFolder` opens only the destination directory after published success
+or warning, once per invocation. Failed/cancelled runs and mixed-failed queues
+do not open it. An Explorer action failure prints a warning without changing
+the audio outcome. Picker/open requests in input-redirected or noninteractive sessions
+are rejected before processing. No output file or playback starts automatically.
+These three options are per-invocation actions and are never saved as preferences.
 
 **Folder queues**
 
