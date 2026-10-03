@@ -1,5 +1,18 @@
 # Current status
 
+Date: 2026-10-03. **WAC-M4-02 implementation validation is in progress.**
+Windows CI and its pinned setup/parity/status tooling are implemented. Both
+actual local Quick gates passed 1075/0/1; the five setup tests are included.
+53 focused Python cases and an actual unavailable-shell simulation passed
+their stated scopes. Full local and actual PR CI evidence remain pending.
+WAC-M4-02 remains todo and AC-070..072 not_run until those results are reconciled.
+The implementation checkpoint does not advance to packaging. Source-only
+original/runtime/defaults remain unchanged. See [evidence](evidence/WAC-M4-02.md).
+
+## Historical M4-01 status (superseded by current progress above)
+
+# Current status
+
 Date: 2026-10-03. **WAC-M4-01 is complete.** Canonical 23 done/7 todo/0 blocked;
 69 AC pass/21 not run. Coverage maps 69 cases, 35 command scopes, eight named
 reviews and eight retained broader-scope gaps. **Next: WAC-M4-02 only.**

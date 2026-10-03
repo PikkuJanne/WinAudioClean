@@ -1,9 +1,9 @@
 # Acceptance coverage and retained gates
 
-[COVERAGE.json](COVERAGE.json) maps AC-001..066 and the current WAC-M4-01
-AC-067..069 to concrete commands, existing reports or named reviews. It keeps
+[COVERAGE.json](COVERAGE.json) maps AC-001..069 and the current WAC-M4-02
+AC-070..072 to concrete commands, existing reports or named reviews. It keeps
 historical evidence in place rather than duplicating its detailed case logs.
-The map contains 69 cases, 35 command scopes, eight named reviews and eight
+The map contains 72 cases, 38 command scopes, eight named reviews and eight
 retained gaps.
 
 Canonical acceptance remains [ACCEPTANCE.json](ACCEPTANCE.json). A command in
@@ -11,8 +11,8 @@ this inventory means runnable coverage is available. It does not mean the
 command ran during M4, that a human review happened, or that every part of the
 original procedure passed. Referenced evidence identifies the tested revision,
 content hashes, host/tool versions, actual commands/exits and engineering scope.
-[WAC-M4-01 evidence](evidence/WAC-M4-01.md) records the current task's actual
-results and separate gate/source/fault ledgers.
+[WAC-M4-01 evidence](evidence/WAC-M4-01.md) retains regression/fault results;
+[WAC-M4-02 evidence](evidence/WAC-M4-02.md) records CI/local parity separately.
 
 The named reviews distinguish record completion from audition. AC-009 checks
 private corpus handling; AC-042 allows an explicit unavailable-corpus record;
