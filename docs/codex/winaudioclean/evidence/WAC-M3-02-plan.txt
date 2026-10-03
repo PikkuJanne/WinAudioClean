@@ -1,0 +1,24 @@
+Publication script preliminary command: python docs/codex/winaudioclean/tools/handoff.py validate-plan --repo .
+Child exit2; wrapper exit1: --plan-root is required; no runtime/test failure. Second preliminary command used the correct --plan-root but exited2 because the source manifest was created too late. Publication order corrected; complete source manifest now exists before plan validation. Final commands follow.
+
+python docs/codex/winaudioclean/tools/handoff.py validate-plan --plan-root docs/codex/winaudioclean
+Exit0
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+
+python docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/codex/winaudioclean
+Exit0
+{
+  "ready": [
+    {
+      "id": "WAC-M3-03",
+      "title": "Add sequential folder queues and batch summaries",
+      "approval_needed": false
+    }
+  ],
+  "blocked": []
+}

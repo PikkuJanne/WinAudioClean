@@ -1,0 +1,199 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-02",
+  "scope": "Index of Pester-only Batch development and regression captures. Historical73-case scopes retain their source hashes and failures. The final four-case scope discovers77 but executes4; the complete current77-case gate belongs to root cumulative evidence.",
+  "scopes": [
+    {
+      "metadata": "evidence/WAC-M3-02-batch-focused-initial.json",
+      "sha256": "630EC8E3054B67DD6EBD0A0883CE4A8775C0D6FC842832DC5B2A9D25BC5050C3",
+      "discovered": 73,
+      "selected": 73,
+      "notes": [
+        "Initial development scope, retained failures: two sharing-incompatible test readers and one real missing-native-diagnostics runtime failure per host."
+      ],
+      "batchSourceSha256": "A897C1D10BA13A9F9E26E85E61B220DBB13E5B9E6DF21DE95BD8600F946524A9",
+      "testSourceSha256": "E0E8A8299987B7D8CB241241201EB1B6E54004CAE651A8122003990BD03ACB6C",
+      "results": [
+        {
+          "shell": "Windows PowerShell 5.1.26100.9444",
+          "exitCode": 1,
+          "passed": 70,
+          "failed": 3,
+          "skipped": 0,
+          "notRun": 0,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-focused/initial-ps51.log",
+            "sha256": "6B34719FDC78369CBF493CD5F814F6C9EDF5C4CDC0996562507A4FED34BC109E"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-focused-initial-ps51.txt",
+            "sha256": "7CF8974B7AEAAD136078462092EEFE28140B6E72D45894E52A8451BDF5BB30E2"
+          }
+        },
+        {
+          "shell": "PowerShell 7.6.5",
+          "exitCode": 1,
+          "passed": 70,
+          "failed": 3,
+          "skipped": 0,
+          "notRun": 0,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-focused/initial-ps7.log",
+            "sha256": "9D5557D798949B5F0F0AA994CBDABC6DA2A927DF9DB7444750FE6D17A9342FB9"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-focused-initial-ps7.txt",
+            "sha256": "7F67D5A5EE3CE0F2EFF7BB1789646562D263EBACC022BA2D709992A980D473C5"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": "evidence/WAC-M3-02-batch-focused-corrected.json",
+      "sha256": "D961FC29FF792D8B9F9DB265603A99A7AF470CE6D04BBD155848E54C1A1F3AB4",
+      "discovered": 73,
+      "selected": 73,
+      "notes": [
+        "Intermediate development scope, retained five runtime integration failures per host from relaying reserved PSHOST information tags."
+      ],
+      "batchSourceSha256": "CCA4807831C14A48C92AAF39D45D76B4A9D7E92601C8CDF1990919BBA22562AD",
+      "testSourceSha256": "E7059D300AD8094FCB905F50297F37E0FA167D6AA060F228796980397F83D808",
+      "results": [
+        {
+          "shell": "Windows PowerShell 5.1.26100.9444",
+          "exitCode": 1,
+          "passed": 68,
+          "failed": 5,
+          "skipped": 0,
+          "notRun": 0,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-focused/corrected-ps51.log",
+            "sha256": "E5A16F021079826A8CD81A63144780046457468EF0E87151BECC3BA4811C1448"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-focused-corrected-ps51.txt",
+            "sha256": "C4D0EDD135A2BF5135788578C46DD1FEBDCCDC5DF2457A08C9AC6632BD79E77E"
+          }
+        },
+        {
+          "shell": "PowerShell 7.6.5",
+          "exitCode": 1,
+          "passed": 68,
+          "failed": 5,
+          "skipped": 0,
+          "notRun": 0,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-focused/corrected-ps7.log",
+            "sha256": "6CA149AEE1F9D2DE82B6BF03C5929DB4DD28606524D77DBF6774DB26E4B5A878"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-focused-corrected-ps7.txt",
+            "sha256": "034D1DA4EDC73FDDABA36A84843AB9749895A92FA43A3CC4CC1A9A08DDF5E420"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": "evidence/WAC-M3-02-batch-focused-final73.json",
+      "sha256": "6F72D2720072D073081DAEC93ABC5F62492C0E716718B3E1695E24EB58B2201B",
+      "discovered": 73,
+      "selected": 73,
+      "notes": [
+        "All73 cases pass on Batch DA98 before the later invalid-relative-path fix and four added regressions. This result is scoped to its recorded source hashes, not the current77-case suite."
+      ],
+      "batchSourceSha256": "DA98B0E8FEB795B8DF1E244103CE29F1D5B9898AFE9F8FF1989B4073B317CD7C",
+      "testSourceSha256": "7D17274EB6A9A73DBD2F2C45B99C7727AE71E7FCFABE195ED37B7D842E0FAC5F",
+      "results": [
+        {
+          "shell": "Windows PowerShell 5.1.26100.9444",
+          "exitCode": 0,
+          "passed": 73,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-focused/final-ps51.log",
+            "sha256": "75BFA046C0DA46A94A49A9D5D77718D76813A7BD9FC9161512CF1CC7A2228B2F"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-focused-final73-ps51.txt",
+            "sha256": "DBC7D5B45D784F4E1C6736463B5D56F8DBC446741BE60911FD10ECCC833ECE89"
+          }
+        },
+        {
+          "shell": "PowerShell 7.6.5",
+          "exitCode": 0,
+          "passed": 73,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-focused/final-ps7.log",
+            "sha256": "76BF42E6DA6DF2BFE1CA5AD01D41E19E17705844E600818C92BD9BF17A509EB2"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-focused-final73-ps7.txt",
+            "sha256": "277D1615817976AAE6C1C6A4C3AED79122AF835647B55E5975CBF02E7DC451A0"
+          }
+        }
+      ]
+    },
+    {
+      "metadata": "evidence/WAC-M3-02-batch-invalid-path-final.json",
+      "sha256": "F758B072DBBEB9A2DD36330983751677F4AE327C7C3899D9AE839008105564E3",
+      "discovered": 77,
+      "selected": 4,
+      "notes": [
+        "Four selected regressions pass on Batch C2CF/test4462: exact anchored pipe/NUL data and actual success/failure2/success continuation. Other73 cases are not executed here."
+      ],
+      "batchSourceSha256": "C2CF3A3923E8608AAF0F010B18503D7CB282F040F465BB0C4F1B6CE89A0ACDFC",
+      "testSourceSha256": "4462F1531BF171624CD922253B516A414E15DF5D3AED5BAB584D3350583B8BAB",
+      "results": [
+        {
+          "shell": "Windows PowerShell 5.1.26100.9444",
+          "exitCode": 0,
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 73,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-invalid-path-focused/final-ps51.log",
+            "sha256": "F226B0C9BB9D0E647FDBA835E247599A5EF1CFC66BC670FF5D41F61DF5FB4A5E"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-invalid-path-final-ps51.txt",
+            "sha256": "004EB34E62BC6D12A3B81825E5CDD55301957DDFD8256443753D21CA3F085AD4"
+          }
+        },
+        {
+          "shell": "PowerShell 7.6.5",
+          "exitCode": 0,
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 73,
+          "rawLog": {
+            "ignoredPath": ".wac-local/WAC-M3-02/batch-invalid-path-focused/final-ps7.log",
+            "sha256": "A02B471F77F9E2D587EFCDE17DE3545920B700AD4B0FAE41B1D75F46A06F9B92"
+          },
+          "publishedLog": {
+            "path": "evidence/WAC-M3-02-batch-invalid-path-final-ps7.txt",
+            "sha256": "6AB3B7407FC3EAED02B6A73568CD3A861CB9FC1F808B8CC658530B844E59B2CF"
+          }
+        }
+      ]
+    }
+  ],
+  "frozenCurrentSource": {
+    "batch": "C2CF3A3923E8608AAF0F010B18503D7CB282F040F465BB0C4F1B6CE89A0ACDFC",
+    "batchTests": "4462F1531BF171624CD922253B516A414E15DF5D3AED5BAB584D3350583B8BAB",
+    "fixtureDriver": "4C40D8C3E74C846910B3C9C9A35E49E03FAC05FDA54964953FE20F987D3479B7"
+  },
+  "reproducibility": "Each scope embeds its exact ignored Pester wrapper, commands, module version, before/after source hashes, raw/published log hashes and fixture provenance. Native fixture factory hash was additionally captured in the final four-case scope; earlier source snapshots are preserved without retroactive additions.",
+  "privacy": "Published logs replace repo/user-profile/temp roots, redact credential-like text if present, remove ANSI, escape remaining controls and condense synthetic long D payloads. Raw and published hashes are separate. Public text uses CRLF, UTF8 without BOM and one final newline.",
+  "excludedClaims": [
+    "No real FFmpeg encoding or objective media measurements are claimed by the native-double cases.",
+    "No desktop Explorer drag and drop was performed.",
+    "No cumulative parser/static/Full gate was run by this test agent."
+  ]
+}

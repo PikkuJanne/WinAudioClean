@@ -1,87 +1,98 @@
-# Next model: WAC-M3-02
+# Next model: WAC-M3-03
 
-**M3-01 is complete. Start only WAC-M3-02: Support multiple dropped files through
-the existing launcher.** Read AGENTS, STATUS, DECISIONS, TASKS, SYNC_PROTOCOL,
-tasks/WAC-M3-02, DATA_FORMATS, AUDIO_CONTRACT/NATIVE_PROCESS_CONTRACT and the
-M3-01 evidence/source/settings matrix/focused preliminary+final records.
-Preserve canonical history, especially M1-02 policy/resumption and honest
-M2/M3 failures/limits. Do not change the source-only original checkout.
+**M3-02 is complete. Start only WAC-M3-03: Add sequential folder queues and batch
+summaries.** Read AGENTS, STATUS, DECISIONS, TASKS, SYNC_PROTOCOL, tasks/WAC-M3-03,
+DATA_FORMATS, AUDIO_CONTRACT/NATIVE_PROCESS_CONTRACT and M3-02 evidence/source/
+Batch/launcher/media scope records. Preserve canonical history, especially
+M1-02 policy/resumption and honest M2/M3 preliminary failures/limits. Do not
+change the source-only original checkout.
 
 ## Synchronize the current checkpoint
 
 Use maintained WinAudioClean-governance, `codex/wac-m3-settings`, exact effective
-fetch/push origin `https://github.com/PikkuJanne/WinAudioClean.git`. M3 began at
-`32f6188461d9f7c11857e390d1145985665dd0dd` (M2-05); inspect live M3 branch/new draft for its actual completed SHA.
-Run inspect, authenticated fetch --prune, sync-check, validate-plan and next.
-Only M3-02 should be ready. Process-only gh credentials are available; never print
-or persist them. Verify live draft/head/CI separately; no CI workflows/checks
-currently exist. The completion SHA belongs in PR/final response, not itself.
+fetch/push origin `https://github.com/PikkuJanne/WinAudioClean.git`. M3-02 began
+at `33dc8b1dde8bb957fc221442e027991a895a85f6` (M3-01); inspect live M3 branch/draft#4
+for its actual completed SHA. Run inspect, authenticated fetch --prune,
+sync-check, validate-plan and next. Only M3-03 should be ready. Process-only gh
+credentials are available; never print/persist them. Verify live draft/head/CI
+separately; no workflows/checks currently exist. Completion SHA belongs in the
+PR/final response, not itself.
 
-Reuse the suitable current M3 milestone branch after fresh verification; do not
-create a duplicate draft/worktree needlessly. M3 draft is stacked on M2#3, itself
-on unmerged M1#2/M0. Do not merge to unlock work. Feature commits/pushes/drafts
-are authorized; main/merge/releases/settings/security/deployment/default promotion
-still require exact owner authorization. Do not force-push/reset/clean/stash.
+Reuse the suitable M3 milestone branch after fresh verification; no duplicate
+draft/worktree. Draft#4 stacks on M2#3, itself on unmerged M1#2/M0. No merge is
+needed to unlock work. Feature commits/pushes/drafts are authorized; main/merge/
+release/settings/security/deployment/default promotion still require exact owner
+authorization. Never force-push/reset/clean/stash.
 
-## Preserve the new settings contract
+## Preserve ordered input and launcher contracts
 
-- Default ApplicationData\WinAudioClean\settings.json; optional Settings sibling
-  loads only for present saved file/explicit SettingsPath/management. Dot-source
-  imports remain IO-only and read no preferences. Normal runs never autosave.
-- Version1 root schemaVersion/settings, nine existing typed optional choices;
-  whole file validates before bound CLI > saved > built-ins. Explicit false
-  switches and empty CleaningOptions override saved values; dictionary replacement
-  is whole, not key merging. Saving expands resolved preferences but persists
-  cleaning overrides rather than the base profile. No input/tool/action/ranges
-  or NonInteractive preference. Unsupported versions fail; Ignore/Reset recover.
-- Show/Save/Reset have no input/media-process/prompt/audio work. Save/Reset exclusive;
-  Reset rejects choices and atomically writes an empty version1 settings object.
-  Display includes origins and expanded selected cleaning/graph, or mode-not-
-  selected reason. Saved mode/index resolve their unattended omissions.
-- Settings uses strict bounded UTF8/JSON, exact keys, duplicate rejection,
-  typed finite allowlist, held native READ/WRITE/DELETE writer, Flush(true),
-  atomic rename and owned cleanup. Ordinary/reparse/reader-hardlink limits,
-  late foreign target/locked/interrupted saves are tested; no power-loss proof.
+- Existing positional inputPath remains one string. InputPaths is a typed array;
+  InputListPath reads strict UTF8 schema1 exact keys/integer version,1..1024
+  nonempty entries, <=1MiB including optional BOM. Mutually exclusive with each
+  other/inputPath; ordinary full renders only. Malformed list/global settings
+  fail2 before jobs. Relative strings anchor beside manifest; invalid pipe/NUL
+  text must fail per item and let later valid jobs continue, including PS5.1.
+- Optional Batch/Settings siblings handle lists, frozen settings and one mode
+  choice; children invoke ordinary main with IgnoreSavedSettings. Stream selection
+  may remain per-item interactive. Preserve explicit repeats/order for explicit
+  lists; settings dictionaries/false/empty choices retain bound semantics.
+- Held CreateNew UTF8 JSONL header/item/summary flushes per item. Never overwrite
+  input/manifest/prior results or infer foreign detailed-report ownership by scan.
+  Preserve single code; multiple failure6/warnings7/all-success0/cancel130.
+  Cancel stops future items with NOT_STARTED. Journal failure5 stops future starts,
+  preserves prior audio/records, attempts suffix-only rollback and discloses
+  incomplete reporting. No crash/power-loss or multi-file atomicity claim.
+- Existing BAT + optional Launcher uses numbered environment captures and a fixed
+  PS bootstrap/selected-worker encoded command. Fresh CMD /c framing must match
+  original token count/order/value; no path text interpolates into commands.
+  Positional raw frame below7600, <=1024 inputs, no observable %/! or ambiguity.
+  CMD may expand percent text before BAT starts: raw capture cannot undo it.
+  Use literal environment /manifest or direct InputListPath for those/long paths;
+  /unattended Raw|Zoom requires one input-or-list and output environment value.
+- Preserve default inner PS5.1/explicit local PS7 selection, helper-less prior
+  single/environment route, no-input guidance, saved status before one interactive
+  pause (including cancellation/worker start3), no unattended pause. Real CMD
+  probes do not imply a manual Explorer gesture was performed.
 
-## M3-02 scope and launcher seams
+## M3-03 scope
 
-BAT bytes remain M2 unchanged. Extend ordered multi-file forwarding through the
-existing launcher, choosing mode once; retain the single-drop, menu, cancel,
-unattended and exit-before-pause routes. Current inputPath remains positional0
-and a single string. Inspect real CMD quoting/limits: do not assume naive %* or
--File array passing is safe. Verify spaces/Unicode/brackets/%/!/ampersands/
-apostrophes/parentheses, invalid-item aggregate results, long/many paths and
-double-click no-input guidance. Use a safe structured handoff only as required.
-Folder/manifest fallback must be actionable, with no truncation or shell eval.
-Reconcile saved mode/destination/index choices with selecting once; tests must
-isolate SettingsPath or deliberately Ignore saved settings, not write user prefs.
-No replacement GUI/server, sound retune or later milestone implementation.
+Extend the current explicit sequential orchestration with a bounded local folder
+queue builder; inspect existing code before extracting another helper. Recursion
+is off by default. Materialize/deduplicate the folder queue before jobs, explain
+unsupported selections, exclude this tool's generated outputs/temp artifacts,
+and avoid symlink/junction traversal loops. Preserve per-file continuation,
+reports and final successful/failed/skipped/cancelled summary. No automatic audio
+re-cleaning. Do not silently change explicit-list repeated-item semantics while
+adding folder deduplication. Reconcile stable queue identities/output exclusion
+with current schema carefully and document any additive report contract.
+No GUI/server/default sound retune or later milestone implementation.
 
-## Audio and gate continuity
+## Audio and gates
 
-Main's pre-existing helper region, IO/Preview/BAT are frozen from M2. Original
-original/1.0.0 stays built-in with legacy literals/implicit nr; Gentle0.1.0 is
-experimental Raw-only, Zoom rejects nonempty cleaning/Gentle. Application2.3,
-report1, Fast default and Accurate repeated prechain/held final meter/warnings
-remain. Preserve PCM16/24/mono/RF64, ownership guards, explicit bounded preview,
-comparison attenuation, selected-origin/clock bounds and no implicit playback.
-Positive integrated/threshold values fail, rather than UNMEASURABLE. Preserve
-M2 raw latency/seek and same-input/build reproduction limits. Listening and
-default promotion remain pending; numeric/synthetic acceptance supplies no approval.
+M3-02 final source preserved normalized pre-existing main helper bodies/full
+processing suffix and IO/Settings/Preview bytes from M3-01. Original1.0.0 stays
+built-in; Gentle0.1.0 opt-in experimental Raw-only. Application2.3/report1, Fast
+default, Accurate repeated prechain/held meter/warnings, PCM16/24/mono/RF64,
+owned output/report transactions and bounded preview remain. Positive integrated/
+threshold measurements fail rather than becoming UNMEASURABLE. Preserve M2
+seek/latency/formatter and same-input/build reproduction limits. Numeric/synthetic
+checks provide no listening/default-promotion approval.
 
-M3-01 final focus: 123 Settings +80 EntryPoints per shell; Full: 1141 Pester +62
-Python discovered per shell (61 execute, one privilege skip). Parser/static
-pass (34 files, 197 advisories); code
-stable during each scope. EntryPoints captured before two unselected Settings
-test-only corrections; retain exact per-scope hashes. Initial PS5.1 junction
-cleanup failure122/123 is preserved; final123/123 both pass. Original20/20 and
-settings 68/68 real invocations pass with 18 exact
-saved/CLI PCM pairs and both decimal cultures. Use existing pinned modules and
-FFmpeg9.0.2; no download or security change. Strip inherited PSMODULEPATH from
-Python children. Focus smallest relevant checks, freeze code, then required Full
-per shell. Record exact commands/exits/hashes/versions/scopes and honest skips.
+Final selected checks:73 Batch plus4 invalid-path cases,33 Transport,58 legacy
+Launcher per host. Full:1251 Pester pass +62 Python discovered per host (61 pass,
+one symlink-privilege skip); parser/static/plan pass with visible non-gating
+advisories. API28/28 calls,32 assets,26 PCM/frame/graph matches +6 direct refs;
+BAT6/6 calls +4/4 refs,20 assets,16 matches. All final source/tool/config guards
+pass. Prior captures with preliminary code and corrected failures stay distinct.
+Use existing pinned modules/FFmpeg9.0.2; no download/security change. Strip
+inherited PSMODULEPATH from Python children. Focus smallest relevant checks,
+freeze code, then required Full per shell. Record exact commands/exits/hashes/
+versions/scopes, failure history and skips. Tests isolate SettingsPath/Ignore;
+never write the user's own preferences or publish private audio/reports.
 
-Inherited listening/calibration/>4GB/disk exhaustion/active Ctrl+C/long-file
-memory/codec-seek limits remain. Update canonical state/evidence/handoff,
-stage/review/commit/push explicitly and verify clean upstream/live/draft equality.
-Stop after M3-02; no merge/release/promotion/deployment.
+Manual Explorer gesture, active-render Ctrl+C, power-loss, speech listening/
+calibration/>4GB/disk exhaustion/long-file memory/codec-seek limits remain.
+Media cancellation is a labeled copied dispatch simulation. Update canonical
+state/evidence/handoff only for the selected task, stage/review/commit/push
+explicitly, verify clean upstream/live/draft equality, and stop after M3-03.
+No merge/release/default promotion/deployment.

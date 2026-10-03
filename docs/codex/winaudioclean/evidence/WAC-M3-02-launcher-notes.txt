@@ -1,0 +1,19 @@
+WAC-M3-02 launcher transport evidence
+
+Final focused Pester scope: 33 passed, 0 failed/skipped/not-run in each outer host (Windows PowerShell5.1.26100.9444 and PowerShell7.6.5), Pester5.7.1. The real CMD/BAT invokes a typed application recorder under both selected inner hosts. This is transport evidence, not audio-render or native Explorer desktop-drop evidence.
+
+Retained initial focused scope: 30 passed/2 failed in each host, exit1. Two negative unit rows collided with automatic $Input and did not exercise their intended ambiguous input. The corrected suite also adds the invalid-image worker-start regression. Initial Launcher469C and final Launcher0FAC source scopes remain separate.
+
+Prior Launcher469C probes: 32/32 exact ordered payload/host/settings/pause cases, plus5/5 real CMD budget/count boundaries. The 7599-character case reaches the recorder and returns7;7600 returns2 without the app;9000 is rejected by CMD with1;1024 captured paths reach the typed array;1025 rejects2. These are synthetic transport bounds, not claims that oversized file paths are valid media paths.
+
+Final Launcher0FAC worker-start proof: an owned invalid .exe returns3, invokes no app and pauses exactly once in both outer hosts. The original reproduction returned3 but had no pause; the failing capture remains published.
+
+The first prototype checked expected exits and record presence, but its UTF-8/no-BOM Unicode fixture was read incorrectly by PS5.1 and did not assert the intended Unicode payload. It is retained as a superseded preliminary, not counted as Unicode acceptance. The first boundary runner omitted two quotes when constructing length and observed the product correctly rejecting its actual over-budget line; the corrected scope records actual7599.
+
+CMD may substitute percent/exclamation text before any BAT begins. The controlled outer-percent experiment created an owned sentinel despite an immediate-exit stub. Observable positional percent/exclamation text is rejected, never repaired. Literal names use direct PowerShell or a short environment-carried manifest path; large list contents stay in the manifest. Positional transport accepts only a fresh verified CMD /c frame shorter than7600 characters and at most1024 inputs. Existing/nested CMD uses the environment/manifest route.
+
+All fixtures and captures use owned synthetic paths; no real preferences, private media, listening, promotion, sound change or upload is claimed. The evidence leaves full application/audio, Batch, cumulative/Full and canonical task status to their separate owners. Original raw file hashes and normalized redacted published hashes are distinct. No self-referential master hash is embedded.
+
+Primary CMD semantics: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd
+Primary8191-character boundary guidance: https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/command-line-string-limitation
+Primary PowerShell native/BAT parsing: https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parsing?view=powershell-7.5

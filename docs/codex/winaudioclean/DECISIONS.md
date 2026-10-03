@@ -504,3 +504,45 @@ settings storage. Complete-file replacement does not certify power-loss durabili
 Human listening/default promotion remains pending under D07/D31. Feature-branch
 delivery is authorized; no merge/release/settings/security/deployment approval
 is added. Evidence: `evidence/WAC-M3-01.md`. Next: WAC-M3-02 only.
+
+### 2026-10-03 — WAC-M3-02 ordered explicit file-list handoff
+
+D33. Preserve the positional single-string input and existing BAT. Add optional
+InputPaths/InputListPath through a narrow Batch sibling, using existing settings
+validation and ordinary single-file execution. Materialize the explicit list,
+resolve preferences once and choose an omitted interactive mode once. Supply
+the frozen choices to children with saved reads disabled. Preserve explicit
+repeats and order; folder discovery, recursion, deduplication and automatic
+generated-output exclusion remain WAC-M3-03.
+
+Use a strict schema-1 UTF-8 manifest (1 MiB, 1..1024 nonempty strings), with
+relative paths anchored beside it. JSON is data; reject malformed/unknown/typed
+schema failures before jobs. Legal percent/exclamation filenames and long lists
+use direct PowerShell or a short manifest/environment handoff. A folder selection
+example may generate an explicit manifest, without implementing folder traversal.
+
+The optional Launcher sibling verifies a narrow fresh CMD /c frame against
+independently captured numbered arguments. Reject observable percent/exclamation,
+ambiguous quoting/count/provenance and a 7600-character positional budget before
+application work. CMD's own earlier expansion cannot be repaired or prevented by
+the BAT after it starts; retain the controlled expansion/sentinel proof and safe
+fallback instructions. Preserve helper-less single/environment routes, default
+inner PS5.1, optional explicitly selected PS7, and saved exit status around pause.
+No path is interpolated into PowerShell command text.
+
+Persist header, each item and terminal summary as flushed JSON Lines through
+an exclusively created held writer. Keep existing detailed render reports.
+Bound item diagnostics, including native-failure context; do not infer report
+ownership by scanning a destination. One-item lists retain ordinary exit codes;
+multi-item failure is 6, warnings alone 7, cancellation 130 and result-storage
+failure 5. A cancelled child stops new jobs; journal append failure rolls back
+only its new suffix where possible and preserves earlier results/exports.
+Disclose incomplete journals and retain crash/storage/manual-cancellation limits.
+
+Preserve the captured development failures and corrections rather than replace
+them with final green history. Main's earlier helper bodies, IO/Settings/Preview,
+application2.3/report1 and Original/Gentle versions remain unchanged. Engineering
+CMD/queue checks do not establish a performed Explorer gesture, active-render
+Ctrl+C test, power-loss guarantee or speech listening/default promotion. Evidence:
+`evidence/WAC-M3-02.md`. Next: WAC-M3-03, separately synchronized; no merge,
+release, default promotion, security change or deployment is authorized here.

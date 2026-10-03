@@ -1,0 +1,34 @@
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: failed.wav
+Invoke-WacBatchItem : Controlled item failure
+At <repo>\WinAudioClean.Batch.ps1:208 char:27
++ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem
+
+Processing input 3 of 3: last.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f7e10b1a711e4151a1122b5d4e3de130\continuation.jsonl
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: cancelled.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f7e10b1a711e4151a1122b5d4e3de130\cancellation.jsonl
+Processing input 1 of 1: warning.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f7e10b1a711e4151a1122b5d4e3de130\single-warning.jsonl
+Processing input 1 of 2: <repo>\.wac-local\WAC-M3-02\smoke-f7e10b1a711e4151a1122b5d4e3de130\missing1.wav
+Invoke-WacBatchItem : Preflight failed: Input file does not exist or cannot be accessed.
+At <repo>\WinAudioClean.Batch.ps1:208 char:27
++ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem
+
+Processing input 2 of 2: <repo>\.wac-local\WAC-M3-02\smoke-f7e10b1a711e4151a1122b5d4e3de130\missing2.wav
+Invoke-WacBatchItem : Preflight failed: Input file does not exist or cannot be accessed.
+At <repo>\WinAudioClean.Batch.ps1:208 char:27
++ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem
+
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f7e10b1a711e4151a1122b5d4e3de130\actual-main.jsonl
+Smoke passed: 5 checks; shell 5.1.26100.9444.

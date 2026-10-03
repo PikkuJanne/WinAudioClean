@@ -1,0 +1,233 @@
+{
+  "initial": {
+    "source": {
+      "WinAudioClean.ps1": "f01c1ce86c5af96fda8b7b116f56a8e552378289c6fc9f822d952ea939326178",
+      "WinAudioClean.Batch.ps1": "f3c4a1b782de6499d710410515696a8b39ba38c0071e32069c37ce91fcbaf91b",
+      "WinAudioClean.Settings.ps1": "bb6c7f034fc65bfeaf26b769b09ba7d8535f98d5455af68d72405b48b577f2da",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+    },
+    "source_unchanged": true,
+    "runs": [
+      {
+        "shell": "ps51",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1",
+          "-RepositoryRoot",
+          "<repo>"
+        ],
+        "exit_code": 1,
+        "log": "batch-smoke-ps51.txt",
+        "sha256": "fccdf64b9a64c97db3964fecdfe9588af4bb0e78b3dc1db9d2b6785e190d67e8",
+        "tail": "Controlled item failure\nAt <repo>\\WinAudioClean.Batch.ps1:176 char:27\n+ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem\n \nProcessing input 3 of 3: last.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-1ca7d2fcbee546bfaa7c944d076b3902\\continuation.jsonl\nProcessing input 1 of 3: first.wav\nProcessing input 2 of 3: cancelled.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-1ca7d2fcbee546bfaa7c944d076b3902\\cancellation.jsonl\nProcessing input 1 of 1: warning.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-1ca7d2fcbee546bfaa7c944d076b3902\\single-warning.jsonl\n<repo>\\WinAudioClean.ps1 : Input list failed: Cannot find an overload for \"Contains\" and \nthe argument count: \"1\".\nAt <repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1:40 char:1\n+ & (Join-Path $RepositoryRoot 'WinAudioClean.ps1') -InputPaths @((Join ...\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1\n \nActual main list route failed.\nAt <repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1:41 char:28\n+ if ($LASTEXITCODE -ne 6) { throw 'Actual main list route failed.' }\n+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : OperationStopped: (Actual main list route failed.:String) [], RuntimeException\n    + FullyQualifiedErrorId : Actual main list route failed.\n \n"
+      },
+      {
+        "shell": "ps7",
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1",
+          "-RepositoryRoot",
+          "<repo>"
+        ],
+        "exit_code": 1,
+        "log": "batch-smoke-ps7.txt",
+        "sha256": "46b571d148247d2bd5fca0fe57d8531375555210071ad97cf75ccb1454a84ced",
+        "tail": "Processing input 1 of 3: first.wav\nProcessing input 2 of 3: failed.wav\nInvoke-WacBatchItem: <repo>\\WinAudioClean.Batch.ps1:176\nLine |\n 176 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Controlled item failure\nProcessing input 3 of 3: last.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-d1a139cb03d54e6fa68ce79c52634c81\\continuation.jsonl\nProcessing input 1 of 3: first.wav\nProcessing input 2 of 3: cancelled.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-d1a139cb03d54e6fa68ce79c52634c81\\cancellation.jsonl\nProcessing input 1 of 1: warning.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-d1a139cb03d54e6fa68ce79c52634c81\\single-warning.jsonl\nWrite-Error: <repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1:40\nLine |\n  40 |  & (Join-Path $RepositoryRoot 'WinAudioClean.ps1') -InputPaths @((Join …\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Input list failed: Cannot find an overload for \"Contains\" and the argument count: \"1\".\nException: <repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1:41\nLine |\n  41 |  if ($LASTEXITCODE -ne 6) { throw 'Actual main list route failed.' }\n     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Actual main list route failed.\n"
+      }
+    ],
+    "public_logs": [
+      {
+        "host": "ps51",
+        "raw_sha256": "fccdf64b9a64c97db3964fecdfe9588af4bb0e78b3dc1db9d2b6785e190d67e8",
+        "path": "evidence/WAC-M3-02-smoke-initial-ps51.txt",
+        "public_sha256": "1afcfd3b75299abc30a715456423d5259d72202cc82ee0a8464159b638c0dd99"
+      },
+      {
+        "host": "ps7",
+        "raw_sha256": "46b571d148247d2bd5fca0fe57d8531375555210071ad97cf75ccb1454a84ced",
+        "path": "evidence/WAC-M3-02-smoke-initial-ps7.txt",
+        "public_sha256": "337c2ae562e7e03004c32a2d4c117db2ed94e9a7933f697a6a4615f48e781d19"
+      }
+    ]
+  },
+  "first-corrected": {
+    "source": {
+      "WinAudioClean.ps1": "f01c1ce86c5af96fda8b7b116f56a8e552378289c6fc9f822d952ea939326178",
+      "WinAudioClean.Batch.ps1": "75aa65935ac882c021b24e79802df2cfa40ec0dfcfcee6772c90d39c35ab3ee3",
+      "WinAudioClean.Settings.ps1": "bb6c7f034fc65bfeaf26b769b09ba7d8535f98d5455af68d72405b48b577f2da",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+    },
+    "source_unchanged": true,
+    "runs": [
+      {
+        "shell": "ps51",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1",
+          "-RepositoryRoot",
+          "<repo>"
+        ],
+        "exit_code": 0,
+        "log": "batch-smoke-final-ps51.txt",
+        "sha256": "e2ac189adb1189c8c3f11b673517bf4716cc4b6e0df407318e7cd54a86511038",
+        "tail": "Batch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-c70621537e81428eb778a750b3c0993f\\continuation.jsonl\nProcessing input 1 of 3: first.wav\nProcessing input 2 of 3: cancelled.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-c70621537e81428eb778a750b3c0993f\\cancellation.jsonl\nProcessing input 1 of 1: warning.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-c70621537e81428eb778a750b3c0993f\\single-warning.jsonl\nProcessing input 1 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-c70621537e81428eb778a750b3c0993f\\missing1.wav\nInvoke-WacBatchItem : Preflight failed: Input file does not exist or cannot be accessed.\nAt <repo>\\WinAudioClean.Batch.ps1:176 char:27\n+ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem\n \nProcessing input 2 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-c70621537e81428eb778a750b3c0993f\\missing2.wav\nInvoke-WacBatchItem : Preflight failed: Input file does not exist or cannot be accessed.\nAt <repo>\\WinAudioClean.Batch.ps1:176 char:27\n+ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem\n \nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-c70621537e81428eb778a750b3c0993f\\actual-main.jsonl\nSmoke passed: 5 checks; shell 5.1.26100.9444.\n"
+      },
+      {
+        "shell": "ps7",
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1",
+          "-RepositoryRoot",
+          "<repo>"
+        ],
+        "exit_code": 0,
+        "log": "batch-smoke-final-ps7.txt",
+        "sha256": "f3f29193091ba129fd55de2d941931309dcfff958141532a932be10b675762b9",
+        "tail": "st.wav\nProcessing input 2 of 3: failed.wav\nInvoke-WacBatchItem: <repo>\\WinAudioClean.Batch.ps1:176\nLine |\n 176 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Controlled item failure\nProcessing input 3 of 3: last.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-acee09fc35db43358431b30511ba10d8\\continuation.jsonl\nProcessing input 1 of 3: first.wav\nProcessing input 2 of 3: cancelled.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-acee09fc35db43358431b30511ba10d8\\cancellation.jsonl\nProcessing input 1 of 1: warning.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-acee09fc35db43358431b30511ba10d8\\single-warning.jsonl\nProcessing input 1 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-acee09fc35db43358431b30511ba10d8\\missing1.wav\nInvoke-WacBatchItem: <repo>\\WinAudioClean.Batch.ps1:176\nLine |\n 176 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Preflight failed: Input file does not exist or cannot be accessed.\nProcessing input 2 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-acee09fc35db43358431b30511ba10d8\\missing2.wav\nInvoke-WacBatchItem: <repo>\\WinAudioClean.Batch.ps1:176\nLine |\n 176 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Preflight failed: Input file does not exist or cannot be accessed.\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-acee09fc35db43358431b30511ba10d8\\actual-main.jsonl\nSmoke passed: 5 checks; shell 7.6.5.\n"
+      }
+    ],
+    "public_logs": [
+      {
+        "host": "ps51",
+        "raw_sha256": "e2ac189adb1189c8c3f11b673517bf4716cc4b6e0df407318e7cd54a86511038",
+        "path": "evidence/WAC-M3-02-smoke-first-corrected-ps51.txt",
+        "public_sha256": "78e9e36863cc7e520ba82123f46583a2f7ceb5e4391d5335c939cd1a505371e0"
+      },
+      {
+        "host": "ps7",
+        "raw_sha256": "f3f29193091ba129fd55de2d941931309dcfff958141532a932be10b675762b9",
+        "path": "evidence/WAC-M3-02-smoke-first-corrected-ps7.txt",
+        "public_sha256": "d9687ff7ddc896013381b6b8198ef19fd4c3c38de228b9c7bbbee02efc9885b3"
+      }
+    ]
+  },
+  "relay-corrected": {
+    "source": {
+      "WinAudioClean.ps1": "f01c1ce86c5af96fda8b7b116f56a8e552378289c6fc9f822d952ea939326178",
+      "WinAudioClean.Batch.ps1": "da98b0e8feb795b8df1e244103ce29f1d5b9898afe9f8ff1989b4073b317cd7c",
+      "WinAudioClean.Settings.ps1": "bb6c7f034fc65bfeaf26b769b09ba7d8535f98d5455af68d72405b48b577f2da",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+    },
+    "source_unchanged": true,
+    "runs": [
+      {
+        "shell": "ps51",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1",
+          "-RepositoryRoot",
+          "<repo>"
+        ],
+        "exit_code": 0,
+        "log": "batch-smoke-relay-fixed-ps51.txt",
+        "sha256": "c79e4fcf184741c58f799e80de8cad2c9349581bc1a65d3581bfcdb1c2ee7b5d",
+        "tail": "Batch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f7e10b1a711e4151a1122b5d4e3de130\\continuation.jsonl\nProcessing input 1 of 3: first.wav\nProcessing input 2 of 3: cancelled.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f7e10b1a711e4151a1122b5d4e3de130\\cancellation.jsonl\nProcessing input 1 of 1: warning.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f7e10b1a711e4151a1122b5d4e3de130\\single-warning.jsonl\nProcessing input 1 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-f7e10b1a711e4151a1122b5d4e3de130\\missing1.wav\nInvoke-WacBatchItem : Preflight failed: Input file does not exist or cannot be accessed.\nAt <repo>\\WinAudioClean.Batch.ps1:208 char:27\n+ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem\n \nProcessing input 2 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-f7e10b1a711e4151a1122b5d4e3de130\\missing2.wav\nInvoke-WacBatchItem : Preflight failed: Input file does not exist or cannot be accessed.\nAt <repo>\\WinAudioClean.Batch.ps1:208 char:27\n+ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...\n+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem\n \nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f7e10b1a711e4151a1122b5d4e3de130\\actual-main.jsonl\nSmoke passed: 5 checks; shell 5.1.26100.9444.\n"
+      },
+      {
+        "shell": "ps7",
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<repo>\\.wac-local\\WAC-M3-02\\batch-smoke.ps1",
+          "-RepositoryRoot",
+          "<repo>"
+        ],
+        "exit_code": 0,
+        "log": "batch-smoke-relay-fixed-ps7.txt",
+        "sha256": "54b08c899133a0b074f23d05c10382bee166630e18f256e8663b0d26250daf5e",
+        "tail": "st.wav\nProcessing input 2 of 3: failed.wav\nInvoke-WacBatchItem: <repo>\\WinAudioClean.Batch.ps1:208\nLine |\n 208 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Controlled item failure\nProcessing input 3 of 3: last.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f2e33c38f32a4bd1b25f1294322ce92d\\continuation.jsonl\nProcessing input 1 of 3: first.wav\nProcessing input 2 of 3: cancelled.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f2e33c38f32a4bd1b25f1294322ce92d\\cancellation.jsonl\nProcessing input 1 of 1: warning.wav\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f2e33c38f32a4bd1b25f1294322ce92d\\single-warning.jsonl\nProcessing input 1 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-f2e33c38f32a4bd1b25f1294322ce92d\\missing1.wav\nInvoke-WacBatchItem: <repo>\\WinAudioClean.Batch.ps1:208\nLine |\n 208 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Preflight failed: Input file does not exist or cannot be accessed.\nProcessing input 2 of 2: <repo>\\.wac-local\\WAC-M3-02\\smoke-f2e33c38f32a4bd1b25f1294322ce92d\\missing2.wav\nInvoke-WacBatchItem: <repo>\\WinAudioClean.Batch.ps1:208\nLine |\n 208 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …\n     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Preflight failed: Input file does not exist or cannot be accessed.\nBatch results saved to: <repo>\\.wac-local\\WAC-M3-02\\smoke-f2e33c38f32a4bd1b25f1294322ce92d\\actual-main.jsonl\nSmoke passed: 5 checks; shell 7.6.5.\n"
+      }
+    ],
+    "public_logs": [
+      {
+        "host": "ps51",
+        "raw_sha256": "c79e4fcf184741c58f799e80de8cad2c9349581bc1a65d3581bfcdb1c2ee7b5d",
+        "path": "evidence/WAC-M3-02-smoke-relay-corrected-ps51.txt",
+        "public_sha256": "cd95179a227a6349065ccd11264237702edf5ce530acf18421b77892ce2cea9d"
+      },
+      {
+        "host": "ps7",
+        "raw_sha256": "54b08c899133a0b074f23d05c10382bee166630e18f256e8663b0d26250daf5e",
+        "path": "evidence/WAC-M3-02-smoke-relay-corrected-ps7.txt",
+        "public_sha256": "b16fb21fd585f2d9f849e960cd321308f4e423018469cd3d7ca313bf790fc81f"
+      }
+    ]
+  },
+  "harnesses": {
+    "batch-smoke.ps1": {
+      "raw_sha256": "8cfb795fc2ebbbaff8c118f39e9e8f56b303d35ece932e84ebe1942edbb8cbd0",
+      "source": "param([string]$RepositoryRoot)\n$ErrorActionPreference='Stop'\n. (Join-Path $RepositoryRoot 'WinAudioClean.ps1')\n. (Join-Path $RepositoryRoot 'WinAudioClean.Settings.ps1')\n. (Join-Path $RepositoryRoot 'WinAudioClean.Batch.ps1')\n$root=Join-Path $RepositoryRoot ('.wac-local/WAC-M3-02/smoke-'+[guid]::NewGuid().ToString('N'))\n$null=[IO.Directory]::CreateDirectory($root)\n$app=Join-Path $root 'stub.ps1'\n[IO.File]::WriteAllText($app, @'\nparam([string]$inputPath)\n[IO.File]::AppendAllText($env:WAC_SMOKE_RECORD,$inputPath+\"`n\",[Text.UTF8Encoding]::new($false))\nswitch ([IO.Path]::GetFileName($inputPath)) {\n  'failed.wav' { Write-Error 'Controlled item failure' -ErrorAction Continue; exit 2 }\n  'warning.wav' { exit 7 }\n  'cancelled.wav' { exit 130 }\n  default { exit 0 }\n}\n'@,[Text.UTF8Encoding]::new($false))\n$manifest=Join-Path $root 'inputs.json'\n[IO.File]::WriteAllText($manifest,'{\"schemaVersion\":1,\"inputs\":[\"literal %TOKEN% ! [a].wav\",\"second.wav\",\"second.wav\"]}',[Text.UTF8Encoding]::new($false))\n$inputs=@(Read-WacInputList -Path $manifest)\nif ($inputs.Count -ne 3 -or $inputs[0] -cne (Join-Path $root 'literal %TOKEN% ! [a].wav') -or $inputs[1] -cne $inputs[2]) { throw 'Manifest anchoring/order/repetition failed.' }\n$checks=1\nforeach ($case in @(\n @{ Name='continuation'; Inputs=@('first.wav','failed.wav','last.wav'); Exit=6; States=@('SUCCESS','FAILED','SUCCESS'); Calls=3 },\n @{ Name='cancellation'; Inputs=@('first.wav','cancelled.wav','last.wav'); Exit=130; States=@('SUCCESS','CANCELLED','NOT_STARTED'); Calls=2 },\n @{ Name='single-warning'; Inputs=@('warning.wav'); Exit=7; States=@('WARNING'); Calls=1 }\n)) {\n $env:WAC_SMOKE_RECORD=Join-Path $root ($case.Name+'.calls.txt')\n $journal=Join-Path $root ($case.Name+'.jsonl')\n $settings=Resolve-WacSettings -Explicit @{ Mode='Raw'; OutputDirectory=$root }\n $result=Invoke-WacBatch -Inputs $case.Inputs -Parameters @{ NonInteractive=$true; BatchResultPath=$journal } -ResolvedSettings $settings -ApplicationPath $app\n $records=@([IO.File]::ReadAllLines($journal)|ForEach-Object { $_|ConvertFrom-Json })\n $states=@($records|Where-Object type -eq item|ForEach-Object status)\n if ($result.ExitCode -ne $case.Exit -or -not $result.ReportingComplete -or ($states -join ',') -cne ($case.States -join ',') -or [IO.File]::ReadAllLines($env:WAC_SMOKE_RECORD).Count -ne $case.Calls) { throw ($case.Name+' failed.') }\n if ($records[-1].exitCode -ne $case.Exit -or $records[-1].type -ne 'summary') { throw 'Summary mismatch.' }\n $checks++\n}\n$journal=Join-Path $root 'actual-main.jsonl'\n& (Join-Path $RepositoryRoot 'WinAudioClean.ps1') -InputPaths @((Join-Path $root 'missing1.wav'),(Join-Path $root 'missing2.wav')) -Mode Raw -OutputDirectory $root -IgnoreSavedSettings -NonInteractive -BatchResultPath $journal\nif ($LASTEXITCODE -ne 6) { throw 'Actual main list route failed.' }\n$records=@([IO.File]::ReadAllLines($journal)|ForEach-Object { $_|ConvertFrom-Json })\nif (@($records|Where-Object { $_.type -eq 'item' -and $_.exitCode -eq 2 }).Count -ne 2) { throw 'Actual preflight results missing.' }\n$checks++\nWrite-Output (\"Smoke passed: $checks checks; shell $($PSVersionTable.PSVersion).\")\nexit 0\n"
+    },
+    "run-smoke.py": {
+      "raw_sha256": "b8325067141e20d734e09b473587dce76c45cd71b5aeca19c2effe9ac1038186",
+      "source": "from pathlib import Path\nimport hashlib,json,os,shutil,subprocess,concurrent.futures,sys\nroot=Path.cwd(); scratch=root/'.wac-local/WAC-M3-02'\nfiles=['WinAudioClean.ps1','WinAudioClean.Batch.ps1','WinAudioClean.Settings.ps1','WinAudioClean.IO.ps1']\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nsource={f:sha(root/f) for f in files}\nphase=sys.argv[1] if len(sys.argv)>1 else 'final'\nshells={'ps51':str(Path(os.environ['SYSTEMROOT'])/'System32/WindowsPowerShell/v1.0/powershell.exe'),'ps7':shutil.which('pwsh.exe')}\nassert all(shells.values())\nenv={k:v for k,v in os.environ.items() if k.upper()!='PSMODULEPATH'}\ndef run(item):\n name,exe=item\n command=[exe,'-NoLogo','-NoProfile','-ExecutionPolicy','Bypass','-File',str(scratch/'batch-smoke.ps1'),'-RepositoryRoot',str(root)]\n p=subprocess.run(command,cwd=root,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,encoding='utf-8',errors='replace',timeout=90)\n log=scratch/('batch-smoke-'+phase+'-'+name+'.txt');log.write_text(p.stdout,encoding='utf-8')\n return {'shell':name,'command':command,'exit_code':p.returncode,'log':log.name,'sha256':sha(log),'tail':p.stdout[-2000:]}\nwith concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:runs=list(pool.map(run,shells.items()))\nafter={f:sha(root/f) for f in files}\ndata={'source':source,'source_unchanged':source==after,'runs':runs}\n(scratch/('batch-smoke-'+phase+'-results.json')).write_text(json.dumps(data,indent=2),encoding='utf-8')\nfor r in runs: print(json.dumps(r))\nraise SystemExit(0 if source==after and all(r['exit_code']==0 for r in runs) else 1)\n"
+    },
+    "run-gates.py": {
+      "raw_sha256": "9c23e4d1f7539287c5987b805e2eddb2b3f8fae5824710b5aa90c260c4b455f6",
+      "source": "from pathlib import Path\nimport concurrent.futures,hashlib,json,os,re,shutil,subprocess,sys,time\nroot=Path.cwd(); scratch=root/'.wac-local/WAC-M3-02'; evidence=root/'docs/codex/winaudioclean/evidence'\nphase=sys.argv[1]; label=sys.argv[2] if len(sys.argv)>2 else 'final'\nassert phase in ('Targeted','Full') and re.fullmatch('[a-z0-9-]+',label)\nnames=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard'],text=True).splitlines()\nnames=sorted(set(n for n in names if n.endswith(('.ps1','.psd1','.py','.cs','.bat')) and (root/n).is_file()))\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()\nsource={n:sha(root/n) for n in names}\ndef sanitize(text):\n text=re.sub(r'\\x1b\\[[0-?]*[ -/]*[@-~]','',text)\n for old,new in ((str(root),'<repo>'),(root.as_posix(),'<repo>'),(str(Path.home()),'<user-profile>'),(Path.home().as_posix(),'<user-profile>')):\n  text=re.sub(re.escape(old),lambda m:new,text,flags=re.I)\n return '\\n'.join(line.rstrip() for line in text.splitlines()).rstrip()+'\\n'\ndef run(shell):\n exe=shutil.which(shell);assert exe\n host='ps51' if shell=='powershell.exe' else 'ps7'\n statement='./scripts/Invoke-Tests.ps1 -Level '+phase\n if phase=='Targeted': statement+=\" -Path @('tests/WinAudioClean.Launcher.Tests.ps1')\"\n if phase=='Full' and host=='ps7':statement+=' -AnalyzerWarnings'\n command=[exe,'-NoLogo','-NoProfile','-ExecutionPolicy','Bypass','-Command',statement]\n env={k:v for k,v in os.environ.items() if k.upper()!='PSMODULEPATH'};start=time.time()\n p=subprocess.run(command,env=env,cwd=root,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,encoding='utf-8',errors='replace',timeout=2400)\n log=evidence/('WAC-M3-02-'+phase.lower()+'-'+label+'-'+host+'.txt')\n assert not log.exists(),'Refusing to overwrite prior gate evidence.'\n log.write_text(sanitize(p.stdout),encoding='utf-8',newline='\\n')\n r={'shell':host,'phase':phase,'label':label,'command':[sanitize(a).strip() for a in command],'exit_code':p.returncode,'elapsed_seconds':round(time.time()-start,2),'log':log.relative_to(evidence.parent).as_posix(),'log_sha256':sha(log)}\n print(json.dumps(r),flush=True);print('\\n'.join(sanitize(p.stdout).splitlines()[-10:]),flush=True);return r\nwith concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:runs=list(pool.map(run,['powershell.exe','pwsh.exe']))\nunchanged=source=={n:sha(root/n) for n in names}\nmetadata=scratch/(phase.lower()+'-'+label+'-results.json');assert not metadata.exists()\nmetadata.write_text(json.dumps({'source':source,'source_unchanged':unchanged,'runs':runs},indent=2)+'\\n',encoding='utf-8')\nraise SystemExit(0 if unchanged and all(r['exit_code']==0 for r in runs) else 1)\n"
+    }
+  },
+  "invalid_relative_path_reproduction": [
+    {
+      "shell": "powershell.exe",
+      "command": [
+        "powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$values=@('bad|name.wav', ('nul'+[char]0+'.wav')); foreach($v in $values) { try { $x=[IO.Path]::Combine('C:\\manifest-parent',$v); [pscustomobject]@{length=$v.Length;combined=$true;anchored=$x.StartsWith('C:\\manifest-parent')}|ConvertTo-Json -Compress } catch { [pscustomobject]@{length=$v.Length;combined=$false;error=$_.Exception.GetBaseException().Message}|ConvertTo-Json -Compress } }"
+      ],
+      "exit_code": 0,
+      "output": "{\"length\":12,\"combined\":false,\"error\":\"Illegal characters in path.\"}\n{\"length\":8,\"combined\":false,\"error\":\"Illegal characters in path.\"}\n",
+      "stderr": ""
+    },
+    {
+      "shell": "pwsh.exe",
+      "command": [
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$values=@('bad|name.wav', ('nul'+[char]0+'.wav')); foreach($v in $values) { try { $x=[IO.Path]::Combine('C:\\manifest-parent',$v); [pscustomobject]@{length=$v.Length;combined=$true;anchored=$x.StartsWith('C:\\manifest-parent')}|ConvertTo-Json -Compress } catch { [pscustomobject]@{length=$v.Length;combined=$false;error=$_.Exception.GetBaseException().Message}|ConvertTo-Json -Compress } }"
+      ],
+      "exit_code": 0,
+      "output": "{\"length\":12,\"combined\":true,\"anchored\":true}\n{\"length\":8,\"combined\":true,\"anchored\":true}\n",
+      "stderr": ""
+    }
+  ],
+  "dispositions": {
+    "initial": "PSBoundParameters.Contains overload bug, fixed with Keys -contains; exit1 in both hosts",
+    "first-corrected": "5 checks per host, exit0 on A897; preliminary before diagnostics relay",
+    "relay-corrected": "5 checks per host, exit0 on DA98; pre-anchoring scope retained",
+    "path_reproduction": "PS5.1 Combine rejects pipe and NUL globally, PS7 accepts. Final C2CF concatenates anchored relative data; four focused and Full regressions cover final fix."
+  }
+}

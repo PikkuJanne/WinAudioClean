@@ -1,0 +1,1255 @@
+{
+  "schemaVersion": 1,
+  "taskId": "WAC-M3-02",
+  "scope": "Launcher transport evidence only; separate root artifacts cover full application/audio/Batch/cumulative/Full and canonical state.",
+  "finalProductSources": [
+    {
+      "path": "WinAudioClean.bat",
+      "sha256": "6E27F9AD0CA277C7952F159F1EC398D6A9EA0C3FA5F9D935FB39C47C1D71935B"
+    },
+    {
+      "path": "WinAudioClean.Launcher.ps1",
+      "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+    }
+  ],
+  "tools": {
+    "capture": {
+      "path": ".wac-local/WAC-M3-02/launcher-tools-at-export.json",
+      "rawSha256": "F9580B1CAB7035C249C2BC088CEC7CC32A3F0EC53127B46CAEBC2E15DA13EA11",
+      "rawBytes": 1322
+    },
+    "data": {
+      "capturedAtUtc": "2026-10-03T06:34:20.1530911Z",
+      "scope": "Binary metadata read at evidence export; shell runtime versions are separately recorded in the executed focused logs.",
+      "tools": [
+        {
+          "path": "C:\\Windows\\System32\\cmd.exe",
+          "sha256": "97AC98B1A92C286054CCE55239CFCCDFC23A5517BD07FE693072C9CA96C7DABB",
+          "fileVersion": "10.0.26100.1 (WinBuild.160101.0800)",
+          "productVersion": "10.0.26100.1"
+        },
+        {
+          "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "sha256": "8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E",
+          "fileVersion": "10.0.26100.8972 (WinBuild.160101.0800)",
+          "productVersion": "10.0.26100.8972"
+        },
+        {
+          "path": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "sha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+          "fileVersion": "7.6.5.500",
+          "productVersion": "7.6.5 SHA: ea554a8f9c6085f54fb2828f7ea286c65c35599f+ea554a8f9c6085f54fb2828f7ea286c65c35599f"
+        }
+      ],
+      "pesterManifest": {
+        "sha256": "C6DCE1CDD85A9236A9A628DCAAF3E6F07B0AC4173FB25F620FA466F4402EC341",
+        "version": "5.7.1",
+        "path": ".wac-local/Modules/Pester/5.7.1/Pester.psd1"
+      }
+    },
+    "commandHashes": []
+  },
+  "focusedSummary": {
+    "initial": {
+      "perHost": {
+        "passed": 30,
+        "failed": 2,
+        "exitCode": 1
+      },
+      "launcherSource": "469C9758862108E2BA46431436E5B4737752432078DEF4E1BDA31FBF295D85D6"
+    },
+    "final": {
+      "perHost": {
+        "passed": 33,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 0,
+        "exitCode": 0
+      },
+      "launcherSource": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+    }
+  },
+  "probeSummary": {
+    "prior469CExactTransport": 32,
+    "prior469CExactBoundaries": 5,
+    "final0FACStartupFailure": 2,
+    "original469CStartupFailure": {
+      "passed": 0,
+      "failed": 2
+    },
+    "outerCmdCharacterization": 3
+  },
+  "sourceScopePolicy": "Prior469C success is not relabeled as final0FAC. Final33-case focused Pester and2-case startup proof verify final0FAC. Initial focus/product/fixture failures remain captured.",
+  "sanitization": {
+    "repository": "<repo>",
+    "profile": "<user-profile>",
+    "username": "<user>",
+    "format": "UTF-8 no BOM, LF, trailing whitespace removed, one terminal newline; JSON string content preserves semantic controls while decoded text captures are normalized. Raw hashes remain original; published artifacts have separate hashes."
+  },
+  "artifacts": [
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-initial-ps51.txt",
+      "publishedSha256": "D384BF927D849B8F4035CFD745C456F552E57EB9B6893AAD92E1491D9B09967C",
+      "publishedBytes": 4061
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-initial-ps7.txt",
+      "publishedSha256": "51B10FBC08C45D6D3280FF3E73059B436CF865B8686AE658062363FAD8B5CE49",
+      "publishedBytes": 4037
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-final-ps51.txt",
+      "publishedSha256": "FD705A89125439212FF0A6B34C91EDC31CA0B1DBEB50B44E666130B1442A4C5A",
+      "publishedBytes": 3479
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-final-ps7.txt",
+      "publishedSha256": "B462685E6B754B85E070C83329A45CFF530F93F0E02E73AFAE012268C464A16C",
+      "publishedBytes": 3467
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused.json",
+      "publishedSha256": "99F8F0221EC29E0365022C634EA8BF66774C1DA93BACC88B6E59E0F403199198",
+      "publishedBytes": 14587
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-probes.json",
+      "publishedSha256": "CB8E52BE129CD5E271725E24D93E6442E42ED9EA92DD81A0CDD4BDFF202C671F",
+      "publishedBytes": 447309
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-harness.json",
+      "publishedSha256": "CE4DDC9338F74DD4E5E3EA709870D904737100040F0AC26C4B77D9EC528B08EC",
+      "publishedBytes": 19384
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-notes.txt",
+      "publishedSha256": "95C255BDD8949DBC0DED4B901274477CD0921FBEDDD465415C9AEC58F0214ABE",
+      "publishedBytes": 3107
+    }
+  ],
+  "rawSourceFiles": [
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/initial-snapshot.json",
+      "rawSha256": "65002561E20291AC25114236E5426866627A3B68490E445212A3B6543A6AF912",
+      "rawBytes": 1439
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/initial-results.json",
+      "rawSha256": "95AA5FFF5079D45516F65E22A519F054301880DB922D92938F135CEC8335FCFE",
+      "rawBytes": 1408
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/initial-ps51.log",
+      "rawSha256": "8F478BA536760972A467CE974D1F4944260DC97B42C0476EF25E0FDBB98D09F2",
+      "rawBytes": 4262
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/initial-ps7.log",
+      "rawSha256": "6167BB9E9AB8D967DF11F6F9B2B980F0ECAC2B6664CE84524637121504C3E47E",
+      "rawBytes": 4238
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/final-snapshot.json",
+      "rawSha256": "89DB3BB438BC6BB7192648C45E17276FF38B20A23500EFC36C6A2EBBA7995D7E",
+      "rawBytes": 1439
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/final-results.json",
+      "rawSha256": "020C7A75B47E03453E108261C3DB71B13572D83B4B75439EEEA237F4753AE811",
+      "rawBytes": 3367
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/final-ps51.log",
+      "rawSha256": "6146BF3BC8A6EAF048F0F61A7FD226F72D17F683B6BAFAC7F9B9117BC91B81A9",
+      "rawBytes": 3555
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/final-ps7.log",
+      "rawSha256": "4120B9B41E2999E0DFFA7D8CF77B0F8E5B105E0F77C5E9CEA2961DB7122E834F",
+      "rawBytes": 3543
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/results.json",
+      "rawSha256": "1EE90B24EBDD4F407FD8435325474D6415D9C8EF32048164D46C96C9ACF8CC0D",
+      "rawBytes": 46453
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-bang-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-bang-reject [app]/stderr.txt",
+      "rawSha256": "AE28A31AA34A3CDABA4F416381B71317645D952633F4E1EEA3FC72AA8B5EB8FF",
+      "rawBytes": 690
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-empty [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-empty [app]/stderr.txt",
+      "rawSha256": "6C6A703C5228DFC0547255CD2C91F505A9DDDB080F4AF99E79F9F704DE9D1841",
+      "rawBytes": 692
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-manifest [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-manifest [app]/record.json",
+      "rawSha256": "06A6497700911D11C72A86676230098E684846F8887EA9B95E040D8ACB8A980A",
+      "rawBytes": 1693
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-multiple [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-multiple [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-multiple [app]/record.json",
+      "rawSha256": "1B342ADFC2DDF83852ACA749A7BA58B92F4F947BE1B3195DA2E26E49E4EE5351",
+      "rawBytes": 2076
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-percent-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-percent-reject [app]/stderr.txt",
+      "rawSha256": "3EB52B410CB7889ADB9EF80C4443E22CB20A6E5B485DDAF29A89E85B1F10DAD8",
+      "rawBytes": 693
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-single [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-single [app]/record.json",
+      "rawSha256": "B9A8B329A8E9E628F4A7022FA06995409BAE5A3F59670A0167DDEB4831FDBE7D",
+      "rawBytes": 1267
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-unattended-manifest [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-unattended-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-unattended-manifest [app]/record.json",
+      "rawSha256": "2051363675BC027B9FA0DD79736C11AB8068B5802B052D6B4B7F427762458EC1",
+      "rawBytes": 1841
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-unattended-single [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-unattended-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-powershell-unattended-single [app]/record.json",
+      "rawSha256": "7C56A2E17E0BA45ECEB0AF837A9A446CBBD0F8902B5A0E9069F814EA7A11ADEE",
+      "rawBytes": 1433
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-bang-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-bang-reject [app]/stderr.txt",
+      "rawSha256": "687AE1915E8DAD492FABD35F6BF8491793D94F30F76C3E978B26C325A131559C",
+      "rawBytes": 684
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-empty [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-empty [app]/stderr.txt",
+      "rawSha256": "1733A6592801684735315103390180CC7E054F0077CEE35AF87FF4E9707DA67A",
+      "rawBytes": 686
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-manifest [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-manifest [app]/record.json",
+      "rawSha256": "8762FED50CC646A7C0A5E51580A63C8BD79BA05170F25445BCD34436D1186731",
+      "rawBytes": 1469
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-multiple [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-multiple [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-multiple [app]/record.json",
+      "rawSha256": "D153284086AEF67B857C94A2595862F70FD4CD8C7D9918769E991990C9CAFD44",
+      "rawBytes": 1828
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-percent-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-percent-reject [app]/stderr.txt",
+      "rawSha256": "0721BE0989FD6E1FECCEDBAE6AF929E657F1871580060CB17A4CEB3C50023F53",
+      "rawBytes": 687
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-single [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-single [app]/record.json",
+      "rawSha256": "7C15AACE1C124EFFF499FFEEABA8847B6FA0D90E35DCE81E54DB35EBAEF73A7E",
+      "rawBytes": 1093
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-unattended-manifest [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-unattended-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-unattended-manifest [app]/record.json",
+      "rawSha256": "987585DDF6A6A7094F64948E6B73FC4D373D37AACD4EEFD89373A26F6EFE2E36",
+      "rawBytes": 1581
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-unattended-single [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-unattended-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/powershell-pwsh-unattended-single [app]/record.json",
+      "rawSha256": "A5A347BCACECCBD3E9061B227DD25B0FE93D663B423B955A363598AAB7D57850",
+      "rawBytes": 1205
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-bang-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-bang-reject [app]/stderr.txt",
+      "rawSha256": "84E388DFBF8B3FF47323E880FDBB5D76C06D1A220A797EACE760352724A2F10E",
+      "rawBytes": 684
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-empty [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-empty [app]/stderr.txt",
+      "rawSha256": "77F472FE73EA903BF33C3D895C4CDDA60BEDB6AE8F60605BA620EC9962CC9683",
+      "rawBytes": 686
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-manifest [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-manifest [app]/record.json",
+      "rawSha256": "7E189F194487B8F5DA270150A18A57D090A00F489AC01D1D079550A2A26BB2C2",
+      "rawBytes": 1657
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-multiple [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-multiple [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-multiple [app]/record.json",
+      "rawSha256": "AF5086CDA0C85530219F05929002D6A0B7884EA7F4BC2D01959AD1FEAB023E09",
+      "rawBytes": 2014
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-percent-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-percent-reject [app]/stderr.txt",
+      "rawSha256": "58DAF117D49D58589E79129F4F222C1E9A3D0297CF733C375EE185DA6D71F2C9",
+      "rawBytes": 687
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-single [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-single [app]/record.json",
+      "rawSha256": "45227CCF732F15D1E04F4CF9FA84720F5777284CE4445000F75ABD34537CB498",
+      "rawBytes": 1229
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-unattended-manifest [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-unattended-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-unattended-manifest [app]/record.json",
+      "rawSha256": "145F7DB77390242D2ACB70855383F53070298B9881A4C7433F5F1BBAC8C34911",
+      "rawBytes": 1805
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-unattended-single [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-unattended-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-powershell-unattended-single [app]/record.json",
+      "rawSha256": "66C5C64BD94F28AA5F5C495795A16044E303DF30D21140BC7EBFA70B10D0DFB9",
+      "rawBytes": 1409
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-bang-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-bang-reject [app]/stderr.txt",
+      "rawSha256": "B0D84698DE399F250CA644EF4EBFA78D257A0062749A237D55E5169CC4C99241",
+      "rawBytes": 678
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-empty [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-empty [app]/stderr.txt",
+      "rawSha256": "E5E7A4246521311AEBAEBBB427E476B274CF8CE100B9149EF1090C7FF864D75D",
+      "rawBytes": 680
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-manifest [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-manifest [app]/record.json",
+      "rawSha256": "4BE36A358C86F70B582006ED9CAC4868C20793390F77B1EBD3D0197357CD14C6",
+      "rawBytes": 1433
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-multiple [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-multiple [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-multiple [app]/record.json",
+      "rawSha256": "95B83C36D465A12D5E8EAACC2E7B63F3D470ECF822916D0D13C52372977A8E4A",
+      "rawBytes": 1766
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-percent-reject [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-percent-reject [app]/stderr.txt",
+      "rawSha256": "4F9ED1C7741ED5FD5CDB27D604F9826EF29E7F99A53A3F8158C7090C63569509",
+      "rawBytes": 681
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-single [app]/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-single [app]/record.json",
+      "rawSha256": "58B9FB4CFC018BF418F8E97A0425569A348F7F525E60C4091D95EC1D2A81CAF3",
+      "rawBytes": 1055
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-unattended-manifest [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-unattended-manifest [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-unattended-manifest [app]/record.json",
+      "rawSha256": "494FD8253F7AA47517143BB6D86A30B5A68280152D31F62357ED0EA41E27EBC0",
+      "rawBytes": 1545
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-unattended-single [app]/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-unattended-single [app]/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-prototype-122d105525d14bee9b57131a64f6f7dc/pwsh-pwsh-unattended-single [app]/record.json",
+      "rawSha256": "02EE93738AAD175874B7279EF7B601BF1F8DC6941256BBE071059DF9910E6C61",
+      "rawBytes": 1181
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/results.json",
+      "rawSha256": "946D59591A144AF5EDE8899923F0EC4106CC107B922FF7B4D61C176311BD99F6",
+      "rawBytes": 28286
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-bang-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-bang-reject/stderr.txt",
+      "rawSha256": "BEC885B346ECC5F1E72648E33603887F0C54E5109DF95D7B4A79F39FEFED0283",
+      "rawBytes": 668
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-empty/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-empty/stderr.txt",
+      "rawSha256": "5B773150AE500CE6FBA40E206DE2F1A32F593B3235FFC17E39502924B4E41B4F",
+      "rawBytes": 670
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-manifest/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-manifest/record.json",
+      "rawSha256": "806D84E6EC405E2A5F424D60E0441C902F26083998C843132C2EA0F6DCB2E2CE",
+      "rawBytes": 1575
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-multiple/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-multiple/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-multiple/record.json",
+      "rawSha256": "840FE748C28048B7968A441357427CFFBB6CCFD3AD1C260EC786D2C3CBC66C25",
+      "rawBytes": 1886
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-percent-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-percent-reject/stderr.txt",
+      "rawSha256": "0A167E55DF215B58CECEC0D776D96CF70B3B3DB678C47DB9C056CA82673664DA",
+      "rawBytes": 671
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-single/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-single/record.json",
+      "rawSha256": "18F90E46DDC3FA48D1BE4831FF3015E66646D51999DBD20A39EA71A128849489",
+      "rawBytes": 1165
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-unattended-manifest/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-unattended-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-unattended-manifest/record.json",
+      "rawSha256": "9BC3D30B05F984180007E8791DD8BA57130B3F6BECF28081F485397269BE8A8E",
+      "rawBytes": 1723
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-unattended-single/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-unattended-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps51-unattended-single/record.json",
+      "rawSha256": "B8D1C12DAB4CC5CF94A4802715D246770F1FE87E73D65926039A783DDAF8B660",
+      "rawBytes": 1345
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-bang-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-bang-reject/stderr.txt",
+      "rawSha256": "50E68E96984CD4E0F9C48C7B5012AEF132B9A64396826632C222805131E5F0B6",
+      "rawBytes": 667
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-empty/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-empty/stderr.txt",
+      "rawSha256": "3220726E05454C8EF362E73E5EB5D6548CB02DF0DED97295FD0A9C788BF30969",
+      "rawBytes": 669
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-manifest/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-manifest/record.json",
+      "rawSha256": "D4C8A2F32BE0ECC6FE6F76CEF8F0C302602B5E8E58EF34791B1A9E9C73E8876E",
+      "rawBytes": 1381
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-multiple/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-multiple/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-multiple/record.json",
+      "rawSha256": "A7EF25573D26C493181B81FA747DF6348191AE06B39B73080386DB85CC09A1C2",
+      "rawBytes": 1678
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-percent-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-percent-reject/stderr.txt",
+      "rawSha256": "E87B3B1B4B10CF5AA1D7F61F9207606AFB39E3240CA64CE3B92899127DF6F2A0",
+      "rawBytes": 670
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-single/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-single/record.json",
+      "rawSha256": "B4B1B046A64637FA9243D3F4886FED39B4C55E04023DED043C7EEC91A3951090",
+      "rawBytes": 1011
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-unattended-manifest/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-unattended-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-unattended-manifest/record.json",
+      "rawSha256": "063122AD8A66CE849AB2118CA63B75D1A6EB18C862405D57EB42445E9C9CC9F8",
+      "rawBytes": 1493
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-unattended-single/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-unattended-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps51-ps7-unattended-single/record.json",
+      "rawSha256": "031A2AA762C0343AEAE337C329B38DF3EC470E340F47239D727D9175FE885953",
+      "rawBytes": 1137
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-bang-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-bang-reject/stderr.txt",
+      "rawSha256": "BDD25F2CE197F6ED06DC45646E045F9400516903F7C87B85FFCE385B821884D0",
+      "rawBytes": 667
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-empty/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-empty/stderr.txt",
+      "rawSha256": "7CA2F65790FB9C35EFF1AB986502CFD18729E4780EBF170586B37BC7F065B870",
+      "rawBytes": 669
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-manifest/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-manifest/record.json",
+      "rawSha256": "226BB0BD8BA1B2457C60E48DBECF366BA293B402D4CE07A99E03EA7466726810",
+      "rawBytes": 1569
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-multiple/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-multiple/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-multiple/record.json",
+      "rawSha256": "A0D3D05693A5F9D726EB45466AE4B5E0490BF206F1C1E55832AE2D083E27BE81",
+      "rawBytes": 1878
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-percent-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-percent-reject/stderr.txt",
+      "rawSha256": "1555BD21E9C08DC1F6931DF23B9C4D069B904757737A3FE74BBA7F1D87D1685C",
+      "rawBytes": 670
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-single/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-single/record.json",
+      "rawSha256": "1CF22A5CE4E7E277F36D2578DB60AD7E63B8C2FA317573FC8791DAB5B445A940",
+      "rawBytes": 1161
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-unattended-manifest/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-unattended-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-unattended-manifest/record.json",
+      "rawSha256": "1E6949683E92E881D32E564004E33136C518B90B34554AB3C15F2A7C954DF529",
+      "rawBytes": 1717
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-unattended-single/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-unattended-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps51-unattended-single/record.json",
+      "rawSha256": "526675D67E2281625DB0563B42B728FEEC91AB11D585F142493DE1CE4BBEC238",
+      "rawBytes": 1341
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-bang-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-bang-reject/stderr.txt",
+      "rawSha256": "AAB3FEC413BABF80EC76073FDF71817753A3FB2B4CCD99F55C55A16796E5AC9C",
+      "rawBytes": 666
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-empty/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-empty/stderr.txt",
+      "rawSha256": "FB164CD08879ABCE0E358DF688B22587A69B46A73C1C751BAA9F43812EEDF014",
+      "rawBytes": 668
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-manifest/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-manifest/record.json",
+      "rawSha256": "97790E1C0629A2711DC4912394514B27E224608394A6B1ACCDBF09DE5911019E",
+      "rawBytes": 1375
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-multiple/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-multiple/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-multiple/record.json",
+      "rawSha256": "1638504D9B28B4A6608979C80300F665FBC48CB7AF13AFFF28F50F99878346F8",
+      "rawBytes": 1670
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-percent-reject/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-percent-reject/stderr.txt",
+      "rawSha256": "7443F589CB47B596BF8B48BAE5E07A6F3A88FFF3D64D5EF57A0E145674EF00D5",
+      "rawBytes": 669
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-single/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-single/record.json",
+      "rawSha256": "35536AF3E510A952FFBABB320AB2BEE53181230813734E891E56A064D62CB5A3",
+      "rawBytes": 1007
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-unattended-manifest/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-unattended-manifest/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-unattended-manifest/record.json",
+      "rawSha256": "88CB06CA3CBD04AF20ADC1D749CFF6C8585B22760642C8A0AE50E1894D669768",
+      "rawBytes": 1487
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-unattended-single/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-unattended-single/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-final-52cc06643e3645049e99df6637993837/ps7-ps7-unattended-single/record.json",
+      "rawSha256": "B44F71A32615BC0E9EFD75AB2E459F58506767436F03043AA2DE3F5CA3CF28BC",
+      "rawBytes": 1133
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/results.json",
+      "rawSha256": "3E2CC9AE96E2ECFF63AE72322E351713BDF539A276C6A754E0C36F214C54D0CB",
+      "rawBytes": 38944
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/count1024/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/count1024/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/count1024/record.json",
+      "rawSha256": "2691C7AE230403826213A54442A3B44A178EED89F596B0D5C2103207887384E0",
+      "rawBytes": 32360
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/count1025/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/count1025/stderr.txt",
+      "rawSha256": "28016A6B5E89E3D69F3A508EED1529699DC7E83725EDAEC36636B99757189170",
+      "rawBytes": 619
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/raw7599/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/raw7599/stderr.txt",
+      "rawSha256": "7CBEFBA72C79DD76089C3A44C08CE71DA19744E9BB20A638187FB59E24D567D9",
+      "rawBytes": 631
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/raw7600/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/raw7600/stderr.txt",
+      "rawSha256": "46A6B51A71D6081AB3E36D569EB8AB8B69DFB5A85A0F4B22147F2694D36FF2A7",
+      "rawBytes": 631
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/raw9000/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-0f71f8051b424b809d352e5f7d3a8891/raw9000/stderr.txt",
+      "rawSha256": "712F89F4976302078A5046FACA78C00B32AAF1AA6C5F6455945D776FF60EAFB5",
+      "rawBytes": 31
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/results.json",
+      "rawSha256": "490D566C988232F6025A63CBA0E37CAE3DB840939A015E8C068DC444BC038606",
+      "rawBytes": 38936
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/count1024/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/count1024/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/count1024/record.json",
+      "rawSha256": "189D114EF647265B3B8755DB5E549CFB9B7226E8477F01D42AC022F9E0504448",
+      "rawBytes": 32360
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/count1025/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/count1025/stderr.txt",
+      "rawSha256": "778975F06A5F18F2A8CD06759C0AAF471FB4846EC4C2807B37AE80361255A85F",
+      "rawBytes": 619
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/raw7599/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/raw7599/stderr.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/raw7599/record.json",
+      "rawSha256": "88D9B063DCC1B8CCB5C925054E15B9C7DAC18D614DEBC80CF30D48AE3C7D8B6E",
+      "rawBytes": 15471
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/raw7600/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/raw7600/stderr.txt",
+      "rawSha256": "68D4DF6BD20CD10996BA1A2EF3A4CCF453717963E7418DB0DEBAEEADF55AC49E",
+      "rawBytes": 631
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/raw9000/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-boundaries-91babc95f2a64cf69fc94fa4ed0341f0/raw9000/stderr.txt",
+      "rawSha256": "712F89F4976302078A5046FACA78C00B32AAF1AA6C5F6455945D776FF60EAFB5",
+      "rawBytes": 31
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-6b85eed139ad49c1932efb0d5b7f8bd5/results.json",
+      "rawSha256": "E701E2A17F06238710A0BFEB291FB7C1BE37982FEB58AB29DB2340E4066C43A9",
+      "rawBytes": 2191
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-6b85eed139ad49c1932efb0d5b7f8bd5/powershell/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-6b85eed139ad49c1932efb0d5b7f8bd5/powershell/stderr.txt",
+      "rawSha256": "2C9FC3329CFCD15933298FEBC2D008543C9CF09582F715FD0612F8EB34739608",
+      "rawBytes": 564
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-6b85eed139ad49c1932efb0d5b7f8bd5/pwsh/stdout.txt",
+      "rawSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "rawBytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-6b85eed139ad49c1932efb0d5b7f8bd5/pwsh/stderr.txt",
+      "rawSha256": "2FD65DEF30D9D2CC866920EBBA4F3F61840CADF30A419DD87BBE60C2BE1A7538",
+      "rawBytes": 558
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-cb3a61a95c8d4d8abfc526171b0235ad/results.json",
+      "rawSha256": "C09B5A3B6707E89D3D838E78090BA5A2B3A36CA9644AAFA683DB2C03ACCE59D0",
+      "rawBytes": 2189
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-cb3a61a95c8d4d8abfc526171b0235ad/powershell/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-cb3a61a95c8d4d8abfc526171b0235ad/powershell/stderr.txt",
+      "rawSha256": "2100F097D91124DD3128F786D9C0F853B52CD7FC188F80482D6BFB4921B8A750",
+      "rawBytes": 564
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-cb3a61a95c8d4d8abfc526171b0235ad/pwsh/stdout.txt",
+      "rawSha256": "D2CF402243A6ED040E5E51FC45C4A72DA1E7DB60136D54A9C84B0955FAF3A4F9",
+      "rawBytes": 34
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/worker-start-failure-cb3a61a95c8d4d8abfc526171b0235ad/pwsh/stderr.txt",
+      "rawSha256": "04C1EEA06DBD5256498138D28CD123D0A3DE954DCD664E92EBFD905646A53794",
+      "rawBytes": 558
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/cmd-investigation-4984392edca54ba388786f3f08c719a6/results.json",
+      "rawSha256": "F79010B571E56D0A808B1B71E010F42ED7F355ABBA1D39EFCE1D71489B9F1EFC",
+      "rawBytes": 1432
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/cmd-investigation-4984392edca54ba388786f3f08c719a6/fail-closed.cmd",
+      "rawSha256": "3D2E88EEBF629435D71AA7BB950F5AA8B877F1FE7DB4E0615B45933C9E24C956",
+      "rawBytes": 56
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/cmd-investigation-4984392edca54ba388786f3f08c719a6/quote_operator_percent.sentinel.txt",
+      "rawSha256": "C04325AC8CAE1E52F60D9AB17E8B201731B3EEECF59D5CBAA919CDD3BF599EEE",
+      "rawBytes": 22
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/Invoke-TransportProbe.ps1",
+      "rawSha256": "4174A48F0BD27CC85C29B08E1D8D38FA2A4F1825EF4FDF3916FF02AE48DEFA46",
+      "rawBytes": 1623
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/LauncherMainProbe.ps1",
+      "rawSha256": "F67169E140E3C1B4CC7959FE63A6647F5F4211464567BF324DDC74ADD8406E16",
+      "rawBytes": 1008
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/Run-TransportProbe.ps1",
+      "rawSha256": "17D99C2727185084FD089072B31B623AF813FF8BDB004F8B7700F8AC11FF8C71",
+      "rawBytes": 6530
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/Run-TransportBoundaryProbe.ps1",
+      "rawSha256": "7A65EA192BAD8C198876817B1F997D6619EAF8475FE8A53838BBD29A3873FC7D",
+      "rawBytes": 3945
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/Run-WorkerStartFailureProbe.ps1",
+      "rawSha256": "D27F5A938CD20EF9ABA8743961FC33B7CF4244F49D0EA59F9AC054CD840DA408",
+      "rawBytes": 2973
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/Invoke-Focused.ps1",
+      "rawSha256": "5FC38150F822111C62CD9BEC65F3DB9BB90E854D8262CBE3385DEA71F431DB02",
+      "rawBytes": 501
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/launcher-tools-at-export.json",
+      "rawSha256": "F9580B1CAB7035C249C2BC088CEC7CC32A3F0EC53127B46CAEBC2E15DA13EA11",
+      "rawBytes": 1322
+    }
+  ],
+  "limitations": [
+    "Native Explorer desktop drag/drop was not performed.",
+    "Typed application recorder does not establish audio-render equivalence.",
+    "Pre-launch CMD expansion cannot be undone or prevented by BAT raw recovery.",
+    "Current binary metadata was captured at export; executed shell runtime versions are separately preserved in focused logs.",
+    "No cumulative/Full or listening approval is claimed."
+  ]
+}

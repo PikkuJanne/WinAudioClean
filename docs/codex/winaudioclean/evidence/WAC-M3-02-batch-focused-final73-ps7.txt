@@ -1,0 +1,152 @@
+Focused shell: 7.6.5
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 73 tests in 306ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Batch.Tests.ps1'
+Describing AC-052/054: explicit input lists are ordered bounded data
+  [+] preserves character-rich paths and repeated explicit entries in order without execution 1.03s (994ms|36ms)
+  [+] anchors relative entries beside the manifest rather than the calling working directory 29ms (28ms|1ms)
+  [+] preserves invalid filesystem/URL strings for separate per-item failures 13ms (11ms|2ms)
+  [+] rejects truncated manifests without changing their bytes 67ms (64ms|2ms)
+  [+] rejects trailing data manifests without changing their bytes 14ms (13ms|1ms)
+  [+] rejects root array manifests without changing their bytes 8ms (7ms|1ms)
+  [+] rejects missing version manifests without changing their bytes 10ms (9ms|1ms)
+  [+] rejects unknown version manifests without changing their bytes 12ms (10ms|1ms)
+  [+] rejects string version manifests without changing their bytes 12ms (11ms|1ms)
+  [+] rejects decimal version manifests without changing their bytes 29ms (28ms|2ms)
+  [+] rejects boolean version manifests without changing their bytes 21ms (19ms|2ms)
+  [+] rejects wrong key case manifests without changing their bytes 31ms (29ms|1ms)
+  [+] rejects unknown key manifests without changing their bytes 35ms (33ms|2ms)
+  [+] rejects duplicate root key manifests without changing their bytes 14ms (12ms|1ms)
+  [+] rejects escaped duplicate root key manifests without changing their bytes 36ms (29ms|7ms)
+  [+] rejects case-coalescing keys manifests without changing their bytes 15ms (14ms|2ms)
+  [+] rejects missing inputs manifests without changing their bytes 13ms (10ms|3ms)
+  [+] rejects null inputs manifests without changing their bytes 19ms (17ms|2ms)
+  [+] rejects scalar inputs manifests without changing their bytes 15ms (13ms|1ms)
+  [+] rejects empty array manifests without changing their bytes 14ms (13ms|1ms)
+  [+] rejects empty entry manifests without changing their bytes 11ms (10ms|1ms)
+  [+] rejects whitespace entry manifests without changing their bytes 16ms (14ms|2ms)
+  [+] rejects null entry manifests without changing their bytes 12ms (10ms|1ms)
+  [+] rejects numeric entry manifests without changing their bytes 12ms (11ms|1ms)
+  [+] rejects boolean entry manifests without changing their bytes 35ms (12ms|23ms)
+  [+] rejects nested array manifests without changing their bytes 16ms (13ms|3ms)
+  [+] rejects object entry manifests without changing their bytes 10ms (8ms|1ms)
+  [+] rejects malformed UTF8 and UTF16 bytes 15ms (13ms|3ms)
+  [+] rejects malformed UTF8 and UTF16 bytes 7ms (6ms|1ms)
+  [+] accepts exactly 1 MiB including a UTF8 BOM and rejects the next byte 634ms (633ms|1ms)
+  [+] materializes all 1024 entries including payload beyond a CMD command line and rejects 1025 100ms (98ms|2ms)
+  [+] accepts the direct list ceiling without deduplicating and rejects count/byte excess 66ms (65ms|1ms)
+  [+] rejects neither source input-source combinations before materializing a queue 16ms (13ms|3ms)
+  [+] rejects both sources input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] rejects legacy input with list input-source combinations before materializing a queue 6ms (5ms|2ms)
+  [+] rejects null array input-source combinations before materializing a queue 12ms (10ms|2ms)
+  [+] rejects empty array input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] rejects empty item input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] rejects numeric item input-source combinations before materializing a queue 15ms (5ms|10ms)
+  [+] accepts a real PSBoundParametersDictionary without ambiguous Contains overloads 25ms (23ms|2ms)
+
+Describing AC-053: held JSONL journal retains completed records when a suffix append fails
+  [+] flushes independent compact UTF8 records with escaped diagnostic newlines and no BOM 95ms (93ms|2ms)
+  [+] rolls back only the newly written suffix after an actual partial stream write 77ms (76ms|1ms)
+  [+] refuses to append batch records to a pre-existing nonexclusive writer 22ms (21ms|1ms)
+
+Describing AC-053: sequential batch orchestration freezes choices and aggregates per-item outcomes
+Select one processing mode for all 3 inputs: [1] Raw; [2] Zoom/Teams; [Q] Cancel.
+Processing input 1 of 3: a.wav
+Processing input 2 of 3: a.wav
+Processing input 3 of 3: b.wav
+Batch results saved to: <test-drive>\58057bfecc56494d8b77444eb5e2a650\results.jsonl
+  [+] runs ordered repeated entries with one mode selection and frozen child settings 616ms (610ms|6ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <test-drive>\bd6ee2e5f17a4608a8534190af5eec5f\results.jsonl
+  [+] retains captured choices when the isolated saved config changes after the first child 178ms (175ms|3ms)
+  [+] rejects an omitted unattended mode before journal allocation, output creation or children 47ms (47ms|1ms)
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:301
+Line |
+ 301 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot create batch result journal: Batch result journal must differ from every requested input.
+  [+] rejects a journal path equal to a missing requested input before creating it or starting children 135ms (134ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\c2fea11a65f842418f518089611e30e1\results.jsonl
+  [+] retains an ordinary one-item exit 0 67ms (65ms|3ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\16516ed6c6c34d409f3a1d9e1211a9f4\results.jsonl
+  [+] retains an ordinary one-item exit 2 41ms (41ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\bd8096c678ba49ef9bd5ecd9d779397e\results.jsonl
+  [+] retains an ordinary one-item exit 3 53ms (52ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\406ca69a1f904a808ea5d40f4a4e1840\results.jsonl
+  [+] retains an ordinary one-item exit 4 49ms (48ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\095de5f96a73449e8cdf52defc38747e\results.jsonl
+  [+] retains an ordinary one-item exit 5 46ms (46ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\280b9953945446c1aa98c8ed3f014348\results.jsonl
+  [+] retains an ordinary one-item exit 7 71ms (70ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <test-drive>\da7c40222fea47caba55d8776bd0bda6\results.jsonl
+  [+] retains an ordinary one-item exit 130 80ms (79ms|2ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <test-drive>\dc495f3c7891433c84dd7b98ca2c131f\results.jsonl
+  [+] continues after a per-item failure and records multi-item failure code 6 94ms (93ms|1ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <test-drive>\64cb3867815c44078581625965aabf56\results.jsonl
+  [+] records warning-only batches as code 7 64ms (63ms|1ms)
+Processing input 1 of 3: first.wav
+Batch results saved to: <test-drive>\adf021f7ee0647168058e1d3993ca865\results.jsonl
+  [+] stops after child cancellation and records later entries as not started 57ms (56ms|1ms)
+Select one processing mode for all 3 inputs: [1] Raw; [2] Zoom/Teams; [Q] Cancel.
+Batch results saved to: <test-drive>\3c6ecb890d314e0e8e3ecf7e0d66f92e\results.jsonl
+  [+] cancels the common menu before any child while preserving every not-started entry 71ms (70ms|1ms)
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:372
+Line |
+ 372 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot create batch result journal: Exception calling "OpenReportWriter" with "3" argument(s): "Cannot open
+     | report writer: The file exists. (Win32 80)."
+  [+] fails result allocation before starting any child and preserves foreign bytes 56ms (55ms|1ms)
+Processing input 1 of 3: first.wav
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:395
+Line |
+ 395 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Batch stopped; result journal is incomplete. Prior outputs/results are retained: injected journal persistence
+     | failure
+  [+] stops new jobs after first item persistence failure and retains prior records and exports 99ms (98ms|1ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Write-Error: <repo>\tests\WinAudioClean.Batch.Tests.ps1:395
+Line |
+ 395 |  …   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Batch stopped; result journal is incomplete. Prior outputs/results are retained: injected journal persistence
+     | failure
+  [+] stops new jobs after summary persistence failure and retains prior records and exports 107ms (106ms|1ms)
+
+Describing AC-052/053/054: isolated batch entry points run actual single-file children
+  [+] processes valid-missing-valid in manifest order with durable results and unchanged sources/config 4.78s (4.78s|3ms)
+  [+] preserves repeated direct-list requests and creates one export/result for each 4.49s (4.49s|5ms)
+  [+] uses isolated saved choices once and saved choices without autosaving 5.83s (5.83s|1ms)
+  [+] uses isolated saved choices once and explicit overrides without autosaving 4.93s (4.93s|1ms)
+  [+] rejects both lists before native/journal work 2.06s (2.06s|1ms)
+  [+] rejects legacy conflict before native/journal work 1.85s (1.85s|1ms)
+  [+] rejects preview conflict before native/journal work 1.88s (1.88s|1ms)
+  [+] rejects range conflict before native/journal work 1.72s (1.72s|1ms)
+  [+] rejects result without list before native/journal work 1.56s (1.56s|1ms)
+  [+] rejects corrupt saved before native/journal work 3.36s (3.36s|1ms)
+  [+] retains one-item native failure code4 and persistent failure diagnostics 4.62s (4.61s|1ms)
+  [+] preserves an occupied result path before native processing or input mutation 3.05s (3.04s|1ms)
+Tests completed in 46.91s
+Tests Passed: 73, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0

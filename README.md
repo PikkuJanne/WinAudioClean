@@ -44,8 +44,14 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 - WinAudioClean.Settings.ps1
   - Sibling helper for loading and managing optional local JSON preferences. Loading an existing saved file, an explicit SettingsPath or a settings action requires it.
 
+- WinAudioClean.Batch.ps1
+  - Sibling helper for ordered file lists, manifest input and a persistent per-item result journal. Lists also require the Settings sibling; single-file rendering does not require Batch.
+
+- WinAudioClean.Launcher.ps1
+  - Sibling helper for ordered launcher paths, manifest handoffs and selecting an inner PowerShell host. Keep it beside the BAT for these routes; legacy single-file launching has a fallback without it.
+
 - WinAudioClean.bat
-  - Simple launcher: enables drag-and-drop functionality for audio files.
+  - Launcher for one or several explicit audio files, with a final interactive pause.
 
 - ffmpeg.exe
   - The engine: Download this from gyan.dev or similar. The script cannot run without it.
@@ -64,7 +70,7 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 **Usage**
 **Recommended: Drag-and-Drop**
 
-1. Drag an audio file (WAV, MP3, M4A, MKV, etc.) onto the WinAudioClean.bat icon.
+1. Drag one or several audio files (WAV, MP3, M4A, MKV, etc.) onto the WinAudioClean.bat icon. Keep all sibling helpers beside it for several files. Use the manifest route below for long lists or names containing percent/exclamation characters.
 
 2. With no saved mode, a window will open asking for Mode Selection:
    - Type 1 for Raw Recording (Microphone audio that needs noise removal).
@@ -72,7 +78,7 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 
 3. Press Enter.
 
-4. Wait for the green SUCCESS message.
+4. Wait for the result. Several files run in the supplied order with one mode choice; their journal records each result, and failed items do not stop later files.
 
 5. Find your new file in your chosen destination, or Music when no destination preference was supplied.
 
@@ -86,7 +92,7 @@ With no saved mode, you will see the same interactive menu and final log output.
 
 **Input, destination and mode checks**
 
-The script checks the input and destination before showing the mode menu. Input
+The single-file route checks input and destination before showing the mode menu. Input
 must be an existing, readable, nonempty file. Paths are handled literally,
 including spaces, square brackets, apostrophes and Unicode characters. URLs,
 PowerShell provider paths, alternate data streams, UNC and device paths are not
@@ -110,6 +116,64 @@ invalid choices ask again. A mode can also be supplied directly:
 redirected input require a mode from the CLI or saved settings and never show a mode prompt. Running
 without an input file displays usage. Direct script preflight failures return
 exit code `2`; menu cancellation returns `130`.
+
+**Ordered file lists and manifests**
+
+Use a typed PowerShell string array for several explicit inputs:
+
+```powershell
+& .\WinAudioClean.ps1 -InputPaths @('C:\Audio\first.wav', 'C:\Audio\second [mix].wav') -Mode Raw -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
+```
+
+`-InputPaths`, `-InputListPath` and the original positional/`-inputPath` route
+are mutually exclusive. File-list runs process inputs in the supplied order,
+including repeated entries. They resolve the shared preferences once using
+CLI > saved > built-ins and choose mode once. Each item uses the ordinary
+full-render path with those frozen choices; saved preferences are not read
+again between items. An invalid item is recorded and later items continue.
+Batch input cannot accompany preview, settings-management or diagnostic-export
+actions. Folder traversal and deduplication are separate future workflows.
+
+For long lists or names that CMD may change, use `-InputListPath` with a UTF-8
+JSON manifest. Its only fields are integer `schemaVersion: 1` and `inputs`, an
+array of 1–1024 nonempty path strings. A UTF-8 BOM is optional; the complete file
+must be at most 1 MiB. Relative input paths resolve from the manifest's folder.
+The manifest is data; filter text and scripts are never executed.
+
+```json
+{"schemaVersion":1,"inputs":["first.wav","second [mix].wav","literal %name%! .wav"]}
+```
+
+```powershell
+& .\WinAudioClean.ps1 -InputListPath 'C:\Audio\inputs.json' -Mode Raw -OutputDirectory 'C:\Audio\Cleaned' -NonInteractive
+```
+
+To select files from a folder without a long command line, create an explicit
+manifest in PowerShell, review it, and run the command above. This example
+selects only that folder's WAV files and preserves the sorted list:
+
+```powershell
+$paths = @(Get-ChildItem -LiteralPath 'C:\Audio\Inputs' -File -Filter '*.wav' | Sort-Object Name | ForEach-Object { $_.FullName })
+@{ schemaVersion = 1; inputs = $paths } | ConvertTo-Json -Depth 3 | Set-Content -LiteralPath 'C:\Audio\inputs.json' -Encoding UTF8
+```
+
+Each batch writes a new UTF-8 JSONL journal, by default
+`WinAudioClean_Batch_<id>.jsonl` in the output directory. Use `-BatchResultPath`
+to choose its filename in an existing parent folder; existing files are never
+replaced. A header records the
+list size and frozen settings, followed by one result per item and a final
+summary. Published items also retain their ordinary audio and reports. Item
+statuses distinguish success, warning, failure, cancellation and inputs that
+were not started. Journal persistence failure stops later work with code `5`;
+keep any completed audio and the journal's already-flushed records.
+Journals contain input paths, preferences and bounded diagnostics. Review them
+before sharing, alongside the ordinary per-file reports.
+
+A one-item list retains the ordinary item's exit code. A multi-item list returns
+`0` when all succeed, `7` for warnings only, or `6` when any item fails.
+Cancellation returns `130` and leaves later items unattempted. Malformed list
+or shared settings fail before processing with code `2`. These queue results do
+not add active-render Ctrl+C guarantees or change the audio recipe.
 
 **Local saved settings and unattended runs**
 
@@ -554,35 +618,67 @@ and local report. Processing and reporting results use these exit codes:
 | Code | Meaning |
 | --- | --- |
 | 0 | Audio was validated and published without loudness or reporting warnings, or settings inspect/save/reset completed successfully. |
-| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout, saved JSON/settings or launcher usage; ambiguous unattended tracks; settings-management or diagnostic export failure. |
+| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout, saved JSON/settings, file list/manifest or launcher usage; ambiguous unattended tracks; settings-management or diagnostic export failure. |
 | 3 | Missing, incompatible or filter-deficient dependency, or analysis/render process start failure. |
 | 4 | Probe/metadata failure, no audio, or analysis/processing/capture/cleanup failure. Malformed first-pass measurements fail here. Native failures retain diagnostics. |
-| 5 | Output allocation, space/size check, validation, publication or owned-file cleanup failed. |
+| 5 | Output allocation, space/size check, validation, publication, owned-file cleanup or batch-journal persistence failed. |
+| 6 | A multi-item list completed with failed items; per-item codes remain in its journal. |
 | 7 | Valid audio was published with loudness or reporting warnings. Audio is retained; inspect the report for the reason. |
-| 130 | Cancelled at the mode or audio-track menu. |
+| 130 | Cancelled at the mode or audio-track menu, or a list item cancelled and remaining inputs were not started. |
 
 A reporting failure never changes an existing processing failure to success.
 An invalid output is never presented as a completed export. Native diagnostics
 remain available when publication fails after FFmpeg returns zero.
 
-The batch launcher preserves the script's exit code across its interactive
-pause. Its default route still accepts one dropped file. CMD can expand `%NAME%`
-and `!NAME!` in paths before the launcher sees them. When observable, the launcher
-rejects these positional paths with a fallback message. An already-open CMD
-session may have changed them earlier; use PowerShell directly or the following
-route for these filenames and for unattended runs:
+The BAT preserves the script's exit code across one final interactive pause.
+One positional file keeps the ordinary single-file route; several quoted paths
+use the ordered list route. The launcher verifies a fresh CMD `/c` command frame
+against its captured arguments. The original command line must be shorter than
+7,600 characters, with at most 1,024 inputs. Existing or nested CMD sessions
+cannot establish that positional handoff; use direct PowerShell or the
+environment routes below instead.
+
+CMD can expand `%NAME%` and `!NAME!` before the BAT sees them. Observable percent
+or exclamation characters in positional paths or the original command line are
+rejected; this cannot repair earlier expansion. For literal names and long
+lists, set a manifest path from PowerShell so no input paths enter CMD text:
 
 ```powershell
-# Set these values from PowerShell so CMD never receives the paths as arguments.
-$env:WAC_LAUNCH_INPUT = 'C:\Audio\meeting %complete%!.wav'
-$env:WAC_LAUNCH_OUTPUT_DIRECTORY = 'C:\Audio\Cleaned'
-.\WinAudioClean.bat /unattended Zoom
+$env:WAC_LAUNCH_INPUT = $null
+$env:WAC_LAUNCH_INPUT_LIST_PATH = 'C:\Audio\inputs.json'
+& .\WinAudioClean.bat /manifest
 $LASTEXITCODE
 ```
 
-This route requires both environment values and `Raw` or `Zoom`, and skips the
-pause. The launcher uses Windows PowerShell 5.1; direct script calls also support
-PowerShell 7. Long native renders have no fixed total timeout. Diagnostics are
+The manifest uses the schema and bounds described above. `/manifest` remains
+interactive, using saved mode/output preferences or the usual prompts/defaults.
+When set, `WAC_LAUNCH_OUTPUT_DIRECTORY` overrides its destination preference.
+It rejects a simultaneously set `WAC_LAUNCH_INPUT`. Large lists belong in the
+manifest file rather than an environment variable containing the list itself.
+
+For unattended processing, supply exactly one input or manifest environment
+value, a destination and `Raw` or `Zoom`:
+
+```powershell
+# Set these values from PowerShell so CMD never receives the paths as arguments.
+$env:WAC_LAUNCH_INPUT_LIST_PATH = $null
+$env:WAC_LAUNCH_INPUT = 'C:\Audio\meeting %complete%!.wav'
+$env:WAC_LAUNCH_OUTPUT_DIRECTORY = 'C:\Audio\Cleaned'
+& .\WinAudioClean.bat /unattended Zoom
+$LASTEXITCODE
+```
+
+To process a manifest unattended, clear `WAC_LAUNCH_INPUT`, set
+`WAC_LAUNCH_INPUT_LIST_PATH` and use the same `/unattended Raw|Zoom` route. It
+skips the pause. Preferences can be isolated with `WAC_LAUNCH_SETTINGS_PATH`
+and `WAC_LAUNCH_IGNORE_SAVED_SETTINGS=1`; the latter accepts only unset or `1`.
+The launcher defaults to Windows PowerShell 5.1. Set `WAC_LAUNCH_POWERSHELL`
+to the absolute path of an existing local PowerShell `.exe` to select the inner
+host, such as PowerShell 7. These values are passed as data. Manifest lists and
+inner-host selection require the Launcher sibling; direct script calls also
+support PowerShell 7.
+
+Long native renders have no fixed total timeout. Diagnostics are
 captured in memory per run; large recordings and very large diagnostic streams
 have not been stress-tested.
 

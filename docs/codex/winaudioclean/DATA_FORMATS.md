@@ -334,6 +334,65 @@ Owned incomplete reports are retired/removed where possible; the console
 remains authoritative when no corrected report could be written. A crash/storage fault
 can leave incomplete artifacts, so this is no multi-file atomicity guarantee.
 
+## Explicit input lists and local batch journal — WAC-M3-02
+
+The existing positional `inputPath` remains a single string. `InputPaths` accepts
+an ordered explicit array through a PowerShell call; `InputListPath` accepts a
+local UTF-8 JSON manifest. They are mutually exclusive with each other and
+`inputPath`. Lists are ordinary full-render requests; settings management,
+support export and preview actions remain separate. The Batch and Settings
+siblings are needed only for explicit lists. Imports and legacy single-file
+installations retain their existing component contract.
+
+The manifest is exactly `{"schemaVersion":1,"inputs":["recording.wav"]}`.
+Require an integer version 1, exact keys and an array of 1 through 1024 nonempty
+path strings. Reject duplicate decoded keys, wrong types, invalid UTF-8, unknown
+versions, arbitrary extra fields and more than 1 MiB including optional UTF-8
+BOM. Read the file through the ordinary held settings-reader policy, including
+reparse/hardlink rejection; no JSON text executes. Relative entries are anchored
+to the manifest directory, with root-relative entries on that directory's drive.
+Invalid/missing media paths become ordinary per-item failures. A malformed list
+is a global exit 2 before jobs. Explicit repeats retain their order; folder
+discovery, recursion, deduplication and generated-output exclusion belong to
+WAC-M3-03. A folder-to-manifest example is a bounded explicit selection, not a
+claim that the application's folder queue builder is implemented.
+
+Resolve and validate preferences once, choose an omitted interactive mode once,
+then supply those same existing choices to every ordinary child invocation.
+Child invocations ignore saved configuration so an external settings change
+cannot silently change a running list. Each input retains the existing source,
+native process, output ownership and full-render report contracts. Stream
+selection can still be per-item when interactive; no universal index is inferred.
+
+`BatchResultPath` optionally selects a new journal in an existing parent;
+otherwise use `WinAudioClean_Batch_<id>.jsonl` in the resolved audio destination.
+CreateNew prevents replacement of inputs, manifests or previous results. The
+writer and parent directory remain held during the list. The UTF-8 no-BOM file
+contains one compact JSON object per line:
+
+| `type` | Fields |
+| --- | --- |
+| `batch` | `schemaVersion:1`, `batchId`, UTC `startedAt`, `inputCount`, lowercase typed `settings` using the preference field schema, and per-choice `origins`. An interactively chosen mode has origin `Interactive`. |
+| `item` | One-based `index`, `inputPath`, `status`, nullable integer `exitCode`, bounded string-array `diagnostics`, nullable UTC `finishedAt`. |
+| `summary` | `status`, `exitCode`, UTC `finishedAt`, `reportingComplete:true`, and `counts` with `success`, `warning`, `failed`, `cancelled`, `notStarted`. |
+
+Item statuses are `SUCCESS` (0), `WARNING` (7), `FAILED` (other failure),
+`CANCELLED` (130) or `NOT_STARTED` (null exit/time). A cancelled child stops new
+jobs; remaining entries are recorded as NOT_STARTED. Cancelling the initial
+mode selector starts no item. Flush the header and every item before advancing,
+then flush the terminal summary. These records include early per-item failures
+that precede existing detailed render reports. Detailed reports remain separate;
+the journal does not infer report ownership by scanning the destination.
+
+One explicit item retains its ordinary application exit. For several items,
+any failed item gives 6; warnings alone give 7; all success gives 0. Cancellation
+gives 130 and stops the list. Journal creation/append failure gives 5 and starts
+no further jobs. Roll back only an attempted append's new suffix where possible,
+preserve earlier result bytes and audio exports, and disclose incomplete reporting.
+A terminal summary is required to claim complete reporting. This is incremental
+local recording, without a crash/power-loss guarantee or a multi-file commit.
+No upload, automatic re-cleaning, sound retuning or saved batch/action flag occurs.
+
 ## Website release metadata
 
 Use schemaVersion, status (draft/published), version, releasedAt, repository, sourceCommit, archiveName, downloadUrl, sha256, requirements, dependencyPolicy and changelog reference. Draft status uses null publication URL/date/hash when not known and disables the download button. Only actual approved artifact output may populate published fields. Validate metadata against the package manifest; reject version/checksum mismatch. Do not use an executable runtime auto-update manifest.

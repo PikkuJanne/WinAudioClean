@@ -802,8 +802,15 @@
       "title": "Real drag/drop matrix",
       "procedure": "Drop one and several files, including spaces, Unicode, brackets, %, !, &, apostrophes and parentheses, onto the actual launcher.",
       "expected": "Each intended input appears once in the queue without truncation, corruption or command execution.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-02.md",
+        "evidence/WAC-M3-02-source.json",
+        "evidence/WAC-M3-02-batch-evidence.json",
+        "evidence/WAC-M3-02-launcher-evidence.json",
+        "evidence/WAC-M3-02-media-api.json",
+        "evidence/WAC-M3-02-media-launcher.json"
+      ]
     },
     {
       "id": "AC-053",
@@ -811,8 +818,15 @@
       "title": "Aggregate result",
       "procedure": "Process a list containing valid and invalid items.",
       "expected": "Per-item results persist; overall exit code reflects failure; single-file behavior remains compatible.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-02.md",
+        "evidence/WAC-M3-02-source.json",
+        "evidence/WAC-M3-02-batch-evidence.json",
+        "evidence/WAC-M3-02-launcher-evidence.json",
+        "evidence/WAC-M3-02-media-api.json",
+        "evidence/WAC-M3-02-media-launcher.json"
+      ]
     },
     {
       "id": "AC-054",
@@ -820,8 +834,15 @@
       "title": "Boundary handling",
       "procedure": "Test many/long paths and double-click with no files.",
       "expected": "No silently lost inputs; actionable safe fallback for launcher limits and clear no-input guidance.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-02.md",
+        "evidence/WAC-M3-02-source.json",
+        "evidence/WAC-M3-02-batch-evidence.json",
+        "evidence/WAC-M3-02-launcher-evidence.json",
+        "evidence/WAC-M3-02-media-api.json",
+        "evidence/WAC-M3-02-media-launcher.json"
+      ]
     },
     {
       "id": "AC-055",

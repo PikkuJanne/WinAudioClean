@@ -84,6 +84,22 @@ preview ranges, NonInteractive or diagnostic actions. Requires no input file.
 Atomically replace preferences with an empty version-1 settings object, restoring
 built-in defaults. Bypasses malformed/unknown-version JSON for explicit recovery.
 Cannot accompany SaveSettings or processing choices. Requires no input file.
+.PARAMETER InputPaths
+Ordered explicit file list supplied through a PowerShell call. Select mode once,
+then process each entry sequentially with the same resolved preferences. Repeated
+entries remain explicit requests. Mutually exclusive with inputPath/InputListPath.
+.PARAMETER InputListPath
+Local UTF-8 JSON manifest: {"schemaVersion":1,"inputs":["recording.wav"]}.
+Requires 1..1024 nonempty path strings and at most 1 MiB including optional BOM.
+Relative paths resolve beside the manifest. Use this instead of a long CMD line
+or positional percent/exclamation paths. No folder traversal or shell evaluation.
+.PARAMETER BatchResultPath
+Optional new JSON Lines journal for InputPaths/InputListPath. The parent must
+already exist; an existing file is never replaced. Default: a unique
+WinAudioClean_Batch_<id>.jsonl in the destination. Each item is flushed before
+the next starts. One-item exit status remains compatible; multiple failed items
+produce 6, warnings alone 7, cancellation 130. Journal failure stops new jobs
+with 5 and preserves prior outputs/results with incomplete-report diagnostics.
 .PARAMETER Preview
 Create source/processed excerpts and separate level-matched comparison WAVs.
 The opt-in route ends after preview; it never starts a full render or playback.
@@ -146,6 +162,7 @@ Author: Janne Vuorela. Windows 10/11; Windows PowerShell 5.1 or PowerShell 7+.
 Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
 Keep WinAudioClean.Preview.ps1 beside them to use optional previews.
 Keep WinAudioClean.Settings.ps1 beside them to use saved preferences.
+Keep WinAudioClean.Batch.ps1 and WinAudioClean.Settings.ps1 for explicit lists.
 Supply FFmpeg/ffprobe through -FfmpegPath/-FfprobePath, beside the script, or PATH.
 No dependency is automatically downloaded. Processing time depends on the file
 and machine. Severe noise and lost/clipped detail may not be recoverable;
@@ -179,7 +196,10 @@ param(
     [switch]$IgnoreSavedSettings,
     [switch]$ShowSettings,
     [switch]$SaveSettings,
-    [switch]$ResetSettings
+    [switch]$ResetSettings,
+    [string[]]$InputPaths,
+    [string]$InputListPath,
+    [string]$BatchResultPath
 )
 
 . (Join-Path $PSScriptRoot 'WinAudioClean.IO.ps1')
@@ -1641,6 +1661,31 @@ try {
 } catch {
     Write-Error -Message ('Settings failed: ' + $_.Exception.Message + ' Use -IgnoreSavedSettings or -ResetSettings for recovery.') -ErrorAction Continue
     exit 2
+}
+
+# Explicit lists reuse the ordinary single-file path, with preferences frozen
+# once and no child configuration reads. Legacy installations/imports need no
+# batch component. Folder discovery belongs to the next queue-builder task.
+$batchRequested = $PSBoundParameters.ContainsKey('InputPaths') -or $PSBoundParameters.ContainsKey('InputListPath')
+if ($batchRequested -or $PSBoundParameters.ContainsKey('BatchResultPath')) {
+    try {
+        if (-not $batchRequested) { throw 'BatchResultPath requires InputPaths or InputListPath.' }
+        if ($Preview -or $PSBoundParameters.ContainsKey('PreviewStartSeconds') -or $PSBoundParameters.ContainsKey('PreviewDurationSeconds')) {
+            throw 'Explicit lists support ordinary full renders; preview requires one inputPath.'
+        }
+        foreach ($component in @('WinAudioClean.Settings.ps1', 'WinAudioClean.Batch.ps1')) {
+            $componentPath = Join-Path $PSScriptRoot $component
+            if (-not (Test-Path -LiteralPath $componentPath -PathType Leaf)) { throw "Keep $component beside the main script to use input lists." }
+            . $componentPath
+        }
+        $batchInputs = @(Resolve-WacBatchInputs -Parameters $PSBoundParameters)
+        if ($null -eq $resolvedSettings) { $resolvedSettings = Resolve-WacSettings -Explicit $PSBoundParameters }
+        $batchResult = Invoke-WacBatch -Inputs $batchInputs -Parameters $PSBoundParameters -ResolvedSettings $resolvedSettings -ApplicationPath $PSCommandPath
+        exit $batchResult.ExitCode
+    } catch {
+        Write-Error -Message ('Input list failed: ' + $_.Exception.Message) -ErrorAction Continue
+        exit 2
+    }
 }
 
 # --- CONFIGURATION ---

@@ -620,3 +620,42 @@ and sanitized results with the task evidence. Counts describe completed runs,
 not planned coverage. Keep generated audio, full local reports and raw logs
 ignored; do not read or overwrite the user's own preferences. These checks do
 not approve speech quality, retune Original or certify cross-build PCM.
+
+## Ordered launcher lists and persistent item results (WAC-M3-02)
+
+Test the actual CMD launcher transport independently from audio processing.
+Check one/many ordered paths, spaces/Unicode/brackets/ampersands/apostrophes/
+parentheses, literal percent/exclamation limitations, malformed and oversized
+handoffs, no-input guidance and preserving status across pause. Use explicit
+manifest fallback where CMD cannot preserve a name or list; never replace an
+unrun Explorer drop with a claim that it was tested.
+
+The accepted positional transport is a fresh CMD `/c` frame whose original
+tokens exactly match the numbered environment captures, below 7,600 characters
+and at most 1,024 inputs. Existing/nested CMD frames and observable `%`/`!`
+positional text fail closed. `/manifest` reads only the literal
+`WAC_LAUNCH_INPUT_LIST_PATH` environment value; `/unattended Raw|Zoom` requires
+that value or `WAC_LAUNCH_INPUT`, exclusively, plus a destination. Exercise both
+default PS5.1 and explicitly selected PS7 inner hosts, isolated settings,
+interactive one-pause and unattended no-pause behavior. Keep transport probes
+distinct from full application/FFmpeg integration results.
+
+Batch tests cover mutually exclusive legacy input/typed `InputPaths`/
+`InputListPath`, schema-1 UTF-8 manifest bounds and relative paths, retained
+explicit repeats, frozen shared settings, one mode selection, and rejection of
+preview/settings/support actions. A held CreateNew JSONL writer records header,
+ordered per-item results and aggregate summary; injected persistence failures
+stop later work. One-item lists preserve the item code; multiple failed items
+produce code 6, warning-only results 7, cancellation 130, and successful lists 0.
+Cancellation marks remaining inputs NOT_STARTED. Folder traversal/deduplication
+and active-render cancellation remain owned by later tasks.
+
+The ignored `.wac-local/WAC-M3-02` real-media matrix uses synthetic inputs and
+isolated saved settings in both PS5.1/PS7. It compares ordered batch items with
+equivalent single-file renders using exact decoded PCM, frames, format, graph,
+stream and effective report settings. Valid/invalid continuation, warning
+retention, literal-name manifests, saved choices and controlled cancellation
+are separate outcomes. Capture hashes, actual commands/exits, JSONL records and
+sanitized evidence; a simulated cancellation seam is labeled explicitly and
+does not certify active Ctrl+C. Preserve failed preliminary runs. No user
+preferences/audio, listening approval, retuning or cross-build claim is involved.
