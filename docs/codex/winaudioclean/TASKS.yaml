@@ -1022,7 +1022,7 @@
       "depends_on": [
         "WAC-M4-02"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "scripts/Build-Release.ps1, allowlisted payload, checksums and dependency notices.",
       "implementation": [
@@ -1036,7 +1036,10 @@
         "AC-074",
         "AC-075"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ],
       "blocked_reason": null
     },
     {

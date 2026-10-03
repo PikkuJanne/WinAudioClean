@@ -13,6 +13,8 @@ original procedure passed. Referenced evidence identifies the tested revision,
 content hashes, host/tool versions, actual commands/exits and engineering scope.
 [WAC-M4-01 evidence](evidence/WAC-M4-01.md) retains regression/fault results;
 [WAC-M4-02 evidence](evidence/WAC-M4-02.md) records CI/local parity separately.
+[WAC-M4-03 evidence](evidence/WAC-M4-03.md) records repeated package builds,
+fresh extracted use and integrity checks with their exact source revision.
 
 The named reviews distinguish record completion from audition. AC-009 checks
 private corpus handling; AC-042 allows an explicit unavailable-corpus record;

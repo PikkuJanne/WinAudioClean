@@ -1109,8 +1109,11 @@
       "title": "Package contents",
       "procedure": "Build twice from the same inputs; inspect archive entries and metadata/checksums.",
       "expected": "Version and content manifest agree; reproducibility claims match actual results; no private/development-only files.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ]
     },
     {
       "id": "AC-074",
@@ -1118,8 +1121,11 @@
       "title": "Fresh package use",
       "procedure": "Extract into a clean user-writable folder with spaces/Unicode; supply approved local dependencies.",
       "expected": "The documented .bat and PowerShell paths work without a repo, Python or test modules installed.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ]
     },
     {
       "id": "AC-075",
@@ -1127,8 +1133,11 @@
       "title": "Licensing and integrity",
       "procedure": "Review included notices, dependency provenance and generated hashes.",
       "expected": "MIT notice is preserved; bundled third-party build obligations are checked or bundling remains explicitly blocked.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ]
     },
     {
       "id": "AC-076",

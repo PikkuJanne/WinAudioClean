@@ -727,3 +727,26 @@ artifact/status evidence. Preserve earlier failures and recovery scopes. Only
 M4-02 advances:24 done/6 todo,72 pass/18 not_run. Retain eight broader gaps,
 unchanged audio defaults and existing approval boundaries. Next M4-03 only;
 no packaging started. Evidence: `evidence/WAC-M4-02.md` and validation ledger.
+
+### 2026-10-03 — WAC-M4-03 local tool-only portable package
+
+D41. Preserve the existing literal scriptVersion 2.3 as the sole version authority.
+Build from explicit current clean HEAD and ordinary committed Git blobs; never
+convert payload bytes through native text output. Include the eight PowerShell
+components, BAT, original icon, MIT notice and selected user docs, with generated
+commit/tree/payload SHA256 manifest and external ZIP checksum/provenance.
+
+Framework/Core NoCompression metadata differed in an actual probe. Canonical
+Stored ZIP32 records fix order, UTF8 fields, CRC32, timestamp, attributes and
+bounds. CreateNew, ordinary/reparse-free ancestry and before/after clean-source
+checks preserve existing outputs and source identities. No installer, download,
+third-party binary bundling, publication or sound change is added.
+
+Accept AC-073..075 from `4609265b1ed40da08897d7d816196ec466adaef0`: four 447048-byte identical builds, 8 real
+entry-point plus 4 separate builtin-only extracted-package cases, both local
+Full gates and four code PR CI jobs. Record normal shared module visibility;
+bootstrap isolation is distinct from direct -File/BAT launching. Preserve MIT
+bytes and exact external FFmpeg 9.0.2 hashes/license probes. That GPL build remains
+user-supplied and bundling unapproved. Retain every prior broader gap and local
+privilege skip. Only M4-03 advances to 25 done / 5 todo and 75 pass / 15 not_run;
+next M4-04 has not started. Evidence: evidence/WAC-M4-03.md and its ledger.

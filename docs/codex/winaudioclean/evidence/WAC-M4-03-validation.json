@@ -7,7 +7,7 @@
     "AC-074",
     "AC-075"
   ],
-  "status": "in_progress",
+  "status": "passed",
   "targeted_runs": [
     {
       "host": "ps51",
@@ -143,5 +143,1279 @@
     "test_physical_sha256": "2f631c780ef17798986af4be88ec68ec57a8b15849b7fb7f2136aaa8c74dd4c9",
     "script_cache_before": 0,
     "script_cache_after": 0
+  },
+  "tested_code_commit": "4609265b1ed40da08897d7d816196ec466adaef0",
+  "builds": {
+    "source_before": {
+      "commit": "4609265b1ed40da08897d7d816196ec466adaef0",
+      "dirty": false,
+      "trees": {
+        "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+        "scripts": "045a61c77ccd8c6536f8a1f14dd82f23aec694dab409323d60fc283b4add155c",
+        "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+        "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+        "governance_tests": "83f30c1938af1571ee2dcbcd833fe9429f308a3a2489fa2c93750947d5c4e961",
+        "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+        "governance_inputs": "a4d6d26085d24a14d91b822eeff15c5e43a95f57b8d9bdf97001ef64d27a96ca"
+      }
+    },
+    "source_after": {
+      "commit": "4609265b1ed40da08897d7d816196ec466adaef0",
+      "dirty": false,
+      "trees": {
+        "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+        "scripts": "045a61c77ccd8c6536f8a1f14dd82f23aec694dab409323d60fc283b4add155c",
+        "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+        "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+        "governance_tests": "83f30c1938af1571ee2dcbcd833fe9429f308a3a2489fa2c93750947d5c4e961",
+        "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+        "governance_inputs": "a4d6d26085d24a14d91b822eeff15c5e43a95f57b8d9bdf97001ef64d27a96ca"
+      }
+    },
+    "source_unchanged": true,
+    "build_count": 4,
+    "same_host_bytes_identical": true,
+    "cross_host_bytes_identical": true,
+    "passed": true,
+    "manifest": {
+      "schema_version": 1,
+      "application": "WinAudioClean",
+      "version": "2.3",
+      "source_commit": "4609265b1ed40da08897d7d816196ec466adaef0",
+      "source_tree": "53a751af9af1f24a50f8466e6f93ae17630875b3",
+      "payload": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477"
+        },
+        {
+          "path": "README.md",
+          "bytes": 49769,
+          "sha256": "50054e737bde03af05b1f88db52e85275d86e20c318d955b7321c8bac3ca948d"
+        },
+        {
+          "path": "THIRD_PARTY_NOTICES.md",
+          "bytes": 1236,
+          "sha256": "50b09c4045af569610c764cd147197920940ce0c12618a48ba0bfa0d0a0a10ec"
+        },
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "bytes": 19634,
+          "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "bytes": 26826,
+          "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "bytes": 14397,
+          "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "bytes": 11184,
+          "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "bytes": 46365,
+          "sha256": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "bytes": 14069,
+          "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "bytes": 28208,
+          "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+        },
+        {
+          "path": "WinAudioClean.bat",
+          "bytes": 3621,
+          "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b"
+        },
+        {
+          "path": "WinAudioClean.ico",
+          "bytes": 30763,
+          "sha256": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "bytes": 152224,
+          "sha256": "863454b00602ca1f24751efefdee21dc1f0a5cf2542331ca3399bd4d27666d0c"
+        },
+        {
+          "path": "docs/PORTABLE_PACKAGE.md",
+          "bytes": 4179,
+          "sha256": "ded76a5ea174b9fe29ab07624b535da87259145d686517d0770b642f741b7902"
+        },
+        {
+          "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+          "bytes": 39363,
+          "sha256": "08f6aff34a7ff82b7b7a7c576b49dca21c9f7f126a1629a6e55716c8d0826f78"
+        }
+      ]
+    },
+    "runs": [
+      {
+        "host": "ps51",
+        "build": "one",
+        "exit_code": 0,
+        "command": "<host> -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/Build-Release.ps1 -Revision 4609265b1ed40da08897d7d816196ec466adaef0 -OutputDirectory dist/WAC-M4-03/builds-one/ps51-one",
+        "archive": "dist/WAC-M4-03/builds-one/ps51-one/WinAudioClean-2.3-4609265b1ed4-tool-only.zip",
+        "bytes": 447048,
+        "sha256": "e72fce6cae5d0e94473bde1b94657e778a472c6ff17aa6a2065c795438bf604c",
+        "manifest_sha256": "f9a270c198a5661747ad59de69ebc0a424ac2ee2b8a76b58e95b7568697256ad"
+      },
+      {
+        "host": "ps51",
+        "build": "two",
+        "exit_code": 0,
+        "command": "<host> -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/Build-Release.ps1 -Revision 4609265b1ed40da08897d7d816196ec466adaef0 -OutputDirectory dist/WAC-M4-03/builds-one/ps51-two",
+        "archive": "dist/WAC-M4-03/builds-one/ps51-two/WinAudioClean-2.3-4609265b1ed4-tool-only.zip",
+        "bytes": 447048,
+        "sha256": "e72fce6cae5d0e94473bde1b94657e778a472c6ff17aa6a2065c795438bf604c",
+        "manifest_sha256": "f9a270c198a5661747ad59de69ebc0a424ac2ee2b8a76b58e95b7568697256ad"
+      },
+      {
+        "host": "ps7",
+        "build": "one",
+        "exit_code": 0,
+        "command": "<host> -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/Build-Release.ps1 -Revision 4609265b1ed40da08897d7d816196ec466adaef0 -OutputDirectory dist/WAC-M4-03/builds-one/ps7-one",
+        "archive": "dist/WAC-M4-03/builds-one/ps7-one/WinAudioClean-2.3-4609265b1ed4-tool-only.zip",
+        "bytes": 447048,
+        "sha256": "e72fce6cae5d0e94473bde1b94657e778a472c6ff17aa6a2065c795438bf604c",
+        "manifest_sha256": "f9a270c198a5661747ad59de69ebc0a424ac2ee2b8a76b58e95b7568697256ad"
+      },
+      {
+        "host": "ps7",
+        "build": "two",
+        "exit_code": 0,
+        "command": "<host> -NoProfile -NonInteractive -ExecutionPolicy Bypass -File scripts/Build-Release.ps1 -Revision 4609265b1ed40da08897d7d816196ec466adaef0 -OutputDirectory dist/WAC-M4-03/builds-one/ps7-two",
+        "archive": "dist/WAC-M4-03/builds-one/ps7-two/WinAudioClean-2.3-4609265b1ed4-tool-only.zip",
+        "bytes": 447048,
+        "sha256": "e72fce6cae5d0e94473bde1b94657e778a472c6ff17aa6a2065c795438bf604c",
+        "manifest_sha256": "f9a270c198a5661747ad59de69ebc0a424ac2ee2b8a76b58e95b7568697256ad"
+      }
+    ],
+    "host_versions": {
+      "ps51": "5.1.26100.9444",
+      "ps7": "7.6.5"
+    }
+  },
+  "fresh_package": {
+    "schema_version": 1,
+    "task": "WAC-M4-03",
+    "passed": true,
+    "scope": "synthetic_local_portable_package",
+    "error_code": null,
+    "real_route_case_count": 8,
+    "builtin_bootstrap_case_count": 4,
+    "cases": [
+      {
+        "id": "powershell_file-ps51-raw",
+        "route": "powershell_file",
+        "shell": "ps51",
+        "mode": "Raw",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "5.1.26100.9444",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 1,
+          "visible_test_modules": [
+            {
+              "name": "Pester",
+              "version": "3.4.0"
+            }
+          ],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.263,
+        "stdout_sha256": "7a66d89a5e959e7ea3c92af4078e251b81e22a4ca5baa8bada6a0ad70005b597",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "c59f5d4a535200f933d4eb75730aee645dffb01e46bd0eefe914911e718ad735",
+          "text_sha256": "b79eb7ed3a9c1c8ac7bd80ab158be505b9a2dfd03f70904a648f9aed4ef54205"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "16617817db5cb5d6091405efdf95f3f452b3c17e804a304db992556e865ba849"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "powershell_file-ps51-zoom",
+        "route": "powershell_file",
+        "shell": "ps51",
+        "mode": "Zoom",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "5.1.26100.9444",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 1,
+          "visible_test_modules": [
+            {
+              "name": "Pester",
+              "version": "3.4.0"
+            }
+          ],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.856,
+        "stdout_sha256": "9fceac88875a1f63e30b8b8c1d9f3b57c04adfa88268a4358a81338e5aa6619b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "748cc306e389c36675af25dfbc0603f65c9e1531325449d4075107ea25002e3d",
+          "text_sha256": "5b402b40537eae355f709d5b102c80bbf60e36663809556bcaec3bf4589a430d"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "powershell_file-ps7-raw",
+        "route": "powershell_file",
+        "shell": "ps7",
+        "mode": "Raw",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "7.6.5",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 2,
+          "visible_test_modules": [],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 5.536,
+        "stdout_sha256": "63eac293c51f23f7b0b7325bf584acb07576095a22ba5fe03c3a21e1d3ab0632",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "c3320083bd49174672cee02b204fcec8e8b91c6279c1e5ecb55459625911dd79",
+          "text_sha256": "a413e623a0cb9a38123f9f0c97efef598f4cca5d76af1a2d413eb194b0186751"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "16617817db5cb5d6091405efdf95f3f452b3c17e804a304db992556e865ba849"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "powershell_file-ps7-zoom",
+        "route": "powershell_file",
+        "shell": "ps7",
+        "mode": "Zoom",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "7.6.5",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 2,
+          "visible_test_modules": [],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.687,
+        "stdout_sha256": "18ab6672121467971e37f3e269aeb7561f6e06a4034ac840a778627ad32c1384",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "a8cf042508bd1e26412350969c234b93808008f906e2d5f8321198c543486b41",
+          "text_sha256": "4ce8b51b01acc0a7d88163ddc0f526e29e2cdce618ce8c2295b274e8ac334d47"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "bat_unattended-ps51-raw",
+        "route": "bat_unattended",
+        "shell": "ps51",
+        "mode": "Raw",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "5.1.26100.9444",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 1,
+          "visible_test_modules": [
+            {
+              "name": "Pester",
+              "version": "3.4.0"
+            }
+          ],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.33,
+        "stdout_sha256": "ae67434a6b6fe031f97afb9b8a93be25b497a4b0a487904e9a25b227b97ab28a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "d37959f6298cfea510efb8ae7dfe72a351f9fdb0909eac907ecbfc4db90f8344",
+          "text_sha256": "463cb256ad6c5dcb360b5ad223968f4b315b25a132e4a5474cdb82cc6c7be6c2"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "16617817db5cb5d6091405efdf95f3f452b3c17e804a304db992556e865ba849"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "bat_unattended-ps51-zoom",
+        "route": "bat_unattended",
+        "shell": "ps51",
+        "mode": "Zoom",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "5.1.26100.9444",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 1,
+          "visible_test_modules": [
+            {
+              "name": "Pester",
+              "version": "3.4.0"
+            }
+          ],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.656,
+        "stdout_sha256": "6501951c215c155d3800dca5831e9e47a8db50d9d079331779abe628ddd9b34d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "2141aff9b5ad9bb5782ab9b92562aa3c83aac2f393ba1561a2a581a864c7789d",
+          "text_sha256": "fec78ba901e10dbaf650d87beedbef26ed97556ab259a3dcb04b3e8f00b04dbe"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "bat_unattended-ps7-raw",
+        "route": "bat_unattended",
+        "shell": "ps7",
+        "mode": "Raw",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "7.6.5",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 3,
+          "visible_test_modules": [
+            {
+              "name": "Pester",
+              "version": "3.4.0"
+            }
+          ],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 6.203,
+        "stdout_sha256": "f72f47c8702608a19f866571025de887808754e43d404f0d1b0a18d7117a8120",
+        "stderr_sha256": "6cd06d0aee3c41dcc1bde168cfa21cd3a2d618affd99a7dba50d8be2c0538389",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "d744203f5cca5975770bfb8b9fe950c35cf0a9f31cf78062bb2be0813c71c660",
+          "text_sha256": "5517f472d986ba44a7fdd8bc98f6c2a550f674a2e0bbda69eb8cb29d8ba05bf3"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "16617817db5cb5d6091405efdf95f3f452b3c17e804a304db992556e865ba849"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "bat_unattended-ps7-zoom",
+        "route": "bat_unattended",
+        "shell": "ps7",
+        "mode": "Zoom",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "7.6.5",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": false,
+          "startup_added_module_root_count": 3,
+          "visible_test_modules": [
+            {
+              "name": "Pester",
+              "version": "3.4.0"
+            }
+          ],
+          "scope": "normal_host_startup"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 5.863,
+        "stdout_sha256": "32d7269fe4fd29476d4b91f2661d491653f7a30f8666594b4fbaed0b05e521b1",
+        "stderr_sha256": "e15c08f017149df9bfb5f83094d7ec18a23500a9bb62685cb5adaafd0068e36a",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "3702f2853358686210c6588f8354b8a739b030f0ed82a1e600a60f52bac58086",
+          "text_sha256": "2dd20b4e25dbe4acbfcd75c2e4d772328982d789f181499276d463cdcd72adc3"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true
+      },
+      {
+        "id": "builtin_bootstrap-ps51-raw",
+        "route": "builtin_bootstrap",
+        "shell": "ps51",
+        "mode": "Raw",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "5.1.26100.9444",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": true,
+          "startup_added_module_root_count": 0,
+          "visible_test_modules": [],
+          "scope": "builtin_only_bootstrap"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.056,
+        "stdout_sha256": "9e3ade18c37b2d5903bbab91ef70f235d7e15c383f962313420b77e144ceeb55",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "e3f63a9c02d060013038b64f1a0931f1f836bb72d4a7a494f68253b96bd68f75",
+          "text_sha256": "39a230936ff1741aa9898c6263775d85b88142b3eacf74501dbdac653ccc6252"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "16617817db5cb5d6091405efdf95f3f452b3c17e804a304db992556e865ba849"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "test_module_loaded_count": 0
+      },
+      {
+        "id": "builtin_bootstrap-ps51-zoom",
+        "route": "builtin_bootstrap",
+        "shell": "ps51",
+        "mode": "Zoom",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "5.1.26100.9444",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": true,
+          "startup_added_module_root_count": 0,
+          "visible_test_modules": [],
+          "scope": "builtin_only_bootstrap"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.486,
+        "stdout_sha256": "e6b8f8078e7d7a677bc1b662ce707e74f78d22628ac635f8473a56a6bdb29aa4",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "12c84d7105d52659708c11216b5ce6413e7a8969731d4ed7391dcbeba91c8b30",
+          "text_sha256": "1c2d0bffbe19ce204d196811a65bb38ab7671e0caa74e7856c2f69e2c5265c1f"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "test_module_loaded_count": 0
+      },
+      {
+        "id": "builtin_bootstrap-ps7-raw",
+        "route": "builtin_bootstrap",
+        "shell": "ps7",
+        "mode": "Raw",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "7.6.5",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": true,
+          "startup_added_module_root_count": 0,
+          "visible_test_modules": [],
+          "scope": "builtin_only_bootstrap"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 5.001,
+        "stdout_sha256": "0513847be94a4c5717b06ff9f561c1e738c1c67efc3b3f7738d4c594ea4dd675",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "fd9f007150706f2ee155fa948e0bd169d841192383eff39890550a68147425da",
+          "text_sha256": "30154767472baca6862415fbb214c8318cf3f6f31445f25de549b1d4a7f2ee02"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "16617817db5cb5d6091405efdf95f3f452b3c17e804a304db992556e865ba849"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "test_module_loaded_count": 0
+      },
+      {
+        "id": "builtin_bootstrap-ps7-zoom",
+        "route": "builtin_bootstrap",
+        "shell": "ps7",
+        "mode": "Zoom",
+        "passed": true,
+        "module_scope": {
+          "shell_version": "7.6.5",
+          "python_available": false,
+          "git_available": false,
+          "builtin_module_roots_only": true,
+          "startup_added_module_root_count": 0,
+          "visible_test_modules": [],
+          "scope": "builtin_only_bootstrap"
+        },
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.254,
+        "stdout_sha256": "9faf92ba36808ddbb0baa70ea962b3cabfabfc1a622485f145f2d7b27107fa59",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "report": {
+          "schema_version": 1,
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "tool_version": "2.3",
+          "source_revision": null,
+          "source_revision_reason": "not_embedded",
+          "published": true,
+          "failure_count": 0,
+          "warning_count": 0,
+          "json_sha256": "52bc75c2cf326728eebd1ed1519a018cc4e46e6f00b9f0e8cb47e9f6eec89c30",
+          "text_sha256": "aa3a0c1c15841206396878c630387c7e1d6699875fb87ef0a5a5d6d42ad1da47"
+        },
+        "output": {
+          "container": "RIFF",
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "sample_rate": 48000,
+          "bits": 16,
+          "frames": 384000,
+          "duration_seconds": 8.0,
+          "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363"
+        },
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "test_module_loaded_count": 0
+      }
+    ],
+    "archive": {
+      "passed": true,
+      "payload_count": 15,
+      "entry_count": 16,
+      "zip_sha256": "e72fce6cae5d0e94473bde1b94657e778a472c6ff17aa6a2065c795438bf604c",
+      "manifest_sha256": "f9a270c198a5661747ad59de69ebc0a424ac2ee2b8a76b58e95b7568697256ad",
+      "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+      "version": "2.3",
+      "source_commit": "4609265b1ed40da08897d7d816196ec466adaef0",
+      "source_tree": "53a751af9af1f24a50f8466e6f93ae17630875b3",
+      "ordered_stored_fixed_timestamp": true,
+      "committed_blobs_identical": true
+    },
+    "input": {
+      "container": "RIFF",
+      "codec": "pcm_s16le",
+      "channels": 2,
+      "sample_rate": 48000,
+      "bits": 16,
+      "frames": 384000,
+      "duration_seconds": 8.0,
+      "sha256": "4e88aa8b885e43d2eef728943f50373f2a19c80560d90a1cff24534d8e3e444f",
+      "unchanged": true,
+      "synthetic": true
+    },
+    "tools": {
+      "ffmpeg": {
+        "version": "9.0.2",
+        "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec"
+      },
+      "ffprobe": {
+        "version": "9.0.2",
+        "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+      }
+    },
+    "preflight": [
+      {
+        "route": "powershell_file",
+        "shell": "ps51",
+        "shell_version": "5.1.26100.9444",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "startup_added_module_root_count": 1,
+        "visible_test_modules": [
+          {
+            "name": "Pester",
+            "version": "3.4.0"
+          }
+        ],
+        "scope": "normal_host_startup"
+      },
+      {
+        "route": "bat_unattended",
+        "shell": "ps51",
+        "shell_version": "5.1.26100.9444",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "startup_added_module_root_count": 1,
+        "visible_test_modules": [
+          {
+            "name": "Pester",
+            "version": "3.4.0"
+          }
+        ],
+        "scope": "normal_host_startup"
+      },
+      {
+        "route": "builtin_bootstrap",
+        "shell": "ps51",
+        "shell_version": "5.1.26100.9444",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": true,
+        "startup_added_module_root_count": 0,
+        "visible_test_modules": [],
+        "scope": "builtin_only_bootstrap"
+      },
+      {
+        "route": "powershell_file",
+        "shell": "ps7",
+        "shell_version": "7.6.5",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "startup_added_module_root_count": 2,
+        "visible_test_modules": [],
+        "scope": "normal_host_startup"
+      },
+      {
+        "route": "bat_unattended",
+        "shell": "ps7",
+        "shell_version": "7.6.5",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "startup_added_module_root_count": 3,
+        "visible_test_modules": [
+          {
+            "name": "Pester",
+            "version": "3.4.0"
+          }
+        ],
+        "scope": "normal_host_startup"
+      },
+      {
+        "route": "builtin_bootstrap",
+        "shell": "ps7",
+        "shell_version": "7.6.5",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": true,
+        "startup_added_module_root_count": 0,
+        "visible_test_modules": [],
+        "scope": "builtin_only_bootstrap"
+      }
+    ],
+    "controller_source_unchanged": true,
+    "approved_tools_unchanged": true,
+    "command": "python -B -X utf8 scripts/Test-ReleasePackage.py --zip <repo>/dist/WAC-M4-03/builds-one/ps51-one/WinAudioClean-2.3-4609265b1ed4-tool-only.zip --expected-commit 4609265b1ed40da08897d7d816196ec466adaef0 --ffmpeg <approved-bin>/ffmpeg.exe --ffprobe <approved-bin>/ffprobe.exe --ps51 <system-ps51> --ps7 <pinned-ps7> --output <repo>/.wac-local/WAC-M4-03/fresh-use-one"
+  },
+  "local_full": [
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps51",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "5.1.26100.9444",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "4609265b1ed40da08897d7d816196ec466adaef0",
+        "dirty": false,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "045a61c77ccd8c6536f8a1f14dd82f23aec694dab409323d60fc283b4add155c",
+          "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "83f30c1938af1571ee2dcbcd833fe9429f308a3a2489fa2c93750947d5c4e961",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "a4d6d26085d24a14d91b822eeff15c5e43a95f57b8d9bdf97001ef64d27a96ca"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1483,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 142,
+          "skipped": 1
+        }
+      },
+      "diagnostics": null,
+      "command": "python -X utf8 scripts/Invoke-CIChecks.py --shell-path <ps51-host> --shell-family ps51 --level Full"
+    },
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps7",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "7.6.5",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "4609265b1ed40da08897d7d816196ec466adaef0",
+        "dirty": false,
+        "trees": {
+          "runtime": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+          "scripts": "045a61c77ccd8c6536f8a1f14dd82f23aec694dab409323d60fc283b4add155c",
+          "tests": "8ed5545946897bd38c60daa1b0ea47d2f501f75e7b5a0b033b5eb4910b627097",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "83f30c1938af1571ee2dcbcd833fe9429f308a3a2489fa2c93750947d5c4e961",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "a4d6d26085d24a14d91b822eeff15c5e43a95f57b8d9bdf97001ef64d27a96ca"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1483,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 142,
+          "skipped": 1
+        }
+      },
+      "diagnostics": null,
+      "command": "<pinned-python> scripts/Invoke-CIChecks.py --shell-path <pinned-ps7> --shell-family ps7 --level Full"
+    }
+  ],
+  "code_ci": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "headSha": "4609265b1ed40da08897d7d816196ec466adaef0",
+    "event": "pull_request",
+    "workflow": "Windows validation",
+    "workflowPath": ".github/workflows/windows-validation.yml",
+    "run": {
+      "id": 37150442388,
+      "workflowId": 374090478,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37150442388",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "state": "passed",
+    "reason": "Exact workflow SHA and all required shell/build jobs succeeded."
+  },
+  "ci_artifact_review": [
+    {
+      "schema_version": 1,
+      "captured_utc": "2026-10-03T20:25:30.579405+00:00",
+      "tested_sha": "4609265b1ed40da08897d7d816196ec466adaef0",
+      "run_id": 37150442388,
+      "run_url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37150442388",
+      "state": "passed",
+      "four_required_jobs_completed_successfully": true,
+      "complete_artifact_set": true,
+      "source_inventory_count": 96,
+      "source_group_counts": {
+        "github": 1,
+        "governance_inputs": 5,
+        "governance_tests": 7,
+        "governance_tools": 3,
+        "runtime": 9,
+        "scripts": 21,
+        "tests": 50
+      },
+      "all_artifact_source_tree_hashes_match": true,
+      "runtime_tree_sha256_lf": "9671ac43111d0778ef136d41a0d957dcf3a818895d9b4c8096de74b3d574c94c",
+      "artifact_privacy_schema_verified": true,
+      "artifacts": [
+        {
+          "name": "checks-windows-2022-ps51",
+          "sha256": "6ede9d5b2c11367c407d0f10231845415fc95ecdd40d6107f0481cf0a3a8b277",
+          "status": "passed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.20348.5622",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "checks": {
+            "pester": {
+              "passed": 1484,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 142,
+              "skipped": 0
+            }
+          },
+          "all_source_tree_hashes_match": true
+        },
+        {
+          "name": "checks-windows-2022-ps7",
+          "sha256": "28f7da311692f1c853adc9920ed0145bb5ac0321b4400a9aaea74a94a3db05a2",
+          "status": "passed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.20348",
+            "windows_build": 20348,
+            "image_os": "win22",
+            "image_version": "20260927.320.1"
+          },
+          "checks": {
+            "pester": {
+              "passed": 1484,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 142,
+              "skipped": 0
+            }
+          },
+          "all_source_tree_hashes_match": true
+        },
+        {
+          "name": "checks-windows-2025-ps51",
+          "sha256": "879d7ca2c3d7a1753ad6b77cc7999b6e54579a9221a4e3b2472b24ff2c77acb1",
+          "status": "passed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "5.1.26100.33438",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "checks": {
+            "pester": {
+              "passed": 1484,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 142,
+              "skipped": 0
+            }
+          },
+          "all_source_tree_hashes_match": true
+        },
+        {
+          "name": "checks-windows-2025-ps7",
+          "sha256": "50e88e39a89420c46ad01f04c038546b70d791a7e8168a998f4cd1f14c70d0b0",
+          "status": "passed",
+          "exit_code": 0,
+          "versions": {
+            "python": "3.14.6",
+            "powershell": "7.6.5",
+            "modules": {
+              "Pester": "5.7.1",
+              "PSScriptAnalyzer": "1.24.0"
+            }
+          },
+          "platform": {
+            "windows_version": "10.0.26100",
+            "windows_build": 26100,
+            "image_os": null,
+            "image_version": "20260925.250.1"
+          },
+          "checks": {
+            "pester": {
+              "passed": 1484,
+              "skipped": 0,
+              "outside_scope": 0
+            },
+            "python": {
+              "ran": 142,
+              "skipped": 0
+            }
+          },
+          "all_source_tree_hashes_match": true
+        }
+      ]
+    }
+  ],
+  "closure_scope": "Metadata-only acceptance and handoff update; tested runtime/scripts/test contents remain unchanged.",
+  "closure_checks": [
+    {
+      "command": "<pinned-python> -B -X utf8 -m unittest discover -s docs/codex/winaudioclean/tests -p test_coverage.py -v",
+      "exit_code": 0,
+      "ran": 13,
+      "skipped": 0
+    },
+    {
+      "command": "<pinned-python> -B -X utf8 -m unittest test_handoff.CanonicalPlanTests -v",
+      "cwd": "<repo>",
+      "exit_code": 1,
+      "status": "not_run",
+      "reason": "embedded_interpreter_module_search_scope"
+    },
+    {
+      "command": "<pinned-python> -B -X utf8 -m unittest test_handoff.CanonicalPlanTests -v",
+      "cwd": "<repo>/docs/codex/winaudioclean/tests",
+      "exit_code": 1,
+      "status": "not_run",
+      "reason": "embedded_interpreter_module_search_scope"
+    },
+    {
+      "command": "<pinned-python> -B -X utf8 -m unittest discover -s docs/codex/winaudioclean/tests -p test_handoff.py -k test_current_plan_is_valid -v",
+      "exit_code": 0,
+      "ran": 1,
+      "skipped": 0
+    }
+  ],
+  "closure_source_review": {
+    "changed_source_groups": [
+      "governance_inputs"
+    ],
+    "runtime_scripts_tests_workflow_unchanged": true,
+    "all_packaged_source_files_unchanged": true,
+    "scope": "metadata_only"
   }
 }

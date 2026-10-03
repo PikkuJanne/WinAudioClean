@@ -1,3 +1,33 @@
+# Next model: WAC-M4-04 — Finish user-facing help, setup and troubleshooting
+
+**M4-03 is complete. Start only M4-04 when requested.** Canonical 25 done / 5 todo,
+75 AC pass / 15 not_run. Read AGENTS, STATUS, DECISIONS, TASKS, ACCEPTANCE,
+SYNC_PROTOCOL, tasks/WAC-M4-04, COVERAGE and evidence/WAC-M4-03 before work.
+
+Use maintained WinAudioClean-governance and preserve the source-only original.
+Branch codex/wac-m4-regression; exact origin https://github.com/PikkuJanne/WinAudioClean.git.
+Draft PR#5 remains stacked on codex/wac-m3-settings. Recover closure SHA from
+Git/live origin and inspect its actual PR/CI separately. Tested code is `4609265b1ed40da08897d7d816196ec466adaef0`;
+its four hosted jobs are green. Closure metadata pending/error is not a pass.
+Fetch/sync-check, validate-plan/coverage/next should identify only M4-04 ready.
+
+Keep application version 2.3 authoritative in the main script. Tool-only package
+has 15 committed runtime/docs/icon/license entries plus manifest. Four clean
+builds are identical on the two recorded hosts; archive source/checksums and 12
+fresh-package cases are in the ledger. Git/Python absence and builtin-only scope
+are process-controlled on the shared machine; normal host module visibility is
+recorded honestly. FFmpeg is separately supplied; exact-build bundling remains
+unapproved. No runtime sound/default/entry-point change was made by packaging.
+
+Retain both local Full counts/skips, four hosted artifact scopes and all eight
+broader gaps. Do not repeat stable Full solely for documentation. New source,
+failures or unresolved concerns justify gates. Keep automated SettingsPath
+isolated; APPDATA does not relocate the Windows known-folder lookup. Feature
+commits/pushes and draft-PR upkeep are in scope; merge/main push/tags/releases/
+repository settings, sound promotion and deployment retain approval boundaries.
+
+## Historical M4-03 validation handoff (superseded)
+
 # Next model: finish WAC-M4-03 validation
 
 M4-03 is active. Canonical task/AC statuses remain todo/not_run. Read current
@@ -6,7 +36,7 @@ only in maintained WinAudioClean-governance on codex/wac-m4-regression; preserve
 the source-only original. Parent f32cf1591a288ff356f69aa3a2320adf62959808
 is synchronized and its four PR CI jobs are green.
 
-Builder takes explicit clean HEAD, preserves committed payload bytes/version2.3,
+Builder takes explicit clean HEAD, preserves committed payload bytes/version 2.3,
 and writes a tool-only ZIP plus checksums/provenance. Require actual two builds
 per host and cross-host byte comparison; then fresh spaces/Unicode extraction
 with approved existing FFmpeg, real BAT/PowerShell cases and separate restricted
@@ -20,7 +50,7 @@ or M4-04 work is authorized by this implementation checkpoint.
 # Next model: WAC-M4-03 — Build a versioned portable release package
 
 **M4-02 is complete. Start only WAC-M4-03 when requested.** Canonical24 done/
-6 todo/0 blocked;72 AC pass/18 not_run. M4-03/AC-073..075 remain todo/not_run.
+6 todo/ 0 blocked;72 AC pass/18 not_run. M4-03/AC-073..075 remain todo/not_run.
 Read AGENTS, STATUS, DECISIONS, TASKS, ACCEPTANCE, SYNC_PROTOCOL,
 tasks/WAC-M4-03, COVERAGE and evidence/WAC-M4-02 before work.
 

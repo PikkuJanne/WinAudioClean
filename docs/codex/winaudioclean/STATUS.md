@@ -1,6 +1,27 @@
 # Current status
 
-Date:2026-10-03. **WAC-M4-03 implementation and validation are in progress.**
+Date: 2026-10-03. **WAC-M4-03 is complete.** Canonical 25 done / 5 todo / 0 blocked;
+75 AC pass / 15 not_run. **Next: WAC-M4-04 — Finish user-facing help, setup and
+troubleshooting**, unlocked and not started. All eight broader gaps remain.
+
+Clean code `4609265b1ed40da08897d7d816196ec466adaef0` produced four identical tool-only version 2.3 ZIPs
+(447048 bytes, SHA256 `e72fce6cae5d0e94473bde1b94657e778a472c6ff17aa6a2065c795438bf604c`). The 15 committed payload files plus generated
+manifest, checksum and provenance agree; MIT bytes are preserved. Eight real
+BAT/PowerShell and four separately scoped builtin-only fresh-package cases pass.
+FFmpeg remains supplied separately and bundling unapproved.
+
+Both local Full gates passed Pester 1483 / 1
+privilege skip, Python 142 ran / 1 privilege skip;
+zero outside scope and stable seven source digests. Four code PR CI jobs passed:
+[run 37150442388](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37150442388). Closure metadata CI is distinct and must be
+read at its actual future SHA. Runtime/defaults/source-only original stay intact.
+[Evidence](evidence/WAC-M4-03.md), [ledger](evidence/WAC-M4-03-validation.json).
+
+## Historical M4-03 implementation checkpoint (superseded)
+
+# Current status
+
+Date: 2026-10-03. **WAC-M4-03 implementation and validation are in progress.**
 Canonical24 done/6 todo,72 AC pass/18 not_run remain unchanged. Build tooling,
 portable instructions and tool-only dependency notices are being validated.
 Clean-revision repeated packages, extracted-package processing and both local
@@ -15,7 +36,7 @@ this does not stand in for M4-03 evidence.
 
 # Current status
 
-Date:2026-10-03. **WAC-M4-02 is complete.** Canonical24 done/6 todo/0 blocked;
+Date: 2026-10-03. **WAC-M4-02 is complete.** Canonical24 done/6 todo/ 0 blocked;
 72 AC pass/18 not_run. **Next: WAC-M4-03 — Build a versioned portable release
 package**, unlocked and not started. Coverage retains all eight broader gaps.
 
@@ -64,7 +85,7 @@ the confirmed stdin prefix. See [evidence](evidence/WAC-M4-02.md).
 
 # Current status
 
-Date: 2026-10-03. **WAC-M4-01 is complete.** Canonical 23 done/7 todo/0 blocked;
+Date: 2026-10-03. **WAC-M4-01 is complete.** Canonical 23 done/7 todo/ 0 blocked;
 69 AC pass/21 not run. Coverage maps 69 cases, 35 command scopes, eight named
 reviews and eight retained broader-scope gaps. **Next: WAC-M4-02 only.**
 
@@ -90,7 +111,7 @@ privileged-symlink gaps remain visible. No CI/package/merge/release/deployment.
 Date: 2026-10-03. **WAC-M3-06 is complete.** AC-064 now passes: user-reported
 actual Explorer drops/menu/playback in modes 1/2 and independent verification of
 both local SUCCESS/exit-0/complete reports and published WAV headers. Canonical:
-22 done/8 todo/0 blocked; 66 AC pass, 24 not run. **Next: WAC-M4-01**, unlocked
+22 done/8 todo/ 0 blocked; 66 AC pass, 24 not run. **Next: WAC-M4-01**, unlocked
 but not started. AC-065/066 retain their earlier evidence.
 
 The initial unquoted-parentheses drop rejection and neutral-name copy/retry are
@@ -171,7 +192,7 @@ preserves earlier outputs/static records, prevents pending starts and persists
 CANCELLED130. Accurate verification cancellation prevents publication. Per-run
 schema1 gains progress and failed-preview reports; journal schemas stay intact.
 
-Final focused77 and required Full 1382 pass/1 privilege skip Pester
+Final focused77 and required Full 1382 pass/ 1 privilege skip Pester
 per host, Python61 pass/one separate privilege skip, parser/static/plan exit0.
 Actual private-console native signals4/4 and final real media20/20 cover both
 PS5.1/PS7 with exact hashes/commands and preserved corrections. Sound helpers and
@@ -243,7 +264,7 @@ journal failure5. Explicit repeats/order remain; its historical folder queue sco
   each (61 pass, one symlink-privilege skip). Parser/static/plan pass; visible
   non-gating advisories remain recorded. Final wrappers exit0 and code is stable.
 - Final API28/28 real calls,32 assets,26 exact PCM/frame/graph comparisons and
-  six direct references. Final BAT6/6 calls plus4/4 direct references,20 assets,
+  six direct references. Final BAT6/6 calls plus 4/4 direct references,20 assets,
  16 exact comparisons. Both inner hosts, real pinned FFmpeg, isolated configs.
 - Strict manifest/CLI checks, persistent valid-invalid-valid, relative pipe/NUL
   failures, settings freeze, one mode prompt, native diagnostics/append rollback,
