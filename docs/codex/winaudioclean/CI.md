@@ -44,8 +44,12 @@ repository secrets and may need GitHub's existing contributor approval.
 The workflow does not change repository settings or permissions.
 
 Only `artifacts/local/ci/<shell>.json` is uploaded, with seven-day retention.
-Its fixed projection includes versions, source hashes and numeric test counts;
-no audio, filenames, personal paths, environment contents or raw diagnostics.
+Its fixed projection includes versions, source hashes and numeric test counts.
+Failed gates also expose a fixed phase/category, bounded Pester totals and up
+to 32 checked-in source filenames with validated line numbers. Source names
+come from Git's maintained ASCII code inventory, not diagnostic text; external
+paths and out-of-range lines are rejected. No audio filenames, personal paths,
+environment contents, assertion messages or expanded test values are exported.
 Raw test output remains in ignored `.wac-local/ci/logs/` and is not uploaded.
 Artifacts and GitHub console logs should be treated as publicly shareable
 repository evidence. A setup failure may have no result artifact; it remains

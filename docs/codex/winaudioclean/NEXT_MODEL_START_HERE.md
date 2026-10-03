@@ -4,8 +4,10 @@ WAC-M4-02 implementation is on `codex/wac-m4-regression` / draft PR #5. Recover
 its current SHA from Git and live origin; the original parent is
 `42cf8f24a9b1886b5a807bb74e7b299d9de9cb29`. Local Quick passed both shells,
 focused integrity/policy/status/parity checks pass, and source remains unchanged
-in its runtime/defaults. Full local and actual four-job PR results must still
-be captured before marking the task/AC-070..072 accepted. Do not start M4-03.
+in its runtime/defaults. Both local Full gates passed at `fd56b84`, but initial
+PR run 37143282084 passed only the PS7 jobs; both PS5.1 jobs failed. Preserve
+those results and diagnose the CI failures before marking the task/AC-070..072
+accepted. Sanitized failure locators are the next checkpoint. Do not start M4-03.
 Read CI.md, evidence/WAC-M4-02.md and current canonical plan/coverage records.
 Use the exact manifest-pinned portable tools and the same existing Full runner.
 Status lookup works on the unmerged branch; a missing/error/pending run is not

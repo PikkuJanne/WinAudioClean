@@ -94,8 +94,75 @@ def parse_results(output, level):
     return {"pester": counts, "python": python}
 
 
+def failure_diagnostics(repo, output, tracked_sources):
+    """Project progress/counts and checked-in source locations, never diagnostic text."""
+    clean = ANSI.sub("", output).replace("\r\n", "\n")
+    phase = "unknown"
+    markers = ((r"^Development module: ", "parser"),
+               (r"^PowerShell parser passed ", "analyzer"),
+               (r"^Static gate passed;", "plan"),
+               (r'^\s*"valid": true,?$', "coverage"),
+               (r"^Coverage traceability passed$", "pester"),
+               (r"^Pester v[0-9.]", "pester"),
+               (r"^Ran [0-9]{1,9} tests? in ", "governance"))
+    for pattern, next_phase in markers:
+        if re.search(pattern, clean, re.M):
+            phase = next_phase
+    for text, failed_phase in (("PowerShell parse failed:", "parser"),
+                               ("PSScriptAnalyzer found ", "analyzer"),
+                               ("Plan validation failed ", "plan"),
+                               ("Coverage traceability validation failed ", "coverage"),
+                               ("Pester failed:", "pester"),
+                               ("Governance helper tests failed ", "governance")):
+        if text in clean:
+            phase = failed_phase
+    totals = re.findall(r"^Tests Passed: ([0-9]{1,9}), Failed: ([0-9]{1,9}), "
+                        r"Skipped: ([0-9]{1,9}), Inconclusive: ([0-9]{1,9}), "
+                        r"NotRun: ([0-9]{1,9})$", clean, re.M)
+    pester = dict(zip(("passed", "failed", "skipped", "inconclusive", "outside_scope"),
+                      map(int, totals[0]))) if len(totals) == 1 else None
+    if pester and phase == "unknown":
+        phase = "pester"
+    locations = []
+    for relative in sorted(set(tracked_sources)):
+        if (not re.fullmatch(r"[A-Za-z0-9_./-]+\.(?:ps1|psm1|py)", relative) or
+                any(part in {"", ".", ".."} for part in relative.split("/")) or
+                not (relative.startswith(("scripts/", "tests/", "docs/codex/winaudioclean/tests/",
+                                          "docs/codex/winaudioclean/tools/")) or
+                     re.fullmatch(r"WinAudioClean(?:\.[A-Za-z]+)?\.ps1", relative))):
+            continue
+        path = repo / relative
+        if path.is_symlink() or not path.is_file() or not path.resolve().is_relative_to(repo.resolve()):
+            continue
+        try:
+            line_count = len(path.read_text(encoding="utf-8-sig", errors="replace").splitlines())
+        except OSError:
+            continue
+        for spelling in {str(path), str(path).replace("\\", "/")}:
+            pattern = (r"(?<![A-Za-z0-9_./\\])" + re.escape(spelling) +
+                       r'(?::([0-9]{1,6})(?![0-9])|", line ([0-9]{1,6})(?![0-9]))')
+            for match in re.finditer(pattern, clean, re.I):
+                line = int(match[1] or match[2])
+                if not 1 <= line <= line_count:
+                    continue
+                context = clean[max(0, match.start() - 1000):match.start()]
+                category = "unknown"
+                for pattern, value in ((r"Expected ", "assertion"), (r"timed out|TimeoutException", "timeout"),
+                                       (r"error CS[0-9]{4}", "compile"), (r"ImportError|ModuleNotFoundError", "import"),
+                                       (r"ParserError|SyntaxError", "parse"), (r"Traceback|Exception", "exception")):
+                    if re.search(pattern, context, re.I):
+                        category = value
+                        break
+                locations.append((match.start(), relative, line, category))
+    unique = {}
+    for _, relative, line, category in sorted(locations):
+        unique.setdefault((relative, line), {"file": relative, "line": line, "category": category})
+    return {"phase": phase, "pester": pester, "locations": list(unique.values())[:32],
+            "truncated": len(unique) > 32}
+
+
 def run_checks(repo, shell_path, family, level="Full", *, process_run=None, environ=None):
-    """Capture raw output locally and publish a fixed projection with no free text or paths."""
+    """Capture output locally; export fixed metadata and checked-in source locators only."""
     process_run = process_run or subprocess.run
     environ = os.environ if environ is None else environ
     env = child_environment(environ)
@@ -107,7 +174,7 @@ def run_checks(repo, shell_path, family, level="Full", *, process_run=None, envi
               "versions": {"python": observed_python if VERSION.fullmatch(observed_python) else None,
                            "powershell": None, "modules": dict.fromkeys(MODULE_PINS)},
               "platform": platform_metadata(environ),
-              "source": None, "checks": None}
+              "source": None, "checks": None, "diagnostics": None}
     raw_log = []
     ran_tests = False
 
@@ -133,6 +200,16 @@ def run_checks(repo, shell_path, family, level="Full", *, process_run=None, envi
                     report.update(status="failed", reason="source_changed")
             except (OSError, ValueError, subprocess.SubprocessError):
                 report.update(status="failed", reason="source_unavailable")
+        if ran_tests and report["status"] == "failed":
+            tracked = []
+            try:
+                files = process_run(["git", "ls-files", "-z"], cwd=repo, env=env, capture_output=True,
+                                    text=True, encoding="utf-8", errors="replace", timeout=30)
+                if files.returncode == 0:
+                    tracked = files.stdout.split("\0")
+            except (OSError, subprocess.SubprocessError):
+                pass
+            report["diagnostics"] = failure_diagnostics(repo, "\n".join(raw_log), tracked)
         artifact = repo / "artifacts/local/ci" / (family + ".json")
         log = repo / ".wac-local/ci/logs" / (family + ".log")
         artifact.parent.mkdir(parents=True, exist_ok=True)
@@ -229,6 +306,18 @@ def main(argv=None):
           f"Python {report['versions']['python']}, PowerShell {report['versions']['powershell'] or 'unavailable'}.")
     print(f"Sanitized artifact: artifacts/local/ci/{args.shell_family}.json")
     if report["status"] != "passed":
+        diagnostic = report.get("diagnostics")
+        if diagnostic:
+            print(f"Failure phase: {diagnostic['phase']}.")
+            if diagnostic["pester"]:
+                totals = diagnostic["pester"]
+                print(f"Pester totals: {totals['passed']} passed, {totals['failed']} failed, "
+                      f"{totals['skipped']} skipped, {totals['inconclusive']} inconclusive, "
+                      f"{totals['outside_scope']} outside scope.")
+            for location in diagnostic["locations"]:
+                print(f"Failure source: {location['file']}:{location['line']} ({location['category']}).")
+            if diagnostic["truncated"]:
+                print("Failure source list limited to 32 locations.")
         print(f"Raw diagnostic output stays local: .wac-local/ci/logs/{args.shell_family}.log")
     return 0 if report["status"] == "passed" else 1
 

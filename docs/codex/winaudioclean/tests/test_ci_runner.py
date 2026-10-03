@@ -42,6 +42,7 @@ class CIRunnerTests(unittest.TestCase):
         self.tests = subprocess.CompletedProcess([], 0, SUMMARY, UNITTEST)
         self.git_head = COMMIT
         self.dirty = ""
+        self.tracked = ["scripts/Invoke-Tests.ps1"]
         self.env = {"PATH": "synthetic", "PSModulePath": "wrong-shell-modules",
                     "Gh_Token": "private-token", "GITHUB_TOKEN": "another-token"}
         for attribute, value in (("system", "Windows"), ("python_version", "3.13.8"),
@@ -56,6 +57,8 @@ class CIRunnerTests(unittest.TestCase):
             return subprocess.CompletedProcess(command, 0, self.git_head, "")
         if command[:2] == ["git", "status"]:
             return subprocess.CompletedProcess(command, 0, self.dirty, "")
+        if command[:2] == ["git", "ls-files"]:
+            return subprocess.CompletedProcess(command, 0, "\0".join(self.tracked) + "\0", "")
         result = self.probe if "-Command" in command else self.tests
         if isinstance(result, BaseException):
             raise result
@@ -82,6 +85,7 @@ class CIRunnerTests(unittest.TestCase):
             "-Level", "Full", "-PythonPath", sys.executable])
         self.assertEqual(test_call[1]["timeout"], ci.TEST_TIMEOUT)
         self.assertTrue(result["source"]["content_unchanged"])
+        self.assertIsNone(result["diagnostics"])
 
     def test_quick_has_fixed_scope_without_claiming_governance_execution(self):
         self.tests = subprocess.CompletedProcess([], 0,
@@ -225,7 +229,7 @@ class CIRunnerTests(unittest.TestCase):
         self.assertIsNone(result["platform"]["image_os"])
         self.assertIsNone(result["platform"]["image_version"])
         self.assertEqual(set(result), {"schema_version", "scope", "shell_family", "level", "status",
-                                      "reason", "exit_code", "versions", "platform", "source", "checks"})
+                                      "reason", "exit_code", "versions", "platform", "source", "checks", "diagnostics"})
         self.assertIn(secret, (self.repo / ".wac-local/ci/logs/ps7.log").read_text(encoding="utf-8"))
         self.assertFalse((self.repo / "artifacts/local/ci/ps7.log").exists())
 
@@ -296,6 +300,90 @@ class CIRunnerTests(unittest.TestCase):
         result = self.run_check()
         self.assertEqual(result["status"], "passed")
         self.assertEqual(result["checks"]["python"], {"ran": 1, "skipped": 0})
+
+    def diagnostic_source(self, relative="tests/WinAudioClean.Fixture.Tests.ps1", lines=40):
+        path = self.repo / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("# synthetic\n" * lines, encoding="utf-8")
+        self.tracked.append(relative)
+        return path
+
+    def test_failure_diagnostics_record_pester_counts_phase_and_verified_assertion_line(self):
+        source = self.diagnostic_source()
+        secret = "Expected private-token C:/Users/person/private.wav, but got private-value."
+        output = (MODULES + "Coverage traceability passed\nPester v5.7.1\n"
+                  + secret + f"\nat <ScriptBlock>, {source}:12\n"
+                  + "Tests Passed: 11, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 0\n")
+        self.tests = subprocess.CompletedProcess([], 1, output, "Pester failed: 1 test(s).")
+        result = self.run_check()
+        self.assertEqual(result["status"], "failed")
+        self.assertEqual(result["diagnostics"], {"phase": "pester",
+            "pester": {"passed": 11, "failed": 1, "skipped": 0, "inconclusive": 0, "outside_scope": 0},
+            "locations": [{"file": "tests/WinAudioClean.Fixture.Tests.ps1", "line": 12, "category": "assertion"}],
+            "truncated": False})
+        for private in (secret, str(source), "private-value", "private-token"):
+            self.assertNotIn(private, json.dumps(result))
+        self.assertIn(secret, (self.repo / ".wac-local/ci/logs/ps7.log").read_text(encoding="utf-8"))
+
+    def test_diagnostics_accept_python_stack_locations_and_strip_ansi_crlf(self):
+        source = self.diagnostic_source("docs/codex/winaudioclean/tests/test_fixture.py")
+        output = ("\x1b[31mTraceback (most recent call last):\x1b[0m\r\n"
+                  f'  File "{source}", line 3, in test_fixture\r\n'
+                  "Ran 4 tests in 0.003s\r\n\r\nFAILED (errors=1)\r\n")
+        diagnostic = ci.failure_diagnostics(self.repo, output, self.tracked)
+        self.assertEqual(diagnostic["phase"], "governance")
+        self.assertEqual(diagnostic["locations"], [{"file": "docs/codex/winaudioclean/tests/test_fixture.py",
+                                                    "line": 3, "category": "exception"}])
+        self.assertNotIn(str(self.repo), json.dumps(diagnostic))
+
+    def test_diagnostics_reject_foreign_untracked_and_out_of_range_source_locations(self):
+        source = self.diagnostic_source()
+        untracked = self.diagnostic_source("tests/Untracked.ps1")
+        self.tracked.remove("tests/Untracked.ps1")
+        output = (f"at <ScriptBlock>, {source.parent.parent.parent / source.name}:3\n"
+                  f"at <ScriptBlock>, {untracked}:3\n"
+                  f"at <ScriptBlock>, {source}:0\n"
+                  f"at <ScriptBlock>, {source}:41\n"
+                  f"at <ScriptBlock>, {source}:1000000\n")
+        diagnostic = ci.failure_diagnostics(self.repo, output, self.tracked + ["../private.py", "/private.py"])
+        self.assertEqual(diagnostic["locations"], [])
+        self.assertNotIn(str(self.repo), json.dumps(diagnostic))
+
+    def test_diagnostics_deduplicate_and_bound_source_locations(self):
+        source = self.diagnostic_source()
+        output = "\n".join(f"at <ScriptBlock>, {source}:{line}" for line in list(range(1, 40)) + [1, 2])
+        diagnostic = ci.failure_diagnostics(self.repo, output, self.tracked)
+        self.assertEqual(len(diagnostic["locations"]), 32)
+        self.assertTrue(diagnostic["truncated"])
+        self.assertEqual([row["line"] for row in diagnostic["locations"]], list(range(1, 33)))
+
+    def test_diagnostics_observe_fixed_progress_and_category_without_copying_messages(self):
+        source = self.diagnostic_source("scripts/fixture.ps1")
+        for marker, expected in (("Development module: Pester 5.7.1", "parser"),
+                                 ("PowerShell parser passed (55 files; shell 5.1).", "analyzer"),
+                                 ("Static gate passed; 1 non-gating analyzer finding(s).", "plan"),
+                                 ('  "valid": true,', "coverage"),
+                                 ("Coverage traceability passed", "pester")):
+            with self.subTest(phase=expected):
+                result = ci.failure_diagnostics(self.repo, marker + f"\nerror CS1234 private-token\nat fixture, {source}:2",
+                                                 self.tracked)
+                self.assertEqual(result["phase"], expected)
+                self.assertEqual(result["locations"][0]["category"], "compile")
+                self.assertNotIn("private-token", json.dumps(result))
+
+    def test_cli_prints_safe_failure_locations_and_counts_only(self):
+        source = self.diagnostic_source()
+        self.tests = subprocess.CompletedProcess([], 1, MODULES + f"Expected private-token\nat fixture, {source}:2\n"
+            "Tests Passed: 11, Failed: 1, Skipped: 0, Inconclusive: 0, NotRun: 0\n", "Pester failed: 1 test(s).")
+        report = self.run_check()
+        with mock.patch.object(ci, "run_checks", return_value=report), mock.patch("builtins.print") as output:
+            self.assertEqual(ci.main(["--shell-path", str(self.shell), "--shell-family", "ps7"]), 1)
+        console = "\n".join(call.args[0] for call in output.call_args_list)
+        self.assertIn("Failure phase: pester.", console)
+        self.assertIn("Pester totals: 11 passed, 1 failed", console)
+        self.assertIn("Failure source: tests/WinAudioClean.Fixture.Tests.ps1:2 (assertion).", console)
+        self.assertNotIn("private-token", console)
+        self.assertNotIn(str(self.repo), console)
 
     def test_cli_defaults_to_full_and_returns_nonzero_for_not_run_or_failed(self):
         for status, expected in (("passed", 0), ("failed", 1), ("not_run", 1)):

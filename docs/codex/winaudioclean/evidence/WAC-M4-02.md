@@ -30,7 +30,35 @@ was absent; after explicit directory creation the actual reader ran. No failed
 capture was claimed as evidence. The initial status lookup's
 default-branch filename restriction was corrected before remote validation.
 
-Full local gates and actual PR runs must be recorded before acceptance. At this
-implementation checkpoint WAC-M4-02 remains todo; AC-070..072 remain not_run.
+## Initial committed Full and PR results
+
+Both local Full gates at clean `fd56b84c56b30575bd744d84751b88cad69333f9`
+passed with stable pre/post source hashes: 1461 Pester passed, one file-symlink
+privilege skip, zero outside scope; Python 128 ran with one privilege skip.
+PS7 elapsed 1073.29 seconds and PS5.1 elapsed 1088.41 seconds, both exit 0.
+These are local Windows build26300 results, not hosted CI evidence.
+
+[Initial actual PR run](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37143282084)
+at the same SHA completed **failed**. Both Windows Server 2022/2025 PS7 jobs
+passed 1462 Pester and 128 Python cases with no skips. Both PS5.1 jobs failed
+the Full step, exit 1. Their setup completed, exact Python/module pins were
+observed, and source remained clean/unchanged. PS5.1 versions were
+5.1.20348.5622 and 5.1.26100.33438. All four fixed JSON artifacts were retained
+for seven days. Initial reports expose no assertion location, so the next
+checkpoint adds bounded sanitized diagnostics before another actual CI run.
+The failure is not waived or represented as a passed gate.
+
+The diagnostic refinement passed all 59 focused CI policy/wrapper/status Python
+cases, including six new privacy/location cases. Independent review found no
+actionable issue; plan and coverage gates pass. It exports only fixed enums,
+counts and at most 32 Git-listed source locations. Runtime and the existing
+Full runner remain unchanged. The preceding local Full evidence is retained
+at its original SHA; focused tests cover this developer-only refinement.
+
+The first forced gh-credential push was rejected for the OAuth workflow scope.
+The existing default Git credential successfully pushed the feature checkpoint
+noninteractively; no permissions, repository settings or credentials changed.
+
+At this implementation checkpoint WAC-M4-02 remains todo; AC-070..072 remain not_run.
 Coverage availability is not execution evidence. No packaging, merge, release,
 repository setting, default promotion or deployment is performed.

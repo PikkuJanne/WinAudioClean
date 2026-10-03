@@ -4,7 +4,11 @@ Date: 2026-10-03. **WAC-M4-02 implementation validation is in progress.**
 Windows CI and its pinned setup/parity/status tooling are implemented. Both
 actual local Quick gates passed 1075/0/1; the five setup tests are included.
 53 focused Python cases and an actual unavailable-shell simulation passed
-their stated scopes. Full local and actual PR CI evidence remain pending.
+their stated scopes. Both local Full gates at `fd56b84` passed 1461 Pester,
+one privilege skip and 128 Python cases with one privilege skip. Initial PR
+run 37143282084 at that exact SHA passed both PS7 jobs but failed both PS5.1
+jobs. The failures are retained; sanitized source-locator diagnostics are being
+added before a new real CI run identifies and stabilizes them.
 WAC-M4-02 remains todo and AC-070..072 not_run until those results are reconciled.
 The implementation checkpoint does not advance to packaging. Source-only
 original/runtime/defaults remain unchanged. See [evidence](evidence/WAC-M4-02.md).
