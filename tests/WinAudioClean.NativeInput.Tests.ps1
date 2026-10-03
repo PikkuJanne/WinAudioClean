@@ -56,6 +56,79 @@ public sealed class WacTestFailingReadStream : Stream
         }
     }
 
+    It 'preserves exact raw stdin and console encoding in an owned fresh process for <Case>' -Tag 'InputEncoding', 'CIRegression' -ForEach @(
+        @{ Case = 'Utf8Empty' }, @{ Case = 'Utf8Binary' }, @{ Case = 'Utf8LeadingBomData' },
+        @{ Case = 'Utf8NoBomControl' }, @{ Case = 'OemControl' }, @{ Case = 'StartupFailure' }
+    ) {
+        $childStart = [Diagnostics.ProcessStartInfo]::new()
+        $childStart.FileName = [Diagnostics.Process]::GetCurrentProcess().MainModule.FileName
+        $childArguments = @('-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File',
+            (Join-Path $PSScriptRoot 'fixtures/Invoke-NativeInputEncodingFixture.ps1'),
+            '-Repository', (Split-Path $PSScriptRoot -Parent), '-NativeFixturePath', $inputNativeFixture, '-Case', $Case)
+        $childStart.Arguments = (@($childArguments | ForEach-Object { ConvertTo-WacNativeArgument -Argument $_ }) -join ' ')
+        $childStart.UseShellExecute = $false
+        $childStart.CreateNoWindow = $true
+        $childStart.RedirectStandardInput = $true
+        $childStart.RedirectStandardOutput = $true
+        $childStart.RedirectStandardError = $true
+        $childStart.StandardOutputEncoding = [Text.Encoding]::UTF8
+        $childStart.StandardErrorEncoding = [Text.Encoding]::UTF8
+        $child = [Diagnostics.Process]::new()
+        $child.StartInfo = $childStart
+        $childStarted = $false
+        $childInput = $null
+        $childOutput = $null
+        $childError = $null
+        try {
+            $childStarted = $child.Start()
+            if ($childStarted) {
+                $childInput = $child.StandardInput
+                $childOutput = $child.StandardOutput
+                $childError = $child.StandardError
+            }
+            $childStarted | Should -BeTrue
+            $stdout = $childOutput.ReadToEndAsync()
+            $stderr = $childError.ReadToEndAsync()
+            $childInput.Close()
+            $child.WaitForExit(15000) | Should -BeTrue
+            [Threading.Tasks.Task]::WaitAll([Threading.Tasks.Task[]]@($stdout, $stderr), 5000) | Should -BeTrue
+            $child.ExitCode | Should -Be 0 -Because $stderr.Result
+            $check = $stdout.Result | ConvertFrom-Json
+            $check.timed_out | Should -BeFalse
+            $check.has_cleanup_error | Should -BeFalse
+            $check.caller_readable | Should -BeTrue
+            $check.input_encoding_equal | Should -BeTrue
+            $check.input_encoding_type_equal | Should -BeTrue
+            $check.after_code_page | Should -Be $check.before_code_page
+            $check.after_preamble_hex | Should -BeExactly $check.before_preamble_hex
+            if ($Case -eq 'StartupFailure') {
+                $check.started | Should -BeFalse
+                $check.exit_code | Should -BeNullOrEmpty
+                $check.has_error | Should -BeTrue
+            } else {
+                $check.started | Should -BeTrue
+                $check.exit_code | Should -Be 0
+                $check.has_error | Should -BeFalse
+                $check.observed_length | Should -Be $check.expected_length
+                $check.observed_sha256 | Should -BeExactly $check.expected_sha256
+            }
+            if ($Case -in @('Utf8NoBomControl', 'OemControl')) { $check.console_reader_unchanged | Should -BeTrue }
+        } finally {
+            try {
+                if ($childStarted -and -not $child.HasExited) { $child.Kill(); $null = $child.WaitForExit(5000) }
+            } finally {
+                try { if ($childInput) { $childInput.Dispose() } }
+                finally {
+                    try { if ($childOutput) { $childOutput.Dispose() } }
+                    finally {
+                        try { if ($childError) { $childError.Dispose() } }
+                        finally { $child.Dispose() }
+                    }
+                }
+            }
+        }
+    }
+
     It 'transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream' {
         $payloadLength = 1048576
         $callerStream = [IO.MemoryStream]::new([Text.Encoding]::ASCII.GetBytes('S' * $payloadLength))

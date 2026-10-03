@@ -7,11 +7,20 @@ actual local Quick gates passed 1075/0/1; the five setup tests are included.
 their stated scopes. Both local Full gates at `fd56b84` passed 1461 Pester,
 one privilege skip and 128 Python cases with one privilege skip. Initial PR
 run 37143282084 at that exact SHA passed both PS7 jobs but failed both PS5.1
-jobs. The failures are retained; sanitized source-locator diagnostics are being
-added before a new real CI run identifies and stabilizes them.
+jobs. Diagnostic run 37144796506 at `8af62ff` identifies three stdin assertions
+failing on both PS5.1 hosts; both PS7 jobs pass. An owned local reproduction
+confirms .NET Framework injects a UTF-8 BOM into redirected stdin, including
+empty input. A narrow native-start fix passes all six fresh-process encoding
+cases in both shells. The broader native-tagged Targeted run passed 203 on PS7
+and failed one cancellation fixture case on PS5.1 (202 passed). Its timer could
+cancel before the PID file was written; a seven-case unchanged recovery passed.
+A bounded, deterministic fixture readiness correction passed exact-path Targeted
+63/0/0 on each shell, with20 outside scope and stable source hashes.
+Fresh local and hosted Full gates are still required; all failed evidence is retained.
 WAC-M4-02 remains todo and AC-070..072 not_run until those results are reconciled.
 The implementation checkpoint does not advance to packaging. Source-only
-original/runtime/defaults remain unchanged. See [evidence](evidence/WAC-M4-02.md).
+original/defaults remain unchanged. The runtime change is limited to preventing
+the confirmed stdin prefix. See [evidence](evidence/WAC-M4-02.md).
 
 ## Historical M4-01 status (superseded by current progress above)
 

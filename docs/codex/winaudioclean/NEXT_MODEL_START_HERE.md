@@ -3,11 +3,17 @@
 WAC-M4-02 implementation is on `codex/wac-m4-regression` / draft PR #5. Recover
 its current SHA from Git and live origin; the original parent is
 `42cf8f24a9b1886b5a807bb74e7b299d9de9cb29`. Local Quick passed both shells,
-focused integrity/policy/status/parity checks pass, and source remains unchanged
-in its runtime/defaults. Both local Full gates passed at `fd56b84`, but initial
+focused integrity/policy/status/parity checks pass, and defaults remain unchanged.
+Both local Full gates passed at `fd56b84`, but initial
 PR run 37143282084 passed only the PS7 jobs; both PS5.1 jobs failed. Preserve
-those results and diagnose the CI failures before marking the task/AC-070..072
-accepted. Sanitized failure locators are the next checkpoint. Do not start M4-03.
+those results. Diagnostic run 37144796506 at `8af62ff` identifies three stdin
+assertions on both PS5.1 hosts; an owned local reproduction confirms an injected
+UTF-8 BOM. Six fresh-process exact-byte cases pass in both shells; the broader
+PS5.1 Targeted run exposed a cancellation fixture PID-readiness race. Preserve
+its failed run and seven-case unchanged recovery. The bounded fixture handshake
+and narrow native-start fix passed exact-path Targeted63/0/0 on both shells,
+with20 outside scope and stable source hashes. Require fresh local Full and
+four hosted Full gates before accepting AC-070..072. Do not start M4-03.
 Read CI.md, evidence/WAC-M4-02.md and current canonical plan/coverage records.
 Use the exact manifest-pinned portable tools and the same existing Full runner.
 Status lookup works on the unmerged branch; a missing/error/pending run is not

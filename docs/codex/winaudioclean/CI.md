@@ -50,6 +50,9 @@ to 32 checked-in source filenames with validated line numbers. Source names
 come from Git's maintained ASCII code inventory, not diagnostic text; external
 paths and out-of-range lines are rejected. No audio filenames, personal paths,
 environment contents, assertion messages or expanded test values are exported.
+Locations may also appear in deliberately handled fixture errors. They and the
+heuristic categories aid investigation; the completed test counts determine
+failure scope.
 Raw test output remains in ignored `.wac-local/ci/logs/` and is not uploaded.
 Artifacts and GitHub console logs should be treated as publicly shareable
 repository evidence. A setup failure may have no result artifact; it remains
@@ -69,6 +72,15 @@ codes are: passed 0, failed 1, pending 2, not_run 3, api_error 4, unavailable 5.
 A newer pending run supersedes an earlier success. Skipped, absent or empty
 jobs cannot pass. An API outage or unavailable shell is distinct from a local
 test pass. Local and GitHub results are recorded separately.
+
+CI exposed a .NET Framework stdin preamble defect. Native startup now selects
+BOM-free UTF-8 through the child-specific property where available. On PS5.1,
+the UTF-8-with-BOM case temporarily selects BOM-free UTF-8 with the same code
+page only for process startup, then restores the caller's input encoding,
+including on startup failure. The Console setter refreshes its cached input
+reader in that case. Existing native calls are sequential; this does not change
+the output encoding or the machine's console code page. Owned fresh-process
+tests compare exact raw byte lengths/hashes, including an intended leading BOM.
 
 Full uses synthetic native fixtures and the governance suite. The standalone
 real-FFmpeg matrices, formal speech listening, actual desktop gestures, broad

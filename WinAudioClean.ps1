@@ -1223,15 +1223,36 @@ function Invoke-WacNativeProcess {
         $startInfo.StandardErrorEncoding = [System.Text.Encoding]::UTF8
         $process = New-Object System.Diagnostics.Process
         $process.StartInfo = $startInfo
-        $result.Started = $process.Start()
+        $inputEncodingToRestore = $null
+        $restoreInputEncoding = $false
+        try {
+            if ($startInfo.PSObject.Properties['StandardInputEncoding']) {
+                $startInfo.StandardInputEncoding = [Text.UTF8Encoding]::new($false)
+            } else {
+                # Framework builds stdin's writer from Console.InputEncoding.
+                # Its automatic flush can prepend a UTF-8 BOM even to raw input.
+                $inputEncodingToRestore = [Console]::InputEncoding
+                if ($inputEncodingToRestore.CodePage -eq 65001 -and $inputEncodingToRestore.GetPreamble().Length -gt 0) {
+                    $restoreInputEncoding = $true
+                    [Console]::InputEncoding = [Text.UTF8Encoding]::new($false)
+                }
+            }
+            $result.Started = $process.Start()
+            if ($result.Started) {
+                # Own all pipe handles before restoring encoding: even a failed
+                # restoration must leave the outer cleanup able to close them.
+                $stdoutReader = $process.StandardOutput
+                $stderrReader = $process.StandardError
+                $stdinWriter = $process.StandardInput
+            }
+        } finally {
+            if ($restoreInputEncoding) { [Console]::InputEncoding = $inputEncodingToRestore }
+        }
         if (-not $result.Started) { throw 'The native process did not start.' }
         $result.OwnedProcessId = $process.Id
         if ($null -ne $ProgressState) { $ProgressState.ProcessId = $process.Id }
         # Both readers start before waiting, so neither full pipe can block the
         # child. No script callbacks or PowerShell runspace are needed to drain.
-        $stdoutReader = $process.StandardOutput
-        $stderrReader = $process.StandardError
-        $stdinWriter = $process.StandardInput
         if ($null -ne $ProgressState) {
             Initialize-WacProgressRuntime
             $progressReader = New-Object WinAudioClean.ProgressReader -ArgumentList $stdoutReader
