@@ -576,3 +576,28 @@ item exit130; active-render Ctrl+C/progress belongs to WAC-M3-04. Preserve all
 prior audio helpers, IO/Settings/Preview, launcher and filter versions/defaults.
 Evidence: `evidence/WAC-M3-03.md`. No listening/default promotion, merge, release,
 security/settings change or deployment approval is introduced.
+
+### 2026-10-03 — WAC-M3-04 bounded progress and owned active cancellation
+
+D35. Add structured FFmpeg stdout progress with bounded complete-block parsing,
+separate diagnostic capture, explicit stage/file position and media-time ranges.
+Only validated held publication reaches100; unknown stage duration is
+indeterminate, while ordinary input timing requirements stay unchanged. Keep
+existing sound/encoder/selection helpers and ownership mechanisms.
+
+Use one instance cancellation flag per invocation, shared by sequential queue
+children. A retained native Ctrl+C/Break handler marks it and leaves the main
+pipeline available for bounded owned-child cleanup and reporting. Unregister in
+finally and suspend interception during Read-Host. Cancellation130 prevents final
+verification from becoming a retained-audio warning and stops pending starts;
+earlier exports/static results remain. Add typed progress/CANCELLED outcomes and
+compact failed-preview reports without inferring artifact ownership by filename.
+
+Final focused77, cumulative Full, private-console OS signals4/4 and frozen real
+media20/20 support AC-058/059/060. Preserve preliminary fixture/harness/runtime
+corrections and exact content hashes. No UI typing/shared-console isolation,
+console-close/crash/power-loss durability, diagnostic memory sandbox or speech
+listening claim is added. Original/Gentle/Fast defaults, settings, launcher and
+queue policies remain. Feature delivery is authorized; no merge/release/default
+promotion, security/settings change or deployment is approved. Evidence:
+`evidence/WAC-M3-04.md`. Next: WAC-M3-05 only.

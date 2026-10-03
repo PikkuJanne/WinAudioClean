@@ -1,5 +1,29 @@
 # Current status
 
+Date: 2026-10-03. **WAC-M3-04 is complete.** Canonical20 done/10todo;
+AC-001..060 pass their recorded engineering scopes. **Next: WAC-M3-05 only.**
+
+FFmpeg structured progress, separate diagnostics, stage/file position and bounded
+media-time ranges are implemented. Complete100 follows held publication only.
+Owned active cancellation shares one controller through sequential queues,
+preserves earlier outputs/static records, prevents pending starts and persists
+CANCELLED130. Accurate verification cancellation prevents publication. Per-run
+schema1 gains progress and failed-preview reports; journal schemas stay intact.
+
+Final focused77 and required Full 1382 pass/1 privilege skip Pester
+per host, Python61 pass/one separate privilege skip, parser/static/plan exit0.
+Actual private-console native signals4/4 and final real media20/20 cover both
+PS5.1/PS7 with exact hashes/commands and preserved corrections. Sound helpers and
+IO/Settings/Queue/BAT/Launcher are unchanged; no user settings were written.
+Unperformed UI typing/listening, window-close/crash and long-stress limits remain.
+
+[Evidence](evidence/WAC-M3-04.md), [source](evidence/WAC-M3-04-source.json),
+[media](evidence/WAC-M3-04-media.json), [console](evidence/WAC-M3-04-console.json),
+[focused](evidence/WAC-M3-04-progress-focused.json).
+
+## Prior M3-03 folder checkpoint
+
+
 Date: 2026-10-03. **WAC-M3-03 is complete.** M0/M1/M2 remain complete;
 AC-001 through AC-057 pass their engineering contracts. Nineteen tasks are
 done;11 remain todo. Human listening/default promotion remain unperformed.

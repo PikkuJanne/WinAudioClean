@@ -1,0 +1,194 @@
+Selected sanitized Pester log. Setup and PassThru capture were corrected. One PS5.1 fixture case exceeded the Windows environment-value limit; four PS7 assertions failed because null-cleared optional environment values arrived as empty strings, suppressing the fixture diagnostic default. Main changed during capture, so this is preliminary and no coherent-source acceptance is claimed.
+
+Pester v5.7.1
+
+Starting discovery in 3 files.
+Discovery found 75 tests in 454ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.Progress.Tests.ps1'
+Describing M3-04 structured progress and owned cancellation
+ Describing AC-058: bounded stage progress without premature completion
+   [+] keeps Analysis within its range and preserves file position
+ 250ms (194ms|56ms)
+   [+] keeps Rendering within its range and preserves file position
+ 35ms (33ms|2ms)
+   [+] keeps Verification within its range and preserves file position
+ 33ms (32ms|1ms)
+   [+] keeps Rendering within its range and preserves file position
+ 37ms (35ms|2ms)
+   [+] keeps preview original within its range and preserves file position
+ 37ms (36ms|1ms)
+   [+] keeps preview processed within its range and preserves file position
+ 41ms (38ms|3ms)
+   [+] keeps preview comparison within its range and preserves file position
+ 33ms (32ms|1ms)
+   [+] keeps preview verification within its range and preserves file position
+ 44ms (43ms|1ms)
+   [+] leaves unknown duration indeterminate even after structured end
+ 26ms (22ms|4ms)
+   [+] leaves negative duration indeterminate even after structured end
+ 16ms (13ms|2ms)
+   [+] leaves NaN duration indeterminate even after structured end
+ 14ms (12ms|2ms)
+   [+] leaves infinite duration indeterminate even after structured end
+ 15ms (13ms|2ms)
+   [+] does not infer completion from a snapshot without a measured time
+ 14ms (12ms|2ms)
+   [+] formats progress consistently under de-DE
+ 31ms (29ms|2ms)
+   [+] formats progress consistently under fi-FI
+ 12ms (10ms|2ms)
+   [+] isolates a closed or failing progress sink from processing state
+ 309ms (308ms|2ms)
+   [+] adds only structured transport flags while preserving the constructed graph
+ 48ms (45ms|3ms)
+   [+] rejects start above publication boundary progress ranges before creating a false completion state
+ 30ms (28ms|1ms)
+   [+] rejects end at premature completion progress ranges before creating a false completion state
+ 7ms (5ms|2ms)
+   [+] rejects descending progress ranges before creating a false completion state
+ 8ms (6ms|2ms)
+ Describing AC-058/060: actual bounded structured pipe and separate diagnostics
+   [+] parses fragmented complete blocks and never converts diagnostic time text into progress
+ 242ms (237ms|5ms)
+   [+] retains only complete structured blocks for unterminated final marker
+ 99ms (94ms|5ms)
+   [+] retains only complete structured blocks for time without block terminator
+ 64ms (62ms|2ms)
+   [+] retains only complete structured blocks for human statistics
+ 67ms (66ms|1ms)
+   [+] retains only complete structured blocks for negative time
+ 66ms (64ms|1ms)
+   [+] retains only complete structured blocks for nonfinite time
+ 60ms (59ms|1ms)
+   [+] retains only complete structured blocks for overflow time
+ 73ms (72ms|2ms)
+   [+] retains only complete structured blocks for expression time
+ 79ms (77ms|2ms)
+   [+] retains only complete structured blocks for duplicate time
+ 75ms (73ms|2ms)
+   [+] retains only complete structured blocks for locale decimal time
+ 69ms (68ms|1ms)
+   [+] retains only complete structured blocks for fractional integer time
+ 72ms (70ms|2ms)
+   [+] retains only complete structured blocks for missing time
+ 70ms (68ms|2ms)
+   [+] retains only complete structured blocks for complete block then truncated newer block
+ 104ms (102ms|2ms)
+   [-] drains overlong malformed lines and a diagnostic flood without poisoning the next block
+ 173ms (169ms|3ms)
+    Expected 524305, but got 524288.
+    at $result.StandardError.Length | Should -Be (524288 + 'DIAGNOSTIC_MARKER'.Length), <REPO>\tests\WinAudioClean.Progress.Tests.ps1:240
+    at <ScriptBlock>, <REPO>\tests\WinAudioClean.Progress.Tests.ps1:240
+   [+] applies the structured block field limit at 64 fields
+ 97ms (95ms|2ms)
+   [+] applies the structured block field limit at 65 fields
+ 99ms (98ms|2ms)
+   [+] applies the structured line limit at 4096 characters
+ 80ms (79ms|1ms)
+   [+] applies the structured line limit at 4097 characters
+ 84ms (82ms|1ms)
+   [-] retains native nonzero status even when it emitted a completed progress block
+ 79ms (78ms|1ms)
+    Expected 'DIAGNOSTIC_MARKER' to be found in collection , but it was not found.
+    at $result.StandardError | Should -Contain 'DIAGNOSTIC_MARKER', <REPO>\tests\WinAudioClean.Progress.Tests.ps1:290
+    at <ScriptBlock>, <REPO>\tests\WinAudioClean.Progress.Tests.ps1:290
+   [-] preserves ordinary stdout behavior when no progress state is supplied
+ 90ms (89ms|1ms)
+    Expected strings to be the same, but they were different.
+    Expected length: 17
+    Actual length:   0
+    Strings differ at index 0.
+    Expected: 'DIAGNOSTIC_MARKER'
+    But was:  ''
+               ^
+    at $result.StandardError | Should -BeExactly 'DIAGNOSTIC_MARKER', <REPO>\tests\WinAudioClean.Progress.Tests.ps1:301
+    at <ScriptBlock>, <REPO>\tests\WinAudioClean.Progress.Tests.ps1:301
+ Describing AC-059/060: active owned cancellation and bounded stream cleanup
+   [+] cancels the owned analysis process while an independent job stays alive
+ 853ms (850ms|3ms)
+   [+] cancels the owned render process while an independent job stays alive
+ 843ms (841ms|1ms)
+   [+] cancels the owned verification process while an independent job stays alive
+ 834ms (833ms|2ms)
+   [+] returns cancellation before startup without creating a native record
+ 13ms (12ms|1ms)
+   [-] cancels an unread input pipe without disposing the caller-held source
+ 1.43s (1.43s|1ms)
+    Expected regular expression 'DIAGNOSTIC_MARKER' to match 'DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD [line abbreviated; full raw log retained locally]
+    at $result.StandardError | Should -Match 'DIAGNOSTIC_MARKER', <REPO>\tests\WinAudioClean.Progress.Tests.ps1:366
+    at <ScriptBlock>, <REPO>\tests\WinAudioClean.Progress.Tests.ps1:366
+   [+] keeps early exit zero distinguishable from a failed held-input transfer
+ 885ms (884ms|2ms)
+
+Running tests from '<REPO>\tests\WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv
+ 539ms (513ms|26ms)
+  [+] preserves square brackets in actual child argv
+ 270ms (268ms|2ms)
+  [+] preserves apostrophe in actual child argv
+ 147ms (145ms|2ms)
+  [+] preserves Unicode in actual child argv
+ 123ms (120ms|2ms)
+  [+] preserves ampersand in actual child argv
+ 135ms (133ms|2ms)
+  [+] preserves percent signs in actual child argv
+ 165ms (163ms|2ms)
+  [+] preserves exclamation marks in actual child argv
+ 125ms (123ms|2ms)
+  [+] preserves parentheses in actual child argv
+ 121ms (119ms|2ms)
+  [+] preserves empty argument in actual child argv
+ 118ms (117ms|1ms)
+  [+] preserves embedded quotes in actual child argv
+ 152ms (149ms|2ms)
+  [+] preserves a quote alone in actual child argv
+ 173ms (171ms|2ms)
+  [+] preserves trailing backslash after spaces in actual child argv
+ 123ms (121ms|2ms)
+  [+] preserves multiple trailing backslashes in actual child argv
+ 149ms (148ms|1ms)
+  [+] preserves backslashes before an embedded quote in actual child argv
+ 117ms (116ms|1ms)
+  [+] starts with no child arguments and no render timeout
+ 125ms (123ms|1ms)
+  [+] keeps native nonzero status and both diagnostic streams
+ 107ms (106ms|1ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input
+ 110ms (109ms|1ms)
+  [+] returns structured startup failure for a missing executable
+ 43ms (42ms|1ms)
+  [+] returns structured startup failure for a file that is not an executable
+ 19ms (19ms|1ms)
+  [+] rejects a NUL argument before starting the child
+ 15ms (15ms|1ms)
+  [+] rejects an excessive command line before starting the child
+ 441ms (440ms|1ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity
+ 130ms (129ms|1ms)
+  [+] terminates the timed-out child and retains prior diagnostics
+ 1.77s (1.77s|1ms)
+
+Running tests from '<REPO>\tests\WinAudioClean.NativeInput.Tests.ps1'
+Describing AC-038/039: held-stream input transfer and native cleanup
+  [+] transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream
+ 513ms (511ms|2ms)
+  [+] drains both output pipes after a large input transfer and retains every diagnostic character
+ 321ms (320ms|1ms)
+  [+] rejects an unreadable caller stream before creating the child
+ 40ms (38ms|1ms)
+  [+] retains a source read error and stops the child without disposing the caller stream
+ 150ms (149ms|1ms)
+  [+] does not treat an early native exit zero as success when the input copy failed
+ 733ms (733ms|1ms)
+  [+] times out an unread input pipe, drains diagnostics and preserves an unrelated process
+ 1.93s (1.93s|1ms)
+Tests completed in 20.67s
+Tests Passed: 71,
+Failed: 4,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 0

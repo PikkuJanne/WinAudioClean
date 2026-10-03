@@ -1,116 +1,83 @@
-# Next model: WAC-M3-04
+# Next model: WAC-M3-05
 
-**M3-03 is complete. Start only WAC-M3-04: Add stage-aware progress and controlled
-cancellation.** Read AGENTS, STATUS, DECISIONS, TASKS, SYNC_PROTOCOL,
-tasks/WAC-M3-04, DATA_FORMATS, AUDIO_CONTRACT/NATIVE_PROCESS_CONTRACT and M3-03
-evidence/source/media records. Preserve canonical history, especially M1-02
-policy/resumption and prior M2/M3 failures/limits. Do not change the source-only
-original checkout.
+**M3-04 is complete. Start only WAC-M3-05: Polish output organization and simple
+local interaction.** Read AGENTS, STATUS, DECISIONS, TASKS, SYNC_PROTOCOL,
+tasks/WAC-M3-05, DATA_FORMATS, AUDIO_CONTRACT/NATIVE_PROCESS_CONTRACT and M3-04
+evidence/source/media/console/focused records. Preserve prior canonical history,
+especially M1-02 policy/resumption and preliminary M2/M3 failures/limits.
+Do not edit the source-only original checkout.
 
-## Synchronize the current checkpoint
+## Verify synchronization first
 
-Use maintained WinAudioClean-governance, `codex/wac-m3-settings`, exact effective
-fetch/push origin `https://github.com/PikkuJanne/WinAudioClean.git`. M3-03 began
-at `8d033079dde925abd48c87d9b4f71784756c146d` (M3-02); inspect live M3 branch/draft#4
-for its actual completed SHA. Run inspect, authenticated fetch --prune,
-sync-check, validate-plan and next. Only M3-04 should be ready. Process-only gh
-credentials are available; never print/persist them. Verify live draft/head/CI
-separately; no workflows/checks currently exist. Completion SHA belongs in the
-PR/final response, not itself.
+Use the maintained WinAudioClean-governance clone, `codex/wac-m3-settings`, exact
+effective fetch/push origin `https://github.com/PikkuJanne/WinAudioClean.git`.
+M3-04 began at `0366f674d0c8921680179d9790044e4f01efac1a`; inspect the live M3
+branch/draft#4 for its completed SHA. Run inspect, authenticated fetch --prune,
+sync-check, validate-plan and next. Only M3-05 should be ready. Process-only gh
+credentials are available; never print/persist them. Check PR/live head/CI
+separately. Current draft#4 stacks on M2#3/M1#2/unmerged M0; no merge is needed.
+Reuse the current milestone branch/PR. Never force-push/reset/clean/stash.
+Feature commits/pushes/draft updates are authorized. Main/merge/release/default
+promotion/settings/security/deployment require exact owner authorization.
 
-Reuse the suitable M3 milestone branch after fresh verification; no duplicate
-draft/worktree. Draft#4 stacks on M2#3, itself on unmerged M1#2/M0. No merge is
-needed to unlock work. Feature commits/pushes/drafts are authorized; main/merge/
-release/settings/security/deployment/default promotion still require exact owner
-authorization. Never force-push/reset/clean/stash.
+## M3-05 scope
 
-## Preserve ordered input and launcher contracts
+Preserve Music as default, chosen output and all safety/publication contracts.
+Add optional job folders/media-report organization and simple console-accessible
+local interaction. No-input usage and an optional picker must not require a
+desktop framework. Open the destination only explicitly/interactively; unattended
+runs never auto-open Explorer, output files or playback. Cover AC-061..063 with
+actual destination/no-GUI/action tests. Do not begin M3-06 or a broad audit.
 
-- Existing positional inputPath remains one string. InputPaths is a typed array;
-  InputListPath reads strict UTF8 schema1 exact keys/integer version,1..1024
-  nonempty entries, <=1MiB including optional BOM. Mutually exclusive with each
-  other/inputPath; ordinary full renders only. Malformed list/global settings
-  fail2 before jobs. Relative strings anchor beside manifest; invalid pipe/NUL
-  text must fail per item and let later valid jobs continue, including PS5.1.
-- Optional Batch/Settings siblings handle lists, frozen settings and one mode
-  choice; children invoke ordinary main with IgnoreSavedSettings. Stream selection
-  may remain per-item interactive. Preserve explicit repeats/order for explicit
-  lists; settings dictionaries/false/empty choices retain bound semantics.
-- Held CreateNew UTF8 JSONL header/item/summary flushes per item. Never overwrite
-  input/manifest/prior results or infer foreign detailed-report ownership by scan.
-  Preserve single code; multiple failure6/warnings7/all-success0/cancel130.
-  Cancel stops future items with NOT_STARTED. Journal failure5 stops future starts,
-  preserves prior audio/records, attempts suffix-only rollback and discloses
-  incomplete reporting. No crash/power-loss or multi-file atomicity claim.
-- Existing BAT + optional Launcher uses numbered environment captures and a fixed
-  PS bootstrap/selected-worker encoded command. Fresh CMD /c framing must match
-  original token count/order/value; no path text interpolates into commands.
-  Positional raw frame below7600, <=1024 inputs, no observable %/! or ambiguity.
-  CMD may expand percent text before BAT starts: raw capture cannot undo it.
-  Use literal environment /manifest or direct InputListPath for those/long paths;
-  /unattended Raw|Zoom requires one input-or-list and output environment value.
-- Preserve default inner PS5.1/explicit local PS7 selection, helper-less prior
-  single/environment route, no-input guidance, saved status before one interactive
-  pause (including cancellation/worker start3), no unattended pause. Real CMD
-  probes do not imply a manual Explorer gesture was performed.
+## Preserve M3-04 and earlier runtime contracts
 
-## Preserve folder queues; M3-04 scope
+- Original1.0.0 stays the default; Gentle0.1.0 remains opt-in Raw experimental.
+  Fast remains default; Accurate/PCM16/24/mono/RF64 policies, selected stream
+  channels/timing and filter graphs are preserved. No listening/default promotion.
+- Native argv stays data via tested Windows CRT quoting, direct absolute exe,
+  nostdin and separate streams. Monitored FFmpeg stdout is bounded structured
+  progress (4096-character lines/64-field blocks, recovery at terminator); stderr
+  and nonmonitored capture remain in memory. Complete100 occurs after held
+  no-replace publication only. Unknown stage duration is indeterminate; ordinary
+  unknown input duration still fails closed before a full render.
+- One RunControl per invocation passes to sequential children through internal
+  WacRunContext. Native Ctrl+C/Break only marks the flag; polling stops only the
+  held child Process and uses bounded exit/stream cleanup. Owner unregisters in
+  finally; Read-Host temporarily restores host behavior. Cancelled stdin IO faults
+  are CancellationInputError, separate from genuine Error/CleanupError.
+- Cancellation130 persists CANCELLED and prevents Accurate verification
+  publication. Do not turn cancellation into warning7. Parent queues stop pending
+  starts while prior outputs/static skips/preflight records remain. Schema1 run
+  reports gain progress; compact unsuccessful preview reports follow owned
+  rollback. Storage failure can prevent persistence; do not infer ownership by name.
+- Preserve source/destination/partial/report held identities, CreateNew writers,
+  source lease lifetime, PCM validation, no-overwrite rename and owned-only cleanup.
+  Preview retains four owned assets/held stdin and rolls back only owned objects.
+- Explicit InputPaths/InputListPath retain order/repeats/schema1 and the BAT
+  transport/environment handoff. Folder InputDirectories/Recurse keeps bounded
+  frozen root-order/BFS/ordinal snapshots, no-follow ancestors, file identity
+  dedup, generated/reparse/output exclusion and source identity/size/mtime leases.
+  Folder journal schema2/reasons/skips stays separate from explicit schema1.
+  Aggregate cancel130/failed6/warning7/success0; journal failure5 stops starts and
+  retains prior audio/records. Empty/allskipped folder runs need no mode/native.
+- Saved schema1 settings are explicit CLI > saved > built-ins; no autosave.
+  Isolate all test preferences. Actual default user settings were absent and
+  untouched. Imports remain helper-only with the existing IO sibling contract.
 
-Preserve explicit InputDirectories/Recurse, root-seeded ordinal/BFS ordering,
-bound snapshot before jobs, ordinary no-follow ancestor/source handles,
-volume/file identity deduplication, strict generated-name/alias exclusions and
-proper descendant destination skips. Root==destination explicit selection wins.
-Folder schema2 captures selection/source metadata/reasons/skips; explicit lists
-retain repeats/schema1. Source identity/length/UTCmtime is checked and held through
-each ordinary child. Per-file failures continue and report ownership is unchanged.
-Empty/allskipped selections need no mode/native job; aggregate folder failed6,
-warning7, success0 and returned cancel130 preserve static skips/preflight failures.
-Journal failure5 stops starts and discloses incomplete reporting. New files never
-enter running snapshots. Extension candidates are not media proof; renamed
-outputs/metadata-restoration/crash claims remain bounded in DATA_FORMATS.
+## Evidence and gates
 
-M3-04 adds FFmpeg structured progress with separate diagnostic logging, stage
-labels/file position and Accurate analysis/render/verification ranges. Unknown
-duration stays indeterminate. Controlled cancellation must target only this
-run's owned child process with bounded cleanup and no kill-by-name. Preserve
-queue persistence, original sources/prior results and frozen sound defaults.
-Current labeled returned-exit130 tests do not prove active-render Ctrl+C. Do not
-implement a later task, GUI/server, retune, merge, release or deployment.
+Use existing Pester5.7.1/PSScriptAnalyzer1.24.0, both PS5.1/PS7 and pinned
+FFmpeg/ffprobe9.0.2. No runtime Python, automatic downloads or security changes.
+Smallest meaningful checks first, stabilize, freeze source, then required Full.
+M3-04 final focused77, actual private-console events4/4 and real media20/20 are
+recorded with source/tool guards and preliminary corrections. Full has the
+documented file-symlink privilege skip and separate Python symlink skip.
+OS events are actual signal tests, without UI typing/shared-console isolation;
+closed display injection and actual redirected capture are separately scoped.
+Console close/logoff, forced host kill, power loss, long memory/storage stress
+and human listening remain unverified. Do not reuse synthetic checks as listening.
 
-## Audio and gates
-
-M3-03 final source preserved normalized pre-existing main helper bodies/full
-processing suffix and IO/Settings/Preview/BAT/Launcher bytes from M3-02. Original1.0.0 stays
-built-in; Gentle0.1.0 opt-in experimental Raw-only. Application2.3/report1, Fast
-default, Accurate repeated prechain/held meter/warnings, PCM16/24/mono/RF64,
-owned output/report transactions and bounded preview remain. Positive integrated/
-threshold measurements fail rather than becoming UNMEASURABLE. Preserve M2
-seek/latency/formatter and same-input/build reproduction limits. Numeric/synthetic
-checks provide no listening/default-promotion approval.
-
-Prior M3-02 selected checks:73 Batch plus4 invalid-path cases,33 Transport,58 legacy
-Launcher per host. Full:1251 Pester pass +62 Python discovered per host (61 pass,
-one symlink-privilege skip); parser/static/plan pass with visible non-gating
-advisories. API28/28 calls,32 assets,26 PCM/frame/graph matches +6 direct refs;
-BAT6/6 calls +4/4 refs,20 assets,16 matches. All final source/tool/config guards
-pass. Prior captures with preliminary code and corrected failures stay distinct.
-Use existing pinned modules/FFmpeg9.0.2; no download/security change. Strip
-inherited PSMODULEPATH from Python children. Focus smallest relevant checks,
-freeze code, then required Full per shell. Record exact commands/exits/hashes/
-versions/scopes, failure history and skips. Tests isolate SettingsPath/Ignore;
-never write the user's own preferences or publish private audio/reports.
-
-Manual Explorer gesture, active-render Ctrl+C, power-loss, speech listening/
-calibration/>4GB/disk exhaustion/long-file memory/codec-seek limits remain.
-Media cancellation is a labeled copied dispatch simulation. Update canonical
-state/evidence/handoff only for the selected task, stage/review/commit/push
-explicitly, verify clean upstream/live/draft equality, and stop after M3-04.
-No merge/release/default promotion/deployment.
-
-Current M3-03 final focused 156 pass/1 skip;
-Full 1330 pass/1 skip Pester per host plus Python62
-discovered/61pass/oneprivilegeskip. Exact final commands/hash/scopes, media
-comparisons, cancellation seams and preliminary fixes are in M3-03 evidence.
-Use existing pinned modules/tools and isolate preferences. Code must freeze
-before final gates/media; do not claim listening or active cancellation from
-synthetic/copied-dispatch checks.
+Update only the selected task/ACs plus status/handoff/decision evidence, inspect
+the explicitly staged diff, commit/push, verify clean local/upstream/live/PR head
+equality and stop after M3-05. Post the exact completed SHA in the PR/final, not
+inside its own source manifest. Authentication/push failure blocks advancement.

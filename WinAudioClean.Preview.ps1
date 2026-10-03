@@ -223,6 +223,12 @@ function Get-WacPreviewSpaceEstimate {
 
 function Assert-WacPreviewProcess {
     param([Parameter(Mandatory = $true)]$Process)
+    if (($Process.PSObject.Properties['Cancelled'] -and $Process.Cancelled) -or
+        ($null -ne $script:WacRunContext -and $script:WacRunContext.IsCancellationRequested)) {
+        $exception = New-Object IO.IOException 'Preview processing cancelled.'
+        $exception.Data['WacExitCode'] = 130
+        throw $exception
+    }
     if (-not $Process.Started) {
         $exception = New-Object IO.IOException 'Preview dependency could not start.'
         $exception.Data['WacExitCode'] = 3
@@ -243,14 +249,18 @@ function Assert-WacPreviewProcess {
 function Get-WacPreviewAssetMeasurement {
     param([Parameter(Mandatory = $true)]$Transaction,
         [Parameter(Mandatory = $true)]$InputAudio, [Parameter(Mandatory = $true)]$OutputPolicy,
-        [string]$FfmpegPath, [string]$FfprobePath, [int]$TimeoutMilliseconds = 120000)
+        [string]$FfmpegPath, [string]$FfprobePath, [int]$TimeoutMilliseconds = 120000,
+        [string]$ProgressLabel = 'Preview measurement', [int]$ProgressStart = 0, [int]$ProgressEnd = 95)
+    $null = Add-WacProgressStage -Stage 'Preview validating' -StartPercent $ProgressStart -EndPercent $ProgressStart
     $outputs = @(Get-WacAudioStreams -FfprobePath $FfprobePath -InputPath $Transaction.TempPath)
     if ($outputs.Count -ne 1) { throw 'Preview output must contain one audio stream.' }
     $held = Freeze-WacOutputTransaction -Transaction $Transaction
     $verified = Assert-WacWaveOutput -Stream $held -InputAudio $InputAudio -OutputAudio $outputs[0] -OutputPolicy $OutputPolicy
     $arguments = Get-WacLoudnessArguments -FilterChain 'loudnorm=I=-12:TP=-1.5:LRA=7:print_format=json' -OutputPolicy $OutputPolicy -FromPipe
     $held.Position = 0
-    $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -StandardInputStream $held -TimeoutMilliseconds $TimeoutMilliseconds
+    $arguments = Get-WacProgressArguments -ArgumentList $arguments
+    $progressState = Add-WacProgressStage -Stage $ProgressLabel -DurationSeconds $verified.DurationSeconds -StartPercent $ProgressStart -EndPercent $ProgressEnd
+    $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -StandardInputStream $held -TimeoutMilliseconds $TimeoutMilliseconds -ProgressState $progressState
     Assert-WacPreviewProcess -Process $process
     $stage = ConvertTo-WacLoudnessStage -Process $process -DurationSeconds $verified.DurationSeconds -Arguments $arguments -InputSource 'held_output_stream'
     if ($stage.status -ne 'PASSED') {
@@ -349,6 +359,7 @@ function Invoke-WacPreview {
         [string]$Start = '0', [string]$Duration = '45', [bool]$DurationExplicit = $false,
         [string]$AudioStreamIndex, [bool]$Interactive = $false,
         [string]$ToolVersion = '2.3', [string]$FfmpegVersion, [string]$FfprobeVersion)
+    $script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]'
     $transactions = [ordered]@{}; $assets = [ordered]@{}; $stages = [ordered]@{}
     $warnings = New-Object 'System.Collections.Generic.List[string]'
     $cleanupErrors = New-Object 'System.Collections.Generic.List[string]'
@@ -403,7 +414,9 @@ function Invoke-WacPreview {
                 $arguments = Get-WacLoudnessArguments -InputPath $InputPath -FilterChain $plan.AnalysisFilter -AudioStreamIndex $selected.Index -OutputPolicy $policy
                 $arguments = Add-WacPreviewWindowArguments -Arguments $arguments -Range $range -Timeline $timeline
                 $exitCode = 4
-                $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -TimeoutMilliseconds $timeout
+                $arguments = Get-WacProgressArguments -ArgumentList $arguments
+                $progressState = Add-WacProgressStage -Stage 'Preview analysis' -DurationSeconds $range.WindowDurationSeconds -EndPercent 15
+                $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -TimeoutMilliseconds $timeout -ProgressState $progressState
                 $stages.Analysis = ConvertTo-WacLoudnessStage -Process $process -DurationSeconds $range.WindowDurationSeconds -Arguments $arguments
                 Assert-WacPreviewProcess -Process $process
                 if ($stages.Analysis.status -ne 'PASSED') { throw 'Preview context analysis could not be parsed.' }
@@ -414,11 +427,18 @@ function Invoke-WacPreview {
                 $normalization.fallbackReason = $plan.FallbackReason
                 if ($plan.FallbackReason) { $warnings.Add('normalization_fallback') }
             }
+            $previewBase = if ($LoudnessMode -eq 'Accurate') { 15 } else { 0 }
+            $previewSpan = (95 - $previewBase) / 8.0
+            $previewStep = 0
             foreach ($role in @('Original', 'Processed')) {
                 $filter = if ($role -eq 'Original') { $originalFilter } else { $renderFilter + ',' + $trim }
                 $arguments = Get-WacPreviewRenderArguments -InputPath $InputPath -FilterChain $filter -OutputFile $transactions[$role].TempPath -AudioStreamIndex $selected.Index -OutputPolicy $policy -Range $range -Timeline $timeline
                 $exitCode = 4
-                $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -TimeoutMilliseconds $timeout
+                $arguments = Get-WacProgressArguments -ArgumentList $arguments
+                $progressStart = [int][math]::Floor($previewBase + $previewStep * $previewSpan); $previewStep++
+                $progressEnd = [int][math]::Floor($previewBase + $previewStep * $previewSpan)
+                $progressState = Add-WacProgressStage -Stage ("Preview $role rendering") -DurationSeconds $expectedAudio.DurationSeconds -StartPercent $progressStart -EndPercent $progressEnd
+                $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -TimeoutMilliseconds $timeout -ProgressState $progressState
                 $stages[$role] = [ordered]@{ arguments = @($arguments); inputSource = 'bounded_file_window'; process = $process }
                 Assert-WacPreviewProcess -Process $process
                 if ($role -eq 'Processed' -and $LoudnessMode -eq 'Accurate') {
@@ -432,7 +452,9 @@ function Invoke-WacPreview {
                     } else { $warnings.Add('normalization_result_unavailable') }
                 }
                 $exitCode = 5
-                $inspection = Get-WacPreviewAssetMeasurement -Transaction $transactions[$role] -InputAudio $expectedAudio -OutputPolicy $policy -FfmpegPath $FfmpegPath -FfprobePath $FfprobePath -TimeoutMilliseconds $timeout
+                $progressStart = $progressEnd; $previewStep++
+                $progressEnd = [int][math]::Floor($previewBase + $previewStep * $previewSpan)
+                $inspection = Get-WacPreviewAssetMeasurement -Transaction $transactions[$role] -InputAudio $expectedAudio -OutputPolicy $policy -FfmpegPath $FfmpegPath -FfprobePath $FfprobePath -TimeoutMilliseconds $timeout -ProgressLabel ("Preview $role measurement") -ProgressStart $progressStart -ProgressEnd $progressEnd
                 $assets[$role] = [ordered]@{ path = $transactions[$role].FinalPath; gainDb = 0.0; exactFilters = $filter
                     format = [ordered]@{ sampleRate = 48000; bitDepth = $policy.Bits; codec = $policy.Codec; channels = $policy.Channels
                         channelLayout = $policy.Layout; container = $(if ($policy.Rf64) { 'RF64' } else { 'RIFF' }) }
@@ -447,11 +469,17 @@ function Invoke-WacPreview {
                 $arguments = Get-WacPreviewRenderArguments -FilterChain $filter -OutputFile $transactions[$role].TempPath -OutputPolicy $policy -FromPipe
                 $sourceStream = $transactions[$sourceRole].ValidationHandle; $sourceStream.Position = 0
                 $exitCode = 4
-                $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -StandardInputStream $sourceStream -TimeoutMilliseconds $timeout
+                $arguments = Get-WacProgressArguments -ArgumentList $arguments
+                $progressStart = $progressEnd; $previewStep++
+                $progressEnd = [int][math]::Floor($previewBase + $previewStep * $previewSpan)
+                $progressState = Add-WacProgressStage -Stage ("Preview $sourceRole comparison") -DurationSeconds $expectedAudio.DurationSeconds -StartPercent $progressStart -EndPercent $progressEnd
+                $process = Invoke-WacNativeProcess -FilePath $FfmpegPath -ArgumentList $arguments -StandardInputStream $sourceStream -TimeoutMilliseconds $timeout -ProgressState $progressState
                 $stages[$role] = [ordered]@{ arguments = @($arguments); inputSource = 'held_excerpt_stream'; process = $process }
                 Assert-WacPreviewProcess -Process $process
                 $exitCode = 5
-                $inspection = Get-WacPreviewAssetMeasurement -Transaction $transactions[$role] -InputAudio $expectedAudio -OutputPolicy $policy -FfmpegPath $FfmpegPath -FfprobePath $FfprobePath -TimeoutMilliseconds $timeout
+                $progressStart = $progressEnd; $previewStep++
+                $progressEnd = [int][math]::Floor($previewBase + $previewStep * $previewSpan)
+                $inspection = Get-WacPreviewAssetMeasurement -Transaction $transactions[$role] -InputAudio $expectedAudio -OutputPolicy $policy -FfmpegPath $FfmpegPath -FfprobePath $FfprobePath -TimeoutMilliseconds $timeout -ProgressLabel ("Preview $role measurement") -ProgressStart $progressStart -ProgressEnd $progressEnd
                 $assets[$role] = [ordered]@{ path = $transactions[$role].FinalPath; gainDb = $gain; exactFilters = $filter
                     format = $assets[$sourceRole].format; durationSeconds = $inspection.VerifiedAudio.DurationSeconds; frames = $inspection.VerifiedAudio.Frames
                     measurements = $inspection.Measurements; measurementStage = $inspection.MeasurementStage }
@@ -475,7 +503,14 @@ function Invoke-WacPreview {
                 $matchingReason = 'undefined_after_attenuation'; $warnings.Add('comparison_unmeasurable')
             }
             $exitCode = 5
-            foreach ($role in $transactions.Keys) { Publish-WacOutputTransaction -Transaction $transactions[$role] }
+            $null = Add-WacProgressStage -Stage 'Preview publishing' -StartPercent 95 -EndPercent 99
+            foreach ($role in $transactions.Keys) {
+                if ($null -ne $script:WacRunContext -and $script:WacRunContext.IsCancellationRequested) {
+                    $exception = New-Object IO.IOException 'Preview processing cancelled.'; $exception.Data['WacExitCode'] = 130; throw $exception
+                }
+                Publish-WacOutputTransaction -Transaction $transactions[$role]
+            }
+            Complete-WacProgress
             # Once every validated asset is published, report failure retains
             # the completed comparison. Settle output handles before reporting
             # while keeping all source/destination pins through report writing.
@@ -516,6 +551,9 @@ function Invoke-WacPreview {
                 space = [ordered]@{ estimatedFileBytes = $estimate.FileBytes; reserveBytes = $estimate.ReserveBytes; requiredBytes = $estimate.RequiredBytes; availableBytes = $availableBytes }
                 reporting = [ordered]@{ complete = $true; paths = $null; errors = @() }
                 privacy = 'Local preview reports may contain paths, media metadata and native diagnostics. Nothing is uploaded. Playback is explicit.' }
+            $report.progress = [ordered]@{ stages = @(Get-WacProgressReport); completed = $true
+                cancellationRequested = ($null -ne $script:WacRunContext -and $script:WacRunContext.IsCancellationRequested)
+                cancellationStage = $(if ($null -ne $script:WacRunContext) { $script:WacRunContext.CancellationStage } else { $null }) }
             try { $reportPaths = Write-WacPreviewReports -Report $report -OutputFolder $OutputFolder }
             catch {
                 $errorText = $_.Exception.Message
@@ -529,6 +567,7 @@ function Invoke-WacPreview {
         $errorText = $_.Exception.Message; $status = 'FAILED'
         if ($_.Exception.Data.Contains('WacExitCode')) { $exitCode = [int]$_.Exception.Data['WacExitCode'] }
         elseif ($exitCode -in @(0, 7)) { $exitCode = 5 }
+        if ($exitCode -eq 130 -or ($null -ne $script:WacRunContext -and $script:WacRunContext.IsCancellationRequested)) { $status = 'CANCELLED'; $exitCode = 130 }
     } finally {
         $watch.Stop()
         if (-not $success) {
@@ -536,6 +575,21 @@ function Invoke-WacPreview {
                 try { Remove-WacPreviewOwnedAsset -Transaction $transaction }
                 catch { $cleanupErrors.Add($_.Exception.Message) }
             }
+            foreach ($transaction in $transactions.Values) {
+                foreach ($message in @(Complete-WacOutputTransaction -Transaction $transaction)) { $cleanupErrors.Add($message) }
+            }
+        }
+        if (-not $success -and $transactions.Count -gt 0) {
+            $report = [ordered]@{ schemaVersion = 1; reportType = 'preview'; jobId = $transactions.Original.JobId; toolVersion = $ToolVersion
+                status = $status; applicationExitCode = $exitCode; startedAtUtc = $startedAt.ToString('o'); endedAtUtc = [DateTime]::UtcNow.ToString('o')
+                input = [ordered]@{ path = $InputPath }; assets = [ordered]@{}; stages = $stages
+                progress = [ordered]@{ stages = @(Get-WacProgressReport); completed = $false
+                    cancellationRequested = ($null -ne $script:WacRunContext -and $script:WacRunContext.IsCancellationRequested)
+                    cancellationStage = $(if ($null -ne $script:WacRunContext) { $script:WacRunContext.CancellationStage } else { $null }) }
+                diagnostics = [ordered]@{ error = $errorText; cleanupErrors = @($cleanupErrors.ToArray()) }
+                reporting = [ordered]@{ complete = $true; paths = $null; errors = @() } }
+            try { $reportPaths = Write-WacPreviewReports -Report $report -OutputFolder $OutputFolder }
+            catch { $report.reporting.complete = $false; $report.reporting.errors = @($_.Exception.Message) }
         }
         foreach ($transaction in $transactions.Values) {
             foreach ($message in @(Close-WacOutputTransaction -Transaction $transaction)) { $cleanupErrors.Add($message) }

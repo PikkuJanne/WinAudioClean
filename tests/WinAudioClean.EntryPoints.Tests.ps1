@@ -1,4 +1,4 @@
-﻿BeforeDiscovery {
+BeforeDiscovery {
     $shellCases = @()
     foreach ($shellName in @('powershell.exe', 'pwsh.exe')) {
         $command = Get-Command -Name $shellName -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -47,7 +47,7 @@
     $directPathCases = foreach ($shell in $shellCases) {
         foreach ($fileName in @(
             'spaces here.wav', '[square brackets].wav', "speaker's recording.wav",
-            'Unicode äöÅ.wav', 'ampersand & here.wav', '%PATH% literal.wav',
+            ('Unicode ' + [char]0x00e4 + [char]0x00f6 + [char]0x00c5 + '.wav'), 'ampersand & here.wav', '%PATH% literal.wav',
             '!PATH! literal.wav', '(parentheses).wav', 'name & echo WAC_UNEXPECTED_COMMAND.wav'
         )) {
             @{
@@ -313,13 +313,14 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         $childEnvironment = @{
             WAC_TEST_ARGV_PATH = $argvPath; WAC_TEST_EXIT_CODE = [string]$ProcessExitCode
             WAC_TEST_FFMPEG_OUTPUT = '1'; WAC_TEST_BLOCK_LOG = [string][int]$BlockLog
-            WAC_TEST_STDOUT = 'Native stdout retained'; WAC_TEST_STDERR = 'Native stderr retained'
+            WAC_TEST_STDOUT = "out_time_us=1500000`nprogress=continue`nout_time_us=3000000`nprogress=end`n"
+            WAC_TEST_STDERR = 'Native stderr retained'
         }
         $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables $childEnvironment
         $expectedExit = if ($ProcessExitCode -ne 0) { 4 } elseif ($BlockLog) { 7 } else { 0 }
         $result.ExitCode | Should -Be $expectedExit -Because ("stdout: {0}; stderr: {1}" -f $result.StandardOutput, $result.StandardError)
         $result.StandardError | Should -BeNullOrEmpty
-        $result.StandardOutput | Should -Match 'Native stdout retained'
+        $result.StandardOutput | Should -Not -Match '(?m)^out_time_us=|^progress=(continue|end)'
         $result.StandardOutput | Should -Match 'Native stderr retained'
         $argv = Get-Content -Raw -LiteralPath $argvPath | ConvertFrom-Json
         $filters = 'dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5'
@@ -328,8 +329,12 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $filters = 'adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,' + $filters
             $modeName = 'RAW (Clean+Level)'
         }
-        $argv.Count | Should -Be 34
-        $argv[0] | Should -BeExactly '-nostdin'
+        $argv.Count | Should -Be 36
+        $argv[0] | Should -BeExactly '-progress'
+        $argv[1] | Should -BeExactly 'pipe:1'
+        $argv[2] | Should -BeExactly '-nostdin'
+        $argv | Should -Contain '-nostats'
+        $argv | Should -Not -Contain '-stats'
         $argv[[Array]::IndexOf($argv, '-protocol_whitelist') + 1] | Should -BeExactly 'file'
         $argv[[Array]::IndexOf($argv, '-format_whitelist') + 1] | Should -BeExactly 'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi'
         $argv[[Array]::IndexOf($argv, '-i') + 1] | Should -BeExactly $inputFile
@@ -350,7 +355,7 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $log | Should -Match ('MODE\s+: ' + [regex]::Escape($modeName))
             $log | Should -Match ('ACTIVE FILTERS : ' + [regex]::Escape($filters))
             $log | Should -Match "Native Exit Code: $ProcessExitCode; Application Exit Code: $expectedExit"
-            $log | Should -Match 'Native stdout retained'
+            $log | Should -Not -Match '(?m)^out_time_us=|^progress=(continue|end)'
             $log | Should -Match 'Native stderr retained'
             $log | Should -Match ('EXECUTABLE\s+: ' + [regex]::Escape((Join-Path $scratch 'ffmpeg.exe')))
             $log | Should -Match ('FFPROBE\s+: ' + [regex]::Escape((Join-Path $scratch 'ffprobe.exe')))
@@ -358,6 +363,20 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
             $log | Should -Match 'FFPROBE VERSION\s*: ffprobe version 9\.0\.2-wac-fixture'
             $log | Should -Match 'AUDIO STREAM\s+: 0 \(absolute index; map 0:0\)'
         }
+        $jsonFiles = @(Get-ChildItem -LiteralPath $outputDirectory -Filter 'WinAudioClean_*.json')
+        $jsonFiles.Count | Should -Be 1
+        $report = Get-Content -Raw -LiteralPath $jsonFiles[0].FullName | ConvertFrom-Json
+        $report.diagnostics.standardOutput | Should -BeNullOrEmpty
+        $report.diagnostics.standardError | Should -BeExactly 'Native stderr retained'
+        $rendering = @($report.progress.stages | Where-Object { $_.stage -eq 'Rendering' })
+        $rendering.Count | Should -Be 1
+        $rendering[0].snapshot.Blocks | Should -Be 2
+        $rendering[0].snapshot.OutTimeMicroseconds | Should -Be 3000000
+        $rendering[0].structuredEnd | Should -BeTrue
+        $rendering[0].percent | Should -BeGreaterOrEqual 0
+        $rendering[0].percent | Should -BeLessOrEqual 90
+        $report.progress.completed | Should -Be ($ProcessExitCode -eq 0)
+        if ($ProcessExitCode -ne 0) { @($report.progress.stages | Where-Object { $_.percent -eq 100 }).Count | Should -Be 0 }
         Test-Path -LiteralPath $outputFile | Should -BeFalse
         $published = @(Get-ChildItem -LiteralPath $outputDirectory -Filter '*.wav')
         if ($ProcessExitCode -eq 0) {

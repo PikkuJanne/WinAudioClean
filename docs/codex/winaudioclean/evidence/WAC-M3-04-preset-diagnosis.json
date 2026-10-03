@@ -1,0 +1,283 @@
+{
+  "task": "WAC-M3-04",
+  "status": "pass",
+  "scope": "Read-only diagnosis of two PS7 Full Preset menu failures, followed by the authorized one-line disposable host-fixture correction. Synthetic native fixture, not real media or actual keyboard/Explorer validation.",
+  "finding": "The fixture forces Test-WacInteractive=true in a redirected CreateNoWindow child but left Clear-Host bound to the actual RawUI. PS7 Clear-Host attempts CursorPosition on an invalid console handle and unwinds the outer processing try. The child returns0 after finalization with no reports. This is deterministic outside Pester; concurrency is not required.",
+  "correction": {
+    "file": {
+      "path": "tests/WinAudioClean.Preset.Tests.ps1",
+      "sha256": "a6d3796e8c5ca7078364a5603afd2f477395aa38515fc9b6f66ea130a26e0e8c",
+      "bytes": 8502
+    },
+    "prior_physical_sha256": "b749593844bb61c284702254413955bf2f20258d1f61df3d6bae9837ecd3596b",
+    "added_line": "function Clear-Host {}",
+    "location": "Only the Menu disposable-script host-boundary injection",
+    "preserved": "All Original preset identity, exact graph, report and argv assertions remain unchanged.",
+    "format": "ASCII; CRLF; no BOM."
+  },
+  "original_full_failure": {
+    "log": {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-04-full-final-ps7.txt",
+      "sha256": "7cc3a1853a676bfb73fc4c7bc202d230ac8da1153675c7afc436c3f6f47937ec",
+      "bytes": 364141
+    },
+    "source_main_sha256": "286a03e46f9b465566fc26c97b802c28a47cf4b2e4980a22dd9e199037b5b5ae",
+    "failed_menu_cases": 2,
+    "failure": "DONE: SUCCESS expected on empty StandardOutput; ExitCode assertion0 passed; both direct-Mode cases passed.",
+    "assertion_file_line": 83
+  },
+  "isolated_capture": {
+    "source_main_sha256_before": "e316ba4f872db8936228f0be1ff3d8ac18d7ad7fe0f5409d75aac2fa695af45f",
+    "source_main_sha256_after": "e316ba4f872db8936228f0be1ff3d8ac18d7ad7fe0f5409d75aac2fa695af45f",
+    "source_unchanged": true,
+    "main_scope": "e316 narrow cancellation-input classification candidate; no menu or Clear-Host behavior change from the Full286A source. Exact copied hashes recorded per case.",
+    "counts": {
+      "original_menu_failed": 2,
+      "direct_controls_passed": 2,
+      "clear_host_noop_menu_passed": 2
+    },
+    "original_summary": {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/summary.json",
+      "sha256": "a55c8a2ec621085d6599c4b80ebf903ee74b94679945ae8ac5583a405ebd7d65",
+      "bytes": 4248
+    },
+    "corrected_summary": {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/clear-host-noop-summary.json",
+      "sha256": "0ade65a8b5fa888c25cc3d6438c91105d1bbdc75eccea98697feb4030e78fa44",
+      "bytes": 931
+    },
+    "original_menu_cases": [
+      {
+        "label": "menu",
+        "mode": "Raw",
+        "shell": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "arguments": "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\menu-Raw\\WinAudioClean.ps1\" -inputPath \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\menu-Raw\\synthetic input.wav\" -OutputDirectory \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\menu-Raw\\output\"",
+        "exit": 0,
+        "stdoutLength": 0,
+        "stderrLength": 196,
+        "stdoutSuccess": false,
+        "stderrSuccess": false,
+        "reportCount": 0,
+        "reportStatus": null,
+        "appHash": "0090D55F828714D3D89A727E4B0B6F28226475AF763A68979205D92E02359350",
+        "ioHash": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      {
+        "label": "menu",
+        "mode": "Zoom",
+        "shell": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "arguments": "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\menu-Zoom\\WinAudioClean.ps1\" -inputPath \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\menu-Zoom\\synthetic input.wav\" -OutputDirectory \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\menu-Zoom\\output\"",
+        "exit": 0,
+        "stdoutLength": 0,
+        "stderrLength": 196,
+        "stdoutSuccess": false,
+        "stderrSuccess": false,
+        "reportCount": 0,
+        "reportStatus": null,
+        "appHash": "0090D55F828714D3D89A727E4B0B6F28226475AF763A68979205D92E02359350",
+        "ioHash": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      }
+    ],
+    "direct_controls": [
+      {
+        "label": "direct",
+        "mode": "Raw",
+        "shell": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "arguments": "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\direct-Raw\\WinAudioClean.ps1\" -inputPath \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\direct-Raw\\synthetic input.wav\" -OutputDirectory \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\direct-Raw\\output\" -Mode Raw -NonInteractive",
+        "exit": 0,
+        "stdoutLength": 1482,
+        "stderrLength": 0,
+        "stdoutSuccess": true,
+        "stderrSuccess": false,
+        "reportCount": 1,
+        "reportStatus": "SUCCESS",
+        "appHash": "2E40CB17409A30888E71DCEEDF17ECC4095045BEE2FAF83273B05987838B2568",
+        "ioHash": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      {
+        "label": "direct",
+        "mode": "Zoom",
+        "shell": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "arguments": "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\direct-Zoom\\WinAudioClean.ps1\" -inputPath \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\direct-Zoom\\synthetic input.wav\" -OutputDirectory \"<repo>\\.wac-local\\WAC-M3-04\\preset-diagnosis\\direct-Zoom\\output\" -Mode Zoom -NonInteractive",
+        "exit": 0,
+        "stdoutLength": 1294,
+        "stderrLength": 0,
+        "stdoutSuccess": true,
+        "stderrSuccess": false,
+        "reportCount": 1,
+        "reportStatus": "SUCCESS",
+        "appHash": "2E40CB17409A30888E71DCEEDF17ECC4095045BEE2FAF83273B05987838B2568",
+        "ioHash": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      }
+    ],
+    "corrected_menu_cases": [
+      {
+        "mode": "Raw",
+        "exit": 0,
+        "stdoutLength": 1853,
+        "stderrLength": 0,
+        "success": true,
+        "promptCount": 1,
+        "reportCount": 1,
+        "status": "SUCCESS",
+        "presetId": "original",
+        "reportMode": "Raw",
+        "exactFilters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "copiedMainHash": "7492227125F88B8396E5352A214C1FCCC71D29E21B5DE6CC728329F2E5DC0BEF"
+      },
+      {
+        "mode": "Zoom",
+        "exit": 0,
+        "stdoutLength": 1665,
+        "stderrLength": 0,
+        "success": true,
+        "promptCount": 1,
+        "reportCount": 1,
+        "status": "SUCCESS",
+        "presetId": "original",
+        "reportMode": "Zoom",
+        "exactFilters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "copiedMainHash": "7492227125F88B8396E5352A214C1FCCC71D29E21B5DE6CC728329F2E5DC0BEF"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".wac-local/WAC-M3-04/preset-diagnosis/driver.ps1"
+      ],
+      "wrapper_exit": 0
+    },
+    {
+      "argv": [
+        "pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        ".wac-local/WAC-M3-04/preset-diagnosis/verify-clear-host.ps1"
+      ],
+      "wrapper_exit": 0
+    }
+  ],
+  "preparatory_launch_failure": {
+    "command": [
+      "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+      "-NoLogo",
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-File",
+      ".wac-local/WAC-M3-04/preset-diagnosis/driver.ps1"
+    ],
+    "wrapper_exit": 1,
+    "outcome": "Specified executable absent; no test child ran. Corrected to the already installed pwsh.exe resolved on PATH."
+  },
+  "tools": {
+    "powershell": {
+      "path": "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+      "sha256": "362a356ce7f0940ec74f73a8fc2c990a2cc24a38a11c90bbd8eca947110ad139"
+    },
+    "native_fixture": {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/fixture.exe",
+      "sha256": "58c65adb24cdd9a10f3da2aa1aa388df2750336691e69cdb6f503f00cc60912b",
+      "bytes": 11264
+    },
+    "fixture_source": {
+      "path": "tests/fixtures/NativeProcessFixture.cs",
+      "sha256": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+      "bytes": 10765
+    }
+  },
+  "harnesses": [
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/driver.ps1",
+      "sha256": "0dded2b9e7b6565df2aa7ef2ca7c0d1a2bef9b5b3f454b8885c96d233f9632bd",
+      "bytes": 3971
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/verify-clear-host.ps1",
+      "sha256": "65220944f8e30956f6537c2a664309acba9a41efe43132bb214c9431a159bcd4",
+      "bytes": 2754
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/publish-diagnosis.py",
+      "sha256": "a3bfea079887a585b3718926494fc9328f36073ac3dbbeaad0186b93de38447d",
+      "bytes": 6571
+    }
+  ],
+  "selected_error": "SetValueInvocationException: \nLine |\n   3 |  $RawUI.CursorPosition = @{X=0;Y=0}\n     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n     | Exception setting \"CursorPosition\": \"The handle is invalid.\"\n",
+  "logs": [
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/menu-Raw/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/menu-Raw/stderr.txt",
+      "sha256": "71f9880c10a0e80d46f10d294f01069d81c669616f954abeab9945db46cb03fa",
+      "bytes": 196
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/menu-Zoom/stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/menu-Zoom/stderr.txt",
+      "sha256": "71f9880c10a0e80d46f10d294f01069d81c669616f954abeab9945db46cb03fa",
+      "bytes": 196
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/direct-Raw/stdout.txt",
+      "sha256": "3b62d5fa54c5c7313a8c0ce3dac983983b92837d632996f4d1ff6ed96c1153f3",
+      "bytes": 1482
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/direct-Raw/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/direct-Zoom/stdout.txt",
+      "sha256": "d32802a3eac66e9907595bdb531351712e1209d6d6f1b99bf1274552be22f8fc",
+      "bytes": 1294
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/direct-Zoom/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/clear-host-noop-Raw/stdout.txt",
+      "sha256": "bd1ec7db1a7d4a33be8c53ce5bfc13fcb69a7f06321c3a5b1aefa8d82fb06cad",
+      "bytes": 1853
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/clear-host-noop-Raw/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/clear-host-noop-Zoom/stdout.txt",
+      "sha256": "aa28eb023b2913eb3e53e48d5d61dbb91395c59474e7c8c5e1e804bf67a6edf6",
+      "bytes": 1665
+    },
+    {
+      "path": ".wac-local/WAC-M3-04/preset-diagnosis/clear-host-noop-Zoom/stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "limits": "No runtime correction or final media claim is derived from this diagnosis. Parent separately runs the corrected focused/Full suites and the final real-media matrix on its final runtime candidate."
+}

@@ -210,7 +210,8 @@ param(
     [string]$InputListPath,
     [string[]]$InputDirectories,
     [switch]$Recurse,
-    [string]$BatchResultPath
+    [string]$BatchResultPath,
+    [Parameter(DontShow = $true)]$WacRunContext
 )
 
 . (Join-Path $PSScriptRoot 'WinAudioClean.IO.ps1')
@@ -309,9 +310,19 @@ function Test-WacInteractive {
     $true
 }
 
+function Read-WacHostSelection {
+    param([string]$Prompt)
+    $restore = $null -ne $script:WacRunContext -and $script:WacRunContext.ConsoleHandlerRegistered
+    # Native control interception is for running work. At Read-Host, retain the
+    # host's usual Ctrl+C behavior instead of swallowing it while input waits.
+    if ($restore) { $script:WacRunContext.Dispose() }
+    try { Read-Host $Prompt }
+    finally { if ($restore) { $script:WacRunContext.CaptureConsole() } }
+}
+
 function Read-WacMode {
     while ($true) {
-        try { $choice = Read-Host "`nEnter selection (1 or 2; Q to cancel)" }
+        try { $choice = Read-WacHostSelection -Prompt "`nEnter selection (1 or 2; Q to cancel)" }
         catch { throw 'Cannot read a mode. Supply -Mode Raw or -Mode Zoom with -NonInteractive.' }
         if ($null -eq $choice) { return $null }
         switch ($choice.Trim()) {
@@ -819,7 +830,7 @@ function Select-WacAudioStream {
         Write-Host $label
     }
     while ($true) {
-        try { $answer = Read-Host 'Audio stream index (Q to cancel)' }
+        try { $answer = Read-WacHostSelection -Prompt 'Audio stream index (Q to cancel)' }
         catch { throw 'Cannot read an audio stream selection. Supply -AudioStreamIndex with -NonInteractive.' }
         if ($null -eq $answer -or $answer.Trim() -in @('q', 'cancel')) { return $null }
         $index = 0
@@ -855,18 +866,227 @@ function ConvertTo-WacNativeArgument {
     $builder.ToString()
 }
 
+function Initialize-WacProgressRuntime {
+    if ('WinAudioClean.RunControl' -as [type]) { return }
+    Add-Type -TypeDefinition @'
+using System;
+using System.IO;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Runtime.InteropServices;
+namespace WinAudioClean {
+    public sealed class RunControl : IDisposable {
+        private int requested;
+        private delegate bool Handler(uint signal);
+        private Handler handler;
+        [DllImport("kernel32.dll", SetLastError=true)]
+        private static extern bool SetConsoleCtrlHandler(Handler handler, bool add);
+        public bool IsCancellationRequested { get { return Interlocked.CompareExchange(ref requested, 0, 0) != 0; } }
+        public bool ConsoleHandlerRegistered { get; private set; }
+        public int FileIndex = 1;
+        public int FileCount = 1;
+        public string CurrentStage;
+        public string CancellationStage;
+        public void Request() {
+            if (Interlocked.CompareExchange(ref requested, 1, 0) == 0) CancellationStage = CurrentStage;
+        }
+        public void CaptureConsole() {
+            if (ConsoleHandlerRegistered) return;
+            handler = delegate(uint signal) {
+                if (signal > 1) return false;
+                Request(); return true;
+            };
+            ConsoleHandlerRegistered = SetConsoleCtrlHandler(handler, true);
+        }
+        public void Dispose() {
+            if (ConsoleHandlerRegistered) {
+                if (!SetConsoleCtrlHandler(handler, false)) throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error());
+                ConsoleHandlerRegistered = false;
+            }
+            GC.KeepAlive(handler);
+        }
+    }
+    public sealed class ProgressSnapshot {
+        public long OutTimeMicroseconds = -1;
+        public bool End;
+        public int Blocks;
+        public int InvalidLines;
+        public int TruncatedLines;
+    }
+    public sealed class ProgressReader {
+        private readonly object gate = new object();
+        private readonly ProgressSnapshot snapshot = new ProgressSnapshot();
+        public Task Completion { get; private set; }
+        public ProgressReader(StreamReader reader) {
+            Completion = Task.Factory.StartNew(() => Drain(reader), CancellationToken.None,
+                TaskCreationOptions.LongRunning, TaskScheduler.Default);
+        }
+        public ProgressSnapshot Snapshot() {
+            lock (gate) return new ProgressSnapshot {
+                OutTimeMicroseconds=snapshot.OutTimeMicroseconds, End=snapshot.End, Blocks=snapshot.Blocks,
+                InvalidLines=snapshot.InvalidLines, TruncatedLines=snapshot.TruncatedLines };
+        }
+        private void Drain(StreamReader reader) {
+            char[] buffer = new char[4096];
+            StringBuilder line = new StringBuilder();
+            bool overlong = false, invalidBlock = false;
+            long pendingTime = -1;
+            int fieldCount = 0, count;
+            while ((count = reader.Read(buffer, 0, buffer.Length)) > 0) {
+                for (int i=0; i<count; i++) {
+                    char c=buffer[i];
+                    if (c != '\n') {
+                        if (!overlong) {
+                            if (line.Length >= 4096) { line.Clear(); overlong=true; }
+                            else line.Append(c);
+                        }
+                        continue;
+                    }
+                    if (overlong) {
+                        lock (gate) snapshot.TruncatedLines++;
+                        overlong=false; invalidBlock=true; line.Clear(); continue;
+                    }
+                    string value=line.ToString().TrimEnd('\r'); line.Clear();
+                    int equals=value.IndexOf('=');
+                    if (equals <= 0) {
+                        lock (gate) snapshot.InvalidLines++;
+                        invalidBlock=true; continue;
+                    }
+                    if (fieldCount >= 64) {
+                        lock (gate) snapshot.InvalidLines++;
+                        invalidBlock=true;
+                    } else fieldCount++;
+                    // Even a rejected block must consume its terminator so a
+                    // later valid block can recover. The counter stays bounded.
+                    string key=value.Substring(0,equals), data=value.Substring(equals+1);
+                    if (key == "out_time_us") {
+                        long time;
+                        if (pendingTime >= 0 || !Int64.TryParse(data, System.Globalization.NumberStyles.None,
+                            System.Globalization.CultureInfo.InvariantCulture, out time)) {
+                            lock (gate) snapshot.InvalidLines++;
+                            invalidBlock=true;
+                        } else pendingTime=time;
+                    }
+                    if (key == "progress") {
+                        if (data != "continue" && data != "end") {
+                            lock (gate) snapshot.InvalidLines++;
+                        } else if (!invalidBlock && pendingTime >= 0) {
+                            lock (gate) {
+                                snapshot.OutTimeMicroseconds=Math.Max(snapshot.OutTimeMicroseconds,pendingTime);
+                                snapshot.End |= data == "end";
+                                snapshot.Blocks++;
+                            }
+                        }
+                        pendingTime=-1; fieldCount=0; invalidBlock=false;
+                    }
+                }
+            }
+            if (overlong || line.Length > 0) lock (gate) snapshot.TruncatedLines++;
+        }
+    }
+}
+'@
+}
+
+function New-WacRunContext {
+    param([switch]$CaptureConsole)
+    Initialize-WacProgressRuntime
+    $context = New-Object WinAudioClean.RunControl
+    if ($CaptureConsole) { $context.CaptureConsole() }
+    $context
+}
+
+function Request-WacCancellation {
+    param($RunContext)
+    if ($null -ne $RunContext) { $RunContext.Request() }
+}
+
+function Get-WacProgressArguments {
+    param([string[]]$ArgumentList)
+    $arguments = @($ArgumentList)
+    $statsIndex = [array]::IndexOf($arguments, '-stats')
+    if ($statsIndex -ge 0) { $arguments[$statsIndex] = '-nostats' }
+    if ('-nostats' -notin $arguments) { $arguments = @('-nostats') + $arguments }
+    @('-progress', 'pipe:1') + $arguments
+}
+
+function New-WacProgressState {
+    param($RunContext, [string]$Stage, [double]$DurationSeconds = 0,
+        [ValidateRange(0, 99)][int]$StartPercent = 0, [ValidateRange(0, 99)][int]$EndPercent = 95)
+    if ($EndPercent -lt $StartPercent) { throw 'Progress range must be ordered.' }
+    if ($null -ne $RunContext) { $RunContext.CurrentStage = $Stage }
+    $known = $DurationSeconds -gt 0 -and -not [double]::IsNaN($DurationSeconds) -and -not [double]::IsInfinity($DurationSeconds)
+    [pscustomobject]@{ Stage = $Stage; RunContext = $RunContext; DurationSeconds = $DurationSeconds
+        FileIndex = $(if ($null -eq $RunContext) { 1 } else { $RunContext.FileIndex })
+        FileCount = $(if ($null -eq $RunContext) { 1 } else { $RunContext.FileCount })
+        StartPercent = $StartPercent; EndPercent = $EndPercent; Percent = $(if ($known) { $StartPercent } else { -1 })
+        ProcessedSeconds = 0.0; StructuredEnd = $false; UpdateCount = 0; ProcessId = $null; Snapshot = $null; DisplayUnavailable = $false }
+}
+
+function Write-WacProgress {
+    param($State, [switch]$Completed)
+    try {
+        $parameters = @{ Id = 1; Activity = "WinAudioClean - file $($State.FileIndex) of $($State.FileCount)"
+            Status = $State.Stage; PercentComplete = $State.Percent; ErrorAction = 'Stop' }
+        if ($Completed) { $parameters.Completed = $true }
+        Write-Progress @parameters
+    } catch { $State.DisplayUnavailable = $true } # Display failure never decides processing success.
+}
+
+function Update-WacProgress {
+    param($State, $Snapshot)
+    if ($null -ne $Snapshot) {
+        $State.Snapshot = $Snapshot
+        $State.StructuredEnd = $Snapshot.End
+        $State.ProcessedSeconds = [math]::Max($State.ProcessedSeconds, [math]::Max(0.0, $Snapshot.OutTimeMicroseconds / 1000000.0))
+        if ($State.Percent -ge 0) {
+            $fraction = [math]::Min(1.0, $State.ProcessedSeconds / $State.DurationSeconds)
+            $State.Percent = [math]::Max($State.Percent, [int][math]::Floor($State.StartPercent + ($State.EndPercent - $State.StartPercent) * $fraction))
+        }
+    }
+    $State.UpdateCount++
+    Write-WacProgress -State $State
+}
+
+function Add-WacProgressStage {
+    param([string]$Stage, [double]$DurationSeconds = 0, [int]$StartPercent = 0, [int]$EndPercent = 95)
+    $state = New-WacProgressState -RunContext $script:WacRunContext -Stage $Stage -DurationSeconds $DurationSeconds -StartPercent $StartPercent -EndPercent $EndPercent
+    if ($null -eq $script:WacProgressStages) { $script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]' }
+    $script:WacProgressStages.Add($state)
+    Update-WacProgress -State $state
+    $state
+}
+
+function Complete-WacProgress {
+    $state = Add-WacProgressStage -Stage 'Completed' -DurationSeconds 1 -StartPercent 99 -EndPercent 99
+    $state.Percent = 100
+    Update-WacProgress -State $state
+}
+
+function Get-WacProgressReport {
+    @($script:WacProgressStages | ForEach-Object {
+        [ordered]@{ stage = $_.Stage; fileIndex = $_.FileIndex; fileCount = $_.FileCount; percent = $_.Percent
+            processedSeconds = $_.ProcessedSeconds; durationSeconds = $(if ($_.Percent -lt 0) { $null } else { $_.DurationSeconds })
+            structuredEnd = $_.StructuredEnd; updates = $_.UpdateCount; processId = $_.ProcessId; snapshot = $_.Snapshot }
+    })
+}
+
 function Invoke-WacNativeProcess {
     param(
         [string]$FilePath,
         [AllowEmptyCollection()][string[]]$ArgumentList = @(),
         [ValidateRange(0, 2147483647)][int]$TimeoutMilliseconds = 0,
         [ValidateRange(1, 60000)][int]$StreamCloseTimeoutMilliseconds = 5000,
-        [System.IO.Stream]$StandardInputStream
+        [System.IO.Stream]$StandardInputStream,
+        $RunContext = $script:WacRunContext,
+        $ProgressState
     )
 
     $result = [pscustomobject]@{
         Started = $false; ExitCode = $null; StandardOutput = ''; StandardError = ''
         Error = $null; TimedOut = $false; CleanupError = $null
+        Cancelled = $false; OwnedProcessId = $null; Progress = $null; CancellationInputError = $null
     }
     $process = $null
     $stdoutReader = $null
@@ -876,7 +1096,9 @@ function Invoke-WacNativeProcess {
     $stderrTask = $null
     $stdinTask = $null
     $stdinClosed = $false
+    $progressReader = $null
     try {
+        if ($null -ne $RunContext -and $RunContext.IsCancellationRequested) { $result.Cancelled = $true; return $result }
         if ($null -ne $StandardInputStream -and -not $StandardInputStream.CanRead) { throw 'Native input stream must be readable.' }
         if (-not [IO.Path]::IsPathRooted($FilePath) -or [IO.Path]::GetExtension($FilePath) -ne '.exe') {
             throw 'Native execution requires a resolved absolute .exe path.'
@@ -900,12 +1122,18 @@ function Invoke-WacNativeProcess {
         $process.StartInfo = $startInfo
         $result.Started = $process.Start()
         if (-not $result.Started) { throw 'The native process did not start.' }
+        $result.OwnedProcessId = $process.Id
+        if ($null -ne $ProgressState) { $ProgressState.ProcessId = $process.Id }
         # Both readers start before waiting, so neither full pipe can block the
         # child. No script callbacks or PowerShell runspace are needed to drain.
         $stdoutReader = $process.StandardOutput
         $stderrReader = $process.StandardError
         $stdinWriter = $process.StandardInput
-        $stdoutTask = $stdoutReader.ReadToEndAsync()
+        if ($null -ne $ProgressState) {
+            Initialize-WacProgressRuntime
+            $progressReader = New-Object WinAudioClean.ProgressReader -ArgumentList $stdoutReader
+            $stdoutTask = $progressReader.Completion
+        } else { $stdoutTask = $stdoutReader.ReadToEndAsync() }
         $stderrTask = $stderrReader.ReadToEndAsync()
         if ($null -eq $StandardInputStream) {
             $stdinWriter.Close()
@@ -917,6 +1145,13 @@ function Invoke-WacNativeProcess {
         }
         $watch = [System.Diagnostics.Stopwatch]::StartNew()
         while (-not $process.WaitForExit(100)) {
+            if ($null -ne $progressReader) { Update-WacProgress -State $ProgressState -Snapshot $progressReader.Snapshot() }
+            if ($null -ne $RunContext -and $RunContext.IsCancellationRequested) {
+                $result.Cancelled = $true
+                $process.Kill()
+                if (-not $process.WaitForExit(5000)) { throw 'Cancelled native process did not stop within 5000 ms.' }
+                break
+            }
             if (-not $stdinClosed -and $stdinTask.IsCompleted) {
                 [void]$stdinTask.GetAwaiter().GetResult()
                 $stdinWriter.Close()
@@ -933,6 +1168,7 @@ function Invoke-WacNativeProcess {
             }
         }
         $result.ExitCode = $process.ExitCode
+        if ($null -ne $RunContext -and $RunContext.IsCancellationRequested) { $result.Cancelled = $true }
         if ($null -ne $stdinTask) {
             if (-not $stdinTask.Wait($StreamCloseTimeoutMilliseconds)) { throw 'Native input stream transfer did not finish.' }
             [void]$stdinTask.GetAwaiter().GetResult()
@@ -941,10 +1177,14 @@ function Invoke-WacNativeProcess {
         if (-not [System.Threading.Tasks.Task]::WaitAll($readers, $StreamCloseTimeoutMilliseconds)) {
             throw "Native output streams did not close within $StreamCloseTimeoutMilliseconds ms."
         }
-        $result.StandardOutput = $stdoutTask.Result
+        if ($null -eq $progressReader) { $result.StandardOutput = $stdoutTask.Result }
         $result.StandardError = $stderrTask.Result
     } catch {
-        if (-not $result.Error) { $result.Error = $_.Exception.Message }
+        if ($result.Cancelled -and $null -ne $stdinTask -and $stdinTask.IsFaulted -and
+            $stdinTask.Exception.GetBaseException() -is [IO.IOException] -and
+            [object]::ReferenceEquals($_.Exception.GetBaseException(), $stdinTask.Exception.GetBaseException())) {
+            $result.CancellationInputError = $stdinTask.Exception.GetBaseException().Message
+        } elseif (-not $result.Error) { $result.Error = $_.Exception.Message }
     } finally {
         if ($null -ne $process) {
             try {
@@ -955,7 +1195,11 @@ function Invoke-WacNativeProcess {
                 }
                 if ($result.Started -and $process.HasExited) { $result.ExitCode = $process.ExitCode }
             } catch { $result.CleanupError = $_.Exception.Message }
-            if ($null -ne $stdoutTask -and $stdoutTask.Status -eq 'RanToCompletion') { $result.StandardOutput = $stdoutTask.Result }
+            if ($null -eq $progressReader -and $null -ne $stdoutTask -and $stdoutTask.Status -eq 'RanToCompletion') { $result.StandardOutput = $stdoutTask.Result }
+            if ($null -ne $progressReader) {
+                $result.Progress = $progressReader.Snapshot()
+                Update-WacProgress -State $ProgressState -Snapshot $result.Progress
+            }
             if ($null -ne $stderrTask -and $stderrTask.Status -eq 'RanToCompletion') { $result.StandardError = $stderrTask.Result }
             # Process.Dispose does not own readers accessed through these
             # properties. Dispose them explicitly, including incomplete reads.
@@ -969,7 +1213,12 @@ function Invoke-WacNativeProcess {
                 try {
                     if (-not $stdinTask.Wait($StreamCloseTimeoutMilliseconds)) { throw 'Native input transfer cleanup exceeded its deadline.' }
                     [void]$stdinTask.GetAwaiter().GetResult()
-                } catch { $result.CleanupError = $_.Exception.Message }
+                } catch {
+                    if ($result.Cancelled -and $stdinTask.IsFaulted -and $stdinTask.Exception.GetBaseException() -is [IO.IOException] -and
+                        [object]::ReferenceEquals($_.Exception.GetBaseException(), $stdinTask.Exception.GetBaseException())) {
+                        $result.CancellationInputError = $stdinTask.Exception.GetBaseException().Message
+                    } else { $result.CleanupError = $_.Exception.Message }
+                }
             }
             try { $process.Dispose() }
             catch { $result.CleanupError = $_.Exception.Message }
@@ -1207,6 +1456,7 @@ function ConvertTo-WacLoudnessStage {
     $stage = [ordered]@{ status = 'FAILED'; arguments = @($Arguments); inputSource = $InputSource
         process = $Process; measurement = $null; error = $null }
     try {
+        if ($Process.PSObject.Properties['Cancelled'] -and $Process.Cancelled) { $stage.status = 'CANCELLED'; throw 'Loudness processing cancelled.' }
         if (-not $Process.Started -or $Process.Error -or $Process.CleanupError -or $Process.TimedOut -or
             $null -eq $Process.ExitCode -or $Process.ExitCode -ne 0) { throw 'Loudness native process failed.' }
         $stage.measurement = ConvertFrom-WacLoudnormJson -StandardError $Process.StandardError -DurationSeconds $DurationSeconds
@@ -1251,7 +1501,7 @@ function New-WacRunReport {
         presetCustomized = [bool]$c.Profile.CleaningCustomized
         sourceRevision = $null; sourceRevisionReason = 'not_embedded'
         status = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
-        processingStatus = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' })
+        processingStatus = $(if ($c.ExitCode -eq 0) { 'SUCCESS' } elseif ($c.ExitCode -eq 130) { 'CANCELLED' } else { 'FAILED' })
         processingExitCode = $c.ExitCode
         applicationExitCode = $c.ExitCode
         nativeExitCode = $c.Process.ExitCode
@@ -1474,8 +1724,8 @@ function ConvertTo-WacRedactedReport {
 
     if ($null -eq $Report -or ($Report.schemaVersion -isnot [int] -and $Report.schemaVersion -isnot [long]) -or $Report.schemaVersion -ne 1 -or
         $Report.status -isnot [string] -or $Report.processingStatus -isnot [string] -or
-        $Report.status -cnotin @('SUCCESS', 'WARNING', 'FAILED') -or
-        $Report.processingStatus -cnotin @('SUCCESS', 'FAILED')) { throw 'Expected a version 1 WinAudioClean run report.' }
+        $Report.status -cnotin @('SUCCESS', 'WARNING', 'FAILED', 'CANCELLED') -or
+        $Report.processingStatus -cnotin @('SUCCESS', 'FAILED', 'CANCELLED')) { throw 'Expected a version 1 WinAudioClean run report.' }
     # Copy no free-form source strings: even version/filter/error fields may
     # contain filenames, metadata or credentials. All retained values are typed
     # numbers, booleans, fixed enums or values regenerated from built-in profiles.
@@ -1674,6 +1924,13 @@ try {
     exit 2
 }
 
+# One controller per invocation; queue children borrow it and never unregister it.
+$ownsRunContext = $null -eq $WacRunContext
+if ($ownsRunContext) { $WacRunContext = New-WacRunContext -CaptureConsole }
+$script:WacRunContext = $WacRunContext
+$script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]'
+try {
+
 # Explicit lists reuse the ordinary single-file path, with preferences frozen
 # once and no child configuration reads. Legacy installations/imports need no
 # batch component. Folder discovery is a separate, explicitly selected route.
@@ -1703,7 +1960,7 @@ if ($batchRequested -or $folderRequested -or $PSBoundParameters.ContainsKey('Bat
             $batchArguments.FolderQueue = $queue
             $batchInputs = @($queue.Entries | ForEach-Object { $_.InputPath })
         } else { $batchInputs = @(Resolve-WacBatchInputs -Parameters $PSBoundParameters) }
-        $batchResult = Invoke-WacBatch -Inputs $batchInputs @batchArguments
+        $batchResult = Invoke-WacBatch -Inputs $batchInputs -RunContext $WacRunContext @batchArguments
         exit $batchResult.ExitCode
     } catch {
         Write-Error -Message ('Input selection failed: ' + $_.Exception.Message) -ErrorAction Continue
@@ -1764,6 +2021,7 @@ try {
     Write-Error -Message ("Preflight failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 2
 }
+$null = Add-WacProgressStage -Stage 'Inspecting'
 try {
     $resolveArguments = @{ Name = 'ffmpeg.exe'; SiblingDirectory = $PSScriptRoot }
     if ($PSBoundParameters.ContainsKey('FfmpegPath')) { $resolveArguments.ExplicitPath = $FfmpegPath }
@@ -1774,6 +2032,7 @@ try {
     $ffmpegVersion = Get-WacToolVersion -FilePath $ffmpegPath -ToolName ffmpeg
     $ffprobeVersion = Get-WacToolVersion -FilePath $ffprobePath -ToolName ffprobe
 } catch {
+    if ($WacRunContext.IsCancellationRequested) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
     Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 3
 }
@@ -1832,6 +2091,7 @@ try {
     if ($Preview) { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain 'atrim,asetpts,aresample,volume' }
 }
 catch {
+    if ($WacRunContext.IsCancellationRequested) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
     Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 3
 }
@@ -1875,6 +2135,7 @@ try {
 try {
 try { $audioStreams = @(Get-WacAudioStreams -FfprobePath $ffprobePath -InputPath $inputPath) }
 catch {
+    if ($WacRunContext.IsCancellationRequested) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
     Write-Error -Message ("Probe failed: " + $_.Exception.Message) -ErrorAction Continue
     exit 4
 }
@@ -1903,6 +2164,7 @@ catch {
 if ($outputPolicy.FilterPrefix) {
     try { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain 'pan' }
     catch {
+        if ($WacRunContext.IsCancellationRequested) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
         Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
         exit 3
     }
@@ -1943,7 +2205,9 @@ if ($LoudnessMode -eq 'Accurate') {
     $normalization.analysisFilter = $loudnessPlan.AnalysisFilter
     $normalization.finalMeasurementFilter = $loudnessPlan.FinalMeasurementFilter
     $analysisArguments = Get-WacLoudnessArguments -InputPath $inputPath -FilterChain $loudnessPlan.AnalysisFilter -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
-    $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $analysisArguments -TimeoutMilliseconds $loudnessTimeout
+    $analysisArguments = Get-WacProgressArguments -ArgumentList $analysisArguments
+    $progressState = Add-WacProgressStage -Stage 'Analysis' -DurationSeconds $selectedStream.DurationSeconds -EndPercent 30
+    $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $analysisArguments -TimeoutMilliseconds $loudnessTimeout -ProgressState $progressState
     $normalization.analysis = ConvertTo-WacLoudnessStage -Process $process -DurationSeconds $selectedStream.DurationSeconds -Arguments $analysisArguments
     $analysisFailed = $normalization.analysis.status -ne 'PASSED'
     if (-not $analysisFailed) {
@@ -1957,7 +2221,9 @@ if ($LoudnessMode -eq 'Accurate') {
         $argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $renderChain -OutputFile $transaction.TempPath -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
         $argumentList[[array]::IndexOf($argumentList, '-loglevel') + 1] = 'info'
         $argumentList[[array]::IndexOf($argumentList, '-stats')] = '-nostats'
-        $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList -TimeoutMilliseconds $loudnessTimeout
+        $argumentList = Get-WacProgressArguments -ArgumentList $argumentList
+        $progressState = Add-WacProgressStage -Stage 'Rendering' -DurationSeconds $selectedStream.DurationSeconds -StartPercent 30 -EndPercent 80
+        $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList -TimeoutMilliseconds $loudnessTimeout -ProgressState $progressState
         $normalization.render = ConvertTo-WacLoudnessStage -Process $process -DurationSeconds $selectedStream.DurationSeconds -Arguments $argumentList
         if ($normalization.render.status -eq 'PASSED') {
             $normalization.actualType = $normalization.render.measurement.NormalizationType
@@ -1967,17 +2233,22 @@ if ($LoudnessMode -eq 'Accurate') {
     }
 } else {
     $argumentList = Get-WacFfmpegArguments -InputPath $inputPath -FilterChain $filterChain -OutputFile $transaction.TempPath -AudioStreamIndex $selectedStream.Index -OutputPolicy $outputPolicy
-    $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList
+    $argumentList = Get-WacProgressArguments -ArgumentList $argumentList
+    $progressState = Add-WacProgressStage -Stage 'Rendering' -DurationSeconds $selectedStream.DurationSeconds -EndPercent 90
+    $process = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $argumentList -ProgressState $progressState
 }
 
 # --- LOGGING ---
 $applicationExitCode = 0
-if (-not $process.Started) { $applicationExitCode = 3 }
+if ($process.Cancelled -or $WacRunContext.IsCancellationRequested) { $applicationExitCode = 130 }
+elseif (-not $process.Started) { $applicationExitCode = 3 }
 elseif ($analysisFailed -or $process.Error -or $process.CleanupError -or $process.TimedOut -or $null -eq $process.ExitCode -or $process.ExitCode -ne 0) { $applicationExitCode = 4 }
 $validationError = $null
 $verifiedAudio = $null
 if ($applicationExitCode -eq 0) {
     try {
+        $null = Add-WacProgressStage -Stage 'Validating' -StartPercent $(if ($LoudnessMode -eq 'Accurate') { 80 } else { 90 }) -EndPercent $(if ($LoudnessMode -eq 'Accurate') { 80 } else { 90 })
+        if ($WacRunContext.IsCancellationRequested) { throw 'Processing cancelled.' }
         $outputStreams = @(Get-WacAudioStreams -FfprobePath $ffprobePath -InputPath $transaction.TempPath)
         if ($outputStreams.Count -ne 1) { throw 'Output must contain exactly one readable audio stream.' }
         $validationStream = Freeze-WacOutputTransaction -Transaction $transaction
@@ -1987,8 +2258,11 @@ if ($applicationExitCode -eq 0) {
             # publication. FFmpeg cannot reopen a file held with DELETE access.
             $validationStream.Position = 0
             $finalArguments = Get-WacLoudnessArguments -FilterChain $loudnessPlan.FinalMeasurementFilter -OutputPolicy $outputPolicy -FromPipe
-            $finalProcess = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $finalArguments -StandardInputStream $validationStream -TimeoutMilliseconds $loudnessTimeout
+            $finalArguments = Get-WacProgressArguments -ArgumentList $finalArguments
+            $progressState = Add-WacProgressStage -Stage 'Verification' -DurationSeconds $verifiedAudio.DurationSeconds -StartPercent 80 -EndPercent 95
+            $finalProcess = Invoke-WacNativeProcess -FilePath $ffmpegPath -ArgumentList $finalArguments -StandardInputStream $validationStream -TimeoutMilliseconds $loudnessTimeout -ProgressState $progressState
             $normalization.final = ConvertTo-WacLoudnessStage -Process $finalProcess -DurationSeconds $verifiedAudio.DurationSeconds -Arguments $finalArguments -InputSource 'held_output_stream'
+            if ($finalProcess.Cancelled -or $WacRunContext.IsCancellationRequested) { throw 'Processing cancelled.' }
             if ($normalization.final.status -eq 'PASSED') {
                 $finalLoudness = ConvertTo-WacFinalLoudness -Measurement $normalization.final.measurement
             } else {
@@ -2001,15 +2275,18 @@ if ($applicationExitCode -eq 0) {
             }
             if ($finalLoudness.Compliance.status -ne 'PASSED') { $loudnessWarnings += 'final_loudness_' + $finalLoudness.Compliance.status.ToLowerInvariant() }
         }
+        $null = Add-WacProgressStage -Stage 'Publishing' -StartPercent 95 -EndPercent 99
+        if ($WacRunContext.IsCancellationRequested) { throw 'Processing cancelled.' }
         Publish-WacOutputTransaction -Transaction $transaction
+        Complete-WacProgress
     } catch {
         $validationError = $_.Exception.Message
-        $applicationExitCode = 5
+        $applicationExitCode = if ($WacRunContext.IsCancellationRequested) { 130 } else { 5 }
         Write-Error -Message ("Output validation/publication failed: " + $validationError) -ErrorAction Continue
     }
 }
 $stopWatch.Stop()
-$status = if ($applicationExitCode -eq 0) { 'SUCCESS' } else { 'FAILED' }
+$status = if ($applicationExitCode -eq 0) { 'SUCCESS' } elseif ($applicationExitCode -eq 130) { 'CANCELLED' } else { 'FAILED' }
 $nativeExitText = if ($null -eq $process.ExitCode) { 'not started' } else { [string]$process.ExitCode }
 # Keep separate diagnostics even when the child returns a failure code.
 if ($process.StandardOutput) { Write-Host $process.StandardOutput }
@@ -2041,7 +2318,8 @@ if ($outputCleanupErrors.Count -gt 0) {
     if ($applicationExitCode -eq 0) { $applicationExitCode = 5 }
 }
 $reasonCodes = @()
-if (-not $process.Started) { $reasonCodes += 'native_start_failed' }
+if ($applicationExitCode -eq 130) { $reasonCodes += 'user_cancelled' }
+if (-not $process.Started -and $applicationExitCode -ne 130) { $reasonCodes += 'native_start_failed' }
 elseif ($process.Error -or $process.CleanupError -or $process.TimedOut -or $null -eq $process.ExitCode -or $process.ExitCode -ne 0) { $reasonCodes += 'native_processing_failed' }
 if ($validationError) { $reasonCodes += 'output_validation_or_publication_failed' }
 if ($analysisFailed) { $reasonCodes += 'loudness_analysis_failed' }
@@ -2058,6 +2336,8 @@ $report = New-WacRunReport -Context @{
     SpaceEstimate = $spaceEstimate; AvailableBytes = $availableBytes
     ValidationError = $validationError; CleanupErrors = $outputCleanupErrors; MetadataError = $metadataError
 }
+$report.progress = [ordered]@{ stages = @(Get-WacProgressReport); completed = [bool]$transaction.Published
+    cancellationRequested = $WacRunContext.IsCancellationRequested; cancellationStage = $WacRunContext.CancellationStage }
 Write-WacRunReports -Report $report -OutputFolder $transaction.OutputFolder
 $applicationExitCode = $report.applicationExitCode
 $status = $report.status
@@ -2081,8 +2361,19 @@ if ($status -eq "SUCCESS") {
     Write-Host "`nDONE: WARNING - Audio was published with loudness or reporting warnings." -ForegroundColor Yellow
     Write-Host ("Warnings: " + ($report.warningCodes -join ', '))
     Write-Host "File saved to: $outputFile"
+} elseif ($status -eq 'CANCELLED') {
+    Write-Host "`nDONE: CANCELLED" -ForegroundColor Yellow
+    Write-Host 'Owned processing stopped; pending inputs were not started.'
 } else {
     Write-Host "`nDONE: FAILED" -ForegroundColor Red
     Write-Host "Native exit: $nativeExitText. Application exit: $applicationExitCode. See diagnostics above."
 }
 exit $applicationExitCode
+
+} finally {
+    if ($script:WacProgressStages.Count -gt 0) { Write-WacProgress -State $script:WacProgressStages[$script:WacProgressStages.Count - 1] -Completed }
+    if ($ownsRunContext) {
+        try { $WacRunContext.Dispose() }
+        catch { Write-Warning ('Console control release failed: ' + $_.Exception.Message) }
+    }
+}

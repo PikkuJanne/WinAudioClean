@@ -1,0 +1,566 @@
+{
+  "schemaVersion": 1,
+  "scope": "sanitized text derivatives only; raw hashes distinguish original bytes",
+  "logs": [
+    {
+      "capture": "console-initial-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-initial-ps51-ctrlc/ps51-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "5f73db4131ca0e43701e45c8b432e791e3130bfa2a90a68f8d7e65c937ec1388",
+      "raw_size_bytes": 670,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "764dd985b2b5ad258a850e4594ed317b149063152f29d0d1ab12ebadc657924d",
+      "published_text_utf8_size_bytes": 599,
+      "text": "<repo>\\.wac-local\\WAC-M3-04\\console-initial-ps51-ctrlc\\ps51-ctrlc-rendering-receiver\\app\\\nWinAudioClean.ps1 : Preflight failed: No input file supplied. Drop a file onto WinAudioClean.bat or run: .\\WinAudioClea\nn.ps1 -inputPath \"C:\\Audio\\recording.wav\" [-Mode Raw|Zoom -NonInteractive]\nAt <repo>\\tests\\fixtures\\Invoke-ConsoleCancellationCase.ps1:156 char:5\n+     & $copiedMain @arguments\n+     ~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1\n"
+    },
+    {
+      "capture": "console-initial-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-initial-ps51-ctrlc/ps51-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-initial-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-initial-ps51-ctrlc/ps51-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "83f100d4f74400815694d0058b48844410c6c4009974e3f07d162f15f814e202",
+      "raw_size_bytes": 670,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "ccd61573315737c9db59a7f076b61e08a57c371ccbb97088a9d875959de1b9c2",
+      "published_text_utf8_size_bytes": 599,
+      "text": "<repo>\\.wac-local\\WAC-M3-04\\console-initial-ps51-ctrlc\\ps51-ctrlc-rendering-survivor\\app\\\nWinAudioClean.ps1 : Preflight failed: No input file supplied. Drop a file onto WinAudioClean.bat or run: .\\WinAudioClea\nn.ps1 -inputPath \"C:\\Audio\\recording.wav\" [-Mode Raw|Zoom -NonInteractive]\nAt <repo>\\tests\\fixtures\\Invoke-ConsoleCancellationCase.ps1:156 char:5\n+     & $copiedMain @arguments\n+     ~~~~~~~~~~~~~~~~~~~~~~~~\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1\n"
+    },
+    {
+      "capture": "console-initial-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-initial-ps51-ctrlc/ps51-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-corrected-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-corrected-ps51-ctrlc/ps51-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-corrected-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-corrected-ps51-ctrlc/ps51-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "5a6ce5a137cfa0ed7997cfecf9c9c9ebef2e3ca3edf17a0ed3550a68a95db5b6",
+      "raw_size_bytes": 1475,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "65f628860b514c08efcc3aa2a02f8036d0ff68253829498d2efb00d36d1dcf15",
+      "published_text_utf8_size_bytes": 1353,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-corrected-ps51-ctrlc\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-corrected-ps51-ctrlc\\\\ps51-ctrlc-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833186611200 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-corrected-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-corrected-ps51-ctrlc/ps51-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-corrected-ps51-ctrlc",
+      "path": ".wac-local/WAC-M3-04/console-corrected-ps51-ctrlc/ps51-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "117e64873b6347533d212d2660d8d173c814de24ce2c11cbe0d8784396d19b18",
+      "raw_size_bytes": 1682,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "5f5a11b84b82286d219b96a325750dea1b7a92417f753586e4fdb4fecbed26b6",
+      "published_text_utf8_size_bytes": 1530,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-corrected-ps51-ctrlc\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-corrected-ps51-ctrlc\\\\ps51-ctrlc-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833186611200 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9836567\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-corrected-ps51-ctrlc\\ps51-ctrlc-rendering-survivor\\output\\synthetic_Cleaned_20261003-111111767_bc7fb34bb404417e9a6d7ad781e441ff.wav\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlbreak-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlbreak-rendering-receiver/stdout.log",
+      "raw_sha256": "ccf601a01d20d87464facd22c23d94b4ac1f8d87898c55da92c5b8a9f2a1bcb9",
+      "raw_size_bytes": 1475,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "2500c89c37541b67001d0c2413ae4fb5dd1a6bffd98ba7cfbcb9aee6f2ac6d54",
+      "published_text_utf8_size_bytes": 1353,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps51-ctrlbreak-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833178890240 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlbreak-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlbreak-rendering-survivor/stdout.log",
+      "raw_sha256": "e77eee9082f411516b37cb8be7bcb875a2d4d7e6285fb1e483e10f6a093e28aa",
+      "raw_size_bytes": 1684,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e4ced32b0d24ad8f9cf099a44a5ceaf6478300e7c9048044342fef74fa30b4ba",
+      "published_text_utf8_size_bytes": 1532,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps51-ctrlbreak-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833178890240 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9699319\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\ps51-ctrlbreak-rendering-survivor\\output\\synthetic_Cleaned_20261003-111155091_22e13eb0195d483d8da2fab0ba6fffe8.wav\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "30102f18aa68022e967d4ee67519e16072e5303a71cc0e44fa8c3cf43f90a6a7",
+      "raw_size_bytes": 1471,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "5f7e3a4570fc15e3a63cf7ff21dbbef5d2f21f29c2fbde88cdcffabf5e49723c",
+      "published_text_utf8_size_bytes": 1349,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps51-ctrlc-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833181257728 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps51-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "4da6541a99f713cd074afa4893221df3ec258ffb41c90bf524a27243402c1522",
+      "raw_size_bytes": 1676,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "6dfc5b745bb6e5dabbbb516c5c6cce2ffefd8d2fbef91ec68644cb17a061a193",
+      "published_text_utf8_size_bytes": 1524,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps51-ctrlc-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833181257728 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:08.0224772\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\ps51-ctrlc-rendering-survivor\\output\\synthetic_Cleaned_20261003-111144473_77a5f23c2fb341ca8958c99f9f8a6f11.wav\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlbreak-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlbreak-rendering-receiver/stdout.log",
+      "raw_sha256": "1faed5bef1a82c2b81d5f26bf78224ee1b4ad4eb85e51168dcf313aadfa1584e",
+      "raw_size_bytes": 1499,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "9235b163c02539800c441eea2ec5a533e298738638e5ba5087c33bb8f9e5d010",
+      "published_text_utf8_size_bytes": 1362,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps7-ctrlbreak-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833172455424 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlbreak-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlbreak-rendering-survivor/stdout.log",
+      "raw_sha256": "338609ebde1c5af2a00ea80cb05ffc071eca12a067ca7562c1d3f03bd349f2f2",
+      "raw_size_bytes": 1709,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "4d5fbd5070da7feb20d72064146caa2c200d56e61aa5b085271562746d03ec7f",
+      "published_text_utf8_size_bytes": 1540,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps7-ctrlbreak-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833172443136 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9158512\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\ps7-ctrlbreak-rendering-survivor\\output\\synthetic_Cleaned_20261003-111218649_a0060539746e48be9acf2f283a61d03e.wav\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "28e7aef366cd482d0e0b8a4cdda1f7c714bf6d489f0fd1dbf4bb9d4b4479e790",
+      "raw_size_bytes": 1495,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "833bb4c5dab9ee8fff376c27d2e61b27dc115fafbe4ca54d6ab03a6b1575f429",
+      "published_text_utf8_size_bytes": 1358,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps7-ctrlc-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833174798336 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-both-hosts-initial",
+      "path": ".wac-local/WAC-M3-04/console-both-hosts-initial/ps7-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "e9e5d9215b9a187459fca648e766b6736fd0bd5320bff6b55130039280cfab71",
+      "raw_size_bytes": 1701,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "9617a72856b7416c619e62447e5f9ace5d1e7cef9a740f9fb22eceedf4cd859c",
+      "published_text_utf8_size_bytes": 1532,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-both-hosts-initial\\\\ps7-ctrlc-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833174777856 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9028436\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-both-hosts-initial\\ps7-ctrlc-rendering-survivor\\output\\synthetic_Cleaned_20261003-111207281_7dd6e6feb96a41068cea1282becfb71b.wav\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlbreak-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlbreak-rendering-receiver/stdout.log",
+      "raw_sha256": "b46e59de72b28d92f0834fd236c3856e82845dfad8f15743c1cfdca3db7b6150",
+      "raw_size_bytes": 1449,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "740ebea6500cb778ee95e3e57c0675db4f151ebd68832ebc975d149ceeb96b43",
+      "published_text_utf8_size_bytes": 1327,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps51-ctrlbreak-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833163751424 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlbreak-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlbreak-rendering-survivor/stdout.log",
+      "raw_sha256": "9c24eb7dcaf82964e524f5be2d8760e630c333a575d7fa21ca3b6a8f6b5c3359",
+      "raw_size_bytes": 1645,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "f5c75bb2f01bbd05b232219e180c88cf69c52a40aa67e05dca37cd71fd921e5a",
+      "published_text_utf8_size_bytes": 1493,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps51-ctrlbreak-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833163751424 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9831478\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final\\ps51-ctrlbreak-rendering-survivor\\output\\synthetic_Cleaned_20261003-111333763_7b3162dbe5304c5e90f2c3a0dff9c329.wav\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "cad99c202b416a1b603c6e732ce1ba5ed13b1e09cd4ec279913e578559a41826",
+      "raw_size_bytes": 1445,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "86b32a8994a10ed69a561d1bbc882dd30f88b52691f6af725eac84ec5580b6ee",
+      "published_text_utf8_size_bytes": 1323,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps51-ctrlc-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833168138240 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps51-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "76521c0a57eda4a8bf505f2ce3b584b843639cbd3a708cb83cd7977e210d033e",
+      "raw_size_bytes": 1637,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "f142cc63af2730c0c1d3d40682d28ffd052a530926c2d8acaff1d4d742bfb4d5",
+      "published_text_utf8_size_bytes": 1485,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps51-ctrlc-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833168138240 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9980042\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final\\ps51-ctrlc-rendering-survivor\\output\\synthetic_Cleaned_20261003-111323091_c9c61fa54d214ace9d28ce477509b659.wav\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlbreak-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlbreak-rendering-receiver/stdout.log",
+      "raw_sha256": "3178a54d550904bf3c0fe48d1466f8c1e44aefdc671169be7019f8f2d0917f39",
+      "raw_size_bytes": 1473,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "bf1bc047cdde2e53eb808a708b9137bbba8a0eda2a9f061b1690ef0e1a85a87c",
+      "published_text_utf8_size_bytes": 1336,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps7-ctrlbreak-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833144778752 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlbreak-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlbreak-rendering-survivor/stdout.log",
+      "raw_sha256": "0fa82e4272de71f9cec62edb8c8e997ef82117192159c7bc7f6276332e25fec7",
+      "raw_size_bytes": 1670,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "420fde4508dc8e622f739d02b07cd11584414d45097f77ad3f3c0058fcbbfe69",
+      "published_text_utf8_size_bytes": 1501,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps7-ctrlbreak-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833144778752 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:08.1646715\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final\\ps7-ctrlbreak-rendering-survivor\\output\\synthetic_Cleaned_20261003-111402907_8f12ae9f360a4b49afe5be9616fc7ed1.wav\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "26c0df7ff4ebda6ba80253e9f179f8854fcd0941ea471dcdedbd0c558393de65",
+      "raw_size_bytes": 1469,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "dc882929d6e73f822f3ca026ad2baf9c14a44c71d9f56e807bee500faeece79a",
+      "published_text_utf8_size_bytes": 1332,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps7-ctrlc-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833149669376 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final",
+      "path": ".wac-local/WAC-M3-04/console-final/ps7-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "2e0b2501b497e80ddc944401c62ab980eedc658a04979f58c270659e93ae3261",
+      "raw_size_bytes": 1662,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "00092a3fb49e0507e5ca283a2dae889d7b3449d1406e4eec261fa7b978dd0951",
+      "published_text_utf8_size_bytes": 1493,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final\\\\ps7-ctrlc-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 833149665280 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:08.5473944\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final\\ps7-ctrlc-rendering-survivor\\output\\synthetic_Cleaned_20261003-111346327_97b3ef39ca584ec7b0878e93d99c0931.wav\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlbreak-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlbreak-rendering-receiver/stdout.log",
+      "raw_sha256": "538643b0b1541e1d02d8de4c0b389a004583b2afd3dd55cb6b49327b33fedcfb",
+      "raw_size_bytes": 1469,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "6a00e34c03ba8774d071117a8d1811060de8f187d3a07261beba1641297507c7",
+      "published_text_utf8_size_bytes": 1347,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps51-ctrlbreak-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834861215744 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlbreak-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlbreak-rendering-survivor/stdout.log",
+      "raw_sha256": "ec483ea575d5fb10f7495843e0698fc917afdd8ea44d0b38069580de8f352d4d",
+      "raw_size_bytes": 1675,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "d62d99001adc947f982527c91846e7b1a7a67c0af9474eeebbe9a007ac751f79",
+      "published_text_utf8_size_bytes": 1523,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps51-ctrlbreak-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834861215744 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9936895\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\ps51-ctrlbreak-rendering-survivor\\output\\synthetic_Cleaned_20261003-113518868_191d15c7de7f4890847f88ee89036ef8.wav\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "35096ea298792461fd3c8aabd27760d603fe430eddabbd1c1df162681ced38f5",
+      "raw_size_bytes": 1465,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "cc3f9b21d564e2a66f607e6110b2130626d23fcbeac31012c0fd070dece2ad16",
+      "published_text_utf8_size_bytes": 1343,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps51-ctrlc-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834863448064 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps51-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "523726dd387430a4fc2ac389da4c5843b78abd7003490143da2ac399c62bda94",
+      "raw_size_bytes": 1667,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "31300352a72a5a6b0c8e5fb0e8f3a1a04f19d99b5f45267dc638ace9003d4720",
+      "published_text_utf8_size_bytes": 1515,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps51-ctrlc-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80,\"NoiseFloorDb\":-25,\"NoiseReductionDb\":12,\"GateThresholdDb\":-45,\"GateRangeDb\":-25}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834863448064 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9743006\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\ps51-ctrlc-rendering-survivor\\output\\synthetic_Cleaned_20261003-113508230_d5e3a65d43d6488d98c606b82b6e1f95.wav\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlbreak-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlbreak-rendering-receiver/stdout.log",
+      "raw_sha256": "b93e230a99917d1e859b760077760771ac8a824f1b929fda4b02be8d2fbbfec7",
+      "raw_size_bytes": 1493,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "bd6d678c4ab5342c81aba82271a52ebefd3e300fd7152c26e1e0bfecfb13d108",
+      "published_text_utf8_size_bytes": 1356,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps7-ctrlbreak-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834856706048 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlbreak-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlbreak-rendering-survivor/stdout.log",
+      "raw_sha256": "007961557fef9dcb5c4ac78165a1413fd0a43879845f4fb2e19b26813eeec882",
+      "raw_size_bytes": 1700,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "03c18ad665e2aba649ac40be7b6dc5dd971635f66e1b4c252c3e897501dfb3c6",
+      "published_text_utf8_size_bytes": 1531,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps7-ctrlbreak-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834856697856 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.8824373\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\ps7-ctrlbreak-rendering-survivor\\output\\synthetic_Cleaned_20261003-113542246_8e8b597edbb745e7a91e8b437061faab.wav\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlc-rendering-receiver/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlc-rendering-receiver/stdout.log",
+      "raw_sha256": "d3428ee47849527d5620e8a3b563bb087f972937b9417a9306c9b4a884b6fa2a",
+      "raw_size_bytes": 1489,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "2c896b0e295024fe858cb2531236afe4bfcb7313340cedc493f085d57b430b67",
+      "published_text_utf8_size_bytes": 1352,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps7-ctrlc-rendering-receiver\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834858967040 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: CANCELLED\nOwned processing stopped; pending inputs were not started.\n"
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlc-rendering-survivor/stderr.log",
+      "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "raw_size_bytes": 0,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "published_text_utf8_size_bytes": 0,
+      "text": ""
+    },
+    {
+      "capture": "console-final-corrected",
+      "path": ".wac-local/WAC-M3-04/console-final-corrected/ps7-ctrlc-rendering-survivor/stdout.log",
+      "raw_sha256": "86b6b6d725921e528c53b4158dfdaba4daf928a61abde6086d565e971544d723",
+      "raw_size_bytes": 1692,
+      "derivative_decoding": "UTF-8 (optional BOM removed)",
+      "published_text_utf8_sha256": "c7bcc8c61e042d449ae3f64b7108cd024e03caaacb2bf8a16a623c14902edd5c",
+      "published_text_utf8_size_bytes": 1523,
+      "text": "WinAudioClean 2.3\n============================\nInput: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\synthetic.wav\nFFmpeg: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)\nFFprobe: <repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)\nEffective settings: {\"mode\":\"Raw\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<repo>\\\\.wac-local\\\\WAC-M3-04\\\\console-final-corrected\\\\ps7-ctrlc-rendering-survivor\\\\output\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nCleaning: {\"schemaVersion\":1,\"Declip\":true,\"Declick\":true,\"Denoise\":true,\"Gate\":true,\"HighpassHz\":80.0,\"NoiseFloorDb\":-25.0,\"NoiseReductionDb\":12.0,\"GateThresholdDb\":-45.0,\"GateRangeDb\":-25.0}\nAudio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)\nExport: 48000 Hz, 16-bit PCM, stereo, RIFF WAV\nDestination space: 834858946560 bytes available; 69712832 bytes required including headroom.\n\nRunning WinAudioClean...\nChain: RAW (Clean+Level)\n\nDONE: SUCCESS\nTime Elapsed : 00:00:07.9221441\nOutput Size  : 1,46 MB\nFile saved to: <repo>\\.wac-local\\WAC-M3-04\\console-final-corrected\\ps7-ctrlc-rendering-survivor\\output\\synthetic_Cleaned_20261003-113530849_10fc0732b3694f8aaa4b68720c8cbd38.wav\n"
+    }
+  ]
+}

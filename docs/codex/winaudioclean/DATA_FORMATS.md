@@ -466,6 +466,73 @@ mode or invoking native tools. Preferences are fully validated first. Journal
 failure5 stops future jobs and preserves earlier audio/records with incomplete
 reporting disclosed. Progress/active Ctrl+C handling belongs to WAC-M3-04.
 
+## Implemented progress and cancellation records — WAC-M3-04
+
+Ordinary and preview run schema `1` gain additive `progress`; older reports
+remain readable without it. Cancellation adds `CANCELLED` to ordinary `status`
+and `processingStatus`, with processing/application code `130` and
+`user_cancelled` among ordinary reason codes. A cancelled run does not acquire
+SUCCESS/WARNING merely because report writing succeeds or fails. Accurate
+`normalization.analysis`, `render` and `final` can have stage `status:
+"CANCELLED"`, null measurement and an explicit stage error. In particular,
+cancelled final verification prevents publication; it is distinct from a
+failed final meter that permits a retained valid export with warning 7.
+
+| `progress` field | Meaning |
+| --- | --- |
+| `stages` | Ordered stage snapshots for this file, including inspection/validation/publication where reached. |
+| `completed` | Boolean audio-publication completion; it does not imply loudness compliance or complete report writing. |
+| `cancellationRequested` | Boolean state of this invocation's controller when the report is constructed. |
+| `cancellationStage` | The first requested stage label, or null if no stage was active/no request occurred. |
+
+A request after completed publication does not roll back valid assets or
+change the completed processing outcome. Its report can truthfully contain
+`completed: true` and `cancellationRequested: true`, with the captured stage;
+report-writing warnings remain independent.
+
+Each progress-stage record contains `stage`, `fileIndex`, `fileCount`,
+`percent`, `processedSeconds`, `durationSeconds`, `structuredEnd`, `updates`,
+`processId` and `snapshot`. File position is one-based; queue children inherit
+the enclosing selection's index/count. Unknown duration is `null` and percent
+`-1`, indicating indeterminate progress. Known media time is nonnegative and
+monotonic within a stage; percentages stay in its documented range. Only a
+post-publication `Completed` stage reaches `100`. A `structuredEnd` flag means
+FFmpeg emitted an accepted terminal block, not that validation/publication
+succeeded. Snapshot fields retain native .NET names: `OutTimeMicroseconds`,
+`End`, `Blocks`, `InvalidLines`, `TruncatedLines`. `OutTimeMicroseconds: -1`
+means no accepted timestamp yet; counts explain rejected/truncated data rather
+than synthesizing progress. Non-native stages can have null processId/snapshot.
+
+Native wrapper results add `Cancelled` (boolean), `OwnedProcessId` (nullable
+integer), `Progress` (nullable snapshot) and `CancellationInputError` (nullable
+text for binary-input IOException following owned cancellation). The latter
+does not suppress genuine `Error`/`CleanupError`. Monitored stdout is consumed
+as bounded structured progress; diagnostics and loudnorm JSON remain in
+`StandardError`. These process fields remain inside existing normalization or
+preview stage records where those records include native results. The top-level
+progress snapshots are concise observation records, not a full stdout log or
+an additional loudness measurement.
+
+After preview transaction creation, a failed/cancelled preview can write a
+smaller schema-1 `reportType: "preview"` record: job/tool/timestamps,
+`status`, `applicationExitCode`, input path, empty `assets`, attempted native
+`stages`, incomplete progress, diagnostic error/owned cleanup errors and report
+completeness. It does not describe four published comparison assets. Rollback
+and partial cleanup settle before this record is serialized, with source and
+directory pins held through report writing. Cleanup failures remain disclosed
+and may leave owned artifacts. Failure before any
+transaction can remain console-only. Report-writing failure preserves the
+primary cancellation/failure result and may prevent a persisted report.
+
+Batch schema `1` and folder schema `2` remain unchanged. Active cancellation
+records the current attempted child as CANCELLED/130; remaining pending entries
+are NOT_STARTED and known folder skips/failures retain their prior outcomes.
+Earlier exports and flushed journal records remain. Independent runs do not
+share a cancellation flag. Redacted support export continues its existing
+allowlist and omits progress snapshots, native PIDs, arbitrary stage labels and
+detailed native output; CANCELLED is an accepted terminal status. Review local
+detailed records and journals before sharing.
+
 ## Website release metadata
 
 Use schemaVersion, status (draft/published), version, releasedAt, repository, sourceCommit, archiveName, downloadUrl, sha256, requirements, dependencyPolicy and changelog reference. Draft status uses null publication URL/date/hash when not known and disables the download button. Only actual approved artifact output may populate published fields. Validate metadata against the package manifest; reject version/checksum mismatch. Do not use an executable runtime auto-update manifest.

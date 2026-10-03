@@ -21,6 +21,7 @@ BeforeAll {
             # This is bounded menu integration, not Explorer/keyboard validation.
             $injection = @'
 function Test-WacInteractive { param([switch]$NonInteractive) $true }
+function Clear-Host {}
 function Read-Host {
     param([string]$Prompt)
     if ($script:WacPresetPrompted) { throw 'Unexpected extra menu prompt.' }

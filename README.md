@@ -176,8 +176,8 @@ before sharing, alongside the ordinary per-file reports.
 A one-item list retains the ordinary item's exit code. A multi-item list returns
 `0` when all succeed, `7` for warnings only, or `6` when any item fails.
 Cancellation returns `130` and leaves later items unattempted. Malformed list
-or shared settings fail before processing with code `2`. These queue results do
-not add active-render Ctrl+C guarantees or change the audio recipe.
+or shared settings fail before processing with code `2`. Progress and active
+cancellation follow the per-run rules below; the audio recipe is unchanged.
 
 **Folder queues**
 
@@ -240,7 +240,7 @@ and mode are resolved once, and files run sequentially. Folder results return
 cancellation returns `130`, preserves known skips/failures and leaves remaining
 pending jobs unstarted. Journal failures return `5` and retain completed audio
 and already-flushed results. Review these local paths and diagnostics before
-sharing. Active-render Ctrl+C handling remains a separate future change.
+sharing. Active cancellation follows the per-run rules below.
 
 **Local saved settings and unattended runs**
 
@@ -674,10 +674,40 @@ BOM and its encoding. For a summary without a BOM, valid UTF-8 is retained;
 otherwise the current Windows ANSI code page is used. If an entry cannot be
 encoded safely, reporting fails rather than replacing existing bytes.
 
+**Progress and cancellation**
+
+Processing shows the current stage and file position. Fast renders occupy
+0-90%; Accurate separates Analysis (0-30%), Rendering (30-80%) and Verification
+(80-95%). Validation and publication finish the remaining work. Preview labels
+its excerpt rendering, comparison and measurement stages separately. Percentages
+follow processed media time rather than elapsed time or a promised finish time.
+Inspection and stages without a known duration use indeterminate progress;
+ordinary processing still requires a supported, validated media duration.
+Only validated, published audio reaches 100%; that does not certify loudness
+compliance or complete report writing.
+
+In an attached Windows console, Ctrl+C or Ctrl+Break requests cancellation of
+the current run. WinAudioClean stops its owned native process, cleans owned
+unfinished output and records `CANCELLED` with exit `130` where report storage
+is available. Cancellation during Accurate verification prevents publication.
+Queued requests keep earlier exports and mark remaining pending inputs
+`NOT_STARTED`; an independent run has its own cancellation state. Each run
+removes its control handler on exit. A request after publication retains the
+valid audio and completed processing outcome; the report can still record that
+request. Cancellation during inspection returns `130` with console diagnostics
+when no processing-attempt report exists. At a mode or track prompt, use `Q` to
+cancel; the normal host Ctrl+C behavior is retained while input is waiting.
+Closing the console, killing PowerShell or losing power can prevent cleanup
+and reporting. A host without an attached console cannot receive these console
+events. Local reports still carry terminal results when progress display is
+redirected or unavailable and processing can finish.
+
 **Native results and launcher automation**
 
 The script runs the resolved FFmpeg executable directly and captures stdout
-and stderr separately. Interactive input to FFmpeg is disabled. Accurate's
+and stderr separately. Structured FFmpeg progress uses stdout during monitored
+stages; diagnostic text and loudness JSON remain on stderr. Interactive input
+to FFmpeg is disabled. Accurate's
 final check streams the held WAV into FFmpeg as binary input while the file
 remains protected from changes. Native failure details appear in the console
 and local report. Processing and reporting results use these exit codes:
@@ -691,7 +721,7 @@ and local report. Processing and reporting results use these exit codes:
 | 5 | Output allocation, space/size check, validation, publication, owned-file cleanup or batch-journal persistence failed. |
 | 6 | A multi-item explicit list or a folder queue completed with failed entries; per-entry codes remain in its journal. |
 | 7 | Valid audio was published with loudness or reporting warnings. Audio is retained; inspect the report for the reason. |
-| 130 | Cancelled at the mode or audio-track menu, or a queued item cancelled and remaining pending inputs were not started. |
+| 130 | Cancelled at selection or during owned processing; remaining queued pending inputs were not started. |
 
 A reporting failure never changes an existing processing failure to success.
 An invalid output is never presented as a completed export. Native diagnostics

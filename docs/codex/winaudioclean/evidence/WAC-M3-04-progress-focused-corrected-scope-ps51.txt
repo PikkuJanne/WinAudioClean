@@ -1,0 +1,178 @@
+Selected sanitized Pester log. Setup and PassThru capture were corrected. One PS5.1 fixture case exceeded the Windows environment-value limit; four PS7 assertions failed because null-cleared optional environment values arrived as empty strings, suppressing the fixture diagnostic default. Main changed during capture, so this is preliminary and no coherent-source acceptance is claimed.
+
+Pester v5.7.1
+
+Starting discovery in 3 files.
+Discovery found 75 tests in 401ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.Progress.Tests.ps1'
+Describing M3-04 structured progress and owned cancellation
+ Describing AC-058: bounded stage progress without premature completion
+   [+] keeps Analysis within its range and preserves file position
+ 396ms (336ms|60ms)
+   [+] keeps Rendering within its range and preserves file position
+ 117ms (115ms|2ms)
+   [+] keeps Verification within its range and preserves file position
+ 107ms (106ms|1ms)
+   [+] keeps Rendering within its range and preserves file position
+ 110ms (108ms|2ms)
+   [+] keeps preview original within its range and preserves file position
+ 107ms (105ms|2ms)
+   [+] keeps preview processed within its range and preserves file position
+ 116ms (114ms|2ms)
+   [+] keeps preview comparison within its range and preserves file position
+ 96ms (95ms|1ms)
+   [+] keeps preview verification within its range and preserves file position
+ 94ms (92ms|2ms)
+   [+] leaves unknown duration indeterminate even after structured end
+ 33ms (30ms|3ms)
+   [+] leaves negative duration indeterminate even after structured end
+ 73ms (70ms|2ms)
+   [+] leaves NaN duration indeterminate even after structured end
+ 28ms (26ms|2ms)
+   [+] leaves infinite duration indeterminate even after structured end
+ 32ms (29ms|2ms)
+   [+] does not infer completion from a snapshot without a measured time
+ 19ms (17ms|1ms)
+   [+] formats progress consistently under de-DE
+ 38ms (35ms|3ms)
+   [+] formats progress consistently under fi-FI
+ 24ms (20ms|3ms)
+   [+] isolates a closed or failing progress sink from processing state
+ 348ms (346ms|2ms)
+   [+] adds only structured transport flags while preserving the constructed graph
+ 58ms (51ms|6ms)
+   [+] rejects start above publication boundary progress ranges before creating a false completion state
+ 27ms (25ms|2ms)
+   [+] rejects end at premature completion progress ranges before creating a false completion state
+ 21ms (20ms|1ms)
+   [+] rejects descending progress ranges before creating a false completion state
+ 9ms (7ms|2ms)
+ Describing AC-058/060: actual bounded structured pipe and separate diagnostics
+   [+] parses fragmented complete blocks and never converts diagnostic time text into progress
+ 241ms (235ms|6ms)
+   [+] retains only complete structured blocks for unterminated final marker
+ 97ms (91ms|6ms)
+   [+] retains only complete structured blocks for time without block terminator
+ 79ms (77ms|1ms)
+   [+] retains only complete structured blocks for human statistics
+ 80ms (77ms|3ms)
+   [+] retains only complete structured blocks for negative time
+ 73ms (71ms|1ms)
+   [+] retains only complete structured blocks for nonfinite time
+ 88ms (86ms|2ms)
+   [+] retains only complete structured blocks for overflow time
+ 82ms (80ms|2ms)
+   [+] retains only complete structured blocks for expression time
+ 90ms (88ms|2ms)
+   [+] retains only complete structured blocks for duplicate time
+ 84ms (82ms|2ms)
+   [+] retains only complete structured blocks for locale decimal time
+ 181ms (180ms|2ms)
+   [+] retains only complete structured blocks for fractional integer time
+ 121ms (118ms|2ms)
+   [+] retains only complete structured blocks for missing time
+ 85ms (83ms|2ms)
+   [+] retains only complete structured blocks for complete block then truncated newer block
+ 172ms (167ms|4ms)
+   [-] drains overlong malformed lines and a diagnostic flood without poisoning the next block
+ 28ms (24ms|4ms)
+    ArgumentException: Environment variable name or value is too long.
+    at <ScriptBlock>, <REPO>\tests\WinAudioClean.Progress.Tests.ps1:229
+   [+] applies the structured block field limit at 64 fields
+ 99ms (96ms|3ms)
+   [+] applies the structured block field limit at 65 fields
+ 79ms (76ms|2ms)
+   [+] applies the structured line limit at 4096 characters
+ 84ms (82ms|2ms)
+   [+] applies the structured line limit at 4097 characters
+ 79ms (78ms|1ms)
+   [+] retains native nonzero status even when it emitted a completed progress block
+ 78ms (77ms|1ms)
+   [+] preserves ordinary stdout behavior when no progress state is supplied
+ 64ms (62ms|2ms)
+ Describing AC-059/060: active owned cancellation and bounded stream cleanup
+   [+] cancels the owned analysis process while an independent job stays alive
+ 935ms (932ms|3ms)
+   [+] cancels the owned render process while an independent job stays alive
+ 904ms (902ms|2ms)
+   [+] cancels the owned verification process while an independent job stays alive
+ 905ms (903ms|2ms)
+   [+] returns cancellation before startup without creating a native record
+ 20ms (18ms|2ms)
+   [+] cancels an unread input pipe without disposing the caller-held source
+ 987ms (985ms|2ms)
+   [+] keeps early exit zero distinguishable from a failed held-input transfer
+ 189ms (187ms|1ms)
+
+Running tests from '<REPO>\tests\WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv
+ 493ms (488ms|5ms)
+  [+] preserves square brackets in actual child argv
+ 156ms (154ms|2ms)
+  [+] preserves apostrophe in actual child argv
+ 133ms (131ms|2ms)
+  [+] preserves Unicode in actual child argv
+ 144ms (140ms|4ms)
+  [+] preserves ampersand in actual child argv
+ 179ms (176ms|4ms)
+  [+] preserves percent signs in actual child argv
+ 165ms (163ms|2ms)
+  [+] preserves exclamation marks in actual child argv
+ 222ms (215ms|7ms)
+  [+] preserves parentheses in actual child argv
+ 213ms (208ms|6ms)
+  [+] preserves empty argument in actual child argv
+ 142ms (138ms|4ms)
+  [+] preserves embedded quotes in actual child argv
+ 167ms (165ms|2ms)
+  [+] preserves a quote alone in actual child argv
+ 234ms (232ms|2ms)
+  [+] preserves trailing backslash after spaces in actual child argv
+ 132ms (128ms|3ms)
+  [+] preserves multiple trailing backslashes in actual child argv
+ 136ms (133ms|3ms)
+  [+] preserves backslashes before an embedded quote in actual child argv
+ 165ms (163ms|2ms)
+  [+] starts with no child arguments and no render timeout
+ 163ms (160ms|3ms)
+  [+] keeps native nonzero status and both diagnostic streams
+ 144ms (141ms|3ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input
+ 118ms (116ms|2ms)
+  [+] returns structured startup failure for a missing executable
+ 30ms (27ms|3ms)
+  [+] returns structured startup failure for a file that is not an executable
+ 49ms (42ms|7ms)
+  [+] rejects a NUL argument before starting the child
+ 35ms (32ms|3ms)
+  [+] rejects an excessive command line before starting the child
+ 54ms (52ms|3ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity
+ 163ms (160ms|3ms)
+  [+] terminates the timed-out child and retains prior diagnostics
+ 1.75s (1.74s|4ms)
+
+Running tests from '<REPO>\tests\WinAudioClean.NativeInput.Tests.ps1'
+Describing AC-038/039: held-stream input transfer and native cleanup
+  [+] transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream
+ 437ms (430ms|6ms)
+  [+] drains both output pipes after a large input transfer and retains every diagnostic character
+ 242ms (239ms|3ms)
+  [+] rejects an unreadable caller stream before creating the child
+ 73ms (70ms|3ms)
+  [+] retains a source read error and stops the child without disposing the caller stream
+ 177ms (174ms|3ms)
+  [+] does not treat an early native exit zero as success when the input copy failed
+ 263ms (260ms|2ms)
+  [+] times out an unread input pipe, drains diagnostics and preserves an unrelated process
+ 1.36s (1.36s|3ms)
+Tests completed in 19.72s
+Tests Passed: 74,
+Failed: 1,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 0

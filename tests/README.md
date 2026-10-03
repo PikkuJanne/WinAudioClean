@@ -649,7 +649,8 @@ stop later work. One-item lists preserve the item code; multiple failed items
 produce code 6, warning-only results 7, cancellation 130, and successful lists 0.
 Cancellation marks remaining inputs NOT_STARTED. Explicit-list checks retain
 repeats; folder discovery and deduplication have separate coverage below.
-Active-render cancellation remains owned by a later task.
+The M3-02 checks did not establish active-render cancellation; the M3-04 scope
+below tests that behavior separately.
 
 The ignored `.wac-local/WAC-M3-02` real-media matrix uses synthetic inputs and
 isolated saved settings in both PS5.1/PS7. It compares ordered batch items with
@@ -722,3 +723,52 @@ reports and fixture trees ignored, publish only sanitized evidence, and do not
 infer listening approval or default promotion from objective checks. Run the
 smallest relevant suites before the required unfiltered Full gate in both
 supported shells; count only completed coverage.
+
+## Structured progress and owned cancellation (WAC-M3-04)
+
+Run the focused suite in both supported shells before cumulative gates:
+
+```powershell
+pwsh -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Progress.Tests.ps1
+powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Progress.Tests.ps1
+```
+
+The native fixture emits valid, malformed, oversized, truncated and flooding
+stdout blocks plus independent stderr. Verify the 4,096-character line and
+64-field block limits, recovery at block terminators, microsecond timestamps,
+indeterminate unknown-duration states, bounded stage percentages and explicit
+process/stream failures. A progress `end` block is not publication or success.
+Display failure must not decide processing outcome. A throwing progress-display
+double is a unit fault; captured redirected stdout/stderr are real redirection
+checks. Neither demonstrates graceful handling of an actual console window
+close or forced host kill. Test parser/display behavior separately from real
+FFmpeg rendering.
+
+Use per-invocation contexts for active cancellation. Exercise Accurate
+analysis/render/verification, Fast and preview paths, held binary input,
+abnormal native exit and queued `NOT_STARTED` suffixes. An independent native
+job must stay alive and complete, with originals, foreign files and completed
+exports preserved. Timer or `Request-WacCancellation` injection is labeled as
+a controlled request; it is not evidence of an actual console signal.
+
+`tests/fixtures/Invoke-ConsoleCancellationCase.ps1` and the ignored
+`.wac-local/WAC-M3-04/check-console.py` harness exercise actual Windows
+`CTRL_C_EVENT` and `CTRL_BREAK_EVENT` in separate hidden private consoles on
+PS5.1 and PS7. The fixture uses synthetic media, isolated settings and source
+copies, adds only input pacing and observation, and delegates native work to
+the product helper. A detached sender attaches to the owned console and sends
+the event to group 0. Verify exit 130, a persisted cancellation report, removal
+of owned partials, an unaffected concurrent survivor and no 100% before held
+publication. A second event after `Dispose` must reach a lower-priority test
+observer, establishing handler removal without terminating the fixture host.
+This is a native signal check, not a UI typing or Explorer-drop claim. It does
+not certify console-close/logoff, forced host termination or power-loss
+cleanup. Keep readiness PIDs, actual commands, raw log hashes, source/tool
+hashes and failed preliminary attempts; publish only sanitized derivatives.
+
+The real-media progress harness records variable-speed rendering, stage
+durations, preview assets, independent survivors and same-build PCM parity.
+Keep unknown-duration unit states separate from a real live-WebM helper/null-
+sink progress check and the application's rejection of unknown media timing
+with code 4 before a full render. These scopes do not broaden supported input
+timing. Distinguish objective output checks from unperformed listening review.

@@ -889,8 +889,15 @@
       "title": "Progress semantics",
       "procedure": "Run fast/accurate/preview jobs, variable-speed data and unknown duration.",
       "expected": "Progress is bounded, stage labels correct, and 100% is not shown before validation/publication.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-04.md",
+        "evidence/WAC-M3-04-source.json",
+        "evidence/WAC-M3-04-progress-focused.json",
+        "evidence/WAC-M3-04-console.json",
+        "evidence/WAC-M3-04-media.json",
+        "evidence/WAC-M3-04-gates.json"
+      ]
     },
     {
       "id": "AC-059",
@@ -898,8 +905,15 @@
       "title": "Owned-process cancellation",
       "procedure": "Run two independent jobs, cancel one at analysis/render/verification in separate tests.",
       "expected": "Only the cancelled run stops; no new queued job starts; originals/other exports remain intact.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-04.md",
+        "evidence/WAC-M3-04-source.json",
+        "evidence/WAC-M3-04-progress-focused.json",
+        "evidence/WAC-M3-04-console.json",
+        "evidence/WAC-M3-04-media.json",
+        "evidence/WAC-M3-04-gates.json"
+      ]
     },
     {
       "id": "AC-060",
@@ -907,8 +921,15 @@
       "title": "Abnormal child / console",
       "procedure": "Force unexpected child exit, truncated progress lines and closed/redirected console.",
       "expected": "No deadlock, misleading success or unbounded wait; final status remains in the report.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M3-04.md",
+        "evidence/WAC-M3-04-source.json",
+        "evidence/WAC-M3-04-progress-focused.json",
+        "evidence/WAC-M3-04-console.json",
+        "evidence/WAC-M3-04-media.json",
+        "evidence/WAC-M3-04-gates.json"
+      ]
     },
     {
       "id": "AC-061",

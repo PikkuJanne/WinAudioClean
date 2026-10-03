@@ -1,0 +1,90 @@
+Selected sanitized Pester log. Pester rejected file-root BeforeEach/AfterEach before any new Progress case executed. Existing 29 native cases passed. The initial wrapper redirected away PassThru and returned exit0 with null counts: that wrapper result is invalid; counts below come from the retained Pester log. This is failed setup, not an acceptance pass.
+
+Pester v5.7.1
+
+Starting discovery in 3 files.
+Discovery found 75 tests in 653ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.Progress.Tests.ps1'
+[-] <REPO>\tests\WinAudioClean.Progress.Tests.ps1 failed with:
+System.Management.Automation.RuntimeException: Each test setup is not supported in root (directly in the block container).
+at Run-Test, <REPO>\.wac-local\Modules\Pester\5.7.1\Pester.psm1: line 1625
+at Invoke-Test, <REPO>\.wac-local\Modules\Pester\5.7.1\Pester.psm1: line 2512
+at Invoke-Pester<End>, <REPO>\.wac-local\Modules\Pester\5.7.1\Pester.psm1: line 4960
+at <ScriptBlock>, <REPO>\.wac-local\WAC-M3-04\progress-focused\Invoke-Focused.ps1: line 11
+
+Running tests from '<REPO>\tests\WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv
+ 690ms (637ms|53ms)
+  [+] preserves square brackets in actual child argv
+ 159ms (156ms|3ms)
+  [+] preserves apostrophe in actual child argv
+ 135ms (132ms|3ms)
+  [+] preserves Unicode in actual child argv
+ 140ms (136ms|4ms)
+  [+] preserves ampersand in actual child argv
+ 120ms (117ms|2ms)
+  [+] preserves percent signs in actual child argv
+ 119ms (115ms|3ms)
+  [+] preserves exclamation marks in actual child argv
+ 139ms (133ms|7ms)
+  [+] preserves parentheses in actual child argv
+ 163ms (159ms|3ms)
+  [+] preserves empty argument in actual child argv
+ 171ms (168ms|3ms)
+  [+] preserves embedded quotes in actual child argv
+ 193ms (190ms|3ms)
+  [+] preserves a quote alone in actual child argv
+ 196ms (193ms|3ms)
+  [+] preserves trailing backslash after spaces in actual child argv
+ 172ms (169ms|3ms)
+  [+] preserves multiple trailing backslashes in actual child argv
+ 269ms (253ms|16ms)
+  [+] preserves backslashes before an embedded quote in actual child argv
+ 218ms (214ms|4ms)
+  [+] starts with no child arguments and no render timeout
+ 467ms (463ms|5ms)
+  [+] keeps native nonzero status and both diagnostic streams
+ 133ms (128ms|5ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input
+ 155ms (152ms|3ms)
+  [+] returns structured startup failure for a missing executable
+ 49ms (43ms|6ms)
+  [+] returns structured startup failure for a file that is not an executable
+ 39ms (37ms|3ms)
+  [+] rejects a NUL argument before starting the child
+ 33ms (30ms|3ms)
+  [+] rejects an excessive command line before starting the child
+ 622ms (619ms|3ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity
+ 148ms (145ms|2ms)
+  [+] terminates the timed-out child and retains prior diagnostics
+ 1.66s (1.66s|3ms)
+
+Running tests from '<REPO>\tests\WinAudioClean.NativeInput.Tests.ps1'
+Describing AC-038/039: held-stream input transfer and native cleanup
+  [+] transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream
+ 449ms (443ms|5ms)
+  [+] drains both output pipes after a large input transfer and retains every diagnostic character
+ 284ms (282ms|2ms)
+  [+] rejects an unreadable caller stream before creating the child
+ 72ms (70ms|2ms)
+  [+] retains a source read error and stops the child without disposing the caller stream
+ 197ms (195ms|2ms)
+  [+] does not treat an early native exit zero as success when the input copy failed
+ 731ms (729ms|2ms)
+  [+] times out an unread input pipe, drains diagnostics and preserves an unrelated process
+ 1.77s (1.77s|2ms)
+Tests completed in 13.11s
+Tests Passed: 29,
+Failed: 46,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 0
+Container failed: 1
+  - <REPO>\tests\WinAudioClean.Progress.Tests.ps1
+
+[Trailing duplicate Pester result-object dump omitted from this selected log.]

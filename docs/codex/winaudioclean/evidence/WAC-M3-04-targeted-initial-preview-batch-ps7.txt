@@ -1,0 +1,14 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (45 files; shell 7.6.5).
+
+ScriptName        Line RuleName                    Message
+----------        ---- --------                    -------
+WinAudioClean.ps1 1017 PSAvoidUsingEmptyCatchBlock Empty catch block is used. Please use Write-Error or throw statement
+                                                   s in catch blocks.
+
+Exception: <repo>\scripts\Invoke-Tests.ps1:108
+Line |
+ 108 |      throw "PSScriptAnalyzer found $($gatingFindings.Count) gating iss …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | PSScriptAnalyzer found 1 gating issue(s).

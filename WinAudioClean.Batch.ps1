@@ -148,7 +148,7 @@ function Invoke-WacBatch {
     param([Parameter(Mandatory = $true)][AllowEmptyCollection()][string[]]$Inputs,
         [Parameter(Mandatory = $true)][System.Collections.IDictionary]$Parameters,
         [Parameter(Mandatory = $true)]$ResolvedSettings,
-        [Parameter(Mandatory = $true)][string]$ApplicationPath, $FolderQueue)
+        [Parameter(Mandatory = $true)][string]$ApplicationPath, $FolderQueue, $RunContext)
     $isFolder = $null -ne $FolderQueue
     if ($isFolder -and $FolderQueue.Entries.Count -ne $Inputs.Count) { throw 'Folder queue and input count differ.' }
     $hasPending = -not $isFolder -or @($FolderQueue.Entries | Where-Object { $_.Status -eq 'PENDING' }).Count -gt 0
@@ -205,6 +205,7 @@ function Invoke-WacBatch {
         if ($Parameters.Keys -contains 'NonInteractive') { $options.NonInteractive = [bool]$Parameters.NonInteractive }
         foreach ($name in @('FfmpegPath', 'FfprobePath')) { if ($Parameters.Keys -contains $name) { $options[$name] = $Parameters[$name] } }
         for ($index = 0; $index -lt $Inputs.Count; $index++) {
+            if ($null -ne $RunContext -and $RunContext.IsCancellationRequested) { $cancelled = $true }
             $item = [ordered]@{ type = 'item'; index = $index + 1; inputPath = $Inputs[$index]
                 status = 'NOT_STARTED'; exitCode = $null; diagnostics = @(); finishedAt = $null }
             $entry = $null
@@ -223,6 +224,10 @@ function Invoke-WacBatch {
                 $arguments = @{}
                 foreach ($name in $options.Keys) { $arguments[$name] = $options[$name] }
                 $arguments.inputPath = $Inputs[$index]
+                if ($null -ne $RunContext) {
+                    $RunContext.FileIndex = $index + 1; $RunContext.FileCount = $Inputs.Count
+                    $arguments.WacRunContext = $RunContext
+                }
                 $lease = $null; $result = $null
                 try {
                     if ($isFolder) {
@@ -231,6 +236,9 @@ function Invoke-WacBatch {
                             $item.reasonCode = 'source_changed'
                             $result = [pscustomobject]@{ ExitCode = 2; Diagnostics = @('Queued source is no longer available with its captured identity, size and modification time: ' + $_.Exception.GetBaseException().Message) }
                         }
+                    }
+                    if ($null -eq $result -and $null -ne $RunContext -and $RunContext.IsCancellationRequested) {
+                        $result = [pscustomobject]@{ ExitCode = 130; Diagnostics = @('Processing cancelled before the queued child started.') }
                     }
                     if ($null -eq $result) { $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Arguments $arguments }
                 } finally { if ($isFolder) { Close-WacQueuedInput -Lease $lease } }
