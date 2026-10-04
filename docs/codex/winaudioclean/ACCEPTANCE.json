@@ -1253,8 +1253,9 @@
       "title": "Approval boundary",
       "procedure": "Attempt to plan merge/tag/release/settings change/deployment without a matching approval record.",
       "expected": "Action stays blocked; no side effect. Ordinary feature commits/pushes/draft PR updates remain permitted.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
+      "acceptance_scope": "Actual owner's merge-only instruction bound to the accepted source and six exact heads; no tag/release/site/settings/default promotion action or inferred approval."
     },
     {
       "id": "AC-089",
@@ -1262,8 +1263,9 @@
       "title": "Exact target check",
       "procedure": "Compare approved SHA/artifact/target to the live candidate immediately before action.",
       "expected": "Mismatch stops publication and returns an updated proposal; no force push or surprise main push.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
+      "acceptance_scope": "Actual premerge exact head/main/preview-tree/check comparisons and six ordinary parent-chain receipts; downstream retargeting occurred only after approved predecessors."
     },
     {
       "id": "AC-090",
@@ -1271,8 +1273,9 @@
       "title": "Post-action verification",
       "procedure": "For each approved action, check actual remote state and downloaded asset hash/site metadata.",
       "expected": "Recorded result matches what was published; outstanding approvals and rollback route are explicit.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
+      "acceptance_scope": "Actual six merged PR/main/parent/tree/source-branch results, exact accepted C tree equality and fresh successful C PR CI. Merge6 main push CI is recorded pending or passed as observed; final closure requires actual main/follow-up CI and live delivery verification externally. Release/site are outside this approved subset."
     }
   ]
 }

@@ -1,0 +1,484 @@
+{
+  "schema_version": 1,
+  "task_id": "WAC-M5-04",
+  "status": "pass",
+  "date": "2026-10-04",
+  "acceptance_ids": [
+    "AC-088",
+    "AC-089",
+    "AC-090"
+  ],
+  "acceptance_scope": "Executed owner-approved merge subset only; release/site are expressly later separate-project work, not an unavailable check accepted as pass.",
+  "owner_approval": {
+    "schema_version": 1,
+    "task_id": "WAC-M5-04",
+    "owner_instruction_date": "2026-10-04",
+    "owner_instruction": "Let's out new version on main branch please",
+    "context": "The immediately preceding response identified accepted source 51ac9a37e17a51979f3c79ccbc1dcd6fdd2243c1 locally and on the feature branch, and explicitly explained that GitHub main is older and all six milestone PRs are unmerged drafts.",
+    "repository": "PikkuJanne/WinAudioClean",
+    "target": "main",
+    "initial_main_sha": "7dfe43361395908a277d7b513b1c9a4fd3cd192a",
+    "accepted_source_sha": "51ac9a37e17a51979f3c79ccbc1dcd6fdd2243c1",
+    "approved_subset": "Integrate the identified completed version into main through ordered ordinary merge commits; this includes making these PRs ready and retargeting each downstream PR to main after its approved predecessor has actually merged, preserving exact source heads. Necessary additive governance receipts use a reviewed follow-up feature PR, with unchanged product files.",
+    "heads": {
+      "1": "329852555170c5e58be3db92c18634b5341eb138",
+      "2": "f1ad9de795b74acef5b932223c38eedfba24cee6",
+      "3": "32f6188461d9f7c11857e390d1145985665dd0dd",
+      "4": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "5": "ea5d53d91ff2c035a50b9808fda18ceba38d3b61",
+      "6": "51ac9a37e17a51979f3c79ccbc1dcd6fdd2243c1"
+    },
+    "merge_method": "merge",
+    "release_and_website_direction": "Release and website publication will be done later in another project making multiple tools available.",
+    "unapproved_actions": [
+      "tag",
+      "release",
+      "deployment",
+      "repository_settings",
+      "security_changes",
+      "branch_deletion",
+      "history_rewrite",
+      "direct_main_push",
+      "default_sound_promotion",
+      "third_party_bundling"
+    ],
+    "checks_must_pass_when_present": true,
+    "stop_on_unrelated_main_or_head_movement": true,
+    "no_check_bypass": true,
+    "ignored_capture_sha256": "bab4dd8f312a536623a7463f8f4b2639d77516850ebd0b1c01a25a91f8c69b45"
+  },
+  "ordered_merges": [
+    {
+      "number": 1,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/pull/1",
+      "head": "329852555170c5e58be3db92c18634b5341eb138",
+      "source_branch": "codex/wac-m0-handoff",
+      "main_before": "7dfe43361395908a277d7b513b1c9a4fd3cd192a",
+      "main_after": "b2e9bd4017477f3561484cc607f7a711fb7a8b74",
+      "tree": "6a846ecc46e5165a373750cab6a217e9b354e903",
+      "merged_at": "2026-10-04T11:35:58Z",
+      "method": "ordinary merge commit",
+      "ready_performed": true,
+      "retarget_performed": false,
+      "exact_parents_and_tree_verified": true,
+      "source_branch_preserved": true,
+      "premerge_checks": "no workflow/checks existed at this earlier head",
+      "fresh_ci": null,
+      "local_capture_hashes": {
+        "preparation": "34ac7b0cc6fb2f528e46be4821072ae8b892a0dbc791022cc2dfac4dcc7462cd",
+        "premerge": "0d28f6c88b09afeda516488d408a13c3c0e14c11c9f96dc3d5c603edd411e713",
+        "receipt": "191678f1fd0ac0efccdf09d7230883d5b236dd2dd27e02ba75afe4c5d7d35230"
+      }
+    },
+    {
+      "number": 2,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/pull/2",
+      "head": "f1ad9de795b74acef5b932223c38eedfba24cee6",
+      "source_branch": "codex/wac-m1-reliability",
+      "main_before": "b2e9bd4017477f3561484cc607f7a711fb7a8b74",
+      "main_after": "0279e8a4e5fcb5c29fe82f43bbe17244c2089bea",
+      "tree": "88b21edd715da8bed1217e440edd7f4a0f645fc6",
+      "merged_at": "2026-10-04T11:36:18Z",
+      "method": "ordinary merge commit",
+      "ready_performed": true,
+      "retarget_performed": true,
+      "exact_parents_and_tree_verified": true,
+      "source_branch_preserved": true,
+      "premerge_checks": "no workflow/checks existed at this earlier head",
+      "fresh_ci": null,
+      "local_capture_hashes": {
+        "preparation": "324a7ee3dc090fbd7b5d264e1df57c626c02c4458dc2db46e2f46ce99473822d",
+        "premerge": "af14602eaa0c243033c16c1fa5c4b53d626f770548aa39d5b55a07b979901320",
+        "receipt": "08836f0fe00d2a221fe55201e0c5456b47473ea8e85a3614f5b08f8a188933c1"
+      }
+    },
+    {
+      "number": 3,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/pull/3",
+      "head": "32f6188461d9f7c11857e390d1145985665dd0dd",
+      "source_branch": "codex/wac-m2-audio",
+      "main_before": "0279e8a4e5fcb5c29fe82f43bbe17244c2089bea",
+      "main_after": "9743e3f1cb6f3debb94007e642da0300506c71a8",
+      "tree": "1bf7d30afa8016e06cf1983b414695aa1090c76b",
+      "merged_at": "2026-10-04T11:36:39Z",
+      "method": "ordinary merge commit",
+      "ready_performed": true,
+      "retarget_performed": true,
+      "exact_parents_and_tree_verified": true,
+      "source_branch_preserved": true,
+      "premerge_checks": "no workflow/checks existed at this earlier head",
+      "fresh_ci": null,
+      "local_capture_hashes": {
+        "preparation": "ddfe5572a67705f70807498105a2f950e263e719fc44802671bd5eb6e7cb360f",
+        "premerge": "8e826ef62cd8f481b29135196c89276e671246cdff177e12247abfe2ccd344c6",
+        "receipt": "f7c3eb1152bc8bb3c538243490704d34d14241712807713175570f8ee1ab374c"
+      }
+    },
+    {
+      "number": 4,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/pull/4",
+      "head": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "source_branch": "codex/wac-m3-settings",
+      "main_before": "9743e3f1cb6f3debb94007e642da0300506c71a8",
+      "main_after": "3d969df16ab47db5c115d1f16991cf8fe539e8aa",
+      "tree": "f085d794df193d80540058053da95a3896d3d42f",
+      "merged_at": "2026-10-04T11:37:00Z",
+      "method": "ordinary merge commit",
+      "ready_performed": true,
+      "retarget_performed": true,
+      "exact_parents_and_tree_verified": true,
+      "source_branch_preserved": true,
+      "premerge_checks": "no workflow/checks existed at this earlier head",
+      "fresh_ci": null,
+      "local_capture_hashes": {
+        "preparation": "bfffe889d8f089887fafac8190c8315ee32d4d3291a6052238a92e27cd5bd580",
+        "premerge": "80d4340b9e5e6b06d639d77a8c868bf8273ce7d529e71dc2ee80cab4cbfd6d09",
+        "receipt": "8f1258c122ed5e877e2027ed1bebd81a9562e4c9c87ce43fb1554bec251d11ba"
+      }
+    },
+    {
+      "number": 5,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/pull/5",
+      "head": "ea5d53d91ff2c035a50b9808fda18ceba38d3b61",
+      "source_branch": "codex/wac-m4-regression",
+      "main_before": "3d969df16ab47db5c115d1f16991cf8fe539e8aa",
+      "main_after": "031eca2c9bf70336d00f67bfe3bf0f63c5e4e3a2",
+      "tree": "480242850462b7f9989ca733dc5cbb190bea2250",
+      "merged_at": "2026-10-04T11:54:35Z",
+      "method": "ordinary merge commit",
+      "ready_performed": true,
+      "retarget_performed": true,
+      "exact_parents_and_tree_verified": true,
+      "source_branch_preserved": true,
+      "premerge_checks": "fresh exact-approved-head four-job PR CI passed; actual main target reread before merge",
+      "fresh_ci": {
+        "id": 37199360772,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37199360772",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Windows windows-2025 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2022 / ps51",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2022 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2025 / ps51",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ],
+        "head_sha": "ea5d53d91ff2c035a50b9808fda18ceba38d3b61",
+        "event": "pull_request"
+      },
+      "local_capture_hashes": {
+        "preparation": "6c96e770ce7adc4e42b59b998c8e83b9526e7a3d963e38632d6d45387a8539c4",
+        "premerge": "de1a9acdfd9dfca72512c5bc02f1f613fb991b18c519eab845ad1d7a2bb7b7f1",
+        "receipt": "b5a5106254732ddf6ed248de09b2102f4564284a86612674390c4d7990a46fc9"
+      }
+    },
+    {
+      "number": 6,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/pull/6",
+      "head": "51ac9a37e17a51979f3c79ccbc1dcd6fdd2243c1",
+      "source_branch": "codex/wac-m5-release-readiness",
+      "main_before": "031eca2c9bf70336d00f67bfe3bf0f63c5e4e3a2",
+      "main_after": "a83538f242252d8747a4d9544e3613a6d2790071",
+      "tree": "bcacb002a8b40ba5eb61a9f1ac4439d90f2b3f2b",
+      "merged_at": "2026-10-04T11:55:14Z",
+      "method": "ordinary merge commit",
+      "ready_performed": true,
+      "retarget_performed": true,
+      "exact_parents_and_tree_verified": true,
+      "source_branch_preserved": true,
+      "premerge_checks": "fresh exact-approved-head four-job PR CI passed; actual main target reread before merge",
+      "fresh_ci": {
+        "id": 37199442318,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37199442318",
+        "status": "completed",
+        "conclusion": "success",
+        "jobs": [
+          {
+            "name": "Windows windows-2022 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2025 / ps7",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2025 / ps51",
+            "status": "completed",
+            "conclusion": "success"
+          },
+          {
+            "name": "Windows windows-2022 / ps51",
+            "status": "completed",
+            "conclusion": "success"
+          }
+        ],
+        "head_sha": "51ac9a37e17a51979f3c79ccbc1dcd6fdd2243c1",
+        "event": "pull_request"
+      },
+      "local_capture_hashes": {
+        "preparation": "e0b967dd3bbde71ee3175f3b526880c6203d74cfe0255af06dd6cae65b269847",
+        "premerge": "5f5ab61aa9e2926ef897389c028efc06aa2df509f423b5046633e10769fbedbe",
+        "receipt": "cbf45b9833d5672abea17b3197519f6f5ff71490622f2dc6a8a6e8359af3877f"
+      }
+    }
+  ],
+  "accepted_product_source": {
+    "commit": "51ac9a37e17a51979f3c79ccbc1dcd6fdd2243c1",
+    "tree": "bcacb002a8b40ba5eb61a9f1ac4439d90f2b3f2b"
+  },
+  "merged_main_anchor": {
+    "commit": "a83538f242252d8747a4d9544e3613a6d2790071",
+    "tree": "bcacb002a8b40ba5eb61a9f1ac4439d90f2b3f2b",
+    "live_main_matched_before_export": true
+  },
+  "main_push_ci": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "headSha": "a83538f242252d8747a4d9544e3613a6d2790071",
+    "event": "push",
+    "workflow": "Windows validation",
+    "workflowPath": ".github/workflows/windows-validation.yml",
+    "state": "pending",
+    "run": {
+      "id": 37200347904,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37200347904",
+      "status": "in_progress",
+      "conclusion": "",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "in_progress",
+          "conclusion": ""
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "in_progress",
+          "conclusion": ""
+        },
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "in_progress",
+          "conclusion": ""
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "in_progress",
+          "conclusion": ""
+        }
+      ],
+      "workflowId": 374090478
+    }
+  },
+  "main_ci_capture_sha256": "2ff4d3cf0cfea2a15aad4b77ce0961594c7f75108dcc29b93d60316e505d3eaa",
+  "immutable_binding": {
+    "whole_accepted_tree_equal_before_governance_export": true,
+    "m503_audit_path": "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json",
+    "m503_audit_physical_sha256": "00034e36000c461dbd8c12193e20647b324e3960c542228331e6293ab2c96cae",
+    "finite_governance_export_paths": [
+      "docs/codex/winaudioclean/ACCEPTANCE.json",
+      "docs/codex/winaudioclean/APPROVALS.md",
+      "docs/codex/winaudioclean/COVERAGE.json",
+      "docs/codex/winaudioclean/COVERAGE.md",
+      "docs/codex/winaudioclean/DECISIONS.md",
+      "docs/codex/winaudioclean/HANDOFF.md",
+      "docs/codex/winaudioclean/NEXT_MODEL_START_HERE.md",
+      "docs/codex/winaudioclean/STATUS.md",
+      "docs/codex/winaudioclean/TASKS.yaml",
+      "docs/codex/winaudioclean/TRACEABILITY.md",
+      "docs/codex/winaudioclean/evidence/WAC-M5-04-validation.json",
+      "docs/codex/winaudioclean/evidence/WAC-M5-04.md"
+    ],
+    "application_runtime_payload_tests_scripts_website_changed": false
+  },
+  "canonical_export": {
+    "tasks_done": 30,
+    "tasks_todo": 0,
+    "acceptance_pass": 90,
+    "acceptance_not_run": 0,
+    "coverage_cases": 90,
+    "commands": 43,
+    "reviews": 13,
+    "gaps": 8,
+    "next_unlocked_task": null
+  },
+  "retained_gaps": [
+    {
+      "id": "speech-listening",
+      "status": "not_run",
+      "cases": [
+        "AC-009",
+        "AC-042",
+        "AC-044",
+        "AC-047",
+        "AC-064"
+      ],
+      "required_for": "Mandatory before any speech-quality/default-sound promotion claim; exact settings/revision/owner approval remain required.",
+      "reason": "Formal level-matched Original/Gentle/custom speech corpus review and attributable per-clip results are absent. AC-064 user playback accepts its original workflow only.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M2-05-listening.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-06-manual.json"
+      ]
+    },
+    {
+      "id": "explorer-matrix",
+      "status": "not_run",
+      "cases": [
+        "AC-013",
+        "AC-016",
+        "AC-052",
+        "AC-054",
+        "AC-064"
+      ],
+      "required_for": "Mandatory before claiming universal manual Explorer drop, punctuation or multi-file gesture coverage.",
+      "reason": "Actual CMD transport/synthetic matrices are engineering checks. Only AC-064's two neutral-name manual retries are observed; its initial unquoted parentheses input was rejected. Earlier percent/exclamation expansion cannot be reconstructed by the BAT.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M3-02.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-06-manual.json"
+      ]
+    },
+    {
+      "id": "picker-gesture",
+      "status": "not_run",
+      "cases": [
+        "AC-061",
+        "AC-063"
+      ],
+      "required_for": "Mandatory before accepting actual file-dialog and Explorer follow-up gestures on the active host.",
+      "reason": "Picker/open helpers have controlled engineering coverage; no manual dialog cancellation/selection or follow-up Explorer action was performed.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M3-05.md"
+      ]
+    },
+    {
+      "id": "large-storage-stress",
+      "status": "not_run",
+      "cases": [
+        "AC-023",
+        "AC-027",
+        "AC-051",
+        "AC-060",
+        "AC-061"
+      ],
+      "required_for": "Extended gate required before claiming >4 GB/full-volume/long-recording durability or memory/storage stress support.",
+      "reason": "Small RF64 headers, bounded size estimates, simulated low space/save faults and short synthetic jobs do not cover full >4 GB exports, actual volume exhaustion, long-running capture or broad UNC/long-path/storage stress.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M1-07-review.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-05.md"
+      ]
+    },
+    {
+      "id": "host-crash-powerloss",
+      "status": "not_run",
+      "cases": [
+        "AC-023",
+        "AC-030",
+        "AC-045",
+        "AC-051",
+        "AC-053",
+        "AC-057",
+        "AC-059",
+        "AC-060"
+      ],
+      "required_for": "Mandatory before any graceful console-close/logoff/forced-host-kill or power-loss recovery claim. No multi-file atomicity/durability guarantee is accepted.",
+      "reason": "Controlled encoder/report/save failures and native Ctrl+C/Break signals cannot establish actual host termination, console-window close or power-loss cleanup. Owned crash leftovers may remain.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M1-07-review.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-04.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-05.md"
+      ]
+    },
+    {
+      "id": "privileged-file-symlink",
+      "status": "not_run",
+      "cases": [
+        "AC-002",
+        "AC-055"
+      ],
+      "required_for": "Mandatory before claiming the skipped file-symlink fixture passed; preserve the actual privilege skip separately from junction/hardlink coverage.",
+      "reason": "The recorded host cannot create a file symlink without unavailable privilege. Other identity/reparse tests do not turn that skip into a pass.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M3-05-gates.json",
+        "docs/codex/winaudioclean/evidence/WAC-M3-06-gates.json"
+      ]
+    },
+    {
+      "id": "meter-seek-domain",
+      "status": "not_run",
+      "cases": [
+        "AC-038",
+        "AC-039",
+        "AC-043",
+        "AC-044",
+        "AC-046",
+        "AC-048"
+      ],
+      "required_for": "Mandatory before broadening independent meter accuracy, positive-LUFS parsing, arbitrary codec seek or cross-build reproduction claims.",
+      "reason": "Same-build synthetic mechanics use FFmpeg meters and declared timestamp tolerances. Positive integrated loudness remains rejected, container seeking has recorded sample uncertainty, and five-second preview context can differ from a full render.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M2-05-listening.md",
+        "docs/codex/winaudioclean/evidence/WAC-M2-05.md"
+      ]
+    },
+    {
+      "id": "unreleased-preview-writer",
+      "status": "not_run",
+      "cases": [
+        "AC-030",
+        "AC-045",
+        "AC-068"
+      ],
+      "required_for": "Mandatory before claiming recovery from a real OS or uncooperative stream refusing writer-handle release.",
+      "reason": "Preview writer-close fault doubles dispose the real inner stream before throwing. They prove later close attempts and truthful retained outcomes but do not prove recovery when an actual OS writer stays held or Dispose refuses to release it.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M4-01.md"
+      ]
+    }
+  ],
+  "owner_gap_waivers_recorded": false,
+  "local_execution": {
+    "tests": false,
+    "full_rerun": false,
+    "candidate_rebuild": false,
+    "media_or_listening": false
+  },
+  "publication": {
+    "tag": false,
+    "release": false,
+    "deployment": false,
+    "website_status": "draft",
+    "download_enabled": false,
+    "screenshots_audio_consent": "pending",
+    "hosting_destination": null,
+    "future_direction": "Release and website publication will be done later in another project making multiple tools available."
+  },
+  "continuity_delivery": {
+    "feature_branch": "codex/wac-m5-main-handoff",
+    "source_anchor": "a83538f242252d8747a4d9544e3613a6d2790071",
+    "future_feature_sha": null,
+    "future_pr7_or_merge_result": null,
+    "external_green_ci_and_live_verification_required_before_final_response": true,
+    "record_after_actual_push": "External checkpoint: exact clean/live feature SHA, ordinary follow-up PR/CI and approved merge result. These later identities are not observed inside their own commit."
+  },
+  "controller_sha256": "bbd79c4e26a0477d202c37d791bbc75f586a81707d680504ef9486e412d2544e",
+  "limits": [
+    "Merge-only acceptance, not release/site publication or universal safety/platform/listening certification.",
+    "Eight broader gates, historical failures, privilege skips and experimental/opt-in sound remain as recorded.",
+    "Root performs separate focused closure checks and external delivery verification; no local test result is inferred by this controller."
+  ]
+}

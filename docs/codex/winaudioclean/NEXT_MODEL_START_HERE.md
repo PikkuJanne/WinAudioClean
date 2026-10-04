@@ -1,3 +1,15 @@
+# No next unlocked task — release/site separately scoped later
+
+Date: 2026-10-04. **WAC-M5-04 merge-only acceptance is complete; final delivery remains subject to external green CI/live verification.** Canonical 30 done / 0 todo; 90 pass / 0 not_run. No next unlocked task. All eight broader gates remain unrun and unwaived; these canonical engineering/action passes do not certify broader listening/platform/stress claims.
+
+Owner instruction (2026-10-04): **Let's out new version on main branch please** Accepted source `51ac9a37e17a51979f3c79ccbc1dcd6fdd2243c1` was integrated through six ordered ordinary exact-head PR merges. Actual merged-main anchor `a83538f242252d8747a4d9544e3613a6d2790071` / tree `bcacb002a8b40ba5eb61a9f1ac4439d90f2b3f2b` equals the accepted C tree. [Main push CI](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37200347904) is pending in the actual four-job run; it is not claimed passed. Earlier heads #1–4 had no workflow/checks; fresh exact-head PR5/6 four-job CI passed, testing approved C on PR6. Actual main targets were reread before merge; source branches remain preserved.
+
+Release/site direction: **Release and website publication will be done later in another project making multiple tools available.** No tag, release, deployment, bundled dependency, media/default change or private-data action occurred. The nine-file website remains draft/download-disabled; screenshots/audio/consent and hosting destination remain pending. Original/Raw/Zoom, PCM16/48 kHz defaults, Accurate opt-in and Gentle experimental/opt-in stay unchanged.
+
+This additive governance feature/ordinary follow-up PR records completed merge results. Its later exact push/CI/PR7/merge identities are verified externally; they are not claimed in this commit. The accepted-main push CI and final governance PR/main CI must actually pass, with live branch/main checks complete, before the final task response. Preserve recordings/settings/exports and the source-only original. [Approval/results](APPROVALS.md), [merge evidence](evidence/WAC-M5-04.md), [validation ledger](evidence/WAC-M5-04-validation.json).
+
+## Historical records through M5-03
+
 # Next model: WAC-M5-04 — exact owner approval required
 
 Date: 2026-10-04. **WAC-M5-03 is complete.** Canonical 29 done / 1 todo; 87 pass / 3 not_run. **Next: WAC-M5-04 — Execute only explicitly approved merge and publication actions**, approval-gated and not started.

@@ -1188,7 +1188,7 @@
       "depends_on": [
         "WAC-M5-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": true,
       "scope": "Approved GitHub merge/tag/release and approved website deployment only.",
       "implementation": [
@@ -1202,8 +1202,9 @@
         "AC-089",
         "AC-090"
       ],
-      "evidence": [],
-      "blocked_reason": null
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
+      "blocked_reason": null,
+      "approval_ref": "evidence/WAC-M5-04-validation.json#owner_approval"
     }
   ]
 }
