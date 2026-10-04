@@ -1159,7 +1159,7 @@
       "depends_on": [
         "WAC-M5-02"
       ],
-      "status": "in_progress",
+      "status": "done",
       "approval_required": false,
       "scope": "Final traceability, evidence summary and narrowly scoped pending approvals.",
       "implementation": [
@@ -1173,7 +1173,7 @@
         "AC-086",
         "AC-087"
       ],
-      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json"],
+      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json", "evidence/WAC-M5-03-validation.json"],
       "blocked_reason": null
     },
     {

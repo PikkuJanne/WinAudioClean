@@ -1,3 +1,19 @@
+# Next model: WAC-M5-04 — exact owner approval required
+
+Date: 2026-10-04. **WAC-M5-03 is complete.** Canonical 29 done / 1 todo; 87 pass / 3 not_run. **Next: WAC-M5-04 — Execute only explicitly approved merge and publication actions**, approval-gated and not started.
+
+All 20 improvements have implemented, evidenced engineering behavior; all 90 cases have concrete dispositions. The bounded baseline audit found no known current safety/false-success regression blocker and preserved historical failures, accepted recoveries and all eight broader unrun gates. No owner waiver, listening/default-sound promotion or publication approval exists.
+
+Exact frozen source `1d2f67e010be96dc68a33e8b2993f2ec1b95acb3` / tree `c372648aa409f6b3092088a3ae0d8ce4508c7747` passed both actual clean-clone Full gates once per host: ps51: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped. Source groups, nine website files, 15 supplemental documents and retained M5-02 capture hashes stayed unchanged. Privilege skips and non-gating analyzer findings remain explicit. Four actual candidates are byte-identical: version 2.3, 442766 bytes, SHA256 `7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58`; 17 payload files/18 entries and manifest/checksum/provenance/source/metadata identity verified, with 28 invalid metadata mutations rejected.
+
+Tested-source CI [passed](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37194466266). Final evidence closure changes only governance/evidence. Its exact post-push clean local/live SHA, current PR/CI observation and four NEW closure-source candidate identities must be verified and recorded externally in the approval packet and PR #6 checkpoint before ending this task; they are not observed in this commit. This avoids a self-referential commit. Local Full ran at the frozen source and is not repeated for closure metadata; hosted CI at the closure is separately observed.
+
+Use [HANDOFF.md](HANDOFF.md), [TRACEABILITY.md](TRACEABILITY.md), [the audit](evidence/WAC-M5-03-audit.json), [accepted evidence](evidence/WAC-M5-03.md) and [validation ledger](evidence/WAC-M5-03-validation.json). Preserve `codex/wac-m5-release-readiness`, exact origin https://github.com/PikkuJanne/WinAudioClean.git, draft PR #6/base M4 and the source-only original. Recover live branch/PR/CI and exact artifacts before relying on a proposal.
+
+M5-04 and AC-088..090 remain unrun. No merge/main push/tag/release/deployment, branch deletion/history rewrite, settings/security/bundling change or default-sound promotion. Website remains draft/download-disabled; media and hosting destination are pending. Stop after this handoff; execute only a separately requested, exactly approved action/revision/assets/target.
+
+## Historical M5-03 audit checkpoint
+
 # Next model: finish WAC-M5-03 final acceptance
 
 Date: 2026-10-04. **WAC-M5-03 is in progress.** Canonical 28 done / 1 in_progress / 1 todo; 84 pass / 6 not_run. AC-085..087 remain not_run until final exact-source gates and delivery are recorded.

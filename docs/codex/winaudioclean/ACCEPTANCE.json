@@ -1226,8 +1226,8 @@
       "title": "Complete traceability",
       "procedure": "Audit TRACEABILITY.md, TASKS.yaml, evidence and release checklist once.",
       "expected": "All improvements are implemented/verified or explicitly deferred with owner approval; no placeholder is reported as complete.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json", "evidence/WAC-M5-03-validation.json"]
     },
     {
       "id": "AC-086",
@@ -1235,8 +1235,8 @@
       "title": "Safe acceptance",
       "procedure": "Review mandatory safety tests and all pending subjective/platform checks.",
       "expected": "Known data-loss/security/false-success regressions block acceptance; unreviewed sound changes stay opt-in/experimental.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json", "evidence/WAC-M5-03-validation.json"]
     },
     {
       "id": "AC-087",
@@ -1244,8 +1244,8 @@
       "title": "Delivery checkpoint",
       "procedure": "Verify clean worktree, live remote SHA, PR/check status and candidate artifact manifest.",
       "expected": "Owner receives a recoverable, approval-ready checkpoint, not a claim that unapproved release/deployment already occurred.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json", "evidence/WAC-M5-03-validation.json"]
     },
     {
       "id": "AC-088",

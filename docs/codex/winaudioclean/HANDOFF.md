@@ -1,6 +1,6 @@
-# Final acceptance and action proposal — in progress
+# Accepted engineering handoff and pending action proposals
 
-This is the WAC-M5-03 engineering handoff, not approval to merge, publish or deploy. Baseline `b471c2dc577cf1138007778e6bef0c56c703b9e0` is clean/live-synchronized and its four CI jobs passed. All 20 improvements and 90 case dispositions have a bounded evidence audit; AC-085..087 await the final gates/delivery.
+This is the WAC-M5-03 engineering handoff, not approval to merge, publish or deploy. All 20 improvements and 90 case dispositions have a bounded evidence audit; AC-085..087 pass in their declared engineering scopes. Both actual Full gates and four source-bound candidate checks passed at `1d2f67e010be96dc68a33e8b2993f2ec1b95acb3`; [the validation ledger](evidence/WAC-M5-03-validation.json) binds exact versions, counts, skips and hashes. Final closure source/assets and current PR/CI must be verified and recorded after push in the external approval packet and PR #6 checkpoint; they are not observed in this commit.
 
 ## Engineering checklist
 
@@ -9,13 +9,13 @@ This is the WAC-M5-03 engineering handoff, not approval to merge, publish or dep
 - [x] Preserve Original/Fast default Raw cleaning and Zoom level-only behavior, PCM16/48 kHz defaults, Accurate opt-in and Gentle opt-in/experimental. No listening/default promotion approved.
 - [x] Retain eight unrun broader gates and actual privilege skips/advisories without waivers or broad support claims.
 - [x] Reconcile tool-only package/license/privacy/rollback and the download-disabled static draft; real media/consent remain pending.
-- [ ] Freeze/push this audit checkpoint, run focused structural checks and one actual Full per PS5.1/PS7 host, then record unchanged source/document hashes.
-- [ ] Reconstruct exact candidates and inspect manifest/checksum/provenance/version/source/metadata identity.
-- [ ] Close/push accepted evidence, verify clean local/live SHA and current PR/CI, then rebuild four candidates at that final accepted SHA for the external exact approval packet.
+- [x] Freeze/push the audit checkpoint; focused checks and one actual Full per PS5.1/PS7 host passed with unchanged source/document hashes.
+- [x] Reconstruct four exact frozen-source candidates and verify manifest/checksum/provenance/version/source/metadata identity and 28 invalid metadata rejections.
+- Post-push delivery record: close/push accepted evidence, verify clean local/live SHA and current PR/CI, and rebuild four candidates at that final accepted SHA. Exact observed completion is in the external approval packet/PR checkpoint; this commit cannot contain its own future SHA.
 
 ## Proposed integration
 
-Repository: `PikkuJanne/WinAudioClean`. Live `main` was `7dfe43361395908a277d7b513b1c9a4fd3cd192a`. All six milestone PRs are open drafts and stacked, not merged. Proposed strategy: bottom-first #1 through #6, ordinary merge commits, no branch deletion/history rewrite/main push/settings changes. Owner must approve the exact current heads, method, destination and any downstream base retargeting. After each approved merge, read the actual new main/PR state and stop on a changed head, failed required check or source/asset mismatch. A new merged release source requires a matching rebuilt candidate and renewed exact asset approval.
+Repository: `PikkuJanne/WinAudioClean`. Live `main` was `7dfe43361395908a277d7b513b1c9a4fd3cd192a`. All six milestone PRs are open drafts and stacked, not merged. Proposed strategy: bottom-first #1 through #6, ordinary merge commits, no branch deletion/history rewrite/main push/settings changes. Owner must approve each exact current head, draft-to-ready step, ordinary merge method and destination `main`; the ordered plan must explicitly authorize retargeting #2–6 to `main` only after preceding approved merges. Record each resulting main/base SHA and refreshed checks; stop on unrelated main movement. After each approved merge, read the actual new main/PR state and stop on a changed head, failed required check or source/asset mismatch. A new merged release source requires a matching rebuilt candidate and renewed exact asset approval.
 
 | PR | Current base | Audited head |
 | --- | --- | --- |

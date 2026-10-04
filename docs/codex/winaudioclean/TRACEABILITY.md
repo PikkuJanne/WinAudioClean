@@ -27,7 +27,7 @@ Every task has three acceptance cases. TASKS.yaml and ACCEPTANCE.json are the ca
 
 ## Final engineering audit — 2026-10-04
 
-All 20 groups have implemented, evidenced engineering behavior in the domains below. This is not approval of the broader listening, platform, stress or publication claims. No implementation is relabeled as owner-approved deferred work. The baseline audit reconciles all 90 case dispositions and referenced evidence in [the audit record](evidence/WAC-M5-03-audit.json). The final cumulative gate and delivery checkpoint are still pending while M5-03 is in progress.
+All 20 groups have implemented, evidenced engineering behavior in the domains below. This is not approval of the broader listening, platform, stress or publication claims. No implementation is relabeled as owner-approved deferred work. The baseline audit reconciles all 90 case dispositions and referenced evidence in [the audit record](evidence/WAC-M5-03-audit.json). The actual final frozen-source cumulative gates and candidate inspection passed; exact evidence is in [the validation ledger](evidence/WAC-M5-03-validation.json). Final closure SHA/assets and current PR/CI must be verified externally after push; they are not observed in this commit.
 
 | # | Implemented behavior | Recorded verification | Pending or excluded claim / risk | Evidence |
 | --- | --- | --- | --- | --- |
