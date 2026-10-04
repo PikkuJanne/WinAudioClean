@@ -765,3 +765,38 @@ All eight broader gaps remain. Original/Fast/default sound and BAT/script entry 
 
 [Evidence](evidence/WAC-M4-04.md), [ledger](evidence/WAC-M4-04-validation.json).
 Accept AC-076..078 within these recorded engineering/documentation scopes: 26 tasks done / 4 todo, 78 AC pass / 12 not_run. Next WAC-M5-01 only after live synchronization. Feature commits/pushes and draft-PR upkeep remain authorized; publication, merge/settings/security changes and sound promotion retain existing boundaries.
+
+### 2026-10-04 — WAC-M5-01 isolated static distribution draft
+
+D43. Keep the product page portable in website/ with no hosting configuration,
+uploads/accounts/processing service/telemetry/updater or tool dependency on it.
+Reuse the existing MIT repository icon/license. Version 2.3 is still authoritative
+in the main script; draft metadata has null date/source/URL/name/hash/size and
+disabled downloads. Published metadata requires complete identity plus a real
+package inspection. Temporary published-like local fixtures establish byte/source
+identity only; publication remains separately approved. Real screenshots and
+permission-cleared samples stay pending with empty inventories and an explicit
+future consent checklist; no marketing/audio claims are fabricated.
+
+Accept AC-079..081 at `11fe377c5fd05624dcc280d89fd119741c6fde9e` from the focused schema/consent/path checks,
+actual package seven mutations, 15 browser fixtures, 17 independent VM vectors,
+selected keyboard/layout/contrast review and both stable cumulative Full gates.
+Preserve duplicate-key/newline/traversal fixes, initial CRLF-only comparison
+failure, distinct source/license scopes and all eight broader gaps. Record CI
+as actually observed (passed); final closure CI is separate. Canonical 27
+done / 3 todo, 81 pass / 9 not_run. Next only M5-02. No new publication/default-sound
+approval. Evidence: evidence/WAC-M5-01.md and WAC-M5-01-validation.json.
+
+### 2026-10-04 — WAC-M5-02 actual clean reconstruction and safe prior-source rollback
+
+D44. Recover exact pushed source `250052238451ef7293e1f5cb49267b71e6e148cf` in a fresh detached GitHub clone on the active Windows machine. Fresh checkout-local verified developer setup at `7b7edc46247172874ca2a9a66e9ba4160e5b899b` remains valid through four unchanged installer/manifest Git blobs. Existing OS/developer prerequisites and externally supplied approved FFmpeg remain explicit; no hidden maintained-checkout tool/module cache is needed.
+
+Accept AC-082..084 from focused Release/package/website checks, four byte-identical 442766-byte version 2.3 candidates (SHA256 `f0ae14fcba29c29396e9298f7dcf571d9a8dbb8451f52304c3b92c4517c8804e`), exact source/manifest/sidecar/ephemeral metadata identity, checksum/version rejection including actual documented helper, bounded payload/static-asset privacy review and four prior/current synthetic rollback runs preserving 39 hashes. Prior source 1f10940 reconstructs its earlier accepted hash. Both clean-source Full gates passed; exact versions/counts/skips/source/hash and CI state passed remain in the ledger.
+
+Document complete-package separate-folder rollback without source/settings/export deletion or preference reset. Correct stale README draft-metadata copy; keep runtime/BAT/defaults/allowlist and draft publication fields unchanged. Do not infer listening, private media consent, new-machine/clean OS support, exhaustive security audit or publication. Preserve all eight broader gaps. Canonical 28 done / 2 todo; 84 pass / 6 not_run. Next only WAC-M5-03; its final audit is not started. Evidence: evidence/WAC-M5-02.md and evidence/WAC-M5-02-validation.json. Final closure delivery/CI is observed outside that commit to avoid self-reference.
+
+### 2026-10-04 — WAC-M5-03 scoped final acceptance and separate action proposals
+
+D45. Accept engineering AC-085..087 from the bounded 20-group/90-case evidence review, no known current regression blocker, preserved compatibility/default sound, both actual clean frozen-source Full gates and four reconstructed candidates at `1d2f67e010be96dc68a33e8b2993f2ec1b95acb3`. Keep eight broader checks unrun without waiver, local privilege skips/advisories, historical failures/recoveries and Gentle experimental/opt-in. All implementation is evidenced in declared domains; pending publication is an approval action, not a fabricated implementation deferral.
+
+Canonical 29 done / 1 todo; 87 pass / 3 not_run. M5-04 is approval-gated and not started. Final governance-only closure/source/assets must be observed externally after push: clean/live SHA, current PR/CI and four NEW exact-head candidate builds with unchanged payload/code/website binding. Do not claim local Full was executed at that later metadata revision; hosted CI is separately observed. Separate owner approvals must bind each merge/draft-to-ready/retarget operation or tag/release artifact set or deployment snapshot/destination; future merged-source assets require fresh reconstruction and exact approval. No consequential action or owner waiver occurred. Evidence: evidence/WAC-M5-03.md, evidence/WAC-M5-03-audit.json and evidence/WAC-M5-03-validation.json.

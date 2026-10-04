@@ -1,10 +1,6 @@
 # Acceptance coverage and retained gates
 
-[COVERAGE.json](COVERAGE.json) maps AC-001..072 and the current WAC-M4-03
-AC-073..075 to concrete commands, existing reports or named reviews. It keeps
-historical evidence in place rather than duplicating its detailed case logs.
-The map contains 75 cases, 41 command scopes, eight named reviews and eight
-retained gaps.
+[COVERAGE.json](COVERAGE.json) maps AC-001..087 to concrete commands, reports and scoped named reviews. The active M5-03 map has 87 cases, 43 command scopes, 12 named reviews and eight retained gaps. All 90 canonical case dispositions are reconciled in [the final audit](evidence/WAC-M5-03-audit.json); approval-only AC-088..090 remain unrun for M5-04. Available map coverage is distinct from an executed acceptance pass.
 
 Canonical acceptance remains [ACCEPTANCE.json](ACCEPTANCE.json). A command in
 this inventory means runnable coverage is available. It does not mean the

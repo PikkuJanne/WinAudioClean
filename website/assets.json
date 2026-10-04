@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "branding": {
+    "status": "available",
+    "path": "WinAudioClean_icon.png",
+    "source": "WinAudioClean_icon.png",
+    "license": "LICENSE",
+    "rights": "Repository MIT license; copyright (c) 2025 Janne Vuorela",
+    "sha256": "b77eaf6f8c0b1fdc083d743bfd76c47be97ac4a698b86c604f5f36a98132f6ee"
+  },
+  "screenshots": {
+    "status": "pending",
+    "items": [],
+    "reason": "No reviewed real application screenshot is supplied for this draft."
+  },
+  "audio": {
+    "status": "pending",
+    "items": [],
+    "reason": "No permission-cleared speech sample is supplied for this draft.",
+    "consent": {
+      "requiredBeforePublication": true,
+      "recordFields": ["assetSha256", "ownerPermission", "speakerPermission", "permittedUse", "clearedOn", "reviewer", "withdrawalContact"]
+    }
+  }
+}

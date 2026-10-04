@@ -1172,8 +1172,8 @@
       "title": "Architecture boundary",
       "procedure": "Inspect page code, browser requests and runtime script behavior.",
       "expected": "Website only presents/distributes; tool never needs the website to process audio; no upload endpoint/telemetry is introduced.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-01.md", "evidence/WAC-M5-01-validation.json"]
     },
     {
       "id": "AC-080",
@@ -1181,8 +1181,8 @@
       "title": "Metadata correctness",
       "procedure": "Validate draft and published-like fixture metadata against packaging output.",
       "expected": "No fabricated release link/hash; draft/unpublished assets cannot appear as a working stable download.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-01.md", "evidence/WAC-M5-01-validation.json"]
     },
     {
       "id": "AC-081",
@@ -1190,8 +1190,8 @@
       "title": "Accessible presentation",
       "procedure": "Test keyboard navigation, meaningful labels, readable layout and sample consent records.",
       "expected": "Page is usable and honest; missing real assets are marked pending without fake screenshots/reviews.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-01.md", "evidence/WAC-M5-01-validation.json"]
     },
     {
       "id": "AC-082",
@@ -1199,8 +1199,8 @@
       "title": "GitHub reconstruction",
       "procedure": "Fetch the checkpoint and create a clean detached worktree/clone for the explicit SHA.",
       "expected": "Project builds/tests using documented prerequisites; no hidden local edits or untracked runtime dependencies are required.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-02.md", "evidence/WAC-M5-02-validation.json"]
     },
     {
       "id": "AC-083",
@@ -1208,8 +1208,8 @@
       "title": "Candidate integrity",
       "procedure": "Compare candidate contents, hashes and version across packaging and website metadata.",
       "expected": "All artifacts identify the same source revision/version; invalid checksum/version inputs fail validation.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-02.md", "evidence/WAC-M5-02-validation.json"]
     },
     {
       "id": "AC-084",
@@ -1217,8 +1217,8 @@
       "title": "Privacy and rollback",
       "procedure": "Review candidate files and documented rollback to a prior release/source tag.",
       "expected": "No confidential content ships and rollback does not erase source recordings/settings without consent.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-02.md", "evidence/WAC-M5-02-validation.json"]
     },
     {
       "id": "AC-085",
@@ -1226,8 +1226,8 @@
       "title": "Complete traceability",
       "procedure": "Audit TRACEABILITY.md, TASKS.yaml, evidence and release checklist once.",
       "expected": "All improvements are implemented/verified or explicitly deferred with owner approval; no placeholder is reported as complete.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json", "evidence/WAC-M5-03-validation.json"]
     },
     {
       "id": "AC-086",
@@ -1235,8 +1235,8 @@
       "title": "Safe acceptance",
       "procedure": "Review mandatory safety tests and all pending subjective/platform checks.",
       "expected": "Known data-loss/security/false-success regressions block acceptance; unreviewed sound changes stay opt-in/experimental.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json", "evidence/WAC-M5-03-validation.json"]
     },
     {
       "id": "AC-087",
@@ -1244,8 +1244,8 @@
       "title": "Delivery checkpoint",
       "procedure": "Verify clean worktree, live remote SHA, PR/check status and candidate artifact manifest.",
       "expected": "Owner receives a recoverable, approval-ready checkpoint, not a claim that unapproved release/deployment already occurred.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-03.md", "evidence/WAC-M5-03-audit.json", "evidence/WAC-M5-03-validation.json"]
     },
     {
       "id": "AC-088",

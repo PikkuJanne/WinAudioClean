@@ -1,0 +1,1648 @@
+{
+  "schema_version": 1,
+  "task_id": "WAC-M5-03",
+  "status": "pass",
+  "date": "2026-10-04",
+  "acceptance_ids": [
+    "AC-085",
+    "AC-086",
+    "AC-087"
+  ],
+  "tested_source": {
+    "commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+    "clean": true
+  },
+  "audit_binding": {
+    "path": "evidence/WAC-M5-03-audit.json",
+    "physical_sha256": "00034e36000c461dbd8c12193e20647b324e3960c542228331e6293ab2c96cae",
+    "git_blob": "338dde1700c4340120cd538409510dc1a296752e",
+    "status_scope": "Immutable historical baseline audit and pre-freeze structural results; no retrospective case promotion inside that audit."
+  },
+  "frozen_source_sync": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "branch": "codex/wac-m5-release-readiness",
+    "head": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "clean": true,
+    "live_remote_head": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "upstream": "origin/codex/wac-m5-release-readiness",
+    "synchronized": true,
+    "note": "Point-in-time branch verification only; PR/CI/publication state must be inspected separately."
+  },
+  "ci_at_tested_source": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "headSha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "event": "pull_request",
+    "workflow": "Windows validation",
+    "workflowPath": ".github/workflows/windows-validation.yml",
+    "run": {
+      "id": 37194466266,
+      "workflowId": 374090478,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37194466266",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "state": "passed",
+    "reason": "Exact workflow SHA and all required shell/build jobs succeeded."
+  },
+  "ci_push_at_tested_source": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "headSha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "event": "push",
+    "workflow": "Windows validation",
+    "workflowPath": ".github/workflows/windows-validation.yml",
+    "run": {
+      "id": 37194464925,
+      "workflowId": 374090478,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37194464925",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "state": "passed",
+    "reason": "Exact workflow SHA and all required shell/build jobs succeeded."
+  },
+  "local_full_diagnostics": {
+    "task_id": "WAC-M5-03",
+    "status": "pass",
+    "source_sha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "sequential_full_runs_per_family": 1,
+    "hosts": {
+      "ps51": {
+        "family": "ps51",
+        "status": "pass",
+        "exit_code": 0,
+        "versions": {
+          "python": "3.14.6",
+          "powershell": "5.1.26100.9444",
+          "modules": {
+            "Pester": "5.7.1",
+            "PSScriptAnalyzer": "1.24.0"
+          }
+        },
+        "platform": {
+          "windows_version": "10.0.26300",
+          "windows_build": 26300,
+          "image_os": null,
+          "image_version": null
+        },
+        "pester": {
+          "passed": 1483,
+          "failed": 0,
+          "skipped": 1,
+          "inconclusive": 0,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 162,
+          "skipped": 1,
+          "seconds": 271.861
+        },
+        "analyzer_non_gating_findings": 285,
+        "pester_skips": [
+          {
+            "name": "never follows a file symlink when the local token permits creating it",
+            "reason": "This local token cannot create a symbolic link; junction coverage runs separately.",
+            "source": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+            "name_observed_in_log": true,
+            "reason_observed_in_log": true,
+            "reason_matches_current_source": true
+          }
+        ],
+        "python_skips": [
+          {
+            "name": "test_handoff.PathAndOriginTests.test_symlink_rejected",
+            "reason": "Symlink privileges unavailable",
+            "source": "docs/codex/winaudioclean/tests/test_handoff.py"
+          }
+        ],
+        "pester_seconds": 691.23,
+        "source": {
+          "commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "dirty": false,
+          "trees": {
+            "runtime": "f207ed8468faadddbf267d2ac27e0096bc1b694f7dd0a2e36ce6174cbcd979d3",
+            "scripts": "adf136d50a697b057ea87c14abf290a5b816ce1a80e1a931d42a01a85a6b3cfd",
+            "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+            "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+            "governance_tests": "45bab243eacb698ee4d0c27070ebf7b2931eb7f415352cf93552688e20690e0b",
+            "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+            "governance_inputs": "a6243a79bddec78007a2a182ab8989b81c6f76bfad0a61042ea59bbba0ebe32e"
+          },
+          "content_unchanged": true
+        },
+        "supplemental_before": {
+          "sha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "clean": true,
+          "website_sha256": "51ea0216306db459d35c388bb54d3352c6168e105c2e399c84bf7e2ed1b60213",
+          "website_file_count": 9,
+          "userdocs_sha256": "f0ae9b3cf4a9d975c6d7af7c45aae969ce692b5cac0a4f4d14e923aae468f1c2",
+          "userdocs_file_count": 15,
+          "userdocs_files": [
+            "LICENSE",
+            "README.md",
+            "THIRD_PARTY_NOTICES.md",
+            "docs/PORTABLE_PACKAGE.md",
+            "docs/SECURITY.md",
+            "docs/SUPPORT.md",
+            "docs/codex/winaudioclean/APPROVALS.md",
+            "docs/codex/winaudioclean/COVERAGE.md",
+            "docs/codex/winaudioclean/DATA_FORMATS.md",
+            "docs/codex/winaudioclean/HANDOFF.md",
+            "docs/codex/winaudioclean/RECONSTRUCTION.md",
+            "docs/codex/winaudioclean/RELEASE_WEBSITE.md",
+            "docs/codex/winaudioclean/TRACEABILITY.md",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03.md"
+          ],
+          "m502_capture_files": 74,
+          "m502_capture_bytes_tree_sha256": "ca8ecb4e233baafe2c6feeac068d0df731e7a339dc487b94cd72088133d73d9e",
+          "supplemental_hash_method": "SHA256 of sorted relative paths plus NUL plus each SHA256 content digest; LF-normalized text; website PNG/LICENSE bytes preserved"
+        },
+        "supplemental_after": {
+          "sha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "clean": true,
+          "website_sha256": "51ea0216306db459d35c388bb54d3352c6168e105c2e399c84bf7e2ed1b60213",
+          "website_file_count": 9,
+          "userdocs_sha256": "f0ae9b3cf4a9d975c6d7af7c45aae969ce692b5cac0a4f4d14e923aae468f1c2",
+          "userdocs_file_count": 15,
+          "userdocs_files": [
+            "LICENSE",
+            "README.md",
+            "THIRD_PARTY_NOTICES.md",
+            "docs/PORTABLE_PACKAGE.md",
+            "docs/SECURITY.md",
+            "docs/SUPPORT.md",
+            "docs/codex/winaudioclean/APPROVALS.md",
+            "docs/codex/winaudioclean/COVERAGE.md",
+            "docs/codex/winaudioclean/DATA_FORMATS.md",
+            "docs/codex/winaudioclean/HANDOFF.md",
+            "docs/codex/winaudioclean/RECONSTRUCTION.md",
+            "docs/codex/winaudioclean/RELEASE_WEBSITE.md",
+            "docs/codex/winaudioclean/TRACEABILITY.md",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03.md"
+          ],
+          "m502_capture_files": 74,
+          "m502_capture_bytes_tree_sha256": "ca8ecb4e233baafe2c6feeac068d0df731e7a339dc487b94cd72088133d73d9e",
+          "supplemental_hash_method": "SHA256 of sorted relative paths plus NUL plus each SHA256 content digest; LF-normalized text; website PNG/LICENSE bytes preserved"
+        },
+        "started_utc": "2026-10-04T10:13:58.569966+00:00",
+        "completed_utc": "2026-10-04T10:30:16.934009+00:00",
+        "outer_command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "<clean-checkout>\\.wac-local\\WAC-M5-03\\capture-checks.py",
+          "full",
+          "--family",
+          "ps51",
+          "--expected-source",
+          "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3"
+        ],
+        "parity_command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "scripts/Invoke-CIChecks.py",
+          "--shell-path",
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "--shell-family",
+          "ps51",
+          "--level",
+          "Full"
+        ],
+        "bindings": {
+          "capture_relative": ".wac-local/WAC-M5-03/full-ps51.json",
+          "capture_sha256": "432a4f4a2ad8e2f257571512046f9e837685d870febe3d1e71a2dd162e5f13e3",
+          "parity_copy_relative": ".wac-local/WAC-M5-03/parity-ps51.json",
+          "parity_copy_sha256": "cfc3e8aea717e231c7752e0633a5112bf01b1b77e1f9d04f8a12b1c430fda5b6",
+          "raw_log_relative": ".wac-local/WAC-M5-03/parity-ps51.log",
+          "raw_log_sha256": "6dfe64cd2264e8582ab7b2e5f7e004051411992cc19e0528cd57f2e6ba27e31e",
+          "wrapper_raw_log_relative_at_capture": ".wac-local/ci/logs/ps51.log"
+        }
+      },
+      "ps7": {
+        "family": "ps7",
+        "status": "pass",
+        "exit_code": 0,
+        "versions": {
+          "python": "3.14.6",
+          "powershell": "7.6.5",
+          "modules": {
+            "Pester": "5.7.1",
+            "PSScriptAnalyzer": "1.24.0"
+          }
+        },
+        "platform": {
+          "windows_version": "10.0.26300",
+          "windows_build": 26300,
+          "image_os": null,
+          "image_version": null
+        },
+        "pester": {
+          "passed": 1483,
+          "failed": 0,
+          "skipped": 1,
+          "inconclusive": 0,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 162,
+          "skipped": 1,
+          "seconds": 275.806
+        },
+        "analyzer_non_gating_findings": 285,
+        "pester_skips": [
+          {
+            "name": "never follows a file symlink when the local token permits creating it",
+            "reason": "This local token cannot create a symbolic link; junction coverage runs separately.",
+            "source": "tests/WinAudioClean.FolderQueue.Tests.ps1",
+            "name_observed_in_log": true,
+            "reason_observed_in_log": true,
+            "reason_matches_current_source": true
+          }
+        ],
+        "python_skips": [
+          {
+            "name": "test_handoff.PathAndOriginTests.test_symlink_rejected",
+            "reason": "Symlink privileges unavailable",
+            "source": "docs/codex/winaudioclean/tests/test_handoff.py"
+          }
+        ],
+        "pester_seconds": 652.65,
+        "source": {
+          "commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "dirty": false,
+          "trees": {
+            "runtime": "f207ed8468faadddbf267d2ac27e0096bc1b694f7dd0a2e36ce6174cbcd979d3",
+            "scripts": "adf136d50a697b057ea87c14abf290a5b816ce1a80e1a931d42a01a85a6b3cfd",
+            "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+            "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+            "governance_tests": "45bab243eacb698ee4d0c27070ebf7b2931eb7f415352cf93552688e20690e0b",
+            "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+            "governance_inputs": "a6243a79bddec78007a2a182ab8989b81c6f76bfad0a61042ea59bbba0ebe32e"
+          },
+          "content_unchanged": true
+        },
+        "supplemental_before": {
+          "sha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "clean": true,
+          "website_sha256": "51ea0216306db459d35c388bb54d3352c6168e105c2e399c84bf7e2ed1b60213",
+          "website_file_count": 9,
+          "userdocs_sha256": "f0ae9b3cf4a9d975c6d7af7c45aae969ce692b5cac0a4f4d14e923aae468f1c2",
+          "userdocs_file_count": 15,
+          "userdocs_files": [
+            "LICENSE",
+            "README.md",
+            "THIRD_PARTY_NOTICES.md",
+            "docs/PORTABLE_PACKAGE.md",
+            "docs/SECURITY.md",
+            "docs/SUPPORT.md",
+            "docs/codex/winaudioclean/APPROVALS.md",
+            "docs/codex/winaudioclean/COVERAGE.md",
+            "docs/codex/winaudioclean/DATA_FORMATS.md",
+            "docs/codex/winaudioclean/HANDOFF.md",
+            "docs/codex/winaudioclean/RECONSTRUCTION.md",
+            "docs/codex/winaudioclean/RELEASE_WEBSITE.md",
+            "docs/codex/winaudioclean/TRACEABILITY.md",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03.md"
+          ],
+          "m502_capture_files": 74,
+          "m502_capture_bytes_tree_sha256": "ca8ecb4e233baafe2c6feeac068d0df731e7a339dc487b94cd72088133d73d9e",
+          "supplemental_hash_method": "SHA256 of sorted relative paths plus NUL plus each SHA256 content digest; LF-normalized text; website PNG/LICENSE bytes preserved"
+        },
+        "supplemental_after": {
+          "sha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "clean": true,
+          "website_sha256": "51ea0216306db459d35c388bb54d3352c6168e105c2e399c84bf7e2ed1b60213",
+          "website_file_count": 9,
+          "userdocs_sha256": "f0ae9b3cf4a9d975c6d7af7c45aae969ce692b5cac0a4f4d14e923aae468f1c2",
+          "userdocs_file_count": 15,
+          "userdocs_files": [
+            "LICENSE",
+            "README.md",
+            "THIRD_PARTY_NOTICES.md",
+            "docs/PORTABLE_PACKAGE.md",
+            "docs/SECURITY.md",
+            "docs/SUPPORT.md",
+            "docs/codex/winaudioclean/APPROVALS.md",
+            "docs/codex/winaudioclean/COVERAGE.md",
+            "docs/codex/winaudioclean/DATA_FORMATS.md",
+            "docs/codex/winaudioclean/HANDOFF.md",
+            "docs/codex/winaudioclean/RECONSTRUCTION.md",
+            "docs/codex/winaudioclean/RELEASE_WEBSITE.md",
+            "docs/codex/winaudioclean/TRACEABILITY.md",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json",
+            "docs/codex/winaudioclean/evidence/WAC-M5-03.md"
+          ],
+          "m502_capture_files": 74,
+          "m502_capture_bytes_tree_sha256": "ca8ecb4e233baafe2c6feeac068d0df731e7a339dc487b94cd72088133d73d9e",
+          "supplemental_hash_method": "SHA256 of sorted relative paths plus NUL plus each SHA256 content digest; LF-normalized text; website PNG/LICENSE bytes preserved"
+        },
+        "started_utc": "2026-10-04T10:30:23.635112+00:00",
+        "completed_utc": "2026-10-04T10:46:06.105729+00:00",
+        "outer_command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "<clean-checkout>\\.wac-local\\WAC-M5-03\\capture-checks.py",
+          "full",
+          "--family",
+          "ps7",
+          "--expected-source",
+          "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3"
+        ],
+        "parity_command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "scripts/Invoke-CIChecks.py",
+          "--shell-path",
+          "<clean-checkout>\\.wac-local\\ci\\tools\\495ec1eefcff44b2868bd6bfe099ab3b\\tool\\pwsh.exe",
+          "--shell-family",
+          "ps7",
+          "--level",
+          "Full"
+        ],
+        "bindings": {
+          "capture_relative": ".wac-local/WAC-M5-03/full-ps7.json",
+          "capture_sha256": "7cd0613ef8384f8bfe0f662ae51b77c7752a0a4d334d08467e45daff21c30208",
+          "parity_copy_relative": ".wac-local/WAC-M5-03/parity-ps7.json",
+          "parity_copy_sha256": "9e31b5e7ffc786cc58c45f053f86aaaa99292cbc9b353928944fc56e902af8b7",
+          "raw_log_relative": ".wac-local/WAC-M5-03/parity-ps7.log",
+          "raw_log_sha256": "7145a6a6e9ed37237c361a24afedd38a02a0b3c4d47773ff79e8ff4d891178f2",
+          "wrapper_raw_log_relative_at_capture": ".wac-local/ci/logs/ps7.log"
+        }
+      }
+    }
+  },
+  "candidate_integrity_at_tested_source": {
+    "schema_version": 1,
+    "task_id": "WAC-M5-03",
+    "mode": "candidate-build-inspection",
+    "stage": "audit",
+    "status": "pass",
+    "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+    "before": {
+      "sha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+      "clean": true,
+      "website_sha256": "51ea0216306db459d35c388bb54d3352c6168e105c2e399c84bf7e2ed1b60213",
+      "website_file_count": 9,
+      "userdocs_sha256": "f0ae9b3cf4a9d975c6d7af7c45aae969ce692b5cac0a4f4d14e923aae468f1c2",
+      "userdocs_file_count": 15,
+      "userdocs_files": [
+        "LICENSE",
+        "README.md",
+        "THIRD_PARTY_NOTICES.md",
+        "docs/PORTABLE_PACKAGE.md",
+        "docs/SECURITY.md",
+        "docs/SUPPORT.md",
+        "docs/codex/winaudioclean/APPROVALS.md",
+        "docs/codex/winaudioclean/COVERAGE.md",
+        "docs/codex/winaudioclean/DATA_FORMATS.md",
+        "docs/codex/winaudioclean/HANDOFF.md",
+        "docs/codex/winaudioclean/RECONSTRUCTION.md",
+        "docs/codex/winaudioclean/RELEASE_WEBSITE.md",
+        "docs/codex/winaudioclean/TRACEABILITY.md",
+        "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json",
+        "docs/codex/winaudioclean/evidence/WAC-M5-03.md"
+      ],
+      "m502_capture_files": 74,
+      "m502_capture_bytes_tree_sha256": "ca8ecb4e233baafe2c6feeac068d0df731e7a339dc487b94cd72088133d73d9e",
+      "supplemental_hash_method": "SHA256 of sorted relative paths plus NUL plus each SHA256 content digest; LF-normalized text; website PNG/LICENSE bytes preserved"
+    },
+    "started_utc": "2026-10-04T10:12:35.345703+00:00",
+    "python_version": "3.14.6",
+    "outer_command": [
+      "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "<clean-checkout>\\.wac-local\\WAC-M5-03\\build-candidates.py",
+      "--expected-source",
+      "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+      "--stage",
+      "audit"
+    ],
+    "runs": [
+      {
+        "family": "ps51",
+        "host_version": "5.1.26100.9444",
+        "pass": 1,
+        "operation": "build",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<clean-checkout>\\scripts\\Build-Release.ps1",
+          "-Revision",
+          "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "-OutputDirectory",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps51-1"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:12:35.580012+00:00",
+        "completed_utc": "2026-10-04T10:12:38.742805+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps51-1-build.log",
+        "raw_log_sha256": "fc141b2b97bd6c07d4ba0667b298eafee1f373d6bbb32bfdda0e73d93b935259"
+      },
+      {
+        "family": "ps51",
+        "host_version": "5.1.26100.9444",
+        "pass": 1,
+        "operation": "strict_metadata_inspection",
+        "command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "scripts/Test-Website.py",
+          "--repo",
+          ".",
+          "--fixture-package",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps51-1\\WinAudioClean-2.3-1d2f67e010be-tool-only.zip"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:12:38.743590+00:00",
+        "completed_utc": "2026-10-04T10:12:49.148062+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps51-1-metadata.log",
+        "raw_log_sha256": "c7fe271a810deb96e720f2509bc85aa8705ee5aaaccd2b6bc1ded134dec57bba"
+      },
+      {
+        "family": "ps51",
+        "host_version": "5.1.26100.9444",
+        "pass": 2,
+        "operation": "build",
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<clean-checkout>\\scripts\\Build-Release.ps1",
+          "-Revision",
+          "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "-OutputDirectory",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps51-2"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:12:49.151770+00:00",
+        "completed_utc": "2026-10-04T10:12:52.642342+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps51-2-build.log",
+        "raw_log_sha256": "fc141b2b97bd6c07d4ba0667b298eafee1f373d6bbb32bfdda0e73d93b935259"
+      },
+      {
+        "family": "ps51",
+        "host_version": "5.1.26100.9444",
+        "pass": 2,
+        "operation": "strict_metadata_inspection",
+        "command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "scripts/Test-Website.py",
+          "--repo",
+          ".",
+          "--fixture-package",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps51-2\\WinAudioClean-2.3-1d2f67e010be-tool-only.zip"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:12:52.643726+00:00",
+        "completed_utc": "2026-10-04T10:13:03.043242+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps51-2-metadata.log",
+        "raw_log_sha256": "c7fe271a810deb96e720f2509bc85aa8705ee5aaaccd2b6bc1ded134dec57bba"
+      },
+      {
+        "family": "ps7",
+        "host_version": "7.6.5",
+        "pass": 1,
+        "operation": "build",
+        "command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\495ec1eefcff44b2868bd6bfe099ab3b\\tool\\pwsh.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<clean-checkout>\\scripts\\Build-Release.ps1",
+          "-Revision",
+          "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "-OutputDirectory",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps7-1"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:13:03.365595+00:00",
+        "completed_utc": "2026-10-04T10:13:07.653621+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps7-1-build.log",
+        "raw_log_sha256": "cac230b0fd27ac86e7872cb6e24cdca655f7def8c98c8ae543b84585f6cfd100"
+      },
+      {
+        "family": "ps7",
+        "host_version": "7.6.5",
+        "pass": 1,
+        "operation": "strict_metadata_inspection",
+        "command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "scripts/Test-Website.py",
+          "--repo",
+          ".",
+          "--fixture-package",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps7-1\\WinAudioClean-2.3-1d2f67e010be-tool-only.zip"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:13:07.654499+00:00",
+        "completed_utc": "2026-10-04T10:13:17.800502+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps7-1-metadata.log",
+        "raw_log_sha256": "c7fe271a810deb96e720f2509bc85aa8705ee5aaaccd2b6bc1ded134dec57bba"
+      },
+      {
+        "family": "ps7",
+        "host_version": "7.6.5",
+        "pass": 2,
+        "operation": "build",
+        "command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\495ec1eefcff44b2868bd6bfe099ab3b\\tool\\pwsh.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<clean-checkout>\\scripts\\Build-Release.ps1",
+          "-Revision",
+          "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "-OutputDirectory",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps7-2"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:13:17.803184+00:00",
+        "completed_utc": "2026-10-04T10:13:22.143702+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps7-2-build.log",
+        "raw_log_sha256": "cac230b0fd27ac86e7872cb6e24cdca655f7def8c98c8ae543b84585f6cfd100"
+      },
+      {
+        "family": "ps7",
+        "host_version": "7.6.5",
+        "pass": 2,
+        "operation": "strict_metadata_inspection",
+        "command": [
+          "<clean-checkout>\\.wac-local\\ci\\tools\\4f14cd9cfe024ed1accf13be62657031\\tool\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "scripts/Test-Website.py",
+          "--repo",
+          ".",
+          "--fixture-package",
+          "<clean-checkout>\\dist\\WAC-M5-03\\audit-ps7-2\\WinAudioClean-2.3-1d2f67e010be-tool-only.zip"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:13:22.144769+00:00",
+        "completed_utc": "2026-10-04T10:13:31.618182+00:00",
+        "raw_log_relative": ".wac-local/WAC-M5-03/audit-ps7-2-metadata.log",
+        "raw_log_sha256": "c7fe271a810deb96e720f2509bc85aa8705ee5aaaccd2b6bc1ded134dec57bba"
+      }
+    ],
+    "candidates": [
+      {
+        "family": "ps51",
+        "host_version": "5.1.26100.9444",
+        "pass": 1,
+        "archive_relative": "dist/WAC-M5-03/audit-ps51-1/WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "file_name": "WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "bytes": 442766,
+        "sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58",
+        "version": "2.3",
+        "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+        "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+        "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+        "manifest": {
+          "schema_version": 1,
+          "application": "WinAudioClean",
+          "version": "2.3",
+          "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+          "payload": [
+            {
+              "path": "LICENSE",
+              "bytes": 1070,
+              "sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477"
+            },
+            {
+              "path": "README.md",
+              "bytes": 21080,
+              "sha256": "6f10780e11a533b20a5815d218b53da1a5d47147ff07f1368fd86b501cdc938f"
+            },
+            {
+              "path": "THIRD_PARTY_NOTICES.md",
+              "bytes": 1236,
+              "sha256": "50b09c4045af569610c764cd147197920940ce0c12618a48ba0bfa0d0a0a10ec"
+            },
+            {
+              "path": "WinAudioClean.Batch.ps1",
+              "bytes": 19634,
+              "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+            },
+            {
+              "path": "WinAudioClean.IO.ps1",
+              "bytes": 26826,
+              "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+            },
+            {
+              "path": "WinAudioClean.Launcher.ps1",
+              "bytes": 14397,
+              "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+            },
+            {
+              "path": "WinAudioClean.Output.ps1",
+              "bytes": 11184,
+              "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+            },
+            {
+              "path": "WinAudioClean.Preview.ps1",
+              "bytes": 46365,
+              "sha256": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+            },
+            {
+              "path": "WinAudioClean.Queue.ps1",
+              "bytes": 14069,
+              "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+            },
+            {
+              "path": "WinAudioClean.Settings.ps1",
+              "bytes": 28208,
+              "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+            },
+            {
+              "path": "WinAudioClean.bat",
+              "bytes": 3621,
+              "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b"
+            },
+            {
+              "path": "WinAudioClean.ico",
+              "bytes": 30763,
+              "sha256": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501"
+            },
+            {
+              "path": "WinAudioClean.ps1",
+              "bytes": 156047,
+              "sha256": "200e5972b2179330879547bcefda1267f97b1a268af47ba22337f81fb283cd37"
+            },
+            {
+              "path": "docs/PORTABLE_PACKAGE.md",
+              "bytes": 8559,
+              "sha256": "6be3dcfb21ab74bca7eeda7861b4a176961d5aa4c8d9e76dbcdd0703e3c2c57e"
+            },
+            {
+              "path": "docs/SECURITY.md",
+              "bytes": 4635,
+              "sha256": "1e48e13284dd7b5c0ad6f2426199fe79070515b8b0db1374b9368e8cfa957310"
+            },
+            {
+              "path": "docs/SUPPORT.md",
+              "bytes": 10929,
+              "sha256": "99e108f6c0c9dc23623ace5ac97719dcd153b7309076d15dc2a1fa273052d66a"
+            },
+            {
+              "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+              "bytes": 39535,
+              "sha256": "f952ee57a13902d36322c1458adbf7ac697b2410bd5569e7d3a9cd0c57815576"
+            }
+          ]
+        },
+        "checksum_file_sha256": "ece589b4a73425b21a05565ed9ad385c3caa84cc46de96ede8854543a6a411d9",
+        "provenance_file_sha256": "7663296c83782bcebe7dc7b7eced0b997e0d97967d16a15ac11bd383f1e38410",
+        "metadata_inspection": {
+          "assets": {
+            "audio": "pending",
+            "branding_sha256": "b77eaf6f8c0b1fdc083d743bfd76c47be97ac4a698b86c604f5f36a98132f6ee",
+            "consent_required": true,
+            "license_sha256": "28cd5b28cc287821be0bfc9f59bb08a3279ae4a119254f1e440d93b9d10f67f5",
+            "screenshots": "pending"
+          },
+          "metadata_sha256": "0dba8c9681cab3a5ebcbeb4bcb45c525dcce62a5b426531545b5b2c936d7bb0a",
+          "passed": true,
+          "published_like_fixture": {
+            "committed_blobs_identical": true,
+            "entry_count": 18,
+            "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+            "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+            "mutations": [
+              {
+                "code": "metadata_schema",
+                "id": "draft_with_download",
+                "rejected": true
+              },
+              {
+                "code": "invalid_date",
+                "id": "invalid_date",
+                "rejected": true
+              },
+              {
+                "code": "metadata_schema",
+                "id": "wrong_url",
+                "rejected": true
+              },
+              {
+                "code": "download_name_mismatch",
+                "id": "wrong_name",
+                "rejected": true
+              },
+              {
+                "code": "package_hash_mismatch",
+                "id": "wrong_hash",
+                "rejected": true
+              },
+              {
+                "code": "package_size_mismatch",
+                "id": "wrong_size",
+                "rejected": true
+              },
+              {
+                "code": "package_source_mismatch",
+                "id": "wrong_tree",
+                "rejected": true
+              }
+            ],
+            "ordered_stored_fixed_timestamp": true,
+            "passed": true,
+            "payload_count": 17,
+            "published": false,
+            "served": false,
+            "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+            "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+            "version": "2.3",
+            "zip_bytes": 442766,
+            "zip_sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58"
+          },
+          "python_version": "3.14.6",
+          "release": {
+            "download_enabled": false,
+            "status": "draft",
+            "version": "2.3"
+          },
+          "schema_sha256": "424fce742b9999e12161c41c4bc7ce0c4fa0140c41c876d32134083cc095ec37",
+          "schema_version": 1
+        },
+        "publication_performed": false
+      },
+      {
+        "family": "ps51",
+        "host_version": "5.1.26100.9444",
+        "pass": 2,
+        "archive_relative": "dist/WAC-M5-03/audit-ps51-2/WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "file_name": "WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "bytes": 442766,
+        "sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58",
+        "version": "2.3",
+        "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+        "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+        "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+        "manifest": {
+          "schema_version": 1,
+          "application": "WinAudioClean",
+          "version": "2.3",
+          "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+          "payload": [
+            {
+              "path": "LICENSE",
+              "bytes": 1070,
+              "sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477"
+            },
+            {
+              "path": "README.md",
+              "bytes": 21080,
+              "sha256": "6f10780e11a533b20a5815d218b53da1a5d47147ff07f1368fd86b501cdc938f"
+            },
+            {
+              "path": "THIRD_PARTY_NOTICES.md",
+              "bytes": 1236,
+              "sha256": "50b09c4045af569610c764cd147197920940ce0c12618a48ba0bfa0d0a0a10ec"
+            },
+            {
+              "path": "WinAudioClean.Batch.ps1",
+              "bytes": 19634,
+              "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+            },
+            {
+              "path": "WinAudioClean.IO.ps1",
+              "bytes": 26826,
+              "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+            },
+            {
+              "path": "WinAudioClean.Launcher.ps1",
+              "bytes": 14397,
+              "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+            },
+            {
+              "path": "WinAudioClean.Output.ps1",
+              "bytes": 11184,
+              "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+            },
+            {
+              "path": "WinAudioClean.Preview.ps1",
+              "bytes": 46365,
+              "sha256": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+            },
+            {
+              "path": "WinAudioClean.Queue.ps1",
+              "bytes": 14069,
+              "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+            },
+            {
+              "path": "WinAudioClean.Settings.ps1",
+              "bytes": 28208,
+              "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+            },
+            {
+              "path": "WinAudioClean.bat",
+              "bytes": 3621,
+              "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b"
+            },
+            {
+              "path": "WinAudioClean.ico",
+              "bytes": 30763,
+              "sha256": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501"
+            },
+            {
+              "path": "WinAudioClean.ps1",
+              "bytes": 156047,
+              "sha256": "200e5972b2179330879547bcefda1267f97b1a268af47ba22337f81fb283cd37"
+            },
+            {
+              "path": "docs/PORTABLE_PACKAGE.md",
+              "bytes": 8559,
+              "sha256": "6be3dcfb21ab74bca7eeda7861b4a176961d5aa4c8d9e76dbcdd0703e3c2c57e"
+            },
+            {
+              "path": "docs/SECURITY.md",
+              "bytes": 4635,
+              "sha256": "1e48e13284dd7b5c0ad6f2426199fe79070515b8b0db1374b9368e8cfa957310"
+            },
+            {
+              "path": "docs/SUPPORT.md",
+              "bytes": 10929,
+              "sha256": "99e108f6c0c9dc23623ace5ac97719dcd153b7309076d15dc2a1fa273052d66a"
+            },
+            {
+              "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+              "bytes": 39535,
+              "sha256": "f952ee57a13902d36322c1458adbf7ac697b2410bd5569e7d3a9cd0c57815576"
+            }
+          ]
+        },
+        "checksum_file_sha256": "ece589b4a73425b21a05565ed9ad385c3caa84cc46de96ede8854543a6a411d9",
+        "provenance_file_sha256": "7663296c83782bcebe7dc7b7eced0b997e0d97967d16a15ac11bd383f1e38410",
+        "metadata_inspection": {
+          "assets": {
+            "audio": "pending",
+            "branding_sha256": "b77eaf6f8c0b1fdc083d743bfd76c47be97ac4a698b86c604f5f36a98132f6ee",
+            "consent_required": true,
+            "license_sha256": "28cd5b28cc287821be0bfc9f59bb08a3279ae4a119254f1e440d93b9d10f67f5",
+            "screenshots": "pending"
+          },
+          "metadata_sha256": "0dba8c9681cab3a5ebcbeb4bcb45c525dcce62a5b426531545b5b2c936d7bb0a",
+          "passed": true,
+          "published_like_fixture": {
+            "committed_blobs_identical": true,
+            "entry_count": 18,
+            "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+            "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+            "mutations": [
+              {
+                "code": "metadata_schema",
+                "id": "draft_with_download",
+                "rejected": true
+              },
+              {
+                "code": "invalid_date",
+                "id": "invalid_date",
+                "rejected": true
+              },
+              {
+                "code": "metadata_schema",
+                "id": "wrong_url",
+                "rejected": true
+              },
+              {
+                "code": "download_name_mismatch",
+                "id": "wrong_name",
+                "rejected": true
+              },
+              {
+                "code": "package_hash_mismatch",
+                "id": "wrong_hash",
+                "rejected": true
+              },
+              {
+                "code": "package_size_mismatch",
+                "id": "wrong_size",
+                "rejected": true
+              },
+              {
+                "code": "package_source_mismatch",
+                "id": "wrong_tree",
+                "rejected": true
+              }
+            ],
+            "ordered_stored_fixed_timestamp": true,
+            "passed": true,
+            "payload_count": 17,
+            "published": false,
+            "served": false,
+            "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+            "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+            "version": "2.3",
+            "zip_bytes": 442766,
+            "zip_sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58"
+          },
+          "python_version": "3.14.6",
+          "release": {
+            "download_enabled": false,
+            "status": "draft",
+            "version": "2.3"
+          },
+          "schema_sha256": "424fce742b9999e12161c41c4bc7ce0c4fa0140c41c876d32134083cc095ec37",
+          "schema_version": 1
+        },
+        "publication_performed": false
+      },
+      {
+        "family": "ps7",
+        "host_version": "7.6.5",
+        "pass": 1,
+        "archive_relative": "dist/WAC-M5-03/audit-ps7-1/WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "file_name": "WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "bytes": 442766,
+        "sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58",
+        "version": "2.3",
+        "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+        "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+        "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+        "manifest": {
+          "schema_version": 1,
+          "application": "WinAudioClean",
+          "version": "2.3",
+          "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+          "payload": [
+            {
+              "path": "LICENSE",
+              "bytes": 1070,
+              "sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477"
+            },
+            {
+              "path": "README.md",
+              "bytes": 21080,
+              "sha256": "6f10780e11a533b20a5815d218b53da1a5d47147ff07f1368fd86b501cdc938f"
+            },
+            {
+              "path": "THIRD_PARTY_NOTICES.md",
+              "bytes": 1236,
+              "sha256": "50b09c4045af569610c764cd147197920940ce0c12618a48ba0bfa0d0a0a10ec"
+            },
+            {
+              "path": "WinAudioClean.Batch.ps1",
+              "bytes": 19634,
+              "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+            },
+            {
+              "path": "WinAudioClean.IO.ps1",
+              "bytes": 26826,
+              "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+            },
+            {
+              "path": "WinAudioClean.Launcher.ps1",
+              "bytes": 14397,
+              "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+            },
+            {
+              "path": "WinAudioClean.Output.ps1",
+              "bytes": 11184,
+              "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+            },
+            {
+              "path": "WinAudioClean.Preview.ps1",
+              "bytes": 46365,
+              "sha256": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+            },
+            {
+              "path": "WinAudioClean.Queue.ps1",
+              "bytes": 14069,
+              "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+            },
+            {
+              "path": "WinAudioClean.Settings.ps1",
+              "bytes": 28208,
+              "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+            },
+            {
+              "path": "WinAudioClean.bat",
+              "bytes": 3621,
+              "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b"
+            },
+            {
+              "path": "WinAudioClean.ico",
+              "bytes": 30763,
+              "sha256": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501"
+            },
+            {
+              "path": "WinAudioClean.ps1",
+              "bytes": 156047,
+              "sha256": "200e5972b2179330879547bcefda1267f97b1a268af47ba22337f81fb283cd37"
+            },
+            {
+              "path": "docs/PORTABLE_PACKAGE.md",
+              "bytes": 8559,
+              "sha256": "6be3dcfb21ab74bca7eeda7861b4a176961d5aa4c8d9e76dbcdd0703e3c2c57e"
+            },
+            {
+              "path": "docs/SECURITY.md",
+              "bytes": 4635,
+              "sha256": "1e48e13284dd7b5c0ad6f2426199fe79070515b8b0db1374b9368e8cfa957310"
+            },
+            {
+              "path": "docs/SUPPORT.md",
+              "bytes": 10929,
+              "sha256": "99e108f6c0c9dc23623ace5ac97719dcd153b7309076d15dc2a1fa273052d66a"
+            },
+            {
+              "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+              "bytes": 39535,
+              "sha256": "f952ee57a13902d36322c1458adbf7ac697b2410bd5569e7d3a9cd0c57815576"
+            }
+          ]
+        },
+        "checksum_file_sha256": "ece589b4a73425b21a05565ed9ad385c3caa84cc46de96ede8854543a6a411d9",
+        "provenance_file_sha256": "7663296c83782bcebe7dc7b7eced0b997e0d97967d16a15ac11bd383f1e38410",
+        "metadata_inspection": {
+          "assets": {
+            "audio": "pending",
+            "branding_sha256": "b77eaf6f8c0b1fdc083d743bfd76c47be97ac4a698b86c604f5f36a98132f6ee",
+            "consent_required": true,
+            "license_sha256": "28cd5b28cc287821be0bfc9f59bb08a3279ae4a119254f1e440d93b9d10f67f5",
+            "screenshots": "pending"
+          },
+          "metadata_sha256": "0dba8c9681cab3a5ebcbeb4bcb45c525dcce62a5b426531545b5b2c936d7bb0a",
+          "passed": true,
+          "published_like_fixture": {
+            "committed_blobs_identical": true,
+            "entry_count": 18,
+            "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+            "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+            "mutations": [
+              {
+                "code": "metadata_schema",
+                "id": "draft_with_download",
+                "rejected": true
+              },
+              {
+                "code": "invalid_date",
+                "id": "invalid_date",
+                "rejected": true
+              },
+              {
+                "code": "metadata_schema",
+                "id": "wrong_url",
+                "rejected": true
+              },
+              {
+                "code": "download_name_mismatch",
+                "id": "wrong_name",
+                "rejected": true
+              },
+              {
+                "code": "package_hash_mismatch",
+                "id": "wrong_hash",
+                "rejected": true
+              },
+              {
+                "code": "package_size_mismatch",
+                "id": "wrong_size",
+                "rejected": true
+              },
+              {
+                "code": "package_source_mismatch",
+                "id": "wrong_tree",
+                "rejected": true
+              }
+            ],
+            "ordered_stored_fixed_timestamp": true,
+            "passed": true,
+            "payload_count": 17,
+            "published": false,
+            "served": false,
+            "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+            "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+            "version": "2.3",
+            "zip_bytes": 442766,
+            "zip_sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58"
+          },
+          "python_version": "3.14.6",
+          "release": {
+            "download_enabled": false,
+            "status": "draft",
+            "version": "2.3"
+          },
+          "schema_sha256": "424fce742b9999e12161c41c4bc7ce0c4fa0140c41c876d32134083cc095ec37",
+          "schema_version": 1
+        },
+        "publication_performed": false
+      },
+      {
+        "family": "ps7",
+        "host_version": "7.6.5",
+        "pass": 2,
+        "archive_relative": "dist/WAC-M5-03/audit-ps7-2/WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "file_name": "WinAudioClean-2.3-1d2f67e010be-tool-only.zip",
+        "bytes": 442766,
+        "sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58",
+        "version": "2.3",
+        "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+        "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+        "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+        "manifest": {
+          "schema_version": 1,
+          "application": "WinAudioClean",
+          "version": "2.3",
+          "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+          "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+          "payload": [
+            {
+              "path": "LICENSE",
+              "bytes": 1070,
+              "sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477"
+            },
+            {
+              "path": "README.md",
+              "bytes": 21080,
+              "sha256": "6f10780e11a533b20a5815d218b53da1a5d47147ff07f1368fd86b501cdc938f"
+            },
+            {
+              "path": "THIRD_PARTY_NOTICES.md",
+              "bytes": 1236,
+              "sha256": "50b09c4045af569610c764cd147197920940ce0c12618a48ba0bfa0d0a0a10ec"
+            },
+            {
+              "path": "WinAudioClean.Batch.ps1",
+              "bytes": 19634,
+              "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+            },
+            {
+              "path": "WinAudioClean.IO.ps1",
+              "bytes": 26826,
+              "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+            },
+            {
+              "path": "WinAudioClean.Launcher.ps1",
+              "bytes": 14397,
+              "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+            },
+            {
+              "path": "WinAudioClean.Output.ps1",
+              "bytes": 11184,
+              "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+            },
+            {
+              "path": "WinAudioClean.Preview.ps1",
+              "bytes": 46365,
+              "sha256": "afb5e1e01633daa52be6bfabbb2a74dc74506ef605fa656d0d07e8f3074cc687"
+            },
+            {
+              "path": "WinAudioClean.Queue.ps1",
+              "bytes": 14069,
+              "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+            },
+            {
+              "path": "WinAudioClean.Settings.ps1",
+              "bytes": 28208,
+              "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+            },
+            {
+              "path": "WinAudioClean.bat",
+              "bytes": 3621,
+              "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b"
+            },
+            {
+              "path": "WinAudioClean.ico",
+              "bytes": 30763,
+              "sha256": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501"
+            },
+            {
+              "path": "WinAudioClean.ps1",
+              "bytes": 156047,
+              "sha256": "200e5972b2179330879547bcefda1267f97b1a268af47ba22337f81fb283cd37"
+            },
+            {
+              "path": "docs/PORTABLE_PACKAGE.md",
+              "bytes": 8559,
+              "sha256": "6be3dcfb21ab74bca7eeda7861b4a176961d5aa4c8d9e76dbcdd0703e3c2c57e"
+            },
+            {
+              "path": "docs/SECURITY.md",
+              "bytes": 4635,
+              "sha256": "1e48e13284dd7b5c0ad6f2426199fe79070515b8b0db1374b9368e8cfa957310"
+            },
+            {
+              "path": "docs/SUPPORT.md",
+              "bytes": 10929,
+              "sha256": "99e108f6c0c9dc23623ace5ac97719dcd153b7309076d15dc2a1fa273052d66a"
+            },
+            {
+              "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+              "bytes": 39535,
+              "sha256": "f952ee57a13902d36322c1458adbf7ac697b2410bd5569e7d3a9cd0c57815576"
+            }
+          ]
+        },
+        "checksum_file_sha256": "ece589b4a73425b21a05565ed9ad385c3caa84cc46de96ede8854543a6a411d9",
+        "provenance_file_sha256": "7663296c83782bcebe7dc7b7eced0b997e0d97967d16a15ac11bd383f1e38410",
+        "metadata_inspection": {
+          "assets": {
+            "audio": "pending",
+            "branding_sha256": "b77eaf6f8c0b1fdc083d743bfd76c47be97ac4a698b86c604f5f36a98132f6ee",
+            "consent_required": true,
+            "license_sha256": "28cd5b28cc287821be0bfc9f59bb08a3279ae4a119254f1e440d93b9d10f67f5",
+            "screenshots": "pending"
+          },
+          "metadata_sha256": "0dba8c9681cab3a5ebcbeb4bcb45c525dcce62a5b426531545b5b2c936d7bb0a",
+          "passed": true,
+          "published_like_fixture": {
+            "committed_blobs_identical": true,
+            "entry_count": 18,
+            "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+            "manifest_sha256": "45612123dc40c261dd36f4097866f7233aac8d3fa804f2312463c580a1009655",
+            "mutations": [
+              {
+                "code": "metadata_schema",
+                "id": "draft_with_download",
+                "rejected": true
+              },
+              {
+                "code": "invalid_date",
+                "id": "invalid_date",
+                "rejected": true
+              },
+              {
+                "code": "metadata_schema",
+                "id": "wrong_url",
+                "rejected": true
+              },
+              {
+                "code": "download_name_mismatch",
+                "id": "wrong_name",
+                "rejected": true
+              },
+              {
+                "code": "package_hash_mismatch",
+                "id": "wrong_hash",
+                "rejected": true
+              },
+              {
+                "code": "package_size_mismatch",
+                "id": "wrong_size",
+                "rejected": true
+              },
+              {
+                "code": "package_source_mismatch",
+                "id": "wrong_tree",
+                "rejected": true
+              }
+            ],
+            "ordered_stored_fixed_timestamp": true,
+            "passed": true,
+            "payload_count": 17,
+            "published": false,
+            "served": false,
+            "source_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+            "source_tree": "c372648aa409f6b3092088a3ae0d8ce4508c7747",
+            "version": "2.3",
+            "zip_bytes": 442766,
+            "zip_sha256": "7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58"
+          },
+          "python_version": "3.14.6",
+          "release": {
+            "download_enabled": false,
+            "status": "draft",
+            "version": "2.3"
+          },
+          "schema_sha256": "424fce742b9999e12161c41c4bc7ce0c4fa0140c41c876d32134083cc095ec37",
+          "schema_version": 1
+        },
+        "publication_performed": false
+      }
+    ],
+    "publication_performed": false,
+    "after": {
+      "sha": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+      "clean": true,
+      "website_sha256": "51ea0216306db459d35c388bb54d3352c6168e105c2e399c84bf7e2ed1b60213",
+      "website_file_count": 9,
+      "userdocs_sha256": "f0ae9b3cf4a9d975c6d7af7c45aae969ce692b5cac0a4f4d14e923aae468f1c2",
+      "userdocs_file_count": 15,
+      "userdocs_files": [
+        "LICENSE",
+        "README.md",
+        "THIRD_PARTY_NOTICES.md",
+        "docs/PORTABLE_PACKAGE.md",
+        "docs/SECURITY.md",
+        "docs/SUPPORT.md",
+        "docs/codex/winaudioclean/APPROVALS.md",
+        "docs/codex/winaudioclean/COVERAGE.md",
+        "docs/codex/winaudioclean/DATA_FORMATS.md",
+        "docs/codex/winaudioclean/HANDOFF.md",
+        "docs/codex/winaudioclean/RECONSTRUCTION.md",
+        "docs/codex/winaudioclean/RELEASE_WEBSITE.md",
+        "docs/codex/winaudioclean/TRACEABILITY.md",
+        "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json",
+        "docs/codex/winaudioclean/evidence/WAC-M5-03.md"
+      ],
+      "m502_capture_files": 74,
+      "m502_capture_bytes_tree_sha256": "ca8ecb4e233baafe2c6feeac068d0df731e7a339dc487b94cd72088133d73d9e",
+      "supplemental_hash_method": "SHA256 of sorted relative paths plus NUL plus each SHA256 content digest; LF-normalized text; website PNG/LICENSE bytes preserved"
+    },
+    "completed_utc": "2026-10-04T10:13:31.748077+00:00",
+    "byte_identical_across_four": true
+  },
+  "canonical_closure": {
+    "tasks": {
+      "done": 29,
+      "todo": 1
+    },
+    "acceptance": {
+      "pass": 87,
+      "not_run": 3
+    },
+    "remaining_task": "WAC-M5-04",
+    "remaining_cases": [
+      "AC-088",
+      "AC-089",
+      "AC-090"
+    ],
+    "approval_required": true,
+    "not_started": true
+  },
+  "acceptance_dispositions": [
+    {
+      "id": "AC-085",
+      "status": "pass",
+      "scope": "All 20 engineering implementations and all 90 case dispositions audited against referenced evidence/release checklist. Historical audit statuses remain dated; no unavailable broader check or placeholder promoted."
+    },
+    {
+      "id": "AC-086",
+      "status": "pass",
+      "scope": "Mandatory declared engineering/safety/compatibility evidence and actual frozen-source Full reviewed; no known current regression blocker in bounded scope. Eight gaps, privilege skips, opt-in experimental sound and absent owner waivers retained."
+    },
+    {
+      "id": "AC-087",
+      "status": "pass",
+      "scope": "Exact frozen source clean/live equality, current PR/CI observation and four measured candidates verified. Final closure clean/live/source/assets/PR/CI are bound in the external post-push packet/checkpoint before ending task."
+    }
+  ],
+  "final_delivery_binding": {
+    "recorded_after_push": "External .wac-local/WAC-M5-03/approval-packet.json and PR #6 checkpoint",
+    "required": "Exact clean/local/live closure SHA and current PR/CI observation, governance-only diff, unchanged payload/code/website, four NEW closure-source candidates with inspected source/tree/manifest/sidecars.",
+    "full_scope": "Local Full actually executed once per host at tested_source only; metadata closure does not constitute another local Full run. Exact-closure hosted CI Full is separately observed."
+  },
+  "limitations": [
+    "All eight broader coverage gaps remain unrun, without owner waiver.",
+    "Same active Windows machine and declared dependency/build scopes; no clean-OS/universal-platform or exhaustive security claim.",
+    "Recorded local privilege skips and non-gating analyzer findings remain.",
+    "Original Raw/Zoom and PCM16/48 kHz defaults preserved; Accurate opt-in, Gentle opt-in/experimental; no speech-quality or default promotion approval.",
+    "Bounded 20-group/90-case/evidence review preserves historical failures and separately scoped accepted recoveries.",
+    "Website stays draft/download-disabled; media/consent/listening and hosting destination remain pending.",
+    "Raw logs, tool downloads, private paths/audio, command captures and archives remain ignored/local; exported checkout paths are aliases.",
+    "No merge/main push/tag/release/deploy, repository/security/settings change, branch deletion, history rewrite or dependency bundling."
+  ],
+  "metadata_closure_checks": {
+    "status": "pass",
+    "python_version": "3.14.6",
+    "source_prior_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+    "source_dirty": true,
+    "scope": "Governance/evidence closure only. Full was not repeated.",
+    "tested_input_physical_sha256": {
+      "docs/codex/winaudioclean/TASKS.yaml": "f3be0b6d401f74062c2a118f4ba8745861f885bdabda5ec0624dea50f3b518b9",
+      "docs/codex/winaudioclean/ACCEPTANCE.json": "f1db77aab12114b76ca17deda5f76cafbc122c9a2de397ced3a065f1ec4845a4",
+      "docs/codex/winaudioclean/COVERAGE.json": "a93ebd0552b8bb60c69034b1e1f6a579dc276a51474f7089c305d7fdf81b55cd",
+      "docs/codex/winaudioclean/evidence/WAC-M5-03-validation.json": "6d4bed89ef68207fc96b53f19362c6e094a4ba358d8d5c4a1cf6c2f649bc0d45"
+    },
+    "tested_input_hash_scope": "Bytes immediately before these checks, before exporting this check record into the validation ledger; this is not a self-hash.",
+    "governance_only_changed_paths": [
+      "docs/codex/winaudioclean/ACCEPTANCE.json",
+      "docs/codex/winaudioclean/COVERAGE.json",
+      "docs/codex/winaudioclean/DECISIONS.md",
+      "docs/codex/winaudioclean/HANDOFF.md",
+      "docs/codex/winaudioclean/NEXT_MODEL_START_HERE.md",
+      "docs/codex/winaudioclean/STATUS.md",
+      "docs/codex/winaudioclean/TASKS.yaml",
+      "docs/codex/winaudioclean/TRACEABILITY.md",
+      "docs/codex/winaudioclean/evidence/WAC-M5-03-validation.json",
+      "docs/codex/winaudioclean/evidence/WAC-M5-03.md"
+    ],
+    "tested_inputs_unchanged_during_checks": true,
+    "checks": [
+      {
+        "name": "plan",
+        "command": [
+          "<maintained-checkout-pinned-python.exe>",
+          "-B",
+          "-X",
+          "utf8",
+          "docs/codex/winaudioclean/tools/handoff.py",
+          "validate-plan",
+          "--plan-root",
+          "docs/codex/winaudioclean"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:47:46.457053+00:00",
+        "completed_utc": "2026-10-04T10:47:46.783042+00:00",
+        "stdout_sha256": "a5dbec61e7e667cb2596f6ac6d02efb47f3212f79e3b8b57cdf021bfc08eab1b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result": {
+          "valid": true,
+          "tasks": 30,
+          "acceptance_cases": 90,
+          "improvements": 20
+        }
+      },
+      {
+        "name": "coverage",
+        "command": [
+          "<maintained-checkout-pinned-python.exe>",
+          "-B",
+          "-X",
+          "utf8",
+          "scripts/Test-Coverage.py",
+          "--repo",
+          "."
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:47:46.783086+00:00",
+        "completed_utc": "2026-10-04T10:47:46.947517+00:00",
+        "stdout_sha256": "3a79b3d5e9f89e92480da1a87813810fd03e97f39e125f60832d2eedbd6048ce",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result": {
+          "mapped_cases": 87,
+          "required_cases": 87,
+          "commands": 43,
+          "named_reviews": 12,
+          "retained_gaps": 8,
+          "scope": "Structural traceability only; commands are available coverage, not execution results."
+        }
+      },
+      {
+        "name": "next",
+        "command": [
+          "<maintained-checkout-pinned-python.exe>",
+          "-B",
+          "-X",
+          "utf8",
+          "docs/codex/winaudioclean/tools/handoff.py",
+          "next",
+          "--plan-root",
+          "docs/codex/winaudioclean"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:47:46.947596+00:00",
+        "completed_utc": "2026-10-04T10:47:47.273827+00:00",
+        "stdout_sha256": "b4e5c94d15fa958855cc3ce30060ac2b0e2d98a2eb20e7d3845f34b365b85ceb",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "result": {
+          "ready": [
+            {
+              "id": "WAC-M5-04",
+              "title": "Execute only explicitly approved merge and publication actions",
+              "approval_needed": true
+            }
+          ],
+          "blocked": []
+        }
+      },
+      {
+        "name": "coverage-regressions",
+        "command": [
+          "<maintained-checkout-pinned-python.exe>",
+          "-B",
+          "-X",
+          "utf8",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "docs/codex/winaudioclean/tests",
+          "-p",
+          "test_coverage.py",
+          "-v"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:47:47.273873+00:00",
+        "completed_utc": "2026-10-04T10:47:47.763450+00:00",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "097750dc071698a9b56c305c8ad03681c71b3f6ca5556578f02119c4aaa88076",
+        "result": {
+          "ran": 13,
+          "failed": 0,
+          "skipped": 0
+        }
+      },
+      {
+        "name": "canonical-plan",
+        "command": [
+          "<maintained-checkout-pinned-python.exe>",
+          "-B",
+          "-X",
+          "utf8",
+          ".wac-local/WAC-M5-03/check-canonical-plan.py"
+        ],
+        "exit_code": 0,
+        "started_utc": "2026-10-04T10:47:47.763680+00:00",
+        "completed_utc": "2026-10-04T10:47:48.168220+00:00",
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "814ab7b308b8b86af6372907545a16c56d6529b401b047a15d024821f300b047",
+        "result": {
+          "ran": 1,
+          "failed": 0,
+          "skipped": 0
+        }
+      }
+    ],
+    "prior_capture_controller_failure": {
+      "status": "collector_assertion_failed",
+      "source_prior_commit": "1d2f67e010be96dc68a33e8b2993f2ec1b95acb3",
+      "actual_command_exit_codes": {
+        "plan": 0,
+        "coverage": 0
+      },
+      "failure": "Collector expected an exact five-key coverage result and omitted the valid scope field. No product test or CLI failure.",
+      "recovery": "Preserve first logs, compare the five required counters, rerun narrow metadata controller only; no local Full rerun.",
+      "first_controller_sha256": "facaf8922e50d09032069e89a7cefd1d1e3390030ad04f80e3ccad17e16d533a",
+      "preserved_log_sha256": {
+        "closure-plan.stdout.log": "a5dbec61e7e667cb2596f6ac6d02efb47f3212f79e3b8b57cdf021bfc08eab1b",
+        "closure-plan.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "closure-coverage.stdout.log": "3a79b3d5e9f89e92480da1a87813810fd03e97f39e125f60832d2eedbd6048ce",
+        "closure-coverage.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "verifier_sha256": "dd995558bd3901fb01ba02525c05dcf754fff3ef2f19d2481e36d5d963c0d6ca",
+    "canonical_plan_driver_sha256": "a136783f4cc278807f73d656af2f2a21d35381995a1e916842e3a14794c97eef",
+    "canonical_plan_driver_source": "from pathlib import Path\nimport sys\nimport unittest\n\nsys.dont_write_bytecode = True\nrepo = Path(__file__).resolve().parents[2]\nsys.path.insert(0, str(repo / 'docs/codex/winaudioclean/tests'))\nimport test_handoff\n\nsuite = unittest.defaultTestLoader.loadTestsFromTestCase(test_handoff.CanonicalPlanTests)\nresult = unittest.TextTestRunner(verbosity=2).run(suite)\nraise SystemExit(0 if result.wasSuccessful() else 1)\n"
+  }
+}

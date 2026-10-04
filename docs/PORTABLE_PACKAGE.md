@@ -79,3 +79,65 @@ are excluded. Committed bytes are preserved, ZIP order/timestamps/attributes
 are fixed and entries are uncompressed. Actual equality is evidence only for
 the source and host versions checked; compare your own outputs before making
 a reproducibility claim.
+
+## Return to a prior source candidate safely
+
+The recorded earlier candidate is application **2.3**, source commit
+`1f10940ee970ebe719c21ba0e7290830beeb7123`, archive
+`WinAudioClean-2.3-1f10940ee970-tool-only.zip`, **438904 bytes**, SHA256
+`d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7`.
+This identifies a reviewed source checkpoint and locally tested candidate;
+it is not a published release or tag. A different source commit has a different
+package identity even when its application version is also 2.3.
+
+1. Let active jobs finish or cancel them through the application before switching
+   tools. Retain the current tool directory, original recordings, preferences,
+   reports and exports. Returning to older code does not require removing any of
+   them or resetting preferences.
+2. Obtain the complete earlier package from your retained verified local copy,
+   or reconstruct that exact source as described below. Apply the checksum
+   verification above and compare its manifest's version/source commit with the
+   reference here. Stop if bytes, checksum or identity differ.
+3. Extract into a **new**, short, user-writable folder such as
+   `WinAudioClean-prior`. Keep all package components together; do not overwrite
+   the current installation or mix individual scripts from different revisions.
+   Supply the same deliberately selected, trusted FFmpeg/ffprobe dependencies.
+4. For the first check, supply a recording explicitly, use a separate output
+   folder and an isolated settings path. Older code may not accept newer saved
+   preferences. `-IgnoreSavedSettings` bypasses preferences without changing
+   their bytes; do not use `-SaveSettings` or `-ResetSettings` against your normal
+   settings as a rollback step. Read the result and listen before choosing which
+   complete tool directory to use.
+
+For this example, run from the parent of `WinAudioClean-prior`, supply your own
+`Inputs\recording.wav`, and create a new writable `RollbackCheck` directory.
+`RollbackCheck\isolated-settings.json` may remain absent. The command chooses a
+distinct output directory; it never replaces the source or prior exports:
+
+```powershell
+& '.\WinAudioClean-prior\WinAudioClean.ps1' -inputPath '.\Inputs\recording.wav' -Mode Zoom -OutputDirectory '.\RollbackExports' -SettingsPath '.\RollbackCheck\isolated-settings.json' -IgnoreSavedSettings -NonInteractive
+```
+
+The existing BAT route can likewise use explicit `WAC_LAUNCH_SETTINGS_PATH`,
+input and output environment values as documented in the README. Switch back
+by invoking the retained current tool directory with those deliberate paths.
+Keep source recordings and preferences outside tool directories; no automatic
+delete, reset, cleanup sweep or folder reuse is part of this procedure.
+
+For a development reconstruction, use Git and PowerShell in a **new** checkout:
+
+```powershell
+git clone --no-checkout https://github.com/PikkuJanne/WinAudioClean.git '.\WinAudioClean-prior-source'
+git -C '.\WinAudioClean-prior-source' switch --detach '1f10940ee970ebe719c21ba0e7290830beeb7123'
+git -C '.\WinAudioClean-prior-source' rev-parse HEAD
+git -C '.\WinAudioClean-prior-source' status --short
+& '.\WinAudioClean-prior-source\scripts\Build-Release.ps1' -Revision '1f10940ee970ebe719c21ba0e7290830beeb7123' -OutputDirectory '.\WinAudioClean-prior-build'
+```
+
+Before building, require the displayed HEAD to match the exact reference and
+`status --short` to be empty. Each command must succeed; stop on a nonzero exit
+instead of resetting or cleaning an existing checkout. Choose new clone/build
+directories, repeat the build to another new destination as described above,
+and verify the resulting archive against the recorded identity and checksum.
+These are local development actions and do not create a release or enable a
+website download.

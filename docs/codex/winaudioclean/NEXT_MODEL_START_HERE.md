@@ -1,3 +1,121 @@
+# Next model: WAC-M5-04 — exact owner approval required
+
+Date: 2026-10-04. **WAC-M5-03 is complete.** Canonical 29 done / 1 todo; 87 pass / 3 not_run. **Next: WAC-M5-04 — Execute only explicitly approved merge and publication actions**, approval-gated and not started.
+
+All 20 improvements have implemented, evidenced engineering behavior; all 90 cases have concrete dispositions. The bounded baseline audit found no known current safety/false-success regression blocker and preserved historical failures, accepted recoveries and all eight broader unrun gates. No owner waiver, listening/default-sound promotion or publication approval exists.
+
+Exact frozen source `1d2f67e010be96dc68a33e8b2993f2ec1b95acb3` / tree `c372648aa409f6b3092088a3ae0d8ce4508c7747` passed both actual clean-clone Full gates once per host: ps51: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped. Source groups, nine website files, 15 supplemental documents and retained M5-02 capture hashes stayed unchanged. Privilege skips and non-gating analyzer findings remain explicit. Four actual candidates are byte-identical: version 2.3, 442766 bytes, SHA256 `7cf1430edc621a3829f9d4a089dfa0a6ef8efb52c655491457921b88df896e58`; 17 payload files/18 entries and manifest/checksum/provenance/source/metadata identity verified, with 28 invalid metadata mutations rejected.
+
+Tested-source CI [passed](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37194466266). Final evidence closure changes only governance/evidence. Its exact post-push clean local/live SHA, current PR/CI observation and four NEW closure-source candidate identities must be verified and recorded externally in the approval packet and PR #6 checkpoint before ending this task; they are not observed in this commit. This avoids a self-referential commit. Local Full ran at the frozen source and is not repeated for closure metadata; hosted CI at the closure is separately observed.
+
+Use [HANDOFF.md](HANDOFF.md), [TRACEABILITY.md](TRACEABILITY.md), [the audit](evidence/WAC-M5-03-audit.json), [accepted evidence](evidence/WAC-M5-03.md) and [validation ledger](evidence/WAC-M5-03-validation.json). Preserve `codex/wac-m5-release-readiness`, exact origin https://github.com/PikkuJanne/WinAudioClean.git, draft PR #6/base M4 and the source-only original. Recover live branch/PR/CI and exact artifacts before relying on a proposal.
+
+M5-04 and AC-088..090 remain unrun. No merge/main push/tag/release/deployment, branch deletion/history rewrite, settings/security/bundling change or default-sound promotion. Website remains draft/download-disabled; media and hosting destination are pending. Stop after this handoff; execute only a separately requested, exactly approved action/revision/assets/target.
+
+## Historical M5-03 audit checkpoint
+
+# Next model: finish WAC-M5-03 final acceptance
+
+Date: 2026-10-04. **WAC-M5-03 is in progress.** Canonical 28 done / 1 in_progress / 1 todo; 84 pass / 6 not_run. AC-085..087 remain not_run until final exact-source gates and delivery are recorded.
+
+Baseline `b471c2dc577cf1138007778e6bef0c56c703b9e0` is clean/live-synchronized on `codex/wac-m5-release-readiness`, PR #6 draft/base M4, with all four CI jobs passed. One bounded audit reconciles all 20 implementation groups/all 90 cases and existing evidence; no known current regression blocker found in that scope. Preserve all eight broader gates, privilege skips, historical failures and missing media/listening; no owner waiver or consequential approval.
+
+[Handoff/action checklist](HANDOFF.md), [traceability](TRACEABILITY.md), [audit](evidence/WAC-M5-03-audit.json), [evidence](evidence/WAC-M5-03.md). Freeze/push this documented audit checkpoint before new four builds and one sequential Full per PS5.1/PS7 at its exact clean SHA. Keep source fixed until both complete; no broad listening/manual/stress reruns or default changes. Close governance/evidence afterward and do not repeat Full solely for metadata closure. Rebuild final exact-head candidate after push and generate the external approval packet/PR checkpoint.
+
+No merge, main push, tag/release, settings/security/bundling change or website deployment. Stop after M5-03; next M5-04 requires exact owner approval of action/revision/assets/target, and is not started. Preserve source-only original; use maintained WinAudioClean-governance and exact origin https://github.com/PikkuJanne/WinAudioClean.git.
+
+## Historical M5-02 accepted checkpoint
+
+# Next model: WAC-M5-03 — Final acceptance and approval-ready handoff
+
+Date: 2026-10-04. **WAC-M5-02 is complete.** Canonical 28 done / 2 todo / 0 blocked; 84 AC pass / 6 not_run. **Next: WAC-M5-03 — Final acceptance and approval-ready handoff**, unlocked and not started.
+
+Exact pushed source `250052238451ef7293e1f5cb49267b71e6e148cf` / tree `a3b21f80a713478ef3ab3651eebb94cdeec7dab1` was recovered in a fresh detached GitHub clone on this active Windows machine. Fresh pinned developer downloads occurred at `7b7edc46247172874ca2a9a66e9ba4160e5b899b`; four identical installer/manifest Git blobs bind that setup to the later frozen source. Existing OS Git, PS5.1 and Framework compiler remain explicit prerequisites.
+
+Both actual Full gates passed on the stable clean clone: ps51: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped. Focused Release Pester 16/16 on each host and package/website Python 8/20 tests passed without skips. All source groups and supplemental website/user-document hashes stayed unchanged. Local privilege skips, analyzer advisories and all eight broader gaps remain recorded.
+
+Four actual tool-only builds (twice per host) are identical: version 2.3, 442766 bytes, SHA256 `f0ae14fcba29c29396e9298f7dcf571d9a8dbb8451f52304c3b92c4517c8804e`, 17 committed payload files plus manifest. ZIP/manifest/checksum/provenance and ephemeral metadata identify the same exact source; corrupt checksum and wrong version each failed with their expected CLI exit 1. The exact committed documentation negative helper also passed. Website draft and real media remain pending/download-disabled.
+
+Bounded privacy review covered 17 payload files and nine website files with zero findings. Actual prior source 1f10940 was independently recovered/rebuilt to its recorded package hash. Four synthetic prior/current Zoom runs across PS5.1/7 and four ShowSettings checks passed; all 39 protected hashes stayed unchanged. Normal preferences/private recordings were not used. No publication/listening/migration or clean OS claim.
+
+Reconstructed-source CI: [passed](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37190100026). Final metadata-only closure SHA/PR/CI/live equality must be observed separately. Evidence: [accepted record](evidence/WAC-M5-02.md), [ledger](evidence/WAC-M5-02-validation.json). Use maintained `WinAudioClean-governance`, feature branch `codex/wac-m5-release-readiness`, exact origin https://github.com/PikkuJanne/WinAudioClean.git and draft PR #6 based on `codex/wac-m4-regression`. Preserve the source-only original.
+
+Read AGENTS, STATUS, DECISIONS, TASKS, ACCEPTANCE, SYNC_PROTOCOL, COVERAGE and tasks/WAC-M5-03 before starting the next task. Do not repeat stable Full solely for metadata closure. No main push, merge, tag/release, deployment, bundling, global settings/security or default-sound promotion. Stop after M5-02 until next requested.
+
+## Historical M5-02 reconstruction checkpoint
+
+# Next model: finish WAC-M5-02 reconstruction
+
+Date: 2026-10-04. **WAC-M5-02 is in progress.** Canonical 27 done / 1 in_progress / 2 todo; 81 AC pass / 9 not_run. AC-082..084 remain not_run until actual reconstruction, candidate, privacy/rollback and cumulative checks pass.
+
+Starting checkpoint `7b7edc46247172874ca2a9a66e9ba4160e5b899b` is clean and live-synchronized on `codex/wac-m5-release-readiness`; draft PR #6 stays based on `codex/wac-m4-regression`. Its own CI was observed pending at session start and is distinct from the passed M5-01 implementation CI. Recover the live state before relying on cached refs.
+
+A fresh GitHub clone on this active machine recovered the exact starting revision in detached HEAD. Fresh checkout-local pinned developer setup is in progress; it does not reuse the maintained checkout's tool/module caches. Narrow documentation fixes add safe separate-folder prior-source rollback and correct the stale website sentence. The draft stays download-disabled; screenshots/audio remain pending.
+
+Read the task brief, RECONSTRUCTION.md, PORTABLE_PACKAGE.md, CI.md and tests/README.md. Push and freeze the documented source checkpoint before fetching it into the rehearsal clone. Stabilize selected package/metadata tests, build four actual candidates, inspect source/manifest/checksum/provenance, reject altered checksum/version inputs, and review privacy and protected-byte rollback. Run each required actual local Full gate once on the stable clean clone; preserve the resulting exact source/tool/hash/count evidence and any failures/skips.
+
+Evidence: [in-progress record](evidence/WAC-M5-02.md). Preserve all eight broader coverage gaps, the source-only original, runtime/BAT/default filters and package allowlist. No main push, merge, release/tag, settings/security change, bundling, publication or sound promotion. Stop after M5-02; next only M5-03 when this task is accepted and synchronized.
+
+## Historical accepted M5-01 checkpoint
+
+# Next model: WAC-M5-02 — Rehearse clean-checkout and release-candidate reconstruction
+
+Date: 2026-10-04. **WAC-M5-01 is complete.** Canonical 27 done / 3 todo / 0 blocked; 81 AC pass / 9 not_run. **Next: WAC-M5-02 — Rehearse clean-checkout and release-candidate reconstruction**, unlocked and not started.
+
+The portable static website draft, versioned release metadata/schema, MIT asset
+registry, validator and 20 regressions are implemented. Source `11fe377c5fd05624dcc280d89fd119741c6fde9e` passed both actual local Full gates: ps51: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped. Every gate exited 0, with zero outside-scope cases and unchanged source/website contents. Retain local privilege skips and all eight broader gaps.
+
+All 15 actual browser metadata fixtures, 17 independent VM vectors, selected
+palette contrast and keyboard/desktop/mobile checks pass within their recorded
+scopes. Only a temporary actual-package fixture enables its local download.
+Committed metadata remains draft with null release fields. Screenshots/audio and
+consent inventories remain pending; no listening or publication is inferred.
+The verified package fixture remains the earlier accepted source 1f10940,
+438904 bytes / SHA256 d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7.
+
+Tested-source CI is **passed**: [observed run](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37187177111). Actual final closure PR/CI/live synchronization must be inspected separately at its own SHA. Source/host/hash/count evidence: [accepted record](evidence/WAC-M5-01.md), [ledger](evidence/WAC-M5-01-validation.json).
+
+Read AGENTS, STATUS, DECISIONS, TASKS, ACCEPTANCE, SYNC_PROTOCOL, COVERAGE and
+tasks/WAC-M5-02. Use maintained WinAudioClean-governance on
+codex/wac-m5-release-readiness with exact origin
+https://github.com/PikkuJanne/WinAudioClean.git. Draft PR #6 remains stacked on
+codex/wac-m4-regression. Recover actual branch, HEAD and live PR; do not use a cached
+tracking ref as delivery proof. Preserve the source-only original and runtime,
+BAT/script/default sound and package allowlist.
+
+Do not repeat stable Full solely for closure metadata. New source, failures or
+unresolved concerns justify additional gates. No merge/main push/tag/release,
+bundling, settings changes, deployment or sound promotion is authorized. Start
+only M5-02 when requested, after fresh checkpoint synchronization.
+
+## Historical M5-01 implementation checkpoint (superseded)
+
+# Next model: finish WAC-M5-01 validation
+
+Date: 2026-10-04. WAC-M5-01 implementation and validation are in progress.
+Canonical 26 done / 1 in_progress / 3 todo; 78 AC pass / 12 not_run.
+The isolated static page and release schema are draft. No release or website
+is published. Actual browser, local package metadata and stable cumulative
+gates are required before AC-079..081 acceptance.
+
+Use the maintained WinAudioClean-governance checkout on
+codex/wac-m5-release-readiness; exact origin
+https://github.com/PikkuJanne/WinAudioClean.git. Parent
+ea5d53d91ff2c035a50b9808fda18ceba38d3b61 was live-synchronized and all four
+parent PR jobs passed in run 37182880390. Inspect current Git/live PR state
+separately. Read AGENTS, task brief, STATUS, DECISIONS, TASKS, ACCEPTANCE,
+SYNC_PROTOCOL, COVERAGE and evidence/WAC-M5-01.md before continuation.
+
+No real screenshots or permission-cleared audio have been admitted. Downloads
+stay unavailable in draft metadata; synthetic/local fixtures do not establish
+publication or speech-quality evidence. Preserve all eight broader gaps and
+unchanged runtime sound, BAT/script entries and tool-only package allowlist.
+No merge/main push/tag/release, deployment, bundling, settings changes or sound
+promotion is authorized. Start no later task before this checkpoint is complete
+and freshly verified on the live feature branch.
+
+## Historical M4-04 closure (superseded)
+
 # Next model: WAC-M5-01 — Prepare static website assets and release metadata
 
 Date: 2026-10-04. **WAC-M4-04 is complete.** Canonical 26 done / 4 todo / 0 blocked; 78 AC pass / 12 not_run. **Next: WAC-M5-01 — Prepare static website assets and release metadata**, unlocked and not started.
