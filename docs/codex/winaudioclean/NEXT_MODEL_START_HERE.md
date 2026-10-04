@@ -1,3 +1,29 @@
+# Next model: finish WAC-M5-01 validation
+
+Date: 2026-10-04. WAC-M5-01 implementation and validation are in progress.
+Canonical 26 done / 1 in_progress / 3 todo; 78 AC pass / 12 not_run.
+The isolated static page and release schema are draft. No release or website
+is published. Actual browser, local package metadata and stable cumulative
+gates are required before AC-079..081 acceptance.
+
+Use the maintained WinAudioClean-governance checkout on
+codex/wac-m5-release-readiness; exact origin
+https://github.com/PikkuJanne/WinAudioClean.git. Parent
+ea5d53d91ff2c035a50b9808fda18ceba38d3b61 was live-synchronized and all four
+parent PR jobs passed in run 37182880390. Inspect current Git/live PR state
+separately. Read AGENTS, task brief, STATUS, DECISIONS, TASKS, ACCEPTANCE,
+SYNC_PROTOCOL, COVERAGE and evidence/WAC-M5-01.md before continuation.
+
+No real screenshots or permission-cleared audio have been admitted. Downloads
+stay unavailable in draft metadata; synthetic/local fixtures do not establish
+publication or speech-quality evidence. Preserve all eight broader gaps and
+unchanged runtime sound, BAT/script entries and tool-only package allowlist.
+No merge/main push/tag/release, deployment, bundling, settings changes or sound
+promotion is authorized. Start no later task before this checkpoint is complete
+and freshly verified on the live feature branch.
+
+## Historical M4-04 closure (superseded)
+
 # Next model: WAC-M5-01 — Prepare static website assets and release metadata
 
 Date: 2026-10-04. **WAC-M4-04 is complete.** Canonical 26 done / 4 todo / 0 blocked; 78 AC pass / 12 not_run. **Next: WAC-M5-01 — Prepare static website assets and release metadata**, unlocked and not started.
