@@ -34,7 +34,7 @@ PAYLOAD = tuple(sorted((
     "WinAudioClean.Launcher.ps1", "WinAudioClean.Output.ps1", "WinAudioClean.Preview.ps1",
     "WinAudioClean.Queue.ps1", "WinAudioClean.Settings.ps1", "WinAudioClean.bat",
     "WinAudioClean.ico", "LICENSE", "README.md", "docs/PORTABLE_PACKAGE.md",
-    "THIRD_PARTY_NOTICES.md", "docs/codex/winaudioclean/DATA_FORMATS.md",
+    "THIRD_PARTY_NOTICES.md", "docs/SUPPORT.md", "docs/SECURITY.md", "docs/codex/winaudioclean/DATA_FORMATS.md",
 )))
 ENTRIES = tuple(sorted(PAYLOAD + ("PACKAGE-MANIFEST.json",)))
 FRAMES = 8 * 48000

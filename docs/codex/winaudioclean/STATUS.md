@@ -1,5 +1,18 @@
 # Current status
 
+Date: 2026-10-04. **WAC-M4-04 implementation and validation are in progress.**
+Canonical 25 done / 5 todo, 75 AC pass / 15 not_run remain unchanged. README,
+complete parameter help, support/security and their package inclusion are
+implemented. Exact clean-ZIP example/failure walkthroughs and cumulative
+checks remain required. All eight broader gaps and default sound are retained.
+[Current evidence](evidence/WAC-M4-04.md). Next remains completion of M4-04.
+
+Parent `33efc4a2f589927203997d65f76096f46bfe3c65` is live-synchronized; its four
+PR CI jobs passed in run 37152237090. No publication/merge/deployment occurs.
+
+## Historical M4-03 closure (superseded)
+# Current status
+
 Date: 2026-10-03. **WAC-M4-03 is complete.** Canonical 25 done / 5 todo / 0 blocked;
 75 AC pass / 15 not_run. **Next: WAC-M4-04 — Finish user-facing help, setup and
 troubleshooting**, unlocked and not started. All eight broader gaps remain.

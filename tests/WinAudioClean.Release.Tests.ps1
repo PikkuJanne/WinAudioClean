@@ -5,7 +5,7 @@ BeforeAll {
         'WinAudioClean.IO.ps1', 'WinAudioClean.Launcher.ps1', 'WinAudioClean.Output.ps1',
         'WinAudioClean.Preview.ps1', 'WinAudioClean.Queue.ps1', 'WinAudioClean.Settings.ps1',
         'WinAudioClean.bat', 'WinAudioClean.ico', 'WinAudioClean.ps1',
-        'docs/PORTABLE_PACKAGE.md', 'docs/codex/winaudioclean/DATA_FORMATS.md'
+        'docs/PORTABLE_PACKAGE.md', 'docs/SUPPORT.md', 'docs/SECURITY.md', 'docs/codex/winaudioclean/DATA_FORMATS.md'
     )
     [Array]::Sort($script:releasePayload, [StringComparer]::Ordinal)
     Add-Type -AssemblyName System.IO.Compression
@@ -104,7 +104,7 @@ Describe 'Committed tool-only release packaging' -Tag 'Release', 'Packaging' {
         [string[]]$expected = @($script:releasePayload) + 'PACKAGE-MANIFEST.json'
         [Array]::Sort($expected, [StringComparer]::Ordinal)
         ($entries.Path -join '|') | Should -BeExactly ($expected -join '|')
-        $entries.Count | Should -Be 16
+        $entries.Count | Should -Be 18
         foreach ($entry in $entries) {
             $entry.Time.Year | Should -Be 1980
             $entry.Time.Month | Should -Be 1
@@ -121,7 +121,7 @@ Describe 'Committed tool-only release packaging' -Tag 'Release', 'Packaging' {
         $manifest.version | Should -BeExactly '2.3'
         $manifest.source_commit | Should -BeExactly $fixture.Commit
         $manifest.source_tree | Should -BeExactly $fixture.Tree
-        $manifest.payload.Count | Should -Be 15
+        $manifest.payload.Count | Should -Be 17
         ($manifest.payload.path -join '|') | Should -BeExactly ($script:releasePayload -join '|')
         foreach ($item in $manifest.payload) {
             $entry = $entries | Where-Object Path -CEQ $item.path

@@ -1,79 +1,79 @@
 # Portable tool-only package
 
-Extract the complete ZIP into a user-writable folder. Spaces and Unicode in
-the folder name are supported. Keep the eight PowerShell files and
-`WinAudioClean.bat` together. No installer, administrator rights, repository,
-Git, Python or test modules are required to run the extracted application.
+Verify the ZIP, then extract the complete payload into a user-writable folder.
+Spaces and Unicode in that folder are supported. Keep all eight PowerShell
+files and `WinAudioClean.bat` together. No installer, administrator rights,
+repository, Git, Python or test modules are needed to run the application.
+The [first-run guide](../README.md) covers dependency placement and tested
+platform scope; [security guidance](SECURITY.md) explains execution restrictions.
 
-The application version comes from `scriptVersion` in `WinAudioClean.ps1`.
-`PACKAGE-MANIFEST.json` records that version, the exact source commit/tree and
-each packaged source file's byte count and SHA256. The ZIP filename also
-identifies the source revision. This is a local build artifact; creating it
-does not publish a release.
+Application version comes from `scriptVersion` in `WinAudioClean.ps1`.
+`PACKAGE-MANIFEST.json` records it, the exact source commit/tree, and each
+packaged file's byte count/SHA256. The ZIP name includes its source revision.
+A locally built candidate is not a published release or a download promise.
 
-## Verify and supply dependencies
+## Verify a download before extraction
 
-Compare `Get-FileHash -Algorithm SHA256 -LiteralPath '<package.zip>'` with the
-matching `.sha256` file obtained through a trusted channel. A checksum detects
-changed bytes against that expected value; it is not a digital signature.
-The adjacent `.provenance.json` records the ZIP checksum and payload manifest.
-Do not edit files while checking their manifest hashes.
+Place exactly one `WinAudioClean-*-tool-only.zip` and its matching `.sha256`
+file in the current folder. Obtain the expected checksum through a trusted
+channel; a checksum is an integrity comparison, not a digital signature.
+The matching `.provenance.json` additionally records source/payload identity.
 
-FFmpeg and ffprobe are not included or downloaded. Supply an already installed
-Windows build with both executables and the required filters. You can place
-them beside the extracted scripts, keep their `bin` directory on `PATH`, or
-use the explicit PowerShell paths below. An invalid supplied path fails rather
-than selecting another installation. See [dependency notices](../THIRD_PARTY_NOTICES.md)
-and the [main README](../README.md) for supported media and dependency lookup.
-
-## Run from PowerShell
-
-From the extracted folder, use the built-in Windows PowerShell host:
-
+<!-- example: verify-zip -->
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\WinAudioClean.ps1 -inputPath 'C:\Audio\recording.wav' -Mode Zoom -OutputDirectory 'C:\Audio\Cleaned' -FfmpegPath 'C:\Tools\ffmpeg\bin\ffmpeg.exe' -FfprobePath 'C:\Tools\ffmpeg\bin\ffprobe.exe' -IgnoreSavedSettings -NonInteractive
+$zip = @(Get-ChildItem -LiteralPath '.' -File -Filter 'WinAudioClean-*-tool-only.zip')
+if ($zip.Count -ne 1) { throw 'Keep exactly one candidate ZIP in this folder.' }
+$checksum = [IO.File]::ReadAllText([IO.Path]::ChangeExtension($zip[0].FullName, '.sha256')).Trim()
+$actual = (Get-FileHash -Algorithm SHA256 -LiteralPath $zip[0].FullName).Hash.ToLowerInvariant()
+if ($checksum -cne ($actual + '  ' + $zip[0].Name)) { throw 'ZIP checksum mismatch.' }
+$actual
 ```
 
-If PowerShell 7 is installed, `pwsh.exe` accepts the same arguments. Execution
-policy is selected only for this invocation; no global policy change is needed.
-`-IgnoreSavedSettings` selects built-in defaults plus these explicit choices.
-The source remains intact and a new WAV and reports are written to the chosen
-destination. Read the reports and listen to the output before using it.
+Extract only after that comparison succeeds. Choose a new folder; retain every
+packaged runtime/doc/license/icon file. Do not edit payload files while checking
+manifest hashes. For an altered or unexpected download, obtain a trusted copy.
 
-## Run the BAT launcher
+## Supply FFmpeg and run
 
-For interactive use, drag a file onto `WinAudioClean.bat` and select Raw or
-Zoom/Teams. For an unattended check, supply literal paths from PowerShell:
+FFmpeg/ffprobe are not included or downloaded. Supply a trusted Windows build
+with both executables and the required filters. The official
+[FFmpeg download page](https://ffmpeg.org/download.html) links Windows builds;
+verify the chosen provider's exact build/integrity/license information. See
+[dependency notices](../THIRD_PARTY_NOTICES.md). A version banner or capability
+check does not authenticate a binary.
 
-```powershell
-$env:WAC_LAUNCH_INPUT = 'C:\Audio\recording.wav'
-$env:WAC_LAUNCH_OUTPUT_DIRECTORY = 'C:\Audio\Cleaned'
-$env:WAC_LAUNCH_IGNORE_SAVED_SETTINGS = '1'
-& .\WinAudioClean.bat /unattended Zoom
-```
+Place both tools beside the extracted scripts for the README examples. You can
+instead bind explicit `-FfmpegPath` / `-FfprobePath` or configure PATH. A bad
+explicit or present sibling tool fails without fallback. FFprobe also checks
+beside the resolved FFmpeg. No numeric minimum replaces capability checks.
 
-The BAT finds sibling FFmpeg/ffprobe or the existing `PATH`. It starts built-in
-PowerShell 5.1 by default. To select an installed PowerShell 7 executable, set
-`WAC_LAUNCH_POWERSHELL` to its absolute path before invoking the BAT. These
-environment values apply to the caller and its children; remove them when done.
-Use the manifest or direct PowerShell route for paths CMD cannot transport.
-See the README for exit codes, batch selection, reports and saved preferences.
+Open PowerShell in the extracted folder, supply your input, and follow the
+[exact README commands](../README.md). The first command chooses execution
+policy for that child process only; it does not change a machine-wide policy
+or override an enforced restriction. See Microsoft's
+[execution-policy documentation](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies).
+If blocked, follow the normal trusted policy/admin process. Global security
+changes and elevation are not installation steps.
 
-## Rebuild locally
+The BAT's default inner host is built-in PowerShell 5.1; an explicitly supplied
+installed PowerShell host can be selected through `WAC_LAUNCH_POWERSHELL`.
+The README shows an unattended environment-data route and cleanup. Review
+reports and listen before using output. [Troubleshooting](SUPPORT.md) covers
+failures, warnings and private support exports.
 
-Development builds require Git and PowerShell 5.1 or 7, but no Python or test
-module. From an unchanged clean checkout, choose its complete commit SHA:
+## Rebuild a candidate locally (development only)
 
-```powershell
-.\scripts\Build-Release.ps1 -Revision '<full-lowercase-40-hex-commit>' -OutputDirectory '.\dist\build-one'
-.\scripts\Build-Release.ps1 -Revision '<same-commit>' -OutputDirectory '.\dist\build-two'
-```
+Development builds need Git and PS5.1/PS7. In an unchanged clean checkout,
+`git rev-parse HEAD` gives the full lowercase forty-character revision to pass
+to `scripts/Build-Release.ps1 -Revision <revision> -OutputDirectory <new-folder>`.
+Build twice to different new folders from that exact HEAD and compare ZIP hashes.
+The explicit revision must equal clean HEAD; an existing output is never replaced.
 
-The builder requires the explicit current clean revision, reads a fixed list
-of committed blobs and creates new files without replacing existing outputs.
-It preserves their bytes, uses ordinal entry order, a fixed ZIP timestamp and
-uncompressed entries. Only runtime files, their selected docs/icon, MIT notice
-and generated manifest enter the archive. Development tools, tests, handoff
-records, settings, logs, recordings and dependency binaries are excluded.
-Compare the actual ZIP hashes before claiming reproducibility; cross-host
-equality is evidence only for the versions and builds actually checked.
+The fixed allowlist has eight PS components, BAT, icon, MIT license, README,
+portable/support/security docs, dependency notices and the linked report-format
+doc: **17 committed payload files plus the generated manifest**. Tests, build
+scripts, handoff records, preferences, logs, recordings and third-party binaries
+are excluded. Committed bytes are preserved, ZIP order/timestamps/attributes
+are fixed and entries are uncompressed. Actual equality is evidence only for
+the source and host versions checked; compare your own outputs before making
+a reproducibility claim.

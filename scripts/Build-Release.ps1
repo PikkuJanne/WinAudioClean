@@ -182,7 +182,7 @@ if ($before.Commit -cne $Revision) { throw 'Revision must equal the current clea
     'WinAudioClean.Launcher.ps1', 'WinAudioClean.Output.ps1', 'WinAudioClean.Preview.ps1',
     'WinAudioClean.Queue.ps1', 'WinAudioClean.Settings.ps1', 'WinAudioClean.bat',
     'WinAudioClean.ico', 'LICENSE', 'README.md', 'docs/PORTABLE_PACKAGE.md',
-    'THIRD_PARTY_NOTICES.md', 'docs/codex/winaudioclean/DATA_FORMATS.md'
+    'THIRD_PARTY_NOTICES.md', 'docs/SUPPORT.md', 'docs/SECURITY.md', 'docs/codex/winaudioclean/DATA_FORMATS.md'
 )
 [Array]::Sort($payloadPaths, [StringComparer]::Ordinal)
 $blobs = @{}

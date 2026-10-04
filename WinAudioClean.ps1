@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
 Cleans and levels spoken-word recordings locally with PowerShell and FFmpeg.
 .DESCRIPTION
@@ -54,7 +54,69 @@ Choose -JobFolder to group one invocation in a new local job folder, with media
 and reports subfolders. -PickFile and -OpenOutputFolder are explicit optional
 interactive actions. Ordinary console/unattended processing needs no desktop UI.
 Reports may contain local paths and metadata. Diagnostic export is a separate
-local action; review it before sharing. Nothing is automatically uploaded.
+local action for ordinary full-run reports; preview/queue records require manual
+review/summarization. Nothing is automatically uploaded. Early preflight/probe
+failures may have console diagnostics only. Fast render has no fixed total
+timeout; Accurate/Preview stages use duration-derived deadlines. Timing checks
+validate selected-track duration, not container timecodes/video synchronization.
+A crash may leave owned partials; inspect only after the job stops. Installation
+in a user-writable folder needs no administrator rights or global security change.
+See README.md, docs/SUPPORT.md, docs/SECURITY.md and docs/PORTABLE_PACKAGE.md.
+.PARAMETER inputPath
+One existing readable nonempty local file, also accepted at positional argument
+zero. Ordinary drive/relative filesystem paths only; URLs, UNC/device/provider
+paths and alternate data streams are rejected. No input prints usage (exit 2).
+.PARAMETER Mode
+Raw cleans plus levels; Zoom levels only. There is no built-in mode value:
+choose at the prompt unless CLI or saved preferences supply it. Unattended or
+redirected input requires a resolved mode. Q cancels interactive selection.
+.PARAMETER OutputDirectory
+Destination, created and checked for write access. Built-in default is the
+current user's Music folder; CLI overrides saved preferences. No current-folder
+fallback. JobFolder optionally creates separate media/reports subfolders.
+.PARAMETER FfmpegPath
+Explicit literal Windows ffmpeg.exe path. Lookup is explicit path, beside this
+script, then PATH. Invalid explicit or present sibling candidates fail without
+fallback. Version/filter capabilities are checked; no download occurs.
+.PARAMETER FfprobePath
+Explicit literal Windows ffprobe.exe path. Lookup is explicit path, beside the
+resolved FFmpeg executable, then PATH. Invalid explicit/present sibling tools
+fail without fallback. Use a trusted compatible build with both executables.
+.PARAMETER AudioStreamIndex
+Nonnegative absolute media stream index (including video indexes). Automatically
+select the only audio track; otherwise choose interactively or bind the index
+for unattended use. Only that audio track is exported; video/metadata/chapters
+are omitted. Standard mono/stereo is supported, not multichannel downmix.
+.PARAMETER BitDepth
+PCM output bit depth: 16 (built-in default) or 24. Output is always 48 kHz WAV.
+This encoder policy is separate from Original's retained legacy filter values;
+files are not promised bit-identical across settings or FFmpeg builds.
+.PARAMETER LoudnessMode
+Fast (built-in default) uses the retained single-pass graph and reports final
+loudness NOT_MEASURED. Accurate adds analysis and encoded-PCM verification with
+-12 LUFS/-1.5 dBTP targets, +/-0.5 LU and maximum -1.3 dBTP acceptance. Valid
+audio with fallback/unavailable/missed/failed final checks returns warning 7.
+.PARAMETER Mono
+Off by default. Explicitly average stereo left/right before processing; mono
+stays mono. Without this switch standard mono/stereo channel order is retained.
+An explicitly bound false overrides a saved true. Does not enable multichannel.
+.PARAMETER Rf64
+Off by default (ordinary RIFF WAV). Request RF64 even for small files; confirm
+your reader supports it. Conservative RIFF size estimates above 4294967295 bytes
+fail before rendering. Explicit false overrides saved true. No automatic split.
+.PARAMETER NonInteractive
+Off by default. Disable mode/track prompts; requires resolved mode and an
+explicit/saved audio index for ambiguous input. Host noninteractive mode and
+redirected stdin also suppress prompts. Picker/open-folder actions are rejected.
+.PARAMETER ExportDiagnostic
+Local ordinary full-run schema-1 JSON report (maximum 16 MiB) to project into
+allowlisted support JSON. Requires DiagnosticOutputPath; no input or FFmpeg.
+Omits paths, free-form metadata/diagnostics, timestamps, IDs and preset settings.
+Preview JSON and queue JSONL are unsupported. Review manually before sharing.
+Nothing is uploaded; the source report remains unchanged.
+.PARAMETER DiagnosticOutputPath
+New filename for ExportDiagnostic in an existing writable parent directory.
+Existing files are never replaced. Export/validation failures return 2.
 .PARAMETER Preset
 Original (default) preserves the existing Raw/Zoom graphs. Gentle is experimental
 and requires Raw. Neither the preset name nor synthetic checks certify speech quality.
@@ -143,53 +205,39 @@ Positive finite duration through 60 seconds, default 45. The omitted default
 shortens to the available source; an explicit duration beyond the end is rejected.
 Requires -Preview. Source interval rounding is to complete 48 kHz samples.
 .EXAMPLE
-.\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\WinAudioClean.ps1 -inputPath '.\recording.wav' -Mode Zoom -OutputDirectory '.\Exports' -IgnoreSavedSettings -NonInteractive
 
-Choose Raw or Zoom at the prompt. Dragging a file onto WinAudioClean.bat uses
-this same menu.
+From the extracted folder, supply your readable recording.wav and trusted
+sibling ffmpeg.exe/ffprobe.exe. Exports is created automatically. The process
+execution policy does not change machine-wide settings. Built-in PS5.1 is used.
 .EXAMPLE
-.\WinAudioClean.ps1 -inputPath "C:\Audio\meeting.wav" -Mode Zoom -NonInteractive
+& .\WinAudioClean.ps1 -inputPath '.\recording.wav' -Mode Raw -BitDepth 24 -OutputDirectory '.\Exports' -IgnoreSavedSettings -NonInteractive
 
-Run Original/Zoom without the mode prompt. Multiple audio tracks require
--AudioStreamIndex with an absolute stream index.
+Original Raw with 48 kHz PCM24 output; original filters remain unchanged.
 .EXAMPLE
-.\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav" -Mode Raw -BitDepth 24
+& .\WinAudioClean.ps1 -inputPath '.\recording.wav' -Mode Zoom -LoudnessMode Accurate -OutputDirectory '.\Exports' -IgnoreSavedSettings -NonInteractive
 
-Use Original/Raw with 48 kHz PCM24 output. -Mono explicitly averages stereo;
--Rf64 needs a compatible reader. These options do not retune the preset.
+Measured normalization and final encoded-PCM verification. Review warning 7;
+valid audio is retained. Numeric checks do not certify speech quality.
 .EXAMPLE
-.\WinAudioClean.ps1 -inputPath "C:\Audio\meeting.wav" -Mode Zoom -LoudnessMode Accurate -NonInteractive
+& .\WinAudioClean.ps1 -inputPath '.\recording.wav' -Mode Raw -Preset Gentle -CleaningOptions @{Gate=$false; NoiseReductionDb=4} -OutputDirectory '.\Exports' -IgnoreSavedSettings -NonInteractive
 
-Request measured normalization and final PCM loudness verification. The shared
-Accurate prechain ends at 192 kHz before loudnorm; output stays at 48 kHz.
-Silent and subsecond audio carry explicit unavailable reasons. No retry loop
-forces a target; inspect warnings and listen to the result.
+Experimental Gentle with a typed override dictionary. No listening approval.
 .EXAMPLE
-& .\WinAudioClean.ps1 -inputPath "C:\Audio\recording.wav" -Mode Raw -Preset Gentle -CleaningOptions @{Denoise=$false; HighpassHz=50} -NonInteractive
+& .\WinAudioClean.ps1 -inputPath '.\recording.wav' -Mode Zoom -Preview -PreviewStartSeconds 1 -PreviewDurationSeconds 3 -OutputDirectory '.\Exports' -IgnoreSavedSettings -NonInteractive
 
-Opt into the Gentle listening candidate with a typed cleaning override. Reports
-identify the base candidate, customization and exact effective settings. Raw's
-highpass and shared leveling remain; only the four documented stages have toggles.
+Requires at least four seconds of input. Creates four local excerpt/comparison
+WAVs only; open them yourself. No playback or full render starts automatically.
 .EXAMPLE
-.\WinAudioClean.ps1 -inputPath "C:\Audio\meeting.wav" -Mode Zoom -Preview -PreviewStartSeconds 15 -PreviewDurationSeconds 30 -NonInteractive
+& .\WinAudioClean.ps1 -SaveSettings -SettingsPath '.\example-settings.json' -Mode Zoom -OutputDirectory '.\Exports' -IgnoreSavedSettings
 
-Create a bounded preview only. Reports identify the selected interval, warmup
-limits, effective filters, excerpt measurements and separate comparison gains.
-The files remain local; open them explicitly to compare. Full-render settings
-and the source recording are unchanged.
-.EXAMPLE
-.\WinAudioClean.ps1 -SaveSettings -Mode Zoom -OutputDirectory "C:\Audio\Exports"
-
-Save existing processing choices explicitly. Later invocations use saved mode
-without the menu; CLI choices override it. -ShowSettings inspects preferences;
--ResetSettings restores built-in defaults. These actions do not process audio.
-.EXAMPLE
-& .\WinAudioClean.ps1 "C:\Audio\recording.wav" -Mode Raw -Mono:$false -CleaningOptions @{} -NonInteractive
-
-Override saved mode, mono and the entire cleaning override dictionary for one
-run. The file at positional argument zero remains the legacy input parameter.
+Explicitly save to a separate example preferences file without processing audio.
+CLI overrides saved values; normal runs never save automatically.
 .NOTES
-Author: Janne Vuorela. Windows 10/11; Windows PowerShell 5.1 or PowerShell 7+.
+Author: Janne Vuorela. Application version 2.3. Windows desktop with PS5.1/PS7.
+Windows 10/11 are intended targets; active-machine validation used build 26100,
+PS5.1.26100.9444 / PS7.6.5 and FFmpeg/ffprobe 9.0.2 essentials. Other OS/build
+and managed-policy compatibility is not universally verified.
 Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
 Keep WinAudioClean.Preview.ps1 beside them to use optional previews.
 Keep WinAudioClean.Settings.ps1 beside them to use saved preferences.

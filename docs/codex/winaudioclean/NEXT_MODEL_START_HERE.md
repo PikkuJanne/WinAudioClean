@@ -1,3 +1,23 @@
+# Next model: finish WAC-M4-04 validation
+
+M4-04 is active; canonical task/AC remain todo/not_run. Work in maintained
+WinAudioClean-governance, branch codex/wac-m4-regression, exact origin
+https://github.com/PikkuJanne/WinAudioClean.git, draft PR#5 stacked on
+codex/wac-m3-settings. Preserve source-only original. Recover actual revision
+from Git/live branch; parent 33efc4a2f589927203997d65f76096f46bfe3c65 is synced
+and all four parent PR CI jobs passed in run37152237090.
+
+README relative command examples need a supplied recording.wav, full package
+and separate trusted FFmpeg/ffprobe. Keep test input synthetic and SettingsPath
+isolated; do not write normal user preferences. Actual Preview/JSONL export
+rejection is a documented limit, not runtime behavior to broaden in this task.
+17 committed payload files plus manifest include support/security docs.
+Complete stable Targeted, clean-revision build, exact example/support walkthrough,
+then the required cumulative gate. Record actual versions/hashes/counts/skips.
+All eight broader gaps/defaults and consequential-action boundaries remain.
+Do not begin M5-01 before accepted M4-04 and verified checkpoint delivery.
+
+## Historical M4-03 closure handoff (superseded)
 # Next model: WAC-M4-04 — Finish user-facing help, setup and troubleshooting
 
 **M4-03 is complete. Start only M4-04 when requested.** Canonical 25 done / 5 todo,

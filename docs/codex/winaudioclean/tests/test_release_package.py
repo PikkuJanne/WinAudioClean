@@ -75,8 +75,8 @@ class PackageInspectionTests(unittest.TestCase):
         self.assertEqual(actual, self.contents)
         self.assertEqual(actual["LICENSE"], self.blobs["LICENSE"])
         self.assertEqual(facts["license_sha256"], sha256(self.blobs["LICENSE"]))
-        self.assertEqual(facts["payload_count"], 15)
-        self.assertEqual(facts["entry_count"], 16)
+        self.assertEqual(facts["payload_count"], 17)
+        self.assertEqual(facts["entry_count"], 18)
 
     def test_trailing_bytes_rejected_even_with_matching_sidecars(self):
         with self.assertRaisesRegex(package.CheckError, "^zip_end_record$"):
