@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import math
 import os
 from pathlib import Path
 import re
@@ -41,7 +42,39 @@ WARNING_CODES = {
 }
 README_REPORT_COUNTS = {"first-run": 1, "raw-24": 1, "accurate": 1, "gentle": 1,
                         "track-mono-rf64": 1, "preview": 1, "list": 2, "manifest": 1,
-                        "folder": 1, "settings": 0, "bat": 1, "help": 0, "diagnostic": 0}
+                        "folder": 1, "settings-save": 0, "settings-show": 0, "settings-reset": 0,
+                        "bat": 1, "help": 0, "diagnostic": 0}
+RAW_CLEANING = {"schemaVersion": 1, "Declip": True, "Declick": True, "Denoise": True,
+                "Gate": True, "HighpassHz": 80, "NoiseFloorDb": -25, "NoiseReductionDb": 12,
+                "GateThresholdDb": -45, "GateRangeDb": -25}
+GENTLE_CLEANING = dict(RAW_CLEANING, Declip=False, Declick=False, Gate=False,
+                       HighpassHz=60, NoiseFloorDb=-35, NoiseReductionDb=4)
+
+
+def expected_case(identifier):
+    """Independent documented requests, not values read back from a report."""
+    expected = {"mode": "Zoom", "bitDepth": 16, "mono": False, "rf64": False,
+                "loudnessMode": "Fast", "presetId": "original", "presetVersion": "1.0.0",
+                "presetCustomized": False, "cleaning": None, "preview": False,
+                "job_folder": False, "action": None}
+    if identifier in {"raw-24", "help-example-2"}:
+        expected.update(mode="Raw", bitDepth=24, cleaning=RAW_CLEANING)
+    if identifier in {"accurate", "help-example-3"}:
+        expected["loudnessMode"] = "Accurate"
+    if identifier in {"gentle", "help-example-4"}:
+        expected.update(mode="Raw", presetId="gentle", presetVersion="0.1.0",
+                        presetCustomized=True, cleaning=GENTLE_CLEANING)
+    if identifier == "track-mono-rf64":
+        expected.update(bitDepth=24, mono=True, rf64=True)
+    if identifier in {"preview", "help-example-5", "diagnostic-preview-source"}:
+        expected["preview"] = True
+    if identifier == "list":
+        expected["job_folder"] = True
+    if identifier in {"settings-save", "settings-show", "settings-reset"}:
+        expected["action"] = identifier
+    if identifier == "help-example-6":
+        expected["action"] = "settings-save"
+    return expected
 
 HELP_AUDIT = r"""
 $ErrorActionPreference='Stop'
@@ -70,7 +103,10 @@ $parameters=@(foreach ($parameter in $ast.ParamBlock.Parameters) {
 })
 $examples=@($help.examples.example | ForEach-Object { [ordered]@{ code=[string]$_.code } })
 [ordered]@{ shell_version=$PSVersionTable.PSVersion.ToString();
-    application_data=[Environment]::GetFolderPath('ApplicationData'); parameters=$parameters; examples=$examples } |
+    application_data=[Environment]::GetFolderPath('ApplicationData');
+    music_directory=[Environment]::GetFolderPath('MyMusic');
+    elevated_administrator=([Security.Principal.WindowsPrincipal]::new([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator);
+    parameters=$parameters; examples=$examples } |
     ConvertTo-Json -Depth 8 -Compress
 """
 
@@ -116,7 +152,7 @@ def payload_unchanged(package, contents, tools):
 
 
 def extract_package(output, label, contents, tools, *, include_tools=True):
-    package = output / (label + " portable äö " + uuid.uuid4().hex)
+    package = output / (label[:20] + " äö " + uuid.uuid4().hex)
     package.mkdir()
     for name, data in contents.items():
         target = package.joinpath(*name.split("/"))
@@ -143,14 +179,209 @@ def file_inventory(package):
 
 def local_file(value, package):
     require(isinstance(value, str), "report_path_type")
-    path = Path(value)
-    require(path.is_absolute(), "report_path_not_absolute")
+    require(Path(value).is_absolute(), "report_path_not_absolute")
+    path = Path(os.path.normpath(value))
+    package = Path(os.path.normpath(str(package)))
     try:
         path.relative_to(package)
     except ValueError as exc:
         raise CheckError("report_outside_local_fixture") from exc
     release.ordinary_path(path, file=True)
     return path
+
+
+def local_directory(value, package):
+    require(isinstance(value, str) and Path(value).is_absolute(), "report_directory_type")
+    path = Path(os.path.normpath(value))
+    try:
+        path.relative_to(Path(os.path.normpath(str(package))))
+    except ValueError as exc:
+        raise CheckError("report_outside_local_fixture") from exc
+    release.ordinary_path(path)
+    return path
+
+
+def finite_number(value):
+    return type(value) in {int, float} and math.isfinite(value)
+
+
+def requested_report_policy(report, expected, package, path):
+    settings = report["settings"]
+    for name in ("mode", "bitDepth", "mono", "rf64", "loudnessMode"):
+        require(settings.get(name) == expected[name] and
+                (name not in {"mono", "rf64"} or type(settings[name]) is bool), "requested_setting_ignored")
+    for name in ("presetId", "presetVersion", "presetCustomized"):
+        require(report.get(name) == expected[name], "requested_preset_ignored")
+    require(type(report["presetCustomized"]) is bool and type(report["presetExperimental"]) is bool,
+            "preset_flag_type")
+    require(settings.get("cleaning") == expected["cleaning"], "requested_cleaning_ignored")
+    if expected["cleaning"] is not None:
+        require(all(type(settings["cleaning"][name]) is bool for name in ("Declip", "Declick", "Denoise", "Gate")) and
+                all(finite_number(settings["cleaning"][name]) for name in
+                    ("HighpassHz", "NoiseFloorDb", "NoiseReductionDb", "GateThresholdDb", "GateRangeDb")),
+                "cleaning_field_type")
+    require((report.get("reportType") == "preview") is expected["preview"], "requested_route_ignored")
+    require(report["input"].get("streamIndex", report["input"].get("stream", {}).get("index")) == 0,
+            "requested_audio_stream_ignored")
+    organization = report.get("outputOrganization") if expected["preview"] else report["output"].get("organization")
+    if expected["job_folder"]:
+        require(isinstance(organization, dict), "requested_job_folder_ignored")
+        root = local_directory(organization["rootDirectory"], package)
+        media = local_directory(organization["mediaDirectory"], package)
+        reports = local_directory(organization["reportDirectory"], package)
+        require(root.parent == package / "Exports" and re.fullmatch(r"WinAudioClean_Job_[a-f0-9]{32}", root.name) and
+                media == root / "media" and reports == root / "reports" and path.parent == reports and
+                local_file(report["output"]["path"], package).parent == media, "requested_output_layout_ignored")
+    else:
+        require(organization is None and path.parent == package / "Exports", "requested_flat_layout_ignored")
+
+
+def metric_projection(metrics, measurement):
+    require(set(metrics) == {"integratedLufs", "truePeakDbtp", "loudnessRangeLu"}, "measurement_key_inventory")
+    for public, internal in (("integratedLufs", "InputI"), ("truePeakDbtp", "InputTP"), ("loudnessRangeLu", "InputLRA")):
+        value = measurement[internal]
+        require(value is None or finite_number(value), "nonfinite_measurement")
+        reason = None if value is not None else measurement["Reason"]
+        require(metrics[public] == {"value": value, "reason": reason}, "measurement_projection_mismatch")
+
+
+def measured_stage(stage, source, *, allow_native_failure=False):
+    require(stage.get("status") in {"PASSED", "FAILED"} and stage.get("inputSource") == source and
+            isinstance(stage.get("arguments"), list) and stage["arguments"] and
+            isinstance(stage.get("process"), dict), "loudness_stage_structure")
+    process = stage["process"]
+    require({"Started", "TimedOut", "Cancelled", "ExitCode", "Error", "CleanupError"} <= set(process) and
+            all(type(process[key]) is bool for key in ("Started", "TimedOut", "Cancelled")) and
+            (process["ExitCode"] is None or type(process["ExitCode"]) is int) and
+            all(process[key] is None or isinstance(process[key], str) for key in ("Error", "CleanupError")),
+            "loudness_native_result_schema")
+    if stage["status"] == "FAILED" and allow_native_failure:
+        require(stage.get("measurement") is None and process["Cancelled"] is False and
+                isinstance(stage.get("error"), str) and bool(stage["error"].strip()),
+                "failed_final_stage_missing_reason")
+        return None
+    require(process.get("Started") is True and process.get("TimedOut") is False and
+            process.get("Cancelled") is False and process.get("ExitCode") == 0 and
+            not process.get("Error") and not process.get("CleanupError"),
+            "loudness_stage_native_failure")
+    if stage["status"] == "PASSED":
+        measurement = stage["measurement"]
+        require(type(measurement.get("Available")) is bool, "measurement_availability")
+        for key in ("InputI", "InputTP", "InputLRA", "InputThreshold", "TargetOffset"):
+            require(measurement.get(key) is None or finite_number(measurement[key]), "nonfinite_measurement")
+        require(not measurement["Available"] or all(finite_number(measurement[key]) for key in
+                ("InputI", "InputTP", "InputLRA", "InputThreshold", "TargetOffset")), "available_measurement_incomplete")
+        require(measurement["Reason"] is None if measurement["Available"] else
+                measurement["Reason"] in {"too_short", "silence", "undefined_loudness"}, "measurement_reason")
+        return measurement
+    require(stage.get("measurement") is None, "failed_stage_has_measurement")
+    return None
+
+
+def accurate_claims(report):
+    normalization = report["normalization"]
+    warnings = set(report["warningCodes"])
+    require(normalization["requestedMode"] == "Accurate" and type(normalization["linearRequested"]) is bool,
+            "accurate_requested_mode_ignored")
+    analysis = measured_stage(normalization["analysis"], "file")
+    require(analysis is not None, "accurate_analysis_not_passed")
+    render = measured_stage(normalization["render"], "file")
+    final = measured_stage(normalization["final"], "held_output_stream", allow_native_failure=True)
+    require(normalization.get("prechain", "").endswith(",aresample=192000") and
+            "loudnorm=I=-12:TP=-1.5:LRA=7" in normalization.get("renderFilter", ""), "accurate_filter_scope")
+    for stage_name, filter_name in (("analysis", "analysisFilter"), ("render", "renderFilter"), ("final", "finalMeasurementFilter")):
+        arguments = normalization[stage_name]["arguments"]
+        require(all(isinstance(value, str) for value in arguments) and arguments.count("-af") == 1 and
+                arguments.index("-af") + 1 < len(arguments) and
+                arguments[arguments.index("-af") + 1] == normalization[filter_name], "accurate_stage_filter_mismatch")
+    final_arguments = normalization["final"]["arguments"]
+    require(final_arguments.count("-i") == 1 and final_arguments.index("-i") + 1 < len(final_arguments) and
+            final_arguments[final_arguments.index("-i") + 1] == "pipe:0",
+            "accurate_final_input_scope")
+    requested_linear = ":linear=true:" if normalization["linearRequested"] else ":linear=false:"
+    require(requested_linear in normalization["renderFilter"], "accurate_linear_request_mismatch")
+    if render is None:
+        require("normalization_result_unavailable" in warnings, "accurate_render_warning_missing")
+    else:
+        require(normalization["actualType"] == render["NormalizationType"] in {"linear", "dynamic"}, "accurate_render_type")
+    fallback = normalization["fallbackReason"]
+    require(fallback in {None, "measurement_out_of_range", "too_short", "silence", "undefined_loudness", "ffmpeg_dynamic_fallback"},
+            "accurate_fallback_reason")
+    require((fallback is not None) == ("normalization_fallback" in warnings), "accurate_fallback_warning")
+    if final is None:
+        require(set(report["measurements"]) == {"integratedLufs", "truePeakDbtp", "loudnessRangeLu"} and
+                all(metric == {"value": None, "reason": "measurement_failed"}
+                    for metric in report["measurements"].values()), "failed_final_measurement_claim")
+        compliance = {"status": "FAILED", "reason": "measurement_failed"}
+    else:
+        metric_projection(report["measurements"], final)
+        if final["InputTP"] is not None and final["InputTP"] > -1.3:
+            compliance = {"status": "OUT_OF_TOLERANCE", "reason": "true_peak_exceeded"}
+        elif not final["Available"]:
+            compliance = {"status": "UNMEASURABLE", "reason": final["Reason"]}
+        elif abs(final["InputI"] + 12) > 0.5:
+            compliance = {"status": "OUT_OF_TOLERANCE", "reason": "loudness_out_of_tolerance"}
+        else:
+            compliance = {"status": "PASSED", "reason": None}
+    require(report["loudnessCompliance"] == compliance, "accurate_compliance_claim")
+    needed = None if compliance["status"] == "PASSED" else "final_loudness_" + compliance["status"].lower()
+    require((needed is None or needed in warnings) and
+            not any(code.startswith("final_loudness_") and code != needed for code in warnings), "accurate_compliance_warning")
+
+
+def preview_claims(report):
+    expected_range = {"startSeconds": 1, "durationSeconds": 3, "startSamples": 48000, "durationSamples": 144000,
+                      "requestedStartSeconds": 1, "requestedDurationSeconds": 3, "durationExplicit": True,
+                      "defaultDurationClipped": False, "windowStartSeconds": 0, "windowDurationSeconds": 8,
+                      "trimStartSamples": 48000, "trimEndSamples": 192000, "preRollSeconds": 1, "postRollSeconds": 4}
+    require(all(report["range"].get(key) == value for key, value in expected_range.items()), "requested_preview_range_ignored")
+    assets = report["assets"]
+    for asset in assets.values():
+        require(asset["frames"] == 144000 and asset["durationSeconds"] == 3, "preview_asset_interval")
+        measurement = measured_stage(asset["measurementStage"], "held_output_stream")
+        require(measurement is not None, "preview_asset_measurement_failed")
+        metric_projection(asset["measurements"], measurement)
+        require(asset["format"] == {"sampleRate": 48000, "bitDepth": 16, "codec": "pcm_s16le", "channels": 2,
+                                    "channelLayout": "stereo", "container": "RIFF"}, "preview_asset_format_claim")
+    matching = report["matching"]
+    require(type(matching["available"]) is bool and matching["peakCeilingDbtp"] == -1.5 and
+            matching["headroomTargetDbtp"] == -1.7 and matching["toleranceLu"] == 0.2 and
+            all(finite_number(matching[key]) and matching[key] <= 0 for key in ("originalGainDb", "processedGainDb")),
+            "preview_matching_policy")
+    for role, key in (("CompareOriginal", "originalGainDb"), ("CompareProcessed", "processedGainDb")):
+        require(assets[role]["gainDb"] == matching[key], "preview_comparison_gain")
+        peak = assets[role]["measurementStage"]["measurement"]["InputTP"]
+        require(peak is None or peak <= -1.5, "preview_comparison_peak_claim")
+    require(assets["Original"]["gainDb"] == assets["Processed"]["gainDb"] == 0, "preview_source_gain")
+    base_available = all(assets[role]["measurementStage"]["measurement"]["Available"] for role in ("Original", "Processed"))
+    require(matching["available"] is base_available, "preview_matching_availability")
+    original = assets["Original"]["measurementStage"]["measurement"]
+    processed = assets["Processed"]["measurementStage"]["measurement"]
+    if base_available:
+        target = min(original["InputI"], processed["InputI"], original["InputI"] - original["InputTP"] - 1.7,
+                     processed["InputI"] - processed["InputTP"] - 1.7)
+        require(finite_number(matching["commonTargetLufs"]) and abs(matching["commonTargetLufs"] - target) <= 1e-9,
+                "preview_matching_target")
+        gains = {"originalGainDb": min(0, target - original["InputI"]),
+                 "processedGainDb": min(0, target - processed["InputI"])}
+    else:
+        require(matching["commonTargetLufs"] is None, "unavailable_preview_target_claim")
+        gains = {"originalGainDb": 0 if original["InputTP"] is None else min(0, -1.7 - original["InputTP"]),
+                 "processedGainDb": 0 if processed["InputTP"] is None else min(0, -1.7 - processed["InputTP"])}
+    require(all(abs(matching[key] - value) <= 1e-9 for key, value in gains.items()), "preview_derived_gain_mismatch")
+    warnings = set(report["warningCodes"])
+    if base_available and all(assets[role]["measurementStage"]["measurement"]["Available"] for role in ("CompareOriginal", "CompareProcessed")):
+        difference = abs(assets["CompareOriginal"]["measurementStage"]["measurement"]["InputI"] -
+                         assets["CompareProcessed"]["measurementStage"]["measurement"]["InputI"])
+        require(finite_number(matching["pairDifferenceLu"]) and abs(matching["pairDifferenceLu"] - difference) <= 1e-9,
+                "preview_matching_difference")
+        passed = difference <= 0.2 + 1e-9
+        require(matching["status"] == ("PASSED" if passed else "OUT_OF_TOLERANCE") and
+                matching["reason"] == (None if passed else "comparison_loudness_difference") and
+                ("comparison_out_of_tolerance" in warnings) is (not passed), "preview_matching_status")
+    else:
+        require(matching["status"] == "UNMEASURABLE" and matching["pairDifferenceLu"] is None and
+                "comparison_unmeasurable" in warnings, "preview_unmeasurable_claim")
 
 
 def inspect_pcm(path, *, bits, channels, frames, container):
@@ -192,11 +423,13 @@ def inspect_pcm(path, *, bits, channels, frames, container):
             "sample_rate": 48000, "bit_depth": bits, "channels": channels, "frames": frames}
 
 
-def inspect_report(path, package, fixture, version, tool_hashes, allow_warning):
+def inspect_report(path, package, fixture, version, tool_hashes, allow_warning, expected=None):
     raw = path.read_bytes()
     report = release.read_json(raw)
+    expected = expected or expected_case("first-run")
     require(report.get("schemaVersion") == 1 and report.get("toolVersion") == version, "report_schema_or_version")
     preview = report.get("reportType") == "preview"
+    requested_report_policy(report, expected, package, path)
     code = report.get("applicationExitCode")
     require(code in ({0, 7} if allow_warning else {0}) and report.get("status") ==
             ("WARNING" if code == 7 else "SUCCESS"), "report_outcome")
@@ -227,6 +460,7 @@ def inspect_report(path, package, fixture, version, tool_hashes, allow_warning):
     require(text.is_file() and text.read_bytes().strip(), "text_report_missing")
     outputs = []
     if preview:
+        preview_claims(report)
         require(set(report["assets"]) == {"Original", "Processed", "CompareOriginal", "CompareProcessed"}, "preview_asset_inventory")
         require(report["normalization"]["scope"] == "bounded_context_window" and
                 report["range"]["durationSamples"] > 0 and report["range"]["durationSeconds"] <= 8,
@@ -252,6 +486,8 @@ def inspect_report(path, package, fixture, version, tool_hashes, allow_warning):
         require(summary.is_file() and text.read_bytes().strip() in summary.read_bytes(), "summary_report_missing")
         if report["settings"]["loudnessMode"] == "Fast":
             require(report["loudnessCompliance"] == {"status": "NOT_MEASURED", "reason": "no_independent_measurement"}, "fast_measurement_claim")
+        else:
+            accurate_claims(report)
     return {"sha256": release.digest(raw), "text_sha256": release.file_digest(text),
             "schema_version": 1, "type": "preview" if preview else "full", "tool_version": version,
             "preset_id": preset, "preset_version": report["presetVersion"], "status": report["status"],
@@ -264,7 +500,7 @@ def run_code(host, env, package, code, prefix):
         stream.write(code)
     # The bytes retained above are the exact published example. The wrapper
     # changes no command/argument and only returns the application's exit code.
-    wrapper = "$ErrorActionPreference='Stop';$global:LASTEXITCODE=0;" \
+    wrapper = "$ErrorActionPreference='Stop';[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false);$global:LASTEXITCODE=0;" \
               "& ([ScriptBlock]::Create([Text.Encoding]::UTF8.GetString([IO.File]::ReadAllBytes($env:WAC_CHECK_EXAMPLE))));" \
               "exit $LASTEXITCODE"
     child_env = dict(env, WAC_CHECK_EXAMPLE=str(prefix.with_suffix(".ps1")))
@@ -272,12 +508,12 @@ def run_code(host, env, package, code, prefix):
                               "-EncodedCommand", release.encoded(wrapper)], package, child_env, prefix)
 
 
-def inspect_new_reports(package, before, fixture, version, tool_hashes, allow_warning):
+def inspect_new_reports(package, before, fixture, version, tool_hashes, allow_warning, expected):
     after = file_inventory(package)
     reports = []
     for name in sorted(after.keys() - before.keys()):
         if name.endswith(".json") and Path(name).name.startswith("WinAudioClean_"):
-            reports.append(inspect_report(package / name, package, fixture, version, tool_hashes, allow_warning))
+            reports.append(inspect_report(package / name, package, fixture, version, tool_hashes, allow_warning, expected))
     # The documented folder example copies the disclosed fixture before
     # selection. Such byte-identical inputs are distinct from published media.
     input_hash = release.file_digest(fixture)
@@ -297,7 +533,7 @@ def report_media_paths(report):
     return [report["output"]["path"]] if report["output"]["published"] else []
 
 
-def inspect_auxiliary(package, before, after, fixture, code, exit_code, report_count):
+def inspect_auxiliary(package, before, after, fixture, code, exit_code, report_count, expected, prefix):
     diagnostics = []
     journals = []
     for name in sorted(after.keys() - before.keys()):
@@ -319,6 +555,24 @@ def inspect_auxiliary(package, before, after, fixture, code, exit_code, report_c
             items = records[1:-1]
             require(records[0]["inputCount"] == len(items) == report_count and
                     records[-1]["counts"]["success"] == len(items), "journal_item_count")
+            frozen = records[0]["settings"]
+            require(all(frozen.get(key) == expected[key] for key in
+                        ("mode", "bitDepth", "mono", "rf64", "loudnessMode")) and
+                    frozen.get("preset") == ("Gentle" if expected["presetId"] == "gentle" else "Original") and
+                    frozen.get("cleaningOptions") == {}, "journal_requested_settings_ignored")
+            destination = local_directory(frozen["outputDirectory"], package)
+            if expected["job_folder"]:
+                organization = records[0].get("outputOrganization")
+                require(isinstance(organization, dict) and destination.name == "media" and
+                        destination.parent.parent == package / "Exports" and
+                        destination == local_directory(organization["mediaDirectory"], package) and
+                        path.parent == local_directory(organization["reportDirectory"], package), "journal_output_layout_ignored")
+            else:
+                require(destination == package / "Exports" and path.parent == destination, "journal_destination_ignored")
+            if records[0]["schemaVersion"] == 2:
+                require(records[0]["selection"]["kind"] == "folders" and records[0]["selection"]["recurse"] is False and
+                        [local_directory(value, package) for value in records[0]["selection"]["directories"]] == [package / "Inputs"],
+                        "journal_folder_selection_ignored")
             for index, item in enumerate(items, 1):
                 require(item.get("type") == "item" and item.get("index") == index and
                         item.get("exitCode") == 0 and item.get("status") == "SUCCESS" and
@@ -333,6 +587,11 @@ def inspect_auxiliary(package, before, after, fixture, code, exit_code, report_c
         require(len(diagnostics) == 1, "diagnostic_example_missing_export")
     if re.search(rb"(?i)-(?:InputPaths|InputListPath|InputDirectories)\b", code) and exit_code == 0:
         require(len(journals) == 1, "batch_example_missing_journal")
+    if re.search(rb"(?i)-InputListPath\b", code) and exit_code == 0:
+        require(release.read_json((package / "inputs.json").read_bytes()) == {"schemaVersion": 1, "inputs": ["recording.wav"]},
+                "documented_manifest_not_created")
+    if expected["action"] in {"settings-save", "settings-show", "settings-reset"} and exit_code == 0:
+        inspect_settings_action(package, prefix, expected)
     if re.search(rb"(?i)-(?:SaveSettings|ResetSettings)\b", code) and exit_code == 0:
         settings = release.read_json((package / "example-settings.json").read_bytes())
         require(settings.get("schemaVersion") == 1 and isinstance(settings.get("settings"), dict), "example_settings_schema")
@@ -347,24 +606,68 @@ def inspect_auxiliary(package, before, after, fixture, code, exit_code, report_c
     return diagnostics, journals
 
 
+def inspect_settings_action(package, prefix, expected):
+    action = expected["action"]
+    saved = release.read_json((package / "example-settings.json").read_bytes())
+    lines = [line for line in prefix.with_suffix(".stdout.log").read_bytes().splitlines() if line.startswith(b"{")]
+    require(len(lines) == 1, "settings_display_count")
+    shown = release.read_json(lines[0])
+    require(shown.get("schemaVersion") == 1 and isinstance(shown.get("origins"), dict), "settings_display_schema")
+    require(set(shown["origins"]) == {"Mode", "Preset", "LoudnessMode", "BitDepth", "Mono", "Rf64",
+                                      "OutputDirectory", "CleaningOptions", "AudioStreamIndex"}, "settings_origin_inventory")
+    if action == "settings-reset":
+        builtins = {"preset": "Original", "loudnessMode": "Fast", "bitDepth": 16, "mono": False,
+                    "rf64": False, "outputDirectory": expected["music_directory"], "cleaningOptions": {}}
+        require(saved == {"schemaVersion": 1, "settings": {}} and
+                shown["settings"] == builtins and
+                shown["effectiveCleaning"] is None and shown["effectiveFilterChain"] is None and
+                shown["effectiveProfileReason"] == "mode_not_selected" and
+                set(shown["origins"].values()) == {"BuiltIn"} and
+                shown["settings"]["outputDirectory"] == expected["music_directory"], "settings_reset_display")
+    else:
+        expected_saved = {"mode": "Zoom", "preset": "Original", "loudnessMode": "Fast", "bitDepth": 16,
+                          "mono": False, "rf64": False, "outputDirectory": str(package / "Exports"), "cleaningOptions": {}}
+        require(saved == {"schemaVersion": 1, "settings": expected_saved} and shown["settings"] == expected_saved and
+                shown["effectiveCleaning"] is None and shown["effectiveProfileReason"] is None and
+                shown["effectiveFilterChain"] == "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+                "saved_settings_requested_choices")
+        if action == "settings-show":
+            require(all(shown["origins"][name] == "Saved" for name in
+                        ("Mode", "Preset", "LoudnessMode", "BitDepth", "Mono", "Rf64", "OutputDirectory", "CleaningOptions")) and
+                    shown["origins"]["AudioStreamIndex"] == "BuiltIn", "settings_saved_origins")
+        else:
+            require(shown["origins"]["Mode"] == shown["origins"]["OutputDirectory"] == "CLI" and
+                    all(shown["origins"][name] == "BuiltIn" for name in
+                        ("Preset", "LoudnessMode", "BitDepth", "Mono", "Rf64", "CleaningOptions", "AudioStreamIndex")),
+                    "settings_save_origins")
+    for name, value in (("preset", "Original"), ("loudnessMode", "Fast"), ("bitDepth", 16),
+                        ("mono", False), ("rf64", False), ("cleaningOptions", {})):
+        require(shown["settings"].get(name) == value, "settings_display_builtin_defaults")
+
+
 def check_case(host, env, package, code, prefix, fixture, input_hash, contents, tool_hashes, version,
-               *, expected_exits=(0,), allow_warning=False, expect_reports=None, preserve_existing=False):
+               *, expected_exits=(0,), allow_warning=False, expect_reports=None, preserve_existing=False, expected=None):
     before = file_inventory(package)
+    expected = expected or expected_case("first-run")
+    old_summaries = {name: (package / name).read_bytes() for name in before if Path(name).name == "WinAudioClean_Log.txt"}
     result = {"passed": False, "error_code": None, "command_sha256": release.digest(code)}
     try:
         result.update(run_code(host, env, package, code, prefix))
         require(result["exit_code"] in expected_exits and not result["timed_out"], "example_exit_or_timeout")
-        reports, after = inspect_new_reports(package, before, fixture, version, tool_hashes, allow_warning)
+        reports, after = inspect_new_reports(package, before, fixture, version, tool_hashes, allow_warning, expected)
         if expect_reports is not None:
             require(len(reports) == expect_reports, "example_report_count")
         if result["exit_code"] == 7:
             require(allow_warning and any(item["application_exit_code"] == 7 for item in reports), "warning_without_valid_published_report")
         if preserve_existing:
             # The cumulative summary log is intentionally append-only.
+            changes = {"example-settings.json"} if expected["action"] == "settings-reset" else set()
             require(all(after.get(name) == value for name, value in before.items()
-                        if Path(name).name != "WinAudioClean_Log.txt"), "previous_file_changed")
+                        if Path(name).name != "WinAudioClean_Log.txt" and name not in changes), "previous_file_changed")
+            require(all((package / name).read_bytes().startswith(data) for name, data in old_summaries.items()),
+                    "previous_summary_bytes_changed")
         result["diagnostics"], result["journals"] = inspect_auxiliary(package, before, after, fixture, code,
-                                                                     result["exit_code"], len(reports))
+                                                                     result["exit_code"], len(reports), expected, prefix)
         result["reports"] = reports
         result["new_report_count"] = len(reports)
         result["new_output_count"] = sum(len(item["outputs"]) for item in reports)
@@ -379,6 +682,7 @@ def check_case(host, env, package, code, prefix, fixture, input_hash, contents, 
     result["input_unchanged"] = release.file_digest(fixture) == input_hash
     result["payload_and_copied_tools_unchanged"] = payload_unchanged(package, contents, tool_hashes)
     require(result["input_unchanged"] and result["payload_and_copied_tools_unchanged"], "fixture_or_package_changed")
+    result["requested_settings_and_route_verified"] = result["passed"]
     return result
 
 
@@ -406,12 +710,13 @@ def audit_help(host, env, package, output, shell, application_data):
             require(parameter["help_default"] == value, "help_declared_default_mismatch")
             defaults[name] = value
     require(names and observed["examples"], "help_inventory_empty")
+    require(type(observed["elevated_administrator"]) is bool, "host_elevation_observation")
     require(defaults == {"BitDepth": "16", "LoudnessMode": "Fast", "Preset": "Original",
                          "CleaningOptions": "@{}", "PreviewStartSeconds": "0", "PreviewDurationSeconds": "45"},
             "unexpected_declared_default_facts")
-    return {"shell_version": observed["shell_version"], "public_parameter_count": len(names),
+    return {"shell_version": observed["shell_version"], "elevated_administrator": observed["elevated_administrator"], "public_parameter_count": len(names),
             "public_parameters": names, "all_public_parameters_documented": True, "declared_defaults": defaults,
-            "example_count": len(observed["examples"]), "help_output_sha256": result["stdout_sha256"]}, observed["examples"]
+            "example_count": len(observed["examples"]), "help_output_sha256": result["stdout_sha256"]}, observed["examples"], observed["music_directory"]
 
 
 def query_application_data(host, env, output, shell):
@@ -433,10 +738,108 @@ def user_settings_snapshot(application_data):
     return (directory.exists(), path.exists(), release.file_digest(path) if path.is_file() else None)
 
 
+ACL_DENY = r"""
+$ErrorActionPreference='Stop'
+$path=$env:WAC_CHECK_ACL_DIRECTORY
+$acl=Get-Acl -LiteralPath $path
+$sections=[Security.AccessControl.AccessControlSections]::All
+$sid=[Security.Principal.WindowsIdentity]::GetCurrent().User
+$principal=[Security.Principal.WindowsPrincipal]::new([Security.Principal.WindowsIdentity]::GetCurrent())
+$state=[ordered]@{original_sddl=$acl.GetSecurityDescriptorSddlForm($sections); current_sid=$sid.Value;
+    administrator_token=$principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)}
+[IO.File]::WriteAllText($env:WAC_CHECK_ACL_STATE,($state | ConvertTo-Json -Compress),[Text.UTF8Encoding]::new($false))
+if ($state.administrator_token) { throw 'Normal user token required for this fixture.' }
+$rights=[Security.AccessControl.FileSystemRights]::CreateFiles -bor [Security.AccessControl.FileSystemRights]::WriteData -bor [Security.AccessControl.FileSystemRights]::AppendData
+$rule=[Security.AccessControl.FileSystemAccessRule]::new($sid,$rights,[Security.AccessControl.AccessControlType]::Deny)
+$acl.AddAccessRule($rule)
+Set-Acl -LiteralPath $path -AclObject $acl
+$after=Get-Acl -LiteralPath $path
+$observed=@($after.Access | Where-Object { $_.AccessControlType -eq 'Deny' -and
+    $_.IdentityReference.Translate([Security.Principal.SecurityIdentifier]).Value -eq $sid.Value -and
+    ($_.FileSystemRights -band [Security.AccessControl.FileSystemRights]::CreateFiles) })
+$probePath=[IO.Path]::Combine($path,'.wac-permission-probe')
+$probe=$null; $writeDenied=$false
+try { $probe=[IO.FileStream]::new($probePath,[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None,1,[IO.FileOptions]::DeleteOnClose) }
+catch { if ($_.Exception.GetBaseException() -is [UnauthorizedAccessException]) { $writeDenied=$true } else { throw } }
+finally { if ($null -ne $probe) { $probe.Dispose() } }
+if (-not $writeDenied -or [IO.File]::Exists($probePath)) { throw 'Owned permission fixture did not deny the write probe cleanly.' }
+[ordered]@{denial_present=($observed.Count -gt 0); administrator_token=$state.administrator_token;
+    write_denied=$writeDenied; denied_sddl=$after.GetSecurityDescriptorSddlForm($sections)} | ConvertTo-Json -Compress
+"""
+
+ACL_RESTORE = r"""
+$ErrorActionPreference='Stop'
+$state=[IO.File]::ReadAllText($env:WAC_CHECK_ACL_STATE,[Text.Encoding]::UTF8) | ConvertFrom-Json
+$acl=Get-Acl -LiteralPath $env:WAC_CHECK_ACL_DIRECTORY
+# Restore only the snapshotted DACL; owner/group/SACL are never changed.
+$acl.SetSecurityDescriptorSddlForm($state.original_sddl,[Security.AccessControl.AccessControlSections]::Access)
+Set-Acl -LiteralPath $env:WAC_CHECK_ACL_DIRECTORY -AclObject $acl
+$after=Get-Acl -LiteralPath $env:WAC_CHECK_ACL_DIRECTORY
+[ordered]@{original_acl_restored=($after.GetSecurityDescriptorSddlForm([Security.AccessControl.AccessControlSections]::All) -ceq $state.original_sddl)} |
+    ConvertTo-Json -Compress
+"""
+
+
+def support_permission_case(host, env, output, shell, contents, tool_paths, tool_hashes, version, base):
+    package, fixture, input_hash = extract_package(output, shell + "-permissions", contents, tool_paths)
+    destination = package / "Exports"
+    destination.mkdir()
+    release.ordinary_path(destination)
+    require(not any(destination.iterdir()), "permission_fixture_not_empty")
+    state_path = output / (shell + "-permission-acl.private.json")
+    case_env = dict(env, WAC_CHECK_ACL_DIRECTORY=str(destination), WAC_CHECK_ACL_STATE=str(state_path))
+    result = {"id": "permission-denied", "shell": shell, "scope": "normal_user_owned_empty_fixture_acl",
+              "passed": False, "error_code": None, "administrator_token": None, "original_acl_restored": False}
+    setup_prefix = output / (shell + "-permission-deny")
+    restore_prefix = output / (shell + "-permission-restore")
+    try:
+        setup = run_code(host, case_env, package, ACL_DENY.encode("utf-8"), setup_prefix)
+        require(setup["exit_code"] == 0 and not setup["timed_out"], "normal_user_acl_scope_unavailable")
+        observed = release.read_json(setup_prefix.with_suffix(".stdout.log").read_bytes())
+        require(observed["denial_present"] is True and observed["write_denied"] is True and observed["administrator_token"] is False,
+                "normal_user_acl_denial_not_observed")
+        result["administrator_token"] = False
+        result["denial_present"] = True
+        result["write_denied"] = True
+        result["denied_acl_sha256"] = release.digest(observed["denied_sddl"].encode("utf-8"))
+        private_state = release.read_json(state_path.read_bytes())
+        result["original_acl_sha256"] = release.digest(private_state["original_sddl"].encode("utf-8"))
+        result.update(check_case(host, env, package, (base + "\n").encode("utf-8"),
+                                 output / (shell + "-support-permission-denied"), fixture, input_hash,
+                                 contents, tool_hashes, version, expected_exits=(2,), expect_reports=0,
+                                 preserve_existing=True))
+        require(not any(destination.iterdir()), "permission_blocked_destination_not_empty")
+        result["blocked_destination_empty"] = True
+    except CheckError as exc:
+        result["error_code"] = str(exc)
+        result["passed"] = False
+    finally:
+        # The setup persists the original descriptor before the first ACL
+        # mutation. Restoration is attempted even when setup/application fails.
+        if state_path.is_file():
+            restoration = run_code(host, case_env, package, ACL_RESTORE.encode("utf-8"), restore_prefix)
+            if restoration["exit_code"] == 0 and not restoration["timed_out"]:
+                restored = release.read_json(restore_prefix.with_suffix(".stdout.log").read_bytes())
+                result["original_acl_restored"] = restored.get("original_acl_restored") is True
+            result["acl_restore_exit_code"] = restoration["exit_code"]
+        if not result["original_acl_restored"]:
+            result["passed"] = False
+            result["error_code"] = "owned_fixture_acl_restore_failed"
+    if result["original_acl_restored"] and result["administrator_token"] is False:
+        recovery = check_case(host, env, package, (base + "\n").encode("utf-8"),
+                              output / (shell + "-support-permission-recovery"), fixture, input_hash,
+                              contents, tool_hashes, version, expect_reports=1, preserve_existing=True)
+        result["recovery"] = recovery
+        result["passed"] = result["passed"] and recovery["passed"]
+    require(not (package / "example-settings.json").exists(), "support_settings_created")
+    return result
+
+
 def support_cases(host, env, output, shell, contents, tool_paths, tool_hashes, version):
     cases = []
     base = ("& .\\WinAudioClean.ps1 -inputPath 'recording.wav' -Mode Zoom -OutputDirectory 'Exports' "
             "-NonInteractive -IgnoreSavedSettings -SettingsPath 'example-settings.json'")
+    cases.append(support_permission_case(host, env, output, shell, contents, tool_paths, tool_hashes, version, base))
     for identifier, extra, expected in (("missing-tool", " -FfmpegPath 'missing-ffmpeg.exe'", 3),
                                         ("corrupt-input", "", 4), ("destination-file", "", 2)):
         package, fixture, input_hash = extract_package(output, shell + "-" + identifier, contents, tool_paths)
@@ -481,7 +884,7 @@ def support_cases(host, env, output, shell, contents, tool_paths, tool_hashes, v
     preview = base + " -Preview -PreviewStartSeconds 1 -PreviewDurationSeconds 3\n"
     case = check_case(host, env, package, preview.encode("utf-8"), output / (shell + "-support-preview-source"),
                       fixture, input_hash, contents, tool_hashes, version, expected_exits=(0, 7), allow_warning=True,
-                      expect_reports=1, preserve_existing=True)
+                      expect_reports=1, preserve_existing=True, expected=expected_case("diagnostic-preview-source"))
     cases.append({"id": "diagnostic-preview-source", "shell": shell, "scope": "isolated_support_preview", **case})
     reject = ("$report = Get-ChildItem -LiteralPath 'Exports' -Filter 'WinAudioClean_Preview_*.json' | Select-Object -First 1\n"
               "& .\\WinAudioClean.ps1 -ExportDiagnostic $report.FullName -DiagnosticOutputPath 'Exports\\rejected-diagnostic.json' -NonInteractive\n")
@@ -555,7 +958,10 @@ def main(argv=None):
                               "filename": "recording.wav", "supplied_by_controller": True}
         summary["extraction"] = {"fresh_packages_per_host": True, "spaces_and_unicode": True,
                                  "writeable_local_folders": True, "tools_supplied_beside_application": True}
+        base_env = dict(env)
         for shell, host in (("ps51", args.ps51), ("ps7", args.ps7)):
+            env = dict(base_env)
+            env["PSModulePath"] = str(host.parent / "Modules")
             download = args.output / (shell + " download äö " + uuid.uuid4().hex)
             download.mkdir()
             copied_zip = download / args.zip_path.name
@@ -574,17 +980,20 @@ def main(argv=None):
                     "exact_fenced_bytes": True, "command_sha256": release.digest(block["code"]),
                     "passed": passed, "error_code": None if passed else "portable_checksum_example_failed", **case})
             package, fixture, input_hash = extract_package(args.output, shell + "-readme", contents, tool_paths)
-            preflight, _ = release.preflight(host, env, args.output, shell + "-preflight", module_roots)
-            audit, examples = audit_help(host, env, package, args.output, shell, application_data[shell])
+            preflight, _ = release.preflight(host, env, args.output, shell + "-preflight", [host.parent / "Modules"])
+            audit, examples, music_directory = audit_help(host, env, package, args.output, shell, application_data[shell])
             summary["help_audits"].append({"shell": shell, **audit})
             summary.setdefault("preflight", []).append({"shell": shell, **preflight})
             for block in blocks:
                 code = block["code"]
+                wanted = expected_case(block["id"])
+                if wanted["action"] == "settings-reset":
+                    wanted["music_directory"] = music_directory
                 warning = bool(re.search(rb"(?i)-Preview\b|-LoudnessMode\s+['\"]?Accurate\b", code))
                 case = check_case(host, env, package, code, args.output / (shell + "-readme-" + block["id"]),
                                   fixture, input_hash, contents, tool_hashes, expected["version"],
                                   expected_exits=(0, 7) if warning else (0,), allow_warning=warning,
-                                  expect_reports=README_REPORT_COUNTS[block["id"]], preserve_existing=True)
+                                  expect_reports=README_REPORT_COUNTS[block["id"]], preserve_existing=True, expected=wanted)
                 summary["readme_cases"].append({"id": block["id"], "shell": shell,
                     "application_host_family": "5.1" if block["id"] in {"first-run", "bat"} else ("5.1" if shell == "ps51" else "7"),
                     "exact_fenced_bytes": True, **case})
@@ -592,6 +1001,7 @@ def main(argv=None):
             # package so saved state from one example cannot conceal omissions.
             for index, example in enumerate(examples, 1):
                 code = example["code"].encode("utf-8")
+                wanted = expected_case("help-example-" + str(index))
                 require(code.strip() and not re.search(rb"(?i)-(?:PickFile|OpenOutputFolder)\b", code), "interactive_help_example")
                 package_help, fixture_help, hash_help = extract_package(args.output, shell + "-help-" + str(index), contents, tool_paths)
                 warning = bool(re.search(rb"(?i)-Preview\b|-LoudnessMode\s+['\"]?Accurate\b", code))
@@ -599,7 +1009,7 @@ def main(argv=None):
                                   fixture_help, hash_help, contents, tool_hashes, expected["version"],
                                   expected_exits=(0, 7) if warning else (0,), allow_warning=warning,
                                   expect_reports=0 if re.search(rb"(?i)-SaveSettings\b", code) else 1,
-                                  preserve_existing=True)
+                                  preserve_existing=True, expected=wanted)
                 summary["help_cases"].append({"id": "help-example-" + str(index), "shell": shell,
                                               "application_host_family": "5.1" if re.match(rb"powershell\.exe\b", code) else ("5.1" if shell == "ps51" else "7"),
                                               "exact_get_help_code": True, **case})
@@ -612,6 +1022,9 @@ def main(argv=None):
         summary["user_settings_unchanged"] = all(user_settings_snapshot(path) == settings_before[shell]
                                                  for shell, path in application_data.items())
         summary["user_settings_scope"] = "actual_windows_known_folder_from_each_host"
+        summary["maximum_generated_media_path_characters"] = max((len(str(path)) for path in args.output.rglob("*.wav")
+                                                                 if path.name != "recording.wav"), default=0)
+        summary["maximum_generated_journal_path_characters"] = max((len(str(path)) for path in args.output.rglob("*.jsonl")), default=0)
         summary["readme_case_count"] = len(summary["readme_cases"])
         summary["portable_case_count"] = len(summary["portable_cases"])
         summary["help_case_count"] = len(summary["help_cases"])

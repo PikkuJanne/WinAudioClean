@@ -1,6 +1,6 @@
 # Portable tool-only package
 
-Verify the ZIP, then extract the complete payload into a user-writable folder.
+Verify the ZIP, then extract the complete payload into a short user-writable folder.
 Spaces and Unicode in that folder are supported. Keep all eight PowerShell
 files and `WinAudioClean.bat` together. No installer, administrator rights,
 repository, Git, Python or test modules are needed to run the application.
@@ -30,7 +30,9 @@ $actual
 ```
 
 Extract only after that comparison succeeds. Choose a new folder; retain every
-packaged runtime/doc/license/icon file. Do not edit payload files while checking
+packaged runtime/doc/license/icon file. Keep the extraction and output paths short:
+generated names and job folders can exceed host-specific native path limits. See
+[destination troubleshooting](SUPPORT.md). Do not edit payload files while checking
 manifest hashes. For an altered or unexpected download, obtain a trusted copy.
 
 ## Supply FFmpeg and run

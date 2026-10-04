@@ -235,7 +235,7 @@ Explicitly save to a separate example preferences file without processing audio.
 CLI overrides saved values; normal runs never save automatically.
 .NOTES
 Author: Janne Vuorela. Application version 2.3. Windows desktop with PS5.1/PS7.
-Windows 10/11 are intended targets; active-machine validation used build 26100,
+Windows 10/11 are intended targets; active-machine validation used build 26300,
 PS5.1.26100.9444 / PS7.6.5 and FFmpeg/ffprobe 9.0.2 essentials. Other OS/build
 and managed-policy compatibility is not universally verified.
 Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.

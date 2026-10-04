@@ -1,3 +1,9 @@
+# Next model: finish WAC-M4-04 exact package validation
+
+WAC-M4-04 final package walkthrough is in progress on 2026-10-04. Both local Full gates and all four code CI jobs passed at `047aefe906ca7954a225d81f53286eb1275723dc`. Canonical 25 done/5 todo and 75 pass/15 not_run remain unchanged. Final 64-case clean-ZIP examples/support/defaults validation is required after the reviewed documentation/controller corrections. Retain all initial failures, path replays, privilege skips and eight broader gaps. [Evidence](evidence/WAC-M4-04.md).
+
+## Historical M4-04 initial implementation progress (superseded)
+
 # Next model: finish WAC-M4-04 validation
 
 M4-04 is active; canonical task/AC remain todo/not_run. Work in maintained

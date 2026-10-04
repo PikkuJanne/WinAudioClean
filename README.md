@@ -4,8 +4,8 @@ Clean and level speech recordings locally with PowerShell and FFmpeg. Choose **R
 
 ## First run
 
-1. Use a Windows desktop with Windows PowerShell 5.1 or PowerShell 7. The active-machine checks used Windows build 26100, PowerShell 5.1.26100.9444 / 7.6.5 and FFmpeg/ffprobe 9.0.2 essentials. Windows 10/11 are intended targets; other builds and managed security configurations are not universally verified.
-2. Verify the tool-only ZIP using the [portable package guide](docs/PORTABLE_PACKAGE.md), then extract **all** its files into a folder you can write to. Installation needs no administrator rights, Git, Python or test modules.
+1. Use a Windows desktop with Windows PowerShell 5.1 or PowerShell 7. The active-machine checks used Windows build 26300, PowerShell 5.1.26100.9444 / 7.6.5 and FFmpeg/ffprobe 9.0.2 essentials. Windows 10/11 are intended targets; other builds and managed security configurations are not universally verified.
+2. Verify the tool-only ZIP using the [portable package guide](docs/PORTABLE_PACKAGE.md), then extract **all** its files into a short folder you can write to. Installation needs no administrator rights, Git, Python or test modules.
 3. Obtain a Windows FFmpeg distribution with both `ffmpeg.exe` and `ffprobe.exe`; check its origin, integrity and license. Put both beside `WinAudioClean.ps1` and keep all eight PowerShell components beside the BAT. Nothing is downloaded automatically. See [dependency notices](THIRD_PARTY_NOTICES.md).
 4. Open PowerShell in the extracted folder. For the examples below, copy one of your recordings there as `recording.wav` (a readable mono/stereo WAV; at least four seconds for the explicit preview). The file is your input, not part of the ZIP. Other supported media can be supplied with its real filename.
 5. Run the first command below. `Exports` is created automatically. `-IgnoreSavedSettings` makes these examples independent of any existing preferences.
@@ -94,10 +94,22 @@ No recursion occurs unless `-Recurse` is added. Discovery deduplicates file iden
 
 Preferences save only when requested. These commands use a separate example settings file, show resolved values/origins, and reset that file to built-ins:
 
-<!-- example: settings -->
+<!-- example: settings-save -->
 ```powershell
 & .\WinAudioClean.ps1 -SaveSettings -SettingsPath '.\example-settings.json' -Mode Zoom -OutputDirectory '.\Exports' -IgnoreSavedSettings
+```
+
+Inspect the saved values and their origins:
+
+<!-- example: settings-show -->
+```powershell
 & .\WinAudioClean.ps1 -ShowSettings -SettingsPath '.\example-settings.json'
+```
+
+Reset this example file and inspect the built-in values:
+
+<!-- example: settings-reset -->
+```powershell
 & .\WinAudioClean.ps1 -ResetSettings -ShowSettings -SettingsPath '.\example-settings.json'
 ```
 
@@ -176,6 +188,8 @@ The requested targets are **-12 LUFS integrated loudness** and **-1.5 dBTP true 
 FFmpeg resolves from explicit `-FfmpegPath`, beside the script, then PATH. FFprobe resolves from explicit `-FfprobePath`, beside the resolved FFmpeg, then PATH. A bad explicit or present sibling executable fails without fallback. Version responses and mode-specific filter capabilities are checked; there is no claimed universal minimum/build compatibility. Version/filter/media inspections have 15-second deadlines. Fast render has no fixed total timeout; Accurate and Preview use duration-derived bounded deadlines. Diagnostics are captured in memory and long-file/memory stress is unverified.
 
 Supported demuxers: WAV, MP3, FLAC, Ogg, MOV/MP4/M4A, Matroska/WebM, AAC, AIFF, ASF, AVI, subject to available decoders. Only FFmpeg's `file` protocol is allowed. URLs, playlists, concat lists, devices, UNC/device/provider paths and alternate data streams are unsupported. Ordinary drive/relative paths handle spaces, brackets, apostrophes and Unicode through direct PowerShell. That does not certify every CMD positional spelling.
+
+Use short extraction and output paths. Generated filenames and `-JobFolder` nesting add length and can exceed the active host's native file-operation limits. The tested PS7 build failed on a long path that PS5.1 handled; cross-host long-path behavior is not guaranteed. For journal/output path errors, follow the [destination troubleshooting](docs/SUPPORT.md).
 
 RIFF estimates above 4,294,967,295 bytes fail before rendering; `-Rf64` explicitly opts in and requires compatible readers. Space estimation adds padding/header allowance and reserves the larger of 64 MiB or 10% headroom. Other writers can still exhaust space. No automatic splitting/trimming occurs. RF64/size boundaries have small synthetic checks; >4 GB exports, real exhaustion and long stress remain unverified.
 

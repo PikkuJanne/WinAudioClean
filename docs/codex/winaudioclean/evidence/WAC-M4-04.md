@@ -47,3 +47,13 @@ new manual UI observation, >4 GB/disk-exhaustion/long-memory stress or crash/
 power-loss guarantee is inferred. Website release/download metadata does not
 yet exist; compare its absence/contracts without implementing the future M5 task.
 No merge, main push, tag/release, repository setting or deployment occurs.
+
+### Stable Full and documentation follow-up checkpoint
+
+Both actual local Full gates at clean `047aefe906ca7954a225d81f53286eb1275723dc` passed Pester 1483 / 1 privilege skip and Python 142 ran / 1 privilege skip; zero outside scope and all seven source digests stable. Exact PR run 37180768822 completed all four Windows 2022/2025 PS5.1/PS7 jobs successfully. These scopes remain tied to that revision.
+
+The initial clean ZIP walkthrough ran 58 cases: 57 passed; the PS7 explicit-list example failed before rendering while opening a 261-character journal. Retain it separately. Fresh exact-command replays at journal 241 / media 254 characters passed PS5.1 and PS7. Native-only module lookup removed an independent harness remoting issue without fixing the long-path failure. No universal path-length guarantee is inferred. Short extraction/output guidance is added; application runtime is unchanged.
+
+The checker now validates requested settings/cleaning, exact Preview 1..4 seconds, Accurate stage/filter/meter/compliance claims, queue preferences/routes, every settings action, append-only old summaries and normalized local containment. Root split the published settings fence into save/show/reset. Independent review and 36 retained reports plus 21 deliberately wrong-evidence counterexamples passed their stated scopes; synthetic valid warning/reset projections also passed. A separate eight-case settings/owned-permission smoke passed on both non-elevated hosts, including actual write denial, empty blocked output, exact permission restoration and successful recovery. The complete final 64-case walkthrough remains pending.
+
+Current Windows OS build is 26300 (verified from CIM and the Full wrapper); PS5.1 remains 5.1.26100.9444. README/comment-help tested-build notes are corrected. Clean candidate rebuild and 64 exact final package checks are pending. Only documentation/comment-help/controller change after the frozen Full source; no runtime body, builder/test or default-sound change is needed. Canonical M4-04 / AC-076..078 remain todo/not_run until those checks pass.

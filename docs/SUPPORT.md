@@ -69,6 +69,13 @@ relative filesystem paths. UNC/device paths, provider syntax and alternate
 data streams are rejected. Mapped drives and redirected folders can still be
 network storage.
 
+Keep the extraction folder and output base short. Generated filenames and
+`-JobFolder` nesting add to the complete path. Some native file operations can
+fail on long paths even when the parent exists: the tested PS7 build failed
+on one path that PS5.1 handled. If a journal or output reports "path not found"
+or "filename too long", retry from a shorter writable local path. There is no
+universal path-length or cross-host compatibility guarantee.
+
 The initial write probe cannot guarantee later access or capacity. Check free
 space, user quota and applications holding destination files open. An invalid
 destination is normally `2`; allocation, capacity, validation or publication
