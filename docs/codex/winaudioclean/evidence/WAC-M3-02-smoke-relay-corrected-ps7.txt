@@ -1,0 +1,28 @@
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: failed.wav
+Invoke-WacBatchItem: <repo>\WinAudioClean.Batch.ps1:208
+Line |
+ 208 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Controlled item failure
+Processing input 3 of 3: last.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f2e33c38f32a4bd1b25f1294322ce92d\continuation.jsonl
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: cancelled.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f2e33c38f32a4bd1b25f1294322ce92d\cancellation.jsonl
+Processing input 1 of 1: warning.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f2e33c38f32a4bd1b25f1294322ce92d\single-warning.jsonl
+Processing input 1 of 2: <repo>\.wac-local\WAC-M3-02\smoke-f2e33c38f32a4bd1b25f1294322ce92d\missing1.wav
+Invoke-WacBatchItem: <repo>\WinAudioClean.Batch.ps1:208
+Line |
+ 208 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Preflight failed: Input file does not exist or cannot be accessed.
+Processing input 2 of 2: <repo>\.wac-local\WAC-M3-02\smoke-f2e33c38f32a4bd1b25f1294322ce92d\missing2.wav
+Invoke-WacBatchItem: <repo>\WinAudioClean.Batch.ps1:208
+Line |
+ 208 |  …   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Preflight failed: Input file does not exist or cannot be accessed.
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-f2e33c38f32a4bd1b25f1294322ce92d\actual-main.jsonl
+Smoke passed: 5 checks; shell 7.6.5.

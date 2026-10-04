@@ -1,0 +1,987 @@
+Sanitized combined test transcript; exact raw capture retained locally.
+
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (49 files; shell 5.1.26100.9444).
+Static gate passed; 273 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 13 files.
+Discovery found 750 tests in 1.8s.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Launcher.Tests.ps1'
+Describing AC-016: actual launcher keeps environment paths literal through both Windows shells
+  [+] passes meeting with spaces.wav exactly from powershell.exe through inner PS5.1 to the native child 5.14s (5.05s|90ms)
+  [+] passes meeting [draft].wav exactly from powershell.exe through inner PS5.1 to the native child 4.65s (4.64s|3ms)
+  [+] passes speaker's recording.wav exactly from powershell.exe through inner PS5.1 to the native child 3.97s (3.96s|2ms)
+  [+] passes meeting äöÅ.wav exactly from powershell.exe through inner PS5.1 to the native child 4.24s (4.24s|4ms)
+  [+] passes speaker & guest.wav exactly from powershell.exe through inner PS5.1 to the native child 3.87s (3.86s|3ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from powershell.exe through inner PS5.1 to the native child 3.68s (3.67s|3ms)
+  [+] passes meeting !important!.wav exactly from powershell.exe through inner PS5.1 to the native child 3.76s (3.76s|3ms)
+  [+] passes meeting (take 1).wav exactly from powershell.exe through inner PS5.1 to the native child 4.27s (4.27s|2ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from powershell.exe through inner PS5.1 to the native child 3.75s (3.75s|4ms)
+  [+] passes meeting with spaces.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.62s (4.62s|7ms)
+  [+] passes meeting [draft].wav exactly from pwsh.exe through inner PS5.1 to the native child 4.52s (4.52s|3ms)
+  [+] passes speaker's recording.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.38s (4.38s|2ms)
+  [+] passes meeting äöÅ.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.66s (4.65s|2ms)
+  [+] passes speaker & guest.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.79s (4.79s|3ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.35s (4.35s|3ms)
+  [+] passes meeting !important!.wav exactly from pwsh.exe through inner PS5.1 to the native child 4.24s (4.24s|2ms)
+  [+] passes meeting (take 1).wav exactly from pwsh.exe through inner PS5.1 to the native child 4.12s (4.12s|2ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.91s (3.91s|3ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from powershell.exe 1.12s (1.11s|2ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from powershell.exe 1.08s (1.08s|2ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from powershell.exe 1.09s (1.09s|1ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from powershell.exe 1.17s (1.17s|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from powershell.exe 1.22s (1.22s|2ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from powershell.exe 1.19s (1.19s|3ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from powershell.exe 1.09s (1.09s|1ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from pwsh.exe 1.73s (1.73s|1ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from pwsh.exe 1.71s (1.71s|2ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from pwsh.exe 1.7s (1.7s|1ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from pwsh.exe 1.74s (1.73s|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from pwsh.exe 1.85s (1.85s|3ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from pwsh.exe 1.7s (1.7s|1ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from pwsh.exe 1.75s (1.75s|1ms)
+  [+] accepts an environment destination with a trailing backslash from powershell.exe 3.75s (3.75s|3ms)
+  [+] accepts an environment destination with a trailing backslash from pwsh.exe 4.15s (4.14s|5ms)
+  [+] passes a 240-character input path exactly from powershell.exe 3.39s (3.38s|2ms)
+  [+] passes a 240-character input path exactly from pwsh.exe 3.91s (3.91s|1ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in powershell.exe 983ms (982ms|1ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in pwsh.exe 1.61s (1.61s|4ms)
+
+Describing AC-017: launcher preserves application status and has a bounded unattended route
+  [+] preserves status for successful child from powershell.exe 3.24s (3.24s|5ms)
+  [+] preserves status for nonzero child from powershell.exe 3s (3s|1ms)
+  [+] preserves status for failed report after native success from powershell.exe 3.33s (3.33s|5ms)
+  [+] preserves status for invalid executable from powershell.exe 1.82s (1.82s|1ms)
+  [+] preserves status for successful child from pwsh.exe 4.06s (4.05s|2ms)
+  [+] preserves status for nonzero child from pwsh.exe 3.68s (3.67s|2ms)
+  [+] preserves status for failed report after native success from pwsh.exe 4.28s (4.28s|1ms)
+  [+] preserves status for invalid executable from pwsh.exe 2.33s (2.33s|2ms)
+  [+] rejects InvalidMode without starting native processing from powershell.exe 1.1s (1.1s|3ms)
+  [+] rejects MissingEnvironment without starting native processing from powershell.exe 1.13s (1.12s|6ms)
+  [+] rejects ExtraArgument without starting native processing from powershell.exe 1.09s (1.09s|2ms)
+  [+] rejects ExtraFile without starting native processing from powershell.exe 1.12s (1.12s|2ms)
+  [+] rejects InvalidMode without starting native processing from pwsh.exe 1.83s (1.83s|2ms)
+  [+] rejects MissingEnvironment without starting native processing from pwsh.exe 1.89s (1.89s|2ms)
+  [+] rejects ExtraArgument without starting native processing from pwsh.exe 1.93s (1.93s|3ms)
+  [+] rejects ExtraFile without starting native processing from pwsh.exe 1.82s (1.81s|3ms)
+  [+] preserves missing-input failure after the default pause in powershell.exe 1.48s (1.48s|2ms)
+  [+] preserves missing-input failure after the default pause in pwsh.exe 2.15s (2.15s|1ms)
+  [+] preserves a controlled application cancellation status after pause in powershell.exe 1.31s (1.31s|2ms)
+  [+] preserves a controlled application cancellation status after pause in pwsh.exe 2.11s (2.11s|2ms)
+
+Running tests from '<repo>\tests\WinAudioClean.LauncherTransport.Tests.ps1'
+Describing AC-052/054: launcher request parsing accepts narrow verified CMD frames
+  [+] retains every quoted safe character-rich path in order and maps multiple inputs as typed data 172ms (168ms|4ms)
+  [+] rejects percent token before application invocation 60ms (56ms|5ms)
+  [+] rejects exclamation token before application invocation 6ms (5ms|2ms)
+  [+] rejects different original token before application invocation 10ms (8ms|2ms)
+  [+] rejects existing CMD session before application invocation 8ms (5ms|2ms)
+  [+] rejects unquoted operator before application invocation 9ms (7ms|3ms)
+  [+] rejects unbalanced quote before application invocation 11ms (9ms|3ms)
+  [+] rejects capture unavailable before application invocation 9ms (7ms|2ms)
+  [+] accepts a 7599-character original frame and rejects 7600 with manifest guidance 34ms (33ms|1ms)
+  [+] accepts 1024 captured arguments and rejects excess or an explicit capture-overflow marker 88ms (86ms|1ms)
+  [+] keeps special-character manifest and single-environment paths literal without CMD evaluation 22ms (20ms|2ms)
+  [+] rejects the manifest and single input control route 20ms (15ms|5ms)
+  [+] rejects the extra manifest argument control route 9ms (6ms|3ms)
+  [+] rejects the missing manifest control route 11ms (5ms|6ms)
+  [+] rejects the two unattended sources control route 8ms (5ms|3ms)
+  [+] rejects the no unattended source control route 11ms (9ms|2ms)
+  [+] rejects the invalid mode control route 6ms (4ms|2ms)
+  [+] rejects the extra unattended argument control route 6ms (4ms|2ms)
+  [+] forwards exactly one legacy string or one typed array and preserves status 452ms (449ms|3ms)
+  [+] forwards exactly one legacy string or one typed array and preserves status 56ms (52ms|5ms)
+
+Describing AC-052/054: real CMD and the actual BAT forward to both inner PowerShell hosts
+  [+] passes the safe single and ordered multiple-file matrix exactly to powershell.exe 2.11s (2.11s|4ms)
+  [+] passes the safe single and ordered multiple-file matrix exactly to pwsh.exe 4.82s (4.82s|2ms)
+  [+] passes all special names and >8191 manifest payload literally to powershell.exe 1.68s (1.67s|4ms)
+  [+] passes all special names and >8191 manifest payload literally to pwsh.exe 2.25s (2.25s|2ms)
+  [+] rejects defined percent-token expansion before processing a decoy through powershell.exe 750ms (748ms|2ms)
+  [+] rejects defined percent-token expansion before processing a decoy through pwsh.exe 697ms (695ms|2ms)
+  [+] forwards 30 long paths without loss and rejects 32 before work through powershell.exe 1.77s (1.77s|2ms)
+  [+] forwards 30 long paths without loss and rejects 32 before work through pwsh.exe 2.86s (2.86s|2ms)
+  [+] shows no-input guidance and starts no app through powershell.exe 731ms (730ms|1ms)
+  [+] shows no-input guidance and starts no app through pwsh.exe 749ms (748ms|1ms)
+  [+] preserves cancellation130 after the interactive-route pause through powershell.exe 788ms (786ms|1ms)
+  [+] preserves cancellation130 after the interactive-route pause through pwsh.exe 2.12s (2.11s|2ms)
+  [+] preserves selected-worker startup failure3 through one parent pause without starting the application 900ms (899ms|2ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Settings.Tests.ps1'
+Describing AC-049: explicit settings override saved values and built-in defaults
+  [+] chooses the saved then explicit Mode value with an attributable origin 102ms (99ms|4ms)
+  [+] chooses the saved then explicit Preset value with an attributable origin 23ms (21ms|2ms)
+  [+] chooses the saved then explicit LoudnessMode value with an attributable origin 23ms (21ms|2ms)
+  [+] chooses the saved then explicit BitDepth value with an attributable origin 24ms (22ms|2ms)
+  [+] chooses the saved then explicit Mono value with an attributable origin 32ms (29ms|3ms)
+  [+] chooses the saved then explicit Rf64 value with an attributable origin 21ms (19ms|2ms)
+  [+] chooses the saved then explicit OutputDirectory value with an attributable origin 43ms (41ms|2ms)
+  [+] chooses the saved then explicit AudioStreamIndex value with an attributable origin 36ms (34ms|2ms)
+  [+] chooses the saved then explicit CleaningOptions value with an attributable origin 95ms (92ms|3ms)
+  [+] retains the exact built-in policy when every preference is omitted 99ms (98ms|2ms)
+  [+] computes the default path without reading or creating preferences 17ms (15ms|2ms)
+  [+] returns omitted settings for a missing isolated file without creating its parent 30ms (28ms|2ms)
+  [+] maps all saved fields into app-compatible values without materializing defaults 713ms (712ms|1ms)
+  [+] rejects explicit empty Mode instead of falling back to a saved value 14ms (11ms|3ms)
+  [+] rejects explicit empty Preset instead of falling back to a saved value 14ms (13ms|2ms)
+  [+] rejects explicit empty LoudnessMode instead of falling back to a saved value 6ms (5ms|2ms)
+  [+] rejects explicit empty BitDepth instead of falling back to a saved value 13ms (11ms|2ms)
+  [+] rejects explicit empty OutputDirectory instead of falling back to a saved value 6ms (5ms|2ms)
+  [+] rejects explicit empty AudioStreamIndex instead of falling back to a saved value 6ms (5ms|2ms)
+  [+] validates an invalid saved field even when an explicit value would replace it 26ms (24ms|1ms)
+  [+] accepts explicit false SwitchParameter values and ignores non-preference main arguments 25ms (23ms|2ms)
+
+Describing AC-051: saved JSON is bounded typed data rather than executable options
+  [+] rejects truncated JSON while preserving the complete file bytes 36ms (32ms|4ms)
+  [+] rejects trailing content while preserving the complete file bytes 20ms (14ms|6ms)
+  [+] rejects root array while preserving the complete file bytes 16ms (14ms|3ms)
+  [+] rejects root null while preserving the complete file bytes 18ms (15ms|3ms)
+  [+] rejects missing schema while preserving the complete file bytes 17ms (14ms|3ms)
+  [+] rejects unknown schema while preserving the complete file bytes 22ms (19ms|3ms)
+  [+] rejects string schema while preserving the complete file bytes 15ms (13ms|2ms)
+  [+] rejects boolean schema while preserving the complete file bytes 18ms (16ms|2ms)
+  [+] rejects fractional schema while preserving the complete file bytes 13ms (11ms|2ms)
+  [+] rejects missing settings while preserving the complete file bytes 24ms (21ms|3ms)
+  [+] rejects null settings while preserving the complete file bytes 21ms (19ms|2ms)
+  [+] rejects array settings while preserving the complete file bytes 18ms (15ms|4ms)
+  [+] rejects unknown outer key while preserving the complete file bytes 21ms (19ms|2ms)
+  [+] rejects wrong outer key case while preserving the complete file bytes 18ms (16ms|2ms)
+  [+] rejects duplicate outer key while preserving the complete file bytes 19ms (17ms|2ms)
+  [+] rejects duplicate setting while preserving the complete file bytes 15ms (12ms|3ms)
+  [+] rejects escaped duplicate setting while preserving the complete file bytes 22ms (16ms|6ms)
+  [+] rejects wrong setting key case while preserving the complete file bytes 17ms (15ms|2ms)
+  [+] rejects case-coalescing settings keys while preserving the complete file bytes 18ms (15ms|3ms)
+  [+] rejects unknown setting while preserving the complete file bytes 28ms (26ms|2ms)
+  [+] rejects invalid mode while preserving the complete file bytes 20ms (18ms|2ms)
+  [+] rejects null mode while preserving the complete file bytes 19ms (17ms|2ms)
+  [+] rejects empty mode while preserving the complete file bytes 23ms (20ms|3ms)
+  [+] rejects boolean mode while preserving the complete file bytes 20ms (18ms|2ms)
+  [+] rejects invalid preset while preserving the complete file bytes 14ms (13ms|2ms)
+  [+] rejects invalid loudness mode while preserving the complete file bytes 22ms (19ms|3ms)
+  [+] rejects string bit depth while preserving the complete file bytes 31ms (27ms|3ms)
+  [+] rejects fractional bit depth while preserving the complete file bytes 23ms (21ms|2ms)
+  [+] rejects unsupported bit depth while preserving the complete file bytes 17ms (13ms|3ms)
+  [+] rejects boolean bit depth while preserving the complete file bytes 21ms (19ms|2ms)
+  [+] rejects numeric mono while preserving the complete file bytes 26ms (23ms|3ms)
+  [+] rejects string mono while preserving the complete file bytes 18ms (17ms|2ms)
+  [+] rejects array RF64 while preserving the complete file bytes 22ms (18ms|4ms)
+  [+] rejects null RF64 while preserving the complete file bytes 19ms (17ms|2ms)
+  [+] rejects empty output directory while preserving the complete file bytes 27ms (23ms|4ms)
+  [+] rejects numeric output directory while preserving the complete file bytes 14ms (12ms|2ms)
+  [+] rejects URL output directory while preserving the complete file bytes 25ms (21ms|3ms)
+  [+] rejects negative stream index while preserving the complete file bytes 28ms (26ms|3ms)
+  [+] rejects string stream index while preserving the complete file bytes 34ms (30ms|4ms)
+  [+] rejects fractional stream index while preserving the complete file bytes 19ms (17ms|2ms)
+  [+] rejects decimal integer stream index while preserving the complete file bytes 18ms (16ms|2ms)
+  [+] rejects overflow stream index while preserving the complete file bytes 21ms (18ms|4ms)
+  [+] rejects boolean stream index while preserving the complete file bytes 14ms (11ms|3ms)
+  [+] rejects null cleaning while preserving the complete file bytes 15ms (13ms|2ms)
+  [+] rejects array cleaning while preserving the complete file bytes 14ms (13ms|2ms)
+  [+] rejects unknown cleaning option while preserving the complete file bytes 19ms (16ms|3ms)
+  [+] rejects wrong cleaning key case while preserving the complete file bytes 18ms (15ms|3ms)
+  [+] rejects case-coalescing cleaning keys while preserving the complete file bytes 16ms (14ms|2ms)
+  [+] rejects duplicate cleaning option while preserving the complete file bytes 13ms (11ms|2ms)
+  [+] rejects string cleaning number while preserving the complete file bytes 15ms (14ms|2ms)
+  [+] rejects boolean cleaning number while preserving the complete file bytes 13ms (12ms|1ms)
+  [+] rejects nonfinite cleaning number while preserving the complete file bytes 18ms (16ms|2ms)
+  [+] rejects below cleaning bound while preserving the complete file bytes 22ms (20ms|2ms)
+  [+] rejects above cleaning bound while preserving the complete file bytes 20ms (18ms|2ms)
+  [+] rejects numeric cleaning toggle while preserving the complete file bytes 19ms (17ms|2ms)
+  [+] rejects injected cleaning string while preserving the complete file bytes 15ms (13ms|2ms)
+  [+] rejects NaN JSON token while preserving the complete file bytes 14ms (13ms|2ms)
+  [+] rejects Zoom Gentle conflict while preserving the complete file bytes 21ms (18ms|3ms)
+  [+] rejects Zoom cleaning conflict while preserving the complete file bytes 17ms (16ms|2ms)
+  [+] rejects invalid disabled gate value while preserving the complete file bytes 20ms (18ms|2ms)
+  [+] rejects invalid disabled denoise value while preserving the complete file bytes 16ms (13ms|3ms)
+  [+] rejects malformed UTF-8 byte encoding without rewriting it 30ms (27ms|3ms)
+  [+] rejects UTF-16 encoding byte encoding without rewriting it 16ms (15ms|2ms)
+  [+] rejects embedded NUL byte encoding without rewriting it 17ms (14ms|3ms)
+  [+] accepts the byte ceiling and rejects one byte beyond it 67ms (65ms|1ms)
+  [+] accepts one UTF-8 BOM and counts it in the byte limit 14ms (13ms|1ms)
+  [+] rejects executable-looking settings without executing their text 41ms (40ms|1ms)
+  [+] reports invalid settings without echoing private configuration contents 18ms (17ms|1ms)
+  [+] serializes typed values and profile numbers invariantly in de-DE 138ms (137ms|2ms)
+  [+] serializes typed values and profile numbers invariantly in fi-FI 52ms (47ms|5ms)
+
+Describing AC-051: atomic settings saves preserve old data on failed publication
+  [+] rejects a directory config path without changing its contents 41ms (38ms|4ms)
+  [+] rejects a config path through a junction without changing the target or foreign files 42ms (40ms|2ms)
+  [+] preserves a foreign destination appearing after an initially absent target was reserved 110ms (108ms|2ms)
+  [+] replaces a valid config and resets it to an empty versioned document 60ms (58ms|2ms)
+  [+] preserves old bytes and a foreign temporary during publication error 82ms (80ms|2ms)
+  [+] preserves old bytes and a foreign temporary during interrupted publication 47ms (45ms|2ms)
+  [+] preserves a locked old target and removes its own temporary after replacement fails 37ms (35ms|2ms)
+  [+] denies non-owner delete, rename and write while publication retains the owned temporary handle 98ms (97ms|1ms)
+  [+] rejects invalid new settings before changing the previous config 19ms (18ms|1ms)
+
+Describing AC-049/050: isolated settings management is unattended and never starts media tools
+  [+] shows omitted/default values without input, native startup, prompts or autosaving 984ms (980ms|4ms)
+  [+] explicitly saves typed chosen settings and shows their origins without media processing 1.51s (1.51s|1ms)
+  [+] resets a corrupt config without reading its content or starting native tools 1.4s (1.39s|2ms)
+  [+] ignores a corrupt isolated config for Show without repairing or rewriting it 762ms (761ms|1ms)
+  [+] rejects save and reset with code 2 before native or preference/output changes 663ms (662ms|1ms)
+  [+] rejects show input with code 2 before native or preference/output changes 649ms (647ms|2ms)
+  [+] rejects show preview with code 2 before native or preference/output changes 666ms (665ms|2ms)
+  [+] rejects show preview range with code 2 before native or preference/output changes 668ms (666ms|1ms)
+  [+] rejects show native path with code 2 before native or preference/output changes 626ms (625ms|2ms)
+  [+] rejects show diagnostic with code 2 before native or preference/output changes 603ms (601ms|1ms)
+  [+] rejects reset mode with code 2 before native or preference/output changes 660ms (658ms|2ms)
+  [+] rejects empty explicit mode with code 2 before native or preference/output changes 1.25s (1.25s|3ms)
+  [+] rejects empty settings path with code 2 before native or preference/output changes 612ms (610ms|2ms)
+  [+] rejects a corrupt saved file before explicit CLI overrides, dependencies or output creation 1.22s (1.22s|1ms)
+  [+] uses saved mode/output choices for a real unattended entry point without autosaving 3.26s (3.26s|1ms)
+  [+] replaces saved cleaning wholly with an explicit empty dictionary before constructing the graph 3.14s (3.14s|2ms)
+  [+] runs an explicit job while ignoring corrupt saved settings without rewriting them 2.87s (2.86s|2ms)
+  [+] passes explicit false switches through the main entry point over saved true values 3.57s (3.56s|5ms)
+  [+] fails missing unattended mode without prompting, rendering or saving defaults 1.04s (1.04s|2ms)
+  [+] uses the saved absolute stream index and rejects omitted selection without prompting 3.3s (3.29s|2ms)
+  [+] uses the saved absolute stream index and rejects omitted selection without prompting 2.51s (2.51s|1ms)
+  [+] retains positional legacy input with only main/IO when saved settings are explicitly ignored 2.77s (2.77s|2ms)
+  [+] dot-sources main/IO without loading settings or acting on management parameters 647ms (645ms|2ms)
+
+Running tests from '<repo>\tests\WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-023/AC-024: invalid output is never published and reporting preserves source bytes
+  [+] handles empty in the actual application in powershell.exe 2.74s (2.74s|7ms)
+  [+] handles header in the actual application in powershell.exe 2.94s (2.94s|2ms)
+  [+] handles truncated in the actual application in powershell.exe 2.85s (2.85s|1ms)
+  [+] handles short in the actual application in powershell.exe 2.99s (2.98s|2ms)
+  [+] handles malformed output probe in the actual application in powershell.exe 2.77s (2.77s|1ms)
+  [+] handles failed output probe in the actual application in powershell.exe 2.82s (2.82s|3ms)
+  [+] handles missing input duration in the actual application in powershell.exe 2.1s (2.1s|2ms)
+  [+] handles input aliases log in the actual application in powershell.exe 5.84s (5.84s|1ms)
+  [+] handles empty in the actual application in pwsh.exe 3.66s (3.66s|2ms)
+  [+] handles header in the actual application in pwsh.exe 3.48s (3.48s|2ms)
+  [+] handles truncated in the actual application in pwsh.exe 3.67s (3.67s|1ms)
+  [+] handles short in the actual application in pwsh.exe 2.88s (2.88s|1ms)
+  [+] handles malformed output probe in the actual application in pwsh.exe 3.31s (3.31s|1ms)
+  [+] handles failed output probe in the actual application in pwsh.exe 3.55s (3.55s|1ms)
+  [+] handles missing input duration in the actual application in pwsh.exe 2.76s (2.76s|2ms)
+  [+] handles input aliases log in the actual application in pwsh.exe 6.29s (6.28s|2ms)
+
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] AC-014: rejects missing -File -inputPath before prompting in powershell.exe 867ms (863ms|4ms)
+  [+] AC-014: rejects missing -File -inputPath before prompting in pwsh.exe 1.87s (1.86s|3ms)
+  [+] AC-014: rejects a missing dropped file via outer powershell.exe before the menu (inner Windows PowerShell) 1.52s (1.52s|2ms)
+  [+] AC-014: rejects a missing dropped file via outer pwsh.exe before the menu (inner Windows PowerShell) 2.18s (2.18s|2ms)
+
+Describing AC-014/015: actual script preflight is bounded and unattended on invalid requests
+  [+] rejects no input without a menu or processing in powershell.exe 659ms (656ms|3ms)
+  [+] rejects directory without a menu or processing in powershell.exe 862ms (861ms|1ms)
+  [+] rejects URL without a menu or processing in powershell.exe 870ms (869ms|1ms)
+  [+] rejects zero bytes without a menu or processing in powershell.exe 980ms (978ms|2ms)
+  [+] rejects destination file without a menu or processing in powershell.exe 871ms (870ms|1ms)
+  [+] rejects empty destination without a menu or processing in powershell.exe 804ms (802ms|1ms)
+  [+] rejects invalid mode without a menu or processing in powershell.exe 705ms (704ms|1ms)
+  [+] rejects empty mode without a menu or processing in powershell.exe 722ms (721ms|1ms)
+  [+] rejects missing mode without a menu or processing in powershell.exe 780ms (779ms|1ms)
+  [+] rejects redirected input without a menu or processing in powershell.exe 845ms (843ms|2ms)
+  [+] rejects host noninteractive without a menu or processing in powershell.exe 936ms (935ms|1ms)
+  [+] rejects no input without a menu or processing in pwsh.exe 1.42s (1.42s|1ms)
+  [+] rejects directory without a menu or processing in pwsh.exe 1.94s (1.94s|1ms)
+  [+] rejects URL without a menu or processing in pwsh.exe 2.23s (2.23s|2ms)
+  [+] rejects zero bytes without a menu or processing in pwsh.exe 1.85s (1.85s|3ms)
+  [+] rejects destination file without a menu or processing in pwsh.exe 1.98s (1.98s|3ms)
+  [+] rejects empty destination without a menu or processing in pwsh.exe 2.08s (2.08s|1ms)
+  [+] rejects invalid mode without a menu or processing in pwsh.exe 2.04s (2.04s|2ms)
+  [+] rejects empty mode without a menu or processing in pwsh.exe 1.86s (1.86s|1ms)
+  [+] rejects missing mode without a menu or processing in pwsh.exe 2.4s (2.4s|1ms)
+  [+] rejects redirected input without a menu or processing in pwsh.exe 2s (2s|1ms)
+  [+] rejects host noninteractive without a menu or processing in pwsh.exe 2.45s (2.45s|1ms)
+
+Describing AC-017: actual native execution reports success, failure and reporting warnings
+  [+] AC-016: preserves spaces here.wav through direct powershell.exe -File and the native child 2.9s (2.9s|4ms)
+  [+] AC-016: preserves [square brackets].wav through direct powershell.exe -File and the native child 2.9s (2.9s|1ms)
+  [+] AC-016: preserves speaker's recording.wav through direct powershell.exe -File and the native child 3.25s (3.25s|2ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct powershell.exe -File and the native child 2.85s (2.85s|1ms)
+  [+] AC-016: preserves ampersand & here.wav through direct powershell.exe -File and the native child 2.97s (2.97s|2ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct powershell.exe -File and the native child 2.78s (2.78s|1ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct powershell.exe -File and the native child 2.76s (2.76s|1ms)
+  [+] AC-016: preserves (parentheses).wav through direct powershell.exe -File and the native child 2.76s (2.76s|1ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct powershell.exe -File and the native child 2.82s (2.82s|1ms)
+  [+] AC-016: preserves spaces here.wav through direct pwsh.exe -File and the native child 3.37s (3.37s|1ms)
+  [+] AC-016: preserves [square brackets].wav through direct pwsh.exe -File and the native child 3.54s (3.54s|2ms)
+  [+] AC-016: preserves speaker's recording.wav through direct pwsh.exe -File and the native child 4.4s (4.4s|3ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct pwsh.exe -File and the native child 3.4s (3.39s|6ms)
+  [+] AC-016: preserves ampersand & here.wav through direct pwsh.exe -File and the native child 4.14s (4.14s|1ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct pwsh.exe -File and the native child 3.78s (3.78s|1ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct pwsh.exe -File and the native child 3.51s (3.51s|1ms)
+  [+] AC-016: preserves (parentheses).wav through direct pwsh.exe -File and the native child 3.37s (3.36s|2ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct pwsh.exe -File and the native child 3.47s (3.47s|1ms)
+  [+] returns dependency failure for invalid executable False in powershell.exe 1.09s (1.09s|3ms)
+  [+] returns dependency failure for invalid executable True in powershell.exe 1.22s (1.21s|4ms)
+  [+] returns dependency failure for invalid executable False in pwsh.exe 2.07s (2.07s|2ms)
+  [+] returns dependency failure for invalid executable True in pwsh.exe 2.09s (2.09s|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in powershell.exe 2.96s (2.96s|1ms)
+  [+] uses mode 1, native exit 0, blocked log True in powershell.exe 2.86s (2.86s|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in powershell.exe 2.84s (2.84s|1ms)
+  [+] uses mode 1, native exit 7, blocked log True in powershell.exe 3.06s (3.06s|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in powershell.exe 2.8s (2.8s|2ms)
+  [+] uses mode 2, native exit 0, blocked log True in powershell.exe 2.85s (2.85s|1ms)
+  [+] uses mode 2, native exit 7, blocked log False in powershell.exe 2.63s (2.62s|1ms)
+  [+] uses mode 2, native exit 7, blocked log True in powershell.exe 2.98s (2.98s|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in pwsh.exe 4.13s (4.13s|1ms)
+  [+] uses mode 1, native exit 0, blocked log True in pwsh.exe 3.44s (3.44s|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in pwsh.exe 4.07s (4.07s|2ms)
+  [+] uses mode 1, native exit 7, blocked log True in pwsh.exe 3.38s (3.37s|3ms)
+  [+] uses mode 2, native exit 0, blocked log False in pwsh.exe 4.13s (4.13s|1ms)
+  [+] uses mode 2, native exit 0, blocked log True in pwsh.exe 3.84s (3.83s|2ms)
+  [+] uses mode 2, native exit 7, blocked log False in pwsh.exe 3.7s (3.7s|1ms)
+  [+] uses mode 2, native exit 7, blocked log True in pwsh.exe 3.74s (3.74s|2ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preset.Tests.ps1'
+Describing AC-035/036: Original identity belongs to each unchanged processing profile
+  [+] names and versions the Original Raw profile separately from its mode 24ms (20ms|3ms)
+  [+] names and versions the Original Zoom profile separately from its mode 23ms (21ms|1ms)
+
+Describing AC-036: menu choices and direct invocations persist the effective Original preset
+  [+] records the Original Raw preset through menu 3.07s (3.07s|4ms)
+  [+] records the Original Zoom preset through menu 3.19s (3.19s|2ms)
+  [+] records the Original Raw preset through direct -Mode 2.93s (2.93s|1ms)
+  [+] records the Original Zoom preset through direct -Mode 2.84s (2.83s|2ms)
+
+Describing AC-029/036: support export does not invent or disclose preset versions
+  [+] keeps legacy unversioned identity and version fields out of the redacted projection 122ms (118ms|4ms)
+  [+] keeps current Original identity and version fields out of the redacted projection 20ms (16ms|4ms)
+  [+] keeps unknown private identity and version fields out of the redacted projection 32ms (29ms|3ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Batch.Tests.ps1'
+Describing AC-052/054: explicit input lists are ordered bounded data
+  [+] preserves character-rich paths and repeated explicit entries in order without execution 77ms (73ms|4ms)
+  [+] anchors relative entries beside the manifest rather than the calling working directory 31ms (28ms|3ms)
+  [+] preserves invalid filesystem/URL strings for separate per-item failures 16ms (15ms|1ms)
+  [+] anchors a relative pipe character entry as exact string data without preventing valid neighbors from being anchored 59ms (57ms|2ms)
+  [+] anchors a relative escaped NUL entry as exact string data without preventing valid neighbors from being anchored 42ms (41ms|2ms)
+  [+] rejects truncated manifests without changing their bytes 34ms (33ms|2ms)
+  [+] rejects trailing data manifests without changing their bytes 23ms (21ms|2ms)
+  [+] rejects root array manifests without changing their bytes 16ms (15ms|2ms)
+  [+] rejects missing version manifests without changing their bytes 28ms (26ms|2ms)
+  [+] rejects unknown version manifests without changing their bytes 25ms (24ms|2ms)
+  [+] rejects string version manifests without changing their bytes 17ms (15ms|2ms)
+  [+] rejects decimal version manifests without changing their bytes 26ms (25ms|2ms)
+  [+] rejects boolean version manifests without changing their bytes 27ms (26ms|1ms)
+  [+] rejects wrong key case manifests without changing their bytes 22ms (21ms|2ms)
+  [+] rejects unknown key manifests without changing their bytes 42ms (40ms|2ms)
+  [+] rejects duplicate root key manifests without changing their bytes 39ms (37ms|2ms)
+  [+] rejects escaped duplicate root key manifests without changing their bytes 26ms (24ms|1ms)
+  [+] rejects case-coalescing keys manifests without changing their bytes 23ms (21ms|1ms)
+  [+] rejects missing inputs manifests without changing their bytes 16ms (14ms|2ms)
+  [+] rejects null inputs manifests without changing their bytes 20ms (19ms|1ms)
+  [+] rejects scalar inputs manifests without changing their bytes 23ms (21ms|2ms)
+  [+] rejects empty array manifests without changing their bytes 23ms (22ms|1ms)
+  [+] rejects empty entry manifests without changing their bytes 22ms (20ms|2ms)
+  [+] rejects whitespace entry manifests without changing their bytes 12ms (10ms|1ms)
+  [+] rejects null entry manifests without changing their bytes 25ms (24ms|1ms)
+  [+] rejects numeric entry manifests without changing their bytes 23ms (22ms|2ms)
+  [+] rejects boolean entry manifests without changing their bytes 26ms (24ms|2ms)
+  [+] rejects nested array manifests without changing their bytes 27ms (24ms|4ms)
+  [+] rejects object entry manifests without changing their bytes 14ms (12ms|1ms)
+  [+] rejects malformed UTF8 and UTF16 bytes 13ms (11ms|2ms)
+  [+] rejects malformed UTF8 and UTF16 bytes 12ms (10ms|2ms)
+  [+] accepts exactly 1 MiB including a UTF8 BOM and rejects the next byte 410ms (409ms|1ms)
+  [+] materializes all 1024 entries including payload beyond a CMD command line and rejects 1025 89ms (86ms|2ms)
+  [+] accepts the direct list ceiling without deduplicating and rejects count/byte excess 33ms (31ms|2ms)
+  [+] rejects neither source input-source combinations before materializing a queue 15ms (12ms|3ms)
+  [+] rejects both sources input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] rejects legacy input with list input-source combinations before materializing a queue 7ms (5ms|2ms)
+  [+] rejects null array input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] rejects empty array input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] rejects empty item input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] rejects numeric item input-source combinations before materializing a queue 6ms (4ms|2ms)
+  [+] accepts a real PSBoundParametersDictionary without ambiguous Contains overloads 27ms (25ms|2ms)
+
+Describing AC-053: held JSONL journal retains completed records when a suffix append fails
+  [+] flushes independent compact UTF8 records with escaped diagnostic newlines and no BOM 104ms (100ms|4ms)
+  [+] rolls back only the newly written suffix after an actual partial stream write 111ms (109ms|1ms)
+  [+] refuses to append batch records to a pre-existing nonexclusive writer 31ms (24ms|6ms)
+
+Describing AC-053: sequential batch orchestration freezes choices and aggregates per-item outcomes
+Select one processing mode for all 3 inputs: [1] Raw; [2] Zoom/Teams; [Q] Cancel.
+Processing input 1 of 3: a.wav
+Processing input 2 of 3: a.wav
+Processing input 3 of 3: b.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\816830bf0f91422fac53248809186ae0\results.jsonl
+  [+] runs ordered repeated entries with one mode selection and frozen child settings 304ms (298ms|6ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\38a6e216527b46a1b05d680dc091b35c\results.jsonl
+  [+] retains captured choices when the isolated saved config changes after the first child 164ms (162ms|1ms)
+  [+] rejects an omitted unattended mode before journal allocation, output creation or children 56ms (54ms|1ms)
+Invoke-WacBatch : Cannot create batch result journal: Batch result journal must differ from every requested input.
+At <repo>\tests\WinAudioClean.Batch.Tests.ps1:319 char:19
++ ...   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatch
+
+  [+] rejects a journal path equal to a missing requested input before creating it or starting children 82ms (81ms|1ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\dd91f8e44ad548dda1c7218de7b1b86b\results.jsonl
+  [+] retains an ordinary one-item exit 0 75ms (73ms|2ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\e29c7066398e4b1b91ae68c06501cc19\results.jsonl
+  [+] retains an ordinary one-item exit 2 73ms (72ms|2ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\97609cc2fcb84fdea6d1d054035e0383\results.jsonl
+  [+] retains an ordinary one-item exit 3 81ms (78ms|3ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\2931241523ce4ef9afe93d8e1f119ec1\results.jsonl
+  [+] retains an ordinary one-item exit 4 79ms (77ms|2ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\bf24667e37b84425afbd448e3b25309b\results.jsonl
+  [+] retains an ordinary one-item exit 5 80ms (78ms|2ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\26749d7934264ad38bce55252c9c036f\results.jsonl
+  [+] retains an ordinary one-item exit 7 77ms (75ms|3ms)
+Processing input 1 of 1: a.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\af2ee9ae4a7b49268764f34da3807394\results.jsonl
+  [+] retains an ordinary one-item exit 130 67ms (65ms|2ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\c90efdb1c30c4f7785802470e2c07085\results.jsonl
+  [+] continues after a per-item failure and records multi-item failure code 6 114ms (113ms|1ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\d26cdff8f27a4d54ba94a9d54c13c281\results.jsonl
+  [+] records warning-only batches as code 7 106ms (104ms|1ms)
+Processing input 1 of 3: first.wav
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\cfb78ecd0f3c4248a36dd98184fce1a6\results.jsonl
+  [+] stops after child cancellation and records later entries as not started 93ms (92ms|1ms)
+Select one processing mode for all 3 inputs: [1] Raw; [2] Zoom/Teams; [Q] Cancel.
+Batch results saved to: <user-profile>\AppData\Local\Temp\d6d0eb9f-7a25-40e8-b1f1-2156191a45af\d423f87ba37444fd9791f3efcad996e1\results.jsonl
+  [+] cancels the common menu before any child while preserving every not-started entry 89ms (87ms|2ms)
+Invoke-WacBatch : Cannot create batch result journal: Exception calling "OpenReportWriter" with "3" argument(s): "Canno
+t open report writer: The file exists (Win32 80)."
+At <repo>\tests\WinAudioClean.Batch.Tests.ps1:390 char:19
++ ...   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatch
+
+  [+] fails result allocation before starting any child and preserves foreign bytes 35ms (33ms|2ms)
+Processing input 1 of 3: first.wav
+Invoke-WacBatch : Batch stopped; result journal is incomplete. Prior outputs/results are retained: injected journal per
+sistence failure
+At <repo>\tests\WinAudioClean.Batch.Tests.ps1:413 char:19
++ ...   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatch
+
+  [+] stops new jobs after first item persistence failure and retains prior records and exports 122ms (121ms|2ms)
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: second.wav
+Processing input 3 of 3: third.wav
+Invoke-WacBatch : Batch stopped; result journal is incomplete. Prior outputs/results are retained: injected journal per
+sistence failure
+At <repo>\tests\WinAudioClean.Batch.Tests.ps1:413 char:19
++ ...   $result = Invoke-WacBatch -Inputs $batchInputs -Parameters $batchPa ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatch
+
+  [+] stops new jobs after summary persistence failure and retains prior records and exports 137ms (136ms|2ms)
+
+Describing AC-052/053/054: isolated batch entry points run actual single-file children
+  [+] processes valid-missing-valid in manifest order with durable results and unchanged sources/config 4.56s (4.55s|6ms)
+  [+] continues valid-relative pipe character-valid as success/failure2/success with a complete durable journal 4.5s (4.5s|2ms)
+  [+] continues valid-relative escaped NUL-valid as success/failure2/success with a complete durable journal 4.57s (4.57s|1ms)
+  [+] preserves repeated direct-list requests and creates one export/result for each 3.71s (3.71s|2ms)
+  [+] uses isolated saved choices once and saved choices without autosaving 4.38s (4.38s|4ms)
+  [+] uses isolated saved choices once and explicit overrides without autosaving 4.24s (4.24s|2ms)
+  [+] rejects both lists before native/journal work 1.39s (1.39s|2ms)
+  [+] rejects legacy conflict before native/journal work 1.15s (1.15s|2ms)
+  [+] rejects preview conflict before native/journal work 1.07s (1.07s|2ms)
+  [+] rejects range conflict before native/journal work 1.32s (1.32s|3ms)
+  [+] rejects result without list before native/journal work 1.22s (1.22s|2ms)
+  [+] rejects corrupt saved before native/journal work 1.43s (1.42s|2ms)
+  [+] retains one-item native failure code4 and persistent failure diagnostics 3.52s (3.52s|1ms)
+  [+] preserves an occupied result path before native processing or input mutation 1.64s (1.64s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.FolderQueue.Tests.ps1'
+Describing AC-055: folder discovery is bounded deterministic local data
+  [+] selects every allowlisted extension case-insensitively and explains unsupported files 377ms (374ms|3ms)
+  [+] leaves recursion off and records the omitted ordinary subdirectory 25ms (24ms|1ms)
+  [+] uses root order and breadth-first traversal with ordinal entry ordering 52ms (50ms|2ms)
+  [+] skips the generated artifact voice_Cleaned_20261003-1234_0123456789abcdef0123456789abcdef.wav using the actual naming contract 24ms (22ms|1ms)
+  [+] skips the generated artifact voice_Cleaned_20261003-123456_0123456789abcdef0123456789abcdef.wav using the actual naming contract 22ms (21ms|1ms)
+  [+] skips the generated artifact voice_Cleaned_20261003-123456789_0123456789abcdef0123456789abcdef.wav using the actual naming contract 26ms (24ms|2ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_Original.wav using the actual naming contract 22ms (19ms|3ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_Processed.wav using the actual naming contract 24ms (22ms|2ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_CompareOriginal.wav using the actual naming contract 27ms (24ms|2ms)
+  [+] skips the generated artifact voice_Preview_0123456789abcdef0123456789abcdef_CompareProcessed.wav using the actual naming contract 30ms (27ms|2ms)
+  [+] skips the generated artifact .wac-0123456789abcdef0123456789abcdef.partial using the actual naming contract 20ms (19ms|2ms)
+  [+] skips the generated artifact .wac-write-check-0123456789abcdef0123456789abcdef.tmp using the actual naming contract 17ms (16ms|1ms)
+  [+] skips the generated artifact .wac-settings-0123456789abcdef0123456789abcdef.tmp using the actual naming contract 21ms (18ms|2ms)
+  [+] skips the generated artifact WinAudioClean_0123456789abcdef0123456789abcdef.json using the actual naming contract 21ms (18ms|3ms)
+  [+] skips the generated artifact WinAudioClean_0123456789abcdef0123456789abcdef.txt using the actual naming contract 25ms (19ms|6ms)
+  [+] skips the generated artifact WinAudioClean_Preview_0123456789abcdef0123456789abcdef.json using the actual naming contract 19ms (18ms|1ms)
+  [+] skips the generated artifact WinAudioClean_Batch_0123456789abcdef0123456789abcdef.jsonl using the actual naming contract 19ms (17ms|1ms)
+  [+] skips the generated artifact WinAudioClean_Log.txt using the actual naming contract 19ms (17ms|1ms)
+  [+] keeps legitimate sources that merely resemble generated filenames 28ms (26ms|2ms)
+  [+] excludes the nested destination subtree while keeping a similarly prefixed sibling 38ms (37ms|1ms)
+  [+] allows source root equal to the destination without selecting existing generated audio 23ms (22ms|1ms)
+  [+] accepts the64-root limit before deduplication and rejects65 138ms (137ms|1ms)
+  [+] accepts1024 materialized entries including skipped files and rejects the next entry 1.57s (1.57s|1ms)
+  [+] rejects more than1024 recursively visited directories even when they contain no files 2.96s (2.96s|2ms)
+  [+] rejects a missing root as a global selection failure 32ms (30ms|3ms)
+  [+] rejects a file root as a global selection failure 15ms (13ms|2ms)
+  [+] rejects a UNC root as a global selection failure 8ms (6ms|2ms)
+  [+] rejects a URL root as a global selection failure 11ms (10ms|2ms)
+  [+] rejects a provider root as a global selection failure 8ms (6ms|2ms)
+  [+] rejects a empty root as a global selection failure 9ms (7ms|2ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 14ms (10ms|5ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 5ms (4ms|2ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 9ms (4ms|4ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 9ms (6ms|3ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 12ms (9ms|3ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 5ms (3ms|2ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 5ms (3ms|2ms)
+  [+] rejects invalid folder-source combinations including an explicitly false recursion flag 5ms (3ms|2ms)
+  [+] accepts actual bound folder parameters without ambiguous dictionary methods 18ms (15ms|3ms)
+
+Describing AC-055/056: real filesystem identities and links cannot expand the queue
+  [+] deduplicates repeated roots and overlapping ordinary directories 44ms (39ms|4ms)
+  [+] deduplicates real hardlink aliases using the volume and file identity 36ms (35ms|1ms)
+  [+] records a junction loop and outside junction without visiting either target 38ms (36ms|2ms)
+  [+] rejects an explicitly selected reparse root before traversal 29ms (27ms|2ms)
+  [+] rejects an explicitly selected reparse ancestor before traversal 19ms (18ms|2ms)
+  [!] never follows a file symlink when the local token permits creating it is skipped, because This local token cannot create a symbolic link; junction coverage runs separately. 43ms (38ms|5ms)
+  [+] retains captured identity length and timestamp in each pending entry 41ms (38ms|2ms)
+  [+] holds the exact input and ordinary ancestors against foreign write rename and deletion until close 81ms (80ms|1ms)
+  [+] rejects a captured source after replacement without returning a usable lease 31ms (29ms|2ms)
+  [+] rejects a captured source after length without returning a usable lease 19ms (18ms|2ms)
+  [+] rejects a captured source after timestamp without returning a usable lease 23ms (21ms|3ms)
+  [+] rejects a captured source after removal without returning a usable lease 17ms (16ms|1ms)
+  [+] records a supported file that cannot be opened as a failed source rather than a global root error 37ms (35ms|1ms)
+  [+] excludes a renamed hardlink alias of a generated audio identity even when the alias sorts first 21ms (20ms|1ms)
+  [+] rejects a captured ordinary ancestor that was replaced with a junction before a child starts 27ms (25ms|1ms)
+
+Describing AC-056/057: folder journals summarize the frozen queue and stop safely
+SKIPPED: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\ccae1e2074de470cba51dcc49d409c8a\notes.txt (unsupported_extension)
+Processing input 2 of 2: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\ccae1e2074de470cba51dcc49d409c8a\source.wav
+Folder summary: 1 successful, 0 warning, 0 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\096e3b7471794ce1b3014fc926dd6b51\results.jsonl
+  [+] writes schema2 folder selection and skipped counts while keeping per-source identities 192ms (187ms|5ms)
+Folder summary: 0 successful, 0 warning, 0 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\d899a9494e6e401fa9f9a5f16a4d4efc\results.jsonl
+  [+] does not request mode or start children for empty selections 97ms (96ms|1ms)
+SKIPPED: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\56ef292fd6cc4e20bd576e0dfc49c83a\notes.txt (unsupported_extension)
+Folder summary: 0 successful, 0 warning, 0 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\cf2eab32c3ae4f719ab67b551b807083\results.jsonl
+  [+] does not request mode or start children for all skipped selections 86ms (84ms|2ms)
+Processing input 1 of 1: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\2badf8dfbc074048888fc563f0c8f38c\source.wav
+Folder summary: 0 successful, 0 warning, 1 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\a685ed1de8a0476eb16e5108eb94f356\results.jsonl
+  [+] treats a one-file folder failure as aggregate6 while preserving the ordinary failed-item code 85ms (83ms|2ms)
+Processing input 1 of 4: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\c9b5e73f77284db3a005759d676755bf\a.wav
+Processing input 2 of 4: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\c9b5e73f77284db3a005759d676755bf\b.wav
+Processing input 3 of 4: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\c9b5e73f77284db3a005759d676755bf\c.wav
+SKIPPED: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\c9b5e73f77284db3a005759d676755bf\notes.txt (unsupported_extension)
+Folder summary: 2 successful, 0 warning, 1 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\5e7b58538c9f47f4b766c546f9256724\results.jsonl
+  [+] continues a middle failure and retains success/failure/skipped records and exports 131ms (130ms|1ms)
+SKIPPED: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\d22174f88ad445fa947e3eb047997ba2\notes.txt (unsupported_extension)
+Processing input 2 of 2: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\d22174f88ad445fa947e3eb047997ba2\source.wav
+Folder summary: 0 successful, 1 warning, 0 failed, 1 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\053bfa5499f64bf6a25656c8bb75e7c8\results.jsonl
+  [+] keeps a warning-only folder at7 and counts static skips separately 127ms (125ms|2ms)
+Processing input 1 of 2: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\2db309a4297e483ea72d46574cc779b3\a.wav
+Processing input 2 of 2: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\2db309a4297e483ea72d46574cc779b3\b.wav
+Folder summary: 2 successful, 0 warning, 0 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\9a40b864845c4af7834d6ee9f6321b53\results.jsonl
+  [+] does not add ordinary late arrivals or newly generated outputs to the materialized queue 87ms (86ms|1ms)
+Processing input 1 of 3: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\d7b6d3156dc446eab47ed277b2fd6201\a.wav
+Processing input 2 of 3: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\d7b6d3156dc446eab47ed277b2fd6201\b.wav
+Processing input 3 of 3: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\d7b6d3156dc446eab47ed277b2fd6201\c.wav
+Folder summary: 2 successful, 0 warning, 1 failed, 0 skipped, 0 cancelled, 0 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\4e8b5475bf5f49068236a16f03744291\results.jsonl
+  [+] fails a later replaced identity before invoking it and continues to the final original 119ms (118ms|2ms)
+Processing input 1 of 4: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\c22dc32ea721427e99dc335564767ef8\a.wav
+SKIPPED: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\c22dc32ea721427e99dc335564767ef8\b.txt (unsupported_extension)
+FAILED: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\c22dc32ea721427e99dc335564767ef8\c.wav (source_unavailable)
+Folder summary: 0 successful, 0 warning, 1 failed, 1 skipped, 1 cancelled, 1 not started.
+Batch results saved to: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\cddc8db705394218a62511637a9e6bb4\results.jsonl
+  [+] preserves static skips/failures after cancellation while pending entries become not started 110ms (109ms|1ms)
+Processing input 1 of 2: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\628e0d32b09446d1a29e41872a8a6e34\a.wav
+Invoke-WacBatch : Batch stopped; result journal is incomplete. Prior outputs/results are retained: controlled folder jo
+urnal persistence failure
+At <repo>\tests\WinAudioClean.FolderQueue.Tests.ps1:62 char:9
++         Invoke-WacBatch -Inputs @($Queue.Entries | ForEach-Object { $ ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatch
+
+  [+] closes source leases when item journal persistence fails and retains completed exports 118ms (116ms|2ms)
+Processing input 1 of 2: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\2f6501b570df45f9b3d1a635a35f19a4\a.wav
+Processing input 2 of 2: <user-profile>\AppData\Local\Temp\31bd4c89-53b1-4990-92c5-3c45cb10bd95\2f6501b570df45f9b3d1a635a35f19a4\b.wav
+Invoke-WacBatch : Batch stopped; result journal is incomplete. Prior outputs/results are retained: controlled folder jo
+urnal persistence failure
+At <repo>\tests\WinAudioClean.FolderQueue.Tests.ps1:62 char:9
++         Invoke-WacBatch -Inputs @($Queue.Entries | ForEach-Object { $ ...
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatch
+
+  [+] closes source leases when summary journal persistence fails and retains completed exports 168ms (166ms|2ms)
+
+Describing AC-055/056: isolated folder CLI preserves single-file publication and preference isolation
+  [+] defaults to top-level selection and explains unsupported nested and generated exclusions 3.85s (3.85s|4ms)
+  [+] publishes identical stems from different folders to unique names without overwriting a prior export or requeuing the destination 4.1s (4.1s|2ms)
+  [+] does not require mode or media tools for a CLI empty selection 2.03s (2.03s|2ms)
+  [+] does not require mode or media tools for a CLI all skipped selection 1.89s (1.89s|3ms)
+  [+] rejects CLI single conflict before native invocation or result allocation 1.47s (1.47s|4ms)
+  [+] rejects CLI explicit list conflict before native invocation or result allocation 1.16s (1.15s|2ms)
+  [+] rejects CLI manifest conflict before native invocation or result allocation 1.07s (1.07s|3ms)
+  [+] rejects CLI recursion without folder false before native invocation or result allocation 1.23s (1.23s|3ms)
+  [+] rejects CLI preview conflict before native invocation or result allocation 1.53s (1.53s|2ms)
+  [+] rejects CLI range conflict before native invocation or result allocation 1.35s (1.35s|2ms)
+  [+] rejects CLI show settings conflict before native invocation or result allocation 633ms (632ms|1ms)
+  [+] rejects CLI missing root before native invocation or result allocation 1.75s (1.75s|2ms)
+  [+] rejects CLI corrupt saved before native invocation or result allocation 1.29s (1.29s|1ms)
+  [+] rejects CLI missing helper before native invocation or result allocation 1.12s (1.12s|2ms)
+  [+] keeps main imports IO-only even when folder parameters are present and optional siblings are absent 694ms (693ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Progress.Tests.ps1'
+Describing M3-04 structured progress and owned cancellation
+ Describing AC-058: bounded stage progress without premature completion
+   [+] keeps Analysis within its range and preserves file position 179ms (170ms|9ms)
+   [+] keeps Rendering within its range and preserves file position 85ms (84ms|1ms)
+   [+] keeps Verification within its range and preserves file position 89ms (88ms|1ms)
+   [+] keeps Rendering within its range and preserves file position 102ms (100ms|1ms)
+   [+] keeps preview original within its range and preserves file position 109ms (107ms|2ms)
+   [+] keeps preview processed within its range and preserves file position 104ms (102ms|2ms)
+   [+] keeps preview comparison within its range and preserves file position 108ms (106ms|2ms)
+   [+] keeps preview verification within its range and preserves file position 96ms (95ms|2ms)
+   [+] leaves unknown duration indeterminate even after structured end 42ms (39ms|3ms)
+   [+] leaves negative duration indeterminate even after structured end 22ms (21ms|2ms)
+   [+] leaves NaN duration indeterminate even after structured end 24ms (22ms|2ms)
+   [+] leaves infinite duration indeterminate even after structured end 25ms (23ms|2ms)
+   [+] does not infer completion from a snapshot without a measured time 15ms (14ms|1ms)
+   [+] formats progress consistently under de-DE 17ms (15ms|2ms)
+   [+] formats progress consistently under fi-FI 16ms (14ms|2ms)
+   [+] isolates a closed or failing progress sink from processing state 104ms (102ms|2ms)
+   [+] adds only structured transport flags while preserving the constructed graph 22ms (21ms|1ms)
+   [+] rejects start above publication boundary progress ranges before creating a false completion state 14ms (12ms|2ms)
+   [+] rejects end at premature completion progress ranges before creating a false completion state 8ms (5ms|3ms)
+   [+] rejects descending progress ranges before creating a false completion state 8ms (6ms|2ms)
+ Describing AC-058/060: actual bounded structured pipe and separate diagnostics
+   [+] parses fragmented complete blocks and never converts diagnostic time text into progress 224ms (221ms|3ms)
+   [+] retains only complete structured blocks for unterminated final marker 79ms (77ms|2ms)
+   [+] retains only complete structured blocks for time without block terminator 80ms (79ms|1ms)
+   [+] retains only complete structured blocks for human statistics 113ms (111ms|2ms)
+   [+] retains only complete structured blocks for negative time 90ms (88ms|2ms)
+   [+] retains only complete structured blocks for nonfinite time 73ms (72ms|1ms)
+   [+] retains only complete structured blocks for overflow time 80ms (79ms|1ms)
+   [+] retains only complete structured blocks for expression time 77ms (75ms|2ms)
+   [+] retains only complete structured blocks for duplicate time 74ms (73ms|1ms)
+   [+] retains only complete structured blocks for locale decimal time 72ms (71ms|1ms)
+   [+] retains only complete structured blocks for fractional integer time 74ms (71ms|3ms)
+   [+] retains only complete structured blocks for missing time 74ms (73ms|1ms)
+   [+] retains only complete structured blocks for complete block then truncated newer block 78ms (75ms|3ms)
+   [+] drains overlong malformed lines and a diagnostic flood without poisoning the next block 109ms (107ms|2ms)
+   [+] applies the structured block field limit at 64 fields 83ms (82ms|2ms)
+   [+] applies the structured block field limit at 65 fields 72ms (70ms|1ms)
+   [+] applies the structured line limit at 4096 characters 81ms (76ms|5ms)
+   [+] applies the structured line limit at 4097 characters 75ms (73ms|2ms)
+   [+] recovers valid progress after discarding an overflowing block 82ms (80ms|1ms)
+   [+] retains native nonzero status even when it emitted a completed progress block 77ms (75ms|2ms)
+   [+] preserves ordinary stdout behavior when no progress state is supplied 69ms (68ms|1ms)
+ Describing AC-059/060: active owned cancellation and bounded stream cleanup
+   [+] cancels the owned analysis process while an independent job stays alive 902ms (900ms|3ms)
+   [+] cancels the owned render process while an independent job stays alive 864ms (862ms|1ms)
+   [+] cancels the owned verification process while an independent job stays alive 846ms (844ms|1ms)
+   [+] returns cancellation before startup without creating a native record 12ms (10ms|1ms)
+   [+] honours a prerequested borrowed context during ordinary application inspection 1.36s (1.35s|1ms)
+   [+] cancels an unread input pipe without disposing the caller-held source 934ms (926ms|8ms)
+   [+] keeps early exit zero distinguishable from a failed held-input transfer 243ms (242ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv 234ms (224ms|9ms)
+  [+] preserves square brackets in actual child argv 95ms (93ms|2ms)
+  [+] preserves apostrophe in actual child argv 104ms (102ms|2ms)
+  [+] preserves Unicode in actual child argv 98ms (96ms|2ms)
+  [+] preserves ampersand in actual child argv 105ms (103ms|2ms)
+  [+] preserves percent signs in actual child argv 115ms (110ms|5ms)
+  [+] preserves exclamation marks in actual child argv 106ms (103ms|3ms)
+  [+] preserves parentheses in actual child argv 99ms (98ms|2ms)
+  [+] preserves empty argument in actual child argv 85ms (83ms|2ms)
+  [+] preserves embedded quotes in actual child argv 83ms (82ms|2ms)
+  [+] preserves a quote alone in actual child argv 91ms (90ms|1ms)
+  [+] preserves trailing backslash after spaces in actual child argv 82ms (80ms|2ms)
+  [+] preserves multiple trailing backslashes in actual child argv 107ms (106ms|2ms)
+  [+] preserves backslashes before an embedded quote in actual child argv 97ms (94ms|2ms)
+  [+] starts with no child arguments and no render timeout 76ms (74ms|1ms)
+  [+] keeps native nonzero status and both diagnostic streams 89ms (87ms|1ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input 110ms (109ms|1ms)
+  [+] returns structured startup failure for a missing executable 34ms (31ms|3ms)
+  [+] returns structured startup failure for a file that is not an executable 22ms (20ms|2ms)
+  [+] rejects a NUL argument before starting the child 16ms (14ms|1ms)
+  [+] rejects an excessive command line before starting the child 38ms (37ms|1ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity 95ms (94ms|2ms)
+  [+] terminates the timed-out child and retains prior diagnostics 1.63s (1.63s|2ms)
+
+Running tests from '<repo>\tests\WinAudioClean.NativeInput.Tests.ps1'
+Describing AC-038/039: held-stream input transfer and native cleanup
+  [+] transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream 232ms (225ms|7ms)
+  [+] drains both output pipes after a large input transfer and retains every diagnostic character 165ms (163ms|1ms)
+  [+] rejects an unreadable caller stream before creating the child 20ms (18ms|2ms)
+  [+] retains a source read error and stops the child without disposing the caller stream 155ms (153ms|1ms)
+  [+] does not treat an early native exit zero as success when the input copy failed 78ms (76ms|2ms)
+  [+] times out an unread input pipe, drains diagnostics and preserves an unrelated process 1.08s (1.08s|2ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preview.Tests.ps1'
+Describing AC-043: preview ranges are finite bounded sample-aligned excerpts
+  [+] rejects negative start 27ms (24ms|3ms)
+  [+] rejects empty start 9ms (6ms|2ms)
+  [+] rejects blank start 5ms (4ms|1ms)
+  [+] rejects null start 5ms (3ms|2ms)
+  [+] rejects locale decimal start 5ms (3ms|1ms)
+  [+] rejects exponent start 4ms (3ms|1ms)
+  [+] rejects NaN start 7ms (5ms|2ms)
+  [+] rejects infinite start 7ms (6ms|2ms)
+  [+] rejects filter injection start 4ms (3ms|1ms)
+  [+] rejects argument injection start 7ms (6ms|1ms)
+  [+] rejects expression start 4ms (3ms|1ms)
+  [+] rejects start at end 12ms (10ms|1ms)
+  [+] rejects start beyond end 5ms (4ms|1ms)
+  [+] rejects negative duration 8ms (6ms|1ms)
+  [+] rejects zero duration 7ms (5ms|2ms)
+  [+] rejects duration over maximum 7ms (5ms|2ms)
+  [+] rejects duration shorter than half a sample 22ms (21ms|1ms)
+  [+] rejects empty duration 5ms (4ms|1ms)
+  [+] rejects blank duration 6ms (5ms|1ms)
+  [+] rejects null duration 5ms (3ms|2ms)
+  [+] rejects locale decimal duration 4ms (3ms|1ms)
+  [+] rejects exponent duration 6ms (3ms|3ms)
+  [+] rejects NaN duration 5ms (4ms|1ms)
+  [+] rejects infinite duration 5ms (3ms|1ms)
+  [+] rejects filter injection duration 5ms (3ms|2ms)
+  [+] rejects argument injection duration 7ms (6ms|1ms)
+  [+] rejects expression duration 6ms (5ms|2ms)
+  [+] rejects unavailable input duration zero 12ms (11ms|1ms)
+  [+] rejects unavailable input duration negative 4ms (3ms|1ms)
+  [+] rejects unavailable input duration NaN 5ms (3ms|1ms)
+  [+] rejects unavailable input duration positive infinity 5ms (3ms|2ms)
+  [+] rejects unavailable input duration negative infinity 6ms (5ms|1ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at start 57ms (56ms|2ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at middle 20ms (18ms|1ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at near end 20ms (17ms|2ms)
+  [+] clips only the implicit default for a 0.2-second short file 17ms (16ms|1ms)
+  [+] clips only the implicit default for a 3-second short file 14ms (11ms|3ms)
+  [+] clips only the implicit default for a 44-second short file 13ms (11ms|2ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 8ms (7ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 4ms (3ms|1ms)
+  [+] accepts an exact explicit end boundary and the 60-second maximum 11ms (10ms|1ms)
+  [+] records clipping only when an implicit requested duration was actually shortened 11ms (8ms|3ms)
+  [+] preserves long-file sample offsets beyond Int32 without overflow 20ms (19ms|1ms)
+  [+] quantizes start and duration to 48 kHz samples using nearest rounding 19ms (17ms|1ms)
+  [+] parses invariant fractional input in en-US 16ms (15ms|1ms)
+  [+] parses invariant fractional input in de-DE 10ms (8ms|1ms)
+  [+] parses invariant fractional input in fi-FI 12ms (9ms|3ms)
+
+Describing AC-044: comparison gain is separate, common and attenuation only
+  [+] matches normal pair at a common target with the true-peak safety margin 78ms (73ms|6ms)
+  [+] matches quiet source at a common target with the true-peak safety margin 22ms (21ms|2ms)
+  [+] matches source peak guard at a common target with the true-peak safety margin 28ms (27ms|1ms)
+  [+] matches fractional guard below one dB at a common target with the true-peak safety margin 20ms (18ms|1ms)
+  [+] matches processed peak guard at a common target with the true-peak safety margin 18ms (16ms|1ms)
+  [+] matches already matched at a common target with the true-peak safety margin 23ms (21ms|2ms)
+  [+] labels unavailable too_short without inventing integrated loudness 20ms (19ms|2ms)
+  [+] labels unavailable silence without inventing integrated loudness 12ms (10ms|1ms)
+  [+] labels unavailable undefined_loudness without inventing integrated loudness 12ms (10ms|2ms)
+  [+] leaves silent null peaks at zero gain and gives too_short priority 16ms (14ms|2ms)
+  [+] rejects invalid measured Available for string availability 16ms (14ms|2ms)
+  [+] rejects invalid measured InputI for numeric string 12ms (11ms|1ms)
+  [+] rejects invalid measured InputI for boolean 6ms (4ms|1ms)
+  [+] rejects invalid measured InputI for array 9ms (5ms|3ms)
+  [+] rejects invalid measured InputI for null 6ms (5ms|1ms)
+  [+] rejects invalid measured InputI for NaN 6ms (4ms|1ms)
+  [+] rejects invalid measured InputI for infinity 5ms (3ms|1ms)
+  [+] rejects invalid measured InputTP for numeric string 6ms (5ms|1ms)
+  [+] rejects invalid measured InputTP for boolean 6ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for array 6ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for null 7ms (4ms|3ms)
+  [+] rejects invalid measured InputTP for NaN 7ms (5ms|2ms)
+  [+] rejects invalid measured InputTP for infinity 6ms (5ms|1ms)
+  [+] rejects unknown unavailable reasons rather than copying an arbitrary label 8ms (6ms|1ms)
+
+Describing AC-043: preview timeline metadata binds seeking to the selected track
+  [+] uses the selected stream origin and retains a negative container origin only as metadata 121ms (117ms|3ms)
+  [+] uses sample zero only when WAV does not report a presentation origin 50ms (48ms|2ms)
+  [+] rejects unsupported selected timestamp negative 39ms (36ms|3ms)
+  [+] rejects unsupported selected timestamp NaN 16ms (15ms|1ms)
+  [+] rejects unsupported selected timestamp infinity 16ms (14ms|1ms)
+  [+] rejects unsupported selected timestamp N/A 15ms (13ms|2ms)
+  [+] rejects unsupported selected timestamp locale decimal 13ms (11ms|3ms)
+  [+] rejects unsupported selected timestamp filter-like string 15ms (14ms|1ms)
+  [+] rejects unsupported selected timestamp JSON number 16ms (12ms|4ms)
+  [+] rejects unsupported selected timestamp boolean 27ms (24ms|4ms)
+  [+] rejects unsupported selected timestamp array 15ms (14ms|1ms)
+  [+] rejects unsupported selected timestamp beyond supported bound 16ms (15ms|2ms)
+  [+] rejects unsupported selected timestamp null for non-WAV 17ms (16ms|1ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/48000 36ms (34ms|2ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/1000 34ms (32ms|2ms)
+  [+] reports finite timestamp resolution with a bounded source-position tolerance for 1/101 39ms (37ms|2ms)
+  [+] rejects unsupported time_base for zero numerator 43ms (40ms|3ms)
+  [+] rejects unsupported time_base for zero denominator 23ms (20ms|3ms)
+  [+] rejects unsupported time_base for negative numerator 15ms (13ms|1ms)
+  [+] rejects unsupported time_base for negative denominator 29ms (28ms|2ms)
+  [+] rejects unsupported time_base for fractional numerator 25ms (23ms|2ms)
+  [+] rejects unsupported time_base for exponent denominator 16ms (15ms|2ms)
+  [+] rejects unsupported time_base for too coarse including one-sample allowance 16ms (15ms|1ms)
+  [+] rejects unsupported time_base for missing non-WAV rational 17ms (15ms|2ms)
+  [+] rejects unsupported time_base for NaN 13ms (11ms|1ms)
+  [+] rejects unsupported time_base for injection 17ms (16ms|1ms)
+  [+] rejects unsupported time_base for JSON number 15ms (13ms|1ms)
+  [+] rejects unsupported time_base for array 17ms (15ms|2ms)
+  [+] rejects unsupported sample_rate for zero 21ms (20ms|2ms)
+  [+] rejects unsupported sample_rate for negative 18ms (17ms|1ms)
+  [+] rejects unsupported sample_rate for fractional string 15ms (14ms|1ms)
+  [+] rejects unsupported sample_rate for NaN 21ms (19ms|2ms)
+  [+] rejects unsupported sample_rate for missing 19ms (18ms|1ms)
+  [+] rejects unsupported sample_rate for integer overflow 29ms (27ms|3ms)
+  [+] rejects unsupported sample_rate for JSON number 22ms (20ms|3ms)
+  [+] rejects unsupported sample_rate for array 18ms (16ms|2ms)
+  [+] rejects malformed or ambiguous timeline metadata for malformed JSON 25ms (24ms|2ms)
+  [+] rejects malformed or ambiguous timeline metadata for root array 19ms (17ms|2ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing streams 18ms (17ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing selected stream 20ms (18ms|2ms)
+  [+] rejects malformed or ambiguous timeline metadata for duplicate stream index 24ms (21ms|3ms)
+  [+] rejects malformed or ambiguous timeline metadata for string stream index 16ms (15ms|1ms)
+  [+] rejects malformed or ambiguous timeline metadata for missing non-WAV origin 17ms (15ms|3ms)
+  [+] rejects malformed or ambiguous timeline metadata for invalid container timestamp 22ms (20ms|2ms)
+
+Describing AC-043/045: preview commands bound one selected input and preserve mastering settings
+  [+] uses a bounded window and exact sample trim in en-US 81ms (77ms|4ms)
+  [+] uses a bounded window and exact sample trim in de-DE 29ms (27ms|2ms)
+  [+] uses a bounded window and exact sample trim in fi-FI 28ms (26ms|1ms)
+  [+] uses held pipe PCM and only comparison gain for a separately matched asset 29ms (27ms|1ms)
+  [+] adds the selected stream timestamp origin to the source-relative seek 18ms (17ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 9ms (7ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 7ms (6ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 6ms (4ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 5ms (3ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 1 channels and 16 bits 73ms (71ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 2 channels and 24 bits 16ms (14ms|2ms)
+
+Describing AC-043/045: CLI preview arguments fail before dependency and output side effects
+  [+] returns configuration exit 2 before native startup for start without preview 976ms (971ms|5ms)
+  [+] returns configuration exit 2 before native startup for duration without preview 1.02s (1.01s|1ms)
+  [+] returns configuration exit 2 before native startup for negative start 1.03s (1.03s|2ms)
+  [+] returns configuration exit 2 before native startup for empty start 950ms (948ms|2ms)
+  [+] returns configuration exit 2 before native startup for locale decimal start 908ms (907ms|1ms)
+  [+] returns configuration exit 2 before native startup for infinite start 1.16s (1.16s|2ms)
+  [+] returns configuration exit 2 before native startup for zero duration 901ms (899ms|2ms)
+  [+] returns configuration exit 2 before native startup for duration beyond maximum 962ms (961ms|1ms)
+  [+] returns configuration exit 2 before native startup for injected duration 1.01s (1.01s|2ms)
+  [+] returns configuration exit 2 before native startup for expression duration 986ms (985ms|2ms)
+
+Describing AC-043/044/045: preview orchestration retains ownership through faults and cancellation
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 4 486ms (483ms|3ms)
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 5 420ms (417ms|3ms)
+  [+] persists owned cleanup diagnostics before releasing pins and retains primary 130 179ms (178ms|2ms)
+  [+] retains all published assets and snapshots a request after the fourth publication 428ms (426ms|2ms)
+  [+] settles and releases Preview leases when output organization fails after publication 868ms (866ms|2ms)
+  [+] settles and releases Preview leases when output organization fails after cancellation 273ms (267ms|6ms)
+  [+] handles valid with exit 0, 4 completed or foreign preview assets and no full export 443ms (441ms|2ms)
+  [+] handles cancel with exit 130, 0 completed or foreign preview assets and no full export 90ms (89ms|1ms)
+  [+] handles range-invalid with exit 2, 0 completed or foreign preview assets and no full export 82ms (79ms|3ms)
+  [+] handles render-start with exit 3, 0 completed or foreign preview assets and no full export 138ms (136ms|1ms)
+  [+] handles render-exit with exit 4, 0 completed or foreign preview assets and no full export 110ms (108ms|1ms)
+  [+] handles measurement-malformed with exit 4, 0 completed or foreign preview assets and no full export 143ms (142ms|1ms)
+  [+] handles measurement-exit with exit 4, 0 completed or foreign preview assets and no full export 163ms (161ms|1ms)
+  [+] handles one-sample-short with exit 5, 0 completed or foreign preview assets and no full export 170ms (169ms|1ms)
+  [+] handles comparison-peak with exit 5, 0 completed or foreign preview assets and no full export 277ms (276ms|1ms)
+  [+] handles publication-race with exit 5, 1 completed or foreign preview assets and no full export 270ms (268ms|1ms)
+  [+] handles report-failure with exit 7, 4 completed or foreign preview assets and no full export 283ms (282ms|1ms)
+  [+] handles silence with exit 7, 4 completed or foreign preview assets and no full export 316ms (315ms|1ms)
+  [+] handles short-preview with exit 7, 4 completed or foreign preview assets and no full export 414ms (412ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.OutputInteraction.Tests.ps1'
+Describing AC-061: default Music is explicit and never falls back to the current directory
+  [+] reads the existing Music registration without writing to it 9ms (6ms|3ms)
+  [+] rejects unavailable or unsupported default Music empty 13ms (10ms|3ms)
+  [+] rejects unavailable or unsupported default Music relative 5ms (4ms|1ms)
+  [+] rejects unavailable or unsupported default Music UNC 8ms (6ms|2ms)
+  [+] rejects unavailable or unsupported default Music provider 5ms (4ms|2ms)
+  [+] preserves explicit relative output resolution instead of applying the default Music guard 13ms (11ms|1ms)
+  [+] keeps action switches outside the saved preference schema 25ms (24ms|1ms)
+  [+] skips an exact prior job directory without traversing renamed media while traversing a near miss 39ms (38ms|1ms)
+
+Describing AC-063: follow-up action requires explicit interactive published success
+  [+] does not open for not requested 35ms (27ms|8ms)
+  [+] does not open for not interactive 13ms (11ms|1ms)
+  [+] does not open for not published 9ms (7ms|1ms)
+  [+] does not open for unpublished warning 12ms (11ms|1ms)
+  [+] does not open for preflight failure 12ms (10ms|2ms)
+  [+] does not open for dependency failure 13ms (11ms|1ms)
+  [+] does not open for processing failure 19ms (17ms|2ms)
+  [+] does not open for storage failure 13ms (12ms|2ms)
+  [+] does not open for mixed batch failure 13ms (11ms|2ms)
+  [+] does not open for cancellation 11ms (9ms|1ms)
+  [+] opens the selected directory once for published exit 0 34ms (33ms|2ms)
+  [+] opens the selected directory once for published exit 7 22ms (18ms|4ms)
+  [+] contains an explicit folder-open failure as an advisory 33ms (32ms|1ms)
+  [+] refuses an existing directory whose identity differs before launching the shell 31ms (30ms|1ms)
+
+Describing AC-062/063: actual picker body with isolated STA dialog doubles
+  [+] configures and disposes the optional picker for OK without loading a GUI assembly 677ms (671ms|5ms)
+  [+] configures and disposes the optional picker for cancel without loading a GUI assembly 615ms (611ms|4ms)
+  [+] configures and disposes the optional picker for throw without loading a GUI assembly 545ms (544ms|1ms)
+
+Describing AC-061/062: actual isolated destination and no-GUI entry points
+  [+] keeps default Music or chosen output flat (True) without a picker or Explorer 3.03s (3.02s|5ms)
+  [+] keeps default Music or chosen output flat (False) without a picker or Explorer 2.59s (2.59s|1ms)
+  [+] uses explicit output successfully when default Music is unavailable 2.71s (2.71s|1ms)
+  [+] uses saved custom output even when default Music is unavailable without rewriting preferences 3.42s (3.42s|2ms)
+  [+] keeps normal helper-less installs flat with explicitly false new action switches 2.82s (2.82s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (empty) 1.04s (1.04s|2ms)
+  [+] rejects unavailable default Music before native work and cwd output (relative) 1.08s (1.08s|1ms)
+  [+] rejects unavailable default Music before native work and cwd output (UNC) 1.11s (1.11s|1ms)
+  [+] shows no-input usage without a desktop dependency, prompt or destination creation 676ms (674ms|2ms)
+  [+] creates one job group with separate media and detailed reports 3.57s (3.57s|2ms)
+  [+] shares one job group across explicit list children and opens it once at the parent 4.52s (4.52s|1ms)
+
+Describing AC-062/063: requested UI boundaries in actual isolated hosts
+  [+] rejects persisting processing action -JobFolder without input, native work or config changes 821ms (817ms|4ms)
+  [+] rejects persisting processing action -PickFile without input, native work or config changes 780ms (778ms|2ms)
+  [+] rejects persisting processing action -OpenOutputFolder without input, native work or config changes 787ms (783ms|3ms)
+  [+] rejects unattended -PickFile before picker, Explorer or native work 1.07s (1.07s|2ms)
+  [+] rejects unattended -OpenOutputFolder before picker, Explorer or native work 1.11s (1.11s|2ms)
+  [+] returns 130 on picker cancellation without creating output or starting native tools 1.22s (1.22s|2ms)
+  [+] rejects PickFile combined with an explicit input before picker or native work 1.07s (1.06s|2ms)
+  [+] uses a picked file through normal validation and native rendering 2.87s (2.86s|1ms)
+  [+] rejects an unavailable picker without native work or a false completed result 1.17s (1.16s|1ms)
+  [+] opens only a published successful group and preserves success when opening fails 3.5s (3.5s|2ms)
+  [+] opens only a published successful group and preserves success when opening fails 3.32s (3.32s|2ms)
+  [+] never offers or opens a completed destination after native failure 3.23s (3.22s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.OutputLayout.Tests.ps1'
+Describing Optional held output layout
+  [+] allows media publication and separate held report writing while denying directory replacement 121ms (114ms|7ms)
+  [+] does not reuse a prior job directory or alter its foreign contents 37ms (36ms|2ms)
+  [+] preserves a file occupying the generated job directory name 19ms (17ms|2ms)
+  [+] resolves a supported existing base junction and rejects a generated child junction collision 44ms (37ms|7ms)
+  [+] rejects paths changed in a borrowed layout while preserving the original held hierarchy 18ms (17ms|1ms)
+  [+] rejects a closed directory lease before further use 19ms (18ms|1ms)
+  [+] releases every directory after an allocation assertion fails and retains empty directories 48ms (46ms|2ms)
+  [+] continues releasing handles after a disposal failure and closes idempotently 22ms (21ms|1ms)
+  [+] does not create a missing base or fall back to the current directory 36ms (34ms|2ms)
+  [+] rejects an existing regular file used as the base without modifying it 22ms (21ms|1ms)
+Tests completed in 618.94s
+Tests Passed: 749, Failed: 0, Skipped: 1, Inconclusive: 0, NotRun: 0
+Targeted passed: 749 Pester passed, 1 skipped, 0 outside scope.

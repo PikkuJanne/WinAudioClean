@@ -1,0 +1,63 @@
+Sanitized selected focused log. Only the then-present21 Unit cases ran;23 Runtime cases were outside the tag filter (44 discovered). This historical stable-source unit scope is not the final application scope.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 44 tests in 423ms.
+Filter 'Tag' set to ('Unit').
+Filters selected 21 tests to run.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputInteraction.Tests.ps1'
+Describing AC-061: default Music is explicit and never falls back to the current directory
+  [+] reads the existing Music registration without writing to it
+ 207ms (149ms|57ms)
+  [+] rejects unavailable or unsupported default Music empty
+ 105ms (97ms|8ms)
+  [+] rejects unavailable or unsupported default Music relative
+ 13ms (9ms|4ms)
+  [+] rejects unavailable or unsupported default Music UNC
+ 21ms (18ms|2ms)
+  [+] rejects unavailable or unsupported default Music provider
+ 11ms (7ms|3ms)
+  [+] preserves explicit relative output resolution instead of applying the default Music guard
+ 71ms (69ms|2ms)
+  [+] keeps action switches outside the saved preference schema
+ 245ms (242ms|4ms)
+  [+] skips an exact prior job directory without traversing renamed media while traversing a near miss
+ 911ms (908ms|3ms)
+
+Describing AC-063: follow-up action requires explicit interactive published success
+  [+] does not open for not requested
+ 490ms (481ms|9ms)
+  [+] does not open for not interactive
+ 26ms (21ms|5ms)
+  [+] does not open for not published
+ 25ms (20ms|4ms)
+  [+] does not open for unpublished warning
+ 21ms (17ms|3ms)
+  [+] does not open for preflight failure
+ 23ms (19ms|4ms)
+  [+] does not open for dependency failure
+ 33ms (30ms|3ms)
+  [+] does not open for processing failure
+ 24ms (20ms|4ms)
+  [+] does not open for storage failure
+ 24ms (20ms|4ms)
+  [+] does not open for mixed batch failure
+ 41ms (22ms|19ms)
+  [+] does not open for cancellation
+ 19ms (16ms|3ms)
+  [+] opens the selected directory once for published exit 0
+ 197ms (195ms|1ms)
+  [+] opens the selected directory once for published exit 7
+ 22ms (20ms|2ms)
+  [+] contains an explicit folder-open failure as an advisory
+ 55ms (53ms|2ms)
+Tests completed in 4.65s
+Tests Passed: 21,
+Failed: 0,
+Skipped: 0,
+Inconclusive: 0,
+
+NotRun: 23

@@ -1,0 +1,347 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+WinAudioClean.ps1:1013: Unexpected token 'file' in expression or statement.
+WinAudioClean.ps1:1013: The hash literal was incomplete.
+WinAudioClean.ps1:1234: Array index expression is missing or not valid.
+WinAudioClean.ps1:1234: Expressions are only allowed as the first element of a pipeline.
+WinAudioClean.ps1:1012: Missing closing '}' in statement block or type definition.
+WinAudioClean.ps1:1234: The Try statement is missing its Catch or Finally block.
+WinAudioClean.ps1:1010: Missing closing '}' in statement block or type definition.
+WinAudioClean.ps1:1234: Unexpected token ')' in expression or statement.
+WinAudioClean.ps1:1235: Missing argument in parameter list.
+WinAudioClean.ps1:1572: Missing expression after unary operator '--'.
+WinAudioClean.ps1:1573: Unexpected token 'STATUS' in expression or statement.
+WinAudioClean.ps1:1573: Missing closing ')' in expression.
+WinAudioClean.ps1:1573: Unexpected token ')' in expression or statement.
+WinAudioClean.ps1:1576: Missing closing ')' in expression.
+WinAudioClean.ps1:1576: Unexpected token ')' in expression or statement.
+WinAudioClean.ps1:1580: Missing argument in parameter list.
+WinAudioClean.ps1:1592: Unexpected token 'frames' in expression or statement.
+WinAudioClean.ps1:1592: Unexpected token 'Hz' in expression or statement.
+WinAudioClean.ps1:1592: Unexpected token 'bits' in expression or statement.
+WinAudioClean.ps1:1595: Unexpected token 'bits' in expression or statement.
+WinAudioClean.ps1:1595: Unexpected token 'WAV' in expression or statement.
+WinAudioClean.ps1:1597: Unexpected token 'dBTP' in expression or statement.
+WinAudioClean.ps1:1597: Unexpected token 'LU' in expression or statement.
+WinAudioClean.ps1:1604: Unexpected token 'available' in expression or statement.
+WinAudioClean.ps1:1610: Missing closing ')' in expression.
+WinAudioClean.ps1:1610: Unexpected token ')' in expression or statement.
+WinAudioClean.ps1:1611: Unexpected token 'channel' in expression or statement.
+WinAudioClean.ps1:1611: Unexpected token 'Hz' in expression or statement.
+WinAudioClean.ps1:1614: Missing argument in parameter list.
+WinAudioClean.ps1:1663: Unexpected token '`r`n" } else { $text }
+                        Set-WacOwnedReportContent -Writer $writer -Content $content
+                    }
+                } catch {
+                    Add-WacReportFailure -Report $Report -Code ($kind + '_report_write_failed') -Message $_.Exception.Message
+                    Write-Warning ('Report could not be written: ' + $_.Exception.Message)
+                    try {
+                        if ($kind -eq 'summary') { Reset-WacSummaryReport -Writer $writer -Length $writer.InitialLength }
+                        else { Remove-WacOwnedReport -Writer $writer }
+                    } catch {
+                        Add-WacReportFailure -Report $Report -Code 'report_cleanup_failed' -Message $_.Exception.Message
+                        Write-Warning ('Incomplete report could not be removed or rolled back: ' + $_.Exception.Message)
+                    } finally {
+                        try { Close-WacReportWriter -Writer $writer }
+                        catch { Write-Warning ('Report handle release failed: ' + $_.Exception.Message) }
+                        $writers.Remove($kind)
+                    }
+                    $retry = $true
+                    break
+                }
+            }
+        } while ($retry -and $writers.Count -gt 0)
+    } finally {
+        foreach ($writer in $writers.Values) {
+            # All content was explicitly flushed above. A subsequent handle
+            # release advisory must not rewrite the persisted terminal outcome.
+            try { Close-WacReportWriter -Writer $writer }
+            catch { Write-Warning ('Report handle release failed: ' + $_.Exception.Message) }
+        }
+    }
+}
+
+function ConvertTo-WacRedactedReport {
+    param($Report)
+
+    if ($null -eq $Report -or ($Report.schemaVersion -isnot [int] -and $Report.schemaVersion -isnot [long]) -or $Report.schemaVersion -ne 1 -or
+        $Report.status -isnot [string] -or $Report.processingStatus -isnot [string] -or
+        $Report.status -cnotin @('SUCCESS', 'WARNING', 'FAILED', 'CANCELLED') -or
+        $Report.processingStatus -cnotin @('SUCCESS', 'FAILED', 'CANCELLED')) { throw 'Expected a version 1 WinAudioClean run report.' }
+    # Copy no free-form source strings: even version/filter/error fields may
+    # contain filenames, metadata or credentials. All retained values are typed
+    # numbers, booleans, fixed enums or values regenerated from built-in profiles.
+    $mode = if ($Report.settings.mode -cin @('Raw', 'Zoom')) { $Report.settings.mode } else { $null }
+    $safe = [ordered]@{
+        schemaVersion = 1; diagnosticExport = 'redacted'
+        reviewWarning = 'Review this export before sharing. No file has been uploaded.'
+        status = $Report.status; processingStatus = $Report.processingStatus
+        applicationExitCode = $null; nativeExitCode = $null
+        settings = [ordered]@{ mode = $mode; bitDepth = $null; mono = $null; rf64 = $null; loudnessMode = $null }
+        input = [ordered]@{ durationSeconds = $null; channels = $null; sampleRate = $null; streamIndex = $null }
+        timing = [ordered]@{ processingElapsedSeconds = $null }
+        output = [ordered]@{ published = $null; validity = $null; format = [ordered]@{} }
+        measurements = [ordered]@{}
+        normalization = [ordered]@{ requestedMode = $null; actualType = $null; linearRequested = $null; fallbackReason = $null }
+        loudnessCompliance = [ordered]@{ status = $null; reason = $null }
+        diagnostics = [ordered]@{ omitted = $true; reason = 'may_contain_paths_or_metadata' }
+    }
+    foreach ($name in @('applicationExitCode', 'nativeExitCode')) {
+        $value = $Report.$name
+        if (($value -is [int] -or $value -is [long]) -and $value -ge [int]::MinValue -and $value -le [int]::MaxValue) { $safe[$name] = $value }
+    }
+    if (($Report.settings.bitDepth -is [int] -or $Report.settings.bitDepth -is [long]) -and $Report.settings.bitDepth -in @(16, 24)) { $safe.settings.bitDepth = $Report.settings.bitDepth }
+    foreach ($name in @('mono', 'rf64')) { if ($Report.settings.$name -is [bool]) { $safe.settings[$name] = $Report.settings.$name } }
+    foreach ($name in @('channels', 'sampleRate', 'index')) {
+        $value = $Report.input.stream.$name
+        $target = if ($name -eq 'index') { 'streamIndex' } else { $name }
+        if (($value -is [int] -or $value -is [long]) -and $value -ge 0 -and $value -le [int]::MaxValue) { $safe.input[$target] = $value }
+    }
+    $safe.input.durationSeconds = (ConvertTo-WacMeasurement -Value $Report.input.durationSeconds -UnavailableReason 'unavailable')
+    $safe.timing.processingElapsedSeconds = (ConvertTo-WacMeasurement -Value $Report.timing.processingElapsedSeconds -UnavailableReason 'unavailable')
+    if ($Report.output.published -is [bool]) { $safe.output.published = $Report.output.published }
+    if ($Report.output.validity -cin @('PASSED', 'FAILED')) { $safe.output.validity = $Report.output.validity }
+    foreach ($name in @('sampleRate', 'bitDepth', 'channels')) {
+        $value = $Report.output.format.$name
+        $safe.output.format[$name] = if (($value -is [int] -or $value -is [long]) -and $value -gt 0 -and $value -le [int]::MaxValue) { $value } else { $null }
+    }
+    foreach ($name in @('codec', 'channelLayout', 'container')) {
+        $allowed = switch ($name) { 'codec' { @('pcm_s16le', 'pcm_s24le') } 'channelLayout' { @('mono', 'stereo') } 'container' { @('RIFF', 'RF64') } }
+        $safe.output.format[$name] = if ($Report.output.format.$name -cin $allowed) { $Report.output.format.$name } else { $null }
+    }
+    $metricReasons = @('unavailable', 'not_measured', 'too_short', 'silence', 'undefined_loudness', 'measurement_failed', 'nonfinite', 'not_numeric')
+    foreach ($name in @('integratedLufs', 'truePeakDbtp', 'loudnessRangeLu')) {
+        $value = $Report.measurements.$name.value
+        $reason = if ($Report.measurements.$name.reason -cin $metricReasons) { $Report.measurements.$name.reason } else { 'not_measured' }
+        if ($null -ne $value -and $value -isnot [double] -and $value -isnot [int] -and $value -isnot [long] -and $value -isnot [decimal]) {
+            $value = $null; $reason = 'not_numeric'
+        }
+        $safe.measurements[$name] = ConvertTo-WacMeasurement -Value $value -UnavailableReason $reason
+    }
+    if ($Report.settings.loudnessMode -cin @('Fast', 'Accurate')) { $safe.settings.loudnessMode = $Report.settings.loudnessMode }
+    if ($Report.normalization.requestedMode -cin @('Fast', 'Accurate')) { $safe.normalization.requestedMode = $Report.normalization.requestedMode }
+    if ($Report.normalization.actualType -cin @('linear', 'dynamic')) { $safe.normalization.actualType = $Report.normalization.actualType }
+    if ($Report.normalization.linearRequested -is [bool]) { $safe.normalization.linearRequested = $Report.normalization.linearRequested }
+    if ($Report.normalization.fallbackReason -cin @('too_short', 'silence', 'undefined_loudness', 'measurement_out_of_range', 'ffmpeg_dynamic_fallback')) {
+        $safe.normalization.fallbackReason = $Report.normalization.fallbackReason
+    }
+    if ($Report.loudnessCompliance.status -cin @('NOT_MEASURED', 'PASSED', 'OUT_OF_TOLERANCE', 'UNMEASURABLE', 'FAILED')) {
+        $safe.loudnessCompliance.status = $Report.loudnessCompliance.status
+    }
+    if ($Report.loudnessCompliance.reason -cin @('no_independent_measurement', 'true_peak_exceeded', 'loudness_out_of_tolerance', 'too_short', 'silence', 'undefined_loudness', 'measurement_failed')) {
+        $safe.loudnessCompliance.reason = $Report.loudnessCompliance.reason
+    }
+    $safe
+}
+
+function Export-WacDiagnostic {
+    param([string]$Path, [string]$Destination)
+
+    $source = $null; $directory = $null; $writer = $null
+    try {
+        $sourcePath = Resolve-WacFileSystemPath -Path $Path
+        $destinationPath = Resolve-WacFileSystemPath -Path $Destination
+        $source = [IO.File]::Open($sourcePath, [IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)
+        if ($source.Length -gt 16MB) { throw 'Diagnostic input exceeds the 16 MiB export limit.' }
+        $reader = [IO.StreamReader]::new($source, [Text.Encoding]::UTF8, $true, 4096, $true)
+        try {
+            $jsonText = $reader.ReadToEnd()
+            if (-not $jsonText.TrimStart().StartsWith('{')) { throw 'Diagnostic input must be a JSON object.' }
+            $data = $jsonText | ConvertFrom-Json -ErrorAction Stop
+        }
+        finally { $reader.Dispose() }
+        $redacted = ConvertTo-WacRedactedReport -Report $data
+        Initialize-WacNativeFileIO
+        $directory = [WinAudioClean.NativeFileIO]::OpenDirectory([IO.Path]::GetDirectoryName($destinationPath))
+        $canonical = [WinAudioClean.NativeFileIO]::ResolvedPath($directory)
+        $writer = Open-WacReportWriter -Path ([IO.Path]::Combine($canonical, [IO.Path]::GetFileName($destinationPath))) -CreateNew
+        try { Set-WacOwnedReportContent -Writer $writer -Content (($redacted | ConvertTo-Json -Depth 10) + "`r`n") }
+        catch {
+            Remove-WacOwnedReport -Writer $writer
+            throw
+        }
+        Write-Warning 'Review the redacted diagnostic export before sharing. No file has been uploaded.'
+        Write-Host ('Diagnostic export saved to: ' + $writer.Path)
+    } finally {
+        if ($null -ne $writer) { Close-WacReportWriter -Writer $writer }
+        if ($null -ne $directory) { $directory.Dispose() }
+        if ($null -ne $source) { $source.Dispose() }
+    }
+}
+
+
+# Dot-sourcing exposes only helpers. Normal -File, &, and .bat calls still run below.
+if ($MyInvocation.InvocationName -eq '.') { return }
+
+# Explicit local support export bypasses media/dependency initialization.
+if ($PSBoundParameters.ContainsKey('ExportDiagnostic') -or $PSBoundParameters.ContainsKey('DiagnosticOutputPath')) {
+    try {
+        foreach ($name in $PSBoundParameters.Keys) {
+            if ($name -notin @('ExportDiagnostic', 'DiagnosticOutputPath', 'NonInteractive')) {
+                throw 'Diagnostic export cannot be combined with audio processing options.'
+            }
+        }
+        Export-WacDiagnostic -Path $ExportDiagnostic -Destination $DiagnosticOutputPath
+        exit 0
+    } catch {
+        Write-Error -Message ('Diagnostic export failed: ' + $_.Exception.Message) -ErrorAction Continue
+        exit 2
+    }
+}
+
+# Settings are optional for an installation with no saved preferences. Imports
+# return above without reading user configuration or requiring this component.
+# Explicit management never probes an input, resolves native tools or prompts.
+$settingsManagement = $ShowSettings -or $SaveSettings -or $ResetSettings
+$audioStreamIndexSpecified = $PSBoundParameters.ContainsKey('AudioStreamIndex')
+$resolvedSettings = $null
+try {
+    $settingsFilePath = $SettingsPath
+    if (-not $PSBoundParameters.ContainsKey('SettingsPath')) {
+        $applicationData = [Environment]::GetFolderPath('ApplicationData')
+        if ($applicationData) { $settingsFilePath = [IO.Path]::Combine($applicationData, 'WinAudioClean', 'settings.json') }
+    }
+    $useSettingsComponent = $settingsManagement -or $PSBoundParameters.ContainsKey('SettingsPath') -or
+        (-not $IgnoreSavedSettings -and $settingsFilePath -and (Test-Path -LiteralPath $settingsFilePath))
+    if ($useSettingsComponent) {
+        $settingsComponent = Join-Path $PSScriptRoot 'WinAudioClean.Settings.ps1'
+        if (-not (Test-Path -LiteralPath $settingsComponent -PathType Leaf)) {
+            throw 'Keep WinAudioClean.Settings.ps1 beside the main script to use saved preferences.'
+        }
+        . $settingsComponent
+        if ($settingsManagement) {
+            $preferenceNames = @('Mode', 'Preset', 'LoudnessMode', 'BitDepth', 'Mono', 'Rf64', 'OutputDirectory', 'AudioStreamIndex', 'CleaningOptions')
+            foreach ($name in $PSBoundParameters.Keys) {
+                if ($name -notin $preferenceNames + @('SettingsPath', 'IgnoreSavedSettings', 'ShowSettings', 'SaveSettings', 'ResetSettings', 'NonInteractive')) {
+                    throw 'Settings management cannot be combined with input, preview, dependencies or diagnostic actions.'
+                }
+            }
+            if ($SaveSettings -and $ResetSettings) { throw 'SaveSettings and ResetSettings cannot be combined.' }
+            if ($ResetSettings) {
+                foreach ($name in $preferenceNames) {
+                    if ($PSBoundParameters.ContainsKey($name)) { throw 'ResetSettings cannot be combined with processing choices.' }
+                }
+            }
+        }
+        $settingsFilePath = Resolve-WacFileSystemPath -Path $settingsFilePath
+        $savedSettings = @{}
+        if (-not $IgnoreSavedSettings -and -not $ResetSettings) {
+            $savedSettings = Read-WacSettings -Path $settingsFilePath
+        }
+        $resolvedSettings = Resolve-WacSettings -Explicit $PSBoundParameters -Saved $savedSettings
+        if ($settingsManagement) {
+            if ($ResetSettings) {
+                $null = Save-WacSettings -Path $settingsFilePath -Values @{}
+                Write-Host 'Saved preferences reset to built-in defaults.'
+            } elseif ($SaveSettings) {
+                $null = Save-WacSettings -Path $settingsFilePath -Values $resolvedSettings.Values
+                Write-Host 'Preferences saved.'
+            }
+            $settingsDisplay = ConvertTo-WacSettingsJson -Values $resolvedSettings.Values | ConvertFrom-Json
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name origins -Value $resolvedSettings.Origins
+            $displayProfile = $null
+            if ($resolvedSettings.Values.Mode) {
+                $displayChoice = if ($resolvedSettings.Values.Mode -eq 'Raw') { '1' } else { '2' }
+                $displayProfile = Get-WacProcessingProfile -Choice $displayChoice -Preset $resolvedSettings.Values.Preset -CleaningOptions $resolvedSettings.Values.CleaningOptions
+            }
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name effectiveCleaning -Value $(if ($displayProfile) { $displayProfile.CleaningSettings } else { $null })
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name effectiveFilterChain -Value $(if ($displayProfile) { $displayProfile.FilterChain } else { $null })
+            $settingsDisplay | Add-Member -MemberType NoteProperty -Name effectiveProfileReason -Value $(if ($displayProfile) { $null } else { 'mode_not_selected' })
+            Write-Output ($settingsDisplay | ConvertTo-Json -Depth 8 -Compress)
+            exit 0
+        }
+        $Mode = $resolvedSettings.Values.Mode
+        $Preset = $resolvedSettings.Values.Preset
+        $LoudnessMode = $resolvedSettings.Values.LoudnessMode
+        $BitDepth = $resolvedSettings.Values.BitDepth
+        $Mono = $resolvedSettings.Values.Mono
+        $Rf64 = $resolvedSettings.Values.Rf64
+        $OutputDirectory = $resolvedSettings.Values.OutputDirectory
+        $AudioStreamIndex = $resolvedSettings.Values.AudioStreamIndex
+        $CleaningOptions = $resolvedSettings.Values.CleaningOptions
+        $audioStreamIndexSpecified = $null -ne $resolvedSettings.Values.AudioStreamIndex
+    }
+} catch {
+    Write-Error -Message ('Settings failed: ' + $_.Exception.Message + ' Use -IgnoreSavedSettings or -ResetSettings for recovery.') -ErrorAction Continue
+    exit 2
+}
+
+# One controller per invocation; queue children borrow it and never unregister it.
+$ownsRunContext = $null -eq $WacRunContext
+if ($ownsRunContext) { $WacRunContext = New-WacRunContext -CaptureConsole }
+$script:WacRunContext = $WacRunContext
+$script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]'
+try {
+
+# Explicit lists reuse the ordinary single-file path, with preferences frozen
+# once and no child configuration reads. Legacy installations/imports need no
+# batch component. Folder discovery is a separate, explicitly selected route.
+$batchRequested = $PSBoundParameters.ContainsKey('InputPaths') -or $PSBoundParameters.ContainsKey('InputListPath')
+$folderRequested = $PSBoundParameters.ContainsKey('InputDirectories')
+if ($batchRequested -or $folderRequested -or $PSBoundParameters.ContainsKey('BatchResultPath') -or $PSBoundParameters.ContainsKey('Recurse')) {
+    try {
+        if (-not $batchRequested -and -not $folderRequested) { throw 'BatchResultPath requires an explicit list or InputDirectories; Recurse requires InputDirectories.' }
+        if ($PSBoundParameters.ContainsKey('Recurse') -and -not $folderRequested) { throw 'Recurse requires InputDirectories.' }
+        if ($Preview -or $PSBoundParameters.ContainsKey('PreviewStartSeconds') -or $PSBoundParameters.ContainsKey('PreviewDurationSeconds')) {
+            throw 'Lists and folders support ordinary full renders; preview requires one inputPath.'
+        }
+        foreach ($component in @('WinAudioClean.Settings.ps1', 'WinAudioClean.Batch.ps1')) {
+            $componentPath = Join-Path $PSScriptRoot $component
+            if (-not (Test-Path -LiteralPath $componentPath -PathType Leaf)) { throw "Keep' in expression or statement.
+WinAudioClean.ps1:2021: Unexpected token 'preset' in expression or statement.
+WinAudioClean.ps1:2021: Missing closing ')' in expression.
+WinAudioClean.ps1:2021: Unexpected token ')' in expression or statement.
+WinAudioClean.ps1:2054: Missing closing ')' in expression.
+WinAudioClean.ps1:2054: Unexpected token ')' in expression or statement.
+WinAudioClean.ps1:2065: Unexpected token 'Dependency' in expression or statement.
+WinAudioClean.ps1:2127: Unexpected token 'channel' in expression or statement.
+WinAudioClean.ps1:2127: Missing closing ')' in expression.
+WinAudioClean.ps1:2127: Unexpected token ')' in expression or statement.
+WinAudioClean.ps1:2130: Unexpected token 'Output' in expression or statement.
+WinAudioClean.ps1:2149: Unexpected token 'bytes' in expression or statement.
+WinAudioClean.ps1:2337: The string is missing the terminator: ".
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+WinAudioClean.ps1:1572: The '--' operator works only on variables or on properties.
+PowerShell parse failed: WinAudioClean.ps1
+At <repo>\scripts\Invoke-Tests.ps1:86 char:9
++         throw "PowerShell parse failed: $($file.Name)"
++         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (PowerShell pars...nAudioClean.ps1:String) [], RuntimeException
+    + FullyQualifiedErrorId : PowerShell parse failed: WinAudioClean.ps1

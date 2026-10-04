@@ -1,0 +1,310 @@
+{
+  "schemaVersion": 1,
+  "scope": "Pester-only actual CMD/BAT and typed application boundary recorder; no audio rendering, cumulative gate, or Explorer desktop drop is claimed.",
+  "captures": {
+    "initial": {
+      "snapshot": {
+        "capture": {
+          "path": ".wac-local/WAC-M3-02/transport-focused/initial-snapshot.json",
+          "rawSha256": "65002561E20291AC25114236E5426866627A3B68490E445212A3B6543A6AF912",
+          "rawBytes": 1439
+        },
+        "data": {
+          "capturedUtc": "2026-10-03T06:25:46.8507679Z",
+          "scope": "Pester-only LauncherTransport suite: real CMD/BAT plus typed application boundary recorder; inner Windows PowerShell5.1 and PowerShell7. No Explorer desktop drop or audio rendering claimed.",
+          "sources": [
+            {
+              "path": "WinAudioClean.bat",
+              "sha256": "6E27F9AD0CA277C7952F159F1EC398D6A9EA0C3FA5F9D935FB39C47C1D71935B"
+            },
+            {
+              "path": "WinAudioClean.Launcher.ps1",
+              "sha256": "469C9758862108E2BA46431436E5B4737752432078DEF4E1BDA31FBF295D85D6"
+            },
+            {
+              "path": "tests/WinAudioClean.LauncherTransport.Tests.ps1",
+              "sha256": "F3667FAFAECB0AC4B19DF1C08F4B418F4EB346391CF4C944167FF49270926BA2"
+            },
+            {
+              "path": "tests/fixtures/LauncherMatrixApplicationStub.ps1",
+              "sha256": "7DEC2E9EF38679154F9743BBC5FB7FAA02E3120F14DF3BBFBE268871FE7C1AD1"
+            },
+            {
+              "path": "tests/fixtures/TestProcess.ps1",
+              "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+            }
+          ],
+          "commands": [
+            "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/transport-focused/Invoke-Focused.ps1 -Repository <repo>",
+            "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/transport-focused/Invoke-Focused.ps1 -Repository <repo>"
+          ],
+          "harnessSha256": "5FC38150F822111C62CD9BEC65F3DB9BB90E854D8262CBE3385DEA71F431DB02"
+        },
+        "commandHashes": [
+          {
+            "jsonPointer": "/commands/0",
+            "rawUtf8Sha256": "31DE55DA95A55D395592290D5450070D41D6426AA9AF34481DFA7DC8BBECB409",
+            "sanitizedUtf8Sha256": "31DE55DA95A55D395592290D5450070D41D6426AA9AF34481DFA7DC8BBECB409",
+            "rawCharacters": 140,
+            "sanitizedCharacters": 140
+          },
+          {
+            "jsonPointer": "/commands/1",
+            "rawUtf8Sha256": "804485027F775572CBB35529B15DF0AD2C896D71E35DBB6012751809F1009009",
+            "sanitizedUtf8Sha256": "804485027F775572CBB35529B15DF0AD2C896D71E35DBB6012751809F1009009",
+            "rawCharacters": 134,
+            "sanitizedCharacters": 134
+          }
+        ]
+      },
+      "results": {
+        "capture": {
+          "path": ".wac-local/WAC-M3-02/transport-focused/initial-results.json",
+          "rawSha256": "95AA5FFF5079D45516F65E22A519F054301880DB922D92938F135CEC8335FCFE",
+          "rawBytes": 1408
+        },
+        "data": {
+          "scope": "Initial Pester-only LauncherTransport32 on BAT6E27/Launcher469C; actual CMD and typed app boundary. No Explorer or audio render claim.",
+          "sourceSnapshot": "initial-snapshot.json",
+          "productHashesVerifiedAfterCompletionBeforeMutation": {
+            "WinAudioClean.bat": "6E27F9AD0CA277C7952F159F1EC398D6A9EA0C3FA5F9D935FB39C47C1D71935B",
+            "WinAudioClean.Launcher.ps1": "469C9758862108E2BA46431436E5B4737752432078DEF4E1BDA31FBF295D85D6"
+          },
+          "results": [
+            {
+              "shell": "PS5.1",
+              "exitCode": 1,
+              "passed": 30,
+              "failed": 2,
+              "skipped": 0,
+              "notRun": 0,
+              "durationSeconds": 28.2,
+              "log": "initial-ps51.log",
+              "logSha256": "8F478BA536760972A467CE974D1F4944260DC97B42C0476EF25E0FDBB98D09F2"
+            },
+            {
+              "shell": "PS7",
+              "exitCode": 1,
+              "passed": 30,
+              "failed": 2,
+              "skipped": 0,
+              "notRun": 0,
+              "durationSeconds": 26.21,
+              "log": "initial-ps7.log",
+              "logSha256": "6167BB9E9AB8D967DF11F6F9B2B980F0ECAC2B6664CE84524637121504C3E47E"
+            }
+          ],
+          "failures": [
+            "Two unit negative routes used ForEach Input data variable, colliding with automatic $Input and losing inputPath. Rename to InputValue and name the rows to prove actual ambiguity."
+          ],
+          "additionalEdgeNotTested": "Selected-worker startup failure3 parent pause edge is added only in subsequent33-case scope."
+        },
+        "commandHashes": []
+      }
+    },
+    "final": {
+      "snapshot": {
+        "capture": {
+          "path": ".wac-local/WAC-M3-02/transport-focused/final-snapshot.json",
+          "rawSha256": "89DB3BB438BC6BB7192648C45E17276FF38B20A23500EFC36C6A2EBBA7995D7E",
+          "rawBytes": 1439
+        },
+        "data": {
+          "capturedUtc": "2026-10-03T06:28:10.1998811Z",
+          "scope": "Pester-only LauncherTransport suite: real CMD/BAT plus typed application boundary recorder; inner Windows PowerShell5.1 and PowerShell7. No Explorer desktop drop or audio rendering claimed.",
+          "sources": [
+            {
+              "path": "WinAudioClean.bat",
+              "sha256": "6E27F9AD0CA277C7952F159F1EC398D6A9EA0C3FA5F9D935FB39C47C1D71935B"
+            },
+            {
+              "path": "WinAudioClean.Launcher.ps1",
+              "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+            },
+            {
+              "path": "tests/WinAudioClean.LauncherTransport.Tests.ps1",
+              "sha256": "879BB764D9796A2D43F2F386D08BE4A07AACAC2C91ADFE96F753A6C76AE58939"
+            },
+            {
+              "path": "tests/fixtures/LauncherMatrixApplicationStub.ps1",
+              "sha256": "7DEC2E9EF38679154F9743BBC5FB7FAA02E3120F14DF3BBFBE268871FE7C1AD1"
+            },
+            {
+              "path": "tests/fixtures/TestProcess.ps1",
+              "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+            }
+          ],
+          "commands": [
+            "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/transport-focused/Invoke-Focused.ps1 -Repository <repo>",
+            "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/transport-focused/Invoke-Focused.ps1 -Repository <repo>"
+          ],
+          "harnessSha256": "5FC38150F822111C62CD9BEC65F3DB9BB90E854D8262CBE3385DEA71F431DB02"
+        },
+        "commandHashes": [
+          {
+            "jsonPointer": "/commands/0",
+            "rawUtf8Sha256": "31DE55DA95A55D395592290D5450070D41D6426AA9AF34481DFA7DC8BBECB409",
+            "sanitizedUtf8Sha256": "31DE55DA95A55D395592290D5450070D41D6426AA9AF34481DFA7DC8BBECB409",
+            "rawCharacters": 140,
+            "sanitizedCharacters": 140
+          },
+          {
+            "jsonPointer": "/commands/1",
+            "rawUtf8Sha256": "804485027F775572CBB35529B15DF0AD2C896D71E35DBB6012751809F1009009",
+            "sanitizedUtf8Sha256": "804485027F775572CBB35529B15DF0AD2C896D71E35DBB6012751809F1009009",
+            "rawCharacters": 134,
+            "sanitizedCharacters": 134
+          }
+        ]
+      },
+      "results": {
+        "capture": {
+          "path": ".wac-local/WAC-M3-02/transport-focused/final-results.json",
+          "rawSha256": "020C7A75B47E03453E108261C3DB71B13572D83B4B75439EEEA237F4753AE811",
+          "rawBytes": 3367
+        },
+        "data": {
+          "capturedUtc": "2026-10-03T06:30:47.1557373Z",
+          "scope": "Pester-only LauncherTransport suite: real CMD/BAT plus typed application boundary recorder; inner Windows PowerShell5.1 and PowerShell7. No Explorer desktop drop or audio rendering claimed.",
+          "sourceSnapshot": "final-snapshot.json",
+          "sourcesUnchanged": true,
+          "sourceHashesAfter": [
+            {
+              "path": "WinAudioClean.bat",
+              "sha256": "6E27F9AD0CA277C7952F159F1EC398D6A9EA0C3FA5F9D935FB39C47C1D71935B"
+            },
+            {
+              "path": "WinAudioClean.Launcher.ps1",
+              "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+            },
+            {
+              "path": "tests/WinAudioClean.LauncherTransport.Tests.ps1",
+              "sha256": "879BB764D9796A2D43F2F386D08BE4A07AACAC2C91ADFE96F753A6C76AE58939"
+            },
+            {
+              "path": "tests/fixtures/LauncherMatrixApplicationStub.ps1",
+              "sha256": "7DEC2E9EF38679154F9743BBC5FB7FAA02E3120F14DF3BBFBE268871FE7C1AD1"
+            },
+            {
+              "path": "tests/fixtures/TestProcess.ps1",
+              "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+            }
+          ],
+          "commands": [
+            "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/transport-focused/Invoke-Focused.ps1 -Repository <repo>",
+            "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .wac-local/WAC-M3-02/transport-focused/Invoke-Focused.ps1 -Repository <repo>"
+          ],
+          "harnessSha256": "5FC38150F822111C62CD9BEC65F3DB9BB90E854D8262CBE3385DEA71F431DB02",
+          "results": [
+            {
+              "shell": "Windows PowerShell 5.1",
+              "shellVersion": "5.1.26100.9444",
+              "pesterVersion": "5.7.1",
+              "exitCode": 0,
+              "passed": 33,
+              "failed": 0,
+              "skipped": 0,
+              "inconclusive": 0,
+              "notRun": 0,
+              "durationSeconds": 20.49,
+              "log": "final-ps51.log",
+              "logSha256": "6146BF3BC8A6EAF048F0F61A7FD226F72D17F683B6BAFAC7F9B9117BC91B81A9"
+            },
+            {
+              "shell": "PowerShell 7",
+              "shellVersion": "7.6.5",
+              "pesterVersion": "5.7.1",
+              "exitCode": 0,
+              "passed": 33,
+              "failed": 0,
+              "skipped": 0,
+              "inconclusive": 0,
+              "notRun": 0,
+              "durationSeconds": 19.42,
+              "log": "final-ps7.log",
+              "logSha256": "4120B9B41E2999E0DFFA7D8CF77B0F8E5B105E0F77C5E9CEA2961DB7122E834F"
+            }
+          ],
+          "coverage": [
+            "Real fresh CMD/BAT invocation forwards exact ordered positional paths through both inner PowerShell hosts.",
+            "Manifest route preserves more than 8191 characters of input payload using a short manifest-path environment value.",
+            "Visible percent expansion and oversized positional commands reject before application invocation.",
+            "Selected-worker invalid-image startup returns3, pauses exactly once, and creates no application record."
+          ],
+          "priorResults": "initial-results.json",
+          "corrections": [
+            "Two unit ForEach negative rows now use InputValue instead of the automatic Input variable.",
+            "Additional actual invalid-image startup3 case verifies the final parent-pause correction."
+          ],
+          "limitations": [
+            "Application boundary recorder is a test double; this suite does not claim audio rendering.",
+            "Actual desktop Explorer drag and drop was not performed.",
+            "No Full, cumulative parser, or static gate was run by this focused harness."
+          ]
+        },
+        "commandHashes": [
+          {
+            "jsonPointer": "/commands/0",
+            "rawUtf8Sha256": "31DE55DA95A55D395592290D5450070D41D6426AA9AF34481DFA7DC8BBECB409",
+            "sanitizedUtf8Sha256": "31DE55DA95A55D395592290D5450070D41D6426AA9AF34481DFA7DC8BBECB409",
+            "rawCharacters": 140,
+            "sanitizedCharacters": 140
+          },
+          {
+            "jsonPointer": "/commands/1",
+            "rawUtf8Sha256": "804485027F775572CBB35529B15DF0AD2C896D71E35DBB6012751809F1009009",
+            "sanitizedUtf8Sha256": "804485027F775572CBB35529B15DF0AD2C896D71E35DBB6012751809F1009009",
+            "rawCharacters": 134,
+            "sanitizedCharacters": 134
+          }
+        ]
+      }
+    }
+  },
+  "logs": [
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/initial-ps51.log",
+      "rawSha256": "8F478BA536760972A467CE974D1F4944260DC97B42C0476EF25E0FDBB98D09F2",
+      "rawBytes": 4262,
+      "sanitizedContentSha256": "D384BF927D849B8F4035CFD745C456F552E57EB9B6893AAD92E1491D9B09967C",
+      "artifact": {
+        "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-initial-ps51.txt",
+        "publishedSha256": "D384BF927D849B8F4035CFD745C456F552E57EB9B6893AAD92E1491D9B09967C",
+        "publishedBytes": 4061
+      }
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/initial-ps7.log",
+      "rawSha256": "6167BB9E9AB8D967DF11F6F9B2B980F0ECAC2B6664CE84524637121504C3E47E",
+      "rawBytes": 4238,
+      "sanitizedContentSha256": "51B10FBC08C45D6D3280FF3E73059B436CF865B8686AE658062363FAD8B5CE49",
+      "artifact": {
+        "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-initial-ps7.txt",
+        "publishedSha256": "51B10FBC08C45D6D3280FF3E73059B436CF865B8686AE658062363FAD8B5CE49",
+        "publishedBytes": 4037
+      }
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/final-ps51.log",
+      "rawSha256": "6146BF3BC8A6EAF048F0F61A7FD226F72D17F683B6BAFAC7F9B9117BC91B81A9",
+      "rawBytes": 3555,
+      "sanitizedContentSha256": "FD705A89125439212FF0A6B34C91EDC31CA0B1DBEB50B44E666130B1442A4C5A",
+      "artifact": {
+        "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-final-ps51.txt",
+        "publishedSha256": "FD705A89125439212FF0A6B34C91EDC31CA0B1DBEB50B44E666130B1442A4C5A",
+        "publishedBytes": 3479
+      }
+    },
+    {
+      "path": ".wac-local/WAC-M3-02/transport-focused/final-ps7.log",
+      "rawSha256": "4120B9B41E2999E0DFFA7D8CF77B0F8E5B105E0F77C5E9CEA2961DB7122E834F",
+      "rawBytes": 3543,
+      "sanitizedContentSha256": "B462685E6B754B85E070C83329A45CFF530F93F0E02E73AFAE012268C464A16C",
+      "artifact": {
+        "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-launcher-focused-final-ps7.txt",
+        "publishedSha256": "B462685E6B754B85E070C83329A45CFF530F93F0E02E73AFAE012268C464A16C",
+        "publishedBytes": 3467
+      }
+    }
+  ]
+}

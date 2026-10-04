@@ -1,0 +1,24 @@
+ps51 actual single-file application; stdout then stderr. Raw byte hashes identify the originals.
+
+WinAudioClean 2.3
+============================
+Input: <repo>\.wac-local\WAC-M3-06\reentry\capture-final\synthetic-stereo.wav
+FFmpeg: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)
+FFprobe: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)
+Effective settings: {"mode":"Raw","preset":"Original","loudnessMode":"Fast","bitDepth":16,"mono":false,"rf64":false,"outputDirectory":"<repo>\\.wac-local\\WAC-M3-06\\reentry\\capture-final\\ps51\\output","audioStreamIndex":null,"cleaningOptions":{}}
+Preset: Original (ID: original; version: 1.0.0)
+Cleaning: {"schemaVersion":1,"Declip":true,"Declick":true,"Denoise":true,"Gate":true,"HighpassHz":80,"NoiseFloorDb":-25,"NoiseReductionDb":12,"GateThresholdDb":-45,"GateRangeDb":-25}
+Audio stream: 0 (pcm_s16le, 2 channel(s), 48000 Hz)
+Export: 48000 Hz, 16-bit PCM, stereo, RIFF WAV
+Destination space: 834218377216 bytes available; 69712832 bytes required including headroom.
+
+Running WinAudioClean...
+Chain: RAW (Clean+Level)
+
+DONE: SUCCESS
+Time Elapsed : 00:00:01.1590988
+Output Size  : 1,46 MB
+File saved to: <repo>\.wac-local\WAC-M3-06\reentry\capture-final\ps51\output\synthetic-stereo_Cleaned_20261003-140356190_e79d2deffd44482d9ef3461120d47b59.wav
+
+
+STDERR:

@@ -1,0 +1,22 @@
+{
+  "baseline_commit": "0366f674d0c8921680179d9790044e4f01efac1a",
+  "sound_helpers_unchanged": {
+    "Get-WacCleaningSettings": "762a061f7c85ee12b4a81c1e9979685653b33eb0ed52b2fc27effd10b48b4ca0",
+    "Get-WacProcessingProfile": "fdd3ac7b1e88bcda16be034408ccb5a1441e6d25b192d1873dd7da39fe2ac790",
+    "Get-WacFfmpegArguments": "23b5a0d47d009be0867fbbbd2792f263a5bc12d63b2e81508461fb5fb889a3c8",
+    "Get-WacOutputPolicy": "33c3c6b90b9f764e25992d5f33e4b8dc449d028e9dbcbf04cacefb8cf720a32b",
+    "Get-WacOutputSpaceEstimate": "a0d77e4e70e90dd1de53064eb7ab2fa19b1d8366d779a8bcfb1f6a97426b0248",
+    "ConvertFrom-WacLoudnormJson": "72d76854f02a37844e06e58645fca0004d9265e1810fe15f63c345edbb3db0c8",
+    "Get-WacLoudnessPlan": "402bd36d0f1021a760dc5da1f0df27cef7600fc3cef6f33564423e6e46ca2c5a",
+    "Get-WacLoudnessArguments": "3b1967438c48bedfd79821c743095aba38de0391ccf9dcc437c75fe969ce7139",
+    "ConvertTo-WacFinalLoudness": "9a9814e2d29b21b712aaf84294de626bd2d52c3e7050fecbdb07115615535f6b"
+  },
+  "protected_files_unchanged_normalized_lf_sha256": {
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.Settings.ps1": "145a9af0a9618a78eacea119a0e292d3625cc08b96457270101a67aab45a85bb",
+    "WinAudioClean.Queue.ps1": "00a5b22940e880c08f8e52180a1e56bfbaae25ab485a2dbd576fc25e1fe56067",
+    "WinAudioClean.bat": "b91cf9ff826fd7bf1b10a253b1610178f69baeccd123aeaef62f7ba7b5bbaae0",
+    "WinAudioClean.Launcher.ps1": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+  },
+  "all_passed": true
+}

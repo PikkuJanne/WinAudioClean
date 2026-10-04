@@ -1,0 +1,95 @@
+{
+  "task": "WAC-M3-02",
+  "derivation": {
+    "script": ".wac-local/WAC-M3-02/publish-media-evidence.py",
+    "source_sha256": "db289e4629694c8216d86f50942b860e6de6f2674a8c472ddf9d52ee4cdbad21",
+    "policy": "Public derivatives redact repository/profile paths, CLIXML User/Computer identities and local username/machine strings. Local original summaries/logs stay untouched. Log hashes describe generated local log files, not unretained native raw streams. Audio, binary PCM and full private reports are not published.",
+    "synthetic_only": true,
+    "listening_or_active_ctrl_c_approval": false
+  },
+  "public_files": [
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-media-api.json",
+      "sha256": "c45b52567ab10bb02fa522477174edd2d6072004a2f2b0b4a7319ab6f31d737e",
+      "bytes": 507505
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-media-launcher.json",
+      "sha256": "96122f83d628285751c3a07f07762bf82c79610f5c8ecb9edb12fd421e244270",
+      "bytes": 229888
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-media-preliminary.json",
+      "sha256": "2a8e5aee841c726d37bf7ba31637a0d4b5086fc5f5d7ac45239d0942b7f3f84a",
+      "bytes": 1685048
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-media-harnesses.json",
+      "sha256": "e7bcf3a126086879f8988c9a2128abb4bca6b0d6e205678b684a11fea698dfdc",
+      "bytes": 64332
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-02-media-logs.json",
+      "sha256": "42cb805ba9221f761d13ebd78eedc444b2fd02e7eb99c6571b9703109bc64ee1",
+      "bytes": 1318318
+    }
+  ],
+  "local_runs": [
+    {
+      "run_id": "media-smoke",
+      "classification": "preliminary_scoped_pass",
+      "reason": "Filtered PS5.1 smoke; no final/unfiltered claim.",
+      "capture_scope_note": "API-only capture includes main/IO/Preview/Settings/Batch and development utilities. The inherited raw summary says unfinished BAT/Launcher because the harness was authored earlier; at final C2CF execution those components were final/frozen but outside this API scope. Separate final launcher evidence captures all seven runtime/BAT files.",
+      "local_summary_path": ".wac-local/WAC-M3-02/media-smoke/summary.json",
+      "local_summary_sha256": "4bcd188f1c8c2d622b9adfa40ab4808086cb24d7ace9ea0d22b42312ceacb745"
+    },
+    {
+      "run_id": "media-final",
+      "classification": "preliminary_pass",
+      "reason": "A897 Batch; later native-error diagnostics gap was outside this passing media scope.",
+      "capture_scope_note": "API-only capture includes main/IO/Preview/Settings/Batch and development utilities. The inherited raw summary says unfinished BAT/Launcher because the harness was authored earlier; at final C2CF execution those components were final/frozen but outside this API scope. Separate final launcher evidence captures all seven runtime/BAT files.",
+      "local_summary_path": ".wac-local/WAC-M3-02/media-final/summary.json",
+      "local_summary_sha256": "7dc2864c04dde1536e5bc825d3bfc8ed4161070f7a30f6a0cb8ae9c8692fb1e4"
+    },
+    {
+      "run_id": "media-final-corrected",
+      "classification": "preliminary_failure",
+      "reason": "CCA Batch; reserved PSHOST tag relay regression prevented ordinary batch publications.",
+      "capture_scope_note": "API-only capture includes main/IO/Preview/Settings/Batch and development utilities. The inherited raw summary says unfinished BAT/Launcher because the harness was authored earlier; at final C2CF execution those components were final/frozen but outside this API scope. Separate final launcher evidence captures all seven runtime/BAT files.",
+      "local_summary_path": ".wac-local/WAC-M3-02/media-final-corrected/summary.json",
+      "local_summary_sha256": "29be1eb8e0d08bed86897523afff315e0cb0a764ff0b2e1df6570ea27000bd46"
+    },
+    {
+      "run_id": "media-final-relay-fixed",
+      "classification": "preliminary_pass",
+      "reason": "DA98 Batch; passed ordinary media but later invalid relative manifest anchoring edge required a narrow C2CF fix.",
+      "capture_scope_note": "API-only capture includes main/IO/Preview/Settings/Batch and development utilities. The inherited raw summary says unfinished BAT/Launcher because the harness was authored earlier; at final C2CF execution those components were final/frozen but outside this API scope. Separate final launcher evidence captures all seven runtime/BAT files.",
+      "local_summary_path": ".wac-local/WAC-M3-02/media-final-relay-fixed/summary.json",
+      "local_summary_sha256": "83ae90d74cb5409931edb38ad76187b0e85d65934ff2eac04fe1d30f4ffd6291"
+    },
+    {
+      "run_id": "launcher-media-final",
+      "classification": "preliminary_pass",
+      "reason": "DA98 Batch/0FAC Launcher/6E27 BAT; six real full-app launcher cases passed before the C2CF anchoring fix.",
+      "capture_scope_note": "Separate launcher/application scope captures all seven runtime/BAT files, copied source and development utilities.",
+      "local_summary_path": ".wac-local/WAC-M3-02/launcher-media-final/summary.json",
+      "local_summary_sha256": "be9443529ddc5fa97858e2aaa55f02d47ac0b1db58d6f5de869da14ccc0c47bf"
+    },
+    {
+      "run_id": "media-final-anchoring",
+      "classification": "final_api_acceptance",
+      "reason": "C2CF Batch/f01c main; final unfiltered API matrix on source-frozen runtime.",
+      "capture_scope_note": "API-only capture includes main/IO/Preview/Settings/Batch and development utilities. The inherited raw summary says unfinished BAT/Launcher because the harness was authored earlier; at final C2CF execution those components were final/frozen but outside this API scope. Separate final launcher evidence captures all seven runtime/BAT files.",
+      "local_summary_path": ".wac-local/WAC-M3-02/media-final-anchoring/summary.json",
+      "local_summary_sha256": "a6e36a5f3c31574a0434705a67e9707bc8b359391915ecbcf82f521689a8e0fb"
+    },
+    {
+      "run_id": "launcher-media-final-anchoring",
+      "classification": "final_launcher_acceptance",
+      "reason": "C2CF Batch/0FAC Launcher/6E27 BAT; final six-case launcher integration on source-frozen runtime.",
+      "capture_scope_note": "Separate launcher/application scope captures all seven runtime/BAT files, copied source and development utilities.",
+      "local_summary_path": ".wac-local/WAC-M3-02/launcher-media-final-anchoring/summary.json",
+      "local_summary_sha256": "741075574c52018fcbcedc4363c4167cf34faebf64cc11b3a99b74344e1ca1d9"
+    }
+  ]
+}

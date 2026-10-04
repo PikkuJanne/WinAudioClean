@@ -1,0 +1,22 @@
+Sanitized selected focused log. Historical green10-case helper scope, with Media share3 and Root/Reports/ancestors share1. Scoped captured main predates final integration; Output helper/test hashes match their final versions.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 10 tests in 405ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputLayout.Tests.ps1'
+Describing Optional held output layout
+  [+] allows media publication and separate held report writing while denying directory replacement 1.5s (1.42s|76ms)
+  [+] does not reuse a prior job directory or alter its foreign contents 56ms (53ms|3ms)
+  [+] preserves a file occupying the generated job directory name 39ms (36ms|3ms)
+  [+] resolves a supported existing base junction and rejects a generated child junction collision 69ms (67ms|3ms)
+  [+] rejects paths changed in a borrowed layout while preserving the original held hierarchy 42ms (38ms|4ms)
+  [+] rejects a closed directory lease before further use 67ms (63ms|4ms)
+  [+] releases every directory after an allocation assertion fails and retains empty directories 407ms (403ms|4ms)
+  [+] continues releasing handles after a disposal failure and closes idempotently 46ms (40ms|7ms)
+  [+] does not create a missing base or fall back to the current directory 247ms (245ms|2ms)
+  [+] rejects an existing regular file used as the base without modifying it 38ms (35ms|4ms)
+Tests completed in 4.14s
+Tests Passed: 10, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0

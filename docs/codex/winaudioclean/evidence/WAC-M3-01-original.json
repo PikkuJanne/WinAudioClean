@@ -1,0 +1,4652 @@
+{
+  "task": "WAC-M2-01",
+  "created_utc": "20261002T191250608391Z",
+  "notice": "Synthetic same-build, same-encoding filter compatibility only. No speech listening, independent loudness measurements, cross-build or legacy-container bit identity claimed.",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.6",
+    "child_psmodulepath_removed": true,
+    "ps51": "5.1.26100.9444",
+    "ps7": "7.6.5"
+  },
+  "source_revision": "32f6188461d9f7c11857e390d1145985665dd0dd",
+  "source_sha256_before": {
+    "WinAudioClean.ps1": "880af42241854cfd3952855c59996c3e15377453392ff4531704d6c02dd08a3b",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "scripts/Test-OriginalPreset.py": "5243779ab0bf7599b0559622ce0056eefc1063b7fb684be4ee6ca259a2a7a34a",
+    "docs/codex/winaudioclean/BASELINE.json": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9",
+    "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+  },
+  "harness_invocation": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/Test-OriginalPreset.py",
+    "--ffmpeg",
+    "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+    "--ffprobe",
+    "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+    "--output",
+    "<repo>\\.wac-local\\WAC-M3-01\\original-final"
+  ],
+  "tools": {
+    "ffmpeg": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    "ffprobe": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+    }
+  },
+  "expected_preset": {
+    "id": "original",
+    "version": "1.0.0"
+  },
+  "fixtures": [
+    {
+      "id": "stereo",
+      "path": ".wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+      "file": "stereo.wav",
+      "sample_rate": 48000,
+      "channels": 2,
+      "frames": 384000,
+      "seconds": 8.0,
+      "kind": "varying_tones",
+      "sha256": "6d572ba752642a6f27d3a307293c944737406ed755dc3d4e3902b72247e14c3f",
+      "bytes": 1536044
+    },
+    {
+      "id": "mono",
+      "path": ".wac-local\\WAC-M3-01\\original-final\\fixtures\\mono.wav",
+      "file": "mono.wav",
+      "sample_rate": 44100,
+      "channels": 1,
+      "frames": 132300,
+      "seconds": 3.0,
+      "kind": "varying_tones",
+      "sha256": "796e1829115ab11dc28af52e9347f7cb6ebec5ec3297b26cdd35caa8a170b660",
+      "bytes": 264644
+    },
+    {
+      "id": "short",
+      "path": ".wac-local\\WAC-M3-01\\original-final\\fixtures\\short.wav",
+      "file": "short.wav",
+      "sample_rate": 48000,
+      "channels": 1,
+      "frames": 9600,
+      "seconds": 0.2,
+      "kind": "varying_tones",
+      "sha256": "6ad135d033a033dd3fb0d6c80f06386e4ada2051224b2d8af7e15e86d176864e",
+      "bytes": 19244
+    },
+    {
+      "id": "silence",
+      "path": ".wac-local\\WAC-M3-01\\original-final\\fixtures\\silence.wav",
+      "file": "silence.wav",
+      "sample_rate": 48000,
+      "channels": 1,
+      "frames": 144000,
+      "seconds": 3.0,
+      "kind": "silence",
+      "sha256": "5cffdd4793d2c7986a33d893ef9f6e29f84420b47f145c3669ecc971581941e7",
+      "bytes": 288044
+    }
+  ],
+  "references": [
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-16.wav",
+      "sha256": "162049d04c1a7931fac86a7e4dfc0d9f82763619362976d2dacdd9e7068518f5",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "8.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "2ba4fe8c85498c8aaa90c696dab6e5fa011843fc88bc8e81b556ac7241ed09ee",
+      "decoded_pcm_bytes": 1536000,
+      "frames": 384000,
+      "passed": true,
+      "id": "stereo-raw-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-16.wav",
+      "sha256": "06f6507caddbb043088fcb2b13dcea84ad13e6a2bb79df16fd182b3df58d04ba",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "8.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "782cad1fb79695bf8ce28af56db7eb9ca42d6baaa1ee635718aafdddafc5a13d",
+      "decoded_pcm_bytes": 1536000,
+      "frames": 384000,
+      "passed": true,
+      "id": "stereo-zoom-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\mono-raw-16.wav",
+      "sha256": "f19beea14ece3749de069c5f03cccd7159ac84c94f135596fd066f2a8f823be0",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "3.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "62fe6bd6a34390ace8762cac4258fa182c749e4a481a22311f5d59fab1a528ee",
+      "decoded_pcm_bytes": 288000,
+      "frames": 144000,
+      "passed": true,
+      "id": "mono-raw-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\mono-zoom-16.wav",
+      "sha256": "c808eaf497a654bdb71703f3982183f24cf1dc03bd9cbde3792cd4c07985ce0e",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "3.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "c1f18489976624cdeda177179433550ed79b8ba61135bc4ad609e723adbdca44",
+      "decoded_pcm_bytes": 288000,
+      "frames": 144000,
+      "passed": true,
+      "id": "mono-zoom-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\short-raw-16.wav",
+      "sha256": "50612f1957e222a684c926f1eebac133163a9b448a23f9852bfe3d24aecfc30a",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "0.200000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "a0f8e5c35745c14ae3ad69cb538dc058f0515f0028ecda3768b63db93961cbd2",
+      "decoded_pcm_bytes": 19200,
+      "frames": 9600,
+      "passed": true,
+      "id": "short-raw-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\short-zoom-16.wav",
+      "sha256": "664e2eb863086aae6d6bcce72a735f633197c6597d2678fd206130d578e38a8d",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "0.200000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "40e6f270606e022d323ac66829f32000deb5c99da7579eab3bff7d9e75eaf0a5",
+      "decoded_pcm_bytes": 19200,
+      "frames": 9600,
+      "passed": true,
+      "id": "short-zoom-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\silence-raw-16.wav",
+      "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "3.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "decoded_pcm_bytes": 288000,
+      "frames": 144000,
+      "passed": true,
+      "id": "silence-raw-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\silence-zoom-16.wav",
+      "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+      "probe": {
+        "codec_name": "pcm_s16le",
+        "sample_rate": "48000",
+        "channels": 1,
+        "bits_per_sample": 16,
+        "channel_layout": null,
+        "duration": "3.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "decoded_pcm_bytes": 288000,
+      "frames": 144000,
+      "passed": true,
+      "id": "silence-zoom-16",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-24.wav",
+      "sha256": "ed1b081c75353f5b5ecbcef0ce6ec5d158fc80b40ffd32feecc41481262bd4d4",
+      "probe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "channel_layout": "stereo",
+        "duration": "8.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "6411c3e98515868fa9cc7e87d960181b77f9872857aed197d4866bb73e52f4b3",
+      "decoded_pcm_bytes": 2304000,
+      "frames": 384000,
+      "passed": true,
+      "id": "stereo-raw-24",
+      "duration_matches_input": true
+    },
+    {
+      "path": ".wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-24.wav",
+      "sha256": "503f029655656ade9f8fa9d98a011e3849d24a49039986921e0cbe559d553ea5",
+      "probe": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "channel_layout": "stereo",
+        "duration": "8.000000",
+        "passed": true
+      },
+      "decoded_pcm_sha256": "84d900a6634664c2e40b684495ecbd7082c5820423dff9454c22eeed4002b539",
+      "decoded_pcm_bytes": 2304000,
+      "frames": 384000,
+      "passed": true,
+      "id": "stereo-zoom-24",
+      "duration_matches_input": true
+    }
+  ],
+  "cases": [
+    {
+      "id": "ps51-stereo-raw-16",
+      "reference_id": "stereo-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16\\stereo_Cleaned_20261002-211257406_7a3d890e6f6947acb01e7aa38a4454e2.wav",
+        "sha256": "162049d04c1a7931fac86a7e4dfc0d9f82763619362976d2dacdd9e7068518f5",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "2ba4fe8c85498c8aaa90c696dab6e5fa011843fc88bc8e81b556ac7241ed09ee",
+        "decoded_pcm_bytes": 1536000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16\\WinAudioClean_7a3d890e6f6947acb01e7aa38a4454e2.json",
+        "sha256": "e1a126e19610b1c54f7f35f4782ba432756291d2608a31a29a840ccee706c9ed",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16\\WinAudioClean_7a3d890e6f6947acb01e7aa38a4454e2.txt",
+          "sha256": "ff99c8bfb33db7a1a3cb138241e33b403c8b3adb5a4821c467f365421c3340a9"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "ff99c8bfb33db7a1a3cb138241e33b403c8b3adb5a4821c467f365421c3340a9"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-stereo-zoom-16",
+      "reference_id": "stereo-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16\\stereo_Cleaned_20261002-211300462_49358e4f85a6437199e0638225b67cec.wav",
+        "sha256": "06f6507caddbb043088fcb2b13dcea84ad13e6a2bb79df16fd182b3df58d04ba",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "782cad1fb79695bf8ce28af56db7eb9ca42d6baaa1ee635718aafdddafc5a13d",
+        "decoded_pcm_bytes": 1536000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16\\WinAudioClean_49358e4f85a6437199e0638225b67cec.json",
+        "sha256": "f73549c34c3b96f0e87bd19fb5635e4c15331fd64429e7c3b19c2a236a8b4783",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16\\WinAudioClean_49358e4f85a6437199e0638225b67cec.txt",
+          "sha256": "d52e0cd4435d096e4ff0c0a0a507b801388aa147902330cfef3c29e2220c8b32"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "d52e0cd4435d096e4ff0c0a0a507b801388aa147902330cfef3c29e2220c8b32"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-mono-raw-16",
+      "reference_id": "mono-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16\\mono_Cleaned_20261002-211302898_a726973b173144bebf1798e74b507a83.wav",
+        "sha256": "f19beea14ece3749de069c5f03cccd7159ac84c94f135596fd066f2a8f823be0",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "62fe6bd6a34390ace8762cac4258fa182c749e4a481a22311f5d59fab1a528ee",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16\\WinAudioClean_a726973b173144bebf1798e74b507a83.json",
+        "sha256": "bed2d7d20d4bea138e3b0e038f61b44c6ba2a02ef22a45aa301f066cd92cd990",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16\\WinAudioClean_a726973b173144bebf1798e74b507a83.txt",
+          "sha256": "499afef7632dff82a2a3bfb363ad031ae3a8eca3af9e52fbac5040f22a0ec5ed"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "499afef7632dff82a2a3bfb363ad031ae3a8eca3af9e52fbac5040f22a0ec5ed"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-mono-zoom-16",
+      "reference_id": "mono-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16\\mono_Cleaned_20261002-211305251_09a6679a62074606ac3368c58de9e0a5.wav",
+        "sha256": "c808eaf497a654bdb71703f3982183f24cf1dc03bd9cbde3792cd4c07985ce0e",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "c1f18489976624cdeda177179433550ed79b8ba61135bc4ad609e723adbdca44",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16\\WinAudioClean_09a6679a62074606ac3368c58de9e0a5.json",
+        "sha256": "a7328a25d31be47434c079a4db75c3ac28871faad0b2b53a1bc4ada81ee7dbbc",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16\\WinAudioClean_09a6679a62074606ac3368c58de9e0a5.txt",
+          "sha256": "d846b0753339b9527a4acb6a063ff3abc25e940f4377477b475c7fba0e6062b1"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "d846b0753339b9527a4acb6a063ff3abc25e940f4377477b475c7fba0e6062b1"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-short-raw-16",
+      "reference_id": "short-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16\\short_Cleaned_20261002-211307464_d9792f1565d146a99f6adf0ccb2b0944.wav",
+        "sha256": "50612f1957e222a684c926f1eebac133163a9b448a23f9852bfe3d24aecfc30a",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "0.200000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "a0f8e5c35745c14ae3ad69cb538dc058f0515f0028ecda3768b63db93961cbd2",
+        "decoded_pcm_bytes": 19200,
+        "frames": 9600,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16\\WinAudioClean_d9792f1565d146a99f6adf0ccb2b0944.json",
+        "sha256": "751bfb30f3264c52cfad888e28ad8c7ad324f93da1ba982aa89f1cf282809dd4",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16\\WinAudioClean_d9792f1565d146a99f6adf0ccb2b0944.txt",
+          "sha256": "9d4368619df600aa5ac9a6d9295b2ca94e12451771074ed41d220559a0ea9598"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "9d4368619df600aa5ac9a6d9295b2ca94e12451771074ed41d220559a0ea9598"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-short-zoom-16",
+      "reference_id": "short-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16\\short_Cleaned_20261002-211310452_c9049e0c1e3840b08c0f4dc057b1785b.wav",
+        "sha256": "664e2eb863086aae6d6bcce72a735f633197c6597d2678fd206130d578e38a8d",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "0.200000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "40e6f270606e022d323ac66829f32000deb5c99da7579eab3bff7d9e75eaf0a5",
+        "decoded_pcm_bytes": 19200,
+        "frames": 9600,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16\\WinAudioClean_c9049e0c1e3840b08c0f4dc057b1785b.json",
+        "sha256": "144415382389e293a5b8433d1648d8f048c8a68aa254d2bf03cc38229eb5b3f4",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16\\WinAudioClean_c9049e0c1e3840b08c0f4dc057b1785b.txt",
+          "sha256": "0c13098897e65e9a915557a6cf75a42c25aec1bd19d7c0eb5d573320d36eea8e"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "0c13098897e65e9a915557a6cf75a42c25aec1bd19d7c0eb5d573320d36eea8e"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-silence-raw-16",
+      "reference_id": "silence-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16\\silence_Cleaned_20261002-211313924_10d384633fe44c5fa3513db6237d2232.wav",
+        "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16\\WinAudioClean_10d384633fe44c5fa3513db6237d2232.json",
+        "sha256": "d75ca1454236fbb7d85c21c516e4de4e0eb03b1b9187686bcc600458b083b6e9",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16\\WinAudioClean_10d384633fe44c5fa3513db6237d2232.txt",
+          "sha256": "91133c6d6700100484811ffe7400798129aa58f1bf8a3ba4d76f9849f88c2232"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "91133c6d6700100484811ffe7400798129aa58f1bf8a3ba4d76f9849f88c2232"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-silence-zoom-16",
+      "reference_id": "silence-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16\\silence_Cleaned_20261002-211317001_8267d9c07f814f17ac0b9c1264151956.wav",
+        "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16\\WinAudioClean_8267d9c07f814f17ac0b9c1264151956.json",
+        "sha256": "310b25379e915b0494c87b2462d0ef64f3256ee9861b5039dd31b65aa994708e",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16\\WinAudioClean_8267d9c07f814f17ac0b9c1264151956.txt",
+          "sha256": "8fe71e2c4057a14c6ce22130234502ac77052d8617c78d06dedd80802d8fdbb5"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "8fe71e2c4057a14c6ce22130234502ac77052d8617c78d06dedd80802d8fdbb5"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-stereo-raw-24",
+      "reference_id": "stereo-raw-24",
+      "mode": "Raw",
+      "bits": 24,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24\\stereo_Cleaned_20261002-211320047_c32dd7c5cfdf427e943497b12152b80c.wav",
+        "sha256": "ed1b081c75353f5b5ecbcef0ce6ec5d158fc80b40ffd32feecc41481262bd4d4",
+        "probe": {
+          "codec_name": "pcm_s24le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 24,
+          "channel_layout": "stereo",
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "6411c3e98515868fa9cc7e87d960181b77f9872857aed197d4866bb73e52f4b3",
+        "decoded_pcm_bytes": 2304000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24\\WinAudioClean_c32dd7c5cfdf427e943497b12152b80c.json",
+        "sha256": "46e593ce1d4d7ba9abc2924927400c5f40a09995e48a71ac44ec0444c4086472",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24\\WinAudioClean_c32dd7c5cfdf427e943497b12152b80c.txt",
+          "sha256": "e8352f92e5373c6e61901d8b050316d6d42c16c140599659dc181b72b79f7838"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24\\WinAudioClean_Log.txt",
+          "sha256": "e8352f92e5373c6e61901d8b050316d6d42c16c140599659dc181b72b79f7838"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 24,
+          "codec": "pcm_s24le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps51-stereo-zoom-24",
+      "reference_id": "stereo-zoom-24",
+      "mode": "Zoom",
+      "bits": 24,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24\\stereo_Cleaned_20261002-211325559_2a6287e7f6ad4fd0a8c97224154cc489.wav",
+        "sha256": "503f029655656ade9f8fa9d98a011e3849d24a49039986921e0cbe559d553ea5",
+        "probe": {
+          "codec_name": "pcm_s24le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 24,
+          "channel_layout": "stereo",
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "84d900a6634664c2e40b684495ecbd7082c5820423dff9454c22eeed4002b539",
+        "decoded_pcm_bytes": 2304000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24\\WinAudioClean_2a6287e7f6ad4fd0a8c97224154cc489.json",
+        "sha256": "cf45ff380d4842073cada511348d75259601a3d6b718fbbe6eb8ea0deda073f2",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24\\WinAudioClean_2a6287e7f6ad4fd0a8c97224154cc489.txt",
+          "sha256": "896f45dd435def2f4bfc8381f89f95203c8810c4889af20ea71a8ebe1aadf144"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24\\WinAudioClean_Log.txt",
+          "sha256": "896f45dd435def2f4bfc8381f89f95203c8810c4889af20ea71a8ebe1aadf144"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 24,
+          "codec": "pcm_s24le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-stereo-raw-16",
+      "reference_id": "stereo-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16\\stereo_Cleaned_20261002-211332819_f68078ecf01f4640955b369b87fbda07.wav",
+        "sha256": "162049d04c1a7931fac86a7e4dfc0d9f82763619362976d2dacdd9e7068518f5",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "2ba4fe8c85498c8aaa90c696dab6e5fa011843fc88bc8e81b556ac7241ed09ee",
+        "decoded_pcm_bytes": 1536000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16\\WinAudioClean_f68078ecf01f4640955b369b87fbda07.json",
+        "sha256": "6121a9f7917a124b224a5fa18a555e7fdbc9ee5c64c0b287b7a19cff4c77803f",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16\\WinAudioClean_f68078ecf01f4640955b369b87fbda07.txt",
+          "sha256": "45339f4d577928c414c7a3d5174e70482bc2b6794bccce4cb1bc984e272f0573"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "45339f4d577928c414c7a3d5174e70482bc2b6794bccce4cb1bc984e272f0573"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-stereo-zoom-16",
+      "reference_id": "stereo-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16\\stereo_Cleaned_20261002-211342410_53c8066f443948319fc22156736b0d46.wav",
+        "sha256": "06f6507caddbb043088fcb2b13dcea84ad13e6a2bb79df16fd182b3df58d04ba",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "782cad1fb79695bf8ce28af56db7eb9ca42d6baaa1ee635718aafdddafc5a13d",
+        "decoded_pcm_bytes": 1536000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16\\WinAudioClean_53c8066f443948319fc22156736b0d46.json",
+        "sha256": "c3294b1a7c68110fc62ad7844a55d0a4afaaeca2fd6be948588d3cd893378ebf",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16\\WinAudioClean_53c8066f443948319fc22156736b0d46.txt",
+          "sha256": "507d52a6b0fc6c7e23d1bc70a64a7182486cc991466f2434f5f002767d35055f"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "507d52a6b0fc6c7e23d1bc70a64a7182486cc991466f2434f5f002767d35055f"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-mono-raw-16",
+      "reference_id": "mono-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16\\mono_Cleaned_20261002-211349418_527e699e83224f30a52a4e8189ca8ba3.wav",
+        "sha256": "f19beea14ece3749de069c5f03cccd7159ac84c94f135596fd066f2a8f823be0",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "62fe6bd6a34390ace8762cac4258fa182c749e4a481a22311f5d59fab1a528ee",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16\\WinAudioClean_527e699e83224f30a52a4e8189ca8ba3.json",
+        "sha256": "85adc050f4d11c5a76138bfc463d4922b540aeb0dc90b3d634e45a206cce8370",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16\\WinAudioClean_527e699e83224f30a52a4e8189ca8ba3.txt",
+          "sha256": "cab49c00e545eec9b38277d40005f34596a097adf043505bcdaaeca33b46074f"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "cab49c00e545eec9b38277d40005f34596a097adf043505bcdaaeca33b46074f"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-mono-zoom-16",
+      "reference_id": "mono-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16\\mono_Cleaned_20261002-211355772_bc91477fbd814a928bc57f9adc1bda40.wav",
+        "sha256": "c808eaf497a654bdb71703f3982183f24cf1dc03bd9cbde3792cd4c07985ce0e",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "c1f18489976624cdeda177179433550ed79b8ba61135bc4ad609e723adbdca44",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16\\WinAudioClean_bc91477fbd814a928bc57f9adc1bda40.json",
+        "sha256": "4f4b30e9211f534bfb0c148ba94d5eb303fa5db8456c8b0fd95b6c2d46154599",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16\\WinAudioClean_bc91477fbd814a928bc57f9adc1bda40.txt",
+          "sha256": "5f220436ef4e977bdd19dac4682aba13da61015e383bc450040d92765a2af281"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "5f220436ef4e977bdd19dac4682aba13da61015e383bc450040d92765a2af281"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-short-raw-16",
+      "reference_id": "short-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16\\short_Cleaned_20261002-211401854_10cd0dd74b364bcea02b9d27fea0c694.wav",
+        "sha256": "50612f1957e222a684c926f1eebac133163a9b448a23f9852bfe3d24aecfc30a",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "0.200000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "a0f8e5c35745c14ae3ad69cb538dc058f0515f0028ecda3768b63db93961cbd2",
+        "decoded_pcm_bytes": 19200,
+        "frames": 9600,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16\\WinAudioClean_10cd0dd74b364bcea02b9d27fea0c694.json",
+        "sha256": "fbe50eba78a8216a5eb93b513eab1ecca01767e28e63d59572541be00c41ea20",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16\\WinAudioClean_10cd0dd74b364bcea02b9d27fea0c694.txt",
+          "sha256": "8cc7f9c2ab33b3e0a97a921a0a8e6be85ff7b0fe8a556c67d308fc26fc0918b4"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "8cc7f9c2ab33b3e0a97a921a0a8e6be85ff7b0fe8a556c67d308fc26fc0918b4"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-short-zoom-16",
+      "reference_id": "short-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16\\short_Cleaned_20261002-211407485_02b66b7c6952420a82f0c4bf9d398eaa.wav",
+        "sha256": "664e2eb863086aae6d6bcce72a735f633197c6597d2678fd206130d578e38a8d",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "0.200000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "40e6f270606e022d323ac66829f32000deb5c99da7579eab3bff7d9e75eaf0a5",
+        "decoded_pcm_bytes": 19200,
+        "frames": 9600,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16\\WinAudioClean_02b66b7c6952420a82f0c4bf9d398eaa.json",
+        "sha256": "deb440f3096e104407ceef8c9a350c1ac8ca7419a6bcd6cae8eab5afea0790c1",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16\\WinAudioClean_02b66b7c6952420a82f0c4bf9d398eaa.txt",
+          "sha256": "4102b350f1aab022efd2fd0728d4b9c02a03161a8ac2983fb298572e4a30000f"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "4102b350f1aab022efd2fd0728d4b9c02a03161a8ac2983fb298572e4a30000f"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-silence-raw-16",
+      "reference_id": "silence-raw-16",
+      "mode": "Raw",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16\\silence_Cleaned_20261002-211413120_4e164100de084141b403dcb1384e8bd3.wav",
+        "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16\\WinAudioClean_4e164100de084141b403dcb1384e8bd3.json",
+        "sha256": "5b4dcac905076324a7db9d75ee9e34a5749b056f718a0ccadcdd9477a53217e0",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16\\WinAudioClean_4e164100de084141b403dcb1384e8bd3.txt",
+          "sha256": "028b26801604790bddfa3fcbd32f084d90527255a190a737af2a70bed4e3bc57"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16\\WinAudioClean_Log.txt",
+          "sha256": "028b26801604790bddfa3fcbd32f084d90527255a190a737af2a70bed4e3bc57"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-silence-zoom-16",
+      "reference_id": "silence-zoom-16",
+      "mode": "Zoom",
+      "bits": 16,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16\\silence_Cleaned_20261002-211420151_a5024b1c5ce544c295a1bd99b2f01661.wav",
+        "sha256": "e0b1384097c3e914462261d21bda4a76bd1e5008a65ae824639e8616b6b8becb",
+        "probe": {
+          "codec_name": "pcm_s16le",
+          "sample_rate": "48000",
+          "channels": 1,
+          "bits_per_sample": 16,
+          "channel_layout": null,
+          "duration": "3.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+        "decoded_pcm_bytes": 288000,
+        "frames": 144000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16\\WinAudioClean_a5024b1c5ce544c295a1bd99b2f01661.json",
+        "sha256": "5e8c557793eecea4016f5b4b58c8b065b5f8e0660f36d3e6d7e2a48f274e2a99",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16\\WinAudioClean_a5024b1c5ce544c295a1bd99b2f01661.txt",
+          "sha256": "8c1e6a73559fcd8a2e6963714830cd1e85a235e627d11c06c4c50524103326d1"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16\\WinAudioClean_Log.txt",
+          "sha256": "8c1e6a73559fcd8a2e6963714830cd1e85a235e627d11c06c4c50524103326d1"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 16,
+          "codec": "pcm_s16le",
+          "channels": 1,
+          "channelLayout": "mono",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-stereo-raw-24",
+      "reference_id": "stereo-raw-24",
+      "mode": "Raw",
+      "bits": 24,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24\\stereo_Cleaned_20261002-211425793_d74f6e406f894669bdb123d23272cf69.wav",
+        "sha256": "ed1b081c75353f5b5ecbcef0ce6ec5d158fc80b40ffd32feecc41481262bd4d4",
+        "probe": {
+          "codec_name": "pcm_s24le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 24,
+          "channel_layout": "stereo",
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "6411c3e98515868fa9cc7e87d960181b77f9872857aed197d4866bb73e52f4b3",
+        "decoded_pcm_bytes": 2304000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24\\WinAudioClean_d74f6e406f894669bdb123d23272cf69.json",
+        "sha256": "f99ccf91a6e5ebbb4233b384443c8f9a654201a0d555224b2a02e7d80c3da66e",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24\\WinAudioClean_d74f6e406f894669bdb123d23272cf69.txt",
+          "sha256": "646d64db2d32edd5dea765ed010bd1c88c086259317f0a2d3865b697284037cf"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24\\WinAudioClean_Log.txt",
+          "sha256": "646d64db2d32edd5dea765ed010bd1c88c086259317f0a2d3865b697284037cf"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Raw",
+        "exact_filters": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 24,
+          "codec": "pcm_s24le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    },
+    {
+      "id": "ps7-stereo-zoom-24",
+      "reference_id": "stereo-zoom-24",
+      "mode": "Zoom",
+      "bits": 24,
+      "exit_code": 0,
+      "final_count": 1,
+      "report_count": 1,
+      "partial_count": 0,
+      "passed": true,
+      "audio": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24\\stereo_Cleaned_20261002-211431756_8b0d1489b32d4271bc7364e398a01064.wav",
+        "sha256": "503f029655656ade9f8fa9d98a011e3849d24a49039986921e0cbe559d553ea5",
+        "probe": {
+          "codec_name": "pcm_s24le",
+          "sample_rate": "48000",
+          "channels": 2,
+          "bits_per_sample": 24,
+          "channel_layout": "stereo",
+          "duration": "8.000000",
+          "passed": true
+        },
+        "decoded_pcm_sha256": "84d900a6634664c2e40b684495ecbd7082c5820423dff9454c22eeed4002b539",
+        "decoded_pcm_bytes": 2304000,
+        "frames": 384000,
+        "passed": true
+      },
+      "zero_lag_decoded_pcm_equal_to_baseline": true,
+      "duration_matches_input": true,
+      "report": {
+        "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24\\WinAudioClean_8b0d1489b32d4271bc7364e398a01064.json",
+        "sha256": "fe11cc4fd8a827a6682ca537ed81acf269cfabfc959a261dd85166881754d0bd",
+        "text": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24\\WinAudioClean_8b0d1489b32d4271bc7364e398a01064.txt",
+          "sha256": "0b07a094fec9add56f55594723afca2a406f3807a0aa51c1fcea519460267b01"
+        },
+        "summary": {
+          "path": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24\\WinAudioClean_Log.txt",
+          "sha256": "0b07a094fec9add56f55594723afca2a406f3807a0aa51c1fcea519460267b01"
+        },
+        "schema_version": 1,
+        "tool_version": "2.3",
+        "preset_id": "original",
+        "preset_name": "Original",
+        "preset_version": "1.0.0",
+        "preset_version_reason": null,
+        "mode": "Zoom",
+        "exact_filters": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "loudness_mode": "Fast",
+        "fast_has_no_measurement_stages": true,
+        "normalization_requested_mode": "Fast",
+        "normalization_actual_type": null,
+        "format": {
+          "sampleRate": 48000,
+          "bitDepth": 24,
+          "codec": "pcm_s24le",
+          "channels": 2,
+          "channelLayout": "stereo",
+          "container": "RIFF"
+        },
+        "requested_targets": {
+          "integratedLufs": -12,
+          "truePeakDbtp": -1.5,
+          "loudnessRangeLu": 7
+        },
+        "measurements": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        },
+        "loudness_compliance": {
+          "status": "NOT_MEASURED",
+          "reason": "no_independent_measurement"
+        },
+        "status": "SUCCESS",
+        "published": true,
+        "application_exit_code": 0,
+        "native_exit_code": 0,
+        "text_contiguous_in_summary": true,
+        "text_retains_preset_identity": true,
+        "same_ffmpeg_path": true,
+        "same_ffmpeg_version": true,
+        "passed": true
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "ffmpeg-version",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.034,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ffmpeg-version-stdout.txt",
+      "stdout_sha256": "35051015bdc29f3cd8ae2fdeb219ad20feee51403a7e9a9868d1405b8de8b553",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ffmpeg-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ffprobe-version",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.032,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ffprobe-version-stdout.txt",
+      "stdout_sha256": "b0c3f37c8f3d89817184b7335f0ff2bf63dd988bada03fbf2e78734d083e8bb0",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ffprobe-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-stereo-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "2",
+        "-channel_layout",
+        "stereo",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.909,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-raw-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-stereo-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.052,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-raw-16-stdout.txt",
+      "stdout_sha256": "0e389495267bfb0c3b902f2802a8df517acc4760b142b9cd78712ae63b59dc85",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-stereo-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.058,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-raw-16-stdout.pcm",
+      "stdout_sha256": "2ba4fe8c85498c8aaa90c696dab6e5fa011843fc88bc8e81b556ac7241ed09ee",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-stereo-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "2",
+        "-channel_layout",
+        "stereo",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.369,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-zoom-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-stereo-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.049,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-zoom-16-stdout.txt",
+      "stdout_sha256": "142ad9ae1e8074cfa6df23c95352f2a63073800d67a72597f3170565ed27360e",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-stereo-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.057,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-zoom-16-stdout.pcm",
+      "stdout_sha256": "782cad1fb79695bf8ce28af56db7eb9ca42d6baaa1ee635718aafdddafc5a13d",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-mono-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\mono.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "1",
+        "-channel_layout",
+        "mono",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\mono-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.25,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-mono-raw-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-mono-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\mono-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.049,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-mono-raw-16-stdout.txt",
+      "stdout_sha256": "833ea8cac7843bb17885cfcbc3a5ab0728433572b1d770c2046f399265f1bae5",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-mono-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\mono-raw-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.042,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-mono-raw-16-stdout.pcm",
+      "stdout_sha256": "62fe6bd6a34390ace8762cac4258fa182c749e4a481a22311f5d59fab1a528ee",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-mono-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\mono.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "1",
+        "-channel_layout",
+        "mono",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\mono-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.093,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-mono-zoom-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-mono-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\mono-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.042,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-mono-zoom-16-stdout.txt",
+      "stdout_sha256": "99d2e818f44484cfdcb916a52adbc38494e11c8888c5eebfbb35e7e6a32c940c",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-mono-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\mono-zoom-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.044,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-mono-zoom-16-stdout.pcm",
+      "stdout_sha256": "c1f18489976624cdeda177179433550ed79b8ba61135bc4ad609e723adbdca44",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-short-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\short.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "1",
+        "-channel_layout",
+        "mono",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\short-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.052,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-short-raw-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-short-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\short-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.03,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-short-raw-16-stdout.txt",
+      "stdout_sha256": "a0f2e482fffad40a68020e8605e74d52745c4e127eb8d0257e87ac2b92a7c93d",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-short-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\short-raw-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.031,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-short-raw-16-stdout.pcm",
+      "stdout_sha256": "a0f8e5c35745c14ae3ad69cb538dc058f0515f0028ecda3768b63db93961cbd2",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-short-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\short.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "1",
+        "-channel_layout",
+        "mono",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\short-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.04,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-short-zoom-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-short-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\short-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.029,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-short-zoom-16-stdout.txt",
+      "stdout_sha256": "c3a2d5b7c22ba67a584fce55966c4538de1e4765c212c254fd3a46611125ed7e",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-short-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\short-zoom-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.031,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-short-zoom-16-stdout.pcm",
+      "stdout_sha256": "40e6f270606e022d323ac66829f32000deb5c99da7579eab3bff7d9e75eaf0a5",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-silence-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\silence.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "1",
+        "-channel_layout",
+        "mono",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\silence-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.258,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-silence-raw-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-silence-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\silence-raw-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.039,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-silence-raw-16-stdout.txt",
+      "stdout_sha256": "ba8708aaf58d862fe67499cb283dcbbb5c884070320574718158ba112f82789d",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-silence-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\silence-raw-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.046,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-silence-raw-16-stdout.pcm",
+      "stdout_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-silence-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\silence.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s16le",
+        "-ac",
+        "1",
+        "-channel_layout",
+        "mono",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\silence-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.096,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-silence-zoom-16-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-silence-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\silence-zoom-16.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.041,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-silence-zoom-16-stdout.txt",
+      "stdout_sha256": "eedc2b24bee98e5b77764dae22d93d3edf660b9c4c33f7bd19821ec34162f162",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-silence-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\silence-zoom-16.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.049,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-silence-zoom-16-stdout.pcm",
+      "stdout_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-stereo-raw-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s24le",
+        "-ac",
+        "2",
+        "-channel_layout",
+        "stereo",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-24.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.006,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-raw-24-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-stereo-raw-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-24.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.046,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-raw-24-stdout.txt",
+      "stdout_sha256": "ca1edb1e49dba7f21f38fe7b892bf1805fffc1707a8d6f00d9f3a4378abac1cf",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-stereo-raw-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-raw-24.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s24le",
+        "-f",
+        "s24le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.06,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-raw-24-stdout.pcm",
+      "stdout_sha256": "6411c3e98515868fa9cc7e87d960181b77f9872857aed197d4866bb73e52f4b3",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "reference-stereo-zoom-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "-ar",
+        "48000",
+        "-c:a",
+        "pcm_s24le",
+        "-ac",
+        "2",
+        "-channel_layout",
+        "stereo",
+        "-map_metadata",
+        "-1",
+        "-map_chapters",
+        "-1",
+        "-f",
+        "wav",
+        "-rf64",
+        "never",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-24.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.491,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-zoom-24-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\reference-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-reference-stereo-zoom-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-24.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.032,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-zoom-24-stdout.txt",
+      "stdout_sha256": "72fe25e33b3df3a047110f02aa0f9dfc487a98f8766e9452a55019702cc62eec",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-reference-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-reference-stereo-zoom-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\references\\stereo-zoom-24.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s24le",
+        "-f",
+        "s24le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.044,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-zoom-24-stdout.pcm",
+      "stdout_sha256": "84d900a6634664c2e40b684495ecbd7082c5820423dff9454c22eeed4002b539",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-reference-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-version",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$PSVersionTable.PSVersion.ToString()"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.248,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-version-stdout.txt",
+      "stdout_sha256": "c0a168f8d34ddc6b4ad828fd5c3453d2adc86ba2251cf1b77f2f977148b670da",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-stereo-raw-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.877,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16-stdout.txt",
+      "stdout_sha256": "bf3e14932ef0e8b6736c9266a7c413bc943de230d12df59cfaf2843b798615ed",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-stereo-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16\\stereo_Cleaned_20261002-211257406_7a3d890e6f6947acb01e7aa38a4454e2.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.055,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-raw-16-stdout.txt",
+      "stdout_sha256": "1ed662c3f6dddb70f316c34750b9d437a10787121e99b10f58b21f3ba8f8d58a",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-stereo-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-16\\stereo_Cleaned_20261002-211257406_7a3d890e6f6947acb01e7aa38a4454e2.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.056,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-raw-16-stdout.pcm",
+      "stdout_sha256": "2ba4fe8c85498c8aaa90c696dab6e5fa011843fc88bc8e81b556ac7241ed09ee",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-stereo-zoom-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.26,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16-stdout.txt",
+      "stdout_sha256": "cbbb6f4ac198f2081423f764ccd85c564d107451d4d76d2b6e0d1e352ff0ca34",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-stereo-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16\\stereo_Cleaned_20261002-211300462_49358e4f85a6437199e0638225b67cec.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.062,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-zoom-16-stdout.txt",
+      "stdout_sha256": "8d328693a953bd9971d762039255010b8dc01c28bc5af2ab170d5e9c272fc22f",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-stereo-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-16\\stereo_Cleaned_20261002-211300462_49358e4f85a6437199e0638225b67cec.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.062,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-zoom-16-stdout.pcm",
+      "stdout_sha256": "782cad1fb79695bf8ce28af56db7eb9ca42d6baaa1ee635718aafdddafc5a13d",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-mono-raw-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\mono.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.187,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16-stdout.txt",
+      "stdout_sha256": "339517072076093a35a12dc1ffec1ba61b2080a792cf77c6fa36c778a450e9bd",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-mono-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16\\mono_Cleaned_20261002-211302898_a726973b173144bebf1798e74b507a83.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.046,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-mono-raw-16-stdout.txt",
+      "stdout_sha256": "60d6d3a2d8a4a4ff8500226dc3562e61a958e66fbcfd14704a396345b60eaabb",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-mono-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-mono-raw-16\\mono_Cleaned_20261002-211302898_a726973b173144bebf1798e74b507a83.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.047,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-mono-raw-16-stdout.pcm",
+      "stdout_sha256": "62fe6bd6a34390ace8762cac4258fa182c749e4a481a22311f5d59fab1a528ee",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-mono-zoom-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\mono.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.099,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16-stdout.txt",
+      "stdout_sha256": "f587580ca3ee784e8d5dd35b851329eebcccf36dc01b15bd4cc0d9e95bc78669",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-mono-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16\\mono_Cleaned_20261002-211305251_09a6679a62074606ac3368c58de9e0a5.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.046,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-mono-zoom-16-stdout.txt",
+      "stdout_sha256": "c579accc3ed87664b155a14469b1dcc013e2e3044e7b264abdb272d74e169ae4",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-mono-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-mono-zoom-16\\mono_Cleaned_20261002-211305251_09a6679a62074606ac3368c58de9e0a5.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.045,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-mono-zoom-16-stdout.pcm",
+      "stdout_sha256": "c1f18489976624cdeda177179433550ed79b8ba61135bc4ad609e723adbdca44",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-short-raw-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\short.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.399,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16-stdout.txt",
+      "stdout_sha256": "6db95a836abbf0626c30e0a20f8357a788c214d8b3ec10330b35812f26a381e8",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-short-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16\\short_Cleaned_20261002-211307464_d9792f1565d146a99f6adf0ccb2b0944.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.047,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-short-raw-16-stdout.txt",
+      "stdout_sha256": "e0b8d9f6211db59a85f8d21a5b7529b2f79105e96f25d490661e48b668b72f4c",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-short-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-short-raw-16\\short_Cleaned_20261002-211307464_d9792f1565d146a99f6adf0ccb2b0944.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.052,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-short-raw-16-stdout.pcm",
+      "stdout_sha256": "a0f8e5c35745c14ae3ad69cb538dc058f0515f0028ecda3768b63db93961cbd2",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-short-zoom-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\short.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 3.2,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16-stdout.txt",
+      "stdout_sha256": "290010f3aa9b5ee8993272b44d98599d690a4fa273211a96800ba825db1dda38",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-short-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16\\short_Cleaned_20261002-211310452_c9049e0c1e3840b08c0f4dc057b1785b.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.058,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-short-zoom-16-stdout.txt",
+      "stdout_sha256": "9d3f030e0e2c22904c3c956cba86d85bd373c279281b1af8b1386cb3a1c0284c",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-short-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-short-zoom-16\\short_Cleaned_20261002-211310452_c9049e0c1e3840b08c0f4dc057b1785b.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.051,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-short-zoom-16-stdout.pcm",
+      "stdout_sha256": "40e6f270606e022d323ac66829f32000deb5c99da7579eab3bff7d9e75eaf0a5",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-silence-raw-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\silence.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 3.263,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16-stdout.txt",
+      "stdout_sha256": "7f04c74c56758be17021d5365f62b3f2fa516bad5cd45bcd010a107470590227",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-silence-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16\\silence_Cleaned_20261002-211313924_10d384633fe44c5fa3513db6237d2232.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.057,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-silence-raw-16-stdout.txt",
+      "stdout_sha256": "08e792493be4398c2e803f7c62e4a3d822872cbb492906424fdfa38f7664bfd0",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-silence-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-silence-raw-16\\silence_Cleaned_20261002-211313924_10d384633fe44c5fa3513db6237d2232.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.062,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-silence-raw-16-stdout.pcm",
+      "stdout_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-silence-zoom-16",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\silence.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.841,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16-stdout.txt",
+      "stdout_sha256": "240d4e9af408d06b26aceada3a6a8bdeb432a1dd3d40e79f3bff801c72f2472b",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-silence-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16\\silence_Cleaned_20261002-211317001_8267d9c07f814f17ac0b9c1264151956.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.055,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-silence-zoom-16-stdout.txt",
+      "stdout_sha256": "61bc63476f7b322cb7332a1247fce9c1ba553c87f3878a3040fbaa684af26232",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-silence-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-silence-zoom-16\\silence_Cleaned_20261002-211317001_8267d9c07f814f17ac0b9c1264151956.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.066,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-silence-zoom-16-stdout.pcm",
+      "stdout_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-stereo-raw-24",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive",
+        "-BitDepth",
+        "24"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 4.911,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24-stdout.txt",
+      "stdout_sha256": "1d812b5d450f4d0351a06d50f448409bf73a649d05b661d6f5fc7ee94d371cc8",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-stereo-raw-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24\\stereo_Cleaned_20261002-211320047_c32dd7c5cfdf427e943497b12152b80c.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.06,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-raw-24-stdout.txt",
+      "stdout_sha256": "58fe723f4b30554f2d6029e6a64acc615a4ce9f926432ea403842dc805b1b4de",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-stereo-raw-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-raw-24\\stereo_Cleaned_20261002-211320047_c32dd7c5cfdf427e943497b12152b80c.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s24le",
+        "-f",
+        "s24le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.152,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-raw-24-stdout.pcm",
+      "stdout_sha256": "6411c3e98515868fa9cc7e87d960181b77f9872857aed197d4866bb73e52f4b3",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-stereo-zoom-24",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive",
+        "-BitDepth",
+        "24"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 4.813,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24-stdout.txt",
+      "stdout_sha256": "d21663ec877e4660e6d23ece879e5bb4495df529694660b80fa8003430c0449d",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-stereo-zoom-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24\\stereo_Cleaned_20261002-211325559_2a6287e7f6ad4fd0a8c97224154cc489.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.117,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-zoom-24-stdout.txt",
+      "stdout_sha256": "34466ae376442b35749c6c8916309a030bbab7558ac2084e68f6b9e15e330a9b",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps51-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps51-stereo-zoom-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps51-stereo-zoom-24\\stereo_Cleaned_20261002-211325559_2a6287e7f6ad4fd0a8c97224154cc489.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s24le",
+        "-f",
+        "s24le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.182,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-zoom-24-stdout.pcm",
+      "stdout_sha256": "84d900a6634664c2e40b684495ecbd7082c5820423dff9454c22eeed4002b539",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps51-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-version",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$PSVersionTable.PSVersion.ToString()"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.467,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-version-stdout.txt",
+      "stdout_sha256": "4ec5708605b2346072fb8113e053a2da5964b6cf61cd460350c758f9928d6ea1",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-stereo-raw-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 8.405,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16-stdout.txt",
+      "stdout_sha256": "28e629bf736c591883a62d922420c972bb243f695b6a32dc56c81fdaddda9b4a",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-stereo-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16\\stereo_Cleaned_20261002-211332819_f68078ecf01f4640955b369b87fbda07.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.195,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-raw-16-stdout.txt",
+      "stdout_sha256": "b0f82c8799728198ac5aedeabe870a6f88c474ff3afe9594c0b7812712021ec1",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-stereo-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-16\\stereo_Cleaned_20261002-211332819_f68078ecf01f4640955b369b87fbda07.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.26,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-raw-16-stdout.pcm",
+      "stdout_sha256": "2ba4fe8c85498c8aaa90c696dab6e5fa011843fc88bc8e81b556ac7241ed09ee",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-stereo-zoom-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 7.033,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16-stdout.txt",
+      "stdout_sha256": "966247dab84a69a15024fbc25b092979115fe8cc5ce92d5954f6d87ae34b44dc",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-stereo-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16\\stereo_Cleaned_20261002-211342410_53c8066f443948319fc22156736b0d46.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.091,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-zoom-16-stdout.txt",
+      "stdout_sha256": "b37b2d69a843c60a7c50cb03ed18dba5f93c64b03018e60b18f018258ed30145",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-stereo-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-16\\stereo_Cleaned_20261002-211342410_53c8066f443948319fc22156736b0d46.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.104,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-zoom-16-stdout.pcm",
+      "stdout_sha256": "782cad1fb79695bf8ce28af56db7eb9ca42d6baaa1ee635718aafdddafc5a13d",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-mono-raw-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\mono.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 6.378,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16-stdout.txt",
+      "stdout_sha256": "525c270af4adc9d73d503b10c07a1104f15a18d965b0113957784df77148658c",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-mono-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16\\mono_Cleaned_20261002-211349418_527e699e83224f30a52a4e8189ca8ba3.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.067,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-mono-raw-16-stdout.txt",
+      "stdout_sha256": "2b5b2dfb2751cf727cae45600020721e3dcbc819c398368f3076d04e6d37cfc1",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-mono-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-mono-raw-16\\mono_Cleaned_20261002-211349418_527e699e83224f30a52a4e8189ca8ba3.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.107,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-mono-raw-16-stdout.pcm",
+      "stdout_sha256": "62fe6bd6a34390ace8762cac4258fa182c749e4a481a22311f5d59fab1a528ee",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-mono-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-mono-zoom-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\mono.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 5.65,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16-stdout.txt",
+      "stdout_sha256": "040f9de4b6b02525da506c5590a5f1f022f7ee7cfa38ff4043651954cb2dfc03",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-mono-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16\\mono_Cleaned_20261002-211355772_bc91477fbd814a928bc57f9adc1bda40.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.094,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-mono-zoom-16-stdout.txt",
+      "stdout_sha256": "4f5201da97a7cbba88393960386021e9c285fc6b43ca6c0485ebf1ddbf9c0805",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-mono-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-mono-zoom-16\\mono_Cleaned_20261002-211355772_bc91477fbd814a928bc57f9adc1bda40.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.181,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-mono-zoom-16-stdout.pcm",
+      "stdout_sha256": "c1f18489976624cdeda177179433550ed79b8ba61135bc4ad609e723adbdca44",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-mono-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-short-raw-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\short.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 5.577,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16-stdout.txt",
+      "stdout_sha256": "b3fa6ead282401f4e1f8ad57a047777ee26e6daed72b7029c5ab43bb333eea88",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-short-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16\\short_Cleaned_20261002-211401854_10cd0dd74b364bcea02b9d27fea0c694.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.078,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-short-raw-16-stdout.txt",
+      "stdout_sha256": "20b755fec969f7d5459b5a9dfcb8a25d02990bddf2a248298b6d942e892ac2a7",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-short-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-short-raw-16\\short_Cleaned_20261002-211401854_10cd0dd74b364bcea02b9d27fea0c694.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.114,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-short-raw-16-stdout.pcm",
+      "stdout_sha256": "a0f8e5c35745c14ae3ad69cb538dc058f0515f0028ecda3768b63db93961cbd2",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-short-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-short-zoom-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\short.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 4.873,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16-stdout.txt",
+      "stdout_sha256": "f5b35416f76b306ae9102e458ed5aa82f2940df6bbf855a26256f6114a0e5291",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-short-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16\\short_Cleaned_20261002-211407485_02b66b7c6952420a82f0c4bf9d398eaa.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.065,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-short-zoom-16-stdout.txt",
+      "stdout_sha256": "8553ae8eaaa6ab396437fc4c7e87021c8afb889d6f0b26efef634e9389494aa0",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-short-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-short-zoom-16\\short_Cleaned_20261002-211407485_02b66b7c6952420a82f0c4bf9d398eaa.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.062,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-short-zoom-16-stdout.pcm",
+      "stdout_sha256": "40e6f270606e022d323ac66829f32000deb5c99da7579eab3bff7d9e75eaf0a5",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-short-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-silence-raw-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\silence.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 6.298,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16-stdout.txt",
+      "stdout_sha256": "7913612bef0d8e5291a4ebf5c73e4a7dbdb1ddb3136969767aebcc7b63ac8054",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-silence-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16\\silence_Cleaned_20261002-211413120_4e164100de084141b403dcb1384e8bd3.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.18,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-silence-raw-16-stdout.txt",
+      "stdout_sha256": "58c189c05f470a9c72e492d74ac8e91f12c0f9d0cbe78fa98fe941ca59b85d77",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-silence-raw-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-silence-raw-16\\silence_Cleaned_20261002-211413120_4e164100de084141b403dcb1384e8bd3.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.54,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-silence-raw-16-stdout.pcm",
+      "stdout_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-silence-raw-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-silence-zoom-16",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\silence.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 6.518,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16-stdout.txt",
+      "stdout_sha256": "b48d0ed4ee46b846bcdf8a92ac075448c277c8940104b909afb4b89a13133e54",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-silence-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16\\silence_Cleaned_20261002-211420151_a5024b1c5ce544c295a1bd99b2f01661.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.091,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-silence-zoom-16-stdout.txt",
+      "stdout_sha256": "94f8fdf21e0a9633f91552b33a6dad1c29b2007f5241ee688e4931436a13c3cf",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-silence-zoom-16",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-silence-zoom-16\\silence_Cleaned_20261002-211420151_a5024b1c5ce544c295a1bd99b2f01661.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s16le",
+        "-f",
+        "s16le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.134,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-silence-zoom-16-stdout.pcm",
+      "stdout_sha256": "0e89e5d755de20a0a96681c385ffcd1c64e8ae3b7d56d1c7c0c351a81cc46513",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-silence-zoom-16-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-stereo-raw-24",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24",
+        "-Mode",
+        "Raw",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive",
+        "-BitDepth",
+        "24"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 5.554,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24-stdout.txt",
+      "stdout_sha256": "04c070219e30a526f66806916c27650ea29154320e1facf209c41a685886e42d",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-stereo-raw-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24\\stereo_Cleaned_20261002-211425793_d74f6e406f894669bdb123d23272cf69.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.054,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-raw-24-stdout.txt",
+      "stdout_sha256": "00973d2e714b644b7dd7306fadad97c06a7530203bbf078f5e95cb108c02d231",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-stereo-raw-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-raw-24\\stereo_Cleaned_20261002-211425793_d74f6e406f894669bdb123d23272cf69.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s24le",
+        "-f",
+        "s24le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.086,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-raw-24-stdout.pcm",
+      "stdout_sha256": "6411c3e98515868fa9cc7e87d960181b77f9872857aed197d4866bb73e52f4b3",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-raw-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-stereo-zoom-24",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\fixtures\\stereo.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24",
+        "-Mode",
+        "Zoom",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive",
+        "-BitDepth",
+        "24"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 5.76,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24-stdout.txt",
+      "stdout_sha256": "c32bcee75d4722adb123fd10e0893a8e7e9c66ed403cb7b3207d74008b11e674",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-stereo-zoom-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24\\stereo_Cleaned_20261002-211431756_8b0d1489b32d4271bc7364e398a01064.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.079,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-zoom-24-stdout.txt",
+      "stdout_sha256": "c48c1a2b12e722b69ab8e363ad384af09dc40573e71cc97e9c0ed6fb93682205",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\probe-ps7-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "decode-ps7-stereo-zoom-24",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-v",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M3-01\\original-final\\ps7-stereo-zoom-24\\stereo_Cleaned_20261002-211431756_8b0d1489b32d4271bc7364e398a01064.wav",
+        "-map",
+        "0:a:0",
+        "-c:a",
+        "pcm_s24le",
+        "-f",
+        "s24le",
+        "-"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.076,
+      "stdout_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-zoom-24-stdout.pcm",
+      "stdout_sha256": "84d900a6634664c2e40b684495ecbd7082c5820423dff9454c22eeed4002b539",
+      "stderr_log": ".wac-local\\WAC-M3-01\\original-final\\decode-ps7-stereo-zoom-24-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "baseline": {
+    "reviewed_commit": "7dfe43361395908a277d7b513b1c9a4fd3cd192a",
+    "filters": {
+      "Raw": "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+      "Zoom": "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5"
+    },
+    "export_settings": "Explicit 48 kHz PCM16/24 RIFF, preserved mono/stereo; these are M1 encoding settings, not the historical implicit encoder defaults."
+  },
+  "fixtures_unchanged": true,
+  "source_sha256_after": {
+    "WinAudioClean.ps1": "880af42241854cfd3952855c59996c3e15377453392ff4531704d6c02dd08a3b",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "scripts/Test-OriginalPreset.py": "5243779ab0bf7599b0559622ce0056eefc1063b7fb684be4ee6ca259a2a7a34a",
+    "docs/codex/winaudioclean/BASELINE.json": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9",
+    "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+  },
+  "sources_unchanged_during_run": true,
+  "status": "pass"
+}

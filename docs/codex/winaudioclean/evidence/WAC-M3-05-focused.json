@@ -1,0 +1,2708 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-05",
+  "acceptanceIds": [
+    "AC-061",
+    "AC-062",
+    "AC-063"
+  ],
+  "precedingCheckpoint": "83e41830a3b2a7f15ece4efa972f2d824ab716c6",
+  "scope": "Latest root Targeted222 per host certifies all48 Interaction,10 Layout,155 Preview and9 Preset cases on the current stable66-source cohort. The original Targeted213 recovery remains immutable historical evidence before the Preset fixture marker correction. Dedicated focused history still has19 records: Interaction9,Layout8 andPreview2 filtered organization-fault scopes, including all earlier failures. Captured Layout main predates final integration; final helper/test hashes match current bytes. Required Full, real-media and human desktop gestures are separate evidence.",
+  "finalScopes": {
+    "OutputInteraction": "finalRecoveryReference: root Targeted final-menu-corrected222 per host (whole Interaction48); original recoveryReference213 retained historically.",
+    "OutputLayout": "final10 helper scope plus latest Targeted222.",
+    "PreviewOrganizationFaults": "Original two selected additive regressions plus all155 Preview cases in latest Targeted222.",
+    "Preset": "Latest Targeted222 includes9 Preset cases and both corrected menu fixture regressions; historical Full1440/2/1 failures retained separately."
+  },
+  "coverage": [
+    "controlled default Music/custom/saved/relative/flat and grouped single/list destinations; unavailable defaults reject before native/cwd output",
+    "no-input usage, ordinary redirected/no-GUI operation, helper-less typed false actions, action flags excluded from persisted settings",
+    "explicit action eligibility, picker cancellation/selection/unavailability, parent-only queue open, primary status preservation on advisory open failures",
+    "actual picker helper body through a fake disposed dialog in fresh STA hosts, and actual directory-open helper wrong-identity rejection before shell launch",
+    "actual held directory/IO publication and report writes, collision exclusion, foreign mutation denial, close without directory removal",
+    "exact generated old job directory exclusion, near-miss traversal, Preview organization fault cleanup and retained published assets"
+  ],
+  "limitations": [
+    "UI tests use controlled known-folder values, interaction eligibility and picker/open boundaries; no real modal picker, Explorer gesture, playback or Music registration write was performed.",
+    "Interaction runtime jobs use the unchanged synthetic NativeProcessFixture, not real FFmpeg. Separate real-media evidence proves audio/render/Preview assets.",
+    "Only two Preview cases were selected;153 were outside the filter. Their valid-WAV output is controlled while native IO/layout ownership is real.",
+    "Layout helper snapshots cover their listed four source paths. Initial PS5.1 policy failure has no loaded runner, source snapshot or Pester result.",
+    "No cumulative Full, whole-repository static, listening, crash/power-loss or broad long-path support claim is made by this ledger."
+  ],
+  "corrections": [
+    "Initial PS5.1 helper command was blocked by execution policy; later command uses process-local Bypass without changing system policy.",
+    "Layout Media directory sharing changed READ1 to READ|WRITE3 because existing held IO publication requires write sharing; Root/Reports/ancestors retain READ1 and all denyDELETE.",
+    "Layout test-only readback was moved after transaction completion and writer close to respect held validation/report sharing.",
+    "Interaction private sandbox GUID and fixture basenames were shortened after PS7 Win32 206; no runtime long-path behavior was broadened.",
+    "Picked-file argv JSON was assigned directly to avoid PS5.1 nested-array test interpretation.",
+    "The stable49 Preview failure exposed an unsupported generic synthetic fixture. Only that redundant Interaction case was removed after active gates stopped; its native97 failure remains visible. Dedicated Preview/real-media coverage remains.",
+    "One stable-source PS5.1 whole48 recapture hit the unchanged30s child deadline under concurrent gates; that failure remains separate from isolated1 pass and subsequent whole Interaction48 pass within root Targeted213. Contention is an inference; no timeout loosening was made.",
+    "An early wrapper summary display selected OrderedDictionary properties as null; raw JSON/Pester captures retained correct counts. The final summary display projects a PSCustomObject.",
+    "Both stable Full captures1440/2/1 failed only the Raw/Zoom menu fixture cases. The fixture inserted its Test-WacInteractive double after the newly earlier interactive-state capture. Only its insertion marker moved earlier; assertions and host doubles were preserved, runtime bytes did not change. Latest Targeted222 passes both menus and all9 Preset cases; previous Full failures and original Targeted213 recovery remain historical evidence."
+  ],
+  "harnesses": [
+    {
+      "name": "output-focused/initial-unit-harness.ps1.txt",
+      "scope": "Historical Interaction unit-only wrapper source archive; initial metadata had no wrapper source hash.",
+      "rawSha256": "EE880362E29F8A8DDD6C0CFF3732D48CC01F6136FAAE21FFEE9F825352882140",
+      "source": "param([string]$Repository, [string]$Scope, [string]$ShellLabel, [switch]$UnitOnly)\n$ErrorActionPreference = 'Stop'\n$paths = @(Get-ChildItem -LiteralPath $Repository -Filter 'WinAudioClean*.ps1' -File | ForEach-Object { $_.Name })\n$paths += @('tests/WinAudioClean.OutputInteraction.Tests.ps1', 'tests/fixtures/NativeProcessFixture.cs', 'tests/fixtures/New-NativeProcessFixture.ps1', 'tests/fixtures/TestProcess.ps1')\n$before = @(foreach ($path in $paths) { [ordered]@{ path = $path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path) -Algorithm SHA256).Hash } })\n$directory = Join-Path $Repository '.wac-local/WAC-M3-05/output-focused'\n$log = Join-Path $directory ($Scope + '-' + $ShellLabel + '.log')\n$metadata = Join-Path $directory ($Scope + '-' + $ShellLabel + '.json')\nImport-Module (Join-Path $Repository '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\n$started = [DateTime]::UtcNow.ToString('o')\n$parameters = @{ Path = Join-Path $Repository 'tests/WinAudioClean.OutputInteraction.Tests.ps1'; Output = 'Detailed'; PassThru = $true }\nif ($UnitOnly) { $parameters.Tag = 'Unit' }\n$capture = @(Invoke-Pester @parameters *>&1)\n$result = @($capture | Where-Object { $_ -is [Pester.Run] })[0]\n$capture | Where-Object { $_ -isnot [Pester.Run] } | Out-File -LiteralPath $log -Encoding utf8 -Width 300\n$code = 0\nif ($null -eq $result -or $result.PassedCount -eq 0 -or $result.FailedCount -gt 0 -or $result.FailedContainersCount -gt 0 -or $result.FailedBlocksCount -gt 0) { $code = 1 }\n$after = @(foreach ($path in $before) { [ordered]@{ path = $path.path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path.path) -Algorithm SHA256).Hash } })\n$record = [ordered]@{\n    scope = $(if ($UnitOnly) { 'OutputInteraction Pester unit-only' } else { 'OutputInteraction Pester entire new suite' })\n    shellLabel = $ShellLabel; shellVersion = $PSVersionTable.PSVersion.ToString(); pesterVersion = (Get-Module Pester).Version.ToString()\n    startedUtc = $started; finishedUtc = [DateTime]::UtcNow.ToString('o'); exitCode = $code\n    passed = $result.PassedCount; failed = $result.FailedCount; skipped = $result.SkippedCount; notRun = $result.NotRunCount; total = $result.TotalCount\n    failedContainers = $result.FailedContainersCount; failedBlocks = $result.FailedBlocksCount\n    sourcesBefore = $before; sourcesAfter = $after; sourceUnchanged = (($before | ConvertTo-Json -Compress) -eq ($after | ConvertTo-Json -Compress))\n    rawLogSha256 = (Get-FileHash -LiteralPath $log -Algorithm SHA256).Hash\n    command = @((Get-Process -Id $PID).Path, '-NoLogo', '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', (Join-Path $directory 'Invoke-Focused.ps1'), '-Repository', $Repository, '-Scope', $Scope, '-ShellLabel', $ShellLabel)\n    failures = @($result.Tests | Where-Object { $_.Result -eq 'Failed' } | ForEach-Object { [ordered]@{ name = $_.ExpandedName; message = ($_.ErrorRecord.Exception.Message -join '; ') } })\n}\nif ($UnitOnly) { $record.command += '-UnitOnly' }\n[IO.File]::WriteAllText($metadata, (($record | ConvertTo-Json -Depth 14) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))\n$record | ConvertTo-Json -Depth 3 -Compress\nexit $code\n"
+    },
+    {
+      "name": "output-focused/initial-all-harness.ps1.txt",
+      "scope": "Historical Interaction initial48 wrapper source archive.",
+      "rawSha256": "2AC298AE67466754CA59E6D8FA386B0425339AAE761A794EF7B2BE9BB0555F83",
+      "source": "param([string]$Repository, [string]$Scope, [string]$ShellLabel, [switch]$UnitOnly)\n$ErrorActionPreference = 'Stop'\n$paths = @(Get-ChildItem -LiteralPath $Repository -Filter 'WinAudioClean*.ps1' -File | ForEach-Object { $_.Name })\n$paths += @('tests/WinAudioClean.OutputInteraction.Tests.ps1', 'tests/fixtures/NativeProcessFixture.cs', 'tests/fixtures/New-NativeProcessFixture.ps1', 'tests/fixtures/TestProcess.ps1')\n$before = @(foreach ($path in $paths) { [ordered]@{ path = $path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path) -Algorithm SHA256).Hash } })\n$directory = Join-Path $Repository '.wac-local/WAC-M3-05/output-focused'\n$log = Join-Path $directory ($Scope + '-' + $ShellLabel + '.log')\n$metadata = Join-Path $directory ($Scope + '-' + $ShellLabel + '.json')\nImport-Module (Join-Path $Repository '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\n$started = [DateTime]::UtcNow.ToString('o')\n$parameters = @{ Path = Join-Path $Repository 'tests/WinAudioClean.OutputInteraction.Tests.ps1'; Output = 'Detailed'; PassThru = $true }\nif ($UnitOnly) { $parameters.Tag = 'Unit' }\n$capture = @(Invoke-Pester @parameters *>&1)\n$result = @($capture | Where-Object { $_ -is [Pester.Run] })[0]\n$capture | Where-Object { $_ -isnot [Pester.Run] } | Out-File -LiteralPath $log -Encoding utf8 -Width 300\n$code = 0\nif ($null -eq $result -or $result.PassedCount -eq 0 -or $result.FailedCount -gt 0 -or $result.FailedContainersCount -gt 0 -or $result.FailedBlocksCount -gt 0) { $code = 1 }\n$after = @(foreach ($path in $before) { [ordered]@{ path = $path.path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path.path) -Algorithm SHA256).Hash } })\n$record = [ordered]@{\n    scope = $(if ($UnitOnly) { 'OutputInteraction Pester unit-only' } else { 'OutputInteraction Pester entire new suite' })\n    shellLabel = $ShellLabel; shellVersion = $PSVersionTable.PSVersion.ToString(); pesterVersion = (Get-Module Pester).Version.ToString()\n    startedUtc = $started; finishedUtc = [DateTime]::UtcNow.ToString('o'); exitCode = $code\n    passed = $result.PassedCount; failed = $result.FailedCount; skipped = $result.SkippedCount; notRun = $result.NotRunCount; total = $result.TotalCount\n    failedContainers = $result.FailedContainersCount; failedBlocks = $result.FailedBlocksCount\n    sourcesBefore = $before; sourcesAfter = $after; sourceUnchanged = (($before | ConvertTo-Json -Compress) -eq ($after | ConvertTo-Json -Compress))\n    rawLogSha256 = (Get-FileHash -LiteralPath $log -Algorithm SHA256).Hash\n    wrapperSourceSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash\n    command = @((Get-Process -Id $PID).Path, '-NoLogo', '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', (Join-Path $directory 'Invoke-Focused.ps1'), '-Repository', $Repository, '-Scope', $Scope, '-ShellLabel', $ShellLabel)\n    failures = @($result.Tests | Where-Object { $_.Result -eq 'Failed' } | ForEach-Object { [ordered]@{ name = $_.ExpandedName; message = ($_.ErrorRecord.Exception.Message -join '; ') } })\n}\nif ($UnitOnly) { $record.command += '-UnitOnly' }\n[IO.File]::WriteAllText($metadata, (($record | ConvertTo-Json -Depth 14) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))\n$record | Select-Object scope, shellLabel, passed, failed, skipped, notRun, total, exitCode, sourceUnchanged | ConvertTo-Json -Compress\nexit $code\n"
+    },
+    {
+      "name": "output-focused/Invoke-Focused.ps1",
+      "scope": "Interaction corrected49 and final-corrected48 wrapper.",
+      "rawSha256": "954ED5BB0459E2078B60C98B91689A2C97F72375122D888D5F12EE012CD1A5D8",
+      "source": "param([string]$Repository, [string]$Scope, [string]$ShellLabel, [switch]$UnitOnly)\n$ErrorActionPreference = 'Stop'\n$paths = @(Get-ChildItem -LiteralPath $Repository -Filter 'WinAudioClean*.ps1' -File | ForEach-Object { $_.Name })\n$paths += @('tests/WinAudioClean.OutputInteraction.Tests.ps1', 'tests/fixtures/NativeProcessFixture.cs', 'tests/fixtures/New-NativeProcessFixture.ps1', 'tests/fixtures/TestProcess.ps1')\n$before = @(foreach ($path in $paths) { [ordered]@{ path = $path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path) -Algorithm SHA256).Hash } })\n$directory = Join-Path $Repository '.wac-local/WAC-M3-05/output-focused'\n$log = Join-Path $directory ($Scope + '-' + $ShellLabel + '.log')\n$metadata = Join-Path $directory ($Scope + '-' + $ShellLabel + '.json')\nImport-Module (Join-Path $Repository '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\n$started = [DateTime]::UtcNow.ToString('o')\n$parameters = @{ Path = Join-Path $Repository 'tests/WinAudioClean.OutputInteraction.Tests.ps1'; Output = 'Detailed'; PassThru = $true }\nif ($UnitOnly) { $parameters.Tag = 'Unit' }\n$capture = @(Invoke-Pester @parameters *>&1)\n$result = @($capture | Where-Object { $_ -is [Pester.Run] })[0]\n$capture | Where-Object { $_ -isnot [Pester.Run] } | Out-File -LiteralPath $log -Encoding utf8 -Width 300\n$code = 0\nif ($null -eq $result -or $result.PassedCount -eq 0 -or $result.FailedCount -gt 0 -or $result.FailedContainersCount -gt 0 -or $result.FailedBlocksCount -gt 0) { $code = 1 }\n$after = @(foreach ($path in $before) { [ordered]@{ path = $path.path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path.path) -Algorithm SHA256).Hash } })\n$record = [ordered]@{\n    scope = $(if ($UnitOnly) { 'OutputInteraction Pester unit-only' } else { 'OutputInteraction Pester entire new suite' })\n    shellLabel = $ShellLabel; shellVersion = $PSVersionTable.PSVersion.ToString(); pesterVersion = (Get-Module Pester).Version.ToString()\n    startedUtc = $started; finishedUtc = [DateTime]::UtcNow.ToString('o'); exitCode = $code\n    passed = $result.PassedCount; failed = $result.FailedCount; skipped = $result.SkippedCount; notRun = $result.NotRunCount; total = $result.TotalCount\n    failedContainers = $result.FailedContainersCount; failedBlocks = $result.FailedBlocksCount\n    sourcesBefore = $before; sourcesAfter = $after; sourceUnchanged = (($before | ConvertTo-Json -Compress) -eq ($after | ConvertTo-Json -Compress))\n    rawLogSha256 = (Get-FileHash -LiteralPath $log -Algorithm SHA256).Hash\n    wrapperSourceSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash\n    command = @((Get-Process -Id $PID).Path, '-NoLogo', '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', (Join-Path $directory 'Invoke-Focused.ps1'), '-Repository', $Repository, '-Scope', $Scope, '-ShellLabel', $ShellLabel)\n    failures = @($result.Tests | Where-Object { $_.Result -eq 'Failed' } | ForEach-Object { [ordered]@{ name = $_.ExpandedName; message = ($_.ErrorRecord.Exception.Message -join '; ') } })\n}\nif ($UnitOnly) { $record.command += '-UnitOnly' }\n[IO.File]::WriteAllText($metadata, (($record | ConvertTo-Json -Depth 14) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))\n[pscustomobject]$record | Select-Object scope, shellLabel, passed, failed, skipped, notRun, total, exitCode, sourceUnchanged | ConvertTo-Json -Compress\nexit $code\n"
+    },
+    {
+      "name": "output-focused/Invoke-IsolatedCase.ps1",
+      "scope": "Only the previously timed-out helper-less/false-actions row, with unchanged deadline.",
+      "rawSha256": "19FFDBEE89FE6C39EBAC9FBACE22D4A359A298EB8F9B98646ADAE0F8364C13AB",
+      "source": "param([string]$Repository, [string]$Scope, [string]$ShellLabel, [switch]$UnitOnly)\n$ErrorActionPreference = 'Stop'\n$paths = @(Get-ChildItem -LiteralPath $Repository -Filter 'WinAudioClean*.ps1' -File | ForEach-Object { $_.Name })\n$paths += @('tests/WinAudioClean.OutputInteraction.Tests.ps1', 'tests/fixtures/NativeProcessFixture.cs', 'tests/fixtures/New-NativeProcessFixture.ps1', 'tests/fixtures/TestProcess.ps1')\n$before = @(foreach ($path in $paths) { [ordered]@{ path = $path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path) -Algorithm SHA256).Hash } })\n$directory = Join-Path $Repository '.wac-local/WAC-M3-05/output-focused'\n$log = Join-Path $directory ($Scope + '-' + $ShellLabel + '.log')\n$metadata = Join-Path $directory ($Scope + '-' + $ShellLabel + '.json')\nImport-Module (Join-Path $Repository '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\n$started = [DateTime]::UtcNow.ToString('o')\n$parameters = @{ Path = Join-Path $Repository 'tests/WinAudioClean.OutputInteraction.Tests.ps1'; Output = 'Detailed'; PassThru = $true }\n$parameters.FullName = '*keeps normal helper-less installs flat with explicitly false new action switches*'\n$capture = @(Invoke-Pester @parameters *>&1)\n$result = @($capture | Where-Object { $_ -is [Pester.Run] })[0]\n$capture | Where-Object { $_ -isnot [Pester.Run] } | Out-File -LiteralPath $log -Encoding utf8 -Width 300\n$code = 0\nif ($null -eq $result -or $result.PassedCount -eq 0 -or $result.FailedCount -gt 0 -or $result.FailedContainersCount -gt 0 -or $result.FailedBlocksCount -gt 0) { $code = 1 }\n$after = @(foreach ($path in $before) { [ordered]@{ path = $path.path; sha256 = (Get-FileHash -LiteralPath (Join-Path $Repository $path.path) -Algorithm SHA256).Hash } })\n$record = [ordered]@{\n    scope = $(if ($UnitOnly) { 'OutputInteraction Pester unit-only' } else { 'OutputInteraction isolated previously-timed-out helper-less false-actions case' })\n    shellLabel = $ShellLabel; shellVersion = $PSVersionTable.PSVersion.ToString(); pesterVersion = (Get-Module Pester).Version.ToString()\n    startedUtc = $started; finishedUtc = [DateTime]::UtcNow.ToString('o'); exitCode = $code\n    passed = $result.PassedCount; failed = $result.FailedCount; skipped = $result.SkippedCount; notRun = $result.NotRunCount; total = $result.TotalCount\n    failedContainers = $result.FailedContainersCount; failedBlocks = $result.FailedBlocksCount\n    sourcesBefore = $before; sourcesAfter = $after; sourceUnchanged = (($before | ConvertTo-Json -Compress) -eq ($after | ConvertTo-Json -Compress))\n    rawLogSha256 = (Get-FileHash -LiteralPath $log -Algorithm SHA256).Hash\n    wrapperSourceSha256 = (Get-FileHash -LiteralPath $PSCommandPath -Algorithm SHA256).Hash\n    command = @((Get-Process -Id $PID).Path, '-NoLogo', '-NoProfile', '-NonInteractive', '-ExecutionPolicy', 'Bypass', '-File', (Join-Path $directory 'Invoke-IsolatedCase.ps1'), '-Repository', $Repository, '-Scope', $Scope, '-ShellLabel', $ShellLabel)\n    failures = @($result.Tests | Where-Object { $_.Result -eq 'Failed' } | ForEach-Object { [ordered]@{ name = $_.ExpandedName; message = ($_.ErrorRecord.Exception.Message -join '; ') } })\n}\nif ($UnitOnly) { $record.command += '-UnitOnly' }\n[IO.File]::WriteAllText($metadata, (($record | ConvertTo-Json -Depth 14) + [Environment]::NewLine), [Text.UTF8Encoding]::new($false))\n[pscustomobject]$record | Select-Object scope, shellLabel, passed, failed, skipped, notRun, total, exitCode, sourceUnchanged | ConvertTo-Json -Compress\nexit $code\n"
+    },
+    {
+      "name": "run-layout-focused.ps1",
+      "scope": "Unchanged Layout helper wrapper across all attempts; initial PS5.1 was blocked before execution.",
+      "rawSha256": "E39B1166E40A7DA9F51551A734F80CE17E8382B73EF81310D4AC677029C6CF9B",
+      "source": "param([Parameter(Mandatory = $true)][string]$ResultPath)\n$ErrorActionPreference = 'Stop'\n$repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path\nSet-Location -LiteralPath $repo\n$paths = @('WinAudioClean.Output.ps1', 'tests/WinAudioClean.OutputLayout.Tests.ps1', 'WinAudioClean.ps1', 'WinAudioClean.IO.ps1')\n$before = [ordered]@{}\nforeach ($path in $paths) { $before[$path] = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash }\nImport-Module (Join-Path $repo '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\nImport-Module (Join-Path $repo '.wac-local/Modules/PSScriptAnalyzer/1.24.0/PSScriptAnalyzer.psd1') -Force\n$safety = @('PSUseCompatibleSyntax', 'PSAvoidUsingInvokeExpression', 'PSAvoidUsingEmptyCatchBlock',\n    'PSAvoidUsingPlainTextForPassword', 'PSAvoidUsingConvertToSecureStringWithPlainText',\n    'PSAvoidUsingUsernameAndPasswordParams', 'PSAvoidUsingBrokenHashAlgorithms')\n$findings = @(foreach ($path in $paths[0..1]) {\n    $tokens = $null; $errors = $null\n    [void][Management.Automation.Language.Parser]::ParseFile((Join-Path $repo $path), [ref]$tokens, [ref]$errors)\n    if ($errors.Count -gt 0) { throw ($errors | Out-String) }\n    Invoke-ScriptAnalyzer -Path $path -Settings (Join-Path $repo 'scripts/PSScriptAnalyzerSettings.psd1')\n})\n$gating = @($findings | Where-Object { $_.Severity -eq 'Error' -or $_.RuleName -in $safety })\nif ($gating.Count -gt 0) { throw ($gating | Out-String) }\n$config = New-PesterConfiguration\n$config.Run.Path = Join-Path $repo 'tests/WinAudioClean.OutputLayout.Tests.ps1'\n$config.Run.PassThru = $true\n$config.Output.Verbosity = 'Detailed'\n$result = Invoke-Pester -Configuration $config\n$after = [ordered]@{}\nforeach ($path in $paths) { $after[$path] = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash }\n$record = [ordered]@{ shellVersion = $PSVersionTable.PSVersion.ToString(); sourceBefore = $before; sourceAfter = $after\n    passed = $result.PassedCount; failed = $result.FailedCount; skipped = $result.SkippedCount\n    notRun = $result.NotRunCount; total = $result.TotalCount; durationSeconds = $result.Duration.TotalSeconds\n    ownSourcesStable = ($before[$paths[0]] -eq $after[$paths[0]] -and $before[$paths[1]] -eq $after[$paths[1]])\n    analyzerGatingFindings = $gating.Count }\n[IO.File]::WriteAllText($ResultPath, ($record | ConvertTo-Json -Depth 5) + \"`r`n\", [Text.UTF8Encoding]::new($false))\nif ($result.FailedCount -gt 0 -or -not $record.ownSourcesStable) { exit 1 }\nexit 0\n"
+    },
+    {
+      "name": "run-preview-layout-focused.ps1",
+      "scope": "Unchanged two-case filtered Preview organization-fault wrapper.",
+      "rawSha256": "629AABD73014809E3DEB79C677DFF37F2ED3126B4224494D9234EA8BCB9DBA18",
+      "source": "param([Parameter(Mandatory = $true)][string]$ResultPath)\n$ErrorActionPreference = 'Stop'\n$repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path\nSet-Location -LiteralPath $repo\n$paths = @('tests/WinAudioClean.Preview.Tests.ps1', 'WinAudioClean.ps1', 'WinAudioClean.IO.ps1',\n    'WinAudioClean.Output.ps1', 'WinAudioClean.Preview.ps1')\n$before = [ordered]@{}\nforeach ($path in $paths) { $before[$path] = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash }\nImport-Module (Join-Path $repo '.wac-local/Modules/Pester/5.7.1/Pester.psd1') -Force\n$config = New-PesterConfiguration\n$config.Run.Path = Join-Path $repo 'tests/WinAudioClean.Preview.Tests.ps1'\n$config.Run.PassThru = $true\n$config.Filter.FullName = '*settles and releases Preview leases when output organization fails*'\n$config.Output.Verbosity = 'Detailed'\n$result = Invoke-Pester -Configuration $config\n$after = [ordered]@{}\n$stable = $true\nforeach ($path in $paths) { $after[$path] = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash; if ($before[$path] -ne $after[$path]) { $stable = $false } }\n$record = [ordered]@{ shellVersion = $PSVersionTable.PSVersion.ToString(); sourceBefore = $before; sourceAfter = $after\n    passed = $result.PassedCount; failed = $result.FailedCount; skipped = $result.SkippedCount\n    notRun = $result.NotRunCount; total = $result.TotalCount; durationSeconds = $result.Duration.TotalSeconds\n    sourcesStable = $stable; filter = $config.Filter.FullName.Value }\n[IO.File]::WriteAllText($ResultPath, ($record | ConvertTo-Json -Depth 5) + \"`r`n\", [Text.UTF8Encoding]::new($false))\nif ($result.FailedCount -gt 0 -or $result.PassedCount -ne 2 -or -not $stable) { exit 1 }\nexit 0\n"
+    }
+  ],
+  "runs": [
+    {
+      "family": "OutputInteraction",
+      "phase": "initial-unit",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester unit-only",
+      "startedUtc": "2026-10-03T10:28:32.8557061Z",
+      "finishedUtc": "2026-10-03T10:28:39.3781114Z",
+      "counts": {
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 23,
+        "total": 44,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 0,
+      "pesterExecuted": true,
+      "coherentSource": true,
+      "acceptancePass": false,
+      "disposition": "Only the then-present21 Unit cases ran;23 Runtime cases were outside the tag filter (44 discovered). This historical stable-source unit scope is not the final application scope.",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "initial-unit",
+        "-ShellLabel",
+        "ps51",
+        "-UnitOnly"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "84D766A41D60F0F224B2EE64C6CDBB44B31F752224EB06686D20040C350A2A1A"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "E9A08B9CBF6DE891BA91E0958C64559534818993EE8F7713E5851BF54ECD9993"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "970ED3F42E3B9D07A602EE97E311250582813DF1812A775B76C6EFFF8618BCF2"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "84D766A41D60F0F224B2EE64C6CDBB44B31F752224EB06686D20040C350A2A1A"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "E9A08B9CBF6DE891BA91E0958C64559534818993EE8F7713E5851BF54ECD9993"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "970ED3F42E3B9D07A602EE97E311250582813DF1812A775B76C6EFFF8618BCF2"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/initial-unit-ps51.json",
+      "rawMetadataSha256": "70744F78BEB0011C51B50B45EB27D993C7EAE3396EBE29EC92D8BA64F7CA794F",
+      "wrapperSourceSha256": null,
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/initial-unit-ps51.log",
+      "rawLogSha256": "23DE331A849EF9C09027F3C622B274A06B63665E59AFAF8B4A51928064E2D85A",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-initial-unit-ps51.txt",
+      "publishedLogSha256": "1504CBACA5A44A3655C9A55BD8C8E0D255604B6846AC7554509A7F2CE8C0A716",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "initial-unit",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester unit-only",
+      "startedUtc": "2026-10-03T10:28:33.8414996Z",
+      "finishedUtc": "2026-10-03T10:28:39.6716930Z",
+      "counts": {
+        "passed": 21,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 23,
+        "total": 44,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 0,
+      "pesterExecuted": true,
+      "coherentSource": true,
+      "acceptancePass": false,
+      "disposition": "Only the then-present21 Unit cases ran;23 Runtime cases were outside the tag filter (44 discovered). This historical stable-source unit scope is not the final application scope.",
+      "command": [
+        "<PS7_EXE>",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "initial-unit",
+        "-ShellLabel",
+        "ps7",
+        "-UnitOnly"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "84D766A41D60F0F224B2EE64C6CDBB44B31F752224EB06686D20040C350A2A1A"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "E9A08B9CBF6DE891BA91E0958C64559534818993EE8F7713E5851BF54ECD9993"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "970ED3F42E3B9D07A602EE97E311250582813DF1812A775B76C6EFFF8618BCF2"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "84D766A41D60F0F224B2EE64C6CDBB44B31F752224EB06686D20040C350A2A1A"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "E9A08B9CBF6DE891BA91E0958C64559534818993EE8F7713E5851BF54ECD9993"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "970ED3F42E3B9D07A602EE97E311250582813DF1812A775B76C6EFFF8618BCF2"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/initial-unit-ps7.json",
+      "rawMetadataSha256": "2C023FF0DD78974C372DD6F0DAEB6C3FF28A8A8A397A0608C5B0EE6B0E92D549",
+      "wrapperSourceSha256": null,
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/initial-unit-ps7.log",
+      "rawLogSha256": "13B5DBF4D9832EF317F626F1A44E0DD254D99AD226BB7369B5B306E498473729",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-initial-unit-ps7.txt",
+      "publishedLogSha256": "6F89F9B7AA11E624ECCF190E7CA3150F99763673F82A7BBB41725BD5AC1A33E1",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "initial-all",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester entire new suite",
+      "startedUtc": "2026-10-03T10:31:30.6510953Z",
+      "finishedUtc": "2026-10-03T10:32:52.9852713Z",
+      "counts": {
+        "passed": 46,
+        "failed": 2,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 48,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 1,
+      "pesterExecuted": true,
+      "coherentSource": false,
+      "acceptancePass": false,
+      "disposition": "Preliminary48-case application scope while runtime integration changed during capture. PS5.1 had46 pass/2 fail; PS7 had43 pass/5 fail. Private fixture paths were shortened after actual Win32 206 publication failures in PS7; the PS5.1 picked-file argv assertion was corrected to avoid nested JSON arrays. The Preview native97 was the generic fixture null-sink/stdin limitation, not a path failure. No coherent-source acceptance is claimed.",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "initial-all",
+        "-ShellLabel",
+        "ps51"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "90DE7126923829DD2B96D7485669BD692DBEAF8A211A8653662B4E975F1CCEFD"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "6CAF98A88A23252CB5D4A784F87ACE45110B18E917CCE8FCBE08AE9FCA445A82"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "518D2EC5FE54E3B9C2645ABE3F15749F4C8F70CD76526DC4442F8678321CDAE5"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "6CAF98A88A23252CB5D4A784F87ACE45110B18E917CCE8FCBE08AE9FCA445A82"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "518D2EC5FE54E3B9C2645ABE3F15749F4C8F70CD76526DC4442F8678321CDAE5"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [
+        {
+          "name": "keeps all four bounded preview assets in media and the preview report in reports",
+          "message": "Expected 0, because WinAudioClean 2.3\n============================\nInput: <TEST_TEMP> source.wav\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_213286f502ca424ebd7f7c22e0d5b2ec\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nPreview: FAILED\nPreview reports: {\"JsonPath\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_213286f502ca424ebd7f7c22e0d5b2ec\\\\reports\\\\WinAudioClean_Preview_47326126cd8a4c1a8488147f7c6998ae.json\",\"TextPath\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_213286f502ca424ebd7f7c22e0d5b2ec\\\\reports\\\\WinAudioClean_Preview_47326126cd8a4c1a8488147f7c6998ae.txt\"}\nPreview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.\n<TEST_TEMP>\r\ns1 : Preview native processing failed (native exit 97; timeout False; transport error reported True; cleanup error repo\r\nrted True).\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1, but got 4.",
+          "abbreviated": false
+        },
+        {
+          "name": "uses a picked file through normal validation and native rendering",
+          "message": "Expected exactly '<TEST_TEMP> source.wav', but got @('-progress', 'pipe:1', '-nostdin', '-protocol_whitelist', 'file', '-format_whitelist', 'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi', '-i', '<TEST_TEMP> source.wav', '-map', ...26 more).",
+          "abbreviated": false
+        }
+      ],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/initial-all-ps51.json",
+      "rawMetadataSha256": "DCF87308F75EE8D92284B069FF4861FCC1B22C2FACB2B26BAC3DAEAF5D92B9A2",
+      "wrapperSourceSha256": "2AC298AE67466754CA59E6D8FA386B0425339AAE761A794EF7B2BE9BB0555F83",
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/initial-all-ps51.log",
+      "rawLogSha256": "7055E19E37C68251A7CD1C36E764B6E9017EEDE896664F8FAD094F4D3E69358E",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-initial-all-ps51.txt",
+      "publishedLogSha256": "ABA50CA932E7E4EA5A00A0C7350358D720B21A6433BAE2FA0E7C1947576E5409",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "initial-all",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester entire new suite",
+      "startedUtc": "2026-10-03T10:31:31.7674321Z",
+      "finishedUtc": "2026-10-03T10:33:07.4075418Z",
+      "counts": {
+        "passed": 43,
+        "failed": 5,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 48,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 1,
+      "pesterExecuted": true,
+      "coherentSource": false,
+      "acceptancePass": false,
+      "disposition": "Preliminary48-case application scope while runtime integration changed during capture. PS5.1 had46 pass/2 fail; PS7 had43 pass/5 fail. Private fixture paths were shortened after actual Win32 206 publication failures in PS7; the PS5.1 picked-file argv assertion was corrected to avoid nested JSON arrays. The Preview native97 was the generic fixture null-sink/stdin limitation, not a path failure. No coherent-source acceptance is claimed.",
+      "command": [
+        "<PS7_EXE>",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "initial-all",
+        "-ShellLabel",
+        "ps7"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "90DE7126923829DD2B96D7485669BD692DBEAF8A211A8653662B4E975F1CCEFD"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "6CAF98A88A23252CB5D4A784F87ACE45110B18E917CCE8FCBE08AE9FCA445A82"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "518D2EC5FE54E3B9C2645ABE3F15749F4C8F70CD76526DC4442F8678321CDAE5"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "518D2EC5FE54E3B9C2645ABE3F15749F4C8F70CD76526DC4442F8678321CDAE5"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [
+        {
+          "name": "creates one job group with separate media and detailed reports",
+          "message": "Expected 0, because WinAudioClean 2.3\r\n============================\r\nInput: <TEST_TEMP> source.wav\r\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\r\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\r\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_2591dc540fd04e24adc49a035c8c4ccd\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\r\nPreset: Original (ID: original; version: 1.0.0)\r\nAudio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)\r\nExport: 48000 Hz, 16-bit PCM, mono, RIFF WAV\r\nDestination space: 834629763072 bytes available; 68455136 bytes required including headroom.\r\n\nRunning WinAudioClean...\r\nChain: ZOOM (Level Only)\r\nWAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC\r\n\nDONE: FAILED\r\nNative exit: 0. Application exit: 5. See diagnostics above.\r\nWrite-Error: Output validation/publication failed: Exception calling \"RenameNoReplace\" with \"3\" argument(s): \"Cannot publish output without replacing an existing file: The filename or extension is too long. (Win32 206).\", but got 5.",
+          "abbreviated": false
+        },
+        {
+          "name": "keeps all four bounded preview assets in media and the preview report in reports",
+          "message": "Expected 0, because WinAudioClean 2.3\r\n============================\r\nInput: <TEST_TEMP> source.wav\r\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\r\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\r\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_92c4bf4fce5947fc9eac37d4c6d79782\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\r\nPreset: Original (ID: original; version: 1.0.0)\r\nPreview: FAILED\r\nPreview reports: {\"JsonPath\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_92c4bf4fce5947fc9eac37d4c6d79782\\\\reports\\\\WinAudioClean_Preview_c6b277471ba9490a9039d97f1742bd90.json\",\"TextPath\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_92c4bf4fce5947fc9eac37d4c6d79782\\\\reports\\\\WinAudioClean_Preview_c6b277471ba9490a9039d97f1742bd90.txt\"}\r\nPreview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.\r\nWrite-Error: Preview native processing failed (native exit 97; timeout False; transport error reported True; cleanup error reported True)., but got 4.",
+          "abbreviated": false
+        },
+        {
+          "name": "shares one job group across explicit list children and opens it once at the parent",
+          "message": "Expected 0, because Processing input 1 of 2: <TEST_TEMP> source.wav\r\nWinAudioClean 2.3\r\n============================\r\nInput: <TEST_TEMP> source.wav\r\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\r\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\r\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_b670df9ae47c43f49573698064ca8ade\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\r\nPreset: Original (ID: original; version: 1.0.0)\r\nAudio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)\r\nExport: 48000 Hz, 16-bit PCM, mono, RIFF WAV\r\nDestination space: 834638266368 bytes available; 68455136 bytes required including headroom.\r\n\nRunning WinAudioClean...\r\nChain: ZOOM (Level Only)\r\nWAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC\r\n\nDONE: FAILED\r\nNative exit: 0. Application exit: 5. See diagnostics above.\r\nProcessing input 2 of 2: <TEST_TEMP> synthetic source.wav\r\nWinAudioClean 2.3\r\n============================\r\nInput: <TEST_TEMP> synthetic source.wav\r\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\r\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\r\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_b670df9ae47c43f49573698064ca8ade\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\r\nPreset: Original (ID: original; version: 1.0.0)\r\nAudio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)\r\nExport: 48000 H",
+          "abbreviated": true
+        },
+        {
+          "name": "opens only a published successful group and preserves success when opening fails",
+          "message": "Expected 0, because WinAudioClean 2.3\r\n============================\r\nInput: <TEST_TEMP> source.wav\r\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\r\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\r\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_440db8f897384298ad5a44da7b476d6e\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\r\nPreset: Original (ID: original; version: 1.0.0)\r\nAudio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)\r\nExport: 48000 Hz, 16-bit PCM, mono, RIFF WAV\r\nDestination space: 834642206720 bytes available; 68455136 bytes required including headroom.\r\n\nRunning WinAudioClean...\r\nChain: ZOOM (Level Only)\r\nWAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC\r\n\nDONE: FAILED\r\nNative exit: 0. Application exit: 5. See diagnostics above.\r\nWrite-Error: Output validation/publication failed: Exception calling \"RenameNoReplace\" with \"3\" argument(s): \"Cannot publish output without replacing an existing file: The filename or extension is too long. (Win32 206).\", but got 5.",
+          "abbreviated": false
+        },
+        {
+          "name": "opens only a published successful group and preserves success when opening fails",
+          "message": "Expected 0, because WinAudioClean 2.3\r\n============================\r\nInput: <TEST_TEMP> source.wav\r\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\r\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\r\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> output [literal]\\\\WinAudioClean_Job_802a499f64a54ce5b97bd49735523511\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\r\nPreset: Original (ID: original; version: 1.0.0)\r\nAudio stream: 0 (pcm_s16le, 1 channel(s), 48000 Hz)\r\nExport: 48000 Hz, 16-bit PCM, mono, RIFF WAV\r\nDestination space: 834641805312 bytes available; 68455136 bytes required including headroom.\r\n\nRunning WinAudioClean...\r\nChain: ZOOM (Level Only)\r\nWAC_OUTPUT_INTERACTION_NATIVE_DIAGNOSTIC\r\n\nDONE: FAILED\r\nNative exit: 0. Application exit: 5. See diagnostics above.\r\nWrite-Error: Output validation/publication failed: Exception calling \"RenameNoReplace\" with \"3\" argument(s): \"Cannot publish output without replacing an existing file: The filename or extension is too long. (Win32 206).\", but got 5.",
+          "abbreviated": false
+        }
+      ],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/initial-all-ps7.json",
+      "rawMetadataSha256": "67E39BFC8F1B19C69D2AC27CD54E20F7D811C28FFEEE27DE72195BC44F95FF18",
+      "wrapperSourceSha256": "2AC298AE67466754CA59E6D8FA386B0425339AAE761A794EF7B2BE9BB0555F83",
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/initial-all-ps7.log",
+      "rawLogSha256": "B6B8E85AB593BAB3E737E656E52DDCA744B6E456771421541C3F21908BD56C38",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-initial-all-ps7.txt",
+      "publishedLogSha256": "DBF02A7D604B5AD20E2302CDC75232EC01F8E1B6905004A038EF989C18D4FB26",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "corrected-all",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester entire new suite",
+      "startedUtc": "2026-10-03T10:36:10.3683167Z",
+      "finishedUtc": "2026-10-03T10:37:31.1448264Z",
+      "counts": {
+        "passed": 48,
+        "failed": 1,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 49,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 1,
+      "pesterExecuted": true,
+      "coherentSource": true,
+      "acceptancePass": false,
+      "disposition": "Stable49-case scope:48 passed and the unsupported synthetic Preview case failed in each host. The unchanged NativeProcessFixture requires a WAV output and does not model Preview null-sink/held-stdin measurements. This is a fixture limitation, not a runtime pass or failure proof. The redundant case was subsequently removed only after active cumulative gates stopped; dedicated Preview ownership and separate real-media four-asset checks provide its coverage.",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "corrected-all",
+        "-ShellLabel",
+        "ps51"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "FCF5F9B0AEB1149BCD88B09EAAEC2C5BD524B94736194B976669A607DE290242"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "FCF5F9B0AEB1149BCD88B09EAAEC2C5BD524B94736194B976669A607DE290242"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [
+        {
+          "name": "keeps all four bounded preview assets in media and the preview report in reports",
+          "message": "Expected 0, because WinAudioClean 2.3\n============================\nInput: <TEST_TEMP>\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> [1] \\u0026 %PATH% !\\\\WinAudioClean_Job_5f59bc0c1c7b45e290510f93f264e05c\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\nPreset: Original (ID: original; version: 1.0.0)\nPreview: FAILED\nPreview reports: {\"JsonPath\":\"<TEST_TEMP> [1] \\u0026 %PATH% !\\\\WinAudioClean_Job_5f59bc0c1c7b45e290510f93f264e05c\\\\reports\\\\WinAudioClean_Preview_f8f3d100c38e403fa070d2acb47227ce.json\",\"TextPath\":\"<TEST_TEMP> [1] \\u0026 %PATH% !\\\\WinAudioClean_Job_5f59bc0c1c7b45e290510f93f264e05c\\\\reports\\\\WinAudioClean_Preview_f8f3d100c38e403fa070d2acb47227ce.txt\"}\nPreview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.\n<TEST_TEMP> : Preview native pro\r\ncessing failed (native exit 97; timeout False; transport error reported True; cleanup error reported True).\r\n    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException\r\n    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1, but got 4.",
+          "abbreviated": false
+        }
+      ],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/corrected-all-ps51.json",
+      "rawMetadataSha256": "FADAA61DA87E08FCDDFD79FC35870773E019F90A896719E13B85ACC57908F0D5",
+      "wrapperSourceSha256": "954ED5BB0459E2078B60C98B91689A2C97F72375122D888D5F12EE012CD1A5D8",
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/corrected-all-ps51.log",
+      "rawLogSha256": "AB8DFEFEA0F940E1ACB22C0391CDED1677DDA849DCD293C00EF67371659B8EAC",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-corrected-all-ps51.txt",
+      "publishedLogSha256": "D9021AA236BB59E74BAB28945CFDBA704C902A41F51664466AAA3BE8C176BC11",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "corrected-all",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester entire new suite",
+      "startedUtc": "2026-10-03T10:36:11.6404170Z",
+      "finishedUtc": "2026-10-03T10:37:52.3108443Z",
+      "counts": {
+        "passed": 48,
+        "failed": 1,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 49,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 1,
+      "pesterExecuted": true,
+      "coherentSource": true,
+      "acceptancePass": false,
+      "disposition": "Stable49-case scope:48 passed and the unsupported synthetic Preview case failed in each host. The unchanged NativeProcessFixture requires a WAV output and does not model Preview null-sink/held-stdin measurements. This is a fixture limitation, not a runtime pass or failure proof. The redundant case was subsequently removed only after active cumulative gates stopped; dedicated Preview ownership and separate real-media four-asset checks provide its coverage.",
+      "command": [
+        "<PS7_EXE>",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "corrected-all",
+        "-ShellLabel",
+        "ps7"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "FCF5F9B0AEB1149BCD88B09EAAEC2C5BD524B94736194B976669A607DE290242"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "FCF5F9B0AEB1149BCD88B09EAAEC2C5BD524B94736194B976669A607DE290242"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [
+        {
+          "name": "keeps all four bounded preview assets in media and the preview report in reports",
+          "message": "Expected 0, because WinAudioClean 2.3\r\n============================\r\nInput: <TEST_TEMP>\r\nFFmpeg: <TEST_TEMP> (ffmpeg version 9.0.2-wac-fixture)\r\nFFprobe: <TEST_TEMP> (ffprobe version 9.0.2-wac-fixture)\r\nEffective settings: {\"mode\":\"Zoom\",\"preset\":\"Original\",\"loudnessMode\":\"Fast\",\"bitDepth\":16,\"mono\":false,\"rf64\":false,\"outputDirectory\":\"<TEST_TEMP> [1] & %PATH% !\\\\WinAudioClean_Job_3f0463dc533b4cc29ec9445278362983\\\\media\",\"audioStreamIndex\":null,\"cleaningOptions\":{}}\r\nPreset: Original (ID: original; version: 1.0.0)\r\nPreview: FAILED\r\nPreview reports: {\"JsonPath\":\"<TEST_TEMP> [1] & %PATH% !\\\\WinAudioClean_Job_3f0463dc533b4cc29ec9445278362983\\\\reports\\\\WinAudioClean_Preview_29ea399512db41d18357574cb8ffd27b.json\",\"TextPath\":\"<TEST_TEMP> [1] & %PATH% !\\\\WinAudioClean_Job_3f0463dc533b4cc29ec9445278362983\\\\reports\\\\WinAudioClean_Preview_29ea399512db41d18357574cb8ffd27b.txt\"}\r\nPreview finished. Open the comparison files explicitly to listen; no full recording or playback starts automatically.\r\nWrite-Error: Preview native processing failed (native exit 97; timeout False; transport error reported True; cleanup error reported True)., but got 4.",
+          "abbreviated": false
+        }
+      ],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/corrected-all-ps7.json",
+      "rawMetadataSha256": "EAD5C08D0C1BE760AC31664C9DAB3B0AA905412B4E05AE8765A8B030723600F9",
+      "wrapperSourceSha256": "954ED5BB0459E2078B60C98B91689A2C97F72375122D888D5F12EE012CD1A5D8",
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/corrected-all-ps7.log",
+      "rawLogSha256": "6DBC6063DD83D3C7CEF39D4C7C08A12E034E48C47D215DCD1E2835F0D66F739B",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-corrected-all-ps7.txt",
+      "publishedLogSha256": "AAB9D68224451911A2C0779EF29078CE1D536964A3F0E9492B90C08C134BC89F",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "final-corrected",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester entire new suite",
+      "startedUtc": "2026-10-03T10:42:00.1202341Z",
+      "finishedUtc": "2026-10-03T10:45:30.2253016Z",
+      "counts": {
+        "passed": 47,
+        "failed": 1,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 48,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 1,
+      "pesterExecuted": true,
+      "coherentSource": true,
+      "acceptancePass": false,
+      "disposition": "48-case OutputInteraction scope on stable final runtime/test bytes: PS7 passed48; PS5.1 passed47 with one30s test-child deadline failure in the helper-less/false-actions case. That exact row had passed the earlier stable49 scope and subsequently passed isolated on unchanged bytes. Simultaneous cumulative/media/focused work may have contributed, but contention is an inference. The timeout remains a failure in this whole-scope record.",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "final-corrected",
+        "-ShellLabel",
+        "ps51"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "866CCD780081D460B0FFB34621D161A0E73AA6162B901C1C6D1B39D073F727A4"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "866CCD780081D460B0FFB34621D161A0E73AA6162B901C1C6D1B39D073F727A4"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [
+        {
+          "name": "keeps normal helper-less installs flat with explicitly false new action switches",
+          "message": "Test child exceeded its 30000 ms deadline.",
+          "abbreviated": false
+        }
+      ],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/final-corrected-ps51.json",
+      "rawMetadataSha256": "F212B4F13C44B4FAEDD1EBB5A8AF694EB5AF8247B75A04FEC3B1E53D65C3E3A7",
+      "wrapperSourceSha256": "954ED5BB0459E2078B60C98B91689A2C97F72375122D888D5F12EE012CD1A5D8",
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/final-corrected-ps51.log",
+      "rawLogSha256": "9CD2B904E5488FA7EED3638189FF3588ACDF3142CAF9B838AE723CE9C893B6C2",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-final-corrected-ps51.txt",
+      "publishedLogSha256": "59A874E930D1F8F164C73CB0B600580F65512EC6B169B6CF83FE3C2B1F962AD0",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "final-corrected",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction Pester entire new suite",
+      "startedUtc": "2026-10-03T10:42:01.4280779Z",
+      "finishedUtc": "2026-10-03T10:44:52.0398776Z",
+      "counts": {
+        "passed": 48,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 48,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 0,
+      "pesterExecuted": true,
+      "coherentSource": true,
+      "acceptancePass": true,
+      "disposition": "48-case OutputInteraction scope on stable final runtime/test bytes: PS7 passed48; PS5.1 passed47 with one30s test-child deadline failure in the helper-less/false-actions case. That exact row had passed the earlier stable49 scope and subsequently passed isolated on unchanged bytes. Simultaneous cumulative/media/focused work may have contributed, but contention is an inference. The timeout remains a failure in this whole-scope record.",
+      "command": [
+        "<PS7_EXE>",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-Focused.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "final-corrected",
+        "-ShellLabel",
+        "ps7"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "866CCD780081D460B0FFB34621D161A0E73AA6162B901C1C6D1B39D073F727A4"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "866CCD780081D460B0FFB34621D161A0E73AA6162B901C1C6D1B39D073F727A4"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/final-corrected-ps7.json",
+      "rawMetadataSha256": "E30C5B79B71A10C8E32F12FF8687C0973DC9B9796480BE3C0C7D77D2DB86CAE8",
+      "wrapperSourceSha256": "954ED5BB0459E2078B60C98B91689A2C97F72375122D888D5F12EE012CD1A5D8",
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/final-corrected-ps7.log",
+      "rawLogSha256": "3B70D391EBBA29034CBA017DB887DE0E01A97838F81CB76FA7CEC7727D95A55B",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-final-corrected-ps7.txt",
+      "publishedLogSha256": "20ECBA1EF7E3E2965A3416AA833342B3958A56FDDD28B363498318CCB901E103",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputInteraction",
+      "phase": "isolated-timeout-check",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "scope": "OutputInteraction isolated previously-timed-out helper-less false-actions case",
+      "startedUtc": "2026-10-03T10:46:15.8885147Z",
+      "finishedUtc": "2026-10-03T10:46:27.1222055Z",
+      "counts": {
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 47,
+        "total": 48,
+        "failedContainers": 0,
+        "failedBlocks": 0
+      },
+      "recordedWrapperExitCode": 0,
+      "pesterExecuted": true,
+      "coherentSource": true,
+      "acceptancePass": false,
+      "disposition": "Only the exact previously timed-out PS5.1 helper-less/false-actions row ran and passed;47 cases were outside the name filter (48 discovered). Test/runtime bytes and the30s deadline were unchanged. This is distinct validation, not a relabeling of the earlier47/1 whole-scope run.",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<REPO>\\.wac-local\\WAC-M3-05\\output-focused\\Invoke-IsolatedCase.ps1",
+        "-Repository",
+        "<REPO>",
+        "-Scope",
+        "isolated-timeout-check",
+        "-ShellLabel",
+        "ps51"
+      ],
+      "commandProvenance": "Invocation argv recorded by the wrapper metadata.",
+      "sourcesBefore": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "866CCD780081D460B0FFB34621D161A0E73AA6162B901C1C6D1B39D073F727A4"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "sourcesAfter": [
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "sha256": "7FAC3B1277AAB43C34424ED59779C61FC470F5C9A31E5CD68FAA72D68425E4BA"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "sha256": "0FAC0E13664DCF6D0017F5636E97F6F6968B813A672E3AB48A9AE68701D94FA5"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "sha256": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "sha256": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "sha256": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "sha256": "957B14ABC7A375D8FBA3CDF3637CE324242587E3DD427A3524E1AE74524AF0C0"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "sha256": "CC74220C3641D69BAD788D221F8ADA98DA8DF36E692F0F853BDAFC24608ACEEA"
+        },
+        {
+          "path": "tests/WinAudioClean.OutputInteraction.Tests.ps1",
+          "sha256": "866CCD780081D460B0FFB34621D161A0E73AA6162B901C1C6D1B39D073F727A4"
+        },
+        {
+          "path": "tests/fixtures/NativeProcessFixture.cs",
+          "sha256": "84B90A35F344C6C003CE73C84B75B42A90FC36B6D70A884977A113E7D2BA14DE"
+        },
+        {
+          "path": "tests/fixtures/New-NativeProcessFixture.ps1",
+          "sha256": "A9E9CDFA3758AA04A9CA4BAFCD7126B78579D2E1E72AD0D00DBF5C67E986C3D8"
+        },
+        {
+          "path": "tests/fixtures/TestProcess.ps1",
+          "sha256": "160D0860CBDE6B65B240A516D279F464E2AA8846F73A09F91222F1235F1AA3E1"
+        }
+      ],
+      "failures": [],
+      "rawMetadataPath": ".wac-local/WAC-M3-05/output-focused/isolated-timeout-check-ps51.json",
+      "rawMetadataSha256": "E5CFF9FBFBA9085BA129BBE5F7E6C3CE2ED462D10B705EE0D46D35F8652F15BA",
+      "wrapperSourceSha256": "19FFDBEE89FE6C39EBAC9FBACE22D4A359A298EB8F9B98646ADAE0F8364C13AB",
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/output-focused/isolated-timeout-check-ps51.log",
+      "rawLogSha256": "F618D031CF0523BD6B64734764ABF8F35FE5CC1F74E4C3404B5660DA867D270D",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-interaction-isolated-timeout-check-ps51.txt",
+      "publishedLogSha256": "B3B81D3A6AD5EAA4F42F07557021356CD909BD04C3C0CEC78AD0E2DC07B93B25",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "initial",
+      "shellLabel": "ps51",
+      "shellVersion": null,
+      "pesterVersion": null,
+      "pesterExecuted": false,
+      "counts": null,
+      "recordedWrapperExitCode": 1,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": null,
+      "ownSourcesStable": null,
+      "acceptancePass": false,
+      "disposition": "Initial layout helper scope. PS5.1 was blocked by host execution policy before loading the runner (exit1, no Pester counts). PS7 ran10 cases:9 passed/1 failed because a READ-only media-directory pin blocked existing IO RenameNoReplace with Win32 32. The helper was corrected to the minimal media READ|WRITE share.",
+      "command": {
+        "argv": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-initial-ps51.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-initial-ps51.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": null,
+      "sourcesAfter": null,
+      "durationSeconds": null,
+      "rawMetadataPath": null,
+      "rawMetadataSha256": null,
+      "failures": [
+        {
+          "name": "Host policy before runner load",
+          "message": "Running scripts is disabled; UnauthorizedAccess.",
+          "abbreviated": false
+        }
+      ],
+      "parserAndStaticGateIncluded": false,
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-initial-ps51.log",
+      "rawLogSha256": "F9A68DC8990D70B6EB3D5215459ACAF1994863BE09836C1FAD993C32BE8CEE66",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-initial-ps51.txt",
+      "publishedLogSha256": "BCBD24124C0575B239044088BFBB46DE16E44608586D03381FADFAE25772E060",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "initial",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 9,
+        "failed": 1,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 10
+      },
+      "recordedWrapperExitCode": 1,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": false,
+      "disposition": "Initial layout helper scope. PS5.1 was blocked by host execution policy before loading the runner (exit1, no Pester counts). PS7 ran10 cases:9 passed/1 failed because a READ-only media-directory pin blocked existing IO RenameNoReplace with Win32 32. The helper was corrected to the minimal media READ|WRITE share.",
+      "command": {
+        "argv": [
+          "<PS7_EXE>",
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-initial-ps7.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-initial-ps7.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "WinAudioClean.Output.ps1": "483AF137C74D558BF8312E222D8244253A792D824B4FC8C4BF194172E9D993BB",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "C6C4887787972598533DE7AF13258EE0B4C3DDE840C7B47C3AD3FAE7C0EB88C1",
+        "WinAudioClean.ps1": "22AF46E2FB7A12B6206364C3026684C1AE3AE276094E714EEF120BC39562BAB3",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "sourcesAfter": {
+        "WinAudioClean.Output.ps1": "483AF137C74D558BF8312E222D8244253A792D824B4FC8C4BF194172E9D993BB",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "C6C4887787972598533DE7AF13258EE0B4C3DDE840C7B47C3AD3FAE7C0EB88C1",
+        "WinAudioClean.ps1": "22AF46E2FB7A12B6206364C3026684C1AE3AE276094E714EEF120BC39562BAB3",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "durationSeconds": 2.6499627,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/layout-initial-ps7.json",
+      "rawMetadataSha256": "E725D0C7C2C0079BF23316E54E48CF0AEB369A3045CADE6ECD2F46534F2C8853",
+      "failures": [
+        {
+          "name": "allows media publication and separate held report writing while denying directory replacement 627ms (593ms|34ms)",
+          "message": "IOException: Cannot publish output without replacing an existing file: The process cannot access the file because it is being used by another process. (Win32 32).\r\n   MethodInvocationException: Exception calling \"RenameNoReplace\" with \"3\" argument(s): \"Cannot publish output without replacing an existing file: The process cannot access the file because it is being used by another process. (Win32 32).\"\r\n   at Publish-WacOutputTransaction, <REPO>\\WinAudioClean.IO.ps1:307\r\n   at <ScriptBlock>, <REPO>\\tests\\WinAudioClean.OutputLayout.Tests.ps1:25",
+          "abbreviated": false
+        }
+      ],
+      "parserAndStaticGateIncluded": true,
+      "psScriptAnalyzerVersion": "1.24.0",
+      "analyzerGatingFindings": 0,
+      "parserAndStaticScope": [
+        "WinAudioClean.Output.ps1",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-initial-ps7.log",
+      "rawLogSha256": "4F93458327C9275F9B6CC9B84FDA3E8A2B13A48454FDF3366361510879292BD0",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-initial-ps7.txt",
+      "publishedLogSha256": "144C78B714D1A3B6D53944178B85AB054883460019166DB362BA1CAB07F3770B",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "corrected",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 9,
+        "failed": 1,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 10
+      },
+      "recordedWrapperExitCode": 1,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": false,
+      "disposition": "10-case helper scope:9 passed/1 failed per host. Corrected media sharing permitted actual publication; test readback then used an incompatible share while the validation/report handle remained held. Test-only readback now follows transaction completion and writer close.",
+      "command": {
+        "argv": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-corrected-ps51.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-corrected-ps51.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "WinAudioClean.Output.ps1": "3CE3992B1CD3EBB6E8E713E4EBAF83DB2D7DF7768EEED7EC81CF7BBCB2F55999",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "C6C4887787972598533DE7AF13258EE0B4C3DDE840C7B47C3AD3FAE7C0EB88C1",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "sourcesAfter": {
+        "WinAudioClean.Output.ps1": "3CE3992B1CD3EBB6E8E713E4EBAF83DB2D7DF7768EEED7EC81CF7BBCB2F55999",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "C6C4887787972598533DE7AF13258EE0B4C3DDE840C7B47C3AD3FAE7C0EB88C1",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "durationSeconds": 2.3290927999999997,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/layout-corrected-ps51.json",
+      "rawMetadataSha256": "CC181F8820948DD06B962D0E15F0801D9B707A527C390FAB316A3F1047C91E94",
+      "failures": [
+        {
+          "name": "allows media publication and separate held report writing while denying directory replacement 757ms (717ms|40ms)",
+          "message": "IOException: The process cannot access the file '<TEST_TEMP> base\\WinAudioClean_Job_2b4f45a1b0cd46b79fac9d0309f5edef\\media\\source_Cleaned_20261003-122712019_3ac2853c67414d3fb60f7e07a197fb9f.wav' because it is being used by another process.\r\n   MethodInvocationException: Exception calling \"ReadAllBytes\" with \"1\" argument(s): \"The process cannot access the file '<TEST_TEMP> base\\WinAudioClean_Job_2b4f45a1b0cd46b79fac9d0309f5edef\\media\\source_Cleaned_20261003-122712019_3ac2853c67414d3fb60f7e07a197fb9f.wav' because it is being used by another process.\"\r\n   at <ScriptBlock>, <REPO>\\tests\\WinAudioClean.OutputLayout.Tests.ps1:28",
+          "abbreviated": false
+        }
+      ],
+      "parserAndStaticGateIncluded": true,
+      "psScriptAnalyzerVersion": "1.24.0",
+      "analyzerGatingFindings": 0,
+      "parserAndStaticScope": [
+        "WinAudioClean.Output.ps1",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-corrected-ps51.log",
+      "rawLogSha256": "09404EF8F525D6DA48B9800A6198C6BC44628BD35D44748519437600A3028190",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-corrected-ps51.txt",
+      "publishedLogSha256": "CA66E9C70F52E13F2F7149B78EBB3222A2F16D223E423DFA3E701FFFAA9A266C",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "corrected",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 9,
+        "failed": 1,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 10
+      },
+      "recordedWrapperExitCode": 1,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": false,
+      "disposition": "10-case helper scope:9 passed/1 failed per host. Corrected media sharing permitted actual publication; test readback then used an incompatible share while the validation/report handle remained held. Test-only readback now follows transaction completion and writer close.",
+      "command": {
+        "argv": [
+          "<PS7_EXE>",
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-corrected-ps7.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-corrected-ps7.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "WinAudioClean.Output.ps1": "3CE3992B1CD3EBB6E8E713E4EBAF83DB2D7DF7768EEED7EC81CF7BBCB2F55999",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "C6C4887787972598533DE7AF13258EE0B4C3DDE840C7B47C3AD3FAE7C0EB88C1",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "sourcesAfter": {
+        "WinAudioClean.Output.ps1": "3CE3992B1CD3EBB6E8E713E4EBAF83DB2D7DF7768EEED7EC81CF7BBCB2F55999",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "C6C4887787972598533DE7AF13258EE0B4C3DDE840C7B47C3AD3FAE7C0EB88C1",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "durationSeconds": 1.9483013,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/layout-corrected-ps7.json",
+      "rawMetadataSha256": "2DF806A04989A3812F8F57D90A85CB1B142B1C73ACAC5BE084791FD324EA2643",
+      "failures": [
+        {
+          "name": "allows media publication and separate held report writing while denying directory replacement 628ms (592ms|36ms)",
+          "message": "IOException: The process cannot access the file '<TEST_TEMP> base\\WinAudioClean_Job_b7dbe0a803cc4b449f5c4d51524c8bbc\\media\\source_Cleaned_20261003-122713180_e47472a5cd144624b515a9f64c3b9aaa.wav' because it is being used by another process.\r\n   MethodInvocationException: Exception calling \"ReadAllBytes\" with \"1\" argument(s): \"The process cannot access the file '<TEST_TEMP> base\\WinAudioClean_Job_b7dbe0a803cc4b449f5c4d51524c8bbc\\media\\source_Cleaned_20261003-122713180_e47472a5cd144624b515a9f64c3b9aaa.wav' because it is being used by another process.\"\r\n   at <ScriptBlock>, <REPO>\\tests\\WinAudioClean.OutputLayout.Tests.ps1:28",
+          "abbreviated": false
+        }
+      ],
+      "parserAndStaticGateIncluded": true,
+      "psScriptAnalyzerVersion": "1.24.0",
+      "analyzerGatingFindings": 0,
+      "parserAndStaticScope": [
+        "WinAudioClean.Output.ps1",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-corrected-ps7.log",
+      "rawLogSha256": "929D1BE25A627A975B2358CA8DA0DFDDA81517CA35DDDC22256B00353E5A9564",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-corrected-ps7.txt",
+      "publishedLogSha256": "C54ACEC7C9339BE262CACC0341E2BB1F80C63A495A4B399EF9A3CFBDC9A72D23",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "minimal-share",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 10
+      },
+      "recordedWrapperExitCode": 0,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": false,
+      "disposition": "Historical green10-case helper scope, with Media share3 and Root/Reports/ancestors share1. Scoped captured main predates final integration; Output helper/test hashes match their final versions.",
+      "command": {
+        "argv": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-minimal-share-ps51.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-minimal-share-ps51.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "20898B0048D75EC64E3D3DA3D7B36CE3533DF51158827D82FB88BB8F32A86019",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "sourcesAfter": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "20898B0048D75EC64E3D3DA3D7B36CE3533DF51158827D82FB88BB8F32A86019",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "durationSeconds": 4.1374952,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/layout-minimal-share-ps51.json",
+      "rawMetadataSha256": "B4FF8567E499EC00C9F2FEB36C1DD3B63A39BBFDF0913257713863B3D3BFABC0",
+      "failures": [],
+      "parserAndStaticGateIncluded": true,
+      "psScriptAnalyzerVersion": "1.24.0",
+      "analyzerGatingFindings": 0,
+      "parserAndStaticScope": [
+        "WinAudioClean.Output.ps1",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-minimal-share-ps51.log",
+      "rawLogSha256": "87DDE5063C1866021E292551D721E62B500E4FBD0C2F144346DC189A78C291E1",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-minimal-share-ps51.txt",
+      "publishedLogSha256": "BE017092342F441DD9D36FDAB4EC094DFB239A4B6BE4F9993CC820227B14CDFE",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "minimal-share",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 10
+      },
+      "recordedWrapperExitCode": 0,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": false,
+      "disposition": "Historical green10-case helper scope, with Media share3 and Root/Reports/ancestors share1. Scoped captured main predates final integration; Output helper/test hashes match their final versions.",
+      "command": {
+        "argv": [
+          "<PS7_EXE>",
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-minimal-share-ps7.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-minimal-share-ps7.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "20898B0048D75EC64E3D3DA3D7B36CE3533DF51158827D82FB88BB8F32A86019",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "sourcesAfter": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "20898B0048D75EC64E3D3DA3D7B36CE3533DF51158827D82FB88BB8F32A86019",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "durationSeconds": 3.6366993,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/layout-minimal-share-ps7.json",
+      "rawMetadataSha256": "9190DD1D9969C7F93D3D5370569684E68A1796BB737786B85B55487965FF907E",
+      "failures": [],
+      "parserAndStaticGateIncluded": true,
+      "psScriptAnalyzerVersion": "1.24.0",
+      "analyzerGatingFindings": 0,
+      "parserAndStaticScope": [
+        "WinAudioClean.Output.ps1",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-minimal-share-ps7.log",
+      "rawLogSha256": "EE50082828C093CDBA0244E5FCC4B39F8204DFC2E39EB72808FD62F38B171302",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-minimal-share-ps7.txt",
+      "publishedLogSha256": "8E86E4F81B0CC4D8F61C4ACD8D286B0F1EBE7AC55E672FD9D60CFAB5451319D1",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "final",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 10
+      },
+      "recordedWrapperExitCode": 0,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": true,
+      "disposition": "Final10-case OutputLayout helper scope: actual held native directory ownership, media publication and separate report writes, explicit foreign write/rename/delete denial, collision/no reuse, close without directory deletion. Scoped captured main predates final integration; Output helper/test hashes match their final versions.",
+      "command": {
+        "argv": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-final-ps51.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-final-ps51.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "6B9746D50B492DAD9B1B74F9E48671093437D30FEEDFD015C8D2F57B8DB818CC",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "sourcesAfter": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "6B9746D50B492DAD9B1B74F9E48671093437D30FEEDFD015C8D2F57B8DB818CC",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "durationSeconds": 4.0723705,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/layout-final-ps51.json",
+      "rawMetadataSha256": "BAC05C76913102B44FA30DE3C97BE6968F3EF7BE0AA5E6B424426D0C630052D1",
+      "failures": [],
+      "parserAndStaticGateIncluded": true,
+      "psScriptAnalyzerVersion": "1.24.0",
+      "analyzerGatingFindings": 0,
+      "parserAndStaticScope": [
+        "WinAudioClean.Output.ps1",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-final-ps51.log",
+      "rawLogSha256": "DF9A95C951EC0DBFC2E6745C6CDFB95730B1DE92A2997F3B55E79EF34D2A2B8C",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-final-ps51.txt",
+      "publishedLogSha256": "45A33021E904103633E259B6EE094B1107C23AB3738967AD0F610658814638E8",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "OutputLayout",
+      "phase": "final",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 10,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 0,
+        "total": 10
+      },
+      "recordedWrapperExitCode": 0,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": true,
+      "disposition": "Final10-case OutputLayout helper scope: actual held native directory ownership, media publication and separate report writes, explicit foreign write/rename/delete denial, collision/no reuse, close without directory deletion. Scoped captured main predates final integration; Output helper/test hashes match their final versions.",
+      "command": {
+        "argv": [
+          "<PS7_EXE>",
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\layout-final-ps7.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\layout-final-ps7.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "6B9746D50B492DAD9B1B74F9E48671093437D30FEEDFD015C8D2F57B8DB818CC",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "sourcesAfter": {
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1": "6B9746D50B492DAD9B1B74F9E48671093437D30FEEDFD015C8D2F57B8DB818CC",
+        "WinAudioClean.ps1": "BC6E7D8FA1918CAF3DC449B12946C5B517B783538D72636944A31DA94232158E",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      "durationSeconds": 3.6728665,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/layout-final-ps7.json",
+      "rawMetadataSha256": "208F2CF8C09EEFB9A252713ED4123A6F5157964CA5BD3D476119ED87CA7C90C3",
+      "failures": [],
+      "parserAndStaticGateIncluded": true,
+      "psScriptAnalyzerVersion": "1.24.0",
+      "analyzerGatingFindings": 0,
+      "parserAndStaticScope": [
+        "WinAudioClean.Output.ps1",
+        "tests/WinAudioClean.OutputLayout.Tests.ps1"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/layout-final-ps7.log",
+      "rawLogSha256": "939E5A9EA495A1F0B5D9672A0FA54DDE1905C043D237BC1D6B0D01C931767713",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-layout-final-ps7.txt",
+      "publishedLogSha256": "30750237690ADD41EDC32061A7B6CBB575AA64C58E09ECEDFEE78FEB19C315A2",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "PreviewOrganizationFaults",
+      "phase": "initial",
+      "shellLabel": "ps51",
+      "shellVersion": "5.1.26100.9444",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 153,
+        "total": 155
+      },
+      "recordedWrapperExitCode": 0,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": true,
+      "disposition": "Two selected new organization-failure Preview ownership regressions passed per host;153 cases were outside the name filter (155 discovered). Actual IO/layout leases with controlled valid-WAV native output cover retained4-assets WARNING7 and cancellation130 cleanup/report failure. This is not real FFmpeg or155 executed cases.",
+      "command": {
+        "argv": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoProfile",
+          "-NonInteractive",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-preview-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\preview-layout-initial-ps51.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\preview-layout-initial-ps51.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "tests/WinAudioClean.Preview.Tests.ps1": "A4CE3475F2A6FE94ACF24D970ACC0B13AC70BF1C140E16CD6A9BB353E450DFA8",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+      },
+      "sourcesAfter": {
+        "tests/WinAudioClean.Preview.Tests.ps1": "A4CE3475F2A6FE94ACF24D970ACC0B13AC70BF1C140E16CD6A9BB353E450DFA8",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+      },
+      "durationSeconds": 3.7633362,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/preview-layout-initial-ps51.json",
+      "rawMetadataSha256": "9C134BAC496AA7CAE4A459CDEC779ABD86AE613A5E19C72BB5835D8C63BE9168",
+      "failures": [],
+      "parserAndStaticGateIncluded": false,
+      "filter": [
+        "*settles and releases Preview leases when output organization fails*"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/preview-layout-initial-ps51.log",
+      "rawLogSha256": "7B0A8A58073EEAD5A73BC96643C9FA4D959F4E431D8C6C88EB044546F6ADEC7D",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-preview-layout-initial-ps51.txt",
+      "publishedLogSha256": "D8BFB9CAF8DBC8181940D00DB614E92426A3EFCA88F8FC9458E974D502184FE5",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    },
+    {
+      "family": "PreviewOrganizationFaults",
+      "phase": "initial",
+      "shellLabel": "ps7",
+      "shellVersion": "7.6.5",
+      "pesterVersion": "5.7.1",
+      "pesterExecuted": true,
+      "counts": {
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "notRun": 153,
+        "total": 155
+      },
+      "recordedWrapperExitCode": 0,
+      "exitCodeProvenance": "Retained owning-agent invocation outcome; helper metadata did not itself record process exit.",
+      "coherentSource": true,
+      "ownSourcesStable": true,
+      "acceptancePass": true,
+      "disposition": "Two selected new organization-failure Preview ownership regressions passed per host;153 cases were outside the name filter (155 discovered). Actual IO/layout leases with controlled valid-WAV native output cover retained4-assets WARNING7 and cancellation130 cleanup/report failure. This is not real FFmpeg or155 executed cases.",
+      "command": {
+        "argv": [
+          "<PS7_EXE>",
+          "-NoProfile",
+          "-NonInteractive",
+          "-File",
+          "<REPO>\\.wac-local\\WAC-M3-05\\run-preview-layout-focused.ps1",
+          "-ResultPath",
+          "<REPO>\\.wac-local\\WAC-M3-05\\preview-layout-initial-ps7.json"
+        ],
+        "mergedStreamsLog": "<REPO>\\.wac-local\\WAC-M3-05\\preview-layout-initial-ps7.log"
+      },
+      "commandProvenance": "Reconstructed from retained exact runner, metadata paths and owning-agent recorded invocation/merged-stream redirection; argv was not captured in helper metadata.",
+      "sourcesBefore": {
+        "tests/WinAudioClean.Preview.Tests.ps1": "A4CE3475F2A6FE94ACF24D970ACC0B13AC70BF1C140E16CD6A9BB353E450DFA8",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+      },
+      "sourcesAfter": {
+        "tests/WinAudioClean.Preview.Tests.ps1": "A4CE3475F2A6FE94ACF24D970ACC0B13AC70BF1C140E16CD6A9BB353E450DFA8",
+        "WinAudioClean.ps1": "728B59CB0D25249A9C17585430B8451A382F4E2D959FB822328BB2E56576FC76",
+        "WinAudioClean.IO.ps1": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46",
+        "WinAudioClean.Output.ps1": "8EBDFC688BC012A98DCC03D9F64B3910A9D3A01B1FEF7440FD4EE98AF33AC7A4",
+        "WinAudioClean.Preview.ps1": "3DBF4D3F88CEE09D5B7AA012392C9B0A2EAE4ADA725342AF1A26D199C3274351"
+      },
+      "durationSeconds": 3.3112829,
+      "rawMetadataPath": ".wac-local/WAC-M3-05/preview-layout-initial-ps7.json",
+      "rawMetadataSha256": "9AA5DE099E57701E650D4E13BBE75068AB026274FEE73BE91B6532608AF4BC3A",
+      "failures": [],
+      "parserAndStaticGateIncluded": false,
+      "filter": [
+        "*settles and releases Preview leases when output organization fails*"
+      ],
+      "rawLogPath": ".wac-local/WAC-M3-05/preview-layout-initial-ps7.log",
+      "rawLogSha256": "3B0E5C2C890703BAE5F89B32EDE7C56E5EE0F194BB9F1741FE8D40F3372CD5D5",
+      "rawLogEncoding": "utf-8-sig",
+      "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-focused-preview-layout-initial-ps7.txt",
+      "publishedLogSha256": "40693A6C7FB52A3AD5F35794A57777DA97D1CD129D02791E09678D99EF31EEE1",
+      "publishedLogIsDerivative": true,
+      "abbreviatedLines": 0
+    }
+  ],
+  "recoveryReference": {
+    "scope": "Final unchanged-source root Targeted213 per host certifies all48 Interaction cases, including the previously timed-out PS5.1 row. No additional whole48 rerun was needed after this successful cohort.",
+    "rawMetadataPath": ".wac-local/WAC-M3-05/targeted-final-corrected-results.json",
+    "rawMetadataSha256": "C75AA60D64B2B4FF57EBDB51BCDE33AD34C5FECB09F3EA03D7DB18E44533FB89",
+    "cohortSourceBefore": {
+      "WinAudioClean.Batch.ps1": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "WinAudioClean.Launcher.ps1": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5",
+      "WinAudioClean.Output.ps1": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+      "WinAudioClean.Preview.ps1": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "WinAudioClean.Queue.ps1": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "WinAudioClean.Settings.ps1": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+      "WinAudioClean.bat": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "WinAudioClean.ps1": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+      "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+      "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+      "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+      "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+      "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+      "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+      "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+      "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+      "scripts/Test-AudioReproduction.py": "285c3ea339e88cf1e30430a650f31f326332355159a9142c6ad241cdb4de84a2",
+      "scripts/Test-GentleCleaning.py": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87",
+      "scripts/Test-MeasuredLoudness.py": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762",
+      "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+      "scripts/Test-OriginalPreset.py": "5243779ab0bf7599b0559622ce0056eefc1063b7fb684be4ee6ca259a2a7a34a",
+      "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+      "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+      "scripts/Test-Preview.py": "89065a5547a5e02d848f0d8e18e93fcc63db9ebda72a24ac529088c3cab1f724",
+      "scripts/Test-RunReports.py": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+      "tests/WinAudioClean.Batch.Tests.ps1": "4462f1531bf171624cd922253b516a414e15df5d3aed5bab584d3350583b8bab",
+      "tests/WinAudioClean.Cleaning.Tests.ps1": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1",
+      "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+      "tests/WinAudioClean.EntryPoints.Tests.ps1": "051b7e58bb93a943abc15cba6a6e305190ca6bebfa641bd2e24ece3187bbef08",
+      "tests/WinAudioClean.FolderQueue.Tests.ps1": "35bebfc0654aa63d80eb635df8f2273495ce967b3bfc2f2ed47e7a350e0c7f03",
+      "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+      "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+      "tests/WinAudioClean.LauncherTransport.Tests.ps1": "879bb764d9796a2d43f2f386d08be4a07aacac2c91adfe96f753a6c76ae58939",
+      "tests/WinAudioClean.Loudness.Tests.ps1": "988a012460a9b6062de0796db8fe571cdf6df5cb0e04775eddf52229ff0868f5",
+      "tests/WinAudioClean.LoudnessRuntime.Tests.ps1": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94",
+      "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+      "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+      "tests/WinAudioClean.NativeInput.Tests.ps1": "52660d8626758fea83ef8338888b10125cf5cd1d3d3a7be903a50fcc8c13206a",
+      "tests/WinAudioClean.OutputInteraction.Tests.ps1": "866ccd780081d460b0ffb34621d161a0e73aa6162b901c1c6d1b39d073f727a4",
+      "tests/WinAudioClean.OutputLayout.Tests.ps1": "6b9746d50b492dad9b1b74f9e48671093437d30feedfd015c8d2f57b8db818cc",
+      "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+      "tests/WinAudioClean.Preset.Tests.ps1": "a6d3796e8c5ca7078364a5603afd2f477395aa38515fc9b6f66ea130a26e0e8c",
+      "tests/WinAudioClean.Preview.Tests.ps1": "a4ce3475f2a6fe94acf24d970acc0b13ac70bf1c140e16cd6a9bb353e450dfa8",
+      "tests/WinAudioClean.Progress.Tests.ps1": "c6acd1ae1237c45e0afa762bbc7eb2e002c8b2cf66a5f9057bc9ca90b8a4165d",
+      "tests/WinAudioClean.ReportIO.Tests.ps1": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a",
+      "tests/WinAudioClean.Reporting.Tests.ps1": "05348e26afb3dc024e48fc0f6387c0bfe02092c7148a8276285c829084c4fd6b",
+      "tests/WinAudioClean.RunReports.Tests.ps1": "4a080874013a1d1647b7eb853a9934900dd825ce9bf73f75980cdc22095dd270",
+      "tests/WinAudioClean.Settings.Tests.ps1": "1dcd28c7fd734a9ba044a39a1e201c43618026abba63b44c3360f87c8c99deab",
+      "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+      "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+      "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+      "tests/fixtures/Invoke-BatchCase.ps1": "4c40d8c3e74c846910b3c9c9a35e49e03fac05fda54964953fe20f987d3479b7",
+      "tests/fixtures/Invoke-ConsoleCancellationCase.ps1": "6207f7212005b056ac18650716a0fc194ea422b0443520024778b900453b6754",
+      "tests/fixtures/Invoke-FolderQueueCase.ps1": "2f04ef7dd698ed796b2b8708632e274a1dea464b0c85104425141552df4d9523",
+      "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+      "tests/fixtures/Invoke-LauncherCase.ps1": "03f9a56a7bdd4e5d355b593a21c29d48497c13aa32709f2908edddfca846c677",
+      "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+      "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+      "tests/fixtures/LauncherMatrixApplicationStub.ps1": "7dec2e9ef38679154f9743bbc5fb7faa02e3120f14df3bbfbe268871fe7c1ad1",
+      "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+      "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+      "tests/fixtures/New-ProgressProcessFixture.ps1": "092ff042bb828b8a4b6f7da639d45caafc2345182d93b8c106a3484045972770",
+      "tests/fixtures/ProgressProcessFixture.cs": "8dac9a16f46ed1ab02d5b2e688f7384931fe27a7c5d529827032e977a5bf5691",
+      "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+    },
+    "cohortSourceAfter": {
+      "WinAudioClean.Batch.ps1": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "WinAudioClean.Launcher.ps1": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5",
+      "WinAudioClean.Output.ps1": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+      "WinAudioClean.Preview.ps1": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "WinAudioClean.Queue.ps1": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "WinAudioClean.Settings.ps1": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+      "WinAudioClean.bat": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "WinAudioClean.ps1": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+      "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+      "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+      "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+      "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+      "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+      "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+      "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+      "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+      "scripts/Test-AudioReproduction.py": "285c3ea339e88cf1e30430a650f31f326332355159a9142c6ad241cdb4de84a2",
+      "scripts/Test-GentleCleaning.py": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87",
+      "scripts/Test-MeasuredLoudness.py": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762",
+      "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+      "scripts/Test-OriginalPreset.py": "5243779ab0bf7599b0559622ce0056eefc1063b7fb684be4ee6ca259a2a7a34a",
+      "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+      "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+      "scripts/Test-Preview.py": "89065a5547a5e02d848f0d8e18e93fcc63db9ebda72a24ac529088c3cab1f724",
+      "scripts/Test-RunReports.py": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+      "tests/WinAudioClean.Batch.Tests.ps1": "4462f1531bf171624cd922253b516a414e15df5d3aed5bab584d3350583b8bab",
+      "tests/WinAudioClean.Cleaning.Tests.ps1": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1",
+      "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+      "tests/WinAudioClean.EntryPoints.Tests.ps1": "051b7e58bb93a943abc15cba6a6e305190ca6bebfa641bd2e24ece3187bbef08",
+      "tests/WinAudioClean.FolderQueue.Tests.ps1": "35bebfc0654aa63d80eb635df8f2273495ce967b3bfc2f2ed47e7a350e0c7f03",
+      "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+      "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+      "tests/WinAudioClean.LauncherTransport.Tests.ps1": "879bb764d9796a2d43f2f386d08be4a07aacac2c91adfe96f753a6c76ae58939",
+      "tests/WinAudioClean.Loudness.Tests.ps1": "988a012460a9b6062de0796db8fe571cdf6df5cb0e04775eddf52229ff0868f5",
+      "tests/WinAudioClean.LoudnessRuntime.Tests.ps1": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94",
+      "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+      "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+      "tests/WinAudioClean.NativeInput.Tests.ps1": "52660d8626758fea83ef8338888b10125cf5cd1d3d3a7be903a50fcc8c13206a",
+      "tests/WinAudioClean.OutputInteraction.Tests.ps1": "866ccd780081d460b0ffb34621d161a0e73aa6162b901c1c6d1b39d073f727a4",
+      "tests/WinAudioClean.OutputLayout.Tests.ps1": "6b9746d50b492dad9b1b74f9e48671093437d30feedfd015c8d2f57b8db818cc",
+      "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+      "tests/WinAudioClean.Preset.Tests.ps1": "a6d3796e8c5ca7078364a5603afd2f477395aa38515fc9b6f66ea130a26e0e8c",
+      "tests/WinAudioClean.Preview.Tests.ps1": "a4ce3475f2a6fe94acf24d970acc0b13ac70bf1c140e16cd6a9bb353e450dfa8",
+      "tests/WinAudioClean.Progress.Tests.ps1": "c6acd1ae1237c45e0afa762bbc7eb2e002c8b2cf66a5f9057bc9ca90b8a4165d",
+      "tests/WinAudioClean.ReportIO.Tests.ps1": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a",
+      "tests/WinAudioClean.Reporting.Tests.ps1": "05348e26afb3dc024e48fc0f6387c0bfe02092c7148a8276285c829084c4fd6b",
+      "tests/WinAudioClean.RunReports.Tests.ps1": "4a080874013a1d1647b7eb853a9934900dd825ce9bf73f75980cdc22095dd270",
+      "tests/WinAudioClean.Settings.Tests.ps1": "1dcd28c7fd734a9ba044a39a1e201c43618026abba63b44c3360f87c8c99deab",
+      "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+      "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+      "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+      "tests/fixtures/Invoke-BatchCase.ps1": "4c40d8c3e74c846910b3c9c9a35e49e03fac05fda54964953fe20f987d3479b7",
+      "tests/fixtures/Invoke-ConsoleCancellationCase.ps1": "6207f7212005b056ac18650716a0fc194ea422b0443520024778b900453b6754",
+      "tests/fixtures/Invoke-FolderQueueCase.ps1": "2f04ef7dd698ed796b2b8708632e274a1dea464b0c85104425141552df4d9523",
+      "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+      "tests/fixtures/Invoke-LauncherCase.ps1": "03f9a56a7bdd4e5d355b593a21c29d48497c13aa32709f2908edddfca846c677",
+      "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+      "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+      "tests/fixtures/LauncherMatrixApplicationStub.ps1": "7dec2e9ef38679154f9743bbc5fb7faa02e3120f14df3bbfbe268871fe7c1ad1",
+      "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+      "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+      "tests/fixtures/New-ProgressProcessFixture.ps1": "092ff042bb828b8a4b6f7da639d45caafc2345182d93b8c106a3484045972770",
+      "tests/fixtures/ProgressProcessFixture.cs": "8dac9a16f46ed1ab02d5b2e688f7384931fe27a7c5d529827032e977a5bf5691",
+      "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+    },
+    "coherentSource": true,
+    "historicalTimeoutRetained": "Interaction final-corrected PS5.1 remains47 passed/1 timeout failed; isolated1 pass and subsequent cohort48 pass are separate records.",
+    "runs": [
+      {
+        "shellLabel": "ps51",
+        "scope": "Whole new OutputInteraction48 within Targeted213 cohort (Interaction48 + Layout10 + Preview155).",
+        "cohortCounts": {
+          "passed": 213,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 213
+        },
+        "interactionCounts": {
+          "passed": 48,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 48
+        },
+        "interactionCountsProvenance": "Exactly48 [+] rows between the OutputInteraction file heading and the next file heading in the retained Detailed transcript.",
+        "recordedWrapperExitCode": 0,
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.OutputInteraction.Tests.ps1','tests/WinAudioClean.OutputLayout.Tests.ps1','tests/WinAudioClean.Preview.Tests.ps1')"
+        ],
+        "elapsedSeconds": 255.81,
+        "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-targeted-final-corrected-ps51.txt",
+        "publishedLogSha256": "7713859C3D0D56A44B7FA595CEA3A5A3AFA5DF407367C13A8B61133BD1A94E5F",
+        "rawLogPath": ".wac-local/WAC-M3-05/targeted-final-corrected-ps51-raw.log",
+        "rawLogSha256": "7601283EED38B417DD3530097B36D5C02550C213DB110D4B2F24FEEBC1EB0A7A",
+        "parserStaticPlanGateIncluded": true,
+        "acceptancePass": true
+      },
+      {
+        "shellLabel": "ps7",
+        "scope": "Whole new OutputInteraction48 within Targeted213 cohort (Interaction48 + Layout10 + Preview155).",
+        "cohortCounts": {
+          "passed": 213,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 213
+        },
+        "interactionCounts": {
+          "passed": 48,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 48
+        },
+        "interactionCountsProvenance": "Exactly48 [+] rows between the OutputInteraction file heading and the next file heading in the retained Detailed transcript.",
+        "recordedWrapperExitCode": 0,
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.OutputInteraction.Tests.ps1','tests/WinAudioClean.OutputLayout.Tests.ps1','tests/WinAudioClean.Preview.Tests.ps1')"
+        ],
+        "elapsedSeconds": 245.56,
+        "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-targeted-final-corrected-ps7.txt",
+        "publishedLogSha256": "C5128D8E3B3492A06542D4F2F0B36AF095F010E0F36593CC307C45FA2B092AAA",
+        "rawLogPath": ".wac-local/WAC-M3-05/targeted-final-corrected-ps7-raw.log",
+        "rawLogSha256": "37315A7B77082DE993B03AAF7FD314A8ACD50F09E6C494D9B18E0EF3E0F7D485",
+        "parserStaticPlanGateIncluded": true,
+        "acceptancePass": true
+      }
+    ]
+  },
+  "rawEvidencePolicy": "Raw logs/metadata and wrapper archives remain ignored/local. Public derivatives strip repo/profile/test temporary paths and ANSI, cap individual lines/messages at1600 characters, trim line-end whitespace, use UTF8/noBOM CRLF and retain separate raw/published SHA256. Historical captures are not overwritten or relabeled as final.",
+  "finalRecoveryReference": {
+    "scope": "Latest stable66-source root Targeted222 per host certifies all48 Interaction cases and all9 Preset cases, including both menu regressions, after the test-only marker correction. Required Full is separate evidence.",
+    "rawMetadataPath": ".wac-local/WAC-M3-05/targeted-final-menu-corrected-results.json",
+    "rawMetadataSha256": "C5F39C9635593C81F01F1326A09F0544D6A0F8671666EBFD05228D430B06CB2D",
+    "cohortSourceBefore": {
+      "WinAudioClean.Batch.ps1": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "WinAudioClean.Launcher.ps1": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5",
+      "WinAudioClean.Output.ps1": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+      "WinAudioClean.Preview.ps1": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "WinAudioClean.Queue.ps1": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "WinAudioClean.Settings.ps1": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+      "WinAudioClean.bat": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "WinAudioClean.ps1": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+      "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+      "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+      "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+      "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+      "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+      "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+      "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+      "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+      "scripts/Test-AudioReproduction.py": "285c3ea339e88cf1e30430a650f31f326332355159a9142c6ad241cdb4de84a2",
+      "scripts/Test-GentleCleaning.py": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87",
+      "scripts/Test-MeasuredLoudness.py": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762",
+      "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+      "scripts/Test-OriginalPreset.py": "5243779ab0bf7599b0559622ce0056eefc1063b7fb684be4ee6ca259a2a7a34a",
+      "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+      "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+      "scripts/Test-Preview.py": "89065a5547a5e02d848f0d8e18e93fcc63db9ebda72a24ac529088c3cab1f724",
+      "scripts/Test-RunReports.py": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+      "tests/WinAudioClean.Batch.Tests.ps1": "4462f1531bf171624cd922253b516a414e15df5d3aed5bab584d3350583b8bab",
+      "tests/WinAudioClean.Cleaning.Tests.ps1": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1",
+      "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+      "tests/WinAudioClean.EntryPoints.Tests.ps1": "051b7e58bb93a943abc15cba6a6e305190ca6bebfa641bd2e24ece3187bbef08",
+      "tests/WinAudioClean.FolderQueue.Tests.ps1": "35bebfc0654aa63d80eb635df8f2273495ce967b3bfc2f2ed47e7a350e0c7f03",
+      "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+      "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+      "tests/WinAudioClean.LauncherTransport.Tests.ps1": "879bb764d9796a2d43f2f386d08be4a07aacac2c91adfe96f753a6c76ae58939",
+      "tests/WinAudioClean.Loudness.Tests.ps1": "988a012460a9b6062de0796db8fe571cdf6df5cb0e04775eddf52229ff0868f5",
+      "tests/WinAudioClean.LoudnessRuntime.Tests.ps1": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94",
+      "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+      "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+      "tests/WinAudioClean.NativeInput.Tests.ps1": "52660d8626758fea83ef8338888b10125cf5cd1d3d3a7be903a50fcc8c13206a",
+      "tests/WinAudioClean.OutputInteraction.Tests.ps1": "866ccd780081d460b0ffb34621d161a0e73aa6162b901c1c6d1b39d073f727a4",
+      "tests/WinAudioClean.OutputLayout.Tests.ps1": "6b9746d50b492dad9b1b74f9e48671093437d30feedfd015c8d2f57b8db818cc",
+      "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+      "tests/WinAudioClean.Preset.Tests.ps1": "e1677916e451eade9e0e28ecdb1bdd3c6f63bae7bdb91c887295d3caba58485e",
+      "tests/WinAudioClean.Preview.Tests.ps1": "a4ce3475f2a6fe94acf24d970acc0b13ac70bf1c140e16cd6a9bb353e450dfa8",
+      "tests/WinAudioClean.Progress.Tests.ps1": "c6acd1ae1237c45e0afa762bbc7eb2e002c8b2cf66a5f9057bc9ca90b8a4165d",
+      "tests/WinAudioClean.ReportIO.Tests.ps1": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a",
+      "tests/WinAudioClean.Reporting.Tests.ps1": "05348e26afb3dc024e48fc0f6387c0bfe02092c7148a8276285c829084c4fd6b",
+      "tests/WinAudioClean.RunReports.Tests.ps1": "4a080874013a1d1647b7eb853a9934900dd825ce9bf73f75980cdc22095dd270",
+      "tests/WinAudioClean.Settings.Tests.ps1": "1dcd28c7fd734a9ba044a39a1e201c43618026abba63b44c3360f87c8c99deab",
+      "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+      "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+      "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+      "tests/fixtures/Invoke-BatchCase.ps1": "4c40d8c3e74c846910b3c9c9a35e49e03fac05fda54964953fe20f987d3479b7",
+      "tests/fixtures/Invoke-ConsoleCancellationCase.ps1": "6207f7212005b056ac18650716a0fc194ea422b0443520024778b900453b6754",
+      "tests/fixtures/Invoke-FolderQueueCase.ps1": "2f04ef7dd698ed796b2b8708632e274a1dea464b0c85104425141552df4d9523",
+      "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+      "tests/fixtures/Invoke-LauncherCase.ps1": "03f9a56a7bdd4e5d355b593a21c29d48497c13aa32709f2908edddfca846c677",
+      "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+      "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+      "tests/fixtures/LauncherMatrixApplicationStub.ps1": "7dec2e9ef38679154f9743bbc5fb7faa02e3120f14df3bbfbe268871fe7c1ad1",
+      "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+      "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+      "tests/fixtures/New-ProgressProcessFixture.ps1": "092ff042bb828b8a4b6f7da639d45caafc2345182d93b8c106a3484045972770",
+      "tests/fixtures/ProgressProcessFixture.cs": "8dac9a16f46ed1ab02d5b2e688f7384931fe27a7c5d529827032e977a5bf5691",
+      "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+    },
+    "cohortSourceAfter": {
+      "WinAudioClean.Batch.ps1": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "WinAudioClean.Launcher.ps1": "0fac0e13664dcf6d0017f5636e97f6f6968b813a672e3ab48a9ae68701d94fa5",
+      "WinAudioClean.Output.ps1": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+      "WinAudioClean.Preview.ps1": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "WinAudioClean.Queue.ps1": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "WinAudioClean.Settings.ps1": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+      "WinAudioClean.bat": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b",
+      "WinAudioClean.ps1": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+      "docs/codex/winaudioclean/tests/test_characterize_filters.py": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22",
+      "docs/codex/winaudioclean/tests/test_handoff.py": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a",
+      "docs/codex/winaudioclean/tools/characterize_filters.py": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf",
+      "docs/codex/winaudioclean/tools/generate_fixtures.py": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b",
+      "docs/codex/winaudioclean/tools/handoff.py": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a",
+      "scripts/DevDependencies.psd1": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90",
+      "scripts/Install-DevDependencies.ps1": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14",
+      "scripts/Invoke-Tests.ps1": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b",
+      "scripts/PSScriptAnalyzerSettings.psd1": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c",
+      "scripts/Test-AudioReproduction.py": "285c3ea339e88cf1e30430a650f31f326332355159a9142c6ad241cdb4de84a2",
+      "scripts/Test-GentleCleaning.py": "bedf3bb7a7cea02792ce68eb5cae9ccc63fb25b0afcfbefe1cae2a86f249ff87",
+      "scripts/Test-MeasuredLoudness.py": "211782a3eefee9adc674c9110c274c7e021994cc515a3860c0e1abb675ccf762",
+      "scripts/Test-MediaPreflight.py": "547e749fe84559ce0556d82292c9fe3b935f854bdf3f3b705a3580d80df94f07",
+      "scripts/Test-OriginalPreset.py": "5243779ab0bf7599b0559622ce0056eefc1063b7fb684be4ee6ca259a2a7a34a",
+      "scripts/Test-OutputEncoding.py": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+      "scripts/Test-OutputTransactions.py": "6cbaddc64c91f24ad8b6452fe0bf5b1c4781ddb2d91bb1de8dd2462231e28985",
+      "scripts/Test-Preview.py": "89065a5547a5e02d848f0d8e18e93fcc63db9ebda72a24ac529088c3cab1f724",
+      "scripts/Test-RunReports.py": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+      "tests/WinAudioClean.Batch.Tests.ps1": "4462f1531bf171624cd922253b516a414e15df5d3aed5bab584d3350583b8bab",
+      "tests/WinAudioClean.Cleaning.Tests.ps1": "779621a2e843aaccccf3f0038a127d92a7ef60384dd9d428c185db23fb6413c1",
+      "tests/WinAudioClean.Encoding.Tests.ps1": "c1fe3c4ab96c701595dba43a2c4fb29e76f9b151e5f8638435bc0dcec6caec37",
+      "tests/WinAudioClean.EntryPoints.Tests.ps1": "051b7e58bb93a943abc15cba6a6e305190ca6bebfa641bd2e24ece3187bbef08",
+      "tests/WinAudioClean.FolderQueue.Tests.ps1": "35bebfc0654aa63d80eb635df8f2273495ce967b3bfc2f2ed47e7a350e0c7f03",
+      "tests/WinAudioClean.Helpers.Tests.ps1": "bcf091eb54441a35e56680cc7bbb2c8564af1bbd4fcfeed588fbb94d810a7753",
+      "tests/WinAudioClean.Launcher.Tests.ps1": "8d63e5c5b4a6d3661a39eddeb47aa1f04110810bfdaef3c82b5eb2e95bd86255",
+      "tests/WinAudioClean.LauncherTransport.Tests.ps1": "879bb764d9796a2d43f2f386d08be4a07aacac2c91adfe96f753a6c76ae58939",
+      "tests/WinAudioClean.Loudness.Tests.ps1": "988a012460a9b6062de0796db8fe571cdf6df5cb0e04775eddf52229ff0868f5",
+      "tests/WinAudioClean.LoudnessRuntime.Tests.ps1": "0ba47869e3361014ebcc18e35d38f2d3be64c54a8b8215c751019817e02c6b94",
+      "tests/WinAudioClean.Media.Tests.ps1": "ff3aac642ccfa1fee86b8d8635e988d550900482b45e7a3673a97e1e94147297",
+      "tests/WinAudioClean.Native.Tests.ps1": "c15c97ae29faf6c1547e7f145b869a4345b3c0d60a24162a327993e6884282e2",
+      "tests/WinAudioClean.NativeInput.Tests.ps1": "52660d8626758fea83ef8338888b10125cf5cd1d3d3a7be903a50fcc8c13206a",
+      "tests/WinAudioClean.OutputInteraction.Tests.ps1": "866ccd780081d460b0ffb34621d161a0e73aa6162b901c1c6d1b39d073f727a4",
+      "tests/WinAudioClean.OutputLayout.Tests.ps1": "6b9746d50b492dad9b1b74f9e48671093437d30feedfd015c8d2f57b8db818cc",
+      "tests/WinAudioClean.Preflight.Tests.ps1": "3b3b76abe470f2c60307133060f3f8c0f2833d6eeb56ebc578d4643449d65d07",
+      "tests/WinAudioClean.Preset.Tests.ps1": "e1677916e451eade9e0e28ecdb1bdd3c6f63bae7bdb91c887295d3caba58485e",
+      "tests/WinAudioClean.Preview.Tests.ps1": "a4ce3475f2a6fe94acf24d970acc0b13ac70bf1c140e16cd6a9bb353e450dfa8",
+      "tests/WinAudioClean.Progress.Tests.ps1": "c6acd1ae1237c45e0afa762bbc7eb2e002c8b2cf66a5f9057bc9ca90b8a4165d",
+      "tests/WinAudioClean.ReportIO.Tests.ps1": "fb14f58afa2114cd5cd8f707e4a11e63adc6d159c3d49534048656e95affe63a",
+      "tests/WinAudioClean.Reporting.Tests.ps1": "05348e26afb3dc024e48fc0f6387c0bfe02092c7148a8276285c829084c4fd6b",
+      "tests/WinAudioClean.RunReports.Tests.ps1": "4a080874013a1d1647b7eb853a9934900dd825ce9bf73f75980cdc22095dd270",
+      "tests/WinAudioClean.Settings.Tests.ps1": "1dcd28c7fd734a9ba044a39a1e201c43618026abba63b44c3360f87c8c99deab",
+      "tests/WinAudioClean.Transaction.Tests.ps1": "169e07f490582bd6f0df9b79f9b394985f8384be6a0d95f5ceb35bef2ce4a0e2",
+      "tests/WinAudioClean.Validation.Tests.ps1": "fa87c0bd0030e54f682ac7498068e9a84ecb0433414941ae99088e6920ba8fde",
+      "tests/fixtures/Import-Safety.ps1": "a37ad2854719725e45588d7486578f5cd17eebf8514f4a940c28b4c9b94c5dbe",
+      "tests/fixtures/Invoke-BatchCase.ps1": "4c40d8c3e74c846910b3c9c9a35e49e03fac05fda54964953fe20f987d3479b7",
+      "tests/fixtures/Invoke-ConsoleCancellationCase.ps1": "6207f7212005b056ac18650716a0fc194ea422b0443520024778b900453b6754",
+      "tests/fixtures/Invoke-FolderQueueCase.ps1": "2f04ef7dd698ed796b2b8708632e274a1dea464b0c85104425141552df4d9523",
+      "tests/fixtures/Invoke-Launcher.ps1": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8",
+      "tests/fixtures/Invoke-LauncherCase.ps1": "03f9a56a7bdd4e5d355b593a21c29d48497c13aa32709f2908edddfca846c677",
+      "tests/fixtures/Invoke-MetadataFailure.ps1": "519fc7414002df059a60fdaae0d89f6f928793b157f88722ef19f65c5af490c3",
+      "tests/fixtures/LauncherApplicationStub.ps1": "73026927282b9c9745f507a42c536749fd3decc5cafa3d5fe15489d2327681e6",
+      "tests/fixtures/LauncherMatrixApplicationStub.ps1": "7dec2e9ef38679154f9743bbc5fb7faa02e3120f14df3bbfbe268871fe7c1ad1",
+      "tests/fixtures/NativeProcessFixture.cs": "84b90a35f344c6c003ce73c84b75b42a90fc36b6d70a884977a113e7d2ba14de",
+      "tests/fixtures/New-NativeProcessFixture.ps1": "a9e9cdfa3758aa04a9ca4bafcd7126b78579d2e1e72ad0d00dbf5c67e986c3d8",
+      "tests/fixtures/New-ProgressProcessFixture.ps1": "092ff042bb828b8a4b6f7da639d45caafc2345182d93b8c106a3484045972770",
+      "tests/fixtures/ProgressProcessFixture.cs": "8dac9a16f46ed1ab02d5b2e688f7384931fe27a7c5d529827032e977a5bf5691",
+      "tests/fixtures/TestProcess.ps1": "160d0860cbde6b65b240a516d279f464e2aa8846f73a09f91222f1235f1aa3e1"
+    },
+    "coherentSource": true,
+    "cohortSourceCount": 66,
+    "runs": [
+      {
+        "shellLabel": "ps51",
+        "recordedWrapperExitCode": 0,
+        "command": [
+          "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.OutputInteraction.Tests.ps1','tests/WinAudioClean.OutputLayout.Tests.ps1','tests/WinAudioClean.Preview.Tests.ps1','tests/WinAudioClean.Preset.Tests.ps1')"
+        ],
+        "elapsedSeconds": 97.79,
+        "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-targeted-final-menu-corrected-ps51.txt",
+        "publishedLogSha256": "FF283A1018167F68E5A02AAF29543D1EEC9FEA4A9978EFE7BF91913F664C8D60",
+        "rawLogPath": ".wac-local/WAC-M3-05/targeted-final-menu-corrected-ps51-raw.log",
+        "rawLogSha256": "34DB62C04E016C8A6D837B0F4D6C02373D02C48F710379984F2A550C7E0E456A",
+        "scope": "Whole OutputInteraction48 and Preset9 within Targeted222 (Interaction48 + Layout10 + Preview155 + Preset9).",
+        "cohortCounts": {
+          "passed": 222,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 222
+        },
+        "interactionCounts": {
+          "passed": 48,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 48
+        },
+        "presetCounts": {
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 9
+        },
+        "menuRegressionNames": [
+          "records the Original Raw preset through menu",
+          "records the Original Zoom preset through menu"
+        ],
+        "fileCountsProvenance": "Exact [+] rows between each named test file heading and the next file heading in the retained Detailed transcript:48 Interaction,10 Layout,155 Preview and9 Preset; no failed rows.",
+        "parserStaticPlanGateIncluded": true,
+        "acceptancePass": true
+      },
+      {
+        "shellLabel": "ps7",
+        "recordedWrapperExitCode": 0,
+        "command": [
+          "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+          "-NoLogo",
+          "-NoProfile",
+          "-ExecutionPolicy",
+          "Bypass",
+          "-Command",
+          "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.OutputInteraction.Tests.ps1','tests/WinAudioClean.OutputLayout.Tests.ps1','tests/WinAudioClean.Preview.Tests.ps1','tests/WinAudioClean.Preset.Tests.ps1')"
+        ],
+        "elapsedSeconds": 119.73,
+        "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-targeted-final-menu-corrected-ps7.txt",
+        "publishedLogSha256": "48A1CC33C529F649D45B38994CABA5C1E16B9C1277EAEC20BFA2E60A31ED4FFD",
+        "rawLogPath": ".wac-local/WAC-M3-05/targeted-final-menu-corrected-ps7-raw.log",
+        "rawLogSha256": "206165D06294FCA0795E429DCA9ED92443FA78D7E7927DD9181D43480B56B665",
+        "scope": "Whole OutputInteraction48 and Preset9 within Targeted222 (Interaction48 + Layout10 + Preview155 + Preset9).",
+        "cohortCounts": {
+          "passed": 222,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 222
+        },
+        "interactionCounts": {
+          "passed": 48,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 48
+        },
+        "presetCounts": {
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "notRun": 0,
+          "total": 9
+        },
+        "menuRegressionNames": [
+          "records the Original Raw preset through menu",
+          "records the Original Zoom preset through menu"
+        ],
+        "fileCountsProvenance": "Exact [+] rows between each named test file heading and the next file heading in the retained Detailed transcript:48 Interaction,10 Layout,155 Preview and9 Preset; no failed rows.",
+        "parserStaticPlanGateIncluded": true,
+        "acceptancePass": true
+      }
+    ],
+    "earlierRecoveryReference": "recoveryReference is the immutable historical Targeted213 cohort; its old Preset test hash predates the narrow menu fixture correction. Its48 Interaction passes and all19 focused run records remain unchanged.",
+    "sourceBridge": {
+      "changedPaths": [
+        "tests/WinAudioClean.Preset.Tests.ps1"
+      ],
+      "runtimeSourcesChanged": false,
+      "beforePresetSha256": "a6d3796e8c5ca7078364a5603afd2f477395aa38515fc9b6f66ea130a26e0e8c",
+      "afterPresetSha256": "e1677916e451eade9e0e28ecdb1bdd3c6f63bae7bdb91c887295d3caba58485e",
+      "correction": "Only the disposable menu fixture insertion marker moved from CONFIGURATION to the earlier explicit-support-route comment, before interactive state is captured. Host doubles and assertions are unchanged."
+    },
+    "precedingFullFailure": {
+      "rawMetadataPath": ".wac-local/WAC-M3-05/full-final-corrected-results.json",
+      "rawMetadataSha256": "0110CBA6F1B322166331A3F9299C2677AFFD54B5CB3AC058C35459F7F3B5A1CE",
+      "coherentSource": true,
+      "cohortSourceReference": "recoveryReference.cohortSourceBefore and cohortSourceAfter (66 files, before Preset marker correction).",
+      "disposition": "Both stable Full captures remain failed1440/2/1 exit1. The two redirected menu cases injected their interaction double after runtime captured interactive state, producing unattended mode-required preflight2. This fixture placement was corrected without runtime edits or weakened assertions; Targeted222 is a distinct later gate.",
+      "runs": [
+        {
+          "shellLabel": "ps51",
+          "recordedWrapperExitCode": 1,
+          "command": [
+            "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-Command",
+            "./scripts/Invoke-Tests.ps1 -Level Full"
+          ],
+          "elapsedSeconds": 1157.38,
+          "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-full-final-corrected-ps51.txt",
+          "publishedLogSha256": "4473C4067EF91A00BBFD9EFBB051D9129858CECA392517D9CACFA3F27632E72F",
+          "rawLogPath": ".wac-local/WAC-M3-05/full-final-corrected-ps51-raw.log",
+          "rawLogSha256": "B698C6C5E0DA872B1EA40ECA3BFF94102AE8EBA805B667033426C591777BB3F5",
+          "scope": "Historical failed Full before the one-line Preset menu fixture placement correction.",
+          "pesterCounts": {
+            "passed": 1440,
+            "failed": 2,
+            "skipped": 1,
+            "notRun": 0,
+            "total": 1443
+          },
+          "failedCaseNames": [
+            "records the Original Raw preset through menu",
+            "records the Original Zoom preset through menu"
+          ],
+          "acceptancePass": false
+        },
+        {
+          "shellLabel": "ps7",
+          "recordedWrapperExitCode": 1,
+          "command": [
+            "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+            "-NoLogo",
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-Command",
+            "./scripts/Invoke-Tests.ps1 -Level Full -AnalyzerWarnings"
+          ],
+          "elapsedSeconds": 1208.19,
+          "publishedLog": "docs/codex/winaudioclean/evidence/WAC-M3-05-full-final-corrected-ps7.txt",
+          "publishedLogSha256": "9B6DEB542071EBC5B205F71530F590CF1FBE12B0A635FDCDF7BA43010808A838",
+          "rawLogPath": ".wac-local/WAC-M3-05/full-final-corrected-ps7-raw.log",
+          "rawLogSha256": "33F195BCDE362A2AE47784D100157BA8534912CF0CAE76AE8DC9C8A7554D6F7F",
+          "scope": "Historical failed Full before the one-line Preset menu fixture placement correction.",
+          "pesterCounts": {
+            "passed": 1440,
+            "failed": 2,
+            "skipped": 1,
+            "notRun": 0,
+            "total": 1443
+          },
+          "failedCaseNames": [
+            "records the Original Raw preset through menu",
+            "records the Original Zoom preset through menu"
+          ],
+          "acceptancePass": false
+        }
+      ]
+    }
+  },
+  "priorPublishedLedger": {
+    "rawArchivePath": ".wac-local/WAC-M3-05/output-focused/WAC-M3-05-focused-before-menu-recovery.json",
+    "rawSha256": "F2E86965F32D951F1B52935D5E1708C9B062A0C6297F904AE0DCEAD842E4985D",
+    "disposition": "Exact previously published ledger bytes retained locally before this additive recovery amendment; the original recoveryReference object,19 run records and19 selected log derivatives are unchanged."
+  }
+}

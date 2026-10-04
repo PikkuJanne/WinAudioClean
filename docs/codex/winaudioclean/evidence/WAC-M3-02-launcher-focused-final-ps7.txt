@@ -1,0 +1,46 @@
+Focused shell: 7.6.5
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 33 tests in 241ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.LauncherTransport.Tests.ps1'
+Describing AC-052/054: launcher request parsing accepts narrow verified CMD frames
+  [+] retains every quoted safe character-rich path in order and maps multiple inputs as typed data 237ms (197ms|41ms)
+  [+] rejects percent token before application invocation 85ms (82ms|3ms)
+  [+] rejects exclamation token before application invocation 7ms (5ms|2ms)
+  [+] rejects different original token before application invocation 4ms (3ms|1ms)
+  [+] rejects existing CMD session before application invocation 5ms (4ms|2ms)
+  [+] rejects unquoted operator before application invocation 8ms (7ms|1ms)
+  [+] rejects unbalanced quote before application invocation 4ms (3ms|1ms)
+  [+] rejects capture unavailable before application invocation 3ms (2ms|1ms)
+  [+] accepts a 7599-character original frame and rejects 7600 with manifest guidance 16ms (15ms|1ms)
+  [+] accepts 1024 captured arguments and rejects excess or an explicit capture-overflow marker 86ms (85ms|1ms)
+  [+] keeps special-character manifest and single-environment paths literal without CMD evaluation 14ms (13ms|1ms)
+  [+] rejects the manifest and single input control route 11ms (9ms|2ms)
+  [+] rejects the extra manifest argument control route 3ms (2ms|1ms)
+  [+] rejects the missing manifest control route 4ms (3ms|1ms)
+  [+] rejects the two unattended sources control route 5ms (4ms|2ms)
+  [+] rejects the no unattended source control route 6ms (5ms|2ms)
+  [+] rejects the invalid mode control route 6ms (4ms|2ms)
+  [+] rejects the extra unattended argument control route 6ms (4ms|2ms)
+  [+] forwards exactly one legacy string or one typed array and preserves status 316ms (313ms|3ms)
+  [+] forwards exactly one legacy string or one typed array and preserves status 20ms (17ms|3ms)
+
+Describing AC-052/054: real CMD and the actual BAT forward to both inner PowerShell hosts
+  [+] passes the safe single and ordered multiple-file matrix exactly to powershell.exe 1.53s (1.53s|5ms)
+  [+] passes the safe single and ordered multiple-file matrix exactly to pwsh.exe 3.82s (3.82s|1ms)
+  [+] passes all special names and >8191 manifest payload literally to powershell.exe 699ms (698ms|1ms)
+  [+] passes all special names and >8191 manifest payload literally to pwsh.exe 1.77s (1.76s|1ms)
+  [+] rejects defined percent-token expansion before processing a decoy through powershell.exe 573ms (572ms|1ms)
+  [+] rejects defined percent-token expansion before processing a decoy through pwsh.exe 576ms (575ms|1ms)
+  [+] forwards 30 long paths without loss and rejects 32 before work through powershell.exe 1.41s (1.41s|1ms)
+  [+] forwards 30 long paths without loss and rejects 32 before work through pwsh.exe 2.54s (2.54s|1ms)
+  [+] shows no-input guidance and starts no app through powershell.exe 622ms (621ms|1ms)
+  [+] shows no-input guidance and starts no app through pwsh.exe 621ms (620ms|1ms)
+  [+] preserves cancellation130 after the interactive-route pause through powershell.exe 717ms (716ms|1ms)
+  [+] preserves cancellation130 after the interactive-route pause through pwsh.exe 1.98s (1.97s|1ms)
+  [+] preserves selected-worker startup failure3 through one parent pause without starting the application 748ms (743ms|5ms)
+Tests completed in 19.42s
+Tests Passed: 33, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0

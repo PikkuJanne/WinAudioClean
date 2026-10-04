@@ -1,0 +1,66 @@
+{
+  "scope": "Targeted Settings suite only (123 discovered), plus parser/analyzer/plan gates; not Full",
+  "snapshot": "initial-snapshot.json",
+  "results": [
+    {
+      "shell": "Windows PowerShell 5.1",
+      "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1",
+      "exitCode": 1,
+      "passed": 122,
+      "failed": 1,
+      "skipped": 0,
+      "notRun": 0,
+      "pesterDurationSeconds": 74.65,
+      "log": "initial-ps51.log",
+      "logSha256": "D9803E08A2E502D9966B177F346EA52F02B0AD39EAEAB7B0F173406F7EE7C8A0",
+      "failure": "Junction safety test cleanup line 300: Remove-Item -LiteralPath junction -Force raised NullReferenceException in PS5.1 after rejection/preservation assertions passed; test portability correction pending.",
+      "sanitized_log": "evidence/WAC-M3-01-settings-initial-ps51.txt",
+      "sanitized_log_sha256": "5c0e3612c56c15a0a9e4c019f5373530cd38bbbbb153593cd16f13ee1e21bb37",
+      "public_log_normalization": "Sanitized copy removes trailing whitespace and blank lines at EOF; original captured log hash remains unchanged."
+    },
+    {
+      "shell": "PowerShell 7",
+      "command": "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1",
+      "exitCode": 0,
+      "passed": 123,
+      "failed": 0,
+      "skipped": 0,
+      "notRun": 0,
+      "pesterDurationSeconds": 95.1,
+      "log": "initial-ps7.log",
+      "logSha256": "ADA55AC32639974BECE876295008579E43AAD39686F31D83CEB86B3EFF55FEDB",
+      "sanitized_log": "evidence/WAC-M3-01-settings-initial-ps7.txt",
+      "sanitized_log_sha256": "a5c2ac91379bbface35e4b4b5c3591389406d7c3d3494bb1b813d982c8e351e4"
+    }
+  ],
+  "source_snapshot": {
+    "capturedUtc": "2026-10-02T19:12:55.2876047Z",
+    "scope": "Targeted: tests/WinAudioClean.Settings.Tests.ps1 only; plus runner parser/analyzer/governance plan gates",
+    "sources": [
+      {
+        "path": "WinAudioClean.ps1",
+        "sha256": "880AF42241854CFD3952855C59996C3E15377453392FF4531704D6C02DD08A3B"
+      },
+      {
+        "path": "WinAudioClean.Settings.ps1",
+        "sha256": "BB6C7F034FC65BFEAF26B769B09BA7D8535F98D5455AF68D72405B48B577F2DA"
+      },
+      {
+        "path": "WinAudioClean.IO.ps1",
+        "sha256": "FCC9F6B69DDB97E20F06242E9A14D2CD02DF194C598806D360E0D85627278E46"
+      },
+      {
+        "path": "tests/WinAudioClean.Settings.Tests.ps1",
+        "sha256": "ED8843E195458AEA8760187FBE57559532E73BAA849C98E56B69840EBFDC9AB8"
+      },
+      {
+        "path": "scripts/Invoke-Tests.ps1",
+        "sha256": "153636E8FA21875B98FCFDA3FA1253CD737301B971AF43A756D2973D182F994B"
+      }
+    ],
+    "commands": [
+      "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1",
+      "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File scripts/Invoke-Tests.ps1 -Level Targeted -Path tests/WinAudioClean.Settings.Tests.ps1"
+    ]
+  }
+}

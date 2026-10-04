@@ -1,0 +1,30 @@
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: failed.wav
+Invoke-WacBatchItem : Controlled item failure
+At <repo>\WinAudioClean.Batch.ps1:176 char:27
++ ...   $result = Invoke-WacBatchItem -ApplicationPath $ApplicationPath -Ar ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,Invoke-WacBatchItem
+
+Processing input 3 of 3: last.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-1ca7d2fcbee546bfaa7c944d076b3902\continuation.jsonl
+Processing input 1 of 3: first.wav
+Processing input 2 of 3: cancelled.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-1ca7d2fcbee546bfaa7c944d076b3902\cancellation.jsonl
+Processing input 1 of 1: warning.wav
+Batch results saved to: <repo>\.wac-local\WAC-M3-02\smoke-1ca7d2fcbee546bfaa7c944d076b3902\single-warning.jsonl
+<repo>\WinAudioClean.ps1 : Input list failed: Cannot find an overload for "Contains" and
+the argument count: "1".
+At <repo>\.wac-local\WAC-M3-02\batch-smoke.ps1:40 char:1
++ & (Join-Path $RepositoryRoot 'WinAudioClean.ps1') -InputPaths @((Join ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1
+
+Actual main list route failed.
+At <repo>\.wac-local\WAC-M3-02\batch-smoke.ps1:41 char:28
++ if ($LASTEXITCODE -ne 6) { throw 'Actual main list route failed.' }
++                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Actual main list route failed.:String) [], RuntimeException
+    + FullyQualifiedErrorId : Actual main list route failed.

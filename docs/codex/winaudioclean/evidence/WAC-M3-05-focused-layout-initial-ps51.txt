@@ -1,0 +1,7 @@
+Sanitized selected focused log. Initial layout helper scope. PS5.1 was blocked by host execution policy before loading the runner (exit1, no Pester counts). PS7 ran10 cases:9 passed/1 failed because a READ-only media-directory pin blocked existing IO RenameNoReplace with Win32 32. The helper was corrected to the minimal media READ|WRITE share.
+
+File <REPO>\.wac-local\WAC-M3-05\run-layout-focused.ps1 cannot be loaded because running
+scripts is disabled on this system. For more information, see about_Execution_Policies at https:/go.microsoft.com/fwlin
+k/?LinkID=135170.
+    + CategoryInfo          : SecurityError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnauthorizedAccess

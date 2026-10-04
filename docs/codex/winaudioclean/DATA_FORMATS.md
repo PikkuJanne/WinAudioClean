@@ -8,6 +8,67 @@ Use a schemaVersion integer and typed allowlisted fields for mode, preset ID, ta
 
 A persisted default-sound change still requires the user's own explicit settings action; new application versions must not silently retune Original.
 
+### Implemented preferences — WAC-M3-01 (2026-10-02)
+
+Preference schema version `1` is separate from ordinary/preview report schema
+version `1` and application `2.3`. The default local path is the current user's
+ApplicationData folder plus `WinAudioClean\settings.json`. `-SettingsPath`
+selects an isolated local file. Reading never saves; only `-SaveSettings` or
+`-ResetSettings` writes preferences. The optional Settings sibling is needed
+for a present saved file, explicit path or management action. Dot-source imports
+return before reading preferences and retain their IO-only dependency contract.
+
+The root object contains exactly `schemaVersion` and `settings`. The latter is
+an object with these optional, case-sensitive fields:
+
+| Field | JSON type and allowed values |
+| --- | --- |
+| `mode` | String `Raw` or `Zoom`; omission retains interactive mode selection or an unattended missing-mode error. |
+| `preset` | String `Original` or `Gentle`; the existing CLI names identify the supported versioned base presets. |
+| `loudnessMode` | String `Fast` or `Accurate`. |
+| `bitDepth` | Integer `16` or `24`. |
+| `mono`, `rf64` | Boolean; explicit CLI false overrides saved true. |
+| `outputDirectory` | Nonempty supported local filesystem path; saving canonicalizes it to an absolute path without creating the audio output directory. |
+| `audioStreamIndex` | Nonnegative integer through Int32 maximum, an absolute ffprobe index. Omission retains automatic single-track selection. |
+| `cleaningOptions` | Object of the existing PascalCase typed cleaning override keys and bounds. It stores overrides rather than an expanded base profile. |
+
+No target/sample-rate knobs are introduced. Input paths, executable paths,
+NonInteractive, preview/actions/ranges and diagnostic choices are not preferences.
+There is no script configuration, arbitrary filter string or executable option.
+Read the complete file with strict bounded UTF-8/JSON validation before applying
+precedence. Reject unknown keys/versions, duplicate decoded keys, wrong scalar
+types, nonfinite/out-of-range values and invalid preset/mode combinations.
+Invalid files fail with configuration exit `2`, even if CLI choices would hide
+their invalid fields. No implicit migration occurs; `-IgnoreSavedSettings`
+bypasses the file and `-ResetSettings` explicitly recovers it.
+
+Actual bound CLI parameters override saved preferences, which override built-ins.
+An explicit cleaning dictionary replaces the entire saved override dictionary,
+including an empty `@{}`. Validate the resulting combination too. A saved mode
+or selected index resolves the corresponding unattended omission; execution
+context is never saved. Original/Fast/PCM16 and the existing channel policy
+remain the built-ins. Processing reports continue recording effective choices
+and exact graphs; saved preferences select existing choices without retuning
+their graphs or changing report schema.
+
+`-ShowSettings`, `-SaveSettings` and `-ResetSettings` run without input, media
+tools, prompting or audio output. Show may accompany either write action; Save
+and Reset are mutually exclusive. Reset rejects processing choices and writes
+`{"schemaVersion":1,"settings":{}}`, preserving the built-in menu behavior.
+The management JSON displays resolved preferences and per-field origins, plus
+expanded `effectiveCleaning` and `effectiveFilterChain` when a mode is selected.
+Otherwise they are null with `effectiveProfileReason: mode_not_selected`.
+These display-only fields are not part of stored JSON. Ordinary runs display
+effective choices and expanded cleaning before rendering.
+
+Writes validate first, create/flush a same-directory owned temporary file, then
+atomically replace the existing file or publish without replacing a newly
+appeared destination. Failed publication preserves prior bytes and cleans only
+the owned temporary file. Settings storage rejects reparse files/directories
+and reparse parents; the reader also rejects files with multiple filesystem
+links. This is a complete-file publication contract, without a
+claim of power-loss durability, configuration migration or a multi-file commit.
+
 ## Run JSON
 
 Include schemaVersion, jobId, toolVersion, presetVersion, sourceRevision when known, start/end timestamps, status, warning/reason codes, native/application exit codes, dependency versions, stream selection, input media duration, elapsed processing time, effective settings, exact filters, output audio format, requested targets, measured metrics and paths to local diagnostics. JSON numbers must be finite; undefined metrics are null plus reason. Separate export validity from loudness-target compliance. Do not put credentials in command strings.
@@ -272,6 +333,233 @@ them with WARNING/7, `reporting.complete: false`, errors and null report paths.
 Owned incomplete reports are retired/removed where possible; the console
 remains authoritative when no corrected report could be written. A crash/storage fault
 can leave incomplete artifacts, so this is no multi-file atomicity guarantee.
+
+## Explicit input lists and local batch journal — WAC-M3-02
+
+The existing positional `inputPath` remains a single string. `InputPaths` accepts
+an ordered explicit array through a PowerShell call; `InputListPath` accepts a
+local UTF-8 JSON manifest. They are mutually exclusive with each other and
+`inputPath`. Lists are ordinary full-render requests; settings management,
+support export and preview actions remain separate. The Batch and Settings
+siblings are needed only for explicit lists. Imports and legacy single-file
+installations retain their existing component contract.
+
+The manifest is exactly `{"schemaVersion":1,"inputs":["recording.wav"]}`.
+Require an integer version 1, exact keys and an array of 1 through 1024 nonempty
+path strings. Reject duplicate decoded keys, wrong types, invalid UTF-8, unknown
+versions, arbitrary extra fields and more than 1 MiB including optional UTF-8
+BOM. Read the file through the ordinary held settings-reader policy, including
+reparse/hardlink rejection; no JSON text executes. Relative entries are anchored
+to the manifest directory, with root-relative entries on that directory's drive.
+Invalid/missing media paths become ordinary per-item failures. A malformed list
+is a global exit 2 before jobs. Explicit repeats retain their order. These
+schema-1 explicit lists do not acquire folder traversal or deduplication;
+the separate WAC-M3-03 route below builds a folder snapshot.
+
+Resolve and validate preferences once, choose an omitted interactive mode once,
+then supply those same existing choices to every ordinary child invocation.
+Child invocations ignore saved configuration so an external settings change
+cannot silently change a running list. Each input retains the existing source,
+native process, output ownership and full-render report contracts. Stream
+selection can still be per-item when interactive; no universal index is inferred.
+
+`BatchResultPath` optionally selects a new journal in an existing parent;
+otherwise use `WinAudioClean_Batch_<id>.jsonl` in the resolved audio destination.
+CreateNew prevents replacement of inputs, manifests or previous results. The
+writer and parent directory remain held during the list. The UTF-8 no-BOM file
+contains one compact JSON object per line:
+
+| `type` | Fields |
+| --- | --- |
+| `batch` | `schemaVersion:1`, `batchId`, UTC `startedAt`, `inputCount`, lowercase typed `settings` using the preference field schema, and per-choice `origins`. An interactively chosen mode has origin `Interactive`. |
+| `item` | One-based `index`, `inputPath`, `status`, nullable integer `exitCode`, bounded string-array `diagnostics`, nullable UTC `finishedAt`. |
+| `summary` | `status`, `exitCode`, UTC `finishedAt`, `reportingComplete:true`, and `counts` with `success`, `warning`, `failed`, `cancelled`, `notStarted`. |
+
+Item statuses are `SUCCESS` (0), `WARNING` (7), `FAILED` (other failure),
+`CANCELLED` (130) or `NOT_STARTED` (null exit/time). A cancelled child stops new
+jobs; remaining entries are recorded as NOT_STARTED. Cancelling the initial
+mode selector starts no item. Flush the header and every item before advancing,
+then flush the terminal summary. These records include early per-item failures
+that precede existing detailed render reports. Detailed reports remain separate;
+the journal does not infer report ownership by scanning the destination.
+
+One explicit item retains its ordinary application exit. For several items,
+any failed item gives 6; warnings alone give 7; all success gives 0. Cancellation
+gives 130 and stops the list. Journal creation/append failure gives 5 and starts
+no further jobs. Roll back only an attempted append's new suffix where possible,
+preserve earlier result bytes and audio exports, and disclose incomplete reporting.
+A terminal summary is required to claim complete reporting. This is incremental
+local recording, without a crash/power-loss guarantee or a multi-file commit.
+No upload, automatic re-cleaning, sound retuning or saved batch/action flag occurs.
+
+## Frozen local folder queues — WAC-M3-03
+
+Direct PowerShell `InputDirectories` selects 1 through 64 nonempty local folder paths,
+mutually exclusive with `inputPath`, `InputPaths` and `InputListPath`. `Recurse`
+is an opt-in switch valid only with InputDirectories, including bound false.
+Preview/settings management/support export remain separate. Queue, Batch and
+Settings siblings are optional for legacy single-file use. The BAT keeps its
+existing explicit-file transport; it does not automatically convert folders.
+
+Materialize all selection records before starting media jobs. Seed one breadth-
+first traversal with supplied roots in order, sorting each folder's immediate
+entries with StringComparer.Ordinal. Without Recurse, ordinary nested folders
+produce one skipped record each; descendants are not counted as selected files.
+Supported extension candidates (case insensitive) are `.aac`, `.aif`, `.aiff`,
+`.avi`, `.flac`, `.m4a`, `.mkv`, `.mov`, `.mp3`, `.mp4`, `.ogg`, `.opus`, `.wav`,
+`.webm`, `.wma`. They remain subject to ordinary probe/decode validation; an
+extension does not certify media. Unsupported entries receive an explanation.
+
+Open ordinary directory ancestors without following reparse points and retain
+those handles through discovery. A missing/inaccessible root, reparse root or
+ancestor, unsupported path, or enumeration error rejects the entire selection
+with exit2 before jobs. Encountered reparse entries are skipped without descent,
+so junction/symlink loops and outside targets cannot enter this traversal. Dedup
+ordinary visited directories and candidate files by volume/file identity.
+Hardlink aliases and overlapping/case/relative folder selections do not create
+additional jobs. Explicit lists still preserve deliberate repeats.
+
+Exclude exact current generated names: Cleaned WAVs with the 8-digit date,
+4/6/9-digit time and 32-hex job ID; four Preview WAV roles with 32-hex ID;
+ordinary/Preview JSON/text reports; Batch ID JSONL; WinAudioClean_Log.txt;
+`.wac-ID.partial`, `.wac-write-check-ID.tmp`, `.wac-settings-ID.tmp`.
+Candidate aliases sharing an identity with a recognized generated filename
+anywhere in the snapshot are also excluded. Near-miss names remain candidates.
+Arbitrarily renamed exports without a recognized alias cannot be identified.
+A destination encountered as a proper descendant of a selected root produces
+one skipped directory record without scanning its subtree. An explicitly
+supplied destination root can still select its ordinary sources; generated
+markers remain excluded. Newly created files never enter this frozen queue.
+
+Reject incomplete selections rather than truncate: at most 1024 emitted entries
+including skips/failures, 1024 immediate entries per folder, 1024 visited
+directories, 2048 unique held ancestor directories, and 1 MiB cumulative UTF-8
+entry path bytes. Split larger selections. No native job starts on these errors.
+Capture each readable candidate's canonical path, 48-hex volume/file identity,
+length and UTC last-write time. A candidate that cannot be held is a per-entry
+FAILED/2, so other entries continue. Release discovery handles before processing.
+Before each pending job, reopen its ordinary ancestors and source without
+following reparse points; compare captured identity, size and modification time.
+Retain the read/share-read source lease and ancestor handles through the child
+invocation, then release them. Missing/changed sources fail2 and others continue.
+This is a bounded filesystem snapshot check, not a full content hash or a crash,
+power-loss or adversarial metadata-restoration guarantee.
+
+Folders use journal schema2, retaining schema1's header/item/summary contract
+and held CreateNew/flush/error behavior, with these additions:
+
+| Record | Additional fields |
+| --- | --- |
+| `batch` | `schemaVersion:2`, `selection:{kind:"folders",directories,recurse,extensions,capturedAt}`; UTC capturedAt; inputCount counts every selected record. |
+| `item` | nullable `reasonCode`, `sourceIdentity`, `sourceLength`, `sourceLastWriteTimeUtc`; `SKIPPED` has null exitCode and a reason; unavailable/changed sources FAILED/2. |
+| `summary` | `counts.skipped` in addition to success, warning, failed, cancelled, notStarted. |
+
+Reason codes are `recursion_disabled`, `output_directory`, `reparse_point`,
+`duplicate_directory`, `duplicate_file`, `unsupported_extension`,
+`generated_artifact`, `source_unavailable`, `source_changed`. Static skipped
+and selection-failed records remain truthful after cancellation; only pending
+jobs become NOT_STARTED. No re-clean/retry occurs. Folder aggregation gives
+cancel130, otherwise any failed6, warnings alone7, success/empty/all-skipped0.
+The one-item explicit-list code exception does not apply to folders. Empty or
+all-skipped folders still write a complete zero-job summary without selecting
+mode or invoking native tools. Preferences are fully validated first. Journal
+failure5 stops future jobs and preserves earlier audio/records with incomplete
+reporting disclosed. Progress/active Ctrl+C handling belongs to WAC-M3-04.
+
+## Optional output organization — WAC-M3-05
+
+The legacy flat layout remains the default. `JobFolder` is an explicit
+per-invocation switch and is never a saved preference. One generated
+`WinAudioClean_Job_<32 lowercase hex>` directory groups a single file, one
+Preview or an entire queue under Music or the chosen output base. `media`
+contains audio/owned partials; `reports` contains per-run JSON/text reports,
+the ordinary summary and default queue journal. An explicit `BatchResultPath`
+still selects its own existing parent. Failures can leave empty job directories;
+there is no directory reuse, recovery sweep or deletion by filename.
+
+Report schemas stay at their existing versions. Only organized invocations
+add a layout object: ordinary `output.organization`, Preview
+`outputOrganization` and queue header `outputOrganization`. Its fields are
+`jobId`, `rootDirectory`, `mediaDirectory`, `reportDirectory`; the grouping ID
+is distinct from each audio/run ID and a queue's batch ID. Detailed paths remain
+private local diagnostic data. Redacted diagnostic exports omit the layout.
+Flat reports have no added layout field.
+
+`PickFile` and `OpenOutputFolder` are unsaved explicit interactive actions.
+No-input use prints console usage and returns `2` without reading settings,
+opening a picker or creating output. Picker cancellation returns `130` before
+destination/native work. Unattended/input-redirected picker/open requests return `2`
+before processing. Only a published success/warning (`0`/`7`) is eligible for
+the requested directory action; empty, failed, mixed-failed or cancelled queues
+do not open it. An open failure warns without changing the persisted audio
+outcome or exit. No playback or output file opens automatically.
+
+## Implemented progress and cancellation records — WAC-M3-04
+
+Ordinary and preview run schema `1` gain additive `progress`; older reports
+remain readable without it. Cancellation adds `CANCELLED` to ordinary `status`
+and `processingStatus`, with processing/application code `130` and
+`user_cancelled` among ordinary reason codes. A cancelled run does not acquire
+SUCCESS/WARNING merely because report writing succeeds or fails. Accurate
+`normalization.analysis`, `render` and `final` can have stage `status:
+"CANCELLED"`, null measurement and an explicit stage error. In particular,
+cancelled final verification prevents publication; it is distinct from a
+failed final meter that permits a retained valid export with warning 7.
+
+| `progress` field | Meaning |
+| --- | --- |
+| `stages` | Ordered stage snapshots for this file, including inspection/validation/publication where reached. |
+| `completed` | Boolean audio-publication completion; it does not imply loudness compliance or complete report writing. |
+| `cancellationRequested` | Boolean state of this invocation's controller when the report is constructed. |
+| `cancellationStage` | The first requested stage label, or null if no stage was active/no request occurred. |
+
+A request after completed publication does not roll back valid assets or
+change the completed processing outcome. Its report can truthfully contain
+`completed: true` and `cancellationRequested: true`, with the captured stage;
+report-writing warnings remain independent.
+
+Each progress-stage record contains `stage`, `fileIndex`, `fileCount`,
+`percent`, `processedSeconds`, `durationSeconds`, `structuredEnd`, `updates`,
+`processId` and `snapshot`. File position is one-based; queue children inherit
+the enclosing selection's index/count. Unknown duration is `null` and percent
+`-1`, indicating indeterminate progress. Known media time is nonnegative and
+monotonic within a stage; percentages stay in its documented range. Only a
+post-publication `Completed` stage reaches `100`. A `structuredEnd` flag means
+FFmpeg emitted an accepted terminal block, not that validation/publication
+succeeded. Snapshot fields retain native .NET names: `OutTimeMicroseconds`,
+`End`, `Blocks`, `InvalidLines`, `TruncatedLines`. `OutTimeMicroseconds: -1`
+means no accepted timestamp yet; counts explain rejected/truncated data rather
+than synthesizing progress. Non-native stages can have null processId/snapshot.
+
+Native wrapper results add `Cancelled` (boolean), `OwnedProcessId` (nullable
+integer), `Progress` (nullable snapshot) and `CancellationInputError` (nullable
+text for binary-input IOException following owned cancellation). The latter
+does not suppress genuine `Error`/`CleanupError`. Monitored stdout is consumed
+as bounded structured progress; diagnostics and loudnorm JSON remain in
+`StandardError`. These process fields remain inside existing normalization or
+preview stage records where those records include native results. The top-level
+progress snapshots are concise observation records, not a full stdout log or
+an additional loudness measurement.
+
+After preview transaction creation, a failed/cancelled preview can write a
+smaller schema-1 `reportType: "preview"` record: job/tool/timestamps,
+`status`, `applicationExitCode`, input path, empty `assets`, attempted native
+`stages`, incomplete progress, diagnostic error/owned cleanup errors and report
+completeness. It does not describe four published comparison assets. Rollback
+and partial cleanup settle before this record is serialized, with source and
+directory pins held through report writing. Cleanup failures remain disclosed
+and may leave owned artifacts. Failure before any
+transaction can remain console-only. Report-writing failure preserves the
+primary cancellation/failure result and may prevent a persisted report.
+
+Batch schema `1` and folder schema `2` remain unchanged. Active cancellation
+records the current attempted child as CANCELLED/130; remaining pending entries
+are NOT_STARTED and known folder skips/failures retain their prior outcomes.
+Earlier exports and flushed journal records remain. Independent runs do not
+share a cancellation flag. Redacted support export continues its existing
+allowlist and omits progress snapshots, native PIDs, arbitrary stage labels and
+detailed native output; CANCELLED is an accepted terminal status. Review local
+detailed records and journals before sharing.
 
 ## Website release metadata
 

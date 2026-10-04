@@ -1,0 +1,35 @@
+{
+  "task": "WAC-M3-04",
+  "status": "pass",
+  "public_files": [
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-04-media.json",
+      "sha256": "82192f837602181d32d41e686411774baca2f149cf10a2f1acd3eee47dcfd1a6",
+      "bytes": 1677681
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-04-media-harness.json",
+      "sha256": "47137c5a12cd34921d9297178ff4ab6dfdd3156a860c111f54dfb48ad33719de",
+      "bytes": 67618
+    }
+  ],
+  "derivation": {
+    "publisher_invocation": [
+      "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+      "-X",
+      "utf8",
+      ".wac-local/WAC-M3-04/publish-progress-evidence.py",
+      "--capture",
+      ".wac-local/WAC-M3-04/media-final-io-classification/summary.json",
+      "--expected-main-sha256",
+      "a29e6b9da45d217d5fd69cbbfa4ecd60400f3fbdf1fa089386bf2a2d3cd38297"
+    ],
+    "publisher_source_sha256": "de8bcacb0afb07b6bd800277fc10bfbc04bce54ae5bb757ada58115ae007b63a",
+    "policy": "Synthetic case outcomes, hashes, command metadata and bounded progress/log projections. No audio/binary PCM/full raw report or repeated full log. Physical runtime equality is checked at capture/publication; parent owns later checkpoint/console/Full records."
+  },
+  "local_capture": {
+    "path": ".wac-local/WAC-M3-04/media-final-io-classification/summary.json",
+    "sha256": "9a2f1c768403632805e72351f59deaa3d2ff86323fe0b519edf6217bfdc74d86",
+    "bytes": 4025309
+  }
+}

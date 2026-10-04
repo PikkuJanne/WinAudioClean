@@ -1,0 +1,19 @@
+Focused shell: 5.1.26100.9444
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 77 tests in 827ms.
+Filter 'Tag' set to ('BatchInvalidPath').
+Filters selected 4 tests to run.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Batch.Tests.ps1'
+Describing AC-052/054: explicit input lists are ordered bounded data
+  [+] anchors a relative pipe character entry as exact string data without preventing valid neighbors from being anchored 1.31s (1.22s|84ms)
+  [+] anchors a relative escaped NUL entry as exact string data without preventing valid neighbors from being anchored 66ms (63ms|4ms)
+
+Describing AC-052/053/054: isolated batch entry points run actual single-file children
+  [+] continues valid-relative pipe character-valid as success/failure2/success with a complete durable journal 7.58s (7.54s|38ms)
+  [+] continues valid-relative escaped NUL-valid as success/failure2/success with a complete durable journal 7.94s (7.94s|4ms)
+Tests completed in 19.7s
+Tests Passed: 4, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 73

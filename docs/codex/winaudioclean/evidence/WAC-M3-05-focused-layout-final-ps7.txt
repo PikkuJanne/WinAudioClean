@@ -1,0 +1,22 @@
+Sanitized selected focused log. Final10-case OutputLayout helper scope: actual held native directory ownership, media publication and separate report writes, explicit foreign write/rename/delete denial, collision/no reuse, close without directory deletion. Scoped captured main predates final integration; Output helper/test hashes match their final versions.
+
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 10 tests in 433ms.
+Running tests.
+
+Running tests from '<REPO>\tests\WinAudioClean.OutputLayout.Tests.ps1'
+Describing Optional held output layout
+  [+] allows media publication and separate held report writing while denying directory replacement 1.12s (1.05s|75ms)
+  [+] does not reuse a prior job directory or alter its foreign contents 58ms (55ms|3ms)
+  [+] preserves a file occupying the generated job directory name 45ms (42ms|3ms)
+  [+] resolves a supported existing base junction and rejects a generated child junction collision 72ms (69ms|3ms)
+  [+] rejects paths changed in a borrowed layout while preserving the original held hierarchy 40ms (37ms|3ms)
+  [+] rejects a closed directory lease before further use 36ms (34ms|2ms)
+  [+] releases every directory after an allocation assertion fails and retains empty directories 410ms (407ms|3ms)
+  [+] continues releasing handles after a disposal failure and closes idempotently 44ms (39ms|6ms)
+  [+] does not create a missing base or fall back to the current directory 59ms (57ms|2ms)
+  [+] rejects an existing regular file used as the base without modifying it 34ms (31ms|3ms)
+Tests completed in 3.67s
+Tests Passed: 10, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0

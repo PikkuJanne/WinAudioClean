@@ -1,0 +1,346 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (49 files; shell 5.1.26100.9444).
+Static gate passed; 272 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 3 files.
+Discovery found 264 tests in 661ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-023/AC-024: invalid output is never published and reporting preserves source bytes
+  [+] handles empty in the actual application in powershell.exe 3.53s (3.47s|60ms)
+  [+] handles header in the actual application in powershell.exe 4.19s (4.19s|2ms)
+  [+] handles truncated in the actual application in powershell.exe 4.12s (4.12s|4ms)
+  [+] handles short in the actual application in powershell.exe 4s (3.99s|8ms)
+  [+] handles malformed output probe in the actual application in powershell.exe 3.61s (3.6s|3ms)
+  [+] handles failed output probe in the actual application in powershell.exe 2.92s (2.92s|3ms)
+  [+] handles missing input duration in the actual application in powershell.exe 2.1s (2.09s|2ms)
+  [+] handles input aliases log in the actual application in powershell.exe 5.71s (5.71s|3ms)
+  [+] handles empty in the actual application in pwsh.exe 3.37s (3.37s|2ms)
+  [+] handles header in the actual application in pwsh.exe 3.37s (3.37s|2ms)
+  [+] handles truncated in the actual application in pwsh.exe 3.43s (3.43s|1ms)
+  [+] handles short in the actual application in pwsh.exe 3.44s (3.44s|2ms)
+  [+] handles malformed output probe in the actual application in pwsh.exe 3.61s (3.61s|1ms)
+  [+] handles failed output probe in the actual application in pwsh.exe 3.9s (3.9s|6ms)
+  [+] handles missing input duration in the actual application in pwsh.exe 4.62s (4.61s|3ms)
+  [+] handles input aliases log in the actual application in pwsh.exe 8.05s (8.05s|2ms)
+
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] AC-014: rejects missing -File -inputPath before prompting in powershell.exe 1.27s (1.27s|6ms)
+  [+] AC-014: rejects missing -File -inputPath before prompting in pwsh.exe 2.68s (2.68s|3ms)
+  [+] AC-014: rejects a missing dropped file via outer powershell.exe before the menu (inner Windows PowerShell) 1.93s (1.93s|2ms)
+  [+] AC-014: rejects a missing dropped file via outer pwsh.exe before the menu (inner Windows PowerShell) 2.73s (2.73s|4ms)
+
+Describing AC-014/015: actual script preflight is bounded and unattended on invalid requests
+  [-] rejects no input without a menu or processing in powershell.exe 821ms (815ms|6ms)
+   Expected regular expression 'No\ input\ file\ supplied' to match <empty>, but it did not match.
+   at $result.StandardError | Should -Match ([regex]::Escape($Diagnostic)), <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+  [+] rejects directory without a menu or processing in powershell.exe 1.12s (1.12s|2ms)
+  [+] rejects URL without a menu or processing in powershell.exe 978ms (975ms|3ms)
+  [+] rejects zero bytes without a menu or processing in powershell.exe 817ms (816ms|2ms)
+  [-] rejects destination file without a menu or processing in powershell.exe 850ms (848ms|1ms)
+   Expected regular expression 'Output\ directory\ cannot\ be\ created' to match '<repo>\WinAudioClean.ps1 : Preflight failed: A mode is required for unattended use. Suppl
+   y -Mode Raw or -Mode Zoom with -NonInteractive.
+       + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+       + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1
+
+   ', but it did not match.
+   at $result.StandardError | Should -Match ([regex]::Escape($Diagnostic)), <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+  [-] rejects empty destination without a menu or processing in powershell.exe 854ms (852ms|2ms)
+   Expected regular expression 'filesystem\ path\ is\ required' to match '<repo>\WinAudioClean.ps1 : Preflight failed: A mode is required for unattended use. Suppl
+   y -Mode Raw or -Mode Zoom with -NonInteractive.
+       + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+       + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,WinAudioClean.ps1
+
+   ', but it did not match.
+   at $result.StandardError | Should -Match ([regex]::Escape($Diagnostic)), <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+  [+] rejects invalid mode without a menu or processing in powershell.exe 823ms (821ms|1ms)
+  [+] rejects empty mode without a menu or processing in powershell.exe 870ms (868ms|2ms)
+  [+] rejects missing mode without a menu or processing in powershell.exe 928ms (926ms|1ms)
+  [+] rejects redirected input without a menu or processing in powershell.exe 915ms (913ms|2ms)
+  [+] rejects host noninteractive without a menu or processing in powershell.exe 840ms (838ms|1ms)
+  [-] rejects no input without a menu or processing in pwsh.exe 1.25s (1.25s|3ms)
+   Expected regular expression 'No\ input\ file\ supplied' to match <empty>, but it did not match.
+   at $result.StandardError | Should -Match ([regex]::Escape($Diagnostic)), <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+  [+] rejects directory without a menu or processing in pwsh.exe 2.21s (2.21s|2ms)
+  [+] rejects URL without a menu or processing in pwsh.exe 1.84s (1.83s|2ms)
+  [+] rejects zero bytes without a menu or processing in pwsh.exe 1.87s (1.86s|1ms)
+  [-] rejects destination file without a menu or processing in pwsh.exe 1.96s (1.95s|1ms)
+   Expected regular expression 'Output\ directory\ cannot\ be\ created' to match 'Write-Error: Preflight failed: A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.
+   ', but it did not match.
+   at $result.StandardError | Should -Match ([regex]::Escape($Diagnostic)), <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+  [-] rejects empty destination without a menu or processing in pwsh.exe 1.9s (1.9s|1ms)
+   Expected regular expression 'filesystem\ path\ is\ required' to match 'Write-Error: Preflight failed: A mode is required for unattended use. Supply -Mode Raw or -Mode Zoom with -NonInteractive.
+   ', but it did not match.
+   at $result.StandardError | Should -Match ([regex]::Escape($Diagnostic)), <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.EntryPoints.Tests.ps1:209
+  [+] rejects invalid mode without a menu or processing in pwsh.exe 1.85s (1.85s|2ms)
+  [+] rejects empty mode without a menu or processing in pwsh.exe 1.88s (1.88s|1ms)
+  [+] rejects missing mode without a menu or processing in pwsh.exe 2.04s (2.03s|1ms)
+  [+] rejects redirected input without a menu or processing in pwsh.exe 1.87s (1.87s|1ms)
+  [+] rejects host noninteractive without a menu or processing in pwsh.exe 2.25s (2.25s|2ms)
+
+Describing AC-017: actual native execution reports success, failure and reporting warnings
+  [+] AC-016: preserves spaces here.wav through direct powershell.exe -File and the native child 2.86s (2.86s|3ms)
+  [+] AC-016: preserves [square brackets].wav through direct powershell.exe -File and the native child 2.84s (2.84s|2ms)
+  [+] AC-016: preserves speaker's recording.wav through direct powershell.exe -File and the native child 3.22s (3.22s|1ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct powershell.exe -File and the native child 2.84s (2.84s|1ms)
+  [+] AC-016: preserves ampersand & here.wav through direct powershell.exe -File and the native child 2.88s (2.88s|2ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct powershell.exe -File and the native child 2.88s (2.88s|1ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct powershell.exe -File and the native child 2.65s (2.65s|1ms)
+  [+] AC-016: preserves (parentheses).wav through direct powershell.exe -File and the native child 2.88s (2.88s|5ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct powershell.exe -File and the native child 2.6s (2.6s|1ms)
+  [+] AC-016: preserves spaces here.wav through direct pwsh.exe -File and the native child 3.6s (3.6s|1ms)
+  [+] AC-016: preserves [square brackets].wav through direct pwsh.exe -File and the native child 3.31s (3.31s|1ms)
+  [+] AC-016: preserves speaker's recording.wav through direct pwsh.exe -File and the native child 3.22s (3.21s|2ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct pwsh.exe -File and the native child 3.5s (3.49s|2ms)
+  [+] AC-016: preserves ampersand & here.wav through direct pwsh.exe -File and the native child 3.7s (3.7s|2ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct pwsh.exe -File and the native child 3.38s (3.38s|2ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct pwsh.exe -File and the native child 3.37s (3.37s|2ms)
+  [+] AC-016: preserves (parentheses).wav through direct pwsh.exe -File and the native child 3.13s (3.12s|1ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct pwsh.exe -File and the native child 3.47s (3.47s|1ms)
+  [+] returns dependency failure for invalid executable False in powershell.exe 1.01s (1.01s|1ms)
+  [+] returns dependency failure for invalid executable True in powershell.exe 1.05s (1.05s|1ms)
+  [+] returns dependency failure for invalid executable False in pwsh.exe 2.02s (2.01s|1ms)
+  [+] returns dependency failure for invalid executable True in pwsh.exe 2.04s (2.04s|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in powershell.exe 2.93s (2.93s|4ms)
+  [+] uses mode 1, native exit 0, blocked log True in powershell.exe 2.79s (2.79s|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in powershell.exe 2.69s (2.69s|1ms)
+  [+] uses mode 1, native exit 7, blocked log True in powershell.exe 2.66s (2.65s|3ms)
+  [+] uses mode 2, native exit 0, blocked log False in powershell.exe 2.79s (2.79s|1ms)
+  [+] uses mode 2, native exit 0, blocked log True in powershell.exe 2.7s (2.7s|1ms)
+  [+] uses mode 2, native exit 7, blocked log False in powershell.exe 2.6s (2.59s|2ms)
+  [+] uses mode 2, native exit 7, blocked log True in powershell.exe 2.69s (2.68s|2ms)
+  [+] uses mode 1, native exit 0, blocked log False in pwsh.exe 3.55s (3.55s|2ms)
+  [+] uses mode 1, native exit 0, blocked log True in pwsh.exe 3.92s (3.92s|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in pwsh.exe 3.23s (3.23s|1ms)
+  [+] uses mode 1, native exit 7, blocked log True in pwsh.exe 3.63s (3.63s|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in pwsh.exe 3.38s (3.38s|2ms)
+  [+] uses mode 2, native exit 0, blocked log True in pwsh.exe 3.35s (3.35s|2ms)
+  [+] uses mode 2, native exit 7, blocked log False in pwsh.exe 3.22s (3.21s|2ms)
+  [+] uses mode 2, native exit 7, blocked log True in pwsh.exe 3.34s (3.34s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Settings.Tests.ps1'
+Describing AC-049: explicit settings override saved values and built-in defaults
+  [+] chooses the saved then explicit Mode value with an attributable origin 111ms (105ms|6ms)
+  [+] chooses the saved then explicit Preset value with an attributable origin 15ms (13ms|1ms)
+  [+] chooses the saved then explicit LoudnessMode value with an attributable origin 18ms (17ms|2ms)
+  [+] chooses the saved then explicit BitDepth value with an attributable origin 22ms (20ms|2ms)
+  [+] chooses the saved then explicit Mono value with an attributable origin 40ms (17ms|23ms)
+  [+] chooses the saved then explicit Rf64 value with an attributable origin 20ms (17ms|3ms)
+  [+] chooses the saved then explicit OutputDirectory value with an attributable origin 42ms (41ms|2ms)
+  [+] chooses the saved then explicit AudioStreamIndex value with an attributable origin 35ms (33ms|2ms)
+  [+] chooses the saved then explicit CleaningOptions value with an attributable origin 65ms (62ms|3ms)
+  [+] retains the exact built-in policy when every preference is omitted 76ms (74ms|2ms)
+  [+] computes the default path without reading or creating preferences 21ms (19ms|2ms)
+  [+] returns omitted settings for a missing isolated file without creating its parent 42ms (39ms|3ms)
+  [+] maps all saved fields into app-compatible values without materializing defaults 744ms (743ms|2ms)
+  [+] rejects explicit empty Mode instead of falling back to a saved value 49ms (46ms|3ms)
+  [+] rejects explicit empty Preset instead of falling back to a saved value 11ms (8ms|3ms)
+  [+] rejects explicit empty LoudnessMode instead of falling back to a saved value 11ms (9ms|2ms)
+  [+] rejects explicit empty BitDepth instead of falling back to a saved value 6ms (5ms|2ms)
+  [+] rejects explicit empty OutputDirectory instead of falling back to a saved value 9ms (6ms|3ms)
+  [+] rejects explicit empty AudioStreamIndex instead of falling back to a saved value 7ms (5ms|2ms)
+  [+] validates an invalid saved field even when an explicit value would replace it 30ms (27ms|3ms)
+  [+] accepts explicit false SwitchParameter values and ignores non-preference main arguments 41ms (39ms|2ms)
+
+Describing AC-051: saved JSON is bounded typed data rather than executable options
+  [+] rejects truncated JSON while preserving the complete file bytes 56ms (37ms|18ms)
+  [+] rejects trailing content while preserving the complete file bytes 21ms (18ms|3ms)
+  [+] rejects root array while preserving the complete file bytes 21ms (18ms|3ms)
+  [+] rejects root null while preserving the complete file bytes 20ms (13ms|7ms)
+  [+] rejects missing schema while preserving the complete file bytes 14ms (11ms|3ms)
+  [+] rejects unknown schema while preserving the complete file bytes 22ms (17ms|5ms)
+  [+] rejects string schema while preserving the complete file bytes 15ms (12ms|3ms)
+  [+] rejects boolean schema while preserving the complete file bytes 14ms (13ms|2ms)
+  [+] rejects fractional schema while preserving the complete file bytes 18ms (17ms|2ms)
+  [+] rejects missing settings while preserving the complete file bytes 15ms (13ms|2ms)
+  [+] rejects null settings while preserving the complete file bytes 14ms (12ms|2ms)
+  [+] rejects array settings while preserving the complete file bytes 15ms (14ms|2ms)
+  [+] rejects unknown outer key while preserving the complete file bytes 19ms (16ms|3ms)
+  [+] rejects wrong outer key case while preserving the complete file bytes 15ms (12ms|3ms)
+  [+] rejects duplicate outer key while preserving the complete file bytes 16ms (14ms|2ms)
+  [+] rejects duplicate setting while preserving the complete file bytes 12ms (10ms|2ms)
+  [+] rejects escaped duplicate setting while preserving the complete file bytes 13ms (11ms|2ms)
+  [+] rejects wrong setting key case while preserving the complete file bytes 12ms (10ms|2ms)
+  [+] rejects case-coalescing settings keys while preserving the complete file bytes 13ms (11ms|2ms)
+  [+] rejects unknown setting while preserving the complete file bytes 12ms (10ms|1ms)
+  [+] rejects invalid mode while preserving the complete file bytes 17ms (15ms|2ms)
+  [+] rejects null mode while preserving the complete file bytes 18ms (16ms|2ms)
+  [+] rejects empty mode while preserving the complete file bytes 12ms (11ms|1ms)
+  [+] rejects boolean mode while preserving the complete file bytes 18ms (16ms|2ms)
+  [+] rejects invalid preset while preserving the complete file bytes 23ms (20ms|2ms)
+  [+] rejects invalid loudness mode while preserving the complete file bytes 18ms (17ms|2ms)
+  [+] rejects string bit depth while preserving the complete file bytes 29ms (27ms|1ms)
+  [+] rejects fractional bit depth while preserving the complete file bytes 28ms (27ms|2ms)
+  [+] rejects unsupported bit depth while preserving the complete file bytes 34ms (31ms|4ms)
+  [+] rejects boolean bit depth while preserving the complete file bytes 18ms (17ms|2ms)
+  [+] rejects numeric mono while preserving the complete file bytes 32ms (29ms|3ms)
+  [+] rejects string mono while preserving the complete file bytes 36ms (26ms|9ms)
+  [+] rejects array RF64 while preserving the complete file bytes 24ms (22ms|3ms)
+  [+] rejects null RF64 while preserving the complete file bytes 17ms (15ms|2ms)
+  [+] rejects empty output directory while preserving the complete file bytes 18ms (16ms|2ms)
+  [+] rejects numeric output directory while preserving the complete file bytes 18ms (12ms|6ms)
+  [+] rejects URL output directory while preserving the complete file bytes 14ms (12ms|2ms)
+  [+] rejects negative stream index while preserving the complete file bytes 29ms (23ms|6ms)
+  [+] rejects string stream index while preserving the complete file bytes 22ms (20ms|2ms)
+  [+] rejects fractional stream index while preserving the complete file bytes 14ms (10ms|3ms)
+  [+] rejects decimal integer stream index while preserving the complete file bytes 16ms (14ms|2ms)
+  [+] rejects overflow stream index while preserving the complete file bytes 14ms (10ms|4ms)
+  [+] rejects boolean stream index while preserving the complete file bytes 15ms (12ms|3ms)
+  [+] rejects null cleaning while preserving the complete file bytes 19ms (13ms|6ms)
+  [+] rejects array cleaning while preserving the complete file bytes 13ms (11ms|1ms)
+  [+] rejects unknown cleaning option while preserving the complete file bytes 22ms (14ms|8ms)
+  [+] rejects wrong cleaning key case while preserving the complete file bytes 19ms (16ms|3ms)
+  [+] rejects case-coalescing cleaning keys while preserving the complete file bytes 15ms (13ms|2ms)
+  [+] rejects duplicate cleaning option while preserving the complete file bytes 12ms (10ms|2ms)
+  [+] rejects string cleaning number while preserving the complete file bytes 15ms (13ms|2ms)
+  [+] rejects boolean cleaning number while preserving the complete file bytes 20ms (18ms|2ms)
+  [+] rejects nonfinite cleaning number while preserving the complete file bytes 18ms (16ms|3ms)
+  [+] rejects below cleaning bound while preserving the complete file bytes 21ms (18ms|3ms)
+  [+] rejects above cleaning bound while preserving the complete file bytes 14ms (13ms|2ms)
+  [+] rejects numeric cleaning toggle while preserving the complete file bytes 21ms (19ms|2ms)
+  [+] rejects injected cleaning string while preserving the complete file bytes 15ms (13ms|2ms)
+  [+] rejects NaN JSON token while preserving the complete file bytes 16ms (14ms|2ms)
+  [+] rejects Zoom Gentle conflict while preserving the complete file bytes 13ms (11ms|1ms)
+  [+] rejects Zoom cleaning conflict while preserving the complete file bytes 19ms (17ms|2ms)
+  [+] rejects invalid disabled gate value while preserving the complete file bytes 16ms (15ms|1ms)
+  [+] rejects invalid disabled denoise value while preserving the complete file bytes 30ms (27ms|3ms)
+  [+] rejects malformed UTF-8 byte encoding without rewriting it 32ms (29ms|3ms)
+  [+] rejects UTF-16 encoding byte encoding without rewriting it 14ms (12ms|2ms)
+  [+] rejects embedded NUL byte encoding without rewriting it 17ms (15ms|2ms)
+  [+] accepts the byte ceiling and rejects one byte beyond it 71ms (69ms|2ms)
+  [+] accepts one UTF-8 BOM and counts it in the byte limit 16ms (14ms|2ms)
+  [+] rejects executable-looking settings without executing their text 60ms (56ms|3ms)
+  [+] reports invalid settings without echoing private configuration contents 21ms (17ms|4ms)
+  [+] serializes typed values and profile numbers invariantly in de-DE 155ms (153ms|2ms)
+  [+] serializes typed values and profile numbers invariantly in fi-FI 50ms (48ms|2ms)
+
+Describing AC-051: atomic settings saves preserve old data on failed publication
+  [+] rejects a directory config path without changing its contents 45ms (40ms|5ms)
+  [+] rejects a config path through a junction without changing the target or foreign files 53ms (50ms|3ms)
+  [+] preserves a foreign destination appearing after an initially absent target was reserved 565ms (564ms|1ms)
+  [+] replaces a valid config and resets it to an empty versioned document 66ms (61ms|6ms)
+  [+] preserves old bytes and a foreign temporary during publication error 68ms (65ms|3ms)
+  [+] preserves old bytes and a foreign temporary during interrupted publication 87ms (84ms|3ms)
+  [+] preserves a locked old target and removes its own temporary after replacement fails 42ms (40ms|2ms)
+  [+] denies non-owner delete, rename and write while publication retains the owned temporary handle 89ms (87ms|2ms)
+  [+] rejects invalid new settings before changing the previous config 30ms (28ms|2ms)
+
+Describing AC-049/050: isolated settings management is unattended and never starts media tools
+  [+] shows omitted/default values without input, native startup, prompts or autosaving 1.17s (1.17s|5ms)
+  [+] explicitly saves typed chosen settings and shows their origins without media processing 1.79s (1.79s|2ms)
+  [+] resets a corrupt config without reading its content or starting native tools 1.62s (1.62s|1ms)
+  [+] ignores a corrupt isolated config for Show without repairing or rewriting it 907ms (904ms|3ms)
+  [+] rejects save and reset with code 2 before native or preference/output changes 705ms (704ms|1ms)
+  [+] rejects show input with code 2 before native or preference/output changes 1.02s (1.02s|2ms)
+  [+] rejects show preview with code 2 before native or preference/output changes 1.13s (1.13s|3ms)
+  [+] rejects show preview range with code 2 before native or preference/output changes 927ms (924ms|3ms)
+  [+] rejects show native path with code 2 before native or preference/output changes 922ms (919ms|3ms)
+  [+] rejects show diagnostic with code 2 before native or preference/output changes 992ms (990ms|2ms)
+  [+] rejects reset mode with code 2 before native or preference/output changes 1.01s (1.01s|2ms)
+  [+] rejects empty explicit mode with code 2 before native or preference/output changes 2.3s (2.29s|3ms)
+  [+] rejects empty settings path with code 2 before native or preference/output changes 2.17s (2.16s|9ms)
+  [+] rejects a corrupt saved file before explicit CLI overrides, dependencies or output creation 2.42s (2.42s|3ms)
+  [+] uses saved mode/output choices for a real unattended entry point without autosaving 5.49s (5.49s|3ms)
+  [+] replaces saved cleaning wholly with an explicit empty dictionary before constructing the graph 5.89s (5.89s|2ms)
+  [+] runs an explicit job while ignoring corrupt saved settings without rewriting them 4.65s (4.65s|2ms)
+  [+] passes explicit false switches through the main entry point over saved true values 5.19s (5.19s|2ms)
+  [+] fails missing unattended mode without prompting, rendering or saving defaults 1.52s (1.52s|2ms)
+  [+] uses the saved absolute stream index and rejects omitted selection without prompting 5.13s (5.13s|3ms)
+  [+] uses the saved absolute stream index and rejects omitted selection without prompting 3.4s (3.39s|2ms)
+  [+] retains positional legacy input with only main/IO when saved settings are explicitly ignored 4.2s (4.2s|3ms)
+  [+] dot-sources main/IO without loading settings or acting on management parameters 760ms (758ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preflight.Tests.ps1'
+Describing AC-013: preflight treats filenames as literal data
+  [+] resolves and reads exactly meeting with spaces.wav 68ms (63ms|5ms)
+  [+] resolves and reads exactly meeting [draft].wav 26ms (22ms|3ms)
+  [+] resolves and reads exactly speaker's recording.wav 29ms (26ms|3ms)
+  [+] resolves and reads exactly meeting äöÅ.wav 35ms (32ms|3ms)
+  [+] resolves and reads exactly speaker & guest.wav 33ms (30ms|3ms)
+  [+] resolves and reads exactly meeting %completed%.wav 33ms (29ms|3ms)
+  [+] resolves and reads exactly meeting !important!.wav 34ms (31ms|3ms)
+  [+] resolves and reads exactly meeting (take 1).wav 26ms (22ms|3ms)
+  [+] does not expand brackets to a different existing filename 61ms (38ms|23ms)
+  [+] normalizes a relative path against the PowerShell working directory 22ms (19ms|3ms)
+  [+] rejects provider-qualified syntax even when the underlying file exists 36ms (34ms|3ms)
+
+Describing AC-014: input preflight rejects unsupported or unreadable input
+  [+] rejects empty path for both input and destination 52ms (45ms|7ms)
+  [+] rejects blank path for both input and destination 16ms (14ms|2ms)
+  [+] rejects HTTPS URL for both input and destination 16ms (14ms|2ms)
+  [+] rejects file URL for both input and destination 29ms (27ms|2ms)
+  [+] rejects environment provider for both input and destination 34ms (28ms|6ms)
+  [+] rejects registry provider for both input and destination 19ms (17ms|2ms)
+  [+] rejects UNC path for both input and destination 24ms (21ms|3ms)
+  [+] rejects forward-slash UNC path for both input and destination 17ms (14ms|3ms)
+  [+] rejects extended device path for both input and destination 23ms (20ms|3ms)
+  [+] rejects device namespace for both input and destination 13ms (9ms|3ms)
+  [+] rejects alternate data stream for both input and destination 24ms (21ms|3ms)
+  [+] rejects a missing file without creating it 19ms (17ms|2ms)
+  [+] rejects an existing directory 24ms (18ms|6ms)
+  [+] rejects a zero-byte file and leaves it unchanged 25ms (22ms|3ms)
+  [+] rejects a file that cannot be opened for reading 24ms (22ms|3ms)
+
+Describing AC-013/AC-014: destination preflight creates and verifies literal directories
+  [+] creates a literal destination containing meeting with spaces.wav without leaving probe files 50ms (45ms|6ms)
+  [+] creates a literal destination containing meeting [draft].wav without leaving probe files 19ms (16ms|3ms)
+  [+] creates a literal destination containing speaker's recording.wav without leaving probe files 16ms (14ms|2ms)
+  [+] creates a literal destination containing meeting äöÅ.wav without leaving probe files 22ms (19ms|3ms)
+  [+] creates a literal destination containing speaker & guest.wav without leaving probe files 12ms (11ms|2ms)
+  [+] creates a literal destination containing meeting %completed%.wav without leaving probe files 17ms (15ms|2ms)
+  [+] creates a literal destination containing meeting !important!.wav without leaving probe files 15ms (12ms|3ms)
+  [+] creates a literal destination containing meeting (take 1).wav without leaving probe files 12ms (10ms|2ms)
+  [+] normalizes and creates a nested relative destination 19ms (17ms|1ms)
+  [+] preserves existing files and removes only its own write probe 31ms (28ms|3ms)
+  [+] rejects a destination occupied by a file and preserves that file 20ms (18ms|2ms)
+  [+] rejects a directory whose ACL denies creating files 59ms (56ms|3ms)
+
+Describing AC-015: the menu retries invalid answers and permits cancellation
+  [+] selects Raw for 1 198ms (192ms|6ms)
+  [+] selects Zoom for 2 40ms (38ms|3ms)
+  [+] retries empty and invalid answers before accepting a valid choice 195ms (193ms|2ms)
+  [+] returns no mode for cancellation q 76ms (73ms|3ms)
+  [+] returns no mode for cancellation cancel 57ms (52ms|5ms)
+  [+] returns no mode when the host reports end of input 50ms (47ms|3ms)
+  [+] reports a clear unattended-use route when Read-Host fails 74ms (73ms|2ms)
+
+Describing AC-015: prompt eligibility follows host and script invocation boundaries
+  [+] allows an interactive host with ordinary startup switches 37ms (30ms|7ms)
+  [+] prevents prompting for the explicit application switch 29ms (26ms|3ms)
+  [+] prevents prompting for redirected standard input 6ms (3ms|3ms)
+  [+] prevents prompting for a noninteractive operating system session 6ms (3ms|3ms)
+  [+] recognizes host switch -NonInteractive before script arguments 24ms (22ms|2ms)
+  [+] recognizes host switch -noni before script arguments 9ms (5ms|4ms)
+  [+] recognizes host switch -nonin before script arguments 9ms (4ms|6ms)
+  [+] recognizes host switch -noninter before script arguments 7ms (4ms|3ms)
+  [+] recognizes host switch -NoNiNtErAcTiVe before script arguments 7ms (4ms|3ms)
+  [+] does not interpret application arguments after -File as host switches 28ms (25ms|3ms)
+  [+] does not interpret application arguments after -fi as host switches 12ms (9ms|3ms)
+  [+] does not interpret application arguments after -Command as host switches 7ms (5ms|2ms)
+  [+] does not interpret application arguments after -co as host switches 7ms (4ms|3ms)
+  [+] does not interpret application arguments after -EncodedCommand as host switches 13ms (10ms|3ms)
+  [+] does not interpret application arguments after -ec as host switches 19ms (16ms|3ms)
+  [+] does not confuse a longer lookalike argument with a supported host switch 10ms (7ms|2ms)
+Tests completed in 282.21s
+Tests Passed: 258, Failed: 6, Skipped: 0, Inconclusive: 0, NotRun: 0
+Pester failed: 6 test(s), 0 container(s), 0 block(s).
+At <repo>\scripts\Invoke-Tests.ps1:128 char:5
++     throw "Pester failed: $($result.FailedCount) test(s), $($result.F ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (Pester failed: ...s), 0 block(s).:String) [], RuntimeException
+    + FullyQualifiedErrorId : Pester failed: 6 test(s), 0 container(s), 0 block(s).

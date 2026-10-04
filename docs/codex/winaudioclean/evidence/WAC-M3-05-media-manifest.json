@@ -1,0 +1,3286 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M3-05",
+  "status": "pass",
+  "capturedAt": "2026-10-03T10:54:46.480754+00:00",
+  "public_artifacts": [
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-05-media.json",
+      "sha256": "27cfa450fe02538a168752a7405381cfc4fc4c47443851ef4099f2954fcf83d0",
+      "bytes": 849761
+    },
+    {
+      "path": "docs/codex/winaudioclean/evidence/WAC-M3-05-media-harness.json",
+      "sha256": "22ae8452805c1bbf822d8c23339cd2d3e0a8c240fca29401a7a72121dc117a24",
+      "bytes": 77018
+    }
+  ],
+  "capture": {
+    "path": ".wac-local/WAC-M3-05/media-final/summary.json",
+    "sha256": "eaea1cb279df68cabf5ab9742b24709e08533056ba19ecb272ef7a442e2ee409",
+    "bytes": 1881725
+  },
+  "runtime_sha256_at_publication": {
+    "WinAudioClean.ps1": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+    "WinAudioClean.Settings.ps1": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+    "WinAudioClean.Preview.ps1": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+    "WinAudioClean.Batch.ps1": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+    "WinAudioClean.Queue.ps1": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+    "WinAudioClean.Output.ps1": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4"
+  },
+  "guard_scope": "Final realmedia app source/copies/tools remained unchanged across execution and were rechecked at publication. Preliminary captures keep their own hashes and failure scopes.",
+  "publisher": {
+    "path": ".wac-local/WAC-M3-05/publish-output-evidence.py",
+    "sha256": "4993bff933458eed773b01f04efbb5380884ce6f9366015f7e80d5083c40bbba",
+    "bytes": 17833
+  },
+  "raw_local_artifacts": [
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/ffmpeg-version-stdout.txt",
+      "sha256": "35051015bdc29f3cd8ae2fdeb219ad20feee51403a7e9a9868d1405b8de8b553",
+      "bytes": 1512
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/ffmpeg-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/ffprobe-version-stdout.txt",
+      "sha256": "b0c3f37c8f3d89817184b7335f0ff2bf63dd988bada03fbf2e78734d083e8bb0",
+      "bytes": 1483
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/ffprobe-version-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-reference-fast-stdout.txt",
+      "sha256": "63b8c84062a0180f1be21873bafda7f103c75cd5f4ae0385f147dde6513eecec",
+      "bytes": 1489
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-reference-fast-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-fast-522ed839516843af920c17736692a7ef-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-fast-522ed839516843af920c17736692a7ef-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-fast-522ed839516843af920c17736692a7ef-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-fast-522ed839516843af920c17736692a7ef-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-reference-accurate-stdout.txt",
+      "sha256": "d9ea253af11bc43aeb55761c6f9c99a29eea92d319738caa2f59241e95f7909b",
+      "bytes": 2966
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-reference-accurate-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-accurate-db1545c5fa8547c0a68e6d2b00a08fbc-stdout.txt",
+      "sha256": "a9dcdc79f9705c4c78457236a1a61c402bf7fee23c5593b72a9b0312a09eb3b5",
+      "bytes": 1509
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-accurate-db1545c5fa8547c0a68e6d2b00a08fbc-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-accurate-db1545c5fa8547c0a68e6d2b00a08fbc-stdout.pcm",
+      "sha256": "7bd45cba4508b53433d47b5924e6e84554cbb13eaeccbf73252dc4d4d02fb4fa",
+      "bytes": 576000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-accurate-db1545c5fa8547c0a68e6d2b00a08fbc-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-reference-preview-stdout.txt",
+      "sha256": "09e6743e236872c032d0845ef9bd255e14af62b4bee999f203c002918345042e",
+      "bytes": 1473
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-reference-preview-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-Original-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-Original-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-Processed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-Processed-stdout.pcm",
+      "sha256": "d1b70b5b4c316f3a017f1b24cecdf72ff31a9fbd754a7805182b08f0235ecc7f",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-CompareOriginal-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-CompareOriginal-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-CompareProcessed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-reference-preview-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-CompareProcessed-stdout.pcm",
+      "sha256": "639a9407f7aefa10ab0ea2276d202da103a15ec9b68a5fb73f6b9f857b344158",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-reference-preview-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-chosen-flat-stdout.txt",
+      "sha256": "a6f060f0a8f2b9f292fb7640bd6caba4db80d1310c00125181106e92fd251ed8",
+      "bytes": 1498
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-chosen-flat-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-chosen-flat-97963bab12da474b86206fe847d74c1f-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-chosen-flat-97963bab12da474b86206fe847d74c1f-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-chosen-flat-97963bab12da474b86206fe847d74c1f-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-chosen-flat-97963bab12da474b86206fe847d74c1f-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-flat-stdout.txt",
+      "sha256": "99c71e2ec0544781260ca0b614c3212f3168f1c87e3df4e1b5e72c00f72f1446",
+      "bytes": 1506
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-flat-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-music-flat-f4e1aed9f7ff44359286e5543cf3fd7d-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-music-flat-f4e1aed9f7ff44359286e5543cf3fd7d-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-music-flat-f4e1aed9f7ff44359286e5543cf3fd7d-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-music-flat-f4e1aed9f7ff44359286e5543cf3fd7d-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-full-job-stdout.txt",
+      "sha256": "e8820101a7bcda9fb00d4fd27947f9c65b326c6b05f54e6093e2eef72bbbc115",
+      "bytes": 3131
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-full-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-full-job-c0e982cbe44b4129820c3d317ed2dd77-stdout.txt",
+      "sha256": "a9dcdc79f9705c4c78457236a1a61c402bf7fee23c5593b72a9b0312a09eb3b5",
+      "bytes": 1509
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-full-job-c0e982cbe44b4129820c3d317ed2dd77-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-full-job-c0e982cbe44b4129820c3d317ed2dd77-stdout.pcm",
+      "sha256": "7bd45cba4508b53433d47b5924e6e84554cbb13eaeccbf73252dc4d4d02fb4fa",
+      "bytes": 576000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-full-job-c0e982cbe44b4129820c3d317ed2dd77-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-preview-job-stdout.txt",
+      "sha256": "df9abdaabc71fcd1a51d13754377ac15869fa8975c35c68462f764a30e8f7f96",
+      "bytes": 1660
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-preview-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-Original-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-Original-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-Processed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-Processed-stdout.pcm",
+      "sha256": "d1b70b5b4c316f3a017f1b24cecdf72ff31a9fbd754a7805182b08f0235ecc7f",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-CompareOriginal-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-CompareOriginal-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-CompareProcessed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-preview-job-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-CompareProcessed-stdout.pcm",
+      "sha256": "639a9407f7aefa10ab0ea2276d202da103a15ec9b68a5fb73f6b9f857b344158",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-preview-job-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-batch-job-stdout.txt",
+      "sha256": "05619ed887e0bd2e1e0a29b74ac5f4554664beaae40a1050a481fb632e54c7a7",
+      "bytes": 3608
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-batch-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-job-828e3d825048474bb58363b0195e6900-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-job-828e3d825048474bb58363b0195e6900-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-job-828e3d825048474bb58363b0195e6900-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-job-828e3d825048474bb58363b0195e6900-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-job-b65bda32183640ebb0b2e14d13bcb9dc-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-job-b65bda32183640ebb0b2e14d13bcb9dc-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-job-b65bda32183640ebb0b2e14d13bcb9dc-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-job-b65bda32183640ebb0b2e14d13bcb9dc-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-folder-job-stdout.txt",
+      "sha256": "c5e3c9820056cdb6e57733c9ccddfa09dd1697e334be333fa28b8b7deb708dd2",
+      "bytes": 4161
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-folder-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-folder-job-a272ffecae434e2588e868286df53ef7-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-folder-job-a272ffecae434e2588e868286df53ef7-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-folder-job-a272ffecae434e2588e868286df53ef7-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-folder-job-a272ffecae434e2588e868286df53ef7-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-folder-job-c41ee9f836cf4317a7df96f7c889beda-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-folder-job-c41ee9f836cf4317a7df96f7c889beda-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-folder-job-c41ee9f836cf4317a7df96f7c889beda-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-folder-job-c41ee9f836cf4317a7df96f7c889beda-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-batch-journal-override-stdout.txt",
+      "sha256": "11e410736a9bfb6ea557c0ab2d863d3c8f071a4e138dbc5109e87a8b45c833f8",
+      "bytes": 3565
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-batch-journal-override-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-journal-override-2e4b16cf59e14db4b19465d4b6bf34f4-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-journal-override-2e4b16cf59e14db4b19465d4b6bf34f4-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-journal-override-2e4b16cf59e14db4b19465d4b6bf34f4-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-journal-override-2e4b16cf59e14db4b19465d4b6bf34f4-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-journal-override-62e35662851f469086eb0536f08a1b4d-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-batch-journal-override-62e35662851f469086eb0536f08a1b4d-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-journal-override-62e35662851f469086eb0536f08a1b4d-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-batch-journal-override-62e35662851f469086eb0536f08a1b4d-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-picker-open-stdout.txt",
+      "sha256": "df0a4043192288fefc65ecb73d74bca1ded87e3f28b74dca1a89b96de5b7a3da",
+      "bytes": 1614
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-picker-open-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-picker-open-aed30d43c88b4d438f234acd8e083636-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-picker-open-aed30d43c88b4d438f234acd8e083636-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-picker-open-aed30d43c88b4d438f234acd8e083636-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-picker-open-aed30d43c88b4d438f234acd8e083636-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-open-failure-stdout.txt",
+      "sha256": "68ca789841164b50f2a7e18c8b94ca8ce999c21b1b19526fc513128d5cfc6c58",
+      "bytes": 1652
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-open-failure-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-open-failure-2031b79ddd0a4c83bda2b8f82805f786-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-open-failure-2031b79ddd0a4c83bda2b8f82805f786-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-open-failure-2031b79ddd0a4c83bda2b8f82805f786-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-open-failure-2031b79ddd0a4c83bda2b8f82805f786-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-native-failure-open-stdout.txt",
+      "sha256": "cab0984948500cae928f8ca830a8af19dfa49fc960254c066f24e4d5b8345e62",
+      "bytes": 1762
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-native-failure-open-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-empty-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-empty-stderr.txt",
+      "sha256": "8e2a5b9ba157e82eabb4549440ab36e78e39b4c9432705dce6978bf86f80de11",
+      "bytes": 544
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-unc-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-unc-stderr.txt",
+      "sha256": "8e2a5b9ba157e82eabb4549440ab36e78e39b4c9432705dce6978bf86f80de11",
+      "bytes": 544
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-blocked-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-music-blocked-stderr.txt",
+      "sha256": "8392ceca6edd538b33468c50db0bb1a7182195d3726067f3e6bc8d5bc3161d96",
+      "bytes": 695
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-custom-empty-music-stdout.txt",
+      "sha256": "05b974dc3aa0dd318eb0ca7106633266efec628d8eca0682be0a357cfdf9cfaf",
+      "bytes": 1512
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-custom-empty-music-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-custom-empty-music-6356292fff68433f9b28689799f1ae7a-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-custom-empty-music-6356292fff68433f9b28689799f1ae7a-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-custom-empty-music-6356292fff68433f9b28689799f1ae7a-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-custom-empty-music-6356292fff68433f9b28689799f1ae7a-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-no-input-stdout.txt",
+      "sha256": "3550d3bb18b90dc80d27744aa77c77dd01977f571376b6641ae35b9d306b0f65",
+      "bytes": 588
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-no-input-stderr.txt",
+      "sha256": "b2a9f71b3d53308d56ed775bae5904a0f81f8be7530da3809fa8bc86af600eb8",
+      "bytes": 465
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-picker-cancel-stdout.txt",
+      "sha256": "8596e8ee0efe7f18971f5db2d89d7e472eaaa4c7c344e1ec99b197fecebc0e20",
+      "bytes": 36
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-picker-cancel-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-redirected-pick-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-redirected-pick-stderr.txt",
+      "sha256": "89c7b183504f2fddc31ddf2418e770d6b4eb500a5892badb33475c3734485d9a",
+      "bytes": 551
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-redirected-open-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-redirected-open-stderr.txt",
+      "sha256": "89c7b183504f2fddc31ddf2418e770d6b4eb500a5892badb33475c3734485d9a",
+      "bytes": 551
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-legacy-helper-missing-stdout.txt",
+      "sha256": "d324f6a7804540667d08fe691912dde237e3eebd708f880acb385361ce4dcc7b",
+      "bytes": 1518
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-legacy-helper-missing-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-legacy-helper-missing-1a80430374a347dd8e07d8fa7e79c1b5-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-legacy-helper-missing-1a80430374a347dd8e07d8fa7e79c1b5-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-legacy-helper-missing-1a80430374a347dd8e07d8fa7e79c1b5-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-legacy-helper-missing-1a80430374a347dd8e07d8fa7e79c1b5-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/create-ps51-flat-junction-junction-stdout.txt",
+      "sha256": "596355bb2a2cc2f61a02193cbb943115ac6fcf413f3bb2943343910f2d011c17",
+      "bytes": 192
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/create-ps51-flat-junction-junction-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-flat-junction-stdout.txt",
+      "sha256": "7d8dc38d384c2685cab502f0e305e5bbde3c35a89543fce8c13e2978560d62ff",
+      "bytes": 1509
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-flat-junction-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-flat-junction-9363c5c7dcdb46dbb29eae42d6131193-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-flat-junction-9363c5c7dcdb46dbb29eae42d6131193-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-flat-junction-9363c5c7dcdb46dbb29eae42d6131193-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-flat-junction-9363c5c7dcdb46dbb29eae42d6131193-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-queue-admission-cancel-stdout.txt",
+      "sha256": "7ffb2c38e4dca681cc1c60e5f04263ab0e8395cbc6b12833337e78c1c9779680",
+      "bytes": 1726
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-queue-admission-cancel-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-organization-report-fault-stdout.txt",
+      "sha256": "9de3f07b38776130b837a735a904696322f359824a0cf4d11bede4dcd364748d",
+      "bytes": 1797
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps51-organization-report-fault-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-organization-report-fault-retained-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps51-organization-report-fault-retained-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-organization-report-fault-retained-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps51-organization-report-fault-retained-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-reference-fast-stdout.txt",
+      "sha256": "cc428aaa0bbce502ef13b109b1b51be1e661b5ad041be248308d63570fc1d277",
+      "bytes": 1514
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-reference-fast-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-fast-e3909fe4559a45028fe68431e4390a3f-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-fast-e3909fe4559a45028fe68431e4390a3f-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-fast-e3909fe4559a45028fe68431e4390a3f-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-fast-e3909fe4559a45028fe68431e4390a3f-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-reference-accurate-stdout.txt",
+      "sha256": "991e967f7d3b543eb86d591f6a6090f34ba040a3b8ccb46083c347536648f420",
+      "bytes": 2991
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-reference-accurate-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-accurate-10557b6f1b0c48a6b243275bddab82a9-stdout.txt",
+      "sha256": "a9dcdc79f9705c4c78457236a1a61c402bf7fee23c5593b72a9b0312a09eb3b5",
+      "bytes": 1509
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-accurate-10557b6f1b0c48a6b243275bddab82a9-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-accurate-10557b6f1b0c48a6b243275bddab82a9-stdout.pcm",
+      "sha256": "7bd45cba4508b53433d47b5924e6e84554cbb13eaeccbf73252dc4d4d02fb4fa",
+      "bytes": 576000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-accurate-10557b6f1b0c48a6b243275bddab82a9-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-reference-preview-stdout.txt",
+      "sha256": "86ed554e8da9310912ff1f1eca30413a119b5e78997633e9e700cdd35a771f13",
+      "bytes": 1491
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-reference-preview-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-Original-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-Original-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-Processed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-Processed-stdout.pcm",
+      "sha256": "d1b70b5b4c316f3a017f1b24cecdf72ff31a9fbd754a7805182b08f0235ecc7f",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-CompareOriginal-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-CompareOriginal-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-CompareProcessed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-reference-preview-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-CompareProcessed-stdout.pcm",
+      "sha256": "639a9407f7aefa10ab0ea2276d202da103a15ec9b68a5fb73f6b9f857b344158",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-reference-preview-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-chosen-flat-stdout.txt",
+      "sha256": "473540c1ba3b54d53004f5f8f249d6ee11067fe8a4be309e5fcd7dfdda5e3e1c",
+      "bytes": 1523
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-chosen-flat-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-chosen-flat-4c7b0cceb33343379927d44f9f59b700-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-chosen-flat-4c7b0cceb33343379927d44f9f59b700-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-chosen-flat-4c7b0cceb33343379927d44f9f59b700-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-chosen-flat-4c7b0cceb33343379927d44f9f59b700-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-flat-stdout.txt",
+      "sha256": "57f170e36e89a12e8754718a6b2928dbb3dc0977baed801390ab115d0dd47773",
+      "bytes": 1531
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-flat-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-music-flat-39dfe322487a44f682e13b6bb3fea0fd-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-music-flat-39dfe322487a44f682e13b6bb3fea0fd-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-music-flat-39dfe322487a44f682e13b6bb3fea0fd-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-music-flat-39dfe322487a44f682e13b6bb3fea0fd-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-full-job-stdout.txt",
+      "sha256": "1142528ef6a057676234c3c7b4a7c36e7a0d81f4e20b907b3f039d80b2ef7ffd",
+      "bytes": 3156
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-full-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-full-job-40adc5da992c4b019c07dda96dee2aee-stdout.txt",
+      "sha256": "a9dcdc79f9705c4c78457236a1a61c402bf7fee23c5593b72a9b0312a09eb3b5",
+      "bytes": 1509
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-full-job-40adc5da992c4b019c07dda96dee2aee-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-full-job-40adc5da992c4b019c07dda96dee2aee-stdout.pcm",
+      "sha256": "7bd45cba4508b53433d47b5924e6e84554cbb13eaeccbf73252dc4d4d02fb4fa",
+      "bytes": 576000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-full-job-40adc5da992c4b019c07dda96dee2aee-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-preview-job-stdout.txt",
+      "sha256": "fbee3f26bebc698d70f61851babd097ac849623a73faf23ffdccef288f145a62",
+      "bytes": 1678
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-preview-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-Original-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-Original-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-Original-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-Processed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-Processed-stdout.pcm",
+      "sha256": "d1b70b5b4c316f3a017f1b24cecdf72ff31a9fbd754a7805182b08f0235ecc7f",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-Processed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-CompareOriginal-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-CompareOriginal-stdout.pcm",
+      "sha256": "3d41e54964358e2bde2b2a8354a4f852ced23565225b589ff8b6e00b49acb2eb",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-CompareOriginal-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-CompareProcessed-stdout.txt",
+      "sha256": "3bdeb5176d16ac12b35189b48e3f841921478d24ec81ec70e626ce3b2a95443a",
+      "bytes": 1425
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-preview-job-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-CompareProcessed-stdout.pcm",
+      "sha256": "639a9407f7aefa10ab0ea2276d202da103a15ec9b68a5fb73f6b9f857b344158",
+      "bytes": 288000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-preview-job-CompareProcessed-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-batch-job-stdout.txt",
+      "sha256": "8fd61f86dfbc45b48841a643d9263c8e67528d7679f7456167bf6a9ce753c252",
+      "bytes": 3660
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-batch-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-job-1d860862eea14090b99daf31a8306057-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-job-1d860862eea14090b99daf31a8306057-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-job-1d860862eea14090b99daf31a8306057-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-job-1d860862eea14090b99daf31a8306057-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-job-f130b1e2355440aeb340cc7f19df5d1b-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-job-f130b1e2355440aeb340cc7f19df5d1b-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-job-f130b1e2355440aeb340cc7f19df5d1b-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-job-f130b1e2355440aeb340cc7f19df5d1b-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-folder-job-stdout.txt",
+      "sha256": "dbdc6ff3a9c11ea4de03091da96ad88f4152cb81c92f5534a29aeb0a9146171a",
+      "bytes": 4210
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-folder-job-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-folder-job-3a9901c342964341a49fe3ebb08fa1c5-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-folder-job-3a9901c342964341a49fe3ebb08fa1c5-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-folder-job-3a9901c342964341a49fe3ebb08fa1c5-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-folder-job-3a9901c342964341a49fe3ebb08fa1c5-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-folder-job-eccb886eedbf453b897092af908f38c6-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-folder-job-eccb886eedbf453b897092af908f38c6-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-folder-job-eccb886eedbf453b897092af908f38c6-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-folder-job-eccb886eedbf453b897092af908f38c6-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-batch-journal-override-stdout.txt",
+      "sha256": "3ccd484a45473fd12f2106f3585608a6da4a140a1c104d674e8dede52265677d",
+      "bytes": 3617
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-batch-journal-override-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-journal-override-699dafeb613c460bae9f3ddfcdcd71ca-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-journal-override-699dafeb613c460bae9f3ddfcdcd71ca-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-journal-override-699dafeb613c460bae9f3ddfcdcd71ca-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-journal-override-699dafeb613c460bae9f3ddfcdcd71ca-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-journal-override-b617580622d2413092d61c65961d84f8-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-batch-journal-override-b617580622d2413092d61c65961d84f8-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-journal-override-b617580622d2413092d61c65961d84f8-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-batch-journal-override-b617580622d2413092d61c65961d84f8-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-picker-open-stdout.txt",
+      "sha256": "69e4a5327fa81b273ed795b6dd92100a1c45e11ec09c9f76c57e3b6a550df371",
+      "bytes": 1639
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-picker-open-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-picker-open-8aea32634a944124a5a6fab93d476dab-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-picker-open-8aea32634a944124a5a6fab93d476dab-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-picker-open-8aea32634a944124a5a6fab93d476dab-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-picker-open-8aea32634a944124a5a6fab93d476dab-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-open-failure-stdout.txt",
+      "sha256": "64a31b634131e245adcfe7ae8bf07b76302396d4c5ca5dcb05acb13c3bf44d5e",
+      "bytes": 1675
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-open-failure-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-open-failure-32b0a860484145c1a13425a0f754958e-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-open-failure-32b0a860484145c1a13425a0f754958e-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-open-failure-32b0a860484145c1a13425a0f754958e-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-open-failure-32b0a860484145c1a13425a0f754958e-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-native-failure-open-stdout.txt",
+      "sha256": "0064bb0a337207ce609cd6cb47cd421bbb367b5177b81ad4cf9043884a10f0ec",
+      "bytes": 1786
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-native-failure-open-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-empty-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-empty-stderr.txt",
+      "sha256": "68a8dc92b781292e4d8bf3d9052378860314a03c1fa2c2cbc19df08bb0f3531e",
+      "bytes": 150
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-unc-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-unc-stderr.txt",
+      "sha256": "68a8dc92b781292e4d8bf3d9052378860314a03c1fa2c2cbc19df08bb0f3531e",
+      "bytes": 150
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-blocked-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-music-blocked-stderr.txt",
+      "sha256": "2dd7aa36294a04ff813fbf681e30696bbbe241dd31f3257bbae423da5872f30b",
+      "bytes": 294
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-custom-empty-music-stdout.txt",
+      "sha256": "a15d8a125398bd3edb78f7e1413bfab8cd2ccf0f63c44b184b526bd52e403b59",
+      "bytes": 1537
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-custom-empty-music-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-custom-empty-music-1e2dc76f10d24a879a87be953bc1e0b9-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-custom-empty-music-1e2dc76f10d24a879a87be953bc1e0b9-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-custom-empty-music-1e2dc76f10d24a879a87be953bc1e0b9-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-custom-empty-music-1e2dc76f10d24a879a87be953bc1e0b9-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-no-input-stdout.txt",
+      "sha256": "335007a7ab5b21ff59790007e257f22a452891a0cc5a95173e3cff2d83203c1f",
+      "bytes": 594
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-no-input-stderr.txt",
+      "sha256": "a88484fa30f9133b94703aa5300996ebcbfc135a6176023a3d95e7e937aebbba",
+      "bytes": 71
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-picker-cancel-stdout.txt",
+      "sha256": "73f91e938fa5daf90412f1b7a91b4a259e3912b6e98f48901c7bc6ea7a6bfd9b",
+      "bytes": 37
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-picker-cancel-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-redirected-pick-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-redirected-pick-stderr.txt",
+      "sha256": "2c57f6c2527af36f5345299b619133d5c7873d591d80daa289596d3920cb35cb",
+      "bytes": 154
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-redirected-open-stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-redirected-open-stderr.txt",
+      "sha256": "2c57f6c2527af36f5345299b619133d5c7873d591d80daa289596d3920cb35cb",
+      "bytes": 154
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-legacy-helper-missing-stdout.txt",
+      "sha256": "a9ae169fe7be8c38d269bff5727c6e54c709811edcc1d4d1087dc2f0c12c4b0b",
+      "bytes": 1543
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-legacy-helper-missing-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-legacy-helper-missing-ad8815bbca644a79a89b08096af27cfd-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-legacy-helper-missing-ad8815bbca644a79a89b08096af27cfd-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-legacy-helper-missing-ad8815bbca644a79a89b08096af27cfd-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-legacy-helper-missing-ad8815bbca644a79a89b08096af27cfd-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/create-ps7-flat-junction-junction-stdout.txt",
+      "sha256": "de220cd3519eb7c3884f9a8caac5b5c797ef938603cffb4156d99f573ae2d042",
+      "bytes": 190
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/create-ps7-flat-junction-junction-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-flat-junction-stdout.txt",
+      "sha256": "cf2b86b175c5f81074d2843d98f31bfe9b3c016beea6ce9f0c638265409e1292",
+      "bytes": 1534
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-flat-junction-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-flat-junction-8c60b115cb7e42e79be4c0bcfc52c458-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-flat-junction-8c60b115cb7e42e79be4c0bcfc52c458-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-flat-junction-8c60b115cb7e42e79be4c0bcfc52c458-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-flat-junction-8c60b115cb7e42e79be4c0bcfc52c458-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-queue-admission-cancel-stdout.txt",
+      "sha256": "7aab0c3768b03c1979e77f9fb34df7b0de8de2a7ed893791bb1754d34e51c47a",
+      "bytes": 1751
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-queue-admission-cancel-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-organization-report-fault-stdout.txt",
+      "sha256": "fe6152ad897bf60bd18f05152d583c8579a54f2ae7ebc08d22e774340cac3845",
+      "bytes": 1822
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/app-ps7-organization-report-fault-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-organization-report-fault-retained-stdout.txt",
+      "sha256": "2d79e9d485da6a36fb7be652051fb07169e0d6d234a65b33f45ce6281475d75f",
+      "bytes": 1426
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/probe-ps7-organization-report-fault-retained-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-organization-report-fault-retained-stdout.pcm",
+      "sha256": "41dc2243fcb47c8e93072bff329a61e42ff798e3efdfcfe457c0bef87d1b3ad1",
+      "bytes": 768000
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/logs/decode-ps7-organization-report-fault-retained-stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-fast/WinAudioClean_522ed839516843af920c17736692a7ef.json",
+      "sha256": "c5e3bebca21cf7004e676e094be1d95ee85836f10fb784064824dda83cebcd92",
+      "bytes": 12628
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-fast/stereo_Cleaned_20261003-124727339_522ed839516843af920c17736692a7ef.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-accurate/WinAudioClean_db1545c5fa8547c0a68e6d2b00a08fbc.json",
+      "sha256": "511f40c2347e57ec5ab1bae66d85f5d12e09773bcbbfebb9a0d540890ef44641",
+      "bytes": 35972
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-accurate/stereo_Cleaned_20261003-124733077_db1545c5fa8547c0a68e6d2b00a08fbc.wav",
+      "sha256": "6561f415c4ae4c06559b258eb4707186158b39ce44ea4760ec7114bc4fe2542f",
+      "bytes": 576102
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-preview/WinAudioClean_Preview_ec5278d4d616471d94d59827c077a51a.json",
+      "sha256": "511c49fbf9a3b6e43904812fc585a9553310b8311605dd2f86dab72b77c29e92",
+      "bytes": 82702
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-preview/stereo_Preview_ec5278d4d616471d94d59827c077a51a_Original.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-preview/stereo_Preview_ec5278d4d616471d94d59827c077a51a_Processed.wav",
+      "sha256": "780c43ea1e27952b4b57aba6270630dc4f1a4d7bde836d2a18cb808189103a00",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-preview/stereo_Preview_ec5278d4d616471d94d59827c077a51a_CompareOriginal.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-preview/stereo_Preview_ec5278d4d616471d94d59827c077a51a_CompareProcessed.wav",
+      "sha256": "2b5f0d827e16c2d2483381165a7cfdf7516d571db9bb96c2cc790718f6364925",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-fast/WinAudioClean_e3909fe4559a45028fe68431e4390a3f.json",
+      "sha256": "ec7db93ee8950adb6dce35264ee30e9f09a9225998c4def1b8fe6f25d277361c",
+      "bytes": 7043
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-fast/stereo_Cleaned_20261003-124944825_e3909fe4559a45028fe68431e4390a3f.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-accurate/WinAudioClean_10557b6f1b0c48a6b243275bddab82a9.json",
+      "sha256": "ee29555d0fa1fdb89fd2a7bf910079c27c5de9e47cfa33aa9666e27a35f57e38",
+      "bytes": 19139
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-accurate/stereo_Cleaned_20261003-124950783_10557b6f1b0c48a6b243275bddab82a9.wav",
+      "sha256": "6561f415c4ae4c06559b258eb4707186158b39ce44ea4760ec7114bc4fe2542f",
+      "bytes": 576102
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-preview/WinAudioClean_Preview_b5d194d68ad744b39c2843d18d69d77e.json",
+      "sha256": "47df474d11272c2f6697a48e46800f52f0d49c3e90a62521a1d5b46e5dbac777",
+      "bytes": 36793
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-preview/stereo_Preview_b5d194d68ad744b39c2843d18d69d77e_Original.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-preview/stereo_Preview_b5d194d68ad744b39c2843d18d69d77e_Processed.wav",
+      "sha256": "780c43ea1e27952b4b57aba6270630dc4f1a4d7bde836d2a18cb808189103a00",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-preview/stereo_Preview_b5d194d68ad744b39c2843d18d69d77e_CompareOriginal.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-preview/stereo_Preview_b5d194d68ad744b39c2843d18d69d77e_CompareProcessed.wav",
+      "sha256": "2b5f0d827e16c2d2483381165a7cfdf7516d571db9bb96c2cc790718f6364925",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-chosen-flat/destination/WinAudioClean_97963bab12da474b86206fe847d74c1f.json",
+      "sha256": "bd923b6538aa2c7c8ed63f9dac81dbc82433ab4c449592706382e8744745e6a8",
+      "bytes": 12648
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-chosen-flat/destination/stereo_Cleaned_20261003-124748919_97963bab12da474b86206fe847d74c1f.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-flat/controlled-music/WinAudioClean_f4e1aed9f7ff44359286e5543cf3fd7d.json",
+      "sha256": "cf85ba8c586f68d57c5289afa786c00f1f5475f0513160ed7f45a4043c0ee65c",
+      "bytes": 12664
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-flat/controlled-music/stereo_Cleaned_20261003-124756229_f4e1aed9f7ff44359286e5543cf3fd7d.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-full-job/destination/WinAudioClean_Job_a7369c8bc5354d758868624ff15514fe/reports/WinAudioClean_c0e982cbe44b4129820c3d317ed2dd77.json",
+      "sha256": "d2ec3d32bfc59036a5fa68c27d29904f905f6ec7773a0137333b9e0490b63219",
+      "bytes": 37231
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-full-job/destination/WinAudioClean_Job_a7369c8bc5354d758868624ff15514fe/media/stereo_Cleaned_20261003-124802744_c0e982cbe44b4129820c3d317ed2dd77.wav",
+      "sha256": "6561f415c4ae4c06559b258eb4707186158b39ce44ea4760ec7114bc4fe2542f",
+      "bytes": 576102
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/destination/WinAudioClean_Job_4096c2dde81f454fb98ad9889592291d/reports/WinAudioClean_Preview_896d118143aa40adad857a0ee24977f2.json",
+      "sha256": "df295865af81b83660cc350b3e1fe6a5eedd01bd1da73287bd0c40a0e61304a4",
+      "bytes": 84367
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/destination/WinAudioClean_Job_4096c2dde81f454fb98ad9889592291d/media/stereo_Preview_896d118143aa40adad857a0ee24977f2_Original.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/destination/WinAudioClean_Job_4096c2dde81f454fb98ad9889592291d/media/stereo_Preview_896d118143aa40adad857a0ee24977f2_Processed.wav",
+      "sha256": "780c43ea1e27952b4b57aba6270630dc4f1a4d7bde836d2a18cb808189103a00",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/destination/WinAudioClean_Job_4096c2dde81f454fb98ad9889592291d/media/stereo_Preview_896d118143aa40adad857a0ee24977f2_CompareOriginal.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/destination/WinAudioClean_Job_4096c2dde81f454fb98ad9889592291d/media/stereo_Preview_896d118143aa40adad857a0ee24977f2_CompareProcessed.wav",
+      "sha256": "2b5f0d827e16c2d2483381165a7cfdf7516d571db9bb96c2cc790718f6364925",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/reports/WinAudioClean_828e3d825048474bb58363b0195e6900.json",
+      "sha256": "f730f403176ef8158a69ca4f42d8ab4103d81dcb2abbce3153e021cab72b6fcb",
+      "bytes": 13738
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/reports/WinAudioClean_b65bda32183640ebb0b2e14d13bcb9dc.json",
+      "sha256": "76f8cb3f897a9838e239c4d67fd87971dcc6e46732677d99a4b4a80a93ab061d",
+      "bytes": 13738
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/media/stereo_Cleaned_20261003-124820199_828e3d825048474bb58363b0195e6900.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/media/stereo_Cleaned_20261003-124822875_b65bda32183640ebb0b2e14d13bcb9dc.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/reports/WinAudioClean_Batch_58d58aaa87134420ae402dab1b5a9790.jsonl",
+      "sha256": "3fb0fc0a36b5c515bec36e7f4cdc637dd56e70bca0ca98baa40ed984e2d38c55",
+      "bytes": 1933
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/reports/WinAudioClean_a272ffecae434e2588e868286df53ef7.json",
+      "sha256": "5b6488b2e7dc56c8edbd62ab6d27af0b936095d860fad890a162135b77f5c75c",
+      "bytes": 13864
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/reports/WinAudioClean_c41ee9f836cf4317a7df96f7c889beda.json",
+      "sha256": "78633a70c7d6890caa19fad8fce42ffcaca15f4fec10a9cc5a4483a3b1064618",
+      "bytes": 13836
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/media/ordinary_Cleaned_20261003-124833043_a272ffecae434e2588e868286df53ef7.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/media/ordinary_Cleaned_20261003-124829944_c41ee9f836cf4317a7df96f7c889beda.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/reports/WinAudioClean_Batch_5c75933a0a774ef7ada394a5fea7979b.jsonl",
+      "sha256": "772f85be9ebfa082482e0751126c7775baccf06715cfbefef31fa843ec9a0fc3",
+      "bytes": 3613
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/destination/WinAudioClean_Job_0ce9719211c94a51a9d1ec860998ceb3/reports/WinAudioClean_2e4b16cf59e14db4b19465d4b6bf34f4.json",
+      "sha256": "3c1f961f010cdf61a044b163aec68e24b1facd50d343cf247ba951e3e476f13a",
+      "bytes": 13829
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/destination/WinAudioClean_Job_0ce9719211c94a51a9d1ec860998ceb3/reports/WinAudioClean_62e35662851f469086eb0536f08a1b4d.json",
+      "sha256": "b6b1f9f83a3c2a0404f42d9afef2f7b4b6c1200666a7f34e1f52c73cddb1f5b2",
+      "bytes": 13830
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/destination/WinAudioClean_Job_0ce9719211c94a51a9d1ec860998ceb3/media/stereo_Cleaned_20261003-124842268_2e4b16cf59e14db4b19465d4b6bf34f4.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/destination/WinAudioClean_Job_0ce9719211c94a51a9d1ec860998ceb3/media/stereo_Cleaned_20261003-124839423_62e35662851f469086eb0536f08a1b4d.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/explicit-result.jsonl",
+      "sha256": "e1ed5c5553152df6de3cbf948d5d0acc684d5693ea6e5ceb4bfeb1294d3be607",
+      "bytes": 1985
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-open/destination/WinAudioClean_Job_0474035bc425487e8d2e130db7f7c542/reports/WinAudioClean_aed30d43c88b4d438f234acd8e083636.json",
+      "sha256": "9eb9d639a58e4bca5fc26b34b3cef9b42394cc6f1709972ce000c6f31b557a43",
+      "bytes": 13753
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-open/destination/WinAudioClean_Job_0474035bc425487e8d2e130db7f7c542/media/stereo_Cleaned_20261003-124847579_aed30d43c88b4d438f234acd8e083636.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-open-failure/destination/WinAudioClean_2031b79ddd0a4c83bda2b8f82805f786.json",
+      "sha256": "67fd571307e394c2e5804222d1f2382e91e0486b764da332e64bca90a67341d3",
+      "bytes": 12652
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-open-failure/destination/stereo_Cleaned_20261003-124853572_2031b79ddd0a4c83bda2b8f82805f786.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-native-failure-open/destination/WinAudioClean_Job_9dd9d2e21f424c15bbd148030f124477/reports/WinAudioClean_ed00f50733c14fb08d3a6849560563d1.json",
+      "sha256": "7e3474774196cffb2920a1bc563e36d5a577d41c85adb363b50677095a12ebed",
+      "bytes": 11838
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-custom-empty-music/destination/WinAudioClean_6356292fff68433f9b28689799f1ae7a.json",
+      "sha256": "9f79ace0267ffb8831ac9a057c87c8a9ab3ea75a03febfc658cfcc22cdd96101",
+      "bytes": 12676
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-custom-empty-music/destination/stereo_Cleaned_20261003-124910872_6356292fff68433f9b28689799f1ae7a.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-legacy-helper-missing/destination/WinAudioClean_1a80430374a347dd8e07d8fa7e79c1b5.json",
+      "sha256": "ef708c57c2df0629944d14ee78ae3ba29ff09a81137ee7f90ff4d40db24cc88f",
+      "bytes": 12688
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-legacy-helper-missing/destination/stereo_Cleaned_20261003-124922578_1a80430374a347dd8e07d8fa7e79c1b5.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-flat-junction/junction-target/WinAudioClean_9363c5c7dcdb46dbb29eae42d6131193.json",
+      "sha256": "e7a8298b6cf739b9c799a32c54e0bb12cf2e5407fc990e2a0751f50a70afc671",
+      "bytes": 12672
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-flat-junction/junction-target/stereo_Cleaned_20261003-124928092_9363c5c7dcdb46dbb29eae42d6131193.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-queue-admission-cancel/destination/WinAudioClean_Job_d103ff7319a343f3844509993fad3b3d/reports/WinAudioClean_9773c97e25034af4bd9d4d941a976a97.json",
+      "sha256": "276a3754612cadf4c778568cd87925e88dc97cf58f716263601cf52a6cb50847",
+      "bytes": 11071
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-queue-admission-cancel/destination/WinAudioClean_Job_d103ff7319a343f3844509993fad3b3d/reports/WinAudioClean_Batch_df8c261976cd40f29fae619bf166114a.jsonl",
+      "sha256": "cfae89dd8633b88492a796612bcbe3e0353f855e6ba5b5e39b32cbe16680ecbe",
+      "bytes": 3634
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-organization-report-fault/destination/WinAudioClean_Job_2f7cf4c4c5354918b8a4168c26a82035/media/stereo_Cleaned_20261003-124939163_3049eae11b154232ba827b807913004a.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-chosen-flat/destination/WinAudioClean_4c7b0cceb33343379927d44f9f59b700.json",
+      "sha256": "fe9160e2e8cd22a14f39023bb336f363e3a4127f82ca2835f232411413022891",
+      "bytes": 7062
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-chosen-flat/destination/stereo_Cleaned_20261003-125006896_4c7b0cceb33343379927d44f9f59b700.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-flat/controlled-music/WinAudioClean_39dfe322487a44f682e13b6bb3fea0fd.json",
+      "sha256": "3ac75fbe6d4e069d1d894cdbd4958610bf9a6ffeb2b3cd106c407fe402f0e5ac",
+      "bytes": 7080
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-flat/controlled-music/stereo_Cleaned_20261003-125012826_39dfe322487a44f682e13b6bb3fea0fd.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-full-job/destination/WinAudioClean_Job_41f4bf38f5524378bdd630c541687491/reports/WinAudioClean_40adc5da992c4b019c07dda96dee2aee.json",
+      "sha256": "8eee97630e4c4c86aa398998632af18496c320327b9763163c33239bf684afad",
+      "bytes": 20207
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-full-job/destination/WinAudioClean_Job_41f4bf38f5524378bdd630c541687491/media/stereo_Cleaned_20261003-125019482_40adc5da992c4b019c07dda96dee2aee.wav",
+      "sha256": "6561f415c4ae4c06559b258eb4707186158b39ce44ea4760ec7114bc4fe2542f",
+      "bytes": 576102
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/destination/WinAudioClean_Job_0156219e475e4c65a38bbb136bd5c3d8/reports/WinAudioClean_Preview_573540cbafa84d428dd2c4bf0969ce4e.json",
+      "sha256": "78c373b3003d7e7e8081df60665979fa8a5c00883ce58a6c4e569efcb0763c2a",
+      "bytes": 38317
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/destination/WinAudioClean_Job_0156219e475e4c65a38bbb136bd5c3d8/media/stereo_Preview_573540cbafa84d428dd2c4bf0969ce4e_Original.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/destination/WinAudioClean_Job_0156219e475e4c65a38bbb136bd5c3d8/media/stereo_Preview_573540cbafa84d428dd2c4bf0969ce4e_Processed.wav",
+      "sha256": "780c43ea1e27952b4b57aba6270630dc4f1a4d7bde836d2a18cb808189103a00",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/destination/WinAudioClean_Job_0156219e475e4c65a38bbb136bd5c3d8/media/stereo_Preview_573540cbafa84d428dd2c4bf0969ce4e_CompareOriginal.wav",
+      "sha256": "f1d98844f677ad1966f1d7aed73aff5bf682c9efaec34e78ce0b68bbd14ab5e9",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/destination/WinAudioClean_Job_0156219e475e4c65a38bbb136bd5c3d8/media/stereo_Preview_573540cbafa84d428dd2c4bf0969ce4e_CompareProcessed.wav",
+      "sha256": "2b5f0d827e16c2d2483381165a7cfdf7516d571db9bb96c2cc790718f6364925",
+      "bytes": 288078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/reports/WinAudioClean_1d860862eea14090b99daf31a8306057.json",
+      "sha256": "f296123fdcbc3f7960e9666a72d15f12073130bd09d8209568e9e6c77d8037a4",
+      "bytes": 7963
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/reports/WinAudioClean_f130b1e2355440aeb340cc7f19df5d1b.json",
+      "sha256": "59de438201d6636bed2729d1028d8798999636e73b7d9f5e95c6703901f8117c",
+      "bytes": 7964
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/media/stereo_Cleaned_20261003-125037827_1d860862eea14090b99daf31a8306057.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/media/stereo_Cleaned_20261003-125035560_f130b1e2355440aeb340cc7f19df5d1b.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/reports/WinAudioClean_Batch_c4e84ee6661943558474d10164a2732a.jsonl",
+      "sha256": "7c17c1a82cb7124c2248bc6c3729e91efb49522ae147d3adb4a98f4d48846130",
+      "bytes": 1929
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/reports/WinAudioClean_3a9901c342964341a49fe3ebb08fa1c5.json",
+      "sha256": "83e98f3f15e710a4807056c37102bc8e8bdb8bacd71fa6f99f3002b14cee7f44",
+      "bytes": 8088
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/reports/WinAudioClean_eccb886eedbf453b897092af908f38c6.json",
+      "sha256": "f568f701e340a30a22a81552596620ba26a529ef487ea7968a9927a4f557ef1e",
+      "bytes": 8059
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/media/ordinary_Cleaned_20261003-125046175_3a9901c342964341a49fe3ebb08fa1c5.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/media/ordinary_Cleaned_20261003-125043847_eccb886eedbf453b897092af908f38c6.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/reports/WinAudioClean_Batch_49748592e1cb47559382b39c79f039d6.jsonl",
+      "sha256": "2e94f36afe5612c9ebb67cc30b63610121bc87379d50928dab2e235918a692a6",
+      "bytes": 3604
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/destination/WinAudioClean_Job_41e04ddfe8a34cfd9732ad7cdd36e881/reports/WinAudioClean_699dafeb613c460bae9f3ddfcdcd71ca.json",
+      "sha256": "b0eae0bd3fec8bf5742d91089bc217a9e276846a14573348235eaf3fe1679758",
+      "bytes": 8054
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/destination/WinAudioClean_Job_41e04ddfe8a34cfd9732ad7cdd36e881/reports/WinAudioClean_b617580622d2413092d61c65961d84f8.json",
+      "sha256": "a4e78e98fee52bc95d4fc4b6f80bc16873c3cb8dacb8c6e3afbfb1d73939a1a8",
+      "bytes": 8054
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/destination/WinAudioClean_Job_41e04ddfe8a34cfd9732ad7cdd36e881/media/stereo_Cleaned_20261003-125054994_699dafeb613c460bae9f3ddfcdcd71ca.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/destination/WinAudioClean_Job_41e04ddfe8a34cfd9732ad7cdd36e881/media/stereo_Cleaned_20261003-125052342_b617580622d2413092d61c65961d84f8.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/explicit-result.jsonl",
+      "sha256": "6adf8c8a7c683efb9e2f249f33ca183d4fffa31072abfa8ca00254fb169b60d0",
+      "bytes": 1981
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-open/destination/WinAudioClean_Job_fb4d65e998f24ef09b390bdc0f555088/reports/WinAudioClean_8aea32634a944124a5a6fab93d476dab.json",
+      "sha256": "15cffdcc53fc8b742faf219ad18b38ebc72d9ee89675c99f1015d1324ac54334",
+      "bytes": 7978
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-open/destination/WinAudioClean_Job_fb4d65e998f24ef09b390bdc0f555088/media/stereo_Cleaned_20261003-125102288_8aea32634a944124a5a6fab93d476dab.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-open-failure/destination/WinAudioClean_32b0a860484145c1a13425a0f754958e.json",
+      "sha256": "8b5539c94ff3943459861006e08e9925dae2955fe393cb738690a8ff0d844f4b",
+      "bytes": 7068
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-open-failure/destination/stereo_Cleaned_20261003-125110853_32b0a860484145c1a13425a0f754958e.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-native-failure-open/destination/WinAudioClean_Job_746217a856be42568a7fd08f02f7086d/reports/WinAudioClean_e34d87dc89f2496fbfc8ed0ee6e9987c.json",
+      "sha256": "9dcda75a98228a3c03e58d467a4a40c34601bd1b6a0e80bfbeab30a34577008b",
+      "bytes": 7409
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-custom-empty-music/destination/WinAudioClean_1e2dc76f10d24a879a87be953bc1e0b9.json",
+      "sha256": "313e9a2c8f2d2c5bbbc5caaa372e44cc250af0dee196c197519bf1a2d6a58b53",
+      "bytes": 7091
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-custom-empty-music/destination/stereo_Cleaned_20261003-125137882_1e2dc76f10d24a879a87be953bc1e0b9.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-legacy-helper-missing/destination/WinAudioClean_ad8815bbca644a79a89b08096af27cfd.json",
+      "sha256": "c3bfd572bdcf2ead3c85b6653cb3cef9d5b3617da4a45918f0ea1f4e884e99ad",
+      "bytes": 7104
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-legacy-helper-missing/destination/stereo_Cleaned_20261003-125156972_ad8815bbca644a79a89b08096af27cfd.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-flat-junction/junction-target/WinAudioClean_8c60b115cb7e42e79be4c0bcfc52c458.json",
+      "sha256": "3d2eadb704dc06d39e6d41a19400a7b1cfb26373f9bdf576172914a4beef9633",
+      "bytes": 7087
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-flat-junction/junction-target/stereo_Cleaned_20261003-125203739_8c60b115cb7e42e79be4c0bcfc52c458.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-queue-admission-cancel/destination/WinAudioClean_Job_a0f7e8a5548c4a40a02dce3bd1a4c7fb/reports/WinAudioClean_a7b4d31666dd415d80c8fa5dd8a98066.json",
+      "sha256": "dc2dea2328f03440da0d7cabb5b05e8f017c5d98026f4cb396f70b8224b81460",
+      "bytes": 6920
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-queue-admission-cancel/destination/WinAudioClean_Job_a0f7e8a5548c4a40a02dce3bd1a4c7fb/reports/WinAudioClean_Batch_df4c4bfec9df43529a1b9655a9937179.jsonl",
+      "sha256": "0337b6959ab249ccbff69c7f49656a30d7065bb261a100fc7cab17ffaa995111",
+      "bytes": 3639
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-organization-report-fault/destination/WinAudioClean_Job_be1a983d7e5a412ba935ac3e8543c418/media/stereo_Cleaned_20261003-125217782_4e3384ae643e434795bd5a0c20a48332.wav",
+      "sha256": "369d776394dd4ace8706a249a902e3aacc40b808ffb6eb4b049ebeaff08ccdc2",
+      "bytes": 768078
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/fixtures/stereo.wav",
+      "sha256": "cee7bbe2a5a52dc301be186f7d1eefd41900cab34b498467c8899716ce060c6c",
+      "bytes": 768044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/ordinary.wav",
+      "sha256": "cee7bbe2a5a52dc301be186f7d1eefd41900cab34b498467c8899716ce060c6c",
+      "bytes": 768044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/WinAudioClean_Job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/renamedordinary.wav",
+      "sha256": "cee7bbe2a5a52dc301be186f7d1eefd41900cab34b498467c8899716ce060c6c",
+      "bytes": 768044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/WinAudioClean_Job_near-miss/ordinary.wav",
+      "sha256": "cee7bbe2a5a52dc301be186f7d1eefd41900cab34b498467c8899716ce060c6c",
+      "bytes": 768044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/ordinary.wav",
+      "sha256": "cee7bbe2a5a52dc301be186f7d1eefd41900cab34b498467c8899716ce060c6c",
+      "bytes": 768044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/WinAudioClean_Job_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/renamedordinary.wav",
+      "sha256": "cee7bbe2a5a52dc301be186f7d1eefd41900cab34b498467c8899716ce060c6c",
+      "bytes": 768044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/WinAudioClean_Job_near-miss/ordinary.wav",
+      "sha256": "cee7bbe2a5a52dc301be186f7d1eefd41900cab34b498467c8899716ce060c6c",
+      "bytes": 768044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/harness-tested.py",
+      "sha256": "82d4cba4cb8610e6eaa6152c849d1d10283136e0f363bac92ef2fd719b7b30eb",
+      "bytes": 40586
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/app/WinAudioClean.Batch.ps1",
+      "sha256": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "bytes": 19936
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/app/WinAudioClean.IO.ps1",
+      "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "bytes": 26826
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/app/WinAudioClean.Output.ps1",
+      "sha256": "8ebdfc688bc012a98dcc03d9f64b3910a9d3a01b1fef7440fd4ee98af33ac7a4",
+      "bytes": 11376
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/app/WinAudioClean.Preview.ps1",
+      "sha256": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "bytes": 46671
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/app/WinAudioClean.ps1",
+      "sha256": "6911fd0135a58313a7c30a8b415c94cece416f0c62a15739e835894547ea6c42",
+      "bytes": 157179
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/app/WinAudioClean.Queue.ps1",
+      "sha256": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "bytes": 14293
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/app/WinAudioClean.Settings.ps1",
+      "sha256": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+      "bytes": 28724
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/baseline/WinAudioClean.Batch.ps1",
+      "sha256": "7fe0f8fac0c9dba9d48dd39eb2651c28967a841a05b54c239c751f7b1aeea805",
+      "bytes": 18300
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/baseline/WinAudioClean.IO.ps1",
+      "sha256": "ef987f752945d12334fe03c4ef5f5696a1920874c4f2a153625668ec911143c0",
+      "bytes": 27360
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/baseline/WinAudioClean.Preview.ps1",
+      "sha256": "ce57bd490bcdf04f99dcefef291fcee204c2f831fa5e3a76426380411dae3347",
+      "bytes": 45555
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/baseline/WinAudioClean.ps1",
+      "sha256": "827dbc9043eac6284e01702d1d9b8148b0285efb5b5d4f322e6ab76ac251bb67",
+      "bytes": 145678
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/baseline/WinAudioClean.Queue.ps1",
+      "sha256": "a92550cf279becd93e9c5c6eff78e95ab4fdf8260b57d273c1a2f14f4cd381c3",
+      "bytes": 13986
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/baseline/WinAudioClean.Settings.ps1",
+      "sha256": "bb6c7f034fc65bfeaf26b769b09ba7d8535f98d5455af68d72405b48b577f2da",
+      "bytes": 28761
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/reports/WinAudioClean_828e3d825048474bb58363b0195e6900.txt",
+      "sha256": "b57f101ff5915472b4767a4d71d0a32757b6bb3b297a46c97a412afc4792dabf",
+      "bytes": 4158
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/reports/WinAudioClean_b65bda32183640ebb0b2e14d13bcb9dc.txt",
+      "sha256": "5046a6ec28425821c0c4b401b9db4ace981bc3b29564793a04980e3715b8688e",
+      "bytes": 4157
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/destination/WinAudioClean_Job_04a92ea2eed94295939016b4e71061f1/reports/WinAudioClean_Log.txt",
+      "sha256": "4589c5937b09254d076af1969f2270c455ce93bbf59389343947c10bf7c4e9c1",
+      "bytes": 8315
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/events.jsonl",
+      "sha256": "af48a641bf87be99b69798f4d852aaa1f013a7b1d3a9e3eb31b0e4c0138db892",
+      "bytes": 19202
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-job/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/destination/WinAudioClean_Job_0ce9719211c94a51a9d1ec860998ceb3/reports/WinAudioClean_2e4b16cf59e14db4b19465d4b6bf34f4.txt",
+      "sha256": "bc955bdef0cce84e7aedd7981016215fae1403d186862b253331f86f46f17be4",
+      "bytes": 4209
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/destination/WinAudioClean_Job_0ce9719211c94a51a9d1ec860998ceb3/reports/WinAudioClean_62e35662851f469086eb0536f08a1b4d.txt",
+      "sha256": "31d84238927f7bb2a37e4fd826d461e775d75203b2d43fe14496032424bada99",
+      "bytes": 4210
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/destination/WinAudioClean_Job_0ce9719211c94a51a9d1ec860998ceb3/reports/WinAudioClean_Log.txt",
+      "sha256": "75024bf0986cd33f1925e9935be95842de474ecf894a277876a97dd5de38905a",
+      "bytes": 8419
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/events.jsonl",
+      "sha256": "9e79c84bd59338ef9dd0a6e5e2fb869045120ca714248f92b1188cd492531252",
+      "bytes": 18451
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-batch-journal-override/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-chosen-flat/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-chosen-flat/destination/WinAudioClean_97963bab12da474b86206fe847d74c1f.txt",
+      "sha256": "c5df4090d6890fd56c06893dccec4c1151dd000f899d51a264c2d40dff1f8da0",
+      "bytes": 3934
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-chosen-flat/destination/WinAudioClean_Log.txt",
+      "sha256": "c5df4090d6890fd56c06893dccec4c1151dd000f899d51a264c2d40dff1f8da0",
+      "bytes": 3934
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-chosen-flat/events.jsonl",
+      "sha256": "af6598e3b96d70d227d3416c32b7f39561f3b9fbcd03516b67e3e4440ff5faf1",
+      "bytes": 8859
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-chosen-flat/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-custom-empty-music/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-custom-empty-music/destination/WinAudioClean_6356292fff68433f9b28689799f1ae7a.txt",
+      "sha256": "b87c4e7ce219a86f4ad6131e9c9d12efe224dc2e027e86a4463cca8e651e3bd6",
+      "bytes": 3962
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-custom-empty-music/destination/WinAudioClean_Log.txt",
+      "sha256": "b87c4e7ce219a86f4ad6131e9c9d12efe224dc2e027e86a4463cca8e651e3bd6",
+      "bytes": 3962
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-custom-empty-music/events.jsonl",
+      "sha256": "d9abe78ad3188a67d578859cbcee172dc49e9119537a13904b2a18b5064baa7c",
+      "bytes": 8893
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-custom-empty-music/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-flat-junction/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-flat-junction/events.jsonl",
+      "sha256": "b4cdecb26480ce9d98884c6dd340e12f4f4c9f8db3265f499450a4c59d6226e1",
+      "bytes": 9627
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-flat-junction/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-flat-junction/junction-target/WinAudioClean_9363c5c7dcdb46dbb29eae42d6131193.txt",
+      "sha256": "61a4a713c55b2a5c1c1af84ef0582acefc80a549f90b8302a2d22387c80cf7b5",
+      "bytes": 3958
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-flat-junction/junction-target/WinAudioClean_Log.txt",
+      "sha256": "61a4a713c55b2a5c1c1af84ef0582acefc80a549f90b8302a2d22387c80cf7b5",
+      "bytes": 3958
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/events.jsonl",
+      "sha256": "4da8d1d8f5cad0d23b13ff9f18e822938c2fb74e9774604553d771139b077a6e",
+      "bytes": 19768
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/reports/WinAudioClean_a272ffecae434e2588e868286df53ef7.txt",
+      "sha256": "c899422a2e0aa86d22cc10ebc7823aeba120ff5e984009541ac65fe5285fb4a8",
+      "bytes": 4247
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/reports/WinAudioClean_c41ee9f836cf4317a7df96f7c889beda.txt",
+      "sha256": "bf405cd0000bad27440df725fd6319f89a4e6a25b92e3ef830131bf77c3353c8",
+      "bytes": 4219
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-folder-job/sources/destination/WinAudioClean_Job_aaedb2616b5046e0b024ffa2e929ecfe/reports/WinAudioClean_Log.txt",
+      "sha256": "cdfbbfee467ae100f749c661450103f24f9a2ca9a41bab2957f52dc8b7fa9c6d",
+      "bytes": 8466
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-full-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-full-job/destination/WinAudioClean_Job_a7369c8bc5354d758868624ff15514fe/reports/WinAudioClean_c0e982cbe44b4129820c3d317ed2dd77.txt",
+      "sha256": "4f5f4d23961b496373ce070359c112723da79a229b83cf7ca0f8453437dc0383",
+      "bytes": 5759
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-full-job/destination/WinAudioClean_Job_a7369c8bc5354d758868624ff15514fe/reports/WinAudioClean_Log.txt",
+      "sha256": "4f5f4d23961b496373ce070359c112723da79a229b83cf7ca0f8453437dc0383",
+      "bytes": 5759
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-full-job/events.jsonl",
+      "sha256": "360df6d86c26bc799b058c04577fb48fbefbf10c3d9dba16845265f92bd2a03b",
+      "bytes": 14526
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-full-job/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-legacy-helper-missing/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-legacy-helper-missing/destination/WinAudioClean_1a80430374a347dd8e07d8fa7e79c1b5.txt",
+      "sha256": "01e79d91d1521a2f5a8466833848c693c5034be3d31ccb0f2086f8fbd3f82a56",
+      "bytes": 3974
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-legacy-helper-missing/destination/WinAudioClean_Log.txt",
+      "sha256": "01e79d91d1521a2f5a8466833848c693c5034be3d31ccb0f2086f8fbd3f82a56",
+      "bytes": 3974
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-legacy-helper-missing/events.jsonl",
+      "sha256": "d7ac6af7b75a3dd9f44a7aa0daba2aa4ce003b52a4f4855d15aaa642c9905806",
+      "bytes": 8908
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-legacy-helper-missing/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-blocked/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-blocked/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-blocked/music-file",
+      "sha256": "111b896e24f80d3f233ab8f384c2be8215010db3cda6c03b5889bae193183d4c",
+      "bytes": 32
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-empty/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-empty/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-flat/controlled-music/WinAudioClean_f4e1aed9f7ff44359286e5543cf3fd7d.txt",
+      "sha256": "5edf78189ea4234f1414a3faf1ecb66c2c9f1aa43538968398918de5d89e1a56",
+      "bytes": 3950
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-flat/controlled-music/WinAudioClean_Log.txt",
+      "sha256": "5edf78189ea4234f1414a3faf1ecb66c2c9f1aa43538968398918de5d89e1a56",
+      "bytes": 3950
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-flat/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-flat/events.jsonl",
+      "sha256": "84ea962460cbbc6ccebd6577eeb01cfc920025855a4d458309e06b275e404ec3",
+      "bytes": 8879
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-flat/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-unc/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-music-unc/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-native-failure-open/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-native-failure-open/destination/WinAudioClean_Job_9dd9d2e21f424c15bbd148030f124477/reports/WinAudioClean_ed00f50733c14fb08d3a6849560563d1.txt",
+      "sha256": "14c10c18bdcc516f03cd8b60ea4442a64e38c90365a0a0b2d9c36433e9f4378e",
+      "bytes": 4584
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-native-failure-open/destination/WinAudioClean_Job_9dd9d2e21f424c15bbd148030f124477/reports/WinAudioClean_Log.txt",
+      "sha256": "14c10c18bdcc516f03cd8b60ea4442a64e38c90365a0a0b2d9c36433e9f4378e",
+      "bytes": 4584
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-native-failure-open/events.jsonl",
+      "sha256": "5ca6cb6493bbe40e75dcc755b520749411017c26f015fb775ebc03c5ae2622a4",
+      "bytes": 6790
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-native-failure-open/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-no-input/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-no-input/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-open-failure/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-open-failure/destination/WinAudioClean_2031b79ddd0a4c83bda2b8f82805f786.txt",
+      "sha256": "8d7b35f5d9a616b95ec966d8278d583512d91bd5a538d530736435345ed85bfa",
+      "bytes": 3938
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-open-failure/destination/WinAudioClean_Log.txt",
+      "sha256": "8d7b35f5d9a616b95ec966d8278d583512d91bd5a538d530736435345ed85bfa",
+      "bytes": 3938
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-open-failure/events.jsonl",
+      "sha256": "8c3f32b1b9e791533255f1b3a4d9e9a2902f1183c74c35812ebdbc28f069af8d",
+      "bytes": 9595
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-open-failure/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-organization-report-fault/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-organization-report-fault/events.jsonl",
+      "sha256": "543ef64c808d6ca31e5a6a5ffbaaca89cb2d09be5d93c1c55f8770e2e496f36e",
+      "bytes": 9465
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-organization-report-fault/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-cancel/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-cancel/events.jsonl",
+      "sha256": "2c60b196fef99b16e517073485d5bb0157e3656d88df239f9e4dab53867a39bb",
+      "bytes": 121
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-cancel/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-open/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-open/destination/WinAudioClean_Job_0474035bc425487e8d2e130db7f7c542/reports/WinAudioClean_aed30d43c88b4d438f234acd8e083636.txt",
+      "sha256": "755ce8f7fd14c3f6389f8e36637ea71e4e1ce0bb4ebc2efb6e37aef72d46b16c",
+      "bytes": 4166
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-open/destination/WinAudioClean_Job_0474035bc425487e8d2e130db7f7c542/reports/WinAudioClean_Log.txt",
+      "sha256": "755ce8f7fd14c3f6389f8e36637ea71e4e1ce0bb4ebc2efb6e37aef72d46b16c",
+      "bytes": 4166
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-open/events.jsonl",
+      "sha256": "ccad67bcdf5a526591243e495eb9112f1bef9ba3e747e2ed8f777a3c365dddaa",
+      "bytes": 10063
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-picker-open/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/destination/WinAudioClean_Job_4096c2dde81f454fb98ad9889592291d/reports/WinAudioClean_Preview_896d118143aa40adad857a0ee24977f2.txt",
+      "sha256": "1cc06e0ffb187c5cb80c2208c1b07551f38351300d5e13f236d188121897dd21",
+      "bytes": 2187
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/events.jsonl",
+      "sha256": "71c44170ae7f91050a5fad9d3b2293041d114612df1d36946ab1b1f58aebc324",
+      "bytes": 31264
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-preview-job/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-queue-admission-cancel/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-queue-admission-cancel/destination/WinAudioClean_Job_d103ff7319a343f3844509993fad3b3d/reports/WinAudioClean_9773c97e25034af4bd9d4d941a976a97.txt",
+      "sha256": "4ba018534249ed9242fc9450979a5fcec242ad27db6b9d402ae999dc6406d639",
+      "bytes": 4251
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-queue-admission-cancel/destination/WinAudioClean_Job_d103ff7319a343f3844509993fad3b3d/reports/WinAudioClean_Log.txt",
+      "sha256": "4ba018534249ed9242fc9450979a5fcec242ad27db6b9d402ae999dc6406d639",
+      "bytes": 4251
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-queue-admission-cancel/events.jsonl",
+      "sha256": "4fec51a74ebb5f6bad47cb6a2a93ce0ab8b8686090283b3ab5908d71da05c301",
+      "bytes": 7314
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-queue-admission-cancel/host-facts.json",
+      "sha256": "6cf1f94a8afa3cb359863a2c872c142922156b66e5fed2438edb41cd327dd7a9",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-redirected-open/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-redirected-open/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-redirected-pick/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-redirected-pick/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-accurate/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-accurate/events.jsonl",
+      "sha256": "7dcfd57a29a97df4a3553aefea85d96a85a14e2ce25e74e92a58a9eb0d55d262",
+      "bytes": 14245
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-accurate/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-fast/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-fast/events.jsonl",
+      "sha256": "78c7e9efe802df6eda6ffe6c7a2b1d2c4ae5b6619d7e0c8ac335ec037d9bceef",
+      "bytes": 8846
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-fast/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-preview/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-preview/events.jsonl",
+      "sha256": "821fa3be0f6f0093373fa313da20244b9aaf433560e21b241457cf27f56d7422",
+      "bytes": 30044
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps51-reference-preview/host-facts.json",
+      "sha256": "90faa2224f33db918297bcf420da7693099b44067cb5bfadd3c2bac44705b15c",
+      "bytes": 153
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/reports/WinAudioClean_1d860862eea14090b99daf31a8306057.txt",
+      "sha256": "0eb6c85f2a4378b428634c4eafd20983c709edd2e36acc66bc4ff0021f3d88ee",
+      "bytes": 4164
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/reports/WinAudioClean_f130b1e2355440aeb340cc7f19df5d1b.txt",
+      "sha256": "bf2aecce3061aa8e86475409cebe634fe3dc0f5809679b4a139b54acb9acf5d6",
+      "bytes": 4164
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/destination/WinAudioClean_Job_d726eeb7966c44629c9204a5e1c50cd7/reports/WinAudioClean_Log.txt",
+      "sha256": "27c204456ab85b3816e40b96762c5c2ac91545cfec90e782bf355cf767eec11e",
+      "bytes": 8328
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/events.jsonl",
+      "sha256": "6e46d1ff4355cd9c0c64c29b82a4de81ffc000e06c06a9120a01e1e403c3410a",
+      "bytes": 19084
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-job/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/destination/WinAudioClean_Job_41e04ddfe8a34cfd9732ad7cdd36e881/reports/WinAudioClean_699dafeb613c460bae9f3ddfcdcd71ca.txt",
+      "sha256": "6df6ea2dd3225ddf784aee31209c30dddac5ec5029ef4fbeeda3ef0fc1a240d5",
+      "bytes": 4216
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/destination/WinAudioClean_Job_41e04ddfe8a34cfd9732ad7cdd36e881/reports/WinAudioClean_b617580622d2413092d61c65961d84f8.txt",
+      "sha256": "b3b2163f5c84e43203a6797ae4fb6af963ca1b5a7c4e9c380d1b1a9d9407a051",
+      "bytes": 4216
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/destination/WinAudioClean_Job_41e04ddfe8a34cfd9732ad7cdd36e881/reports/WinAudioClean_Log.txt",
+      "sha256": "e82c89dece6ad064cc1052d8d19d01c1fdc6e6c6aa3e72a85cf5f044e9218b55",
+      "bytes": 8432
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/events.jsonl",
+      "sha256": "57cc060bfbd7adfa4bcb044f2a683ea136ed523c633730b53426b92792a34c97",
+      "bytes": 18332
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-batch-journal-override/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-chosen-flat/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-chosen-flat/destination/WinAudioClean_4c7b0cceb33343379927d44f9f59b700.txt",
+      "sha256": "9887737b5c23ccfa8adca75e2c2880d82b30c7a224a772d74e7f8914f5c4f046",
+      "bytes": 3940
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-chosen-flat/destination/WinAudioClean_Log.txt",
+      "sha256": "9887737b5c23ccfa8adca75e2c2880d82b30c7a224a772d74e7f8914f5c4f046",
+      "bytes": 3940
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-chosen-flat/events.jsonl",
+      "sha256": "82575ce00f0090cdcd72466d21186378c26a87a9e67329d2ba3a9a9032f20acf",
+      "bytes": 8811
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-chosen-flat/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-custom-empty-music/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-custom-empty-music/destination/WinAudioClean_1e2dc76f10d24a879a87be953bc1e0b9.txt",
+      "sha256": "73ae5ea85c928447c8283c17d9c6ba3f69449851b0992482b39392743a363e26",
+      "bytes": 3968
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-custom-empty-music/destination/WinAudioClean_Log.txt",
+      "sha256": "73ae5ea85c928447c8283c17d9c6ba3f69449851b0992482b39392743a363e26",
+      "bytes": 3968
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-custom-empty-music/events.jsonl",
+      "sha256": "1d7326035461e75415ffc42a6639ff75de8497737657af879e5585a70961cb70",
+      "bytes": 8846
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-custom-empty-music/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-flat-junction/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-flat-junction/events.jsonl",
+      "sha256": "375d89adb3fb4a87cf97904f314fc4f8cc28bd899fe59b4faa7fecd09534e8dd",
+      "bytes": 9568
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-flat-junction/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-flat-junction/junction-target/WinAudioClean_8c60b115cb7e42e79be4c0bcfc52c458.txt",
+      "sha256": "76f3bca3e9130191ce1f8c656715428f77ebee7d1940a6351c72cbb11c12afcb",
+      "bytes": 3964
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-flat-junction/junction-target/WinAudioClean_Log.txt",
+      "sha256": "76f3bca3e9130191ce1f8c656715428f77ebee7d1940a6351c72cbb11c12afcb",
+      "bytes": 3964
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/events.jsonl",
+      "sha256": "8ea0409a958152b529c681128da1b45cee60127f159026b9927ee6887639926d",
+      "bytes": 19617
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/reports/WinAudioClean_3a9901c342964341a49fe3ebb08fa1c5.txt",
+      "sha256": "e313524da5cbd64f58b7f3a3b02dde6e0462098ffe4a596a62083c8a6ffd6ac7",
+      "bytes": 4252
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/reports/WinAudioClean_eccb886eedbf453b897092af908f38c6.txt",
+      "sha256": "b1a4ecf9333063a37cccaf1aeb5abd5090f72e419c0c0dcf9a0048ca5189c7a0",
+      "bytes": 4224
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-folder-job/sources/destination/WinAudioClean_Job_79dd6d0d471d42b59f20f1fd169e4046/reports/WinAudioClean_Log.txt",
+      "sha256": "682ed49595ea2d1644f8b02715680d1b0ed076c12a9bb6ab750efc38640327f0",
+      "bytes": 8476
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-full-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-full-job/destination/WinAudioClean_Job_41f4bf38f5524378bdd630c541687491/reports/WinAudioClean_40adc5da992c4b019c07dda96dee2aee.txt",
+      "sha256": "d66dee9fa545748fab28cdd351824454568fcc8384a8084e30be441785494f4e",
+      "bytes": 5764
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-full-job/destination/WinAudioClean_Job_41f4bf38f5524378bdd630c541687491/reports/WinAudioClean_Log.txt",
+      "sha256": "d66dee9fa545748fab28cdd351824454568fcc8384a8084e30be441785494f4e",
+      "bytes": 5764
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-full-job/events.jsonl",
+      "sha256": "161f0e0a980f84e3d2c3aeb37dc8d31dedcb1505c3240190e8326e7a8d7f08f3",
+      "bytes": 14435
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-full-job/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-legacy-helper-missing/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-legacy-helper-missing/destination/WinAudioClean_ad8815bbca644a79a89b08096af27cfd.txt",
+      "sha256": "43bc5045c5a978075d2d68e28276b51f8e566b08bd5f158b8798ebeca41eca8e",
+      "bytes": 3980
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-legacy-helper-missing/destination/WinAudioClean_Log.txt",
+      "sha256": "43bc5045c5a978075d2d68e28276b51f8e566b08bd5f158b8798ebeca41eca8e",
+      "bytes": 3980
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-legacy-helper-missing/events.jsonl",
+      "sha256": "d0cfd88bc44771fb497f31a7d934937ad68c578a9c042c4bb388e067a4d604d1",
+      "bytes": 8863
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-legacy-helper-missing/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-blocked/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-blocked/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-blocked/music-file",
+      "sha256": "111b896e24f80d3f233ab8f384c2be8215010db3cda6c03b5889bae193183d4c",
+      "bytes": 32
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-empty/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-empty/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-flat/controlled-music/WinAudioClean_39dfe322487a44f682e13b6bb3fea0fd.txt",
+      "sha256": "37cc5e62615c47d19e9509ba5a688f329bc1869a1a5b393071850695fb38e3c8",
+      "bytes": 3956
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-flat/controlled-music/WinAudioClean_Log.txt",
+      "sha256": "37cc5e62615c47d19e9509ba5a688f329bc1869a1a5b393071850695fb38e3c8",
+      "bytes": 3956
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-flat/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-flat/events.jsonl",
+      "sha256": "e521bd62db5e923a9cebe2b0832a619d5a66b63856ed1609839aa98cacccdfe3",
+      "bytes": 8818
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-flat/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-unc/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-music-unc/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-native-failure-open/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-native-failure-open/destination/WinAudioClean_Job_746217a856be42568a7fd08f02f7086d/reports/WinAudioClean_e34d87dc89f2496fbfc8ed0ee6e9987c.txt",
+      "sha256": "d693166a7a15dbbda705f34d551dafd04118afa6a2f6de1285e3fd38951d62f1",
+      "bytes": 4588
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-native-failure-open/destination/WinAudioClean_Job_746217a856be42568a7fd08f02f7086d/reports/WinAudioClean_Log.txt",
+      "sha256": "d693166a7a15dbbda705f34d551dafd04118afa6a2f6de1285e3fd38951d62f1",
+      "bytes": 4588
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-native-failure-open/events.jsonl",
+      "sha256": "7a0d33b317b393fbc2505602d7df5716917b3dab32fb1f85dc61460df43233c1",
+      "bytes": 6846
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-native-failure-open/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-no-input/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-no-input/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-open-failure/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-open-failure/destination/WinAudioClean_32b0a860484145c1a13425a0f754958e.txt",
+      "sha256": "950aa27f8dd9128c5c82606d2a92efef2392db5ba6548b4dd12f613fc3d836c8",
+      "bytes": 3944
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-open-failure/destination/WinAudioClean_Log.txt",
+      "sha256": "950aa27f8dd9128c5c82606d2a92efef2392db5ba6548b4dd12f613fc3d836c8",
+      "bytes": 3944
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-open-failure/events.jsonl",
+      "sha256": "cc9cb9ef0e88cf2fea3e46e46aca61bf774a3f259fba8ba3cc9ab7d2a6063908",
+      "bytes": 9535
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-open-failure/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-organization-report-fault/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-organization-report-fault/events.jsonl",
+      "sha256": "48517eeecb561b8799efa03f00faf3518d964673bf5b1ed160069933c3ea0db1",
+      "bytes": 9405
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-organization-report-fault/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-cancel/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-cancel/events.jsonl",
+      "sha256": "7bd1c0961905a3dccf03bd071fe172d526da952417776550081126432b61d5e8",
+      "bytes": 121
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-cancel/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-open/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-open/destination/WinAudioClean_Job_fb4d65e998f24ef09b390bdc0f555088/reports/WinAudioClean_8aea32634a944124a5a6fab93d476dab.txt",
+      "sha256": "06265399ea35a501a368b5b04c7a0dcb9bfd70d5a9e0901bc65d5b07b36cc730",
+      "bytes": 4172
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-open/destination/WinAudioClean_Job_fb4d65e998f24ef09b390bdc0f555088/reports/WinAudioClean_Log.txt",
+      "sha256": "06265399ea35a501a368b5b04c7a0dcb9bfd70d5a9e0901bc65d5b07b36cc730",
+      "bytes": 4172
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-open/events.jsonl",
+      "sha256": "63926a7ac332f0c5c76ab666c532865dfad849b4ce47009d0cda1cdc64bbd1bf",
+      "bytes": 10003
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-picker-open/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/destination/WinAudioClean_Job_0156219e475e4c65a38bbb136bd5c3d8/reports/WinAudioClean_Preview_573540cbafa84d428dd2c4bf0969ce4e.txt",
+      "sha256": "851d510a9d582173b6f12fe97679d0c4f0912fc439737dd33c0b28d48b351dbc",
+      "bytes": 2183
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/events.jsonl",
+      "sha256": "1df9291e74309b13b51d80f045c8db947356f6f31817bccc1005c76059ebc8a4",
+      "bytes": 31085
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-preview-job/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-queue-admission-cancel/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-queue-admission-cancel/destination/WinAudioClean_Job_a0f7e8a5548c4a40a02dce3bd1a4c7fb/reports/WinAudioClean_a7b4d31666dd415d80c8fa5dd8a98066.txt",
+      "sha256": "e0c191e129b17f6e634e4d96b8aa3c195f66f1194f4362a537198ffba039c190",
+      "bytes": 4257
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-queue-admission-cancel/destination/WinAudioClean_Job_a0f7e8a5548c4a40a02dce3bd1a4c7fb/reports/WinAudioClean_Log.txt",
+      "sha256": "e0c191e129b17f6e634e4d96b8aa3c195f66f1194f4362a537198ffba039c190",
+      "bytes": 4257
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-queue-admission-cancel/events.jsonl",
+      "sha256": "0959766cd813f211e7d6d71101376efc3ede6c7e1ceef2fc0a169ac0e402a997",
+      "bytes": 7266
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-queue-admission-cancel/host-facts.json",
+      "sha256": "51ed1927fb74050807d7fb5831b773de0d87d78e17cbb3bd8093025a935d23ed",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-redirected-open/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-redirected-open/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-redirected-pick/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-redirected-pick/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-accurate/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-accurate/events.jsonl",
+      "sha256": "ba513987f4f7b3595e1bb6e5efedfecb0ad0d246992fdac0ca2de127b3bca8e6",
+      "bytes": 14147
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-accurate/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-fast/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-fast/events.jsonl",
+      "sha256": "419fa295c018e424439b14605743198507b2aeccad052c34766a73405dd48559",
+      "bytes": 8786
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-fast/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-preview/cwd/sentinel.txt",
+      "sha256": "01da16c12e4d766c8b1886b5b7ebe60f64e59a92cd581b7fe8b3bb7fb315b691",
+      "bytes": 28
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-preview/events.jsonl",
+      "sha256": "01e2ebab615135f730cb7cdc2ad7ef496ad9613581bb90d1ff26af19e9b4f69a",
+      "bytes": 29866
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/cases/ps7-reference-preview/host-facts.json",
+      "sha256": "b5bbe0c9b34a20a9dd179599e29b3b74b1a90a1896e63e2a917b4518186ad8a2",
+      "bytes": 144
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/legacy/WinAudioClean.Batch.ps1",
+      "sha256": "7fac3b1277aab43c34424ed59779c61fc470f5c9a31e5cd68faa72d68425e4ba",
+      "bytes": 19936
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/legacy/WinAudioClean.IO.ps1",
+      "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46",
+      "bytes": 26826
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/legacy/WinAudioClean.Preview.ps1",
+      "sha256": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351",
+      "bytes": 46671
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/legacy/WinAudioClean.ps1",
+      "sha256": "6911fd0135a58313a7c30a8b415c94cece416f0c62a15739e835894547ea6c42",
+      "bytes": 157179
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/legacy/WinAudioClean.Queue.ps1",
+      "sha256": "957b14abc7a375d8fba3cdf3637ce324242587e3dd427a3524e1ae74524af0c0",
+      "bytes": 14293
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/legacy/WinAudioClean.Settings.ps1",
+      "sha256": "cc74220c3641d69bad788d221f8ada98da8df36e692f0f853bdafc24608aceea",
+      "bytes": 28724
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-accurate/WinAudioClean_db1545c5fa8547c0a68e6d2b00a08fbc.txt",
+      "sha256": "1de09dbe47c937c13b75d5b9561ed96f3e9932e01d445286e979bf5de74ddcfe",
+      "bytes": 5485
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-accurate/WinAudioClean_Log.txt",
+      "sha256": "1de09dbe47c937c13b75d5b9561ed96f3e9932e01d445286e979bf5de74ddcfe",
+      "bytes": 5485
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-fast/WinAudioClean_522ed839516843af920c17736692a7ef.txt",
+      "sha256": "42dc2c9c5c0e7ce8684806bf372cabba6416256b4c13b6886d3584c66c32aed8",
+      "bytes": 3918
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-fast/WinAudioClean_Log.txt",
+      "sha256": "42dc2c9c5c0e7ce8684806bf372cabba6416256b4c13b6886d3584c66c32aed8",
+      "bytes": 3918
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps51-reference-preview/WinAudioClean_Preview_ec5278d4d616471d94d59827c077a51a.txt",
+      "sha256": "d42b4d74b5ac1242563f2000a99874b6ebb52ed67cc267c7714def184b1236ee",
+      "bytes": 1955
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-accurate/WinAudioClean_10557b6f1b0c48a6b243275bddab82a9.txt",
+      "sha256": "3a5d93f040de4cb1b2fb9d5524b58bb4ebe4335cdd8eff88453a83c4aff018c6",
+      "bytes": 5490
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-accurate/WinAudioClean_Log.txt",
+      "sha256": "3a5d93f040de4cb1b2fb9d5524b58bb4ebe4335cdd8eff88453a83c4aff018c6",
+      "bytes": 5490
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-fast/WinAudioClean_e3909fe4559a45028fe68431e4390a3f.txt",
+      "sha256": "ac0d310e9caf9d25cd81bf3818aafd72c5accebe0cadf3c438b9ef296e0e28df",
+      "bytes": 3924
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-fast/WinAudioClean_Log.txt",
+      "sha256": "ac0d310e9caf9d25cd81bf3818aafd72c5accebe0cadf3c438b9ef296e0e28df",
+      "bytes": 3924
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/references/ps7-reference-preview/WinAudioClean_Preview_b5d194d68ad744b39c2843d18d69d77e.txt",
+      "sha256": "e99c6e4813cdd6381aa7042c5552ce880cd0a9de765b8bf57063b9c6492ee198",
+      "bytes": 1951
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-final/summary.json",
+      "sha256": "eaea1cb279df68cabf5ab9742b24709e08533056ba19ecb272ef7a442e2ee409",
+      "bytes": 1881725
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-smoke-initial/summary.json",
+      "sha256": "efbea6b99d31c43c82ebc14d7b1fceed8ce30c8b533d1e32e2ecea009cc60601",
+      "bytes": 443265
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-smoke-final-candidate/summary.json",
+      "sha256": "4ac9e23bec88dbe42d7b736cc0e1b61d5fc836fd2a58ef1885610c458fde03f7",
+      "bytes": 530594
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-smoke-final-candidate/harness-tested.py",
+      "sha256": "40a2501fadb473e2899eb6b1e0b879a1ed10d66b47181dc8920700ba295af9d6",
+      "bytes": 40485
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-smoke-admission-corrected/summary.json",
+      "sha256": "8ad4a40a6833cadd346ef6e030249aac09581f1833545b48baf5fd9795edbdc5",
+      "bytes": 472184
+    },
+    {
+      "path": ".wac-local/WAC-M3-05/media-smoke-admission-corrected/harness-tested.py",
+      "sha256": "939f46d61d477fa7c323f64b2f77bd7029f45fa66afc96529a4f27a04eaf0c81",
+      "bytes": 40507
+    }
+  ],
+  "raw_artifact_notice": "Relative ignored paths/hash/bytes identify local synthetic media/raw events/reports/nativePCM/logs. These files are not published; public derivative hashes are separate. Preliminary full capture content is summarized and its complete summary digest retained."
+}
