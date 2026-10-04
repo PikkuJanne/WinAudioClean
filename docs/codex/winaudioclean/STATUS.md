@@ -1,9 +1,152 @@
 # Current status
 
+Date: 2026-10-04. **WAC-M4-04 is complete.** Canonical 26 done / 4 todo / 0 blocked; 78 AC pass / 12 not_run. **Next: WAC-M5-01 — Prepare static website assets and release metadata**, unlocked and not started.
+
+Final packaged documentation/controller source `1f10940ee970ebe719c21ba0e7290830beeb7123` passed all 64 actual cases. ZIP: 438904 bytes, SHA256 `d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7`; controller SHA256 `3cf5cd6fd7d24c4633e4163372e7b194a5840219a6b2534fc394f245b4a5266b`.
+
+Both local Full gates used the earlier frozen source `047aefe906ca7954a225d81f53286eb1275723dc`: ps51: Pester 1483 passed/1 skipped, Python 142 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 142 ran/1 skipped; zero failures/outside-scope cases. These are distinct source scopes; Full was not repeated for later documentation/controller-only edits. Retain the initial long-path/controller failures and successful shorter-path replays separately. Short local extraction/output paths are the remedy; no universal path limit or global security change is claimed.
+
+CI at `1f10940ee970ebe719c21ba0e7290830beeb7123` is pending (0/4 observed jobs); [observed run](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37182513533). Pending/unavailable/not-run CI is not a passed gate. Live branch synchronization and actual post-push PR/CI must be verified separately.
+
+All eight broader gaps remain. Original/Fast/default sound and BAT/script entry points stay unchanged; no publication or machine-security changes are authorized. Website draft metadata remains uncreated future M5-01 work.
+
+[Evidence](evidence/WAC-M4-04.md), [ledger](evidence/WAC-M4-04-validation.json).
+
+## Historical M4-04 implementation checkpoint (superseded)
+
+# Current status
+
+WAC-M4-04 final package walkthrough is in progress on 2026-10-04. Both local Full gates and all four code CI jobs passed at `047aefe906ca7954a225d81f53286eb1275723dc`. Canonical 25 done/5 todo and 75 pass/15 not_run remain unchanged. Final 64-case clean-ZIP examples/support/defaults validation is required after the reviewed documentation/controller corrections. Retain all initial failures, path replays, privilege skips and eight broader gaps. [Evidence](evidence/WAC-M4-04.md).
+
+## Historical M4-04 initial implementation progress (superseded)
+
+# Current status
+
+Date: 2026-10-04. **WAC-M4-04 implementation and validation are in progress.**
+Canonical 25 done / 5 todo, 75 AC pass / 15 not_run remain unchanged. README,
+complete parameter help, support/security and their package inclusion are
+implemented. Exact clean-ZIP example/failure walkthroughs and cumulative
+checks remain required. All eight broader gaps and default sound are retained.
+[Current evidence](evidence/WAC-M4-04.md). Next remains completion of M4-04.
+
+Parent `33efc4a2f589927203997d65f76096f46bfe3c65` is live-synchronized; its four
+PR CI jobs passed in run 37152237090. No publication/merge/deployment occurs.
+
+## Historical M4-03 closure (superseded)
+# Current status
+
+Date: 2026-10-03. **WAC-M4-03 is complete.** Canonical 25 done / 5 todo / 0 blocked;
+75 AC pass / 15 not_run. **Next: WAC-M4-04 — Finish user-facing help, setup and
+troubleshooting**, unlocked and not started. All eight broader gaps remain.
+
+Clean code `4609265b1ed40da08897d7d816196ec466adaef0` produced four identical tool-only version 2.3 ZIPs
+(447048 bytes, SHA256 `e72fce6cae5d0e94473bde1b94657e778a472c6ff17aa6a2065c795438bf604c`). The 15 committed payload files plus generated
+manifest, checksum and provenance agree; MIT bytes are preserved. Eight real
+BAT/PowerShell and four separately scoped builtin-only fresh-package cases pass.
+FFmpeg remains supplied separately and bundling unapproved.
+
+Both local Full gates passed Pester 1483 / 1
+privilege skip, Python 142 ran / 1 privilege skip;
+zero outside scope and stable seven source digests. Four code PR CI jobs passed:
+[run 37150442388](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37150442388). Closure metadata CI is distinct and must be
+read at its actual future SHA. Runtime/defaults/source-only original stay intact.
+[Evidence](evidence/WAC-M4-03.md), [ledger](evidence/WAC-M4-03-validation.json).
+
+## Historical M4-03 implementation checkpoint (superseded)
+
+# Current status
+
+Date: 2026-10-03. **WAC-M4-03 implementation and validation are in progress.**
+Canonical24 done/6 todo,72 AC pass/18 not_run remain unchanged. Build tooling,
+portable instructions and tool-only dependency notices are being validated.
+Clean-revision repeated packages, extracted-package processing and both local
+Full gates are required before acceptance. Next remains completion of M4-03;
+M4-04 has not started. All eight retained gaps and runtime defaults remain.
+Parent f32cf159 PR run37148623973 completed all four jobs successfully;
+this does not stand in for M4-03 evidence.
+
+[Current evidence](evidence/WAC-M4-03.md).
+
+## Historical M4-02 closure (superseded)
+
+# Current status
+
+Date: 2026-10-03. **WAC-M4-02 is complete.** Canonical24 done/6 todo/ 0 blocked;
+72 AC pass/18 not_run. **Next: WAC-M4-03 — Build a versioned portable release
+package**, unlocked and not started. Coverage retains all eight broader gaps.
+
+Tested code `c5a107e825bfa087f6b21f96dd54e91e538b1890` passed both local Full gates (Pester 1467 passed/1 skipped; Python 134 ran/1 skipped) and
+all four Windows2022/2025 PS5.1/PS7 PR jobs (Pester 1468 passed/0 skipped; Python 134 ran/0 skipped): [PR run 37147112528](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37147112528).
+Every Full has zero outside-scope cases; hashes, pinned versions and sanitized
+seven-day artifacts agree. Missing shells/API errors/unrun CI cannot pass.
+Earlier failed captures and their separate source identities remain retained.
+
+CI uses verified Action/checksum pins, contents:read and the existing local
+runner. The necessary native-start fix prevents an injected stdin BOM and
+preserves intended input bytes/restores encoding. A bounded PID-ready fixture
+handshake preserves ownership and deadline assertions. Source-only original,
+BAT entry points, filters/defaults and settings remain unchanged. Local privilege
+skips and all broader listening/manual/stress/crash gaps retain their scope.
+
+[Evidence](evidence/WAC-M4-02.md), [validation ledger](evidence/WAC-M4-02-validation.json).
+
+## Historical M4-02 implementation checkpoint (superseded)
+
+# Current status
+
+Date: 2026-10-03. **WAC-M4-02 implementation validation is in progress.**
+Windows CI and its pinned setup/parity/status tooling are implemented. Both
+actual local Quick gates passed 1075/0/1; the five setup tests are included.
+53 focused Python cases and an actual unavailable-shell simulation passed
+their stated scopes. Both local Full gates at `fd56b84` passed 1461 Pester,
+one privilege skip and 128 Python cases with one privilege skip. Initial PR
+run 37143282084 at that exact SHA passed both PS7 jobs but failed both PS5.1
+jobs. Diagnostic run 37144796506 at `8af62ff` identifies three stdin assertions
+failing on both PS5.1 hosts; both PS7 jobs pass. An owned local reproduction
+confirms .NET Framework injects a UTF-8 BOM into redirected stdin, including
+empty input. A narrow native-start fix passes all six fresh-process encoding
+cases in both shells. The broader native-tagged Targeted run passed 203 on PS7
+and failed one cancellation fixture case on PS5.1 (202 passed). Its timer could
+cancel before the PID file was written; a seven-case unchanged recovery passed.
+A bounded, deterministic fixture readiness correction passed exact-path Targeted
+63/0/0 on each shell, with20 outside scope and stable source hashes.
+Fresh local and hosted Full gates are still required; all failed evidence is retained.
+WAC-M4-02 remains todo and AC-070..072 not_run until those results are reconciled.
+The implementation checkpoint does not advance to packaging. Source-only
+original/defaults remain unchanged. The runtime change is limited to preventing
+the confirmed stdin prefix. See [evidence](evidence/WAC-M4-02.md).
+
+## Historical M4-01 status (superseded by current progress above)
+
+# Current status
+
+Date: 2026-10-03. **WAC-M4-01 is complete.** Canonical 23 done/7 todo/ 0 blocked;
+69 AC pass/21 not run. Coverage maps 69 cases, 35 command scopes, eight named
+reviews and eight retained broader-scope gaps. **Next: WAC-M4-02 only.**
+
+Both PS5.1/PS7: Quick 1070/0/1, selected Targeted 290/0/0,
+one Full 1456/0/1; Python 75 discovered successful with one privilege skip.
+Parser/static/plan/coverage gates pass; non-gating advisories remain. Three
+baseline passes and three intended mutant failures per host plus five cleanup
+safety cases certify isolated representative faults. Source is stable across
+accepted gates. Preview close-fault tests pass9/0 per host; old loop fails0/9.
+
+Only Preview report close handling changed; all other runtime/BAT LF contents,
+filters/defaults/ownership/configuration/cancellation contracts match M3 closure.
+Preserved initial harness/fixture/publication corrections and truthful scopes
+are in [evidence](evidence/WAC-M4-01.md) and its source/gate/fault ledgers.
+Saved settings remain absent; no user audio or personal logs are published.
+Listening/picker/platform/stress/crash/power-loss/real unreleased-writer and
+privileged-symlink gaps remain visible. No CI/package/merge/release/deployment.
+
+## Historical M3-06 closure (superseded by current status)
+
+# Current status
+
 Date: 2026-10-03. **WAC-M3-06 is complete.** AC-064 now passes: user-reported
 actual Explorer drops/menu/playback in modes 1/2 and independent verification of
 both local SUCCESS/exit-0/complete reports and published WAV headers. Canonical:
-22 done/8 todo/0 blocked; 66 AC pass, 24 not run. **Next: WAC-M4-01**, unlocked
+22 done/8 todo/ 0 blocked; 66 AC pass, 24 not run. **Next: WAC-M4-01**, unlocked
 but not started. AC-065/066 retain their earlier evidence.
 
 The initial unquoted-parentheses drop rejection and neutral-name copy/retry are
@@ -84,7 +227,7 @@ preserves earlier outputs/static records, prevents pending starts and persists
 CANCELLED130. Accurate verification cancellation prevents publication. Per-run
 schema1 gains progress and failed-preview reports; journal schemas stay intact.
 
-Final focused77 and required Full 1382 pass/1 privilege skip Pester
+Final focused77 and required Full 1382 pass/ 1 privilege skip Pester
 per host, Python61 pass/one separate privilege skip, parser/static/plan exit0.
 Actual private-console native signals4/4 and final real media20/20 cover both
 PS5.1/PS7 with exact hashes/commands and preserved corrections. Sound helpers and
@@ -156,7 +299,7 @@ journal failure5. Explicit repeats/order remain; its historical folder queue sco
   each (61 pass, one symlink-privilege skip). Parser/static/plan pass; visible
   non-gating advisories remain recorded. Final wrappers exit0 and code is stable.
 - Final API28/28 real calls,32 assets,26 exact PCM/frame/graph comparisons and
-  six direct references. Final BAT6/6 calls plus4/4 direct references,20 assets,
+  six direct references. Final BAT6/6 calls plus 4/4 direct references,20 assets,
  16 exact comparisons. Both inner hosts, real pinned FFmpeg, isolated configs.
 - Strict manifest/CLI checks, persistent valid-invalid-valid, relative pipe/NUL
   failures, settings freeze, one mode prompt, native diagnostics/append rollback,

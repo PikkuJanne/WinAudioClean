@@ -36,22 +36,77 @@ BeforeAll {
     if (-not ('WacTestRunCanceller' -as [type])) {
         Add-Type -TypeDefinition @'
 using System;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 
 public sealed class WacTestRunCanceller : IDisposable
 {
     private readonly Timer timer;
+    private volatile bool disposed;
     public string Error { get; private set; }
     public bool Requested { get; private set; }
     public WacTestRunCanceller(object context, int milliseconds)
     {
+        timer = new Timer(delegate(object ignored) { Request(context); }, null, milliseconds, Timeout.Infinite);
+    }
+    public WacTestRunCanceller(object context, int milliseconds, string pidPath, int readinessMilliseconds)
+    {
         timer = new Timer(delegate(object ignored) {
-            try { context.GetType().GetMethod("Request").Invoke(context, new object[0]); Requested = true; }
+            try
+            {
+                Stopwatch watch = Stopwatch.StartNew();
+                while (!disposed && !PidReady(pidPath))
+                {
+                    if (watch.ElapsedMilliseconds >= readinessMilliseconds)
+                    {
+                        Error = "Fixture PID readiness timed out.";
+                        return;
+                    }
+                    Thread.Sleep(10);
+                }
+                Request(context);
+            }
             catch (Exception error) { Error = error.ToString(); }
         }, null, milliseconds, Timeout.Infinite);
     }
-    public void Dispose() { timer.Dispose(); }
+    private void Request(object context)
+    {
+        if (disposed) return;
+        try { context.GetType().GetMethod("Request").Invoke(context, new object[0]); Requested = true; }
+        catch (Exception error) { Error = error.ToString(); }
+    }
+    private static bool PidReady(string path)
+    {
+        try
+        {
+            string text;
+            // Exclusive access rejects a PID writer that has not closed yet;
+            // a positive numeric prefix of a partial record is not readiness.
+            using (FileStream file = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                if (file.Length < 1 || file.Length > 16) return false;
+                using (StreamReader reader = new StreamReader(file, Encoding.ASCII, false)) { text = reader.ReadToEnd(); }
+            }
+            int pid;
+            if (!Int32.TryParse(text, NumberStyles.None, CultureInfo.InvariantCulture, out pid) || pid <= 0) return false;
+            using (Process process = Process.GetProcessById(pid)) { return !process.HasExited; }
+        }
+        catch (IOException) { return false; }
+        catch (ArgumentException) { return false; }
+    }
+    public void Dispose()
+    {
+        disposed = true;
+        using (ManualResetEvent complete = new ManualResetEvent(false))
+        {
+            timer.Dispose(complete);
+            if (!complete.WaitOne(4000)) throw new TimeoutException("Fixture cancellation callback did not finish.");
+        }
+    }
 }
 '@
     }
@@ -330,10 +385,11 @@ Describe 'AC-059/060: active owned cancellation and bounded stream cleanup' -Tag
     ) {
         $pidPath = Join-Path $TestDrive ('cancel-' + $Stage + '.pid')
         $env:WAC_PROGRESS_TEST_PID_PATH = $pidPath
+        $env:WAC_PROGRESS_TEST_PID_DELAY_MS = '1000'
         $env:WAC_PROGRESS_TEST_SLEEP_MS = '15000'
         $context = New-WacRunContext
         $survivor = Start-WacTestProgressSurvivor
-        $timer = [WacTestRunCanceller]::new($context, 750)
+        $timer = [WacTestRunCanceller]::new($context, 750, $pidPath, 3000)
         $watch = [Diagnostics.Stopwatch]::StartNew()
         try {
             $state = New-WacProgressState -RunContext $context -Stage $Stage -DurationSeconds 10 -StartPercent 0 -EndPercent 99
@@ -350,9 +406,16 @@ Describe 'AC-059/060: active owned cancellation and bounded stream cleanup' -Tag
             $watch.ElapsedMilliseconds | Should -BeLessThan 8000
             $state.Percent | Should -BeLessThan 100
         } finally {
-            $timer.Dispose(); $context.Dispose()
-            if (-not $survivor.HasExited) { $survivor.Kill() }
-            $null = $survivor.WaitForExit(5000); $survivor.Dispose()
+            try { $timer.Dispose() }
+            finally {
+                try { $context.Dispose() }
+                finally {
+                    try {
+                        if (-not $survivor.HasExited) { $survivor.Kill() }
+                        $null = $survivor.WaitForExit(5000)
+                    } finally { $survivor.Dispose() }
+                }
+            }
         }
     }
 
@@ -439,7 +502,13 @@ exit $resultCode
             $input.CanRead | Should -BeTrue
             $input.Position = 0
             $input.ReadByte() | Should -Be 83
-        } finally { $timer.Dispose(); $context.Dispose(); $input.Dispose() }
+        } finally {
+            try { $timer.Dispose() }
+            finally {
+                try { $context.Dispose() }
+                finally { $input.Dispose() }
+            }
+        }
     }
 
     It 'keeps early exit zero distinguishable from a failed held-input transfer' {

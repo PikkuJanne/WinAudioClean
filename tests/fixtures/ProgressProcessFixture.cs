@@ -42,7 +42,11 @@ internal static class ProgressProcessFixture
             Console.OutputEncoding = new UTF8Encoding(false);
             string pidPath = Setting("PID_PATH");
             if (!String.IsNullOrEmpty(pidPath))
+            {
+                int pidDelay = Number("PID_DELAY_MS", 0);
+                if (pidDelay > 0) Thread.Sleep(pidDelay);
                 File.WriteAllText(pidPath, Process.GetCurrentProcess().Id.ToString(CultureInfo.InvariantCulture));
+            }
             string readyPath = Setting("READY_PATH");
             if (!String.IsNullOrEmpty(readyPath)) File.WriteAllText(readyPath, "READY");
             string outputPath = Setting("PARTIAL_PATH");

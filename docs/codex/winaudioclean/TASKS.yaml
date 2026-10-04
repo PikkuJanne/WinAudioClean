@@ -958,7 +958,7 @@
       "depends_on": [
         "WAC-M3-06"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Pester suites, local runners and small repeatable native-process fixtures.",
       "implementation": [
@@ -972,7 +972,13 @@
         "AC-068",
         "AC-069"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ],
       "blocked_reason": null
     },
     {
@@ -985,7 +991,7 @@
       "depends_on": [
         "WAC-M4-01"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": ".github/workflows, development dependency lock/manifest and local parity.",
       "implementation": [
@@ -999,7 +1005,10 @@
         "AC-071",
         "AC-072"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ],
       "blocked_reason": null
     },
     {
@@ -1013,7 +1022,7 @@
       "depends_on": [
         "WAC-M4-02"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "scripts/Build-Release.ps1, allowlisted payload, checksums and dependency notices.",
       "implementation": [
@@ -1027,7 +1036,10 @@
         "AC-074",
         "AC-075"
       ],
-      "evidence": [],
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ],
       "blocked_reason": null
     },
     {
@@ -1042,7 +1054,7 @@
       "depends_on": [
         "WAC-M4-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Product README, comment-based Get-Help, examples, support/security documentation.",
       "implementation": [
@@ -1056,7 +1068,7 @@
         "AC-077",
         "AC-078"
       ],
-      "evidence": [],
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"],
       "blocked_reason": null
     },
     {

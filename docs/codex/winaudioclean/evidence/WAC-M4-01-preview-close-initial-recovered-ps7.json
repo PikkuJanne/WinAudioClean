@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "scope": "Preview post-dispose release advisory; held FileStream closes before injected fault",
+  "psVersion": "7.6.5",
+  "psEdition": "Core",
+  "pesterVersion": "5.7.1",
+  "tag": "ReportCloseFault",
+  "passed": 0,
+  "failed": 9,
+  "skipped": 0,
+  "notRun": 155,
+  "total": 164,
+  "sourceStable": true,
+  "sourceHashes": [
+    {
+      "path": "WinAudioClean.ps1",
+      "sha256": "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76"
+    },
+    {
+      "path": "WinAudioClean.IO.ps1",
+      "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+    },
+    {
+      "path": "WinAudioClean.Preview.ps1",
+      "sha256": "3dbf4d3f88cee09d5b7aa012392c9b0a2eae4ada725342af1a26d199c3274351"
+    },
+    {
+      "path": "tests/WinAudioClean.Preview.Tests.ps1",
+      "sha256": "cbeadfc881ade5207b6462b17a4496264943c129923e5fc33703eaf0bf80c869"
+    },
+    {
+      "path": "tests/WinAudioClean.PreviewReportClose.Tests.ps1",
+      "sha256": "a44c22f33c7e64d6913f55a90a47e71d851d48d52be7e4f65ebd1ef18a1ce5f1"
+    },
+    {
+      "path": "tests/fixtures/ReportCloseFault.ps1",
+      "sha256": "d967d457af994784572392cdb522a22d6884fc18e14761e18894952cf2502f91"
+    }
+  ],
+  "cases": [
+    {
+      "name": "retains flushed SUCCESS reports and releases all Preview leases after both writer close faults",
+      "result": "Failed",
+      "error": [
+        "Expected 0, but got 7."
+      ]
+    },
+    {
+      "name": "retains flushed FAILED reports and releases all Preview leases after both writer close faults",
+      "result": "Failed",
+      "error": [
+        "Expected $true, but got $false."
+      ]
+    },
+    {
+      "name": "retains flushed CANCELLED reports and releases all Preview leases after both writer close faults",
+      "result": "Failed",
+      "error": [
+        "Expected $true, but got $false."
+      ]
+    },
+    {
+      "name": "closes every writer after a post-dispose fault in the first JSON writer",
+      "result": "Failed",
+      "error": [
+        "Exception calling \"Dispose\" with \"0\" argument(s): \"Injected post-dispose json report release diagnostic.\""
+      ]
+    },
+    {
+      "name": "closes every writer after a post-dispose fault in the second text writer",
+      "result": "Failed",
+      "error": [
+        "Exception calling \"Dispose\" with \"0\" argument(s): \"Injected post-dispose txt report release diagnostic.\""
+      ]
+    },
+    {
+      "name": "closes every writer after a post-dispose fault in both writers",
+      "result": "Failed",
+      "error": [
+        "Exception calling \"Dispose\" with \"0\" argument(s): \"Injected post-dispose json report release diagnostic.\""
+      ]
+    },
+    {
+      "name": "keeps release advisories nonterminating when the caller stops on warnings",
+      "result": "Failed",
+      "error": [
+        "Exception calling \"Dispose\" with \"0\" argument(s): \"Injected post-dispose json report release diagnostic.\""
+      ]
+    },
+    {
+      "name": "retains the primary write exception and rolls back both owned reports despite both close faults",
+      "result": "Failed",
+      "error": [
+        "Expected an exception with message like '*Injected primary text report write failure*' to be thrown, but the message was 'Exception calling \"Dispose\" with \"0\" argument(s): \"Injected post-dispose json report release diagnostic.\"'. from <REPOSITORY>\\.wac-local\\m4-preview-close-old\\WinAudioClean.Preview.ps1:347 char:48\r\n    + … $writer in $writers.Values) { Close-WacReportWriter -Writer $writer }\r\n    +                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      ]
+    },
+    {
+      "name": "retains a second-writer collision and foreign bytes when the first writer close faults",
+      "result": "Failed",
+      "error": [
+        "Expected 0, but got 1."
+      ]
+    }
+  ]
+}

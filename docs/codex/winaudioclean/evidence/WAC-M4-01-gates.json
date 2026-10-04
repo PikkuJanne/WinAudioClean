@@ -1,0 +1,369 @@
+{
+  "schemaVersion": 1,
+  "task": "WAC-M4-01",
+  "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+  "acceptanceIds": [
+    "AC-067",
+    "AC-069"
+  ],
+  "source": "evidence/WAC-M4-01-source.json",
+  "sourceMapSha256": "08F094240F966BC4C9C52A2B5989B671507369114A606363854F46491EF22E06",
+  "scope": "Quick and seven explicit Targeted files followed by one Full gate per host after source stabilization. Full invokes all Pester tests and Python governance discovery; standalone real-FFmpeg matrices were not rerun.",
+  "runs": [
+    {
+      "phase": "quick",
+      "shell": "ps51",
+      "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "./scripts/Invoke-Tests.ps1 -Level Quick -PythonPath '<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe'"
+      ],
+      "started_utc": "2026-10-03T15:07:18.440779+00:00",
+      "finished_utc": "2026-10-03T15:08:08.353827+00:00",
+      "elapsed_seconds": 49.89,
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "wrapper_sha256": "5B45063AE8C902CCDAB756CA279D10C23768C9AB10C1E2B0BB9F996674A74EE2",
+      "host_sha256": "8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E",
+      "python_sha256": "DD5F8D19F6755D6491EE7C4BEF2FE35DDD521334CC3CA3ED8FC93EBCADF135D0",
+      "log": "docs/codex/winaudioclean/evidence/WAC-M4-01-quick-ps51.txt",
+      "log_sha256": "AF40519F1734AB16C5F43CDA77E672BACE76EE41DDE013D781ECBC233A78919D",
+      "raw_log_sha256": "7CC2BB328CC9A3047E4392DB185DB696FEBA38002A7A337A4C18AB9F6FEFFF0C",
+      "parser": [
+        "53",
+        "5.1.26100.9444"
+      ],
+      "non_gating_analyzer_findings": 280,
+      "pester_counts": {
+        "passed": 1070,
+        "failed": 0,
+        "skipped": 1,
+        "inconclusive": 0,
+        "not_run": 386
+      },
+      "runner_summary": [
+        "1070",
+        "1",
+        "386"
+      ],
+      "skip_lines": [
+        "  [!] never follows a file symlink when the local token permits creating it is skipped, because This local token cannot create a symbolic link; junction coverage runs separately. 33ms (29ms|3ms)"
+      ],
+      "python_governance_count": null,
+      "python_governance_ok": null,
+      "coverage_validation_passed": true,
+      "passed": true,
+      "sourceMapSha256": "08F094240F966BC4C9C52A2B5989B671507369114A606363854F46491EF22E06",
+      "environment": "PSModulePath removed from this child environment so each PowerShell host reconstructs its standard module paths; Python I/O encoding set UTF-8. No persistent environment or security setting changed."
+    },
+    {
+      "phase": "quick",
+      "shell": "ps7",
+      "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "argv": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "./scripts/Invoke-Tests.ps1 -Level Quick -PythonPath '<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe'"
+      ],
+      "started_utc": "2026-10-03T15:05:53.672152+00:00",
+      "finished_utc": "2026-10-03T15:06:42.645158+00:00",
+      "elapsed_seconds": 48.94,
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "wrapper_sha256": "E5C4A31DBC44B8F885A60FD34360FDD627B24CB94A461C312A1DC955A5C725D4",
+      "host_sha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+      "python_sha256": "DD5F8D19F6755D6491EE7C4BEF2FE35DDD521334CC3CA3ED8FC93EBCADF135D0",
+      "log": "docs/codex/winaudioclean/evidence/WAC-M4-01-quick-ps7.txt",
+      "log_sha256": "1B4DCC7152C2FF7BDC3A08608E9B00F4DF1861613EF09EAEC6057304E4C8B7F7",
+      "raw_log_sha256": "2D57FD311A0D4330D830B6395BF3C0721C2C7E998A9B651237F546F36EC41D4F",
+      "parser": [
+        "53",
+        "7.6.5"
+      ],
+      "non_gating_analyzer_findings": 280,
+      "pester_counts": {
+        "passed": 1070,
+        "failed": 0,
+        "skipped": 1,
+        "inconclusive": 0,
+        "not_run": 386
+      },
+      "runner_summary": [
+        "1070",
+        "1",
+        "386"
+      ],
+      "skip_lines": [
+        "  [!] never follows a file symlink when the local token permits creating it is skipped, because This local token cannot create a symbolic link; junction coverage runs separately. 19ms (18ms|2ms)"
+      ],
+      "python_governance_count": null,
+      "python_governance_ok": null,
+      "coverage_validation_passed": true,
+      "passed": true,
+      "sourceMapSha256": "08F094240F966BC4C9C52A2B5989B671507369114A606363854F46491EF22E06",
+      "environment": "Inherited PSModulePath for first PS7 Quick; no module-resolution failure observed."
+    },
+    {
+      "phase": "targeted",
+      "shell": "ps51",
+      "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.PreviewReportClose.Tests.ps1','tests/WinAudioClean.Preview.Tests.ps1','tests/WinAudioClean.FaultChecks.Tests.ps1','tests/WinAudioClean.Native.Tests.ps1','tests/WinAudioClean.Transaction.Tests.ps1','tests/WinAudioClean.Encoding.Tests.ps1','tests/WinAudioClean.ReportIO.Tests.ps1') -PythonPath '<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe'"
+      ],
+      "started_utc": "2026-10-03T15:08:32.048830+00:00",
+      "finished_utc": "2026-10-03T15:09:28.349086+00:00",
+      "elapsed_seconds": 56.26,
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "wrapper_sha256": "5B45063AE8C902CCDAB756CA279D10C23768C9AB10C1E2B0BB9F996674A74EE2",
+      "host_sha256": "8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E",
+      "python_sha256": "DD5F8D19F6755D6491EE7C4BEF2FE35DDD521334CC3CA3ED8FC93EBCADF135D0",
+      "log": "docs/codex/winaudioclean/evidence/WAC-M4-01-targeted-ps51.txt",
+      "log_sha256": "FEB50676FD98EDE9ACD66E8DE47B50EF9F6D72CD905E50D0E36A650623B5734C",
+      "raw_log_sha256": "EA69C5F077D847D6DCFC0A20F6EDDBE745EB050CD62AEA5806A8F1C53AEAA143",
+      "parser": [
+        "53",
+        "5.1.26100.9444"
+      ],
+      "non_gating_analyzer_findings": 280,
+      "pester_counts": {
+        "passed": 290,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "not_run": 0
+      },
+      "runner_summary": [
+        "290",
+        "0",
+        "0"
+      ],
+      "skip_lines": [],
+      "python_governance_count": null,
+      "python_governance_ok": null,
+      "coverage_validation_passed": true,
+      "passed": true,
+      "sourceMapSha256": "08F094240F966BC4C9C52A2B5989B671507369114A606363854F46491EF22E06",
+      "environment": "PSModulePath removed from this child environment so each PowerShell host reconstructs its standard module paths; Python I/O encoding set UTF-8. No persistent environment or security setting changed."
+    },
+    {
+      "phase": "targeted",
+      "shell": "ps7",
+      "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "argv": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "./scripts/Invoke-Tests.ps1 -Level Targeted -Path @('tests/WinAudioClean.PreviewReportClose.Tests.ps1','tests/WinAudioClean.Preview.Tests.ps1','tests/WinAudioClean.FaultChecks.Tests.ps1','tests/WinAudioClean.Native.Tests.ps1','tests/WinAudioClean.Transaction.Tests.ps1','tests/WinAudioClean.Encoding.Tests.ps1','tests/WinAudioClean.ReportIO.Tests.ps1') -PythonPath '<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe'"
+      ],
+      "started_utc": "2026-10-03T15:08:32.049544+00:00",
+      "finished_utc": "2026-10-03T15:09:40.390554+00:00",
+      "elapsed_seconds": 68.31,
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "wrapper_sha256": "5B45063AE8C902CCDAB756CA279D10C23768C9AB10C1E2B0BB9F996674A74EE2",
+      "host_sha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+      "python_sha256": "DD5F8D19F6755D6491EE7C4BEF2FE35DDD521334CC3CA3ED8FC93EBCADF135D0",
+      "log": "docs/codex/winaudioclean/evidence/WAC-M4-01-targeted-ps7.txt",
+      "log_sha256": "B19AB14CD3C4179EA97D332E80F9766CB41C2BF79C7AFF055449A8862C638E77",
+      "raw_log_sha256": "84A314A06C5DD620F45CFAC4DABB0AF0D8DA8BA0B3BC75198FACAFFBBF936C07",
+      "parser": [
+        "53",
+        "7.6.5"
+      ],
+      "non_gating_analyzer_findings": 280,
+      "pester_counts": {
+        "passed": 290,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0,
+        "not_run": 0
+      },
+      "runner_summary": [
+        "290",
+        "0",
+        "0"
+      ],
+      "skip_lines": [],
+      "python_governance_count": null,
+      "python_governance_ok": null,
+      "coverage_validation_passed": true,
+      "passed": true,
+      "sourceMapSha256": "08F094240F966BC4C9C52A2B5989B671507369114A606363854F46491EF22E06",
+      "environment": "PSModulePath removed from this child environment so each PowerShell host reconstructs its standard module paths; Python I/O encoding set UTF-8. No persistent environment or security setting changed."
+    },
+    {
+      "phase": "full",
+      "shell": "ps51",
+      "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "argv": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "./scripts/Invoke-Tests.ps1 -Level Full -PythonPath '<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe'"
+      ],
+      "started_utc": "2026-10-03T15:09:45.138987+00:00",
+      "finished_utc": "2026-10-03T15:26:43.898484+00:00",
+      "elapsed_seconds": 1018.72,
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "wrapper_sha256": "5B45063AE8C902CCDAB756CA279D10C23768C9AB10C1E2B0BB9F996674A74EE2",
+      "host_sha256": "8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E",
+      "python_sha256": "DD5F8D19F6755D6491EE7C4BEF2FE35DDD521334CC3CA3ED8FC93EBCADF135D0",
+      "log": "docs/codex/winaudioclean/evidence/WAC-M4-01-full-ps51.txt",
+      "log_sha256": "C2A9D8AB3488AF0A6050EDDFD33677715D6ABCD198173072695C33FD1FFD2C52",
+      "raw_log_sha256": "B6BC5F4BEF5B1BC24F171B3CCC4DA306D23CF8E0FAB9BAC971A9CFB9790245C5",
+      "parser": [
+        "53",
+        "5.1.26100.9444"
+      ],
+      "non_gating_analyzer_findings": 280,
+      "pester_counts": {
+        "passed": 1456,
+        "failed": 0,
+        "skipped": 1,
+        "inconclusive": 0,
+        "not_run": 0
+      },
+      "runner_summary": [
+        "1456",
+        "1",
+        "0"
+      ],
+      "skip_lines": [
+        "  [!] never follows a file symlink when the local token permits creating it is skipped, because This local token cannot create a symbolic link; junction coverage runs separately. 39ms (34ms|5ms)"
+      ],
+      "python_governance_count": 75,
+      "python_governance_ok": true,
+      "coverage_validation_passed": true,
+      "passed": true,
+      "sourceMapSha256": "08F094240F966BC4C9C52A2B5989B671507369114A606363854F46491EF22E06",
+      "environment": "PSModulePath removed from this child environment so each PowerShell host reconstructs its standard module paths; Python I/O encoding set UTF-8. No persistent environment or security setting changed."
+    },
+    {
+      "phase": "full",
+      "shell": "ps7",
+      "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+      "argv": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "./scripts/Invoke-Tests.ps1 -Level Full -PythonPath '<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe'"
+      ],
+      "started_utc": "2026-10-03T15:09:45.139500+00:00",
+      "finished_utc": "2026-10-03T15:28:26.865646+00:00",
+      "elapsed_seconds": 1121.69,
+      "exit_code": 0,
+      "timed_out": false,
+      "source_unchanged": true,
+      "wrapper_sha256": "5B45063AE8C902CCDAB756CA279D10C23768C9AB10C1E2B0BB9F996674A74EE2",
+      "host_sha256": "362A356CE7F0940EC74F73A8FC2C990A2CC24A38A11C90BBD8ECA947110AD139",
+      "python_sha256": "DD5F8D19F6755D6491EE7C4BEF2FE35DDD521334CC3CA3ED8FC93EBCADF135D0",
+      "log": "docs/codex/winaudioclean/evidence/WAC-M4-01-full-ps7.txt",
+      "log_sha256": "0A45EE5700FDD093E7EFF6414DD1E4B9776FFA531D2904CC0182D885E117BC5E",
+      "raw_log_sha256": "4626CBCB5E7FB47C4BF4FFF09DDCF7017C3493212B1B89E560BB36AD56A26552",
+      "parser": [
+        "53",
+        "7.6.5"
+      ],
+      "non_gating_analyzer_findings": 280,
+      "pester_counts": {
+        "passed": 1456,
+        "failed": 0,
+        "skipped": 1,
+        "inconclusive": 0,
+        "not_run": 0
+      },
+      "runner_summary": [
+        "1456",
+        "1",
+        "0"
+      ],
+      "skip_lines": [
+        "  [!] never follows a file symlink when the local token permits creating it is skipped, because This local token cannot create a symbolic link; junction coverage runs separately. 33ms (30ms|3ms)"
+      ],
+      "python_governance_count": 75,
+      "python_governance_ok": true,
+      "coverage_validation_passed": true,
+      "passed": true,
+      "sourceMapSha256": "08F094240F966BC4C9C52A2B5989B671507369114A606363854F46491EF22E06",
+      "environment": "PSModulePath removed from this child environment so each PowerShell host reconstructs its standard module paths; Python I/O encoding set UTF-8. No persistent environment or security setting changed."
+    }
+  ],
+  "preliminaryFailure": {
+    "phase": "quick",
+    "shell": "ps51",
+    "baseline": "c2ad4de8fd1258a474ad0ba424bc8f6ee53a2ed3",
+    "argv": [
+      "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "-NoLogo",
+      "-NoProfile",
+      "-NonInteractive",
+      "-ExecutionPolicy",
+      "Bypass",
+      "-Command",
+      "./scripts/Invoke-Tests.ps1 -Level Quick -PythonPath '<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe'"
+    ],
+    "started_utc": "2026-10-03T15:05:53.671322+00:00",
+    "finished_utc": "2026-10-03T15:05:54.199765+00:00",
+    "elapsed_seconds": 0.49,
+    "exit_code": 1,
+    "timed_out": false,
+    "source_unchanged": true,
+    "wrapper_sha256": "E5C4A31DBC44B8F885A60FD34360FDD627B24CB94A461C312A1DC955A5C725D4",
+    "host_sha256": "8BB6FA8C283B4D92120B1EF249A9B311B0F804D4CABBE9981159976C8BE76A5E",
+    "python_sha256": "DD5F8D19F6755D6491EE7C4BEF2FE35DDD521334CC3CA3ED8FC93EBCADF135D0",
+    "log": "docs/codex/winaudioclean/evidence/WAC-M4-01-quick-initial-ps51.txt",
+    "log_sha256": "34961F3CFFC113EA58E81B4C93F8EB7B244DFE9A49DBC46F50BA828180474B60",
+    "raw_log_sha256": "81C97CD38ED1EC260CD7D2CE4352F9F819B2E733F96026EA15ED8592FF573D7F",
+    "parser": null,
+    "non_gating_analyzer_findings": null,
+    "pester_counts": null,
+    "runner_summary": null,
+    "skip_lines": [],
+    "python_governance_count": null,
+    "python_governance_ok": null,
+    "coverage_validation_passed": false,
+    "passed": false,
+    "pre_formatting_log_sha256": "2EC5DF1A891B989248DE3C379DFC44F20A24B63DE04070BAA123B5F5B1EE4765"
+  },
+  "correction": "Initial PS5.1 Quick stopped before parser/Pester because the Python wrapper inherited PS7 PSModulePath and could not discover Import-PowerShellDataFile. Preserve its exit1 log; remove PSModulePath in child env and rerun only PS5.1 Quick. First successful PS7 Quick is retained, not repeated. Product and test source were unchanged.",
+  "sanitization": "Combined stdout/stderr UTF8 decoding, ANSI removed, known repository/profile path prefixes replaced, trailing line whitespace trimmed. No case lines abbreviated. Published and raw capture hashes are distinct. Trailing empty lines at EOF were removed from the preliminary PS5.1 diagnostic derivative after whitespace review; its prior hash and raw capture remain distinct.",
+  "fullRepeated": false,
+  "skips": "Quick/Full retain one file-symlink privilege skip per host; selected Targeted has no skips. No privilege elevation or skip-to-pass conversion."
+}

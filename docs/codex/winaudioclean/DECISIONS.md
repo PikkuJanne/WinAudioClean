@@ -669,3 +669,99 @@ as history. Do not repeat unchanged-source suites solely for this closure.
 Next WAC-M4-01 is unlocked, not started. Picker/stress/crash/power-loss and the
 inherited Preview writer-close path remain unverified. No merge/release/security
 settings/deployment approval is added. Evidence: `evidence/WAC-M3-06-manual.json`.
+
+### 2026-10-03 — WAC-M4-01 regression, traceability and isolated faults
+
+D39. Map AC-001..069 to concrete commands/reports/named reviews without copying
+canonical pass statuses or hiding broader manual/listening/stress gaps. Run the
+read-only validator in each existing test level; thirteen negative/read-only
+validator cases join Full. Preserve all earlier feature evidence and exact failed
+harness/fixture/publication captures. Available coverage is not executed proof.
+
+Use copy-only representative overwrite, native-exit and encoder-argv mutations,
+unmutated baseline controls and exact intended failed assertions. Held ordinary
+ancestry/tree identities and pre-delete reparse validation prohibit user-file
+cleanup/fallback deletion. Track unexpected mutant transaction handles solely
+for test teardown. Actual FFmpeg sample-rate rendering is not claimed by argv.
+
+Fix only Preview writer close: independent per-writer attempts, nonterminating
+advisories after durable flush, truthful persisted outcomes and primary errors.
+Real FileStream post-dispose fixture passes nine cases per host; inherited loop
+fails those nine. Do not infer real uncooperative OS release recovery. No other
+runtime/BAT LF content, sound/default, ownership or cancellation contract changes.
+
+Quick/selected Targeted then one Full gate per PS5.1/PS7 use final stable hashes;
+preserve privilege skips and non-gating advisories. Python capture's inherited
+PS7 module path is corrected only in child env; repeat its failed PS5.1 Quick
+alone, retain successful first PS7 Quick. No product/machine setting change.
+Only M4-01/AC-067..069 advance; 23 tasks done/7 todo,69 AC pass/21 not_run.
+Next M4-02 only, after live sync. No CI/package/merge/release/settings/deployment
+or sound-promotion approval is added. Evidence: `evidence/WAC-M4-01.md`.
+
+### 2026-10-03 — WAC-M4-02 Windows CI supplements local validation
+
+D40. Run the existing Full runner on Windows2022/2025, PS5.1 and pinned
+PS7 7.6.5/Python3.14.6/Pester5.7.1/PSScriptAnalyzer1.24.0. Verify full Action
+commits and archive checksums from official sources. Hosted image/PS5.1 patch
+versions are observed servicing values. Ordinary PR/push, contents:read and
+nonpersisted credentials bound access; no secret/cache/publication jobs.
+
+Upload only fixed source/version/count JSON with seven-day retention. Failed
+gates may include bounded Git-listed source locations and fixed categories;
+handled fixture stack references are informational, not the failure inventory.
+Raw logs and private data stay local/ignored. Select exact SHA/event/workflow
+and require all four expected jobs; unavailable/missing/pending/skipped/API
+failures cannot become passes. Actual missing-shell/not-run captures and
+controlled status tests establish truthful fallback.
+
+CI exposed a Framework-created stdin BOM. Native startup chooses a child
+BOM-free encoding where available; PS5.1 scopes same-code-page BOM-free UTF-8
+to startup and restores the encoding in finally. That Console setter refreshes
+its cached reader; WAC native starts remain sequential. Own pipe handles before
+restoration. Exact raw-byte/start-failure regressions and bounded deterministic
+PID-ready cancellation fixtures preserve input/ownership/deadline contracts.
+
+Accept AC-070..072 from `c5a107e825bfa087f6b21f96dd54e91e538b1890`: both local Full gates (Pester 1467 passed/1 skipped; Python 134 ran/1 skipped)
+and four hosted Full jobs (Pester 1468 passed/0 skipped; Python 134 ran/0 skipped), [PR run 37147112528](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37147112528), matching source/pin/
+artifact/status evidence. Preserve earlier failures and recovery scopes. Only
+M4-02 advances:24 done/6 todo,72 pass/18 not_run. Retain eight broader gaps,
+unchanged audio defaults and existing approval boundaries. Next M4-03 only;
+no packaging started. Evidence: `evidence/WAC-M4-02.md` and validation ledger.
+
+### 2026-10-03 — WAC-M4-03 local tool-only portable package
+
+D41. Preserve the existing literal scriptVersion 2.3 as the sole version authority.
+Build from explicit current clean HEAD and ordinary committed Git blobs; never
+convert payload bytes through native text output. Include the eight PowerShell
+components, BAT, original icon, MIT notice and selected user docs, with generated
+commit/tree/payload SHA256 manifest and external ZIP checksum/provenance.
+
+Framework/Core NoCompression metadata differed in an actual probe. Canonical
+Stored ZIP32 records fix order, UTF8 fields, CRC32, timestamp, attributes and
+bounds. CreateNew, ordinary/reparse-free ancestry and before/after clean-source
+checks preserve existing outputs and source identities. No installer, download,
+third-party binary bundling, publication or sound change is added.
+
+Accept AC-073..075 from `4609265b1ed40da08897d7d816196ec466adaef0`: four 447048-byte identical builds, 8 real
+entry-point plus 4 separate builtin-only extracted-package cases, both local
+Full gates and four code PR CI jobs. Record normal shared module visibility;
+bootstrap isolation is distinct from direct -File/BAT launching. Preserve MIT
+bytes and exact external FFmpeg 9.0.2 hashes/license probes. That GPL build remains
+user-supplied and bundling unapproved. Retain every prior broader gap and local
+privilege skip. Only M4-03 advances to 25 done / 5 todo and 75 pass / 15 not_run;
+next M4-04 has not started. Evidence: evidence/WAC-M4-03.md and its ledger.
+
+### 2026-10-04 — WAC-M4-04 user help and scoped example validation
+
+D42. Finish README/Get-Help and packaged setup/support/security guidance for the existing version 2.3 tool. Keep typed options, actual defaults, exact Original filters, local processing and separate ordinary/Preview/journal schemas consistent. The ordinary-only redacted exporter does not accept actual Preview JSON or JSONL journals. Recovery needs no private audio upload, administrator installation or global security disable. Short extraction/output paths account for generated names/nesting and host native path limits; retained PS7/PS5.1 observations do not establish universal path support.
+
+Final packaged documentation/controller source `1f10940ee970ebe719c21ba0e7290830beeb7123` passed all 64 actual cases. ZIP: 438904 bytes, SHA256 `d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7`; controller SHA256 `3cf5cd6fd7d24c4633e4163372e7b194a5840219a6b2534fc394f245b4a5266b`.
+
+Both local Full gates used the earlier frozen source `047aefe906ca7954a225d81f53286eb1275723dc`: ps51: Pester 1483 passed/1 skipped, Python 142 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 142 ran/1 skipped; zero failures/outside-scope cases. These are distinct source scopes; Full was not repeated for later documentation/controller-only edits. Retain the initial long-path/controller failures and successful shorter-path replays separately. Short local extraction/output paths are the remedy; no universal path limit or global security change is claimed.
+
+CI at `1f10940ee970ebe719c21ba0e7290830beeb7123` is pending (0/4 observed jobs); [observed run](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37182513533). Pending/unavailable/not-run CI is not a passed gate. Live branch synchronization and actual post-push PR/CI must be verified separately.
+
+All eight broader gaps remain. Original/Fast/default sound and BAT/script entry points stay unchanged; no publication or machine-security changes are authorized. Website draft metadata remains uncreated future M5-01 work.
+
+[Evidence](evidence/WAC-M4-04.md), [ledger](evidence/WAC-M4-04-validation.json).
+Accept AC-076..078 within these recorded engineering/documentation scopes: 26 tasks done / 4 todo, 78 AC pass / 12 not_run. Next WAC-M5-01 only after live synchronization. Feature commits/pushes and draft-PR upkeep remain authorized; publication, merge/settings/security changes and sound promotion retain existing boundaries.

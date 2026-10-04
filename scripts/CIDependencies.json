@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-10-03",
+  "python": {
+    "version": "3.14.6",
+    "uri": "https://www.python.org/ftp/python/3.14.6/python-3.14.6-embed-amd64.zip",
+    "sha256": "df901e84a896ff1ee720ad03377e0c8d8c2244fda79808aeeaff6316df1cb75c",
+    "executable": "python.exe",
+    "source": "https://www.python.org/downloads/release/python-3146/"
+  },
+  "powershell": {
+    "version": "7.6.5",
+    "uri": "https://github.com/PowerShell/PowerShell/releases/download/v7.6.5/PowerShell-7.6.5-win-x64.zip",
+    "sha256": "32eb8f6cdce08f86e987d625a2733e54ac3e289ae7e1621b14c0b5bcec2434ea",
+    "executable": "pwsh.exe",
+    "source": "https://github.com/PowerShell/PowerShell/releases/tag/v7.6.5"
+  },
+  "actions": {
+    "actions/checkout": {
+      "version": "v5.0.0",
+      "commit": "08c6903cd8c0fde910a37f88322edcfb5dd907a8",
+      "source": "https://github.com/actions/checkout/releases/tag/v5.0.0"
+    },
+    "actions/upload-artifact": {
+      "version": "v4.6.2",
+      "commit": "ea165f8d65b6e75b540449e92b4886f43607fa02",
+      "source": "https://github.com/actions/upload-artifact/releases/tag/v4.6.2"
+    }
+  },
+  "windows_images": ["windows-2022", "windows-2025"],
+  "limits": [
+    "Hosted Windows image labels are servicing channels, not immutable OS snapshots; actual OS and PS5.1 builds are recorded.",
+    "Full uses synthetic native fixtures and governance tests; standalone real-FFmpeg matrices and listening reviews remain separate.",
+    "Downloads occur only in explicitly invoked development setup, never in the audio application."
+  ]
+}

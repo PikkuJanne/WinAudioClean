@@ -1,0 +1,4340 @@
+{
+  "schema_version": 1,
+  "task": "WAC-M4-04",
+  "status": "passed",
+  "parent": "33efc4a2f589927203997d65f76096f46bfe3c65",
+  "acceptance_ids": [
+    "AC-076",
+    "AC-077",
+    "AC-078"
+  ],
+  "scope": "Exact packaged documentation, normal-user support/privacy, help/default/claims review; no sound promotion or publication.",
+  "full_runs": [
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps51",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "5.1.26100.9444",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "047aefe906ca7954a225d81f53286eb1275723dc",
+        "dirty": false,
+        "trees": {
+          "runtime": "796f04faa81705b18a25b1769324a75e5f9ef72f1ae31f044ba72822b171b04c",
+          "scripts": "5a9da906353dcee3c954d1d8c306742fb3d1ba222ddc347ef89d66aa930e9bab",
+          "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "2fc4c8fc1682fccdf091198b71fe49fab628806c42ac092c04f1870927849d6b",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "312a67f010ce659b7a252072056411365f2ff596d7d716b6dd99592317122173"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1483,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 142,
+          "skipped": 1
+        }
+      },
+      "diagnostics": null
+    },
+    {
+      "schema_version": 1,
+      "scope": "local",
+      "shell_family": "ps7",
+      "level": "Full",
+      "status": "passed",
+      "reason": "completed",
+      "exit_code": 0,
+      "versions": {
+        "python": "3.14.6",
+        "powershell": "7.6.5",
+        "modules": {
+          "Pester": "5.7.1",
+          "PSScriptAnalyzer": "1.24.0"
+        }
+      },
+      "platform": {
+        "windows_version": "10.0.26300",
+        "windows_build": 26300,
+        "image_os": null,
+        "image_version": null
+      },
+      "source": {
+        "commit": "047aefe906ca7954a225d81f53286eb1275723dc",
+        "dirty": false,
+        "trees": {
+          "runtime": "796f04faa81705b18a25b1769324a75e5f9ef72f1ae31f044ba72822b171b04c",
+          "scripts": "5a9da906353dcee3c954d1d8c306742fb3d1ba222ddc347ef89d66aa930e9bab",
+          "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "2fc4c8fc1682fccdf091198b71fe49fab628806c42ac092c04f1870927849d6b",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "312a67f010ce659b7a252072056411365f2ff596d7d716b6dd99592317122173"
+        },
+        "content_unchanged": true
+      },
+      "checks": {
+        "pester": {
+          "passed": 1483,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 142,
+          "skipped": 1
+        }
+      },
+      "diagnostics": null
+    }
+  ],
+  "full_scope_after_followup": "Full ran at clean047aefe. Later changes are user docs/comment help and the documentation controller. Builder, tests and application body are unchanged; the final controller/examples and closure inputs receive separate narrow checks.",
+  "initial_targeted": [
+    {
+      "host": "ps51",
+      "exit_code": 0,
+      "source": {
+        "commit": "33efc4a2f589927203997d65f76096f46bfe3c65",
+        "dirty": true,
+        "trees": {
+          "runtime": "796f04faa81705b18a25b1769324a75e5f9ef72f1ae31f044ba72822b171b04c",
+          "scripts": "bf370ffb7b7ce1c33f1355a39a42649f1f0cca625b883eeebe2966bb50dfc69a",
+          "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "0ba34218e414796d944021eb331384ac622165794e0662c9ce3ffb4a7145471b",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "41d8ba6eaa93342a71eb374b270561d191aa78abe9a1bfb085e227ca78d5d5cf"
+        }
+      },
+      "source_after": {
+        "commit": "33efc4a2f589927203997d65f76096f46bfe3c65",
+        "dirty": true,
+        "trees": {
+          "runtime": "796f04faa81705b18a25b1769324a75e5f9ef72f1ae31f044ba72822b171b04c",
+          "scripts": "e21e8bba546fe150d23c8fae2e79ffee9ff745dd350d4cd2e476977f53869489",
+          "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "2fc4c8fc1682fccdf091198b71fe49fab628806c42ac092c04f1870927849d6b",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "41d8ba6eaa93342a71eb374b270561d191aa78abe9a1bfb085e227ca78d5d5cf"
+        }
+      },
+      "counts": {
+        "passed": 16,
+        "skipped": 0,
+        "outside_scope": 0
+      },
+      "source_unchanged": false
+    },
+    {
+      "host": "ps7",
+      "exit_code": 0,
+      "source": {
+        "commit": "33efc4a2f589927203997d65f76096f46bfe3c65",
+        "dirty": true,
+        "trees": {
+          "runtime": "796f04faa81705b18a25b1769324a75e5f9ef72f1ae31f044ba72822b171b04c",
+          "scripts": "bf370ffb7b7ce1c33f1355a39a42649f1f0cca625b883eeebe2966bb50dfc69a",
+          "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "0ba34218e414796d944021eb331384ac622165794e0662c9ce3ffb4a7145471b",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "41d8ba6eaa93342a71eb374b270561d191aa78abe9a1bfb085e227ca78d5d5cf"
+        }
+      },
+      "source_after": {
+        "commit": "33efc4a2f589927203997d65f76096f46bfe3c65",
+        "dirty": true,
+        "trees": {
+          "runtime": "796f04faa81705b18a25b1769324a75e5f9ef72f1ae31f044ba72822b171b04c",
+          "scripts": "aa162c772ad5e03ba678d3978f27a543bb11d19ed909493593a07d47104133ef",
+          "tests": "deb0e54bb33c7007c60425d5a71434153a10f02b5e096073e6cdfe1a055da1b0",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "2fc4c8fc1682fccdf091198b71fe49fab628806c42ac092c04f1870927849d6b",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "312a67f010ce659b7a252072056411365f2ff596d7d716b6dd99592317122173"
+        }
+      },
+      "counts": {
+        "passed": 16,
+        "skipped": 0,
+        "outside_scope": 0
+      },
+      "source_unchanged": false
+    }
+  ],
+  "initial_targeted_disposition": "Both Pester selections passed16/0/0, but source changed during capture; not accepted as stable gates.",
+  "initial_documentation": {
+    "source_commit": "047aefe906ca7954a225d81f53286eb1275723dc",
+    "passed": false,
+    "case_count": 58,
+    "passed_count": 57,
+    "failures": [
+      {
+        "id": "list",
+        "shell": "ps7",
+        "exit_code": 5,
+        "error_code": "example_exit_or_timeout"
+      }
+    ],
+    "disposition": "PS7 list failed opening a261-character journal before render. Preserved; shorter paths separately verified."
+  },
+  "initial_controller_argument_failure": {
+    "reason": "absolute_path_required",
+    "disposition": "Relative CLI arguments rejected before walkthrough; corrected absolute invocation retained separately."
+  },
+  "path_replays": {
+    "schema_version": 1,
+    "source_unchanged": true,
+    "original_capture_preserved": true,
+    "cases": [
+      {
+        "id": "ps51-short-mixed",
+        "exit_code": 0,
+        "passed": true,
+        "journal_path_characters": 241,
+        "implicit_remoting_observed": false,
+        "maximum_generated_media_path_characters": 254
+      },
+      {
+        "id": "ps7-short-mixed",
+        "exit_code": 0,
+        "passed": true,
+        "journal_path_characters": 241,
+        "implicit_remoting_observed": true,
+        "maximum_generated_media_path_characters": 254
+      },
+      {
+        "id": "ps7-short-native",
+        "exit_code": 0,
+        "passed": true,
+        "journal_path_characters": 241,
+        "implicit_remoting_observed": false,
+        "maximum_generated_media_path_characters": 254
+      },
+      {
+        "id": "ps7-long-native",
+        "exit_code": 5,
+        "passed": true,
+        "journal_path_characters": 261,
+        "implicit_remoting_observed": false,
+        "maximum_generated_media_path_characters": 0
+      }
+    ]
+  },
+  "controller_guard_checks": {
+    "schema_version": 1,
+    "scope": "readonly_actual_reports_and_in_memory_counterexamples",
+    "controller_sha256": "3cf5cd6fd7d24c4633e4163372e7b194a5840219a6b2534fc394f245b4a5266b",
+    "positive_report_count": 36,
+    "positive_errors": [],
+    "negative_cases": [
+      {
+        "id": "raw-24-ignored-bitDepth",
+        "passed": true,
+        "error_code": "requested_setting_ignored"
+      },
+      {
+        "id": "raw-24-ignored-mode",
+        "passed": true,
+        "error_code": "requested_setting_ignored"
+      },
+      {
+        "id": "accurate-ignored-loudnessMode",
+        "passed": true,
+        "error_code": "requested_setting_ignored"
+      },
+      {
+        "id": "track-mono-rf64-ignored-mono",
+        "passed": true,
+        "error_code": "requested_setting_ignored"
+      },
+      {
+        "id": "track-mono-rf64-ignored-rf64",
+        "passed": true,
+        "error_code": "requested_setting_ignored"
+      },
+      {
+        "id": "gentle-ignored-preset",
+        "passed": true,
+        "error_code": "requested_preset_ignored"
+      },
+      {
+        "id": "gentle-ignored-override",
+        "passed": true,
+        "error_code": "requested_cleaning_ignored"
+      },
+      {
+        "id": "preview-ignored-range",
+        "passed": true,
+        "error_code": "requested_preview_range_ignored"
+      },
+      {
+        "id": "preview-invalid-gain",
+        "passed": true,
+        "error_code": "preview_matching_policy"
+      },
+      {
+        "id": "preview-false-passed-matching",
+        "passed": true,
+        "error_code": "preview_matching_difference"
+      },
+      {
+        "id": "accurate-false-passed-analysis",
+        "passed": true,
+        "error_code": "failed_stage_has_measurement"
+      },
+      {
+        "id": "accurate-false-passed-compliance",
+        "passed": true,
+        "error_code": "accurate_compliance_claim"
+      },
+      {
+        "id": "accurate-failed-final-empty-meters",
+        "passed": true,
+        "error_code": "failed_final_measurement_claim"
+      },
+      {
+        "id": "accurate-failed-final-missing-native-record",
+        "passed": true,
+        "error_code": "loudness_native_result_schema"
+      },
+      {
+        "id": "preview-false-reported-gain",
+        "passed": true,
+        "error_code": "preview_derived_gain_mismatch"
+      },
+      {
+        "id": "accurate-false-linear-metadata",
+        "passed": true,
+        "error_code": "accurate_linear_request_mismatch"
+      },
+      {
+        "id": "accurate-false-stage-filter",
+        "passed": true,
+        "error_code": "accurate_stage_filter_mismatch"
+      },
+      {
+        "id": "escaped-local-file",
+        "passed": true,
+        "error_code": "report_outside_local_fixture"
+      },
+      {
+        "id": "escaped-local-directory",
+        "passed": true,
+        "error_code": "report_outside_local_fixture"
+      },
+      {
+        "id": "settings-reset-missing-origins",
+        "passed": true,
+        "error_code": "settings_origin_inventory"
+      },
+      {
+        "id": "settings-reset-missing-default",
+        "passed": true,
+        "error_code": "settings_reset_display"
+      }
+    ],
+    "positive_native_failure_warning_projection_count": 1,
+    "positive_reset_display_projection_count": 1,
+    "negative_case_count": 21,
+    "passed": true
+  },
+  "precopy_settings_permission_smoke": {
+    "schema_version": 1,
+    "scope": "isolated_packaged_settings_and_owned_permission_fixture_smoke",
+    "controller_sha256": "3cf5cd6fd7d24c4633e4163372e7b194a5840219a6b2534fc394f245b4a5266b",
+    "source_commit": "047aefe906ca7954a225d81f53286eb1275723dc",
+    "source_unchanged": true,
+    "original_capture_preserved": true,
+    "original_tools_unchanged": true,
+    "user_settings_unchanged": true,
+    "help_audits": [
+      {
+        "shell": "ps51",
+        "shell_version": "5.1.26100.9444",
+        "elevated_administrator": false,
+        "public_parameter_count": 31,
+        "public_parameters": [
+          "inputPath",
+          "Mode",
+          "OutputDirectory",
+          "FfmpegPath",
+          "FfprobePath",
+          "AudioStreamIndex",
+          "BitDepth",
+          "LoudnessMode",
+          "Preset",
+          "CleaningOptions",
+          "Preview",
+          "PreviewStartSeconds",
+          "PreviewDurationSeconds",
+          "Mono",
+          "Rf64",
+          "NonInteractive",
+          "ExportDiagnostic",
+          "DiagnosticOutputPath",
+          "SettingsPath",
+          "IgnoreSavedSettings",
+          "ShowSettings",
+          "SaveSettings",
+          "ResetSettings",
+          "InputPaths",
+          "InputListPath",
+          "InputDirectories",
+          "Recurse",
+          "BatchResultPath",
+          "JobFolder",
+          "PickFile",
+          "OpenOutputFolder"
+        ],
+        "all_public_parameters_documented": true,
+        "declared_defaults": {
+          "BitDepth": "16",
+          "LoudnessMode": "Fast",
+          "Preset": "Original",
+          "CleaningOptions": "@{}",
+          "PreviewStartSeconds": "0",
+          "PreviewDurationSeconds": "45"
+        },
+        "example_count": 6,
+        "help_output_sha256": "2f59afe4b6a6833677af9f1659acd2499c3621668f3f386fba31c9268540e44f"
+      },
+      {
+        "shell": "ps7",
+        "shell_version": "7.6.5",
+        "elevated_administrator": false,
+        "public_parameter_count": 31,
+        "public_parameters": [
+          "inputPath",
+          "Mode",
+          "OutputDirectory",
+          "FfmpegPath",
+          "FfprobePath",
+          "AudioStreamIndex",
+          "BitDepth",
+          "LoudnessMode",
+          "Preset",
+          "CleaningOptions",
+          "Preview",
+          "PreviewStartSeconds",
+          "PreviewDurationSeconds",
+          "Mono",
+          "Rf64",
+          "NonInteractive",
+          "ExportDiagnostic",
+          "DiagnosticOutputPath",
+          "SettingsPath",
+          "IgnoreSavedSettings",
+          "ShowSettings",
+          "SaveSettings",
+          "ResetSettings",
+          "InputPaths",
+          "InputListPath",
+          "InputDirectories",
+          "Recurse",
+          "BatchResultPath",
+          "JobFolder",
+          "PickFile",
+          "OpenOutputFolder"
+        ],
+        "all_public_parameters_documented": true,
+        "declared_defaults": {
+          "BitDepth": "16",
+          "LoudnessMode": "Fast",
+          "Preset": "Original",
+          "CleaningOptions": "@{}",
+          "PreviewStartSeconds": "0",
+          "PreviewDurationSeconds": "45"
+        },
+        "example_count": 6,
+        "help_output_sha256": "b4880264a024c96ae87b8a3cd1c400a779c9cf8707bcccfd701384c5ef35b9ae"
+      }
+    ],
+    "cases": [
+      {
+        "id": "settings-save",
+        "shell": "ps51",
+        "original_command_line_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "35cad132300567aedba64824c6f338eb791cf3a210d3ced2045e7ae1d7a9ce41",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.594,
+        "stdout_sha256": "22657ae31e640781bea389acbfc4e5b1cda22da790a515c6e342ec1792336439",
+        "stderr_sha256": "edcd94fc66c8d8f262b36b65b46a4437f5ad8c36a68a2cc20ecf14338520afd2",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-show",
+        "shell": "ps51",
+        "original_command_line_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "dd9e7e8296f575372ceba0bd2d2d98bd748d7e1e3cf96e4d7db768a00e938536",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.641,
+        "stdout_sha256": "32c0c433067949d393b5d728dda1126174a711bd3908a54ac7da9a77bd24fbe7",
+        "stderr_sha256": "aa4c6b5187e8a52a4b02316c91eb0c7a4cfdce4cdea9b9d7ecfe2faa1d97cce4",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-reset",
+        "shell": "ps51",
+        "original_command_line_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "6542494bdbb7a8b06788288c5f85f96af92d381aa974782cdd64e082cf9f8b02",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.531,
+        "stdout_sha256": "491e10a997376a8840d22f2afc83bcde819393a617ac7dc60aaefc08d14a204c",
+        "stderr_sha256": "fb96a4fcf8fbdd852a7846a15c658d9b8d95f5c3223840564abe702295fef92f",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "permission-denied",
+        "shell": "ps51",
+        "scope": "normal_user_owned_empty_fixture_acl",
+        "passed": true,
+        "error_code": null,
+        "administrator_token": false,
+        "original_acl_restored": true,
+        "denial_present": true,
+        "write_denied": true,
+        "denied_acl_sha256": "81c1f470a9b612e4380f8e74f6655159b4d556428d9cddb9042582110ca5a0c5",
+        "original_acl_sha256": "c01bdfebca4479e6ae937d00025034ab547e66565c3ba49433e12c35b1439934",
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.079,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "3b8b3d236e201d7efecf4aeacd4929111aedaf2b47d4dde3da0eda9f56f89607",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true,
+        "blocked_destination_empty": true,
+        "acl_restore_exit_code": 0,
+        "recovery": {
+          "passed": true,
+          "error_code": null,
+          "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+          "exit_code": 0,
+          "timed_out": false,
+          "direct_child_exited": true,
+          "timeout_owned_tree_cleanup_complete": null,
+          "elapsed_seconds": 3.5,
+          "stdout_sha256": "2e0b9923d4af348bc37ebc09ac9aba60e57ec6c982b83bccce1623b1d987bfb2",
+          "stderr_sha256": "1a6cc2b6647f7e811c20e1c52886f181fbcc883cdcb6a2211786897c86ee015f",
+          "diagnostics": [],
+          "journals": [],
+          "reports": [
+            {
+              "sha256": "b52b564c33d0d2927b44544ff0072dbf2145bc2e4cb607c08f9bf956651eace2",
+              "text_sha256": "20b7f826086f9ab89d4508a8c3305adf10f72d26eb6e155f14965e524cde1d2e",
+              "schema_version": 1,
+              "type": "full",
+              "tool_version": "2.3",
+              "preset_id": "original",
+              "preset_version": "1.0.0",
+              "status": "SUCCESS",
+              "application_exit_code": 0,
+              "warning_codes": [],
+              "local_scope_verified": true,
+              "outputs": [
+                {
+                  "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                  "container": "RIFF",
+                  "codec": "pcm_s16le",
+                  "sample_rate": 48000,
+                  "bit_depth": 16,
+                  "channels": 2,
+                  "frames": 384000
+                }
+              ]
+            }
+          ],
+          "new_report_count": 1,
+          "new_output_count": 1,
+          "input_unchanged": true,
+          "payload_and_copied_tools_unchanged": true,
+          "requested_settings_and_route_verified": true
+        }
+      },
+      {
+        "id": "settings-save",
+        "shell": "ps7",
+        "original_command_line_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "35cad132300567aedba64824c6f338eb791cf3a210d3ced2045e7ae1d7a9ce41",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.843,
+        "stdout_sha256": "14dad65e4c3ba0425ffe88eeb4e1f6dcbc72452f1cfb61f4e7889af4504e2a49",
+        "stderr_sha256": "f9ec781912d20a87511da236623a655fad8a24b9aefa864c72355da7fd61f014",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-show",
+        "shell": "ps7",
+        "original_command_line_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "dd9e7e8296f575372ceba0bd2d2d98bd748d7e1e3cf96e4d7db768a00e938536",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.781,
+        "stdout_sha256": "34dadd7aa1bcef9bcf40c2f927b750686662e1a56cfd571fa30217ebec16577d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-reset",
+        "shell": "ps7",
+        "original_command_line_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "6542494bdbb7a8b06788288c5f85f96af92d381aa974782cdd64e082cf9f8b02",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.953,
+        "stdout_sha256": "0350729bdef802eac3bf73b463fdb243e67ec59925f3e1bec9894bf6b1a1e6d1",
+        "stderr_sha256": "d4b699c174a5e4790819f76b9b45047ffccfd1e515d0d421119728e0daaa444b",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "permission-denied",
+        "shell": "ps7",
+        "scope": "normal_user_owned_empty_fixture_acl",
+        "passed": true,
+        "error_code": null,
+        "administrator_token": false,
+        "original_acl_restored": true,
+        "denial_present": true,
+        "write_denied": true,
+        "denied_acl_sha256": "81c1f470a9b612e4380f8e74f6655159b4d556428d9cddb9042582110ca5a0c5",
+        "original_acl_sha256": "c01bdfebca4479e6ae937d00025034ab547e66565c3ba49433e12c35b1439934",
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.906,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "3e0557d5174415264a24bc3f6ca47241088a88ba5ea40deac49cbbc7685f3b0e",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true,
+        "blocked_destination_empty": true,
+        "acl_restore_exit_code": 0,
+        "recovery": {
+          "passed": true,
+          "error_code": null,
+          "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+          "exit_code": 0,
+          "timed_out": false,
+          "direct_child_exited": true,
+          "timeout_owned_tree_cleanup_complete": null,
+          "elapsed_seconds": 3.969,
+          "stdout_sha256": "c9d1fbc950e873f891893ef19eaf761a7a8da6e097ba9506898a4cbb40184280",
+          "stderr_sha256": "17a1a5c5acc9a3201ad386c961ef5cd0690b0cbed73b5b43e078282b2db7c0c5",
+          "diagnostics": [],
+          "journals": [],
+          "reports": [
+            {
+              "sha256": "eb99459bb6b9260eecefbeec370254ea8e5f7e518e33dab47c0b00e9b930e8f5",
+              "text_sha256": "1aa927a1342db50f2657a0a044c0e2e5f988ac38c8be708041b02d42cc1b590c",
+              "schema_version": 1,
+              "type": "full",
+              "tool_version": "2.3",
+              "preset_id": "original",
+              "preset_version": "1.0.0",
+              "status": "SUCCESS",
+              "application_exit_code": 0,
+              "warning_codes": [],
+              "local_scope_verified": true,
+              "outputs": [
+                {
+                  "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                  "container": "RIFF",
+                  "codec": "pcm_s16le",
+                  "sample_rate": 48000,
+                  "bit_depth": 16,
+                  "channels": 2,
+                  "frames": 384000
+                }
+              ]
+            }
+          ],
+          "new_report_count": 1,
+          "new_output_count": 1,
+          "input_unchanged": true,
+          "payload_and_copied_tools_unchanged": true,
+          "requested_settings_and_route_verified": true
+        }
+      }
+    ],
+    "case_count": 8,
+    "maximum_generated_media_path_characters": 191,
+    "maximum_generated_journal_path_characters": 0,
+    "passed": true
+  },
+  "final_builds": {
+    "source_commit": "1f10940ee970ebe719c21ba0e7290830beeb7123",
+    "identical": true,
+    "bytes": 438904,
+    "zip_sha256": "d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7",
+    "hosts": [
+      "5.1.26100.9444",
+      "7.6.5"
+    ],
+    "archives": [
+      "dist/WAC-M4-04/final-ps51/WinAudioClean-2.3-1f10940ee970-tool-only.zip",
+      "dist/WAC-M4-04/final-ps7/WinAudioClean-2.3-1f10940ee970-tool-only.zip"
+    ]
+  },
+  "final_documentation": {
+    "schema_version": 1,
+    "task": "WAC-M4-04",
+    "passed": true,
+    "scope": "synthetic_local_packaged_documentation",
+    "error_code": null,
+    "readme_cases": [
+      {
+        "id": "first-run",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "1478d1554ca2cabc7d4dfcdec9d91f7a4ea96c84207a9f7a104c64025ca1ec15",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.03,
+        "stdout_sha256": "11c7b887978f14a2cabb8f7fa12dc5de588379d8404b963cf09dc2ca2dc302b6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "18c0b2e4d9a451b9de08f04e7ce325a956f587b5a55f14d7b4b52734652fae51",
+            "text_sha256": "ed2bc9f00f403b7e4c89ea41c3778b48475872c188f799ed446b9cc532389be6",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "raw-24",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "b629020702a61cf75453bce2624cbb5b85c6a479fe8345580848421a7a74ae63",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.1,
+        "stdout_sha256": "b12c4f6eeb75f0eb39632bae964e5a97dbc118c0a14dda7bd9624e53c9e215a7",
+        "stderr_sha256": "1ea2ae195f4f15a3dcff3dba16be0bc0c6d1057ba142ad0acf7c3a3daa637ba0",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "13fc747e4d1890c9c0e4c9d61a76c3c6d7277ff787d3ee47c41f40c7d2a08230",
+            "text_sha256": "4e5f5ef41c11493e90a340d9867d73a16e5c209519ec686985bf520dd5df92e7",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "7603c58a48b01aa974d178ab641b502f81f602272280f01dc24bb6ab09b2e81a",
+                "container": "RIFF",
+                "codec": "pcm_s24le",
+                "sample_rate": 48000,
+                "bit_depth": 24,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "accurate",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "663b76b5d1e64efd1cf343ebb654366f10a2210081d866464fef23606723b777",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.401,
+        "stdout_sha256": "23dc6611d55d5ba418404f49f59bb729674b72a0489c17daa7aad094933ef44d",
+        "stderr_sha256": "75d0f832884592c083edea63276967680f80d12b9c39481df4fda5beafabea4c",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "5b3816e2a42d4d4005ead5682f9a88b9e25ae3b38950285473bd813813e2623d",
+            "text_sha256": "94664b2f39c96a87bf46f4e82775d3720dabda765bacf4dd57675d71dd9d11ee",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "c3c64214149f92d5e19436dfa4304981571c059afc5805de3e7b35d272ba6c44",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "gentle",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "808208aec5335eb3437a8131572bfd055574f87632bad27e7e31fa47e3d1d472",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.658,
+        "stdout_sha256": "3ecd3046d79f55b8a059ccd6b7750ba833abecdd17fd637e5605e2e17e5d014c",
+        "stderr_sha256": "ef54d0ada4c399445cb88fd434e77bf4971ed388cc4202c9a0d5b1e0d5db3319",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "d223b2246f240468185eb4091d3821ea843c82f95f40b2b78dd04cb785620b9e",
+            "text_sha256": "964421dc5b7780c1401f60f956e6d63eb69679ac8d58f7f6251a73f7164b7b1f",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "gentle",
+            "preset_version": "0.1.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "549ff35affab372d5be26f9f1d70178ae52eadefc658bf6a411bb7702193d8b5",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "track-mono-rf64",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "6a18df33ee46072e781b6ad3315637f919d00a81b887dde29b2b50ff91ba0b83",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.368,
+        "stdout_sha256": "acb153f0f55774fdb2c835220ed8fad730b5056b4cfb10c4d043d4149239f981",
+        "stderr_sha256": "1907f864f2b4d45ba965ec948d1acebbc5e1c7fb30d1c821e9f74f3c8223d733",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "29d3a81d044c6c21459454b5249a06477494e148be56ce971c90805d892c1282",
+            "text_sha256": "5de6154ab80e7f3ef906e383bd61efaf0607466fecceb8e49142f2dc86f70838",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "7c6e934962b0b6df1add6e12e5eb21cf09ffe68a55ccfe353a9e020d42e71024",
+                "container": "RF64",
+                "codec": "pcm_s24le",
+                "sample_rate": 48000,
+                "bit_depth": 24,
+                "channels": 1,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "preview",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "2cfb4abe9d17709cfea81e694c507d6a07d6f16a5262dc2caf887a4566a315a7",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.229,
+        "stdout_sha256": "fdaaa9bc84877c30a78cef3926b24ec97f95e88f40ae29914d504c669d02565a",
+        "stderr_sha256": "1d6fc40b8d6dd70e302a2c15e582ef736b7478dafc533c1fad0ee48acf5aad42",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "02fc40fdd8a6377ded22e2a1458c574351ec5617934f99dfb09bd0cf80b052d5",
+            "text_sha256": "89707cabcf80eb85c48d50cd1a44ec54f2b03c23a54027c33097e6650d479acb",
+            "schema_version": 1,
+            "type": "preview",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "1efcaa1a444aff1c11028fcdd6d7f537ffcc52d58ee0a24b2a51fbf071607e76",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "26ada8aa5aa897fc452f95762cf27f6bd910e7e824d1d0c19936c0649d910270",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 4,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "list",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "9de73687910d82104df071ee371a64524c88803b90383daa1f444eb4594aad34",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.673,
+        "stdout_sha256": "20c3fe7f42f8de55430aa92f7a9a8ecdf23321fe460e774d8c775727a1ba5394",
+        "stderr_sha256": "4b1bc330f9e3822c6cd3c2d03c0677c644557b808fbf16f4096c0a0ac93f8d1f",
+        "diagnostics": [],
+        "journals": [
+          {
+            "sha256": "d63389ef36ea36593f3a42a018fb1db8cfa505c0c8f77e23c4ddc5f157e85347",
+            "schema_version": 1,
+            "item_count": 2,
+            "reporting_complete": true
+          }
+        ],
+        "reports": [
+          {
+            "sha256": "bc0ba260d73ec15abb3b9e6ccdc3cacabb6f1a8d3f3159f73da0a848ce1ba7c8",
+            "text_sha256": "8f6387da7bfb6536758048172f38e8fd6c7197de98cc0a81e9a4196f312b633c",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          },
+          {
+            "sha256": "5609d636f07ef6b469c4ac0cb7cac691f00dfeb11c43f07d4e79909e1b68da03",
+            "text_sha256": "f24c4bfdf2e1affded359d033f055cef97da052e54d36964907a5991c9bffdee",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 2,
+        "new_output_count": 2,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "manifest",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "a02f0e46199d6e95079ad9352506018c169dd4e36113e6f999a0599d7bc8f468",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.911,
+        "stdout_sha256": "9ff5afa78f3154cfb10114ca0599000c5a3a755808bbec29e1e9d8a5bd70874a",
+        "stderr_sha256": "66dc4d49ef454e010cb1a5b4cf2107030771dc7d99c6f6e34962003167c5fa61",
+        "diagnostics": [],
+        "journals": [
+          {
+            "sha256": "9b6ed84b7cc8e4db17ac8142c5df52a23350507c9b4a3ac7267f9fa309ed0b1b",
+            "schema_version": 1,
+            "item_count": 1,
+            "reporting_complete": true
+          }
+        ],
+        "reports": [
+          {
+            "sha256": "848a35c408fa3a39180ace68eabb615868b1414e9087d4a3ba73ddb83bec6f47",
+            "text_sha256": "2aa45743e29ee7ad1d72c31ebba38425dc7d57062055622f91986b0a06c7b1ca",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "folder",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "e1598fff53fa061ea012f6af1cceb172251c43320b530f814933ea4a489dacd3",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.909,
+        "stdout_sha256": "338e5c3fabd11be3a0b725539b48c65572c3caa6429f397eae7b52b54283bcfa",
+        "stderr_sha256": "ea0c0a2695030c0c14fdd19a304f1356d54c07cebfc3afeda409fad2ef5113ab",
+        "diagnostics": [],
+        "journals": [
+          {
+            "sha256": "5e434e989fec2e529d215894917648d51fbae521fbf5b70a886e6cfbd02f7420",
+            "schema_version": 2,
+            "item_count": 1,
+            "reporting_complete": true
+          }
+        ],
+        "reports": [
+          {
+            "sha256": "0e430c02f2af135484b36bc179b2c8502621e93f268e64338870da4d50423280",
+            "text_sha256": "b45674e27164f9d035ec21292751329dc7ae17309716e3d33133bd2d82421967",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-save",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "35cad132300567aedba64824c6f338eb791cf3a210d3ced2045e7ae1d7a9ce41",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.382,
+        "stdout_sha256": "a2121c20d999c9134b74524ea689a56ea901463cde7c28502d25caeb0f3c9627",
+        "stderr_sha256": "48eba5d69e879fbd04d6cab657df0cbeeebc3512a57765a182f1ab28393b6dcd",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-show",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "dd9e7e8296f575372ceba0bd2d2d98bd748d7e1e3cf96e4d7db768a00e938536",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.26,
+        "stdout_sha256": "0d368811e2f1b279ef9244b34ecc700655d1d9c9bbff33e1b995f6bc15354bdf",
+        "stderr_sha256": "aa4c6b5187e8a52a4b02316c91eb0c7a4cfdce4cdea9b9d7ecfe2faa1d97cce4",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-reset",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "6542494bdbb7a8b06788288c5f85f96af92d381aa974782cdd64e082cf9f8b02",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.238,
+        "stdout_sha256": "491e10a997376a8840d22f2afc83bcde819393a617ac7dc60aaefc08d14a204c",
+        "stderr_sha256": "ffd75686e7fc2cf208dc5c8e95c43af32010d4577633910bb344d17c70db2ddf",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "bat",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "88563c9e85a056dd8c6683bd67ae3523427043612bd81bcd371a59377380bb08",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.124,
+        "stdout_sha256": "240b26b9aadcda4c1ecbb7b744d7befa7089cd57e089889b17bc731c761a5dac",
+        "stderr_sha256": "a3639af5e23464fc391dae127fd5493f02c8178068a35866d9c7fdd35dcd623f",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "4625c2f43d6117714057c2866ea0c0dc29a1944af8f11fb2287992dd6f44ee67",
+            "text_sha256": "894ad7ed36587c555f9bdcfc3dd75a4a9208ce77b9079c566da57b61156ad65a",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "c650d99f2be221410e38fe9bf250d367b0c1264007d1d24271c77a5eadfd3b8d",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 0.413,
+        "stdout_sha256": "efce4e0e57995ab416c726fce484fa038dc24e7caa60db30ffce214c4df316d8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "b898af635d54b46a26589be0c30eb044c2d2900e448fa62ddcfc9b6f2af1cb14",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.122,
+        "stdout_sha256": "728ede4b0e6358400c196471df9e2038659f1bacd890e0511a0865ff36dbb059",
+        "stderr_sha256": "cb41ee91cda6d195f618b6816b9eed425bafd1451a669c3310d12b6f2ea396c5",
+        "diagnostics": [
+          {
+            "sha256": "0d66c760042c323d25c787f52bdb30a173f8c1926fed5d04a84bbffcdadd4b41",
+            "schema_version": 1,
+            "paths_omitted": true
+          }
+        ],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "first-run",
+        "shell": "ps7",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "1478d1554ca2cabc7d4dfcdec9d91f7a4ea96c84207a9f7a104c64025ca1ec15",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.108,
+        "stdout_sha256": "9e64dd3fa4d3faa1f40e55a5f81046a885136e5544728fb2f06e4f4760ec3fea",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "b1b3ce13a00efc9994b991447516f7bdd47286014f3463b583ef5ba360cd01f6",
+            "text_sha256": "492d3dc298581a6906820aacdbb9d26041b5d01bca1cf82386b00a3746d23a3f",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "raw-24",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "b629020702a61cf75453bce2624cbb5b85c6a479fe8345580848421a7a74ae63",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.207,
+        "stdout_sha256": "37791fc6aa7d8266d41232aa85d44db65a6604091af2d796ff6966ab12504e08",
+        "stderr_sha256": "a2a9476e70c454ac0e250c1eb5efe5365a800a2ac6d59873aab37726f482a48c",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "5bb1daf769dd150a1a7c5dcee4b96664bfe817b514112398c3b94d7811bce36e",
+            "text_sha256": "233a8789eba4d1378ed6fde672b956dfdb93b3029cd4c46ea60e5d94117afd26",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "7603c58a48b01aa974d178ab641b502f81f602272280f01dc24bb6ab09b2e81a",
+                "container": "RIFF",
+                "codec": "pcm_s24le",
+                "sample_rate": 48000,
+                "bit_depth": 24,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "accurate",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "663b76b5d1e64efd1cf343ebb654366f10a2210081d866464fef23606723b777",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.142,
+        "stdout_sha256": "816bc82ade28585d3df97f5988aedb47825228040b4305294fc4d83b5163a293",
+        "stderr_sha256": "af1d32b8bc5cd8c38e1bfdc2528fe1f47388c780dd4ea750b89a83356b07f6a1",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "7f180164b330175248b66477bf766ac2ce48a4685e8761b2445f0b2ae49de686",
+            "text_sha256": "c88c138d382eb6698eb23a0ea111c837b504e6fb281c758389e5242624366290",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "c3c64214149f92d5e19436dfa4304981571c059afc5805de3e7b35d272ba6c44",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "gentle",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "808208aec5335eb3437a8131572bfd055574f87632bad27e7e31fa47e3d1d472",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.519,
+        "stdout_sha256": "d7d9963c8e2daa47c68e42eb280b15658cfb922d4673e5b561f2d99bf15c8d9b",
+        "stderr_sha256": "7310b7da8bf0c42df5cab2e1cc05753d89c58ad7932e2bd7b8b9357a097d8244",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "ffc52bbfb3e38e93d79522b137fb0d98ace705663ea04e983b818a0b0af1695a",
+            "text_sha256": "c7e2827c5eebad5adfdbe66cbbc98cbedd18ff5aaa75597078358ca8ab878819",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "gentle",
+            "preset_version": "0.1.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "549ff35affab372d5be26f9f1d70178ae52eadefc658bf6a411bb7702193d8b5",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "track-mono-rf64",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "6a18df33ee46072e781b6ad3315637f919d00a81b887dde29b2b50ff91ba0b83",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.228,
+        "stdout_sha256": "2b9918f5c3a768e3e21e32657040e4b080376da02849ac51c9461a4b892ceddf",
+        "stderr_sha256": "a76065165467299feda4bdecb453057652a980570917ec22d75799c536533224",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "37126e1807989b1b7b77df47d0b505191bc80005969d38449a290afb1dde98a4",
+            "text_sha256": "f8f1e3a60ab5e9fc1bc13d18111630df858a623c19b1b4bb78df9fed2ea25eaf",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "7c6e934962b0b6df1add6e12e5eb21cf09ffe68a55ccfe353a9e020d42e71024",
+                "container": "RF64",
+                "codec": "pcm_s24le",
+                "sample_rate": 48000,
+                "bit_depth": 24,
+                "channels": 1,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "preview",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "2cfb4abe9d17709cfea81e694c507d6a07d6f16a5262dc2caf887a4566a315a7",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.287,
+        "stdout_sha256": "4d652c7a8198597dd64a3453ecde464d866bd80363149317d31148d3d45f9899",
+        "stderr_sha256": "2a4ba79e413ca36c983ac076f7078183d98d7b727d1e3c859d6b0c0fb808749b",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "d56f2835d7879b3a8dadaae2b46f04319c46d55e7eb93b564a29fd15a4bd98a4",
+            "text_sha256": "3fd7a63cc47283a0d590e0fe0273b12ba53e7b5a90b18eab10806f7d7c35abf6",
+            "schema_version": 1,
+            "type": "preview",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "1efcaa1a444aff1c11028fcdd6d7f537ffcc52d58ee0a24b2a51fbf071607e76",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "26ada8aa5aa897fc452f95762cf27f6bd910e7e824d1d0c19936c0649d910270",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 4,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "list",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "9de73687910d82104df071ee371a64524c88803b90383daa1f444eb4594aad34",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.578,
+        "stdout_sha256": "6d42aca7ffc8933fcef7cb20a32989deb9b3f614e2f63bfe3b951f08253d16d6",
+        "stderr_sha256": "0c30a699ab0b8fa2e17ee7ba7934bae6b3140abbc62fd8aaa06a338f5e6e9f11",
+        "diagnostics": [],
+        "journals": [
+          {
+            "sha256": "a044b8e68e52e30b1749a24f54bac8f98d422764bffd1e646e8737e6357a2fa4",
+            "schema_version": 1,
+            "item_count": 2,
+            "reporting_complete": true
+          }
+        ],
+        "reports": [
+          {
+            "sha256": "eab9e39635710749b8f6b93770a11b11d49ee7e272d35707835910938cdef3c5",
+            "text_sha256": "761d52d19a08dedc617c0b6397613fa4cfaa2657734637a26c0298734765bb0c",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          },
+          {
+            "sha256": "4a546a3b3096852bbb8595e3cb58550c743a51b6da98d7f224b7c70fcf9f1c0d",
+            "text_sha256": "d434f958b37b6065055fa9e3ad76e929520a8e0aedc4fefbff66b78d40458d42",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 2,
+        "new_output_count": 2,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "manifest",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "a02f0e46199d6e95079ad9352506018c169dd4e36113e6f999a0599d7bc8f468",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.769,
+        "stdout_sha256": "5076893e9e010806fa0018d1a4aa31ff0bcf97e2b19f8dd36118b6fc0fba6025",
+        "stderr_sha256": "e787a60ee7ace70d40f3a0dcfdd42fdeebbd0a819f5ca053de09214079d24db9",
+        "diagnostics": [],
+        "journals": [
+          {
+            "sha256": "eadee5ab744e412b93367a0e0148ccb3abfce08eb44ffd34ecb36e37f623ba64",
+            "schema_version": 1,
+            "item_count": 1,
+            "reporting_complete": true
+          }
+        ],
+        "reports": [
+          {
+            "sha256": "6dcc5c00ad27fe32c23d820e8142a006325369740a15d60a4a693f75afe8376e",
+            "text_sha256": "337fb6ee03af07afd8c56761240ec0b7efb2279e62fcfac2f360a0ab36e57be3",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "folder",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "e1598fff53fa061ea012f6af1cceb172251c43320b530f814933ea4a489dacd3",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.914,
+        "stdout_sha256": "408565486f94a8df9fef1308a1eb268f029a1dfaa8d82ee0aab92477ccc39301",
+        "stderr_sha256": "72d91b22ddec69f424ae21ea4e7963c604478698ff2deb1719293418842d3dd6",
+        "diagnostics": [],
+        "journals": [
+          {
+            "sha256": "90b116bac09bfe3a20263866046c14d1d530798a1e63dfa0b41e6fbd0d00db1f",
+            "schema_version": 2,
+            "item_count": 1,
+            "reporting_complete": true
+          }
+        ],
+        "reports": [
+          {
+            "sha256": "f913f62f42180ca7d09dd4872b6d45d101f26ff591b9f7517f7fe5088e281c5d",
+            "text_sha256": "cb3fff951184039ad429631b997bb56a96826554e436ef5f4da67e369b131469",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-save",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "35cad132300567aedba64824c6f338eb791cf3a210d3ced2045e7ae1d7a9ce41",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.288,
+        "stdout_sha256": "50acb7d1c95e4e187a80ac79853afca51733e111d9a60b5d85fb7f4ec38d05cd",
+        "stderr_sha256": "275bf3df478155bcf1bbb9359d128fff3a7ddbf6bbc4bc3347ad4fa00ae1f1bc",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-show",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "dd9e7e8296f575372ceba0bd2d2d98bd748d7e1e3cf96e4d7db768a00e938536",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.266,
+        "stdout_sha256": "8a6a72bd93eb441b3f3e3ab8f91df3d2de364b14574cc24d687eec5b1db1ebeb",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "settings-reset",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "6542494bdbb7a8b06788288c5f85f96af92d381aa974782cdd64e082cf9f8b02",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.278,
+        "stdout_sha256": "bddb5ecf11a0220d2e28cc8d03875c4f3a7f9fd9935431b4929ccc808fc32373",
+        "stderr_sha256": "51bb7c15ddc883aeaedd9b4a26098e678758a00ffc9a6afbd419485dc22beb6a",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "bat",
+        "shell": "ps7",
+        "application_host_family": "5.1",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "88563c9e85a056dd8c6683bd67ae3523427043612bd81bcd371a59377380bb08",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.064,
+        "stdout_sha256": "1b719d46a282f4f09b983969fae8bf1712578ffe4c6f15c13e339023fbe2836b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "407acd285bf580bc772bdfe70e9ca184fa604126e1090a7983682738ce147533",
+            "text_sha256": "4488bb1c29ac155c5573c8ede8d198bc8ef8e5e25602bb97bb7fdfd4a5b5b786",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "c650d99f2be221410e38fe9bf250d367b0c1264007d1d24271c77a5eadfd3b8d",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 0.57,
+        "stdout_sha256": "41a2cb6ab446106df57576d3136898bef523423647b043e585991c9e7104c07e",
+        "stderr_sha256": "6d6d09b57a0414c183634e27056686330dacc0f5e0452494c376aec743ecd0ed",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_fenced_bytes": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "b898af635d54b46a26589be0c30eb044c2d2900e448fa62ddcfc9b6f2af1cb14",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.408,
+        "stdout_sha256": "b61636689ec9c91a30c40d58c8f4ad955ce3422e5185e4646cc40eda48cd4ee7",
+        "stderr_sha256": "416536d3d518fa7d9bca7a85a2d2bd63cc2f122cf5b1d7480c70d25e0bc91a3e",
+        "diagnostics": [
+          {
+            "sha256": "1dca2060aa76e0c85378cad4d4feb16e6e39b1b6ef6d10615336d089a1bae9f9",
+            "schema_version": 1,
+            "paths_omitted": true
+          }
+        ],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      }
+    ],
+    "portable_cases": [
+      {
+        "id": "verify-zip",
+        "shell": "ps51",
+        "exact_fenced_bytes": true,
+        "command_sha256": "8653d8e9c3561cb93162e8d8c568f12d5c51cc9aa1f175c5a4816ace37ae89bb",
+        "passed": true,
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.503,
+        "stdout_sha256": "93ea5cb3dbce605221838fd7ca2df56dedb8a1bb455c1ec5d474758c3e7d9e94",
+        "stderr_sha256": "2ce70d6c8c9ad6726c794690c8b14a2b83673648cac88edf4ff1acc50ec46348"
+      },
+      {
+        "id": "verify-zip",
+        "shell": "ps7",
+        "exact_fenced_bytes": true,
+        "command_sha256": "8653d8e9c3561cb93162e8d8c568f12d5c51cc9aa1f175c5a4816ace37ae89bb",
+        "passed": true,
+        "error_code": null,
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.221,
+        "stdout_sha256": "93ea5cb3dbce605221838fd7ca2df56dedb8a1bb455c1ec5d474758c3e7d9e94",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "help_cases": [
+      {
+        "id": "help-example-1",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "c3bf4f46a5ee51cdcecd89c334a570adeb5f9404d2f1bdb9231d710bde368973",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.012,
+        "stdout_sha256": "d20e3c53d3b43dddf6baf97824e725fd5d0ebc883181c49bc8e889366542af51",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "8f0c0ff6bed59ee48451c503b3b1e2a676eb7a028e6a440583523ba729bb784e",
+            "text_sha256": "baafba17c41889a448cf99f17b904c146d7a407609ff045cf8b7c920e2bb895a",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-2",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "3c719312d229892509e4988b80d8f8b334d27cb6b7bbabaa757abcfff7c736a1",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.392,
+        "stdout_sha256": "e01bc7745719e939a96fe03c71bf9412a87366f16abc0a27f94615ffda6216fc",
+        "stderr_sha256": "2f930cdcfeb5063c77209e80d5dbaa3f029020f2512e95e2620ab1058e00a08b",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "789515c5dfebc14fbf9f4667639de038ff901c8106ee4315640970aa8972e18b",
+            "text_sha256": "972db8d799e87be348ad7fc9b7b4bff3e2f03bc5eabb34f71ac6c41e21148d37",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "7603c58a48b01aa974d178ab641b502f81f602272280f01dc24bb6ab09b2e81a",
+                "container": "RIFF",
+                "codec": "pcm_s24le",
+                "sample_rate": 48000,
+                "bit_depth": 24,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-3",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "9bda0f005bcbfcab5d1b7823178647a4310bfe77e24cec94941e9b96be229b92",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.578,
+        "stdout_sha256": "b0d8bc79336d03b2c97c10ef50b1e4fda1a3edaf0593f0bf98bb3ca780ebd878",
+        "stderr_sha256": "8e9fbe14c7405a51c6bbfb3175be8485d4711fcea2e53c0170187d1db86aa762",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "fa4b7dd033dd60319cc696c0d61c0e3209af08100039f5c4340a2372d3b4778c",
+            "text_sha256": "8afe4161869f4fe6e42fdcfda500cfc3736a3962d3a35a38f15e8c889d5cc055",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "c3c64214149f92d5e19436dfa4304981571c059afc5805de3e7b35d272ba6c44",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-4",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "0fee802454afc388f38b3cd92bebe6fb63c29c1d1cce7cf1d7780561a6595f02",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.87,
+        "stdout_sha256": "2eab93853dafadcf606b9c9229adcd1ce354f2c1790dd950cdf1115a963b94fb",
+        "stderr_sha256": "ca396947eaddfd8c75cf0924187456215c2d102038e5403597c7f47c74ad2338",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "42a1f6d1cc8dc13dcb0d2d777941b82e0cc6ebe06343874bb9bbaca59af94af8",
+            "text_sha256": "f4ac9bfbc4170e626800ce2fb47bf23ae3d12223e861ac416f45ca33e515614b",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "gentle",
+            "preset_version": "0.1.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "549ff35affab372d5be26f9f1d70178ae52eadefc658bf6a411bb7702193d8b5",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-5",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "661af38303f74427209388bf8de795848a84c858155ad8d42a46a29b84707b1f",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.768,
+        "stdout_sha256": "5c0dfbe2def4fe0cd293b04ed9c051385353616c701098e49f6a91fd15190141",
+        "stderr_sha256": "ca38ee4a903361e5d4279c94237384403ddbe5e4256a93c6660e3aab08f678de",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "8600296b131954c4967ff869e1f7e0d5b9245534b7fb6e0f0897ca7232656ae9",
+            "text_sha256": "cd7c4f72c38f531b2c0de45a10e8a4ae904cd42d906f43277c40259d926af0ee",
+            "schema_version": 1,
+            "type": "preview",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "1efcaa1a444aff1c11028fcdd6d7f537ffcc52d58ee0a24b2a51fbf071607e76",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "26ada8aa5aa897fc452f95762cf27f6bd910e7e824d1d0c19936c0649d910270",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 4,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-6",
+        "shell": "ps51",
+        "application_host_family": "5.1",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "911483deb6a0ba6df320808270a3e288146bdb4d02ab8b667cc009ea8c0dd721",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.275,
+        "stdout_sha256": "01451d5f34b795ae242be6337f3d61ad6ca61204880e99864dcc6cef27ed4981",
+        "stderr_sha256": "3505519681701edcb6865fba035dc5fbcefbe896606250263f6eb527f5abc3f0",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-1",
+        "shell": "ps7",
+        "application_host_family": "5.1",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "c3bf4f46a5ee51cdcecd89c334a570adeb5f9404d2f1bdb9231d710bde368973",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.118,
+        "stdout_sha256": "eb71fcf0a0eaa560aec63e57f2fc982cb42c791d9a315dd1012a7d73775a8048",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "92d6521979a6a784e0179feffa3d576c662307784e5d914ee655196067a84d76",
+            "text_sha256": "14b392acc52a28313a2564555f22162e3d6728fe2c77bf5809e7526d8cae66cd",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-2",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "3c719312d229892509e4988b80d8f8b334d27cb6b7bbabaa757abcfff7c736a1",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.489,
+        "stdout_sha256": "f321dcb2d323581c26080d2a5b5adc9852f6477b7a7e2864d2d33a8cc503669c",
+        "stderr_sha256": "992415750ea6e79837f76a640d37cb3dc81a8e228fee19514a617b0084b16bbb",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "179711b67124f5faac2666381e8a913488183ec826c6abee64fbaf6f6298c1b4",
+            "text_sha256": "55d5b3864893d9f6466531276633bac2651d6c2858733b09369fa7c79839c0eb",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "7603c58a48b01aa974d178ab641b502f81f602272280f01dc24bb6ab09b2e81a",
+                "container": "RIFF",
+                "codec": "pcm_s24le",
+                "sample_rate": 48000,
+                "bit_depth": 24,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-3",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "9bda0f005bcbfcab5d1b7823178647a4310bfe77e24cec94941e9b96be229b92",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.667,
+        "stdout_sha256": "639d24fe42927fb704559ddc98727b2b3826971ca15beb002511d738bea8284e",
+        "stderr_sha256": "9eabd2a35c2e33c31befc91f8b6cfe2b703e5ff1513afb99e7a5baf2648402f0",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "d3fde16bf86f86111fcb2503221774229e18b677b143632bf1e21c7ed90e5a02",
+            "text_sha256": "6f3b518e91bd6a5cbeb65cde34a2306beed6775b7a2e4caee4cc272570fff0bd",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "c3c64214149f92d5e19436dfa4304981571c059afc5805de3e7b35d272ba6c44",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-4",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "0fee802454afc388f38b3cd92bebe6fb63c29c1d1cce7cf1d7780561a6595f02",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 3.026,
+        "stdout_sha256": "31b8602f599d2c72919b76e43ec0487d912a9c7767457911e429b647e7458f50",
+        "stderr_sha256": "186508e170aa9308fa991572fb35c0ad4de4651c5c84960093a02bfa8aa470bf",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "d1c0ae10cc07ccf3a7a2eaa54f5ce4e592340dc8343927c3121babe7177b08bc",
+            "text_sha256": "3cc125f3a9e6d5d232fa371a62221124060e4b7f8d0bce42601bc3ccea955ae6",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "gentle",
+            "preset_version": "0.1.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "549ff35affab372d5be26f9f1d70178ae52eadefc658bf6a411bb7702193d8b5",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-5",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "661af38303f74427209388bf8de795848a84c858155ad8d42a46a29b84707b1f",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.695,
+        "stdout_sha256": "aa6e0b25fe61b649da27321ea7edb13de4fbac7f66e642cb4ee3bf5509a1afd7",
+        "stderr_sha256": "78a87703008ec22fe6426e612d1791037c8ac1c7576274b0517e64559f6a346e",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "5df41d0ed3f322f10a1e7fd27096bafa5a4578b16671090aaad9ebd89506ff86",
+            "text_sha256": "05a7160e49a0040113044103ba7560d2311969456ecaac67545414339f35bd1c",
+            "schema_version": 1,
+            "type": "preview",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "1efcaa1a444aff1c11028fcdd6d7f537ffcc52d58ee0a24b2a51fbf071607e76",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "26ada8aa5aa897fc452f95762cf27f6bd910e7e824d1d0c19936c0649d910270",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 4,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "help-example-6",
+        "shell": "ps7",
+        "application_host_family": "7",
+        "exact_get_help_code": true,
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "911483deb6a0ba6df320808270a3e288146bdb4d02ab8b667cc009ea8c0dd721",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.279,
+        "stdout_sha256": "83796e6cb94cba37161db4fc0dd00e67915a6c8ced4c33973034dfa3b3a85efa",
+        "stderr_sha256": "f6629c45b70732110a8564297433f840c2621f53e3026059b16f14c6db8b5910",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      }
+    ],
+    "support_cases": [
+      {
+        "id": "permission-denied",
+        "shell": "ps51",
+        "scope": "normal_user_owned_empty_fixture_acl",
+        "passed": true,
+        "error_code": null,
+        "administrator_token": false,
+        "original_acl_restored": true,
+        "denial_present": true,
+        "write_denied": true,
+        "denied_acl_sha256": "81c1f470a9b612e4380f8e74f6655159b4d556428d9cddb9042582110ca5a0c5",
+        "original_acl_sha256": "c01bdfebca4479e6ae937d00025034ab547e66565c3ba49433e12c35b1439934",
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 0.986,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "685a393d2b4f4beb1bd8dc5c2fc6683b1d1d43e0abfb5430c81715c08971e19e",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true,
+        "blocked_destination_empty": true,
+        "acl_restore_exit_code": 0,
+        "recovery": {
+          "passed": true,
+          "error_code": null,
+          "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+          "exit_code": 0,
+          "timed_out": false,
+          "direct_child_exited": true,
+          "timeout_owned_tree_cleanup_complete": null,
+          "elapsed_seconds": 2.938,
+          "stdout_sha256": "5d227c3fb112c7781d6c766dfa88eda0893641ff5d2439708ecb67b379bb92e7",
+          "stderr_sha256": "b8f9a644a6723a93b81ec11c2d373ab0362fe160a5ac64e673459e6be0517b7e",
+          "diagnostics": [],
+          "journals": [],
+          "reports": [
+            {
+              "sha256": "fa7341a167d8e687d6333b63f5061808e5495523e0dc41cc408dceaaaa56ca27",
+              "text_sha256": "6fa665b556117b78959f3aa47d7eec6427c7d8d09fca632249ed579dabf4745a",
+              "schema_version": 1,
+              "type": "full",
+              "tool_version": "2.3",
+              "preset_id": "original",
+              "preset_version": "1.0.0",
+              "status": "SUCCESS",
+              "application_exit_code": 0,
+              "warning_codes": [],
+              "local_scope_verified": true,
+              "outputs": [
+                {
+                  "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                  "container": "RIFF",
+                  "codec": "pcm_s16le",
+                  "sample_rate": 48000,
+                  "bit_depth": 16,
+                  "channels": 2,
+                  "frames": 384000
+                }
+              ]
+            }
+          ],
+          "new_report_count": 1,
+          "new_output_count": 1,
+          "input_unchanged": true,
+          "payload_and_copied_tools_unchanged": true,
+          "requested_settings_and_route_verified": true
+        }
+      },
+      {
+        "id": "missing-tool",
+        "shell": "ps51",
+        "scope": "isolated_support_fault",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "87a9aec5f921ac1218f2fea966d97f9b64867fad323db27aef22f5cdf7710155",
+        "exit_code": 3,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.007,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "3dc53383afe74b179939bda6f88e6624ae69190f685d731fa3848e4da3a5db17",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "corrupt-input",
+        "shell": "ps51",
+        "scope": "isolated_support_fault",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "94c6b4a1209a6fddb0e33b113af57f9ee3e06ef50c25786b9acb2f39feaf5cd6",
+        "exit_code": 4,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.844,
+        "stdout_sha256": "219c9affbc9f43720fa0ac0a85b8133d9c2cafd394125f23fbfe25a1decc27c7",
+        "stderr_sha256": "3036f94739f87909146d48d525c39e2b558db2ab79743e9d9c964b50c4cba0b6",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "destination-file",
+        "shell": "ps51",
+        "scope": "isolated_support_fault",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.065,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "ee4e7acfeba083084b40ebc3ed4a95801bda9f19b978c77fbc72c4279e18978c",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "collision-first",
+        "shell": "ps51",
+        "scope": "isolated_support_publication",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.9,
+        "stdout_sha256": "5ef92ac4776565c031458335892c79011f5afc95babded9eeda8223ad0807236",
+        "stderr_sha256": "0ebc4ca8d2d06ec1354fb6556f2c6b337bd097eb97625929c772a77c5b08d37e",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "7dc1af5532f9fff894ab9dba4aafe84c9c8e81d8e2c7f90512748fe5b75c8933",
+            "text_sha256": "6ceabba815c4ee1d560d8da5b9773dab05b2d027a80b6eb5fa946e07cb600147",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "collision-repeat",
+        "shell": "ps51",
+        "scope": "isolated_support_publication",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.576,
+        "stdout_sha256": "191eebd98e62e676f05d0a9dab6df5a76631725cf93a0960a8e1fd6e844f7937",
+        "stderr_sha256": "8cdffecf0d7d6b53b236ce8ef57e83ebf7b18ef0b6d556f07555940e9b2ee460",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "cb420acd5914386e8547a5ac02f6afae58b9850bc98544c5b317fad2cb4faaff",
+            "text_sha256": "1cdd492c85615a6536a44522622d738c484c26c95418408a68cc4bdffd26093e",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic-success",
+        "shell": "ps51",
+        "scope": "isolated_support_diagnostic",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "fa7e3f2c2af1da5638e5ad26beff6ac91173c4d52277c709e94b73ccf7e47101",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.092,
+        "stdout_sha256": "3448cf753b71102eaea2cdb56206a1cb0808a35c9fe90f484cd37c2db8ae52c7",
+        "stderr_sha256": "36cbdd41c6252b258a3808798582ba14a586c1f38f45e0914855abde9515408a",
+        "diagnostics": [
+          {
+            "sha256": "e61bfbe6389aabf186852fb9896c1c93bd96064fdc5d7ef3470a6ac9243f2c77",
+            "schema_version": 1,
+            "paths_omitted": true
+          }
+        ],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true,
+        "diagnostic_sha256": "e61bfbe6389aabf186852fb9896c1c93bd96064fdc5d7ef3470a6ac9243f2c77"
+      },
+      {
+        "id": "diagnostic-collision",
+        "shell": "ps51",
+        "scope": "isolated_support_diagnostic",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "fa7e3f2c2af1da5638e5ad26beff6ac91173c4d52277c709e94b73ccf7e47101",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.043,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "d29251d462d9a31eaa6b1cd846a04e274987f8d0e50fa1ad1bba1280bccf9b27",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic-preview-source",
+        "shell": "ps51",
+        "scope": "isolated_support_preview",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "7179d38ced3c05f9faa3a8063903c686465af60dc8d9ca5e0af34bcc6b48bb89",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.254,
+        "stdout_sha256": "f9495998087159ddc1a647b570037fdc2b340cd11866a2df09a7d42d7a96c38c",
+        "stderr_sha256": "6b44fec62d9e4656f21a33717437cefab4c7fcb8eaf42774c53be03397d42bab",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "ab3cbba93fb5aad32f45026496beb180592ab39d0896bb53ffee93e7a4e56fbc",
+            "text_sha256": "386fb53c113c6c7453d415887eb612f0ba6a3197c90655a1bf611a7d21d183a9",
+            "schema_version": 1,
+            "type": "preview",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "1efcaa1a444aff1c11028fcdd6d7f537ffcc52d58ee0a24b2a51fbf071607e76",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "26ada8aa5aa897fc452f95762cf27f6bd910e7e824d1d0c19936c0649d910270",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 4,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic-preview-rejection",
+        "shell": "ps51",
+        "scope": "isolated_support_diagnostic",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "8d43b464681b3a748df35ae78fcf09989e9468365fec6519a159174624206d2a",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 0.762,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "3796b6cf26a8ea73e804b0bd199b481c04bfe390726f6a6a23cd57f26ac6515c",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "permission-denied",
+        "shell": "ps7",
+        "scope": "normal_user_owned_empty_fixture_acl",
+        "passed": true,
+        "error_code": null,
+        "administrator_token": false,
+        "original_acl_restored": true,
+        "denial_present": true,
+        "write_denied": true,
+        "denied_acl_sha256": "81c1f470a9b612e4380f8e74f6655159b4d556428d9cddb9042582110ca5a0c5",
+        "original_acl_sha256": "c01bdfebca4479e6ae937d00025034ab547e66565c3ba49433e12c35b1439934",
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.508,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "6bf3432dbc286dd25bf95fef10b5272fa415f0e9cdddfbcbc8c5466951b8850e",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true,
+        "blocked_destination_empty": true,
+        "acl_restore_exit_code": 0,
+        "recovery": {
+          "passed": true,
+          "error_code": null,
+          "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+          "exit_code": 0,
+          "timed_out": false,
+          "direct_child_exited": true,
+          "timeout_owned_tree_cleanup_complete": null,
+          "elapsed_seconds": 3.031,
+          "stdout_sha256": "1ec3886945643d7f2cf75f288102fd3bd30ca6f31d7ecef55588fe30381a431e",
+          "stderr_sha256": "4a5a0b61baba58af8910205357325e278231ffd017161250652b38b602e3de9c",
+          "diagnostics": [],
+          "journals": [],
+          "reports": [
+            {
+              "sha256": "034cfc61bce842a648217dd15122cdbaa89267f294f51f4ed7975992be28b5de",
+              "text_sha256": "19c720f807b5ec8cb17ec82e2f6168074f9ec04f15211ea5cd5d44dd5553b5cb",
+              "schema_version": 1,
+              "type": "full",
+              "tool_version": "2.3",
+              "preset_id": "original",
+              "preset_version": "1.0.0",
+              "status": "SUCCESS",
+              "application_exit_code": 0,
+              "warning_codes": [],
+              "local_scope_verified": true,
+              "outputs": [
+                {
+                  "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                  "container": "RIFF",
+                  "codec": "pcm_s16le",
+                  "sample_rate": 48000,
+                  "bit_depth": 16,
+                  "channels": 2,
+                  "frames": 384000
+                }
+              ]
+            }
+          ],
+          "new_report_count": 1,
+          "new_output_count": 1,
+          "input_unchanged": true,
+          "payload_and_copied_tools_unchanged": true,
+          "requested_settings_and_route_verified": true
+        }
+      },
+      {
+        "id": "missing-tool",
+        "shell": "ps7",
+        "scope": "isolated_support_fault",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "87a9aec5f921ac1218f2fea966d97f9b64867fad323db27aef22f5cdf7710155",
+        "exit_code": 3,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.466,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "82b6a0ef7d2ba3974d50af396ba52f76a555f51772381bf5aaff0d3831fc42d5",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "corrupt-input",
+        "shell": "ps7",
+        "scope": "isolated_support_fault",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "94c6b4a1209a6fddb0e33b113af57f9ee3e06ef50c25786b9acb2f39feaf5cd6",
+        "exit_code": 4,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.392,
+        "stdout_sha256": "10d212894034a175c6d74c4a6b7ec47dd8fc673448d099d95c71d7be350a6019",
+        "stderr_sha256": "a7e060a485d29862e5955ccccb57c9ad77ff0c3fa8fecb7e9054c2f2cf6ee135",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "destination-file",
+        "shell": "ps7",
+        "scope": "isolated_support_fault",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.39,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "af47abdbb49903db1ff9ae5aae19e027baa6b4e6ad62e84babd244527e15be31",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "collision-first",
+        "shell": "ps7",
+        "scope": "isolated_support_publication",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.861,
+        "stdout_sha256": "317a9a5d45d32cfd95d33d97e0c17e06fe4206555fb50a5958604803fe493e1c",
+        "stderr_sha256": "f3aca474e9b1cb27ff1357dfe7867e900542e47563fa1404697d17ff408dbc50",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "0707e30136c686275abfc80ed49591f52b7350cb2b9933c98e90001e46540e25",
+            "text_sha256": "1f8ca171d889f319ca624a6559c5d9deaafdf3cfbfd4e3dffad582acaecfcd23",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "collision-repeat",
+        "shell": "ps7",
+        "scope": "isolated_support_publication",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "991576c7c1dfd90ec337f062333e5883be4841ce6e2caa0c1538c8dfe7f5e7e2",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 2.529,
+        "stdout_sha256": "e2410c506e41b19aea326e8bb11f4c6cf572be22ef6a6cb203eba52b23659047",
+        "stderr_sha256": "ec4338e3321147e0e23da249a4448b21a0726c6164849e629e37973cd376253c",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "78572462070c7543bb93e48f308a8f211176e75ac8be293d27c5f7cf90006403",
+            "text_sha256": "778591f046cc9505c3ab528ebecd1c82c7632a05c865f10c6ede8196e807e4de",
+            "schema_version": 1,
+            "type": "full",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "487b753c15422f53fa0a6bcafbeaf012379124532ddc4561ae5057495c20f363",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 384000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 1,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic-success",
+        "shell": "ps7",
+        "scope": "isolated_support_diagnostic",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "fa7e3f2c2af1da5638e5ad26beff6ac91173c4d52277c709e94b73ccf7e47101",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.144,
+        "stdout_sha256": "ebf22c71f0354aa71e33f0270af8cfb0a229160bab20021b9e602d608dd22d94",
+        "stderr_sha256": "d2e60f21413b7c4eccbc0bb2611f1ff5259910911f177487e5ba8078095a8578",
+        "diagnostics": [
+          {
+            "sha256": "64cca9faf2aa8a9808402c769a97228e824ed52a202a48101c1b681f494572e5",
+            "schema_version": 1,
+            "paths_omitted": true
+          }
+        ],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true,
+        "diagnostic_sha256": "64cca9faf2aa8a9808402c769a97228e824ed52a202a48101c1b681f494572e5"
+      },
+      {
+        "id": "diagnostic-collision",
+        "shell": "ps7",
+        "scope": "isolated_support_diagnostic",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "fa7e3f2c2af1da5638e5ad26beff6ac91173c4d52277c709e94b73ccf7e47101",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 1.274,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "34b6244c7f2a465f038c633932cd1a7d5547cebf0145a97d5220df4f5ab90c09",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic-preview-source",
+        "shell": "ps7",
+        "scope": "isolated_support_preview",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "7179d38ced3c05f9faa3a8063903c686465af60dc8d9ca5e0af34bcc6b48bb89",
+        "exit_code": 0,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 4.229,
+        "stdout_sha256": "bf70599fd585751afa8830a6519ae6da65e6d489fe76ab8b66ebf4de6a446097",
+        "stderr_sha256": "bad085f54a9d65663e524c93a0caec543955519491e1a6273b874b0a5659d0e4",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [
+          {
+            "sha256": "2532aebc6ac69f3e8753500229d2d9b0a64a3f11473c15c86827a915f6378959",
+            "text_sha256": "df31f57d9dbb9bf103052dbba6999587c78fbef9c91c54ba8c7603f4daccdeae",
+            "schema_version": 1,
+            "type": "preview",
+            "tool_version": "2.3",
+            "preset_id": "original",
+            "preset_version": "1.0.0",
+            "status": "SUCCESS",
+            "application_exit_code": 0,
+            "warning_codes": [],
+            "local_scope_verified": true,
+            "outputs": [
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "1efcaa1a444aff1c11028fcdd6d7f537ffcc52d58ee0a24b2a51fbf071607e76",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "963c3dbcf7789acf6ee7699e07ec356810c4fa88b637ceb8b7ff5605240cedac",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              },
+              {
+                "sha256": "26ada8aa5aa897fc452f95762cf27f6bd910e7e824d1d0c19936c0649d910270",
+                "container": "RIFF",
+                "codec": "pcm_s16le",
+                "sample_rate": 48000,
+                "bit_depth": 16,
+                "channels": 2,
+                "frames": 144000
+              }
+            ]
+          }
+        ],
+        "new_report_count": 1,
+        "new_output_count": 4,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      },
+      {
+        "id": "diagnostic-preview-rejection",
+        "shell": "ps7",
+        "scope": "isolated_support_diagnostic",
+        "passed": true,
+        "error_code": null,
+        "command_sha256": "8d43b464681b3a748df35ae78fcf09989e9468365fec6519a159174624206d2a",
+        "exit_code": 2,
+        "timed_out": false,
+        "direct_child_exited": true,
+        "timeout_owned_tree_cleanup_complete": null,
+        "elapsed_seconds": 0.811,
+        "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stderr_sha256": "07f664afa2dee5d05722c9c51c8486bc191d45d38c9d94631850b4da5f2e87e2",
+        "diagnostics": [],
+        "journals": [],
+        "reports": [],
+        "new_report_count": 0,
+        "new_output_count": 0,
+        "input_unchanged": true,
+        "payload_and_copied_tools_unchanged": true,
+        "requested_settings_and_route_verified": true
+      }
+    ],
+    "help_audits": [
+      {
+        "shell": "ps51",
+        "shell_version": "5.1.26100.9444",
+        "elevated_administrator": false,
+        "public_parameter_count": 31,
+        "public_parameters": [
+          "inputPath",
+          "Mode",
+          "OutputDirectory",
+          "FfmpegPath",
+          "FfprobePath",
+          "AudioStreamIndex",
+          "BitDepth",
+          "LoudnessMode",
+          "Preset",
+          "CleaningOptions",
+          "Preview",
+          "PreviewStartSeconds",
+          "PreviewDurationSeconds",
+          "Mono",
+          "Rf64",
+          "NonInteractive",
+          "ExportDiagnostic",
+          "DiagnosticOutputPath",
+          "SettingsPath",
+          "IgnoreSavedSettings",
+          "ShowSettings",
+          "SaveSettings",
+          "ResetSettings",
+          "InputPaths",
+          "InputListPath",
+          "InputDirectories",
+          "Recurse",
+          "BatchResultPath",
+          "JobFolder",
+          "PickFile",
+          "OpenOutputFolder"
+        ],
+        "all_public_parameters_documented": true,
+        "declared_defaults": {
+          "BitDepth": "16",
+          "LoudnessMode": "Fast",
+          "Preset": "Original",
+          "CleaningOptions": "@{}",
+          "PreviewStartSeconds": "0",
+          "PreviewDurationSeconds": "45"
+        },
+        "example_count": 6,
+        "help_output_sha256": "2f59afe4b6a6833677af9f1659acd2499c3621668f3f386fba31c9268540e44f"
+      },
+      {
+        "shell": "ps7",
+        "shell_version": "7.6.5",
+        "elevated_administrator": false,
+        "public_parameter_count": 31,
+        "public_parameters": [
+          "inputPath",
+          "Mode",
+          "OutputDirectory",
+          "FfmpegPath",
+          "FfprobePath",
+          "AudioStreamIndex",
+          "BitDepth",
+          "LoudnessMode",
+          "Preset",
+          "CleaningOptions",
+          "Preview",
+          "PreviewStartSeconds",
+          "PreviewDurationSeconds",
+          "Mono",
+          "Rf64",
+          "NonInteractive",
+          "ExportDiagnostic",
+          "DiagnosticOutputPath",
+          "SettingsPath",
+          "IgnoreSavedSettings",
+          "ShowSettings",
+          "SaveSettings",
+          "ResetSettings",
+          "InputPaths",
+          "InputListPath",
+          "InputDirectories",
+          "Recurse",
+          "BatchResultPath",
+          "JobFolder",
+          "PickFile",
+          "OpenOutputFolder"
+        ],
+        "all_public_parameters_documented": true,
+        "declared_defaults": {
+          "BitDepth": "16",
+          "LoudnessMode": "Fast",
+          "Preset": "Original",
+          "CleaningOptions": "@{}",
+          "PreviewStartSeconds": "0",
+          "PreviewDurationSeconds": "45"
+        },
+        "example_count": 6,
+        "help_output_sha256": "b4880264a024c96ae87b8a3cd1c400a779c9cf8707bcccfd701384c5ef35b9ae"
+      }
+    ],
+    "archive": {
+      "passed": true,
+      "payload_count": 17,
+      "entry_count": 18,
+      "zip_sha256": "d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7",
+      "manifest_sha256": "1334339b8738aab7d37461e456b540bceb05e37cb4b82fb257bbd223a8746a7f",
+      "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+      "version": "2.3",
+      "source_commit": "1f10940ee970ebe719c21ba0e7290830beeb7123",
+      "source_tree": "c3ca091af76c72b57643f6dd5b7d64d84eeaaa83",
+      "ordered_stored_fixed_timestamp": true,
+      "committed_blobs_identical": true
+    },
+    "tools": {
+      "ffmpeg": {
+        "version": "9.0.2",
+        "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec"
+      },
+      "ffprobe": {
+        "version": "9.0.2",
+        "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+      }
+    },
+    "readme_example_count": 15,
+    "fixture": {
+      "synthetic": true,
+      "duration_seconds": 8,
+      "channels": 2,
+      "sample_rate": 48000,
+      "filename": "recording.wav",
+      "supplied_by_controller": true
+    },
+    "extraction": {
+      "fresh_packages_per_host": true,
+      "spaces_and_unicode": true,
+      "writeable_local_folders": true,
+      "tools_supplied_beside_application": true
+    },
+    "preflight": [
+      {
+        "shell": "ps51",
+        "shell_version": "5.1.26100.9444",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "startup_added_module_root_count": 1,
+        "visible_test_modules": [
+          {
+            "name": "Pester",
+            "version": "3.4.0"
+          }
+        ],
+        "scope": "normal_host_startup"
+      },
+      {
+        "shell": "ps7",
+        "shell_version": "7.6.5",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "startup_added_module_root_count": 2,
+        "visible_test_modules": [],
+        "scope": "normal_host_startup"
+      }
+    ],
+    "controller_source_unchanged": true,
+    "original_tools_unchanged": true,
+    "archive_unchanged": true,
+    "archive_sidecars_unchanged": true,
+    "user_settings_unchanged": true,
+    "user_settings_scope": "actual_windows_known_folder_from_each_host",
+    "maximum_generated_media_path_characters": 248,
+    "maximum_generated_journal_path_characters": 235,
+    "readme_case_count": 30,
+    "portable_case_count": 2,
+    "help_case_count": 12,
+    "support_case_count": 20
+  },
+  "final_controller_sha256": "3cf5cd6fd7d24c4633e4163372e7b194a5840219a6b2534fc394f245b4a5266b",
+  "ci_at_full_source": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "headSha": "047aefe906ca7954a225d81f53286eb1275723dc",
+    "event": "pull_request",
+    "workflow": "Windows validation",
+    "workflowPath": ".github/workflows/windows-validation.yml",
+    "run": {
+      "id": 37180768822,
+      "workflowId": 374090478,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37180768822",
+      "status": "completed",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "state": "passed",
+    "reason": "Exact workflow SHA and all required shell/build jobs succeeded."
+  },
+  "ci_at_documentation_source": {
+    "repository": "PikkuJanne/WinAudioClean",
+    "headSha": "1f10940ee970ebe719c21ba0e7290830beeb7123",
+    "event": "pull_request",
+    "workflow": "Windows validation",
+    "workflowPath": ".github/workflows/windows-validation.yml",
+    "run": {
+      "id": 37182513533,
+      "workflowId": 374090478,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37182513533",
+      "status": "in_progress",
+      "conclusion": "",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "in_progress",
+          "conclusion": ""
+        },
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "in_progress",
+          "conclusion": ""
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "in_progress",
+          "conclusion": ""
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "in_progress",
+          "conclusion": ""
+        }
+      ]
+    },
+    "state": "pending",
+    "reason": "The matching workflow has not completed."
+  },
+  "source_review": {
+    "main_runtime_body_normalized_equal_to_parent": true,
+    "other_runtime_components_and_bat_equal_to_parent": true,
+    "builder_and_release_tests_equal_to_full_source": true,
+    "main_script_sha256": "200e5972b2179330879547bcefda1267f97b1a268af47ba22337f81fb283cd37",
+    "default_filters_and_sound_unchanged": true,
+    "website_metadata": "absent_future_M5_01",
+    "windows_build": 26300,
+    "scope": "Source/doc/report comparison by root and independent reviewers; synthetic checks do not certify listening, OS/build universality or storage stress."
+  },
+  "retained_gaps": [
+    {
+      "id": "speech-listening",
+      "status": "not_run",
+      "cases": [
+        "AC-009",
+        "AC-042",
+        "AC-044",
+        "AC-047",
+        "AC-064"
+      ],
+      "required_for": "Mandatory before any speech-quality/default-sound promotion claim; exact settings/revision/owner approval remain required.",
+      "reason": "Formal level-matched Original/Gentle/custom speech corpus review and attributable per-clip results are absent. AC-064 user playback accepts its original workflow only.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M2-05-listening.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-06-manual.json"
+      ]
+    },
+    {
+      "id": "explorer-matrix",
+      "status": "not_run",
+      "cases": [
+        "AC-013",
+        "AC-016",
+        "AC-052",
+        "AC-054",
+        "AC-064"
+      ],
+      "required_for": "Mandatory before claiming universal manual Explorer drop, punctuation or multi-file gesture coverage.",
+      "reason": "Actual CMD transport/synthetic matrices are engineering checks. Only AC-064's two neutral-name manual retries are observed; its initial unquoted parentheses input was rejected. Earlier percent/exclamation expansion cannot be reconstructed by the BAT.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M3-02.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-06-manual.json"
+      ]
+    },
+    {
+      "id": "picker-gesture",
+      "status": "not_run",
+      "cases": [
+        "AC-061",
+        "AC-063"
+      ],
+      "required_for": "Mandatory before accepting actual file-dialog and Explorer follow-up gestures on the active host.",
+      "reason": "Picker/open helpers have controlled engineering coverage; no manual dialog cancellation/selection or follow-up Explorer action was performed.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M3-05.md"
+      ]
+    },
+    {
+      "id": "large-storage-stress",
+      "status": "not_run",
+      "cases": [
+        "AC-023",
+        "AC-027",
+        "AC-051",
+        "AC-060",
+        "AC-061"
+      ],
+      "required_for": "Extended gate required before claiming >4 GB/full-volume/long-recording durability or memory/storage stress support.",
+      "reason": "Small RF64 headers, bounded size estimates, simulated low space/save faults and short synthetic jobs do not cover full >4 GB exports, actual volume exhaustion, long-running capture or broad UNC/long-path/storage stress.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M1-07-review.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-05.md"
+      ]
+    },
+    {
+      "id": "host-crash-powerloss",
+      "status": "not_run",
+      "cases": [
+        "AC-023",
+        "AC-030",
+        "AC-045",
+        "AC-051",
+        "AC-053",
+        "AC-057",
+        "AC-059",
+        "AC-060"
+      ],
+      "required_for": "Mandatory before any graceful console-close/logoff/forced-host-kill or power-loss recovery claim. No multi-file atomicity/durability guarantee is accepted.",
+      "reason": "Controlled encoder/report/save failures and native Ctrl+C/Break signals cannot establish actual host termination, console-window close or power-loss cleanup. Owned crash leftovers may remain.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M1-07-review.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-04.md",
+        "docs/codex/winaudioclean/evidence/WAC-M3-05.md"
+      ]
+    },
+    {
+      "id": "privileged-file-symlink",
+      "status": "not_run",
+      "cases": [
+        "AC-002",
+        "AC-055"
+      ],
+      "required_for": "Mandatory before claiming the skipped file-symlink fixture passed; preserve the actual privilege skip separately from junction/hardlink coverage.",
+      "reason": "The recorded host cannot create a file symlink without unavailable privilege. Other identity/reparse tests do not turn that skip into a pass.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M3-05-gates.json",
+        "docs/codex/winaudioclean/evidence/WAC-M3-06-gates.json"
+      ]
+    },
+    {
+      "id": "meter-seek-domain",
+      "status": "not_run",
+      "cases": [
+        "AC-038",
+        "AC-039",
+        "AC-043",
+        "AC-044",
+        "AC-046",
+        "AC-048"
+      ],
+      "required_for": "Mandatory before broadening independent meter accuracy, positive-LUFS parsing, arbitrary codec seek or cross-build reproduction claims.",
+      "reason": "Same-build synthetic mechanics use FFmpeg meters and declared timestamp tolerances. Positive integrated loudness remains rejected, container seeking has recorded sample uncertainty, and five-second preview context can differ from a full render.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M2-05-listening.md",
+        "docs/codex/winaudioclean/evidence/WAC-M2-05.md"
+      ]
+    },
+    {
+      "id": "unreleased-preview-writer",
+      "status": "not_run",
+      "cases": [
+        "AC-030",
+        "AC-045",
+        "AC-068"
+      ],
+      "required_for": "Mandatory before claiming recovery from a real OS or uncooperative stream refusing writer-handle release.",
+      "reason": "Preview writer-close fault doubles dispose the real inner stream before throwing. They prove later close attempts and truthful retained outcomes but do not prove recovery when an actual OS writer stays held or Dispose refuses to release it.",
+      "reports": [
+        "docs/codex/winaudioclean/evidence/WAC-M4-01.md"
+      ]
+    }
+  ],
+  "closure": {
+    "final_documentation": {
+      "source_commit": "1f10940ee970ebe719c21ba0e7290830beeb7123",
+      "case_count": 64,
+      "all_cases_valid": true,
+      "cases": [
+        {
+          "id": "ps51-first-run",
+          "passed": true
+        },
+        {
+          "id": "ps51-raw-24",
+          "passed": true
+        },
+        {
+          "id": "ps51-accurate",
+          "passed": true
+        },
+        {
+          "id": "ps51-gentle",
+          "passed": true
+        },
+        {
+          "id": "ps51-track-mono-rf64",
+          "passed": true
+        },
+        {
+          "id": "ps51-preview",
+          "passed": true
+        },
+        {
+          "id": "ps51-list",
+          "passed": true
+        },
+        {
+          "id": "ps51-manifest",
+          "passed": true
+        },
+        {
+          "id": "ps51-folder",
+          "passed": true
+        },
+        {
+          "id": "ps51-settings-save",
+          "passed": true
+        },
+        {
+          "id": "ps51-settings-show",
+          "passed": true
+        },
+        {
+          "id": "ps51-settings-reset",
+          "passed": true
+        },
+        {
+          "id": "ps51-bat",
+          "passed": true
+        },
+        {
+          "id": "ps51-help",
+          "passed": true
+        },
+        {
+          "id": "ps51-diagnostic",
+          "passed": true
+        },
+        {
+          "id": "ps7-first-run",
+          "passed": true
+        },
+        {
+          "id": "ps7-raw-24",
+          "passed": true
+        },
+        {
+          "id": "ps7-accurate",
+          "passed": true
+        },
+        {
+          "id": "ps7-gentle",
+          "passed": true
+        },
+        {
+          "id": "ps7-track-mono-rf64",
+          "passed": true
+        },
+        {
+          "id": "ps7-preview",
+          "passed": true
+        },
+        {
+          "id": "ps7-list",
+          "passed": true
+        },
+        {
+          "id": "ps7-manifest",
+          "passed": true
+        },
+        {
+          "id": "ps7-folder",
+          "passed": true
+        },
+        {
+          "id": "ps7-settings-save",
+          "passed": true
+        },
+        {
+          "id": "ps7-settings-show",
+          "passed": true
+        },
+        {
+          "id": "ps7-settings-reset",
+          "passed": true
+        },
+        {
+          "id": "ps7-bat",
+          "passed": true
+        },
+        {
+          "id": "ps7-help",
+          "passed": true
+        },
+        {
+          "id": "ps7-diagnostic",
+          "passed": true
+        },
+        {
+          "id": "ps51-help-example-1",
+          "passed": true
+        },
+        {
+          "id": "ps51-help-example-2",
+          "passed": true
+        },
+        {
+          "id": "ps51-help-example-3",
+          "passed": true
+        },
+        {
+          "id": "ps51-help-example-4",
+          "passed": true
+        },
+        {
+          "id": "ps51-help-example-5",
+          "passed": true
+        },
+        {
+          "id": "ps51-help-example-6",
+          "passed": true
+        },
+        {
+          "id": "ps7-help-example-1",
+          "passed": true
+        },
+        {
+          "id": "ps7-help-example-2",
+          "passed": true
+        },
+        {
+          "id": "ps7-help-example-3",
+          "passed": true
+        },
+        {
+          "id": "ps7-help-example-4",
+          "passed": true
+        },
+        {
+          "id": "ps7-help-example-5",
+          "passed": true
+        },
+        {
+          "id": "ps7-help-example-6",
+          "passed": true
+        },
+        {
+          "id": "ps51-verify-zip",
+          "passed": true
+        },
+        {
+          "id": "ps7-verify-zip",
+          "passed": true
+        },
+        {
+          "id": "ps51-permission-denied",
+          "passed": true
+        },
+        {
+          "id": "ps51-missing-tool",
+          "passed": true
+        },
+        {
+          "id": "ps51-corrupt-input",
+          "passed": true
+        },
+        {
+          "id": "ps51-destination-file",
+          "passed": true
+        },
+        {
+          "id": "ps51-collision-first",
+          "passed": true
+        },
+        {
+          "id": "ps51-collision-repeat",
+          "passed": true
+        },
+        {
+          "id": "ps51-diagnostic-success",
+          "passed": true
+        },
+        {
+          "id": "ps51-diagnostic-collision",
+          "passed": true
+        },
+        {
+          "id": "ps51-diagnostic-preview-source",
+          "passed": true
+        },
+        {
+          "id": "ps51-diagnostic-preview-rejection",
+          "passed": true
+        },
+        {
+          "id": "ps7-permission-denied",
+          "passed": true
+        },
+        {
+          "id": "ps7-missing-tool",
+          "passed": true
+        },
+        {
+          "id": "ps7-corrupt-input",
+          "passed": true
+        },
+        {
+          "id": "ps7-destination-file",
+          "passed": true
+        },
+        {
+          "id": "ps7-collision-first",
+          "passed": true
+        },
+        {
+          "id": "ps7-collision-repeat",
+          "passed": true
+        },
+        {
+          "id": "ps7-diagnostic-success",
+          "passed": true
+        },
+        {
+          "id": "ps7-diagnostic-collision",
+          "passed": true
+        },
+        {
+          "id": "ps7-diagnostic-preview-source",
+          "passed": true
+        },
+        {
+          "id": "ps7-diagnostic-preview-rejection",
+          "passed": true
+        }
+      ],
+      "archive_bytes": 438904,
+      "archive_sha256": "d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7",
+      "controller_sha256": "3cf5cd6fd7d24c4633e4163372e7b194a5840219a6b2534fc394f245b4a5266b"
+    },
+    "full_gate": {
+      "source_commit": "047aefe906ca7954a225d81f53286eb1275723dc",
+      "runs": [
+        {
+          "host": "ps51",
+          "exit_code": 0,
+          "source_unchanged": true,
+          "pester_passed": 1483,
+          "pester_skipped": 1,
+          "pester_failed": 0,
+          "outside_scope": 0,
+          "python_ran": 142,
+          "python_skipped": 1,
+          "python_failed": 0
+        },
+        {
+          "host": "ps7",
+          "exit_code": 0,
+          "source_unchanged": true,
+          "pester_passed": 1483,
+          "pester_skipped": 1,
+          "pester_failed": 0,
+          "outside_scope": 0,
+          "python_ran": 142,
+          "python_skipped": 1,
+          "python_failed": 0
+        }
+      ]
+    },
+    "ci": {
+      "source_commit": "1f10940ee970ebe719c21ba0e7290830beeb7123",
+      "status": "pending",
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37182513533",
+      "passed_jobs": 0,
+      "expected_jobs": 4
+    },
+    "claims_review": {
+      "status": "complete",
+      "website_metadata": "absent_future_M5_01"
+    },
+    "next_task": "WAC-M5-01",
+    "retained_gap_count": 8
+  },
+  "closure_checks": {
+    "validate_plan": {
+      "passed": true,
+      "tasks": 30,
+      "acceptance_cases": 90
+    },
+    "coverage": {
+      "passed": true,
+      "mapped_cases": 78,
+      "commands": 42,
+      "reviews": 9,
+      "retained_gaps": 8
+    },
+    "next": {
+      "ready": [
+        "WAC-M5-01"
+      ],
+      "blocked": []
+    },
+    "coverage_regression": {
+      "ran": 13,
+      "failed": 0,
+      "skipped": 0
+    },
+    "canonical_plan_file_loader": {
+      "ran": 1,
+      "failed": 0,
+      "skipped": 0
+    },
+    "retained_invocation_failures": [
+      {
+        "command_scope": "coverage helper named as nonexistent governance tools/validate_coverage.py",
+        "executed_acceptance_cases": 0,
+        "corrected_command": "python -X utf8 scripts/Test-Coverage.py --repo .",
+        "corrected_passed": true,
+        "observed_shell_exit_code": 1
+      },
+      {
+        "command_scope": "module-name selection test_handoff.CanonicalPlanTests from root then test directory",
+        "attempts": 2,
+        "exit_code_each": 1,
+        "executed_acceptance_cases": 0,
+        "reason": "ModuleNotFoundError before actual test execution",
+        "corrected_scope": "explicit file-loader, CanonicalPlanTests only",
+        "corrected_passed": true
+      }
+    ]
+  }
+}

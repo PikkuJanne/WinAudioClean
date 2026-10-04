@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
@@ -199,6 +200,17 @@ internal static class NativeProcessFixture
             {
                 string input = Console.In.ReadToEnd();
                 Console.Out.Write("STDIN_EOF:" + input.Length.ToString(CultureInfo.InvariantCulture));
+            }
+            if (Setting("READ_STDIN_BYTES") == "1")
+            {
+                using (MemoryStream bytes = new MemoryStream())
+                using (Stream input = Console.OpenStandardInput())
+                using (SHA256 hash = SHA256.Create())
+                {
+                    input.CopyTo(bytes);
+                    string digest = BitConverter.ToString(hash.ComputeHash(bytes.ToArray())).Replace("-", "");
+                    Console.Out.Write("STDIN_BYTES:" + bytes.Length.ToString(CultureInfo.InvariantCulture) + ":" + digest);
+                }
             }
 
             int streamCount = Number("STREAM_BYTES");

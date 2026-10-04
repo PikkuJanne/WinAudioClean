@@ -115,6 +115,8 @@ Write-Information -InformationAction Continue -MessageData "Static gate passed; 
 $planRoot = Join-Path $repoRoot 'docs/codex/winaudioclean'
 & $python.Source (Join-Path $planRoot 'tools/handoff.py') validate-plan --plan-root $planRoot
 if ($LASTEXITCODE -ne 0) { throw "Plan validation failed (exit $LASTEXITCODE)." }
+& $python.Source (Join-Path $PSScriptRoot 'Test-Coverage.py') --repo $repoRoot
+if ($LASTEXITCODE -ne 0) { throw "Coverage traceability validation failed (exit $LASTEXITCODE)." }
 
 $configuration = New-PesterConfiguration
 $configuration.Run.Path = $testPaths

@@ -1028,8 +1028,14 @@
       "title": "Coverage traceability",
       "procedure": "Map every implemented acceptance ID to a test command/report or a named manual review.",
       "expected": "No implemented behavior relies solely on a roadmap checkbox; mandatory gaps remain visible.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ]
     },
     {
       "id": "AC-068",
@@ -1037,8 +1043,14 @@
       "title": "Mutation / fault checks",
       "procedure": "Inject representative overwrite, bad exit and wrong-sample-rate defects in an isolated test tree.",
       "expected": "Relevant tests detect them; test fixture cleanup cannot remove real user files.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ]
     },
     {
       "id": "AC-069",
@@ -1046,8 +1058,14 @@
       "title": "Efficient repeatability",
       "procedure": "Run Quick and selected Targeted suites after a narrow change, then one Full gate.",
       "expected": "Runners are reusable and evidence tied to revision; no repetitive all-project audit is required for every small edit.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-01.md",
+        "evidence/WAC-M4-01-source.json",
+        "evidence/WAC-M4-01-gates.json",
+        "evidence/WAC-M4-01-faultchecks.json",
+        "evidence/WAC-M4-01-preview-close.md"
+      ]
     },
     {
       "id": "AC-070",
@@ -1055,8 +1073,11 @@
       "title": "CI/local parity",
       "procedure": "Compare workflow commands and versions to local runners; run a PR check.",
       "expected": "Same checks are invoked, versions recorded, real green/failure status linked to the tested SHA.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ]
     },
     {
       "id": "AC-071",
@@ -1064,8 +1085,11 @@
       "title": "Workflow permissions",
       "procedure": "Review permissions, triggers, pinned actions, downloads and secrets exposure.",
       "expected": "Untrusted PR tests cannot publish releases/access private recordings/secrets; no broad write token by default.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ]
     },
     {
       "id": "AC-072",
@@ -1073,8 +1097,11 @@
       "title": "Truthful fallback",
       "procedure": "Simulate unavailable CI or one unsupported local shell.",
       "expected": "Local and CI results remain distinct; neither an API outage nor an unrun job becomes a passed gate.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-02.md",
+        "evidence/WAC-M4-02-validation.json"
+      ]
     },
     {
       "id": "AC-073",
@@ -1082,8 +1109,11 @@
       "title": "Package contents",
       "procedure": "Build twice from the same inputs; inspect archive entries and metadata/checksums.",
       "expected": "Version and content manifest agree; reproducibility claims match actual results; no private/development-only files.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ]
     },
     {
       "id": "AC-074",
@@ -1091,8 +1121,11 @@
       "title": "Fresh package use",
       "procedure": "Extract into a clean user-writable folder with spaces/Unicode; supply approved local dependencies.",
       "expected": "The documented .bat and PowerShell paths work without a repo, Python or test modules installed.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ]
     },
     {
       "id": "AC-075",
@@ -1100,8 +1133,11 @@
       "title": "Licensing and integrity",
       "procedure": "Review included notices, dependency provenance and generated hashes.",
       "expected": "MIT notice is preserved; bundled third-party build obligations are checked or bundling remains explicitly blocked.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M4-03.md",
+        "evidence/WAC-M4-03-validation.json"
+      ]
     },
     {
       "id": "AC-076",
@@ -1109,8 +1145,8 @@
       "title": "Examples execute",
       "procedure": "Follow installation and commands from a clean release ZIP on the active machine.",
       "expected": "Examples run without hidden setup; help contains valid parameter descriptions and actual defaults.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"]
     },
     {
       "id": "AC-077",
@@ -1118,8 +1154,8 @@
       "title": "Support and privacy",
       "procedure": "Walk through missing dependency, corrupt media, permissions, output collision and redacted-report guidance.",
       "expected": "User can diagnose without uploading private audio or changing machine-wide security settings.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"]
     },
     {
       "id": "AC-078",
@@ -1127,8 +1163,8 @@
       "title": "Claims consistency",
       "procedure": "Compare README/Get-Help/preset labels/reports and website draft metadata.",
       "expected": "Versions, LUFS/peak units, local-processing statement and limitations agree.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"]
     },
     {
       "id": "AC-079",

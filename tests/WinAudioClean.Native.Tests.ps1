@@ -26,7 +26,7 @@ Describe 'AC-016/AC-017/AC-018: real native process arguments, results and strea
             'WAC_TEST_ARGV_PATH', 'WAC_TEST_PID_PATH', 'WAC_TEST_EXIT_CODE',
             'WAC_TEST_STDOUT', 'WAC_TEST_STDERR', 'WAC_TEST_STREAM_BYTES',
             'WAC_TEST_SLEEP_MS', 'WAC_TEST_FFMPEG_OUTPUT', 'WAC_TEST_OUTPUT_PATH',
-            'WAC_TEST_BLOCK_LOG', 'WAC_TEST_READ_STDIN'
+            'WAC_TEST_BLOCK_LOG', 'WAC_TEST_READ_STDIN', 'WAC_TEST_READ_STDIN_BYTES'
         )
     }
 

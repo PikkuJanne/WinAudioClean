@@ -1,0 +1,58 @@
+{
+  "name": "Windows validation",
+  "on": {
+    "pull_request": { "types": ["opened", "synchronize", "reopened", "ready_for_review"] },
+    "push": { "branches": ["main", "codex/**"] }
+  },
+  "permissions": { "contents": "read" },
+  "concurrency": {
+    "group": "${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}",
+    "cancel-in-progress": true
+  },
+  "jobs": {
+    "windows": {
+      "name": "Windows ${{ matrix.os }} / ${{ matrix.shell }}",
+      "runs-on": "${{ matrix.os }}",
+      "timeout-minutes": 45,
+      "strategy": {
+        "fail-fast": false,
+        "matrix": { "os": ["windows-2022", "windows-2025"], "shell": ["ps51", "ps7"] }
+      },
+      "env": { "PYTHONUTF8": "1", "WAC_CI_SOURCE_SHA": "${{ github.event.pull_request.head.sha || github.sha }}" },
+      "steps": [
+        {
+          "name": "Check out tested source",
+          "uses": "actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8",
+          "with": { "persist-credentials": false, "fetch-depth": 1, "ref": "${{ github.event.pull_request.head.sha || github.sha }}" }
+        },
+        {
+          "name": "Install verified portable CI tools",
+          "shell": "powershell",
+          "run": "./scripts/Install-CIDependencies.ps1 -GitHubActions"
+        },
+        {
+          "name": "Install verified development modules",
+          "shell": "powershell",
+          "run": "./scripts/Install-DevDependencies.ps1"
+        },
+        {
+          "name": "Run the local Full gate",
+          "shell": "powershell",
+          "run": "$taskShell = if ('${{ matrix.shell }}' -eq 'ps51') { Join-Path $env:SystemRoot 'System32/WindowsPowerShell/v1.0/powershell.exe' } else { $env:WAC_CI_PS7 }\n& $env:WAC_CI_PYTHON -X utf8 scripts/Invoke-CIChecks.py --shell-path $taskShell --shell-family '${{ matrix.shell }}' --level Full\nexit $LASTEXITCODE"
+        },
+        {
+          "name": "Retain sanitized result only",
+          "if": "${{ always() }}",
+          "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",
+          "with": {
+            "name": "checks-${{ matrix.os }}-${{ matrix.shell }}",
+            "path": "artifacts/local/ci/${{ matrix.shell }}.json",
+            "retention-days": 7,
+            "if-no-files-found": "warn",
+            "include-hidden-files": false
+          }
+        }
+      ]
+    }
+  }
+}

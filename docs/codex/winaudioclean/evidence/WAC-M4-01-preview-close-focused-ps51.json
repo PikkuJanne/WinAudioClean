@@ -1,0 +1,105 @@
+{
+    "schemaVersion":  1,
+    "scope":  "Preview post-dispose release advisory; held FileStream closes before injected fault",
+    "psVersion":  "5.1.26100.9444",
+    "psEdition":  "Desktop",
+    "pesterVersion":  "5.7.1",
+    "tag":  "ReportCloseFault",
+    "passed":  9,
+    "failed":  0,
+    "skipped":  0,
+    "notRun":  155,
+    "total":  164,
+    "sourceStable":  true,
+    "sourceHashes":  [
+                         {
+                             "path":  "WinAudioClean.ps1",
+                             "sha256":  "728b59cb0d25249a9c17585430b8451a382f4e2d959fb822328bb2e56576fc76"
+                         },
+                         {
+                             "path":  "WinAudioClean.IO.ps1",
+                             "sha256":  "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+                         },
+                         {
+                             "path":  "WinAudioClean.Preview.ps1",
+                             "sha256":  "fd3c46ba3df1acabd9542cf9e2910554138ee34f87673d4b4c6a41ac188e1e95"
+                         },
+                         {
+                             "path":  "tests/WinAudioClean.Preview.Tests.ps1",
+                             "sha256":  "9d8a73befd7fe2d2b10e4e9e2eb56fe21027e5bedab4d9857537d45988dfa5cf"
+                         },
+                         {
+                             "path":  "tests/WinAudioClean.PreviewReportClose.Tests.ps1",
+                             "sha256":  "1ef65a676129bc3696990eb412a318a552387adf395badbaf4b462f7cc3e24e4"
+                         },
+                         {
+                             "path":  "tests/fixtures/ReportCloseFault.ps1",
+                             "sha256":  "6422069b5b2309a9936781680f09d89c2e511b0661a8bdfe57e024d2d4c2bdfb"
+                         }
+                     ],
+    "cases":  [
+                  {
+                      "name":  "retains flushed SUCCESS reports and releases all Preview leases after both writer close faults",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "retains flushed FAILED reports and releases all Preview leases after both writer close faults",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "retains flushed CANCELLED reports and releases all Preview leases after both writer close faults",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "closes every writer after a post-dispose fault in the first JSON writer",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "closes every writer after a post-dispose fault in the second text writer",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "closes every writer after a post-dispose fault in both writers",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "keeps release advisories nonterminating when the caller stops on warnings",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "retains the primary write exception and rolls back both owned reports despite both close faults",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  },
+                  {
+                      "name":  "retains a second-writer collision and foreign bytes when the first writer close faults",
+                      "result":  "Passed",
+                      "error":  [
+
+                                ]
+                  }
+              ]
+}

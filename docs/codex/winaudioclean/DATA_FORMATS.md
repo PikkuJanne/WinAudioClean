@@ -239,7 +239,9 @@ they do not certify listening approval or processing success.
 
 `-ExportDiagnostic <raw-json> -DiagnosticOutputPath <new-json>` is a separate
 local action; it requires no media dependencies and rejects audio-processing
-options. Input must be a version 1 JSON object of at most 16 MiB. Its file stays
+options. Input must be an ordinary full-run version 1 JSON object of at most
+16 MiB with a supported processingStatus. Actual preview JSON and queue JSONL
+are not accepted. Its file stays
 read-only; the destination parent must exist and a CreateNew output never
 replaces an existing file, including a source alias.
 
@@ -324,9 +326,10 @@ fallback. Keep the four-asset space estimate and report-writing completeness
 separate from audio matching.
 
 No preview state is saved and no report/audio uploads automatically. The
-existing redacted diagnostic projection remains the ordinary report subset;
-it drops arbitrary preview assets, range, graphs, stages and paths rather
-than treating preview metadata as full-render measurements. Failed preview
+existing redacted diagnostic projection accepts ordinary full-run reports only.
+Actual preview records lack its required processingStatus and are rejected;
+they are not projected into full-render measurements. Review or summarize
+preview diagnostics manually before sharing. Failed preview
 processing/publication requests use console diagnostics and owned rollback.
 Once all four valid assets are published, report-writing failure preserves
 them with WARNING/7, `reporting.complete: false`, errors and null report paths.
