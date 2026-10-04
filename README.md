@@ -1,14 +1,14 @@
 # WinAudioClean — Automated Audio Cleaning & Leveling Droplet (PowerShell + FFmpeg)
 
-A "drop-and-forget" audio post-production tool for podcasters, students, and professionals who just want their audio to sound good. Audio engineering is complex, but this script treats it like a laundry machine, drop dirty audio in, get clean, broadcast-ready audio out. It combines standard noise reduction with loudness normalization to make recordings sound consistent and professional. I use it to process Zoom recordings and voiceovers without opening a DAW.
+A local audio cleaning and leveling tool for speech recordings, including meetings, podcasts and voiceovers. It applies a validated FFmpeg filter chain and saves a separate WAV export. Results depend on the recording; listen to the output before using it.
 
 **Synopsis**
 
-- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only).
+- Two Modes: "Raw Recording" (Clean + Level) and "Zoom/Teams" (Level Only), both using Original by default. Raw also offers an optional experimental Gentle preset.
 
-- Robust Cleaning: De-clips distortion, cuts rumble (80Hz), de-clicks mouth noises, and gates background hiss.
+- Cleaning: Attempts clipping and click repair, reduces low-frequency rumble, and applies noise reduction and a gate.
 
-- Broadcast Leveling: Uses dynamic gain leveling (85%) and loudness limiting (-12dB RMS) to match industry standards.
+- Leveling: Uses dynamic gain adjustment followed by loudness normalization with chosen targets of -12 LUFS integrated loudness and -1.5 dBTP true peak.
 
 - Detailed Logging: Writes a report for every file to the Music folder, tracking size, duration, and filter chains.
 
@@ -37,6 +37,9 @@ Place these together (e.g. C:\Tools\WinAudioClean\):
 
 - WinAudioClean.IO.ps1
   - Required sibling helper for Windows file ownership, validation locks and safe publication.
+
+- WinAudioClean.Preview.ps1
+  - Sibling helper for the optional excerpt and level-matched comparison workflow. Full renders work without it.
 
 - WinAudioClean.bat
   - Simple launcher: enables drag-and-drop functionality for audio files.
@@ -104,6 +107,192 @@ invalid choices ask again. A mode can also be supplied directly:
 redirected input require an explicit mode and never show a mode prompt. Running
 without an input file displays usage. Direct script preflight failures return
 exit code `2`; menu cancellation returns `130`.
+
+**Original preset**
+
+Both mode choices select **Original**, ID `original`, version `1.0.0` by default.
+Choose `1` / `-Mode Raw` for cleaning plus leveling, or `2` / `-Mode Zoom` for
+leveling only. Naming the preset preserves these legacy filter values and order:
+
+Raw:
+
+```text
+adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
+```
+
+Zoom/Teams:
+
+```text
+dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
+```
+
+These are the default Fast settings. The -12 LUFS target is a preset choice,
+not a universal broadcast standard or a guarantee of the final file's loudness.
+Fast leaves final loudness unmeasured. Accurate adds the optional measurement
+workflow below. Preset identity names the Original base settings; loudness mode
+and the explicit 48 kHz PCM export policy are separate choices. Different
+FFmpeg builds or export settings can produce different samples. Speech listening
+approval remains pending.
+
+**Optional Gentle cleaning and advanced settings**
+
+`-Preset Gentle` selects an experimental Raw cleaning candidate, ID `gentle`,
+version `0.1.0`. It skips clipping repair, click repair and the gate, uses a
+60 Hz high-pass cutoff and sets `afftdn=nf=-35:nr=6`. Dynamic leveling and
+loudness targets stay the same. The name describes the chosen settings;
+speech listening has not established that it improves a recording.
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -Preset Gentle -NonInteractive
+```
+
+Raw accepts a `-CleaningOptions` hashtable with the settings below. Values
+override the selected base preset for that run. All numeric bounds are
+inclusive. Booleans must be `$true` or `$false`; numbers must be finite numeric
+scalars. Strings, arrays, null values, scriptblocks, unknown keys and arbitrary
+FFmpeg filter text are rejected. Numeric settings are validated even when
+their stage is disabled.
+
+| Option | Allowed value | Original Raw | Gentle Raw |
+| --- | --- | --- | --- |
+| `Declip` | Boolean | `$true` | `$false` |
+| `Declick` | Boolean | `$true` | `$false` |
+| `Denoise` | Boolean | `$true` | `$true` |
+| `Gate` | Boolean | `$true` | `$false` |
+| `HighpassHz` | 20 to 200 Hz | 80 | 60 |
+| `NoiseFloorDb` | -80 to -20 dB | -25 | -35 |
+| `NoiseReductionDb` | 0.01 to 20 dB | 12 | 6 |
+| `GateThresholdDb` | -80 to -20 dBFS | -45 | -45 (inactive) |
+| `GateRangeDb` | -60 to 0 dB | -25 | -25 (inactive) |
+
+For example, disable the Original gate and request 4 dB of noise reduction:
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -CleaningOptions @{Gate=$false; NoiseReductionDb=4} -NonInteractive
+```
+
+Run hashtable examples in PowerShell with the call operator `&`. A native
+`powershell.exe -File` or `pwsh -File` invocation cannot pass a hashtable literal
+as a typed parameter. Drag-and-drop and the menu default to Original; use the
+PowerShell entry point for these options. `-Mode Zoom` accepts only Original
+with no nonempty cleaning options, so it remains leveling only. These options
+can accompany either Fast or Accurate; Accurate repeats the selected cleaning
+chain in both passes. Settings are not saved between runs.
+
+The range limits are application choices within the supported FFmpeg options,
+not listening guarantees. High-pass filtering remains present in Raw even when
+all four optional stages are disabled. At its built-in settings, Original retains the legacy
+gate values `range=0.056:threshold=0.0056` at the nominal -25/-45 dB settings,
+and leaves `afftdn nr` implicit at the tested FFmpeg default of 12 dB. Changing
+the noise floor or reduction makes `nr` explicit. Other gate dB settings are
+converted to linear amplitude as `10^(dB/20)` with
+invariant decimal formatting. Preserve the report's exact filters and FFmpeg
+build when reproducing a render.
+
+**Local excerpt preview and comparison**
+
+Use `-Preview` to create a short original excerpt, the processed excerpt and
+two separate files for comparing them at a matched level:
+
+```powershell
+& .\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -Preset Gentle -Preview -PreviewStartSeconds 30 -PreviewDurationSeconds 45 -NonInteractive
+```
+
+The default starts at zero and requests 45 seconds, shortened to the remaining
+audio when needed. An explicit duration must be greater than zero, at most
+60 seconds and fit before the selected track ends. Start must be nonnegative
+and before the track ends. Start counts from the selected audio track's
+beginning, including tracks that start later than others in a container.
+Preview rejects negative or missing selected-track timestamp origins;
+WAV sample zero is accepted as its origin when timestamps are absent.
+Use decimal seconds with a dot, such as `30.125`.
+The range is rounded to 48 kHz sample positions; a range shorter than one
+output sample is rejected. Range options require `-Preview`.
+
+Each request creates four uniquely named WAVs:
+
+- `Original`: the selected interval with the chosen output/channel policy.
+- `Processed`: that interval after the selected Raw/Zoom profile.
+- `CompareOriginal`: a separately attenuated original for comparison.
+- `CompareProcessed`: a separately attenuated processed excerpt for comparison.
+
+Open the two comparison files yourself to listen. The script never starts
+playback or a full recording render as part of preview. Choose or cancel the
+mode/audio-track prompt before processing; a cancelled selection creates no
+preview audio. Existing files and the source are preserved.
+
+Processing uses up to five seconds of context before and after the excerpt,
+limited by the track's ends, then trims both excerpts to matching source
+positions and frame counts. Stateful filtering and normalization over that
+window can differ from a full render. Container timestamp precision can also
+shift a seek by a few samples; the report gives its resolution and a
+conservative bound of at most 10 ms. WAV source intervals are checked exactly
+in the synthetic tests; container positions are checked within their declared
+precision. Unknown/coarse non-WAV timestamp clocks are rejected.
+The current Original and Gentle Raw
+graphs retain an approximately 25 ms waveform delay on the tested FFmpeg
+build; Zoom and the tested Raw graph with all four cleaning stages disabled
+had zero reference delay. No delay compensation is applied. Custom graphs
+need their own delay check. The report labels context and these limitations.
+
+Comparison uses attenuation only. Both excerpts are measured, a common lower
+LUFS level is chosen with a -1.7 dBTP headroom target, and the resulting files
+are measured again. Matching allows a difference of 0.2 LU and requires true
+peak at or below -1.5 dBTP. Silence or clips shorter than one second are
+labelled unmeasurable; any available peak still controls safe attenuation.
+Preview metrics describe these excerpts, never the full recording's loudness.
+The comparison gain leaves full-render settings unchanged.
+
+The shared meter parser currently accepts integrated values through 0 LUFS.
+A preliminary very loud synthetic clip reported +0.51 LUFS and was rejected
+without publication. This inherited limit remains; the successful peak-guard
+fixture has negative integrated loudness and does not establish support for
+positive-LUFS material.
+
+The preview JSON/text reports contain each asset's measurements, selected
+range, context, gains and exact graphs. They may include local paths and native
+diagnostics; review them before sharing. Processing/publication failures
+roll back only owned preview files where storage permits. If writing reports
+fails after all four valid assets are published, the audio is retained with
+WARNING/7 and an incomplete-report diagnostic. Creating these files is
+not speech listening approval. The optional helper must be beside the main
+script, and the existing Fast/Accurate, bit-depth, mono and stream choices
+remain available. Accurate analyzes only the bounded context window.
+
+**Fast and Accurate loudness**
+
+`-LoudnessMode Fast` is the default, including drag-and-drop. It retains the
+original single-pass chain and runs no additional loudness analysis. To opt
+into two-pass normalization and final-file measurement, use PowerShell:
+
+```powershell
+.\WinAudioClean.ps1 -inputPath 'C:\Audio\interview.wav' -Mode Raw -LoudnessMode Accurate -NonInteractive
+```
+
+Accurate analyzes the selected recording, renders it using the measured values,
+and checks the encoded WAV in a separate FFmpeg process. The analysis and render
+repeat the same selected cleaning, dynamic leveling and optional mono conversion.
+A 192 kHz resampling step follows dynamic leveling in both passes; exports
+remain 48 kHz PCM16 or PCM24.
+Accurate takes longer and can sound different from Fast.
+
+Reports keep requested targets separate from measured integrated loudness,
+true peak and loudness range. The final check allows an integrated difference
+of at most 0.5 LU from -12 LUFS and true peak no higher than -1.3 dBTP
+(the -1.5 dBTP target plus 0.2 dB measurement tolerance). These are this tool's
+engineering tolerances. A peak violation takes priority; loudness range is
+reported for information.
+
+FFmpeg may use dynamic normalization when measured linear normalization is
+unavailable or cannot meet its constraints. The report records the actual
+normalization type and fallback reason. Fallbacks, undefined measurements and
+results outside the tolerances produce **WARNING / exit 7** when a valid WAV
+is published. Undefined metrics have `null` values and explicit reasons. For
+audio shorter than one second, integrated loudness and loudness range are
+unavailable; any finite true-peak measurement is retained.
+Malformed first-pass measurements or failed processing stop the run; a failed
+final measurement retains a valid export with a warning. Report completeness
+is recorded separately from loudness compliance.
 
 **Dependencies and audio tracks**
 
@@ -224,13 +413,22 @@ Early input, dependency, selection and space errors remain console-only.
 
 The version 1 JSON records the selected stream, exact filters, requested output
 format, verified audio, native diagnostics and processing/reporting outcomes.
-Input recording duration and elapsed rendering time are separate fields.
-Loudness and true-peak measurements are currently `null` with a reason; successful
-export validation does not claim that a loudness target was achieved.
+Reports identify the base preset and its version separately from the
+application `toolVersion`. `presetExperimental` marks Gentle and
+`presetCustomized` marks a nonempty cleaning-options override, even if its values
+match the defaults. Raw reports include the typed effective `settings.cleaning`;
+Zoom records `null`. The base ID/version alone does not describe a customized
+render; retain its settings, exact filters, FFmpeg build and output format.
+Input recording duration and elapsed processing time are separate fields. The
+processing time includes analysis, rendering, validation and publication.
+Fast measurements remain `null` with `not_measured` and compliance
+`NOT_MEASURED`. Accurate reports the final encoded file's measurements,
+normalization stages, actual type, fallback and compliance outcome. Valid PCM
+alone does not establish loudness compliance.
 
 Published audio remains available if a report cannot be written. The console
-returns `7` for a successful export with incomplete reporting; an earlier
-processing failure keeps its own code. Surviving reports are corrected to that
+returns `7` for a valid published export with loudness or reporting warnings;
+an earlier processing failure keeps its own code. Surviving reports are corrected to that
 outcome where storage permits. A crash or unrecoverable write/rollback failure
 can leave incomplete report files. Use the console exit and diagnostics to
 resolve those cases; do not treat an incomplete file as a completed report.
@@ -248,7 +446,8 @@ destination's parent folder must already exist, and its filename must be new.
 This command runs without FFmpeg and cannot be combined with audio-processing
 options. It creates an allowlisted diagnostic JSON with numeric values, booleans
 and fixed labels; it omits all free-form source text, paths, filenames, titles,
-timestamps, job IDs, dependency banners and raw diagnostics. **Review the export
+timestamps, job IDs, preset identity/flags, cleaning settings, dependency banners
+and raw diagnostics. **Review the export
 before sharing it.** Nothing is uploaded automatically; the raw report remains
 unchanged. See the [report format](docs/codex/winaudioclean/DATA_FORMATS.md).
 
@@ -259,18 +458,20 @@ encoded safely, reporting fails rather than replacing existing bytes.
 
 **Native results and launcher automation**
 
-The script runs the resolved FFmpeg executable directly, disables its stdin and
-captures stdout and stderr separately. Native failure details appear in the
-console and local report. Processing and reporting results use these exit codes:
+The script runs the resolved FFmpeg executable directly and captures stdout
+and stderr separately. Interactive input to FFmpeg is disabled. Accurate's
+final check streams the held WAV into FFmpeg as binary input while the file
+remains protected from changes. Native failure details appear in the console
+and local report. Processing and reporting results use these exit codes:
 
 | Code | Meaning |
 | --- | --- |
-| 0 | Audio was validated and published; reporting completed. |
-| 2 | Invalid input, destination, mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
-| 3 | Missing, incompatible or filter-deficient dependency, or render process start failure. |
-| 4 | Probe/metadata failure, no audio, or processing/capture/cleanup failure. Native failures retain diagnostics. |
+| 0 | Audio was validated and published without loudness or reporting warnings. |
+| 2 | Invalid input, destination, mode, preset/cleaning options, loudness mode, audio selection, export settings/layout or launcher usage; ambiguous unattended tracks; diagnostic export failure. |
+| 3 | Missing, incompatible or filter-deficient dependency, or analysis/render process start failure. |
+| 4 | Probe/metadata failure, no audio, or analysis/processing/capture/cleanup failure. Malformed first-pass measurements fail here. Native failures retain diagnostics. |
 | 5 | Output allocation, space/size check, validation, publication or owned-file cleanup failed. |
-| 7 | Audio was published, but reporting was incomplete. Audio is retained. |
+| 7 | Valid audio was published with loudness or reporting warnings. Audio is retained; inspect the report for the reason. |
 | 130 | Cancelled at the mode or audio-track menu. |
 
 A reporting failure never changes an existing processing failure to success.
@@ -306,18 +507,23 @@ have not been stress-tested.
 
 2. Mode Selection (TUI)
    - Asks the user if they want the full cleaning suite or just volume leveling.
-   - This prevents "over-processing" artifacts on audio that was already cleaned by Zoom's algorithms.
+   - Zoom/Teams skips the cleaning filters for recordings that already received noise reduction.
 
 3. Construct Filter Chain
-   - Cleaning (Mode 1 Only):
-     - adeclip: Repairs digital clipping (distortion) in loud peaks.
-     - highpass: Cuts low-end mud and rumble below 80Hz.
-     - adeclick: Smooths out mouth clicks and lip smacks.
-     - afftdn: Reduces steady background noise (fans, hiss) by ~25dB.
-     - agate: Silences the track when the volume drops below -45dB.
+   - Original cleaning by default (Mode 1 Only; optional Raw settings are described above):
+     - adeclip: Attempts to reconstruct clipped peaks.
+     - highpass: Attenuates low frequencies with an 80 Hz cutoff.
+     - adeclick: Attempts to remove impulsive clicks.
+     - afftdn: `nf=-25` sets the noise floor in dB. Reduction is controlled separately by `nr`, left at FFmpeg's default of 12 dB.
+     - agate: Reduces low-level audio below a threshold of about -45 dBFS. `range=0.056` limits attenuation to about 25 dB; it does not mute the track.
    - Leveling (Mode 1 & 2):
-     - dynaudnorm: Dynamically boosts quiet sections to make volume consistent (matches Adobe's "Speech Volume Leveler").
-     - loudnorm: A final limiter that ensures the average volume hits exactly -12 LUFS.
+     - dynaudnorm: Adjusts gain over time. `p=0.85` sets a peak-amplitude target of 0.85 of full scale, not a leveling percentage.
+     - loudnorm: Requests -12 LUFS integrated loudness and -1.5 dBTP maximum true peak. LUFS measures loudness; it is not an RMS level.
+
+   Parameter definitions: FFmpeg's [afftdn](https://ffmpeg.org/ffmpeg-filters.html#afftdn),
+   [agate](https://ffmpeg.org/ffmpeg-filters.html#agate),
+   [dynaudnorm](https://ffmpeg.org/ffmpeg-filters.html#dynaudnorm) and
+   [loudnorm](https://ffmpeg.org/ffmpeg-filters.html#loudnorm) documentation.
 
 4. Processing
    - Probes audio tracks and maps the selected absolute stream index.
@@ -330,9 +536,9 @@ have not been stress-tested.
 
 **Limitations / When not to use**
 
-   - Extreme Noise: If you recorded in a wind tunnel or a busy cafe, standard signal processing isn't enough. You need AI isolation tools for that.
+   - Heavy noise or distortion may remain, and filtering can introduce artifacts. Listen for lost quiet words, pumping and changes to voice character.
    - Multi-track editing: This processes one selected audio track. It cannot separate speakers mixed into that track.
-   - Music Production: Do not use this on songs. The "De-clipper" and "Highpass" filters are tuned for human speech and will damage the quality of musical instruments.
+   - Music: This preset is intended for speech. Its filters can alter musical tone and dynamics.
 
 **Troubleshooting**
 

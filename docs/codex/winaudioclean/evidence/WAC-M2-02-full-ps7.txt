@@ -1,0 +1,1554 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (29 files; shell 7.6.5).
+
+ScriptName                              Line RuleName                                    Message
+----------                              ---- --------                                    -------
+Import-Safety.ps1                         26 PSAvoidUsingWriteHost                       File 'Import-Safety.ps1' uses
+                                                                                         Console.'WriteLine'. Using Con
+                                                                                         sole to write is not recommend
+                                                                                         ed because it may not work in
+                                                                                         all hosts or there may even be
+                                                                                          no hosts at all. Use Write-Ou
+                                                                                         tput instead.
+Invoke-MetadataFailure.ps1                10 PSAvoidOverwritingBuiltInCmdlets            'Get-Item' is a cmdlet that is
+                                                                                          included with PowerShell (ver
+                                                                                         sion core-6.1.0-windows) whose
+                                                                                          definition should not be over
+                                                                                         ridden
+New-NativeProcessFixture.ps1               3 PSUseShouldProcessForStateChangingFunctions Function 'New-WacTestNativeExe
+                                                                                         cutable' has verb that could c
+                                                                                         hange system state. Therefore,
+                                                                                          the function has to support '
+                                                                                         ShouldProcess'.
+WinAudioClean.Encoding.Tests.ps1          88 PSUseDeclaredVarsMoreThanAssignments        The variable 'stereo16' is ass
+                                                                                         igned but never used.
+WinAudioClean.Encoding.Tests.ps1         203 PSUseDeclaredVarsMoreThanAssignments        The variable 'encodingNativeFi
+                                                                                         xture' is assigned but never u
+                                                                                         sed.
+WinAudioClean.Encoding.Tests.ps1         204 PSUseDeclaredVarsMoreThanAssignments        The variable 'encodingShell' i
+                                                                                         s assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1        7 PSUseDeclaredVarsMoreThanAssignments        The variable 'controlledCases'
+                                                                                          is assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1       19 PSUseDeclaredVarsMoreThanAssignments        The variable 'preflightCases'
+                                                                                         is assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1       39 PSUseDeclaredVarsMoreThanAssignments        The variable 'dependencyCases'
+                                                                                          is assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1       47 PSUseDeclaredVarsMoreThanAssignments        The variable 'directPathCases'
+                                                                                          is assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1       59 PSUseDeclaredVarsMoreThanAssignments        The variable 'publicationFailu
+                                                                                         reCases' is assigned but never
+                                                                                          used.
+WinAudioClean.EntryPoints.Tests.ps1      131 PSUseDeclaredVarsMoreThanAssignments        The variable 'scriptPath' is a
+                                                                                         ssigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1      132 PSUseDeclaredVarsMoreThanAssignments        The variable 'launcherPath' is
+                                                                                          assigned but never used.
+WinAudioClean.EntryPoints.Tests.ps1      135 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeFixture' i
+                                                                                         s assigned but never used.
+WinAudioClean.Helpers.Tests.ps1            7 PSUseDeclaredVarsMoreThanAssignments        The variable 'rawFilters' is a
+                                                                                         ssigned but never used.
+WinAudioClean.Helpers.Tests.ps1            8 PSUseDeclaredVarsMoreThanAssignments        The variable 'zoomFilters' is
+                                                                                         assigned but never used.
+WinAudioClean.Helpers.Tests.ps1           10 PSUseDeclaredVarsMoreThanAssignments        The variable 'baseline' is ass
+                                                                                         igned but never used.
+WinAudioClean.Launcher.Tests.ps1          50 PSUseShouldProcessForStateChangingFunctions Function 'New-WacLauncherTestF
+                                                                                         older' has verb that could cha
+                                                                                         nge system state. Therefore, t
+                                                                                         he function has to support 'Sh
+                                                                                         ouldProcess'.
+WinAudioClean.Launcher.Tests.ps1          18 PSUseDeclaredVarsMoreThanAssignments        The variable 'launcherExitCase
+                                                                                         s' is assigned but never used.
+WinAudioClean.Launcher.Tests.ps1          32 PSUseDeclaredVarsMoreThanAssignments        The variable 'defaultLauncherP
+                                                                                         athCases' is assigned but neve
+                                                                                         r used.
+WinAudioClean.Launcher.Tests.ps1          33 PSUseDeclaredVarsMoreThanAssignments        The variable 'launcherInvalidC
+                                                                                         ases' is assigned but never us
+                                                                                         ed.
+WinAudioClean.Loudness.Tests.ps1          16 PSUseShouldProcessForStateChangingFunctions Function 'New-WacLoudnormTestJ
+                                                                                         son' has verb that could chang
+                                                                                         e system state. Therefore, the
+                                                                                          function has to support 'Shou
+                                                                                         ldProcess'.
+WinAudioClean.Loudness.Tests.ps1          28 PSUseShouldProcessForStateChangingFunctions Function 'New-WacUndefinedLoud
+                                                                                         normTestJson' has verb that co
+                                                                                         uld change system state. There
+                                                                                         fore, the function has to supp
+                                                                                         ort 'ShouldProcess'.
+WinAudioClean.Loudness.Tests.ps1           2 PSUseDeclaredVarsMoreThanAssignments        The variable 'passCases' is as
+                                                                                         signed but never used.
+WinAudioClean.Loudness.Tests.ps1          14 PSUseDeclaredVarsMoreThanAssignments        The variable 'baseline' is ass
+                                                                                         igned but never used.
+WinAudioClean.LoudnessRuntime.Tests.ps1    2 PSUseDeclaredVarsMoreThanAssignments        The variable 'loudnessRepo' is
+                                                                                          assigned but never used.
+WinAudioClean.LoudnessRuntime.Tests.ps1    5 PSUseDeclaredVarsMoreThanAssignments        The variable 'loudnessNative'
+                                                                                         is assigned but never used.
+WinAudioClean.LoudnessRuntime.Tests.ps1    6 PSUseDeclaredVarsMoreThanAssignments        The variable 'loudnessShell' i
+                                                                                         s assigned but never used.
+WinAudioClean.Media.Tests.ps1              3 PSUseDeclaredVarsMoreThanAssignments        The variable 'rawFilters' is a
+                                                                                         ssigned but never used.
+WinAudioClean.Media.Tests.ps1              4 PSUseDeclaredVarsMoreThanAssignments        The variable 'zoomFilters' is
+                                                                                         assigned but never used.
+WinAudioClean.Media.Tests.ps1              5 PSUseDeclaredVarsMoreThanAssignments        The variable 'validAudioJson'
+                                                                                         is assigned but never used.
+WinAudioClean.Media.Tests.ps1            415 PSUseDeclaredVarsMoreThanAssignments        The variable 'inspectionVariab
+                                                                                         les' is assigned but never use
+                                                                                         d.
+WinAudioClean.Native.Tests.ps1             2 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeArgumentCa
+                                                                                         ses' is assigned but never use
+                                                                                         d.
+WinAudioClean.Native.Tests.ps1            24 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeFixture' i
+                                                                                         s assigned but never used.
+WinAudioClean.Native.Tests.ps1            25 PSUseDeclaredVarsMoreThanAssignments        The variable 'fixtureVariables
+                                                                                         ' is assigned but never used.
+WinAudioClean.NativeInput.Tests.ps1        5 PSUseDeclaredVarsMoreThanAssignments        The variable 'inputNativeFixtu
+                                                                                         re' is assigned but never used
+                                                                                         .
+WinAudioClean.Preflight.Tests.ps1          2 PSUseDeclaredVarsMoreThanAssignments        The variable 'literalCases' is
+                                                                                          assigned but never used.
+WinAudioClean.Preflight.Tests.ps1         12 PSUseDeclaredVarsMoreThanAssignments        The variable 'unsupportedCases
+                                                                                         ' is assigned but never used.
+WinAudioClean.Preset.Tests.ps1             7 PSUseDeclaredVarsMoreThanAssignments        The variable 'presetShell' is
+                                                                                         assigned but never used.
+WinAudioClean.Preset.Tests.ps1             9 PSUseDeclaredVarsMoreThanAssignments        The variable 'baseline' is ass
+                                                                                         igned but never used.
+WinAudioClean.Preset.Tests.ps1            11 PSUseShouldProcessForStateChangingFunctions Function 'New-WacPresetSandbox
+                                                                                         ' has verb that could change s
+                                                                                         ystem state. Therefore, the fu
+                                                                                         nction has to support 'ShouldP
+                                                                                         rocess'.
+WinAudioClean.Reporting.Tests.ps1          2 PSUseDeclaredVarsMoreThanAssignments        The variable 'reportingCases'
+                                                                                         is assigned but never used.
+WinAudioClean.Reporting.Tests.ps1         17 PSUseDeclaredVarsMoreThanAssignments        The variable 'scriptPath' is a
+                                                                                         ssigned but never used.
+WinAudioClean.Reporting.Tests.ps1         18 PSUseDeclaredVarsMoreThanAssignments        The variable 'metadataFixture'
+                                                                                          is assigned but never used.
+WinAudioClean.Reporting.Tests.ps1         21 PSUseDeclaredVarsMoreThanAssignments        The variable 'nativeFixture' i
+                                                                                         s assigned but never used.
+WinAudioClean.ReportIO.Tests.ps1           6 PSUseShouldProcessForStateChangingFunctions Function 'New-WacFailingReport
+                                                                                         Stream' has verb that could ch
+                                                                                         ange system state. Therefore,
+                                                                                         the function has to support 'S
+                                                                                         houldProcess'.
+WinAudioClean.ReportIO.Tests.ps1          27 PSUseDeclaredVarsMoreThanAssignments        The variable 'reportPath' is a
+                                                                                         ssigned but never used.
+WinAudioClean.ReportIO.Tests.ps1          28 PSUseDeclaredVarsMoreThanAssignments        The variable 'writers' is assi
+                                                                                         gned but never used.
+WinAudioClean.ReportIO.Tests.ps1         255 PSUseDeclaredVarsMoreThanAssignments        The variable 'transaction' is
+                                                                                         assigned but never used.
+WinAudioClean.RunReports.Tests.ps1       304 PSAvoidAssignmentToAutomaticVariable        The Variable 'matches' is an a
+                                                                                         utomatic variable that is buil
+                                                                                         t into PowerShell, assigning t
+                                                                                         o it might have undesired side
+                                                                                          effects. If assignment is not
+                                                                                          by design, please use a diffe
+                                                                                         rent name.
+WinAudioClean.RunReports.Tests.ps1         9 PSUseDeclaredVarsMoreThanAssignments        The variable 'reportLevelFilte
+                                                                                         rs' is assigned but never used
+                                                                                         .
+WinAudioClean.RunReports.Tests.ps1        11 PSUseShouldProcessForStateChangingFunctions Function 'New-WacRunReportSand
+                                                                                         box' has verb that could chang
+                                                                                         e system state. Therefore, the
+                                                                                          function has to support 'Shou
+                                                                                         ldProcess'.
+WinAudioClean.Transaction.Tests.ps1       11 PSUseShouldProcessForStateChangingFunctions Function 'New-WacTestLink' has
+                                                                                          verb that could change system
+                                                                                          state. Therefore, the functio
+                                                                                         n has to support 'ShouldProces
+                                                                                         s'.
+WinAudioClean.Transaction.Tests.ps1       28 PSUseDeclaredVarsMoreThanAssignments        The variable 'transactions' is
+                                                                                          assigned but never used.
+WinAudioClean.Validation.Tests.ps1         4 PSUseShouldProcessForStateChangingFunctions Function 'New-TestWave' has ve
+                                                                                         rb that could change system st
+                                                                                         ate. Therefore, the function h
+                                                                                         as to support 'ShouldProcess'.
+WinAudioClean.Validation.Tests.ps1        26 PSUseShouldProcessForStateChangingFunctions Function 'Set-TestUInt32' has
+                                                                                         verb that could change system
+                                                                                         state. Therefore, the function
+                                                                                          has to support 'ShouldProcess
+                                                                                         '.
+WinAudioClean.Validation.Tests.ps1        31 PSUseShouldProcessForStateChangingFunctions Function 'Set-TestUInt64' has
+                                                                                         verb that could change system
+                                                                                         state. Therefore, the function
+                                                                                          has to support 'ShouldProcess
+                                                                                         '.
+WinAudioClean.Validation.Tests.ps1        51 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1        67 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1        68 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       117 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       122 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       123 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       158 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       159 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       297 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       306 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       310 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       316 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt64' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       321 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt64' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       325 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt64' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       329 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       333 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt64' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       339 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt64' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       348 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt32' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.Validation.Tests.ps1       353 PSAvoidUsingPositionalParameters            Cmdlet 'Set-TestUInt64' has po
+                                                                                         sitional parameter. Please use
+                                                                                          named parameters instead of p
+                                                                                         ositional parameters when call
+                                                                                         ing a command.
+WinAudioClean.IO.ps1                     267 PSUseApprovedVerbs                          The cmdlet 'Freeze-WacOutputTr
+                                                                                         ansaction' uses an unapproved
+                                                                                         verb.
+WinAudioClean.IO.ps1                     217 PSUseShouldProcessForStateChangingFunctions Function 'New-WacOutputTransac
+                                                                                         tion' has verb that could chan
+                                                                                         ge system state. Therefore, th
+                                                                                         e function has to support 'Sho
+                                                                                         uldProcess'.
+WinAudioClean.IO.ps1                     472 PSUseShouldProcessForStateChangingFunctions Function 'Set-WacOwnedReportCo
+                                                                                         ntent' has verb that could cha
+                                                                                         nge system state. Therefore, t
+                                                                                         he function has to support 'Sh
+                                                                                         ouldProcess'.
+WinAudioClean.IO.ps1                     484 PSUseShouldProcessForStateChangingFunctions Function 'Reset-WacSummaryRepo
+                                                                                         rt' has verb that could change
+                                                                                          system state. Therefore, the
+                                                                                         function has to support 'Shoul
+                                                                                         dProcess'.
+WinAudioClean.IO.ps1                     516 PSUseShouldProcessForStateChangingFunctions Function 'Remove-WacOwnedRepor
+                                                                                         t' has verb that could change
+                                                                                         system state. Therefore, the f
+                                                                                         unction has to support 'Should
+                                                                                         Process'.
+WinAudioClean.IO.ps1                     209 PSUseSingularNouns                          The cmdlet 'Get-WacAvailableOu
+                                                                                         tputBytes' uses a plural noun.
+                                                                                          A singular noun should be use
+                                                                                         d instead.
+WinAudioClean.ps1                        199 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                        609 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                        614 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                        625 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1327 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1400 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1401 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1402 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1402 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1403 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1404 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1408 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1409 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1410 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1411 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1412 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1413 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1420 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1430 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1467 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1474 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1495 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1496 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1500 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1501 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1592 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1593 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1653 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1654 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1655 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1656 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1658 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1659 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1660 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1662 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                       1663 PSAvoidUsingWriteHost                       File 'WinAudioClean.ps1' uses
+                                                                                         Write-Host. Avoid using Write-
+                                                                                         Host because it might not work
+                                                                                          in all hosts, does not work w
+                                                                                         hen there is no host, and (pri
+                                                                                         or to PS 5.0) cannot be suppre
+                                                                                         ssed, captured, or redirected.
+                                                                                          Instead, use Write-Output, Wr
+                                                                                         ite-Verbose, or Write-Informat
+                                                                                         ion.
+WinAudioClean.ps1                        227 PSUseSingularNouns                          The cmdlet 'Get-WacFfmpegArgum
+                                                                                         ents' uses a plural noun. A si
+                                                                                         ngular noun should be used ins
+                                                                                         tead.
+WinAudioClean.ps1                        299 PSUseSingularNouns                          The cmdlet 'Get-WacLocalMediaA
+                                                                                         rguments' uses a plural noun.
+                                                                                         A singular noun should be used
+                                                                                          instead.
+WinAudioClean.ps1                        351 PSUseSingularNouns                          The cmdlet 'Test-WacRequiredFi
+                                                                                         lters' uses a plural noun. A s
+                                                                                         ingular noun should be used in
+                                                                                         stead.
+WinAudioClean.ps1                        545 PSUseSingularNouns                          The cmdlet 'Get-WacAudioStream
+                                                                                         s' uses a plural noun. A singu
+                                                                                         lar noun should be used instea
+                                                                                         d.
+WinAudioClean.ps1                        926 PSUseSingularNouns                          The cmdlet 'Get-WacLoudnessArg
+                                                                                         uments' uses a plural noun. A
+                                                                                         singular noun should be used i
+                                                                                         nstead.
+WinAudioClean.ps1                       1165 PSUseSingularNouns                          The cmdlet 'Write-WacRunReport
+                                                                                         s' uses a plural noun. A singu
+                                                                                         lar noun should be used instea
+                                                                                         d.
+WinAudioClean.ps1                        978 PSUseShouldProcessForStateChangingFunctions Function 'Update-WacReportOutc
+                                                                                         ome' has verb that could chang
+                                                                                         e system state. Therefore, the
+                                                                                          function has to support 'Shou
+                                                                                         ldProcess'.
+WinAudioClean.ps1                        998 PSUseShouldProcessForStateChangingFunctions Function 'New-WacRunReport' ha
+                                                                                         s verb that could change syste
+                                                                                         m state. Therefore, the functi
+                                                                                         on has to support 'ShouldProce
+                                                                                         ss'.
+
+Static gate passed; 126 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 16 files.
+Discovery found 666 tests in 1.64s.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Encoding.Tests.ps1'
+Describing AC-025/AC-026: explicit PCM and selected-channel policy
+  [+] preserves 1 channels with 16-bit PCM at 48 kHz 250ms (203ms|47ms)
+  [+] preserves 1 channels with 24-bit PCM at 48 kHz 19ms (17ms|1ms)
+  [+] preserves 2 channels with 16-bit PCM at 48 kHz 13ms (11ms|2ms)
+  [+] preserves 2 channels with 24-bit PCM at 48 kHz 10ms (9ms|2ms)
+  [+] infers conventional layout for 1 channels with a missing layout 17ms (15ms|3ms)
+  [+] infers conventional layout for 2 channels with a missing layout 9ms (8ms|2ms)
+  [+] infers conventional layout for 1 channels with a empty layout 7ms (6ms|2ms)
+  [+] infers conventional layout for 2 channels with a blank layout 9ms (7ms|2ms)
+  [+] rejects unsupported or inconsistent input zero channels, including with explicit mono 65ms (63ms|2ms)
+  [+] rejects unsupported or inconsistent input 2.1, including with explicit mono 10ms (8ms|2ms)
+  [+] rejects unsupported or inconsistent input 5.1, including with explicit mono 9ms (7ms|2ms)
+  [+] rejects unsupported or inconsistent input one channel labeled stereo, including with explicit mono 15ms (12ms|3ms)
+  [+] rejects unsupported or inconsistent input two channels labeled mono, including with explicit mono 7ms (5ms|2ms)
+  [+] rejects unsupported or inconsistent input downmix channel positions, including with explicit mono 7ms (5ms|2ms)
+  [+] rejects unsupported or inconsistent input numeric layout, including with explicit mono 27ms (10ms|17ms)
+  [+] mixes stereo equally before the exact original processing chain only when mono is requested 52ms (49ms|2ms)
+  [+] leaves an already-mono filter path unchanged under explicit mono 13ms (11ms|2ms)
+  [+] pins output encoding and keeps selected stereo channels without trimming or splitting 52ms (37ms|15ms)
+  [+] rejects unsupported bit depth  46ms (43ms|2ms)
+  [+] rejects unsupported bit depth 8 8ms (5ms|2ms)
+  [+] rejects unsupported bit depth 32 8ms (6ms|2ms)
+  [+] rejects unsupported bit depth 16.0 11ms (5ms|6ms)
+
+Describing AC-027: conservative output-size and available-space policy
+  [+] reserves one output file, 101 ms timing slack, a 1 MiB header and at least 64 MiB headroom 109ms (106ms|3ms)
+  [+] uses ten percent headroom when greater than 64 MiB 16ms (14ms|2ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 1 channels/16 bits 75ms (73ms|2ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 2 channels/16 bits 18ms (15ms|2ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 1 channels/24 bits 20ms (17ms|2ms)
+  [+] accepts the last safe RIFF frame estimate then rejects the next for 2 channels/24 bits 14ms (12ms|2ms)
+  [+] uses 64-bit byte counts for a supported very long RF64 estimate 14ms (13ms|2ms)
+  [+] rejects a duration that cannot be estimated: zero 37ms (33ms|4ms)
+  [+] rejects a duration that cannot be estimated: negative 19ms (16ms|2ms)
+  [+] rejects a duration that cannot be estimated: NaN 8ms (5ms|2ms)
+  [+] rejects a duration that cannot be estimated: infinity 10ms (7ms|2ms)
+  [+] rejects a duration that cannot be estimated: above supported bound 8ms (6ms|2ms)
+  [+] rejects invalid requested format in the estimator 45ms (42ms|2ms)
+  [+] rejects invalid requested format in the estimator 12ms (9ms|2ms)
+  [+] rejects invalid requested format in the estimator 11ms (9ms|2ms)
+  [+] rejects one byte below the required space and accepts the exact requirement 522ms (520ms|2ms)
+  [+] does not turn a failed destination query into an available-space result 52ms (47ms|5ms)
+
+Describing AC-027: the native space query uses the held destination directory
+  [+] queries a pinned junction target and rejects the transaction after close 543ms (540ms|3ms)
+
+Describing AC-025/AC-027: the application rejects settings and space before rendering
+  [+] fails safely before render for insufficient space 4.09s (4.08s|4ms)
+  [+] fails safely before render for unavailable space query 2.88s (2.87s|1ms)
+  [+] fails safely before render for RIFF oversized estimate 3.1s (3.1s|1ms)
+  [+] fails safely before render for multichannel input 2.84s (2.84s|1ms)
+  [+] fails safely before render for multichannel input with mono requested 2.86s (2.86s|1ms)
+  [+] fails safely before render for mismatched layout 2.94s (2.94s|1ms)
+  [+] fails safely before render for unsupported bit depth 1.5s (1.5s|1ms)
+  [+] fails safely before render for missing explicit mono filter 3.59s (3.59s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-023/AC-024: invalid output is never published and reporting preserves source bytes
+  [+] handles empty in the actual application in powershell.exe 3.1s (3.09s|5ms)
+  [+] handles header in the actual application in powershell.exe 2.64s (2.64s|1ms)
+  [+] handles truncated in the actual application in powershell.exe 2.88s (2.88s|1ms)
+  [+] handles short in the actual application in powershell.exe 2.67s (2.67s|1ms)
+  [+] handles malformed output probe in the actual application in powershell.exe 2.51s (2.51s|1ms)
+  [+] handles failed output probe in the actual application in powershell.exe 2.32s (2.32s|1ms)
+  [+] handles missing input duration in the actual application in powershell.exe 1.66s (1.66s|1ms)
+  [+] handles input aliases log in the actual application in powershell.exe 5.71s (5.71s|1ms)
+  [+] handles empty in the actual application in pwsh.exe 5.34s (5.34s|2ms)
+  [+] handles header in the actual application in pwsh.exe 3.76s (3.76s|1ms)
+  [+] handles truncated in the actual application in pwsh.exe 3.99s (3.99s|1ms)
+  [+] handles short in the actual application in pwsh.exe 3.78s (3.78s|1ms)
+  [+] handles malformed output probe in the actual application in pwsh.exe 3.5s (3.5s|1ms)
+  [+] handles failed output probe in the actual application in pwsh.exe 3.53s (3.53s|1ms)
+  [+] handles missing input duration in the actual application in pwsh.exe 4.18s (4.18s|1ms)
+  [+] handles input aliases log in the actual application in pwsh.exe 7.31s (7.31s|1ms)
+
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] AC-014: rejects missing -File -inputPath before prompting in powershell.exe 613ms (612ms|1ms)
+  [+] AC-014: rejects missing -File -inputPath before prompting in pwsh.exe 1.57s (1.57s|1ms)
+  [+] AC-014: rejects a missing dropped file via outer powershell.exe before the menu (inner Windows PowerShell) 1.03s (1.03s|1ms)
+  [+] AC-014: rejects a missing dropped file via outer pwsh.exe before the menu (inner Windows PowerShell) 1.79s (1.79s|1ms)
+
+Describing AC-014/015: actual script preflight is bounded and unattended on invalid requests
+  [+] rejects no input without a menu or processing in powershell.exe 696ms (694ms|2ms)
+  [+] rejects directory without a menu or processing in powershell.exe 697ms (696ms|1ms)
+  [+] rejects URL without a menu or processing in powershell.exe 601ms (596ms|5ms)
+  [+] rejects zero bytes without a menu or processing in powershell.exe 650ms (649ms|1ms)
+  [+] rejects destination file without a menu or processing in powershell.exe 639ms (638ms|1ms)
+  [+] rejects empty destination without a menu or processing in powershell.exe 800ms (799ms|1ms)
+  [+] rejects invalid mode without a menu or processing in powershell.exe 755ms (754ms|1ms)
+  [+] rejects empty mode without a menu or processing in powershell.exe 731ms (730ms|1ms)
+  [+] rejects missing mode without a menu or processing in powershell.exe 801ms (800ms|1ms)
+  [+] rejects redirected input without a menu or processing in powershell.exe 703ms (702ms|1ms)
+  [+] rejects host noninteractive without a menu or processing in powershell.exe 709ms (707ms|1ms)
+  [+] rejects no input without a menu or processing in pwsh.exe 1.59s (1.58s|1ms)
+  [+] rejects directory without a menu or processing in pwsh.exe 1.64s (1.63s|1ms)
+  [+] rejects URL without a menu or processing in pwsh.exe 1.52s (1.52s|1ms)
+  [+] rejects zero bytes without a menu or processing in pwsh.exe 1.71s (1.71s|1ms)
+  [+] rejects destination file without a menu or processing in pwsh.exe 1.64s (1.64s|1ms)
+  [+] rejects empty destination without a menu or processing in pwsh.exe 1.55s (1.55s|1ms)
+  [+] rejects invalid mode without a menu or processing in pwsh.exe 1.75s (1.75s|1ms)
+  [+] rejects empty mode without a menu or processing in pwsh.exe 2.23s (2.22s|1ms)
+  [+] rejects missing mode without a menu or processing in pwsh.exe 1.9s (1.9s|3ms)
+  [+] rejects redirected input without a menu or processing in pwsh.exe 1.83s (1.82s|2ms)
+  [+] rejects host noninteractive without a menu or processing in pwsh.exe 1.6s (1.6s|1ms)
+
+Describing AC-017: actual native execution reports success, failure and reporting warnings
+  [+] AC-016: preserves spaces here.wav through direct powershell.exe -File and the native child 2.77s (2.77s|5ms)
+  [+] AC-016: preserves [square brackets].wav through direct powershell.exe -File and the native child 2.87s (2.87s|1ms)
+  [+] AC-016: preserves speaker's recording.wav through direct powershell.exe -File and the native child 2.37s (2.37s|1ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct powershell.exe -File and the native child 2.22s (2.22s|1ms)
+  [+] AC-016: preserves ampersand & here.wav through direct powershell.exe -File and the native child 2.15s (2.14s|1ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct powershell.exe -File and the native child 2.38s (2.38s|1ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct powershell.exe -File and the native child 2.36s (2.36s|0ms)
+  [+] AC-016: preserves (parentheses).wav through direct powershell.exe -File and the native child 2.52s (2.52s|1ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct powershell.exe -File and the native child 2.2s (2.2s|1ms)
+  [+] AC-016: preserves spaces here.wav through direct pwsh.exe -File and the native child 3.09s (3.09s|1ms)
+  [+] AC-016: preserves [square brackets].wav through direct pwsh.exe -File and the native child 2.97s (2.97s|1ms)
+  [+] AC-016: preserves speaker's recording.wav through direct pwsh.exe -File and the native child 3.06s (3.06s|1ms)
+  [+] AC-016: preserves Unicode äöÅ.wav through direct pwsh.exe -File and the native child 3.36s (3.36s|1ms)
+  [+] AC-016: preserves ampersand & here.wav through direct pwsh.exe -File and the native child 3.02s (3.02s|1ms)
+  [+] AC-016: preserves %PATH% literal.wav through direct pwsh.exe -File and the native child 3.04s (3.04s|1ms)
+  [+] AC-016: preserves !PATH! literal.wav through direct pwsh.exe -File and the native child 3.16s (3.16s|1ms)
+  [+] AC-016: preserves (parentheses).wav through direct pwsh.exe -File and the native child 2.94s (2.94s|1ms)
+  [+] AC-016: preserves name & echo WAC_UNEXPECTED_COMMAND.wav through direct pwsh.exe -File and the native child 2.79s (2.78s|1ms)
+  [+] returns dependency failure for invalid executable False in powershell.exe 770ms (769ms|0ms)
+  [+] returns dependency failure for invalid executable True in powershell.exe 729ms (728ms|1ms)
+  [+] returns dependency failure for invalid executable False in pwsh.exe 1.49s (1.49s|1ms)
+  [+] returns dependency failure for invalid executable True in pwsh.exe 1.32s (1.32s|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in powershell.exe 2.35s (2.34s|1ms)
+  [+] uses mode 1, native exit 0, blocked log True in powershell.exe 2.22s (2.22s|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in powershell.exe 2.19s (2.19s|1ms)
+  [+] uses mode 1, native exit 7, blocked log True in powershell.exe 2.19s (2.19s|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in powershell.exe 2.47s (2.47s|1ms)
+  [+] uses mode 2, native exit 0, blocked log True in powershell.exe 2.25s (2.25s|1ms)
+  [+] uses mode 2, native exit 7, blocked log False in powershell.exe 2.07s (2.07s|1ms)
+  [+] uses mode 2, native exit 7, blocked log True in powershell.exe 1.99s (1.99s|1ms)
+  [+] uses mode 1, native exit 0, blocked log False in pwsh.exe 3.28s (3.28s|1ms)
+  [+] uses mode 1, native exit 0, blocked log True in pwsh.exe 2.96s (2.96s|1ms)
+  [+] uses mode 1, native exit 7, blocked log False in pwsh.exe 2.85s (2.85s|1ms)
+  [+] uses mode 1, native exit 7, blocked log True in pwsh.exe 2.88s (2.88s|1ms)
+  [+] uses mode 2, native exit 0, blocked log False in pwsh.exe 3.02s (3.02s|1ms)
+  [+] uses mode 2, native exit 0, blocked log True in pwsh.exe 2.89s (2.89s|1ms)
+  [+] uses mode 2, native exit 7, blocked log False in pwsh.exe 2.91s (2.91s|1ms)
+  [+] uses mode 2, native exit 7, blocked log True in pwsh.exe 2.7s (2.7s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] AC-007: matches the Raw filter values and order in BASELINE.json 10ms (7ms|2ms)
+  [+] AC-007: matches the Zoom filter values and order in BASELINE.json 3ms (3ms|1ms)
+  [+] selects the exact original Raw mode and filters for choice 1 5ms (5ms|1ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 5ms (4ms|1ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom () 9ms (8ms|1ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (invalid) 3ms (2ms|1ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (3) 3ms (2ms|1ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 9ms (7ms|1ms)
+  [+] accepts an input stem without an extension 3ms (3ms|1ms)
+  [+] uses a fresh job identifier for inputs with the same stem and timestamp 5ms (4ms|0ms)
+  [+] keeps paths and filters as separate arguments and disables native stdin 7ms (6ms|1ms)
+  [+] explicitly writes WAV to the caller-owned partial path 8ms (5ms|3ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 1.23s (1.23s|2ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Launcher.Tests.ps1'
+Describing AC-016: actual launcher keeps environment paths literal through both Windows shells
+  [+] passes meeting with spaces.wav exactly from powershell.exe through inner PS5.1 to the native child 2.77s (2.77s|1ms)
+  [+] passes meeting [draft].wav exactly from powershell.exe through inner PS5.1 to the native child 2.57s (2.57s|1ms)
+  [+] passes speaker's recording.wav exactly from powershell.exe through inner PS5.1 to the native child 2.68s (2.68s|1ms)
+  [+] passes meeting äöÅ.wav exactly from powershell.exe through inner PS5.1 to the native child 2.59s (2.59s|1ms)
+  [+] passes speaker & guest.wav exactly from powershell.exe through inner PS5.1 to the native child 2.57s (2.57s|1ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from powershell.exe through inner PS5.1 to the native child 2.55s (2.54s|1ms)
+  [+] passes meeting !important!.wav exactly from powershell.exe through inner PS5.1 to the native child 2.54s (2.54s|1ms)
+  [+] passes meeting (take 1).wav exactly from powershell.exe through inner PS5.1 to the native child 2.65s (2.65s|1ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from powershell.exe through inner PS5.1 to the native child 2.56s (2.56s|1ms)
+  [+] passes meeting with spaces.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.27s (3.27s|1ms)
+  [+] passes meeting [draft].wav exactly from pwsh.exe through inner PS5.1 to the native child 3.21s (3.21s|1ms)
+  [+] passes speaker's recording.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.19s (3.19s|1ms)
+  [+] passes meeting äöÅ.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.14s (3.14s|1ms)
+  [+] passes speaker & guest.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.48s (3.48s|1ms)
+  [+] passes meeting %WAC_LAUNCH_PERCENT_TOKEN%.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.13s (3.13s|1ms)
+  [+] passes meeting !important!.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.13s (3.13s|1ms)
+  [+] passes meeting (take 1).wav exactly from pwsh.exe through inner PS5.1 to the native child 3.18s (3.18s|1ms)
+  [+] passes name & echo WAC_UNEXPECTED_COMMAND.wav exactly from pwsh.exe through inner PS5.1 to the native child 3.3s (3.3s|1ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from powershell.exe 1s (999ms|1ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from powershell.exe 983ms (982ms|1ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from powershell.exe 932ms (930ms|3ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from powershell.exe 976ms (975ms|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from powershell.exe 1.02s (1.02s|1ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from powershell.exe 928ms (928ms|1ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from powershell.exe 1.02s (1.02s|0ms)
+  [+] preserves the default single-file handoff for meeting with spaces.wav from pwsh.exe 1.68s (1.67s|1ms)
+  [+] preserves the default single-file handoff for meeting [draft].wav from pwsh.exe 1.56s (1.56s|0ms)
+  [+] preserves the default single-file handoff for speaker's recording.wav from pwsh.exe 1.76s (1.76s|1ms)
+  [+] preserves the default single-file handoff for meeting äöÅ.wav from pwsh.exe 1.68s (1.68s|1ms)
+  [+] preserves the default single-file handoff for speaker & guest.wav from pwsh.exe 1.74s (1.74s|0ms)
+  [+] preserves the default single-file handoff for meeting (take 1).wav from pwsh.exe 1.64s (1.63s|1ms)
+  [+] preserves the default single-file handoff for name & echo WAC_UNEXPECTED_COMMAND.wav from pwsh.exe 1.49s (1.49s|1ms)
+  [+] accepts an environment destination with a trailing backslash from powershell.exe 2.54s (2.53s|1ms)
+  [+] accepts an environment destination with a trailing backslash from pwsh.exe 3.2s (3.2s|1ms)
+  [+] passes a 240-character input path exactly from powershell.exe 2.56s (2.56s|1ms)
+  [+] passes a 240-character input path exactly from pwsh.exe 3.28s (3.28s|1ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in powershell.exe 728ms (728ms|1ms)
+  [+] rejects positional percent expansion before a defined-token decoy can be processed in pwsh.exe 1.34s (1.34s|1ms)
+
+Describing AC-017: launcher preserves application status and has a bounded unattended route
+  [+] preserves status for successful child from powershell.exe 2.46s (2.46s|1ms)
+  [+] preserves status for nonzero child from powershell.exe 2.41s (2.41s|1ms)
+  [+] preserves status for failed report after native success from powershell.exe 2.64s (2.64s|1ms)
+  [+] preserves status for invalid executable from powershell.exe 975ms (974ms|1ms)
+  [+] preserves status for successful child from pwsh.exe 3.22s (3.22s|1ms)
+  [+] preserves status for nonzero child from pwsh.exe 2.95s (2.95s|1ms)
+  [+] preserves status for failed report after native success from pwsh.exe 3.42s (3.42s|1ms)
+  [+] preserves status for invalid executable from pwsh.exe 1.69s (1.68s|1ms)
+  [+] rejects InvalidMode without starting native processing from powershell.exe 862ms (861ms|1ms)
+  [+] rejects MissingEnvironment without starting native processing from powershell.exe 992ms (992ms|1ms)
+  [+] rejects ExtraArgument without starting native processing from powershell.exe 769ms (768ms|1ms)
+  [+] rejects ExtraFile without starting native processing from powershell.exe 770ms (769ms|1ms)
+  [+] rejects InvalidMode without starting native processing from pwsh.exe 1.35s (1.35s|0ms)
+  [+] rejects MissingEnvironment without starting native processing from pwsh.exe 1.37s (1.36s|1ms)
+  [+] rejects ExtraArgument without starting native processing from pwsh.exe 1.47s (1.47s|0ms)
+  [+] rejects ExtraFile without starting native processing from pwsh.exe 1.5s (1.49s|1ms)
+  [+] preserves missing-input failure after the default pause in powershell.exe 854ms (854ms|1ms)
+  [+] preserves missing-input failure after the default pause in pwsh.exe 1.63s (1.62s|1ms)
+  [+] preserves a controlled application cancellation status after pause in powershell.exe 876ms (875ms|0ms)
+  [+] preserves a controlled application cancellation status after pause in pwsh.exe 1.64s (1.64s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Loudness.Tests.ps1'
+Describing AC-037: Accurate passes share the selected signal and invariant measured values
+  [+] keeps Original choice 1, 1 channels, Mono=False, selected stream 5 in en-US 92ms (91ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=False, selected stream 5 in en-US 16ms (15ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=True, selected stream 5 in en-US 14ms (14ms|1ms)
+  [+] keeps Original choice 2, 1 channels, Mono=False, selected stream 5 in en-US 15ms (15ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=False, selected stream 5 in en-US 21ms (21ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=True, selected stream 5 in en-US 11ms (10ms|1ms)
+  [+] keeps Original choice 1, 1 channels, Mono=False, selected stream 5 in de-DE 37ms (30ms|7ms)
+  [+] keeps Original choice 1, 2 channels, Mono=False, selected stream 5 in de-DE 13ms (12ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=True, selected stream 5 in de-DE 14ms (13ms|1ms)
+  [+] keeps Original choice 2, 1 channels, Mono=False, selected stream 5 in de-DE 12ms (12ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=False, selected stream 5 in de-DE 12ms (12ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=True, selected stream 5 in de-DE 11ms (10ms|1ms)
+  [+] keeps Original choice 1, 1 channels, Mono=False, selected stream 5 in fi-FI 13ms (12ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=False, selected stream 5 in fi-FI 15ms (14ms|1ms)
+  [+] keeps Original choice 1, 2 channels, Mono=True, selected stream 5 in fi-FI 15ms (14ms|1ms)
+  [+] keeps Original choice 2, 1 channels, Mono=False, selected stream 5 in fi-FI 13ms (12ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=False, selected stream 5 in fi-FI 15ms (14ms|1ms)
+  [+] keeps Original choice 2, 2 channels, Mono=True, selected stream 5 in fi-FI 16ms (15ms|1ms)
+  [+] measures the frozen final WAV through pipe 0 without reapplying conversion or cleaning 8ms (7ms|0ms)
+  [+] rejects an altered or duplicated terminal normalization filter 5ms (5ms|1ms)
+  [+] rejects an altered or duplicated terminal normalization filter 2ms (1ms|0ms)
+  [+] rejects an altered or duplicated terminal normalization filter 2ms (1ms|0ms)
+
+Describing AC-039: loudnorm diagnostics have a bounded strict schema
+  [+] extracts one real measurement block amid native diagnostics and unrelated braces 15ms (15ms|1ms)
+  [+] accepts JSON numbers without using the local decimal separator 6ms (5ms|0ms)
+  [+] rejects NaN without treating it as silence or short audio 7ms (6ms|1ms)
+  [+] rejects Infinity without treating it as silence or short audio 2ms (2ms|1ms)
+  [+] rejects unpaired negative infinity without treating it as silence or short audio 3ms (3ms|1ms)
+  [+] rejects unpaired infinite offset without treating it as silence or short audio 3ms (2ms|1ms)
+  [+] rejects overflow exponent without treating it as silence or short audio 3ms (2ms|1ms)
+  [+] rejects comma decimal without treating it as silence or short audio 3ms (3ms|1ms)
+  [+] rejects thousands separator without treating it as silence or short audio 4ms (3ms|1ms)
+  [+] rejects out of range integrated loudness without treating it as silence or short audio 4ms (3ms|1ms)
+  [+] rejects out of range peak without treating it as silence or short audio 3ms (3ms|1ms)
+  [+] rejects negative range without treating it as silence or short audio 6ms (6ms|1ms)
+  [+] rejects positive threshold without treating it as silence or short audio 3ms (2ms|1ms)
+  [+] rejects out of range offset without treating it as silence or short audio 3ms (3ms|1ms)
+  [+] rejects unsupported normalization type without treating it as silence or short audio 3ms (3ms|1ms)
+  [+] rejects array without treating it as silence or short audio 6ms (4ms|2ms)
+  [+] rejects null without treating it as silence or short audio 6ms (3ms|3ms)
+  [+] rejects missing input_i even on short input 10ms (9ms|1ms)
+  [+] rejects missing input_tp even on short input 4ms (3ms|1ms)
+  [+] rejects missing input_lra even on short input 4ms (3ms|1ms)
+  [+] rejects missing input_thresh even on short input 2ms (2ms|1ms)
+  [+] rejects missing output_i even on short input 2ms (2ms|0ms)
+  [+] rejects missing output_tp even on short input 6ms (2ms|4ms)
+  [+] rejects missing output_lra even on short input 3ms (2ms|1ms)
+  [+] rejects missing output_thresh even on short input 3ms (2ms|1ms)
+  [+] rejects missing normalization_type even on short input 3ms (2ms|1ms)
+  [+] rejects missing target_offset even on short input 3ms (2ms|1ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 11ms (11ms|1ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 5ms (5ms|1ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 3ms (3ms|0ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 2ms (2ms|1ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 2ms (2ms|1ms)
+  [+] rejects malformed, duplicate, nested or oversized diagnostic blocks 22ms (21ms|1ms)
+
+Describing AC-038/039: final encoded input measurements control compliance and explicit fallback
+  [+] uses measured input fields, with peak precedence for target 23ms (21ms|2ms)
+  [+] uses measured input fields, with peak precedence for lower loudness boundary 4ms (3ms|1ms)
+  [+] uses measured input fields, with peak precedence for upper loudness boundary 4ms (3ms|0ms)
+  [+] uses measured input fields, with peak precedence for quiet 7ms (7ms|0ms)
+  [+] uses measured input fields, with peak precedence for hot 4ms (4ms|1ms)
+  [+] uses measured input fields, with peak precedence for peak failure 6ms (5ms|1ms)
+  [+] uses measured input fields, with peak precedence for both failures 5ms (5ms|1ms)
+  [+] records silence without passing infinities to render or output JSON 20ms (19ms|1ms)
+  [+] records short linear observation without passing infinities to render or output JSON 10ms (10ms|1ms)
+  [+] records below measurement gate without passing infinities to render or output JSON 7ms (7ms|1ms)
+  [+] records short peak violation without passing infinities to render or output JSON 9ms (9ms|1ms)
+  [+] marks a finite subsecond measurement too short only after checking all fields 6ms (5ms|1ms)
+  [+] retains finite high LRA for FFmpeg to evaluate linear feasibility 6ms (6ms|1ms)
+  [+] retains finite input_i below FFmpeg measured parameter bounds without passing it to pass two 9ms (9ms|1ms)
+  [+] retains finite input_tp below FFmpeg measured parameter bounds without passing it to pass two 8ms (7ms|1ms)
+  [+] retains finite input_thresh below FFmpeg measured parameter bounds without passing it to pass two 4ms (4ms|1ms)
+
+Describing AC-039: a native stage must succeed before its measurements can be used
+  [+] rejects start failure even when stderr contains valid measurements 19ms (18ms|1ms)
+  [+] rejects native failure even when stderr contains valid measurements 13ms (13ms|1ms)
+  [+] rejects missing exit even when stderr contains valid measurements 7ms (6ms|1ms)
+  [+] rejects timeout even when stderr contains valid measurements 9ms (8ms|1ms)
+  [+] rejects capture failure even when stderr contains valid measurements 7ms (7ms|1ms)
+  [+] rejects cleanup failure even when stderr contains valid measurements 6ms (5ms|1ms)
+  [+] records malformed successful-process diagnostics as measurement failure 8ms (8ms|1ms)
+  [+] distinguishes a successful silence measurement from native or parser failure 9ms (9ms|1ms)
+
+Describing AC-038/039: loudness warnings stay separate from publication and report completeness
+  [+] records a complete successful Accurate report with achieved values and separate requested targets 76ms (75ms|2ms)
+  [+] keeps a published quality warning at exit 7 while every report is complete 80ms (79ms|0ms)
+  [+] preserves the processing failure when quality and reporting warnings coexist 16ms (16ms|0ms)
+  [+] keeps Fast metrics unmeasured with no quality warning 11ms (10ms|1ms)
+
+Describing AC-029/038: support export keeps typed loudness facts and fixed labels only
+  [+] retains allowed loudness modes, observed type, fallback and finite metrics without native stages 41ms (40ms|1ms)
+  [+] retains approved unavailable metric reason not_measured 9ms (9ms|1ms)
+  [+] retains approved unavailable metric reason unavailable 3ms (2ms|1ms)
+  [+] retains approved unavailable metric reason too_short 3ms (2ms|1ms)
+  [+] retains approved unavailable metric reason silence 2ms (2ms|0ms)
+  [+] retains approved unavailable metric reason undefined_loudness 3ms (3ms|0ms)
+  [+] retains approved unavailable metric reason measurement_failed 4ms (3ms|1ms)
+  [+] retains approved unavailable metric reason nonfinite 2ms (2ms|0ms)
+  [+] retains approved unavailable metric reason not_numeric 5ms (2ms|3ms)
+  [+] rejects nonnumeric or nonfinite metric numeric string without accepting a supplied reason 6ms (6ms|0ms)
+  [+] rejects nonnumeric or nonfinite metric private string without accepting a supplied reason 3ms (2ms|0ms)
+  [+] rejects nonnumeric or nonfinite metric boolean without accepting a supplied reason 4ms (3ms|0ms)
+  [+] rejects nonnumeric or nonfinite metric NaN without accepting a supplied reason 3ms (2ms|0ms)
+  [+] rejects nonnumeric or nonfinite metric infinity without accepting a supplied reason 4ms (4ms|1ms)
+  [+] drops arbitrary labels and native-stage strings from a malicious report 8ms (8ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.LoudnessRuntime.Tests.ps1'
+Describing AC-039: measured stage failures preserve publication and warning contracts
+  [+] handles analysis-malformed with exit 4 and final publication False 3.67s (3.67s|1ms)
+  [+] handles analysis-exit with exit 4 and final publication False 2.89s (2.89s|1ms)
+  [+] handles analysis-start with exit 3 and final publication False 2.94s (2.94s|4ms)
+  [+] handles render-malformed with exit 7 and final publication True 3.27s (3.27s|1ms)
+  [+] handles final-malformed with exit 7 and final publication True 3.49s (3.49s|1ms)
+  [+] handles final-exit with exit 7 and final publication True 3.18s (3.17s|1ms)
+  [+] handles final-silence with exit 7 and final publication True 3.22s (3.22s|1ms)
+  [+] handles final-peak with exit 7 and final publication True 3.15s (3.15s|1ms)
+  [+] handles render-dynamic with exit 7 and final publication True 3.22s (3.22s|1ms)
+  [+] handles valid with exit 0 and final publication True 2.93s (2.93s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Media.Tests.ps1'
+Describing AC-019: dependency discovery has deterministic precedence
+  [+] uses explicit ffmpeg.exe ahead of sibling and PATH 39ms (38ms|1ms)
+  [+] uses explicit ffprobe.exe ahead of sibling and PATH 9ms (9ms|1ms)
+  [+] uses sibling ffmpeg.exe without querying PATH 16ms (16ms|1ms)
+  [+] uses sibling ffprobe.exe without querying PATH 10ms (9ms|1ms)
+  [+] uses the first PATH application only when no sibling exists 56ms (55ms|1ms)
+  [+] resolves an explicit relative executable path literally 21ms (20ms|0ms)
+  [+] rejects an empty override as an explicit override without sibling or PATH fallback 16ms (15ms|0ms)
+  [+] rejects a blank override as an explicit override without sibling or PATH fallback 8ms (8ms|0ms)
+  [+] rejects a URL as an explicit override without sibling or PATH fallback 13ms (12ms|1ms)
+  [+] rejects a missing executable as an explicit override without sibling or PATH fallback 11ms (10ms|0ms)
+  [+] rejects a non-executable file as an explicit override without sibling or PATH fallback 19ms (19ms|1ms)
+  [+] rejects a directory as an explicit override without sibling or PATH fallback 10ms (10ms|0ms)
+  [+] does not hide a broken sibling candidate by falling back to PATH 17ms (16ms|0ms)
+  [+] reports a missing dependency when sibling and PATH are absent 20ms (20ms|0ms)
+
+Describing AC-019: dependency identity, capability and timeout checks
+  [+] returns the first ffmpeg version line and uses a bounded native call 50ms (49ms|1ms)
+  [+] returns the first ffprobe version line and uses a bounded native call 9ms (9ms|1ms)
+  [+] passes an explicit version timeout to the native wrapper 12ms (11ms|1ms)
+  [+] rejects a wrong or empty version banner (ffprobe version 7.1-test) 24ms (24ms|1ms)
+  [+] rejects a wrong or empty version banner (unrelated program version 7.1-test) 10ms (9ms|1ms)
+  [+] rejects a wrong or empty version banner () 12ms (11ms|1ms)
+  [+] rejects startup failure even when version output looks valid 20ms (19ms|1ms)
+  [+] rejects a nonzero exit even when version output looks valid 10ms (9ms|1ms)
+  [+] rejects a capture error even when version output looks valid 16ms (15ms|1ms)
+  [+] rejects a timeout even when version output looks valid 6ms (6ms|1ms)
+  [+] rejects a cleanup error even when version output looks valid 10ms (9ms|1ms)
+  [+] accepts Zoom when the build supplies only its two required filters 30ms (29ms|1ms)
+  [+] accepts the FFmpeg 9 two-column capability flags 8ms (7ms|1ms)
+  [+] accepts Raw when every required filter is present 14ms (14ms|1ms)
+  [+] identifies Raw-only filters missing from a Zoom-capable build 19ms (18ms|1ms)
+  [+] does not accept a filter name substring or description as a capability 15ms (14ms|1ms)
+  [+] rejects a failed filter query even when its output lists the required filters 19ms (18ms|1ms)
+
+Describing AC-020/AC-021: structured audio probing validates native outcome and schema
+  [+] retains absolute indexes and metadata when video precedes two audio streams 72ms (70ms|2ms)
+  [+] accepts a single audio stream without optional tags or channel layout 15ms (15ms|1ms)
+  [+] passes literal input, JSON selection, local restrictions and a finite probe timeout 13ms (13ms|0ms)
+  [+] uses a bounded default probe timeout 20ms (19ms|1ms)
+  [+] rejects metadata whose UTF-8 byte size exceeds the limit even below one million characters 162ms (162ms|0ms)
+  [+] rejects metadata with more than 256 streams before accepting audio metadata 26ms (25ms|1ms)
+  [+] rejects startup failure before trusting plausible JSON 11ms (10ms|1ms)
+  [+] rejects nonzero probe exit before trusting plausible JSON 8ms (7ms|1ms)
+  [+] rejects capture failure before trusting plausible JSON 13ms (13ms|1ms)
+  [+] rejects timeout before trusting plausible JSON 7ms (6ms|1ms)
+  [+] rejects cleanup failure before trusting plausible JSON 7ms (6ms|1ms)
+  [+] rejects malformed JSON without returning invented stream metadata 17ms (16ms|1ms)
+  [+] rejects empty output without returning invented stream metadata 9ms (8ms|1ms)
+  [+] rejects a null root without returning invented stream metadata 8ms (7ms|1ms)
+  [+] rejects an array root without returning invented stream metadata 8ms (6ms|3ms)
+  [+] rejects a string root without returning invented stream metadata 6ms (5ms|1ms)
+  [+] rejects a missing streams array without returning invented stream metadata 16ms (16ms|1ms)
+  [+] rejects a null streams property without returning invented stream metadata 7ms (7ms|1ms)
+  [+] rejects an object in place of a streams array without returning invented stream metadata 6ms (5ms|1ms)
+  [+] rejects a non-object stream without returning invented stream metadata 8ms (8ms|1ms)
+  [+] rejects a missing index without returning invented stream metadata 10ms (6ms|4ms)
+  [+] rejects a null index without returning invented stream metadata 6ms (5ms|1ms)
+  [+] rejects a negative index without returning invented stream metadata 5ms (5ms|0ms)
+  [+] rejects a fractional index without returning invented stream metadata 11ms (10ms|0ms)
+  [+] rejects a string index without returning invented stream metadata 7ms (6ms|1ms)
+  [+] rejects a boolean index without returning invented stream metadata 7ms (7ms|1ms)
+  [+] rejects an out-of-range index without returning invented stream metadata 13ms (12ms|1ms)
+  [+] rejects duplicate stream indexes without returning invented stream metadata 6ms (5ms|1ms)
+  [+] rejects a missing codec type without returning invented stream metadata 8ms (7ms|1ms)
+  [+] rejects an empty audio codec without returning invented stream metadata 13ms (12ms|1ms)
+  [+] rejects missing channel count without returning invented stream metadata 10ms (9ms|1ms)
+  [+] rejects zero channels without returning invented stream metadata 8ms (7ms|1ms)
+  [+] rejects fractional channels without returning invented stream metadata 10ms (9ms|1ms)
+  [+] rejects missing sample rate without returning invented stream metadata 8ms (7ms|1ms)
+  [+] rejects zero sample rate without returning invented stream metadata 6ms (6ms|1ms)
+  [+] rejects a fractional sample rate without returning invented stream metadata 10ms (9ms|1ms)
+  [+] rejects a numeric sample rate instead of ffprobe text without returning invented stream metadata 9ms (8ms|1ms)
+  [+] rejects a video-only container before a cleaning process can be requested 14ms (13ms|1ms)
+  [+] rejects a container with no streams before a cleaning process can be requested 12ms (11ms|1ms)
+
+Describing AC-020: stream selection is explicit for ambiguous containers
+  [+] automatically selects the sole audio stream without prompting 30ms (29ms|1ms)
+  [+] selects explicit absolute index 0 without prompting 23ms (22ms|1ms)
+  [+] selects explicit absolute index 4 without prompting 10ms (10ms|1ms)
+  [+] rejects invalid explicit index  rather than interpreting an audio ordinal 18ms (18ms|1ms)
+  [+] rejects invalid explicit index -1 rather than interpreting an audio ordinal 9ms (9ms|1ms)
+  [+] rejects invalid explicit index 1 rather than interpreting an audio ordinal 15ms (14ms|1ms)
+  [+] rejects invalid explicit index 0.5 rather than interpreting an audio ordinal 21ms (20ms|1ms)
+  [+] rejects invalid explicit index 0:a:0 rather than interpreting an audio ordinal 12ms (12ms|1ms)
+  [+] rejects invalid explicit index word rather than interpreting an audio ordinal 16ms (16ms|1ms)
+  [+] rejects invalid explicit index 2147483648 rather than interpreting an audio ordinal 11ms (11ms|1ms)
+  [+] rejects unattended ambiguity without reading the host 12ms (12ms|1ms)
+  [+] retries empty, invalid and nonexistent indexes until a valid absolute index is entered 99ms (99ms|1ms)
+  [+] returns no selection for cancellation q 27ms (26ms|1ms)
+  [+] returns no selection for cancellation cancel 16ms (15ms|1ms)
+  [+] returns no selection when the host reports end of input 23ms (22ms|1ms)
+  [+] reports a host read failure without retrying indefinitely 20ms (19ms|0ms)
+
+Describing AC-020/AC-021: command construction enforces local media and exact stream mapping
+  [+] restricts protocols and explicitly allowlists ordinary media demuxers 5ms (3ms|1ms)
+  [+] maps absolute index 0 and places restrictions before the input 13ms (13ms|1ms)
+  [+] maps absolute index 4 and places restrictions before the input 14ms (14ms|0ms)
+  [+] rejects a negative absolute stream index before process startup 5ms (4ms|0ms)
+
+Describing AC-021: real probe processes fail safely and terminate within their deadline
+  [+] resolves actual PATH application ffmpeg.exe when the sibling candidate is absent 27ms (25ms|1ms)
+  [+] resolves actual PATH application ffprobe.exe when the sibling candidate is absent 5ms (4ms|0ms)
+  [+] finds ffprobe adjacent to an explicit FFmpeg executable in the actual application 2.63s (2.63s|0ms)
+  [+] passes JSON and local-only input arguments to the actual ffprobe process 115ms (115ms|1ms)
+  [+] rejects malformed JSON emitted by an actual successful probe process 68ms (67ms|1ms)
+  [+] rejects a real nonzero probe exit despite its valid JSON and retains its diagnostic 72ms (71ms|1ms)
+  [+] times out and reaps the actual PROBE child without accepting its pre-timeout output 625ms (625ms|1ms)
+  [+] times out and reaps the actual VERSION child without accepting its pre-timeout output 578ms (577ms|1ms)
+  [+] times out and reaps the actual FILTERS child without accepting its pre-timeout output 597ms (596ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Native.Tests.ps1'
+Describing AC-016/AC-017/AC-018: real native process arguments, results and streams
+  [+] preserves spaces in actual child argv 172ms (171ms|1ms)
+  [+] preserves square brackets in actual child argv 61ms (60ms|1ms)
+  [+] preserves apostrophe in actual child argv 62ms (62ms|1ms)
+  [+] preserves Unicode in actual child argv 68ms (67ms|1ms)
+  [+] preserves ampersand in actual child argv 64ms (64ms|1ms)
+  [+] preserves percent signs in actual child argv 66ms (66ms|1ms)
+  [+] preserves exclamation marks in actual child argv 59ms (59ms|1ms)
+  [+] preserves parentheses in actual child argv 57ms (57ms|1ms)
+  [+] preserves empty argument in actual child argv 58ms (57ms|0ms)
+  [+] preserves embedded quotes in actual child argv 59ms (58ms|1ms)
+  [+] preserves a quote alone in actual child argv 60ms (59ms|0ms)
+  [+] preserves trailing backslash after spaces in actual child argv 60ms (59ms|1ms)
+  [+] preserves multiple trailing backslashes in actual child argv 52ms (52ms|0ms)
+  [+] preserves backslashes before an embedded quote in actual child argv 55ms (52ms|3ms)
+  [+] starts with no child arguments and no render timeout 57ms (56ms|0ms)
+  [+] keeps native nonzero status and both diagnostic streams 47ms (46ms|0ms)
+  [+] closes child stdin so a reader receives EOF without waiting for input 59ms (58ms|0ms)
+  [+] returns structured startup failure for a missing executable 10ms (9ms|1ms)
+  [+] returns structured startup failure for a file that is not an executable 9ms (8ms|1ms)
+  [+] rejects a NUL argument before starting the child 10ms (10ms|1ms)
+  [+] rejects an excessive command line before starting the child 228ms (227ms|0ms)
+  [+] fully drains simultaneous streams that each exceed pipe capacity 59ms (58ms|0ms)
+  [+] terminates the timed-out child and retains prior diagnostics 1.63s (1.63s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.NativeInput.Tests.ps1'
+Describing AC-038/039: held-stream input transfer and native cleanup
+  [+] transfers input larger than pipe capacity and closes stdin at EOF without closing the caller stream 341ms (341ms|1ms)
+  [+] drains both output pipes after a large input transfer and retains every diagnostic character 220ms (219ms|1ms)
+  [+] rejects an unreadable caller stream before creating the child 14ms (13ms|1ms)
+  [+] retains a source read error and stops the child without disposing the caller stream 138ms (138ms|0ms)
+  [+] does not treat an early native exit zero as success when the input copy failed 452ms (452ms|0ms)
+  [+] times out an unread input pipe, drains diagnostics and preserves an unrelated process 1.54s (1.53s|0ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preflight.Tests.ps1'
+Describing AC-013: preflight treats filenames as literal data
+  [+] resolves and reads exactly meeting with spaces.wav 15ms (14ms|1ms)
+  [+] resolves and reads exactly meeting [draft].wav 5ms (5ms|0ms)
+  [+] resolves and reads exactly speaker's recording.wav 9ms (8ms|1ms)
+  [+] resolves and reads exactly meeting äöÅ.wav 4ms (3ms|0ms)
+  [+] resolves and reads exactly speaker & guest.wav 4ms (4ms|0ms)
+  [+] resolves and reads exactly meeting %completed%.wav 6ms (5ms|0ms)
+  [+] resolves and reads exactly meeting !important!.wav 4ms (4ms|0ms)
+  [+] resolves and reads exactly meeting (take 1).wav 4ms (4ms|0ms)
+  [+] does not expand brackets to a different existing filename 16ms (15ms|1ms)
+  [+] normalizes a relative path against the PowerShell working directory 11ms (11ms|1ms)
+  [+] rejects provider-qualified syntax even when the underlying file exists 10ms (9ms|0ms)
+
+Describing AC-014: input preflight rejects unsupported or unreadable input
+  [+] rejects empty path for both input and destination 13ms (12ms|1ms)
+  [+] rejects blank path for both input and destination 4ms (3ms|1ms)
+  [+] rejects HTTPS URL for both input and destination 3ms (2ms|0ms)
+  [+] rejects file URL for both input and destination 4ms (3ms|1ms)
+  [+] rejects environment provider for both input and destination 5ms (3ms|2ms)
+  [+] rejects registry provider for both input and destination 5ms (4ms|1ms)
+  [+] rejects UNC path for both input and destination 4ms (3ms|1ms)
+  [+] rejects forward-slash UNC path for both input and destination 7ms (7ms|0ms)
+  [+] rejects extended device path for both input and destination 3ms (3ms|1ms)
+  [+] rejects device namespace for both input and destination 4ms (3ms|1ms)
+  [+] rejects alternate data stream for both input and destination 8ms (8ms|1ms)
+  [+] rejects a missing file without creating it 8ms (8ms|1ms)
+  [+] rejects an existing directory 10ms (9ms|1ms)
+  [+] rejects a zero-byte file and leaves it unchanged 8ms (8ms|1ms)
+  [+] rejects a file that cannot be opened for reading 15ms (15ms|1ms)
+
+Describing AC-013/AC-014: destination preflight creates and verifies literal directories
+  [+] creates a literal destination containing meeting with spaces.wav without leaving probe files 13ms (12ms|1ms)
+  [+] creates a literal destination containing meeting [draft].wav without leaving probe files 11ms (11ms|1ms)
+  [+] creates a literal destination containing speaker's recording.wav without leaving probe files 6ms (6ms|1ms)
+  [+] creates a literal destination containing meeting äöÅ.wav without leaving probe files 6ms (5ms|1ms)
+  [+] creates a literal destination containing speaker & guest.wav without leaving probe files 6ms (5ms|0ms)
+  [+] creates a literal destination containing meeting %completed%.wav without leaving probe files 5ms (5ms|0ms)
+  [+] creates a literal destination containing meeting !important!.wav without leaving probe files 6ms (5ms|1ms)
+  [+] creates a literal destination containing meeting (take 1).wav without leaving probe files 5ms (5ms|1ms)
+  [+] normalizes and creates a nested relative destination 14ms (13ms|0ms)
+  [+] preserves existing files and removes only its own write probe 14ms (14ms|1ms)
+  [+] rejects a destination occupied by a file and preserves that file 8ms (8ms|1ms)
+  [+] rejects a directory whose ACL denies creating files 40ms (40ms|0ms)
+
+Describing AC-015: the menu retries invalid answers and permits cancellation
+  [+] selects Raw for 1 24ms (22ms|2ms)
+  [+] selects Zoom for 2 15ms (14ms|1ms)
+  [+] retries empty and invalid answers before accepting a valid choice 17ms (17ms|0ms)
+  [+] returns no mode for cancellation q 16ms (15ms|0ms)
+  [+] returns no mode for cancellation cancel 10ms (9ms|0ms)
+  [+] returns no mode when the host reports end of input 14ms (14ms|0ms)
+  [+] reports a clear unattended-use route when Read-Host fails 16ms (15ms|0ms)
+
+Describing AC-015: prompt eligibility follows host and script invocation boundaries
+  [+] allows an interactive host with ordinary startup switches 11ms (10ms|1ms)
+  [+] prevents prompting for the explicit application switch 6ms (5ms|1ms)
+  [+] prevents prompting for redirected standard input 2ms (1ms|1ms)
+  [+] prevents prompting for a noninteractive operating system session 2ms (1ms|1ms)
+  [+] recognizes host switch -NonInteractive before script arguments 6ms (5ms|1ms)
+  [+] recognizes host switch -noni before script arguments 1ms (1ms|0ms)
+  [+] recognizes host switch -nonin before script arguments 1ms (1ms|1ms)
+  [+] recognizes host switch -noninter before script arguments 5ms (5ms|1ms)
+  [+] recognizes host switch -NoNiNtErAcTiVe before script arguments 1ms (1ms|0ms)
+  [+] does not interpret application arguments after -File as host switches 4ms (4ms|0ms)
+  [+] does not interpret application arguments after -fi as host switches 1ms (1ms|0ms)
+  [+] does not interpret application arguments after -Command as host switches 1ms (1ms|0ms)
+  [+] does not interpret application arguments after -co as host switches 1ms (1ms|0ms)
+  [+] does not interpret application arguments after -EncodedCommand as host switches 2ms (1ms|1ms)
+  [+] does not interpret application arguments after -ec as host switches 2ms (1ms|1ms)
+  [+] does not confuse a longer lookalike argument with a supported host switch 3ms (3ms|0ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Preset.Tests.ps1'
+Describing AC-035/036: Original identity belongs to each unchanged processing profile
+  [+] names and versions the Original Raw profile separately from its mode 9ms (8ms|1ms)
+  [+] names and versions the Original Zoom profile separately from its mode 7ms (6ms|1ms)
+
+Describing AC-036: menu choices and direct invocations persist the effective Original preset
+  [+] records the Original Raw preset through menu 3.16s (3.16s|1ms)
+  [+] records the Original Zoom preset through menu 3.03s (3.03s|1ms)
+  [+] records the Original Raw preset through direct -Mode 2.95s (2.95s|1ms)
+  [+] records the Original Zoom preset through direct -Mode 2.96s (2.96s|1ms)
+
+Describing AC-029/036: support export does not invent or disclose preset versions
+  [+] keeps legacy unversioned identity and version fields out of the redacted projection 32ms (31ms|1ms)
+  [+] keeps current Original identity and version fields out of the redacted projection 12ms (12ms|1ms)
+  [+] keeps unknown private identity and version fields out of the redacted projection 9ms (9ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Reporting.Tests.ps1'
+Describing AC-017: metadata reporting failures preserve native outcome
+  [+] handles native exit 0 with caller Continue in powershell.exe 2.31s (2.3s|3ms)
+  [+] handles native exit 0 with caller Stop in powershell.exe 2.36s (2.36s|1ms)
+  [+] handles native exit 9 with caller Continue in powershell.exe 2.06s (2.06s|1ms)
+  [+] handles native exit 9 with caller Stop in powershell.exe 2.08s (2.08s|1ms)
+  [+] handles native exit 0 with caller Continue in pwsh.exe 3.07s (3.07s|1ms)
+  [+] handles native exit 0 with caller Stop in pwsh.exe 3.04s (3.04s|1ms)
+  [+] handles native exit 9 with caller Continue in pwsh.exe 2.65s (2.65s|1ms)
+  [+] handles native exit 9 with caller Stop in pwsh.exe 2.83s (2.83s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.ReportIO.Tests.ps1'
+Describing AC-030: held report writers and summary rollback
+  [+] creates a unique report and writes UTF-8 without a BOM through its held stream 61ms (60ms|1ms)
+  [+] replaces only its own newly created content without stale trailing bytes 13ms (12ms|0ms)
+  [+] refuses to overwrite a pre-existing report file 8ms (8ms|0ms)
+  [+] rejects mutation or removal of a prior summary through the owned-file APIs 16ms (15ms|1ms)
+  [+] appends and rolls back only the bytes added while it holds the summary writer 50ms (50ms|0ms)
+  [+] creates a missing summary without requiring an earlier file 10ms (9ms|1ms)
+  [+] preserves a prior UTF-8 BOM summary encoding and BOM when appending 20ms (19ms|1ms)
+  [+] preserves a prior UTF-16 LE summary encoding and BOM when appending 21ms (21ms|1ms)
+  [+] preserves a prior UTF-16 BE summary encoding and BOM when appending 8ms (8ms|1ms)
+  [+] preserves a prior UTF-32 LE summary encoding and BOM when appending 18ms (17ms|0ms)
+  [+] preserves a prior UTF-32 BE summary encoding and BOM when appending 10ms (9ms|1ms)
+  [+] detects and preserves a valid UTF-8 summary without a BOM 15ms (14ms|1ms)
+  [+] detects UTF-8 when a four-byte character crosses the decoding buffer boundary 24ms (24ms|0ms)
+  [+] preserves a legacy ANSI summary that is not valid UTF-8 25ms (24ms|1ms)
+  [+] rejects rollback beyond its original summary or current end 18ms (18ms|1ms)
+  [+] restores the exact original summary bytes after an injected partial write failure 53ms (52ms|1ms)
+  [+] prevents another writer, rename or deletion while held and bounds contention retry 142ms (141ms|1ms)
+  [+] refuses a multiple-hardlink summary without changing its target 8ms (8ms|1ms)
+  [+] refuses an existing directory reparse leaf 9ms (9ms|0ms)
+  [+] deletes only its held newly created report and closes idempotently 12ms (11ms|0ms)
+  [+] serializes concurrent process summary entries without interleaving 2.49s (2.49s|0ms)
+
+Describing AC-028/030: finish output cleanup before reporting while retaining source protection
+  [+] cleans the owned partial and holds input/destination until final close 41ms (40ms|2ms)
+  [+] surfaces cleanup failure once before reporting and preserves the blocking partial 23ms (17ms|5ms)
+
+Running tests from '<repo>\tests\WinAudioClean.RunReports.Tests.ps1'
+Describing AC-028: unavailable measurements stay explicit JSON nulls
+  [+] retains a finite numeric measurement 6ms (5ms|1ms)
+  [+] accepts integer schema/settings fields returned as int by JSON readers 19ms (18ms|1ms)
+  [+] accepts integer schema/settings fields returned as long by JSON readers 7ms (6ms|2ms)
+  [+] uses null with a reason for missing 8ms (7ms|1ms)
+  [+] uses null with a reason for NaN 9ms (8ms|1ms)
+  [+] uses null with a reason for positive infinity 3ms (2ms|1ms)
+  [+] uses null with a reason for negative infinity 3ms (2ms|1ms)
+  [+] uses null with a reason for unsupported diagnostic text 4ms (4ms|1ms)
+  [+] uses null with a reason for FFmpeg negative infinity text 4ms (3ms|1ms)
+
+Describing AC-028: per-run JSON, text, summary, console and exit agree
+  [+] reports success without losing native diagnostics 3.01s (3.01s|1ms)
+  [+] reports encoder without losing native diagnostics 2.85s (2.85s|1ms)
+  [+] reports validation without losing native diagnostics 3.18s (3.18s|1ms)
+  [+] keeps a multiline title in JSON while preventing forged human status lines 2.86s (2.86s|0ms)
+
+Describing AC-030: reporting failures preserve the primary outcome and audio
+  [+] preserves success when json permission is denied 3.03s (3.03s|2ms)
+  [+] preserves success when text permission is denied 3.09s (3.09s|1ms)
+  [+] preserves success when summary permission is denied 2.95s (2.95s|1ms)
+  [+] preserves encoder when json permission is denied 2.92s (2.92s|1ms)
+  [+] preserves encoder when text permission is denied 3.14s (3.14s|1ms)
+  [+] preserves encoder when summary permission is denied 2.93s (2.93s|1ms)
+  [+] preserves validation when json permission is denied 3.25s (3.25s|1ms)
+  [+] preserves validation when text permission is denied 3.11s (3.11s|1ms)
+  [+] preserves validation when summary permission is denied 3.14s (3.14s|1ms)
+  [+] preserves success when json-write permission is denied 3.25s (3.25s|1ms)
+  [+] preserves success when text-write permission is denied 3.05s (3.05s|1ms)
+  [+] preserves success when summary-write permission is denied 3.11s (3.11s|1ms)
+  [+] preserves encoder when json-write permission is denied 2.89s (2.89s|1ms)
+  [+] preserves encoder when text-write permission is denied 2.82s (2.82s|1ms)
+  [+] preserves encoder when summary-write permission is denied 2.77s (2.77s|1ms)
+  [+] preserves validation when json-write permission is denied 3.51s (3.5s|0ms)
+  [+] preserves validation when text-write permission is denied 3.06s (3.06s|1ms)
+  [+] preserves validation when summary-write permission is denied 3.28s (3.28s|1ms)
+  [+] keeps concurrent run reports unique and summary entries contiguous 4.36s (4.36s|0ms)
+
+Describing AC-029: explicit support export removes sensitive local fields
+  [+] exports an allowlisted report without tools or processing and refuses overwrite 7.6s (7.6s|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Transaction.Tests.ps1'
+Describing AC-022/AC-023/AC-024: owned output allocation, publication and cleanup
+  [+] allocates an exclusively owned partial in the final destination 17ms (16ms|1ms)
+  [+] allows the encoder to overwrite only the reserved partial while preventing its rename 17ms (16ms|1ms)
+  [+] pins the physical output directory against rename until the transaction closes 13ms (12ms|1ms)
+  [+] never overwrites a preexisting partial reservation 14ms (13ms|1ms)
+  [+] rejects a partial path that is the input itself 10ms (10ms|0ms)
+  [+] allocates unique names for rapid same-input runs and equal stems while all jobs remain open 31ms (30ms|0ms)
+  [+] freezes the exact owned bytes against writers and external rename until publication 25ms (24ms|1ms)
+  [+] refuses publication without freezing the output 11ms (10ms|1ms)
+  [+] rejects another publish or freeze after successful publication 22ms (21ms|1ms)
+  [+] does not replace a final file created after allocation 19ms (18ms|1ms)
+  [+] retains input and prior export when either is hardlinked to the final name 18ms (17ms|1ms)
+  [+] retains input and prior export when either is hardlinked to the final name 13ms (12ms|1ms)
+  [+] protects input hardlink and shared-log aliases until the transaction closes 20ms (20ms|0ms)
+  [+] removes only its own partial on normal failure and preserves unrelated crash leftovers 15ms (14ms|0ms)
+  [+] retains a foreign file replacing the partial between render and freeze 20ms (19ms|1ms)
+  [+] rejects tampered publication paths outside the pinned output directory 15ms (15ms|1ms)
+  [+] reports a cleanup sharing failure and still releases the input lock 11ms (10ms|1ms)
+  [+] returns a resolved input path so changing its junction cannot change the rendered file 14ms (13ms|1ms)
+  [+] resolves a junction destination and retains that physical target if the junction changes 13ms (13ms|1ms)
+  [+] rejects unsafe identifiers before allocating partial files 7ms (7ms|1ms)
+  [+] rejects unsafe identifiers before allocating partial files 8ms (5ms|3ms)
+  [+] rejects unsafe identifiers before allocating partial files 7ms (6ms|1ms)
+
+Describing AC-005: transaction helper import has no side effects
+  [+] defines functions without compiling native declarations, writing files or starting a child 1.04s (1.04s|1ms)
+
+Describing AC-023: report writes cannot follow filesystem aliases into existing audio
+  [+] allows Add-Content on a new or existing singly linked report while its guard is held 12ms (11ms|1ms)
+  [+] allows Add-Content on a new or existing singly linked report while its guard is held 8ms (5ms|3ms)
+  [+] refuses a report hardlink to a prior audio export without changing either path 9ms (8ms|0ms)
+  [+] does not redirect a held report guard when its directory junction changes 12ms (12ms|1ms)
+
+Running tests from '<repo>\tests\WinAudioClean.Validation.Tests.ps1'
+Describing AC-023/024: validate the owned PCM bytes before publication
+  [+] accepts complete PCM and leaves the validation handle open 93ms (91ms|2ms)
+  [+] accepts complete stereo PCM24 without imposing a new encoding default 10ms (6ms|5ms)
+  [+] accepts a complete extensible PCM format 25ms (25ms|0ms)
+  [+] rejects an extensible format claiming bytes beyond its own chunk 6ms (5ms|0ms)
+  [+] rejects a zero-length or header-only output: 0 10ms (9ms|1ms)
+  [+] rejects a zero-length or header-only output: 44 5ms (3ms|1ms)
+  [+] rejects truncated samples even when ffprobe reports plausible audio 11ms (11ms|1ms)
+  [+] rejects truncated data after RIFF length was repaired 7ms (6ms|1ms)
+  [+] rejects a complete but implausibly short result after both lengths were repaired 8ms (7ms|0ms)
+  [+] rejects mismatched probe Codec 8ms (8ms|0ms)
+  [+] rejects mismatched probe Channels 2ms (2ms|0ms)
+  [+] rejects mismatched probe SampleRate 7ms (7ms|1ms)
+  [+] rejects mismatched probe DurationSeconds 5ms (4ms|1ms)
+  [+] rejects changed selected channel count 6ms (6ms|0ms)
+  [+] enforces 10 ms PCM duration tolerance 7ms (7ms|0ms)
+  [+] allows at most 100 ms compressed padding difference 7ms (6ms|0ms)
+  [+] rejects an RF64 signature without its required header 6ms (6ms|1ms)
+  [+] rejects empty sample data 6ms (6ms|0ms)
+  [+] rejects inconsistent sample alignment 9ms (8ms|1ms)
+
+Describing AC-025/026: enforce the requested output format and channel policy
+  [+] accepts requested 16-bit mono output 15ms (14ms|1ms)
+  [+] accepts requested 24-bit mono output 5ms (4ms|1ms)
+  [+] accepts requested 16-bit stereo output 5ms (5ms|1ms)
+  [+] accepts requested 24-bit stereo output 2ms (2ms|0ms)
+  [+] rejects a probe/header-consistent legacy 192 kHz export 7ms (7ms|0ms)
+  [+] rejects a probe/header-consistent wrong bit depth 6ms (6ms|1ms)
+  [+] permits explicit mono conversion of the selected stereo track 6ms (5ms|1ms)
+  [+] rejects an unrequested mono conversion even if the probe agrees 6ms (6ms|1ms)
+  [+] rejects an unexpected stereo upmix 7ms (5ms|2ms)
+  [+] rejects an inconsistent output probe layout 6ms (6ms|0ms)
+  [+] accepts a conventional or unspecified mono extensible mask: 4 6ms (5ms|0ms)
+  [+] accepts a conventional or unspecified mono extensible mask: 0 2ms (1ms|0ms)
+  [+] rejects an unexpected extensible channel mask 6ms (6ms|0ms)
+  [+] accepts extensible stereo PCM24 with the expected FL/FR mask 8ms (5ms|3ms)
+  [+] rejects an extensible valid-bit count different from the requested depth 7ms (6ms|1ms)
+  [+] rejects ordinary RIFF when RF64 was requested 6ms (5ms|1ms)
+  [+] treats RIFF chunk identifiers as case-sensitive 10ms (10ms|1ms)
+  [+] treats WAVE chunk identifiers as case-sensitive 2ms (1ms|0ms)
+  [+] treats fmt  chunk identifiers as case-sensitive 2ms (2ms|0ms)
+  [+] treats data chunk identifiers as case-sensitive 2ms (2ms|1ms)
+
+Describing AC-027: validate RF64 sizes and samples on the held stream
+  [+] accepts a complete small RF64 fixture without closing the held stream 17ms (16ms|1ms)
+  [+] enforces explicit RF64 policy for an otherwise valid RF64 output 7ms (7ms|1ms)
+  [+] rejects a missing container size sentinel 5ms (4ms|0ms)
+  [+] requires ds64 before all other chunks 11ms (11ms|0ms)
+  [+] rejects malformed ds64 chunk length: 0 8ms (7ms|1ms)
+  [+] rejects malformed ds64 chunk length: 27 3ms (2ms|1ms)
+  [+] rejects malformed ds64 chunk length: 40 3ms (2ms|1ms)
+  [+] rejects unsupported ds64 tables 7ms (6ms|1ms)
+  [+] rejects 64-bit overflow in RIFF length 16ms (15ms|1ms)
+  [+] rejects 64-bit overflow in data length 4ms (4ms|1ms)
+  [+] rejects 64-bit overflow in sample count 4ms (4ms|1ms)
+  [+] rejects a 64-bit container size that disagrees with actual length 7ms (6ms|1ms)
+  [+] bounds a large data length before seeking or addition can overflow 6ms (6ms|1ms)
+  [+] rejects RF64 data without its sentinel 5ms (4ms|0ms)
+  [+] rejects empty sample data described by ds64 6ms (6ms|1ms)
+  [+] rejects inconsistent ds64 sample count: 0 9ms (8ms|1ms)
+  [+] rejects inconsistent ds64 sample count: 144001 2ms (2ms|0ms)
+  [+] rejects inconsistent ds64 sample count: 9007199254740993 2ms (2ms|0ms)
+  [+] rejects duplicate ds64 chunks 6ms (5ms|0ms)
+  [+] rejects a sentinel on an unlisted non-data chunk 8ms (7ms|1ms)
+  [+] rejects truncation even if the RF64 container length was repaired 5ms (5ms|0ms)
+
+Describing Selected-stream duration metadata
+  [+] parses invariant seconds 3ms (3ms|1ms)
+  [+] uses Matroska stream end time minus its start time 7ms (6ms|0ms)
+  [+] prefers direct stream duration over tags 3ms (3ms|0ms)
+  [+] leaves unknown or invalid timing unavailable:  6ms (5ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: N/A 2ms (1ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: NaN 1ms (1ms|0ms)
+  [+] leaves unknown or invalid timing unavailable: Infinity 2ms (1ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: 0 1ms (1ms|0ms)
+  [+] leaves unknown or invalid timing unavailable: -1 1ms (1ms|0ms)
+  [+] leaves unknown or invalid timing unavailable: 3,5 1ms (1ms|0ms)
+Tests completed in 502.87s
+Tests Passed: 666, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+test_commands_sanitize_paths_and_use_bounded_no_shell_process (test_characterize_filters.CharacterizationTests.test_commands_sanitize_paths_and_use_bounded_no_shell_process) ... ok
+test_existing_output_is_refused_without_launch_or_overwrite (test_characterize_filters.CharacterizationTests.test_existing_output_is_refused_without_launch_or_overwrite) ... ok
+test_malformed_metric_fails_instead_of_becoming_unavailable (test_characterize_filters.CharacterizationTests.test_malformed_metric_fails_instead_of_becoming_unavailable) ... ok
+test_missing_or_ambiguous_metrics_fail (test_characterize_filters.CharacterizationTests.test_missing_or_ambiguous_metrics_fail) ... ok
+test_nonfinite_metrics_are_null_with_reason_and_valid_json (test_characterize_filters.CharacterizationTests.test_nonfinite_metrics_are_null_with_reason_and_valid_json) ... ok
+test_process_failure_is_not_reported_as_success (test_characterize_filters.CharacterizationTests.test_process_failure_is_not_reported_as_success) ... ok
+test_sample_and_loudness_analyses_are_independent (test_characterize_filters.CharacterizationTests.test_sample_and_loudness_analyses_are_independent) ... ok
+test_uses_final_file_input_metrics_not_analysis_output (test_characterize_filters.CharacterizationTests.test_uses_final_file_input_metrics_not_analysis_output) ... ok
+test_apply_preserves_application (test_handoff.BundleAndInstallTests.test_apply_preserves_application) ... ok
+test_copy_failure_rolls_back_only_new_files (test_handoff.BundleAndInstallTests.test_copy_failure_rolls_back_only_new_files) ... ok
+test_detached_head_rejected (test_handoff.BundleAndInstallTests.test_detached_head_rejected) ... ok
+test_differing_agents_never_overwritten (test_handoff.BundleAndInstallTests.test_differing_agents_never_overwritten) ... ok
+test_dirty_apply_rejected (test_handoff.BundleAndInstallTests.test_dirty_apply_rejected) ... ok
+test_expected_head_mismatch_rejected (test_handoff.BundleAndInstallTests.test_expected_head_mismatch_rejected) ... ok
+test_extra_file_rejected (test_handoff.BundleAndInstallTests.test_extra_file_rejected) ... ok
+test_main_apply_rejected (test_handoff.BundleAndInstallTests.test_main_apply_rejected) ... ok
+test_multiple_push_destinations_rejected (test_handoff.BundleAndInstallTests.test_multiple_push_destinations_rejected) ... ok
+test_preview_is_read_only (test_handoff.BundleAndInstallTests.test_preview_is_read_only) ... ok
+test_repeat_after_checkpoint_is_idempotent (test_handoff.BundleAndInstallTests.test_repeat_after_checkpoint_is_idempotent) ... ok
+test_runtime_payload_rejected (test_handoff.BundleAndInstallTests.test_runtime_payload_rejected) ... ok
+test_subdirectory_is_not_repository_root (test_handoff.BundleAndInstallTests.test_subdirectory_is_not_repository_root) ... ok
+test_tampered_file_rejected (test_handoff.BundleAndInstallTests.test_tampered_file_rejected) ... ok
+test_tampered_sums_rejected (test_handoff.BundleAndInstallTests.test_tampered_sums_rejected) ... ok
+test_unreviewed_drift_rejected (test_handoff.BundleAndInstallTests.test_unreviewed_drift_rejected) ... ok
+test_valid_bundle (test_handoff.BundleAndInstallTests.test_valid_bundle) ... ok
+test_wrong_origin_rejected (test_handoff.BundleAndInstallTests.test_wrong_origin_rejected) ... ok
+test_current_plan_is_valid (test_handoff.CanonicalPlanTests.test_current_plan_is_valid) ... ok
+test_existing_file_preserved (test_handoff.FixtureTests.test_existing_file_preserved) ... ok
+test_fixture_format_and_no_overwrite (test_handoff.FixtureTests.test_fixture_format_and_no_overwrite) ... ok
+test_repeatable_pcm (test_handoff.FixtureTests.test_repeatable_pcm) ... ok
+test_bad_origins (test_handoff.PathAndOriginTests.test_bad_origins) ... ok
+test_payload_is_governance_only (test_handoff.PathAndOriginTests.test_payload_is_governance_only) ... ok
+test_safe_paths (test_handoff.PathAndOriginTests.test_safe_paths) ... ok
+test_supported_origin_forms (test_handoff.PathAndOriginTests.test_supported_origin_forms) ... ok
+test_symlink_rejected (test_handoff.PathAndOriginTests.test_symlink_rejected) ... skipped 'Symlink privileges unavailable'
+test_unsafe_paths (test_handoff.PathAndOriginTests.test_unsafe_paths) ... ok
+test_all_improvements_required (test_handoff.PlanTests.test_all_improvements_required) ... ok
+test_blocked_without_reason_rejected (test_handoff.PlanTests.test_blocked_without_reason_rejected) ... ok
+test_cycle_rejected (test_handoff.PlanTests.test_cycle_rejected) ... ok
+test_deferred_without_approval_rejected (test_handoff.PlanTests.test_deferred_without_approval_rejected) ... ok
+test_done_before_dependencies_rejected (test_handoff.PlanTests.test_done_before_dependencies_rejected) ... ok
+test_done_with_real_evidence_unlocks_next (test_handoff.PlanTests.test_done_with_real_evidence_unlocks_next) ... ok
+test_done_without_evidence_rejected (test_handoff.PlanTests.test_done_without_evidence_rejected) ... ok
+test_duplicate_acceptance_rejected (test_handoff.PlanTests.test_duplicate_acceptance_rejected) ... ok
+test_duplicate_task_rejected (test_handoff.PlanTests.test_duplicate_task_rejected) ... ok
+test_evidence_path_traversal_rejected (test_handoff.PlanTests.test_evidence_path_traversal_rejected) ... ok
+test_initial_plan (test_handoff.PlanTests.test_initial_plan) ... ok
+test_missing_brief_rejected (test_handoff.PlanTests.test_missing_brief_rejected) ... ok
+test_missing_dependency_rejected (test_handoff.PlanTests.test_missing_dependency_rejected) ... ok
+test_next_is_governance_only (test_handoff.PlanTests.test_next_is_governance_only) ... ok
+test_orphan_case_rejected (test_handoff.PlanTests.test_orphan_case_rejected) ... ok
+test_pass_without_evidence_rejected (test_handoff.PlanTests.test_pass_without_evidence_rejected) ... ok
+test_publication_is_approval_gated (test_handoff.PlanTests.test_publication_is_approval_gated) ... ok
+test_skip_without_reason_rejected (test_handoff.PlanTests.test_skip_without_reason_rejected) ... ok
+test_unknown_state_rejected (test_handoff.PlanTests.test_unknown_state_rejected) ... ok
+test_actual_local_bare_round_trip (test_handoff.SyncTests.test_actual_local_bare_round_trip) ... ok
+test_dirty_checkpoint_rejected (test_handoff.SyncTests.test_dirty_checkpoint_rejected) ... ok
+test_empty_live_ref_rejected (test_handoff.SyncTests.test_empty_live_ref_rejected) ... ok
+test_equal_live_head_passes (test_handoff.SyncTests.test_equal_live_head_passes) ... ok
+test_network_failure_not_success (test_handoff.SyncTests.test_network_failure_not_success) ... ok
+test_stale_live_head_rejected (test_handoff.SyncTests.test_stale_live_head_rejected) ... ok
+test_wrong_upstream_rejected (test_handoff.SyncTests.test_wrong_upstream_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 62 tests in 73.007s
+
+OK (skipped=1)
+Full passed: 666 Pester passed, 0 skipped, 0 outside scope.

@@ -16,7 +16,7 @@ Local detailed logs may contain user paths/media metadata. Redacted support expo
 
 ### Implemented in WAC-M1-06: local run report version 1
 
-After a render attempt, write `WinAudioClean_<jobId>.json` and the corresponding
+After a processing attempt, write `WinAudioClean_<jobId>.json` and the corresponding
 `.txt` beside the audio. Preserve the shared `WinAudioClean_Log.txt` as a human
 summary. Early pre-render input, dependency, probe, selection and space failures
 remain console-only. New per-run files use CreateNew and UTF-8 without a BOM.
@@ -24,26 +24,45 @@ remain console-only. New per-run files use CreateNew and UTF-8 without a BOM.
 | Fields | Meaning |
 | --- | --- |
 | `schemaVersion`, `jobId`, `toolVersion` | Integer schema version `1`, the unique transaction ID and the application version. |
-| `presetVersion`, `sourceRevision` | Currently `null`, with `not_versioned` and `not_embedded` reason fields. No revision is inferred from the machine. |
-| `status`, `applicationExitCode` | Final `SUCCESS`, `WARNING` or `FAILED` outcome, including reporting failures. |
-| `processingStatus`, `processingExitCode`, `nativeExitCode` | Processing/publication/owned-cleanup result kept separate from report warnings and the actual native exit. |
+| `presetId`, `presetName`, `presetVersion` | Base preset from the selected processing profile: default `original`, `Original`, `1.0.0`; optional Raw `gentle`, `Gentle (experimental)`, `0.1.0` since M2-03. `presetVersionReason` is `null`. Older M1 reports have a null version with `not_versioned`. |
+| `presetExperimental`, `presetCustomized` | Since M2-03, typed booleans: Gentle is experimental; a nonempty cleaning-options override marks the run customized. |
+| `sourceRevision` | `null` with `not_embedded`; no revision is inferred from the machine. |
+| `status`, `applicationExitCode` | Final `SUCCESS`, `WARNING` or `FAILED` outcome, including loudness and reporting warnings. |
+| `processingStatus`, `processingExitCode`, `nativeExitCode` | Processing/publication/owned-cleanup result kept separate from loudness/report warnings and the actual native exit. |
 | `reasonCodes`, `warningCodes`, `reporting` | Machine-readable cause labels, report completeness and local error messages. |
-| `timing`, `input` | UTC rendering start and post-processing/cleanup end; elapsed native rendering seconds; selected recording duration, size, path and stream metadata. |
-| `settings`, `dependencies` | Mode, bit depth, mono/RF64 choices, exact effective filter chain, executable paths and version banners. |
+| `timing`, `input` | UTC processing start and post-processing/cleanup end; elapsed analysis, rendering, validation and publication seconds; selected recording duration, size, path and stream metadata. |
+| `settings`, `dependencies` | Raw/Zoom mode, `loudnessMode` (`Fast` or `Accurate`), bit depth, mono/RF64 choices, typed effective cleaning settings since M2-03, exact effective filter chain, executable paths and version banners. |
 | `output`, `space` | Published state, validity, requested format, verified PCM parameters, paths/size, and pre-render capacity estimates. Requested format alone is not proof of a valid export. |
-| `requestedTargets`, `measurements`, `loudnessCompliance` | Requested LUFS/true-peak targets, measurement availability and independent compliance status. |
+| `requestedTargets`, `measurements`, `loudnessCompliance` | Requested integrated LUFS, true-peak dBTP and `loudnessRangeLu`; final-file measurement availability and compliance status. |
+| `loudnessTolerances`, `normalization` | Integrated/peak tolerances; requested processing mode, actual normalization type, fallback and analysis/render/final-measurement stage records. |
 | `diagnostics`, `privacy` | Separate native stdout/stderr, processing/output/cleanup errors, local report paths and a privacy notice. |
 
-Recording duration and elapsed rendering time are finite numbers or `null` with
+Preset identity is additive in schema version 1. It names the base filter values
+and order, separately from `toolVersion` (currently `2.3`), mode and export
+format. Since M2-03, customized renders also require their effective settings
+and exact graph; the base identity alone is insufficient. JSON, text and the
+summary carry the identity and customization flag. Redacted
+diagnostic exports continue to omit all preset/application version fields,
+including arbitrary values supplied in a report.
+
+Recording duration and elapsed processing time are finite numbers or `null` with
 companion reason fields. Each loudness measurement uses `{ value, reason }`;
-unavailable values are `null` with `not_measured`, invalid numeric values use
-`not_numeric`, and NaN/infinity use `nonfinite`. The application currently takes
-no independent loudness measurements, so compliance is `NOT_MEASURED` with
-`no_independent_measurement`. PCM validation does not establish loudness compliance.
+unmeasured values are `null` with `not_measured`, invalid numeric values use
+`not_numeric`, and NaN/infinity use `nonfinite`. Fast retains `NOT_MEASURED`
+with `no_independent_measurement`. Accurate supplies final encoded-file metrics
+when available and explicit reasons for undefined or failed measurements.
+Recognizing an undefined result never permits malformed measurement JSON to
+be treated as successful analysis. PCM validation alone does not establish
+loudness compliance.
 
 Keep a primary processing failure and its exit code when reporting also fails.
 Published audio with successful processing but incomplete reporting uses
 `status: WARNING`, `processingStatus: SUCCESS` and application exit `7`.
+Since M2-02 the same warning outcome also covers normalization fallback,
+undefined/out-of-tolerance loudness and render/final measurement diagnostic
+failure on valid PCM.
+`reporting.complete` and `reporting.errors` still describe only report writing;
+a loudness warning can coexist with complete reports.
 Report writers correct surviving artifacts after a companion or summary failure
 where storage permits. Owned-output cleanup finishes before this outcome is
 serialized. Later release of already-flushed report handles or read-only safety
@@ -58,6 +77,102 @@ UTF-32 LE/BE; without a BOM, strict UTF-8 is used when valid, otherwise the
 current Windows ANSI code page is used. Unrepresentable new text fails reporting
 rather than silently substituting characters. A failed append is rolled back to
 the previously held file length where storage permits.
+
+### Implemented Accurate fields — WAC-M2-02 (2026-10-02)
+
+Schema version 1 gains additive fields; existing reports remain accepted.
+`settings.loudnessMode` distinguishes the unchanged default Fast path from
+opt-in Accurate. The Original preset ID/version remains separate from this
+processing choice, Raw/Zoom selection and output encoding.
+
+`requestedTargets` contains `integratedLufs: -12`, `truePeakDbtp: -1.5` and
+`loudnessRangeLu: 7`. `loudnessTolerances` contains `integratedLufs: 0.5` and
+`truePeakDbtp: 0.2`. LRA is informational in the final-file check; no LRA
+compliance tolerance is implied by its normalization target.
+
+The `normalization` object contains:
+
+| Field | Meaning |
+| --- | --- |
+| `requestedMode` | `Fast` or `Accurate`. |
+| `prechain`, `analysisFilter`, `renderFilter`, `finalMeasurementFilter` | Effective filter strings. Fast records its unchanged `renderFilter`; the other three are null. |
+| `linearRequested`, `actualType` | Whether measured linear normalization was requested; the render's reported `linear` or `dynamic` type, or null when unavailable. |
+| `fallbackReason` | Null, `too_short`, `silence`, `undefined_loudness`, `measurement_out_of_range` or `ffmpeg_dynamic_fallback`. |
+| `analysis`, `render`, `final` | Stage objects, or null when that stage did not run. All three are null for Fast. |
+
+If Accurate analysis fails, `normalization.renderFilter` and
+`settings.exactFilters` are null because rendering was not attempted.
+
+Each stage has `status` (`PASSED` or `FAILED`), `arguments` (the actual argument
+array), `inputSource` (`file` or `held_output_stream`), `process` (the native
+wrapper result), `measurement` and `error`. A parsed `measurement` has
+`Available`, `Reason`, `InputI`, `InputTP`, `InputLRA`, `InputThreshold`,
+`TargetOffset` and `NormalizationType`. A PASSED stage means the process and
+JSON parsing succeeded; its measurements may still be unavailable. Malformed
+render JSON after native exit 0 does not by itself invalidate valid PCM; it
+adds `normalization_result_unavailable` to the published warning codes.
+Keep the actual normalization type separate from a requested fallback.
+Stage arguments, process output and errors may contain paths and native text.
+
+The top-level `measurements` describe the encoded export using the final
+analysis's input statistics. Never substitute that analysis's output statistics
+or pass-2 internal measurements. Required integrated/peak values must be finite
+and inside the declared tolerances for compliance to pass; an exceeded peak
+takes precedence over undefined integrated loudness. Under one second, I/LRA
+are null with `too_short`; any finite peak remains available. Other recognized
+undefined results use `silence` or `undefined_loudness`. Failed final analysis
+sets every metric to null with `measurement_failed`, has a FAILED diagnostic outcome
+and warning 7 after valid publication, while failed/malformed first-pass
+analysis or failed rendering prevents publication with processing code 4.
+Failure to start the analysis/render process retains dependency code 3.
+Warnings must survive later report outcome updates and report-write retries.
+
+`loudnessCompliance.status` is `NOT_MEASURED`, `PASSED`, `OUT_OF_TOLERANCE`,
+`UNMEASURABLE` or `FAILED`. The corresponding fixed reasons are
+`no_independent_measurement`, `true_peak_exceeded`,
+`loudness_out_of_tolerance`, `too_short`, `silence`, `undefined_loudness` or
+`measurement_failed`; PASSED has a null reason. A normalization fallback can
+produce overall WARNING/7 even when final compliance is PASSED.
+
+### Implemented cleaning fields — WAC-M2-03 (2026-10-02)
+
+Schema version 1 gains additive `presetExperimental`, `presetCustomized` and
+`settings.cleaning`. Earlier reports remain readable with these fields absent;
+no historical report is rewritten. `presetExperimental` is true for Gentle,
+false for Original. `presetCustomized` is true whenever a nonempty
+`-CleaningOptions` dictionary was supplied, including values equal to defaults.
+Identity remains the selected base candidate rather than a new preset ID for
+each override. Local text/summary reports also mark experimental/customized
+state and retain the exact filter chain.
+
+For Raw, `settings.cleaning` is a typed object with these exact field names:
+
+| Field | Type / meaning |
+| --- | --- |
+| `schemaVersion` | Integer `1` for this cleaning-settings contract. |
+| `Declip`, `Declick`, `Denoise`, `Gate` | Boolean effective stage toggles. |
+| `HighpassHz` | Finite number, 20 through 200 Hz. |
+| `NoiseFloorDb` | Finite number, -80 through -20 dB. |
+| `NoiseReductionDb` | Finite number, 0.01 through 20 dB. |
+| `GateThresholdDb` | Finite number, -80 through -20 dBFS. |
+| `GateRangeDb` | Finite number, -60 through 0 dB. |
+
+Bounds are inclusive. Numeric fields retain the validated effective values
+even when denoise or gate is disabled; their toggles determine whether the
+stage is present. Zoom has `settings.cleaning: null`, because it applies no
+cleaning. It accepts only Original and no nonempty override.
+
+Original Raw has all toggles true, 80 Hz, -25/12 dB noise settings and nominal
+-45/-25 dB gate settings. Gentle Raw has declip/declick/gate false, denoise
+true, 60 Hz and -35/6 dB noise settings; its dormant gate settings remain
+-45/-25 dB. Nominal gate defaults preserve the rounded legacy linear literals
+`threshold=0.0056` and `range=0.056`. Other gate values use `10^(dB/20)`.
+Original's baseline graph leaves `afftdn nr` implicit; 12 dB is the default
+of the tested build. Reproduction needs the base identity, customization flag,
+typed settings, `settings.exactFilters`, processing mode, FFmpeg build and
+output/channel policy together. Accurate additionally retains its actual
+analysis/render graphs under `normalization`. These flags record selection;
+they do not certify listening approval or processing success.
 
 ### Explicit redacted diagnostic export
 
@@ -76,6 +191,87 @@ job IDs, revision/version banners, exact filters, raw diagnostics and arbitrary
 error/reason text. Invalid or unsupported values become `null` or a fixed
 availability reason. The original report remains local and unchanged.
 The export carries a review warning; the application never uploads it.
+
+M2-02 adds allowlisted loudness mode, actual normalization type, the boolean
+`linearRequested`, the fixed fallback reasons listed above and loudness
+compliance status/reason. Measurement reasons retain only the fixed availability
+labels above, plus `unavailable`, `not_measured`, `nonfinite` and `not_numeric`.
+Stage records, arguments, filters, stage measurements, native output and error
+strings are omitted. Targets and tolerances are also omitted from this smaller
+diagnostic schema. Earlier version 1 reports remain accepted; absent new labels
+become null.
+
+M2-03 keeps this projection unchanged: cleaning settings, preset identity,
+`presetExperimental` and `presetCustomized` are omitted, even if arbitrary
+values are injected into a source report. The redacted export is insufficient
+to reproduce a cleaning candidate; the detailed original stays local.
+
+## Preview JSON
+
+### Implemented preview report — WAC-M2-04 (2026-10-02)
+
+Preview has a separate detailed schema-1 record, `reportType: preview`,
+written as `WinAudioClean_Preview_<jobId>.json` and a matching text file.
+It does not append an ordinary full-render summary entry. Record application
+version, status/exit, selected source stream, dependencies/build, preset base
+identity and candidate/customization flags. `settings` retains effective
+cleaning values, channel/encoding choices, Fast/Accurate and the unchanged
+`fullProfileFilters`. Asset measurements describe encoded excerpts; Accurate's
+Analysis measurement separately describes the bounded input context. Neither
+establishes full-program compliance.
+
+`range` contains requested/default duration information plus quantized
+`startSeconds`, `durationSeconds`, `startSamples`, `durationSamples`,
+`windowStartSeconds`, `windowDurationSeconds`, `trimStartSamples`,
+`trimEndSamples`, `preRollSeconds` and `postRollSeconds`. `alignment` records
+zero `compensationSamples`, `filterDelayPolicy: preserved`, the known graph's
+approximate reference delay or null for uncalibrated custom graphs, a fixed
+reference reason and a disclosed interval limitation. `boundaryNotice`
+explains bounded warmup, EOF and normalization differences.
+
+`timeline` carries `streamIndex`, `streamStartSeconds`, nullable
+`formatStartSeconds`, `originReason`, `absoluteSeekSeconds` and
+`seekTimestamp: true`. The source-relative window uses an absolute seek to
+the selected stream's origin plus its window start, including tracks that
+begin later than another container track. Full-render probe/argument policy
+remains separate.
+
+The timeline also records sample rate, rational `timeBase` (or null for a
+WAV fallback), `timestampResolutionSeconds`, `seekToleranceSamples`,
+`seekToleranceSeconds`, a fixed `resolutionReason` and `positionNote`.
+The seek bound is `ceil(48000 * timeBaseSeconds) + 1`, at most 480 samples;
+unknown/coarse non-WAV clocks fail closed. The development evidence records
+actual source-frame differences within that bound. These fields disclose
+container seek uncertainty separately from the unchanged graph delay.
+
+`assets` has exactly Original, Processed, CompareOriginal and CompareProcessed
+keys. Each carries its path, format, duration/frame count, gain, exact graph,
+encoded-file `{ value, reason }` metrics and `measurementStage`. `stages`
+records actual arguments, input source and native results for each render,
+plus Analysis for Accurate. Original/Processed use `bounded_file_window`;
+comparison renders use `held_excerpt_stream`; all asset meters use
+`held_output_stream`. Native diagnostics and paths stay local.
+
+`normalization.scope` is `bounded_context_window`, with requested mode,
+analysis/prechain/render strings and observed normalization type/fallback.
+`matching` records availability/reason/status, `commonTargetLufs`, the two
+attenuation gains, `headroomTargetDbtp: -1.7`, `peakCeilingDbtp: -1.5`,
+`toleranceLu: 0.2` and observed `pairDifferenceLu` or null. Unmeasurable
+matching has no invented common LUFS target. A complete report can coexist
+with WARNING/7 for unavailable/nonmatching comparison or normalization
+fallback. Keep the four-asset space estimate and report-writing completeness
+separate from audio matching.
+
+No preview state is saved and no report/audio uploads automatically. The
+existing redacted diagnostic projection remains the ordinary report subset;
+it drops arbitrary preview assets, range, graphs, stages and paths rather
+than treating preview metadata as full-render measurements. Failed preview
+processing/publication requests use console diagnostics and owned rollback.
+Once all four valid assets are published, report-writing failure preserves
+them with WARNING/7, `reporting.complete: false`, errors and null report paths.
+Owned incomplete reports are retired/removed where possible; the console
+remains authoritative when no corrected report could be written. A crash/storage fault
+can leave incomplete artifacts, so this is no multi-file atomicity guarantee.
 
 ## Website release metadata
 

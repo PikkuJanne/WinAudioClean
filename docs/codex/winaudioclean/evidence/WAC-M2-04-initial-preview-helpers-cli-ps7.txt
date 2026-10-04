@@ -1,0 +1,138 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (32 files; shell 7.6.5).
+Static gate passed; 176 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 89 tests in 226ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Preview.Tests.ps1'
+Describing AC-043: preview ranges are finite bounded sample-aligned excerpts
+  [+] rejects negative start 119ms (90ms|29ms)
+  [+] rejects empty start 5ms (3ms|1ms)
+  [+] rejects blank start 4ms (2ms|1ms)
+  [+] rejects null start 5ms (3ms|2ms)
+  [+] rejects locale decimal start 10ms (9ms|1ms)
+  [+] rejects exponent start 11ms (3ms|7ms)
+  [+] rejects NaN start 18ms (16ms|2ms)
+  [+] rejects infinite start 5ms (4ms|1ms)
+  [+] rejects filter injection start 3ms (2ms|1ms)
+  [+] rejects argument injection start 13ms (12ms|1ms)
+  [+] rejects expression start 3ms (2ms|1ms)
+  [+] rejects start at end 13ms (12ms|1ms)
+  [+] rejects start beyond end 5ms (4ms|1ms)
+  [+] rejects negative duration 9ms (8ms|1ms)
+  [+] rejects zero duration 10ms (5ms|5ms)
+  [+] rejects duration over maximum 4ms (3ms|1ms)
+  [+] rejects duration shorter than half a sample 16ms (15ms|1ms)
+  [+] rejects empty duration 9ms (7ms|2ms)
+  [+] rejects blank duration 5ms (3ms|1ms)
+  [+] rejects null duration 7ms (5ms|2ms)
+  [+] rejects locale decimal duration 7ms (5ms|2ms)
+  [+] rejects exponent duration 4ms (3ms|1ms)
+  [+] rejects NaN duration 6ms (5ms|1ms)
+  [+] rejects infinite duration 4ms (3ms|1ms)
+  [+] rejects filter injection duration 4ms (3ms|1ms)
+  [+] rejects argument injection duration 4ms (3ms|1ms)
+  [+] rejects expression duration 4ms (3ms|1ms)
+  [+] rejects unavailable input duration zero 12ms (10ms|2ms)
+  [+] rejects unavailable input duration negative 5ms (4ms|1ms)
+  [+] rejects unavailable input duration NaN 4ms (3ms|1ms)
+  [+] rejects unavailable input duration positive infinity 4ms (3ms|1ms)
+  [+] rejects unavailable input duration negative infinity 3ms (2ms|1ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at start 84ms (83ms|1ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at middle 21ms (15ms|6ms)
+  [+] uses the implicit 45-second default and bounded five-second rolls at near end 15ms (13ms|2ms)
+  [+] clips only the implicit default for a 0.2-second short file 25ms (24ms|2ms)
+  [+] clips only the implicit default for a 3-second short file 6ms (5ms|1ms)
+  [+] clips only the implicit default for a 44-second short file 7ms (6ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 11ms (10ms|1ms)
+  [+] rejects an explicitly supplied duration beyond the remaining interval 4ms (3ms|1ms)
+  [+] accepts an exact explicit end boundary and the 60-second maximum 7ms (6ms|1ms)
+  [+] quantizes start and duration to 48 kHz samples using nearest rounding 10ms (9ms|1ms)
+  [+] parses invariant fractional input in en-US 14ms (13ms|1ms)
+  [+] parses invariant fractional input in de-DE 15ms (14ms|1ms)
+  [+] parses invariant fractional input in fi-FI 5ms (4ms|1ms)
+
+Describing AC-044: comparison gain is separate, common and attenuation only
+  [+] matches normal pair at a common target with the true-peak safety margin 59ms (58ms|2ms)
+  [+] matches quiet source at a common target with the true-peak safety margin 14ms (13ms|1ms)
+  [-] matches source peak guard at a common target with the true-peak safety margin 16ms (15ms|1ms)
+   Expected the actual value to be less than 0.0000001, but got 0.300000000000001.
+   at [math]::Abs($plan.OriginalGainDb - ($Target - $OriginalI)) | Should -BeLessThan 0.0000001, <repo>\tests\WinAudioClean.Preview.Tests.ps1:145
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Preview.Tests.ps1:145
+  [-] matches fractional guard below one dB at a common target with the true-peak safety margin 8ms (7ms|1ms)
+   Expected the actual value to be less than 0.0000001, but got 0.399999999999999.
+   at [math]::Abs($plan.OriginalGainDb - ($Target - $OriginalI)) | Should -BeLessThan 0.0000001, <repo>\tests\WinAudioClean.Preview.Tests.ps1:145
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Preview.Tests.ps1:145
+  [-] matches processed peak guard at a common target with the true-peak safety margin 6ms (6ms|1ms)
+   Expected the actual value to be less than 0.0000001, but got 0.300000000000001.
+   at [math]::Abs($plan.OriginalGainDb - ($Target - $OriginalI)) | Should -BeLessThan 0.0000001, <repo>\tests\WinAudioClean.Preview.Tests.ps1:145
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Preview.Tests.ps1:145
+  [+] matches already matched at a common target with the true-peak safety margin 13ms (12ms|1ms)
+  [-] labels unavailable too_short without inventing integrated loudness 21ms (20ms|1ms)
+   Expected the actual value to be less than 0.0000001, but got 0.2.
+   at [math]::Abs($plan.OriginalGainDb + 1.2) | Should -BeLessThan 0.0000001, <repo>\tests\WinAudioClean.Preview.Tests.ps1:167
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Preview.Tests.ps1:167
+  [-] labels unavailable silence without inventing integrated loudness 6ms (5ms|1ms)
+   Expected the actual value to be less than 0.0000001, but got 0.2.
+   at [math]::Abs($plan.OriginalGainDb + 1.2) | Should -BeLessThan 0.0000001, <repo>\tests\WinAudioClean.Preview.Tests.ps1:167
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Preview.Tests.ps1:167
+  [-] labels unavailable undefined_loudness without inventing integrated loudness 7ms (6ms|1ms)
+   Expected the actual value to be less than 0.0000001, but got 0.2.
+   at [math]::Abs($plan.OriginalGainDb + 1.2) | Should -BeLessThan 0.0000001, <repo>\tests\WinAudioClean.Preview.Tests.ps1:167
+   at <ScriptBlock>, <repo>\tests\WinAudioClean.Preview.Tests.ps1:167
+  [+] leaves silent null peaks at zero gain and gives too_short priority 16ms (15ms|1ms)
+  [+] rejects invalid measured Available for string availability 12ms (11ms|1ms)
+  [+] rejects invalid measured InputI for numeric string 4ms (3ms|1ms)
+  [+] rejects invalid measured InputI for boolean 9ms (6ms|3ms)
+  [+] rejects invalid measured InputI for array 7ms (5ms|2ms)
+  [+] rejects invalid measured InputI for null 7ms (6ms|1ms)
+  [+] rejects invalid measured InputI for NaN 4ms (3ms|1ms)
+  [+] rejects invalid measured InputI for infinity 3ms (2ms|1ms)
+  [+] rejects invalid measured InputTP for numeric string 7ms (6ms|2ms)
+  [+] rejects invalid measured InputTP for boolean 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for array 5ms (4ms|1ms)
+  [+] rejects invalid measured InputTP for null 6ms (5ms|1ms)
+  [+] rejects invalid measured InputTP for NaN 7ms (5ms|1ms)
+  [+] rejects invalid measured InputTP for infinity 3ms (2ms|1ms)
+  [+] rejects unknown unavailable reasons rather than copying an arbitrary label 8ms (7ms|1ms)
+
+Describing AC-043/045: preview commands bound one selected input and preserve mastering settings
+  [+] uses a bounded window and exact sample trim in en-US 88ms (86ms|2ms)
+  [+] uses a bounded window and exact sample trim in de-DE 17ms (17ms|1ms)
+  [+] uses a bounded window and exact sample trim in fi-FI 15ms (14ms|1ms)
+  [+] uses held pipe PCM and only comparison gain for a separately matched asset 25ms (25ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 16ms (12ms|4ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 7ms (4ms|2ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 5ms (3ms|1ms)
+  [+] rejects an already bounded or missing input instead of adding conflicting windows 5ms (4ms|1ms)
+  [+] estimates all four preview PCM assets plus headroom for 1 channels and 16 bits 53ms (52ms|2ms)
+  [+] estimates all four preview PCM assets plus headroom for 2 channels and 24 bits 8ms (6ms|1ms)
+
+Describing AC-043/045: CLI preview arguments fail before dependency and output side effects
+  [+] returns configuration exit 2 before native startup for start without preview 1.42s (1.41s|6ms)
+  [+] returns configuration exit 2 before native startup for duration without preview 1.31s (1.31s|1ms)
+  [+] returns configuration exit 2 before native startup for negative start 1.26s (1.26s|1ms)
+  [+] returns configuration exit 2 before native startup for empty start 1.28s (1.28s|1ms)
+  [+] returns configuration exit 2 before native startup for locale decimal start 1.2s (1.2s|1ms)
+  [+] returns configuration exit 2 before native startup for infinite start 1.24s (1.23s|1ms)
+  [+] returns configuration exit 2 before native startup for zero duration 1.35s (1.35s|0ms)
+  [+] returns configuration exit 2 before native startup for duration beyond maximum 1.21s (1.21s|1ms)
+  [+] returns configuration exit 2 before native startup for injected duration 1.24s (1.24s|1ms)
+  [+] returns configuration exit 2 before native startup for expression duration 1.26s (1.26s|0ms)
+Tests completed in 14.85s
+Tests Passed: 83, Failed: 6, Skipped: 0, Inconclusive: 0, NotRun: 0
+Exception: <repo>\scripts\Invoke-Tests.ps1:128
+Line |
+ 128 |      throw "Pester failed: $($result.FailedCount) test(s), $($result.F …
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Pester failed: 6 test(s), 0 container(s), 0 block(s).

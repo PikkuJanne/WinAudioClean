@@ -525,8 +525,23 @@
       "title": "Claims audit",
       "procedure": "Search all shipped docs/help/website drafts for old claims and compare parameter descriptions to official docs.",
       "expected": "Units and limitations are accurate; -12 LUFS is a chosen preset, not a universal broadcast standard.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-01-claims-review.md",
+        "evidence/WAC-M2-01-filter-options.json",
+        "evidence/WAC-M2-01-full-ps51.txt",
+        "evidence/WAC-M2-01-full-ps7.txt",
+        "evidence/WAC-M2-01-harness-timeout.json",
+        "evidence/WAC-M2-01-help-console.json",
+        "evidence/WAC-M2-01-initial-targeted-ps51.txt",
+        "evidence/WAC-M2-01-original-compatibility.json",
+        "evidence/WAC-M2-01-targeted-final-ps51.txt",
+        "evidence/WAC-M2-01-targeted-final-ps7.txt",
+        "evidence/WAC-M2-01-targeted-ps51.txt",
+        "evidence/WAC-M2-01-targeted-ps7.txt",
+        "evidence/WAC-M2-01.md",
+        "evidence/WAC-M2-01-source.json"
+      ]
     },
     {
       "id": "AC-035",
@@ -534,8 +549,23 @@
       "title": "Preset compatibility",
       "procedure": "Compare Original Raw/Zoom filter strings and synthetic output with the baseline on the same build/output settings.",
       "expected": "Filter values/order remain; any differences are explained by explicit encoder behavior rather than silent retuning.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-01-claims-review.md",
+        "evidence/WAC-M2-01-filter-options.json",
+        "evidence/WAC-M2-01-full-ps51.txt",
+        "evidence/WAC-M2-01-full-ps7.txt",
+        "evidence/WAC-M2-01-harness-timeout.json",
+        "evidence/WAC-M2-01-help-console.json",
+        "evidence/WAC-M2-01-initial-targeted-ps51.txt",
+        "evidence/WAC-M2-01-original-compatibility.json",
+        "evidence/WAC-M2-01-targeted-final-ps51.txt",
+        "evidence/WAC-M2-01-targeted-final-ps7.txt",
+        "evidence/WAC-M2-01-targeted-ps51.txt",
+        "evidence/WAC-M2-01-targeted-ps7.txt",
+        "evidence/WAC-M2-01.md",
+        "evidence/WAC-M2-01-source.json"
+      ]
     },
     {
       "id": "AC-036",
@@ -543,8 +573,23 @@
       "title": "Preset version report",
       "procedure": "Select Original from existing interactive paths and a test invocation.",
       "expected": "The effective preset ID/version appears in the report and is not confused with the application version.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-01-claims-review.md",
+        "evidence/WAC-M2-01-filter-options.json",
+        "evidence/WAC-M2-01-full-ps51.txt",
+        "evidence/WAC-M2-01-full-ps7.txt",
+        "evidence/WAC-M2-01-harness-timeout.json",
+        "evidence/WAC-M2-01-help-console.json",
+        "evidence/WAC-M2-01-initial-targeted-ps51.txt",
+        "evidence/WAC-M2-01-original-compatibility.json",
+        "evidence/WAC-M2-01-targeted-final-ps51.txt",
+        "evidence/WAC-M2-01-targeted-final-ps7.txt",
+        "evidence/WAC-M2-01-targeted-ps51.txt",
+        "evidence/WAC-M2-01-targeted-ps7.txt",
+        "evidence/WAC-M2-01.md",
+        "evidence/WAC-M2-01-source.json"
+      ]
     },
     {
       "id": "AC-037",
@@ -552,8 +597,12 @@
       "title": "Pass consistency",
       "procedure": "Capture both commands for Raw/Zoom, selected stream, mono/stereo and numeric locale variations.",
       "expected": "Prechains, stream, channel policy and parameters match; second pass uses valid pass-1 measurements and invariant decimals.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-02.md",
+        "evidence/WAC-M2-02-source.json",
+        "evidence/WAC-M2-02-measured-loudness.json"
+      ]
     },
     {
       "id": "AC-038",
@@ -561,8 +610,12 @@
       "title": "Output measurements",
       "procedure": "Run eligible full-length fixtures at -12 LUFS / -1.5 dBTP and verify final-file loudness/peak.",
       "expected": "Achievable cases meet declared tolerances; constraints/fallbacks are reported and out-of-tolerance results are not called target-compliant.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-02.md",
+        "evidence/WAC-M2-02-source.json",
+        "evidence/WAC-M2-02-measured-loudness.json"
+      ]
     },
     {
       "id": "AC-039",
@@ -570,8 +623,12 @@
       "title": "Undefined and fallback cases",
       "procedure": "Use silence, <1-second audio, restricted peak headroom, high LRA and malformed measurement output.",
       "expected": "No unchecked nonfinite values, infinite retries, division errors, or false exact-target claims; fallback is logged.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-02.md",
+        "evidence/WAC-M2-02-source.json",
+        "evidence/WAC-M2-02-measured-loudness.json"
+      ]
     },
     {
       "id": "AC-040",
@@ -579,8 +636,12 @@
       "title": "Parameter validation",
       "procedure": "Test valid bounds, invalid values, unknown settings and filter-like injected strings.",
       "expected": "Only typed allowlisted settings construct the graph; no arbitrary filter/command injection through configuration.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-03.md",
+        "evidence/WAC-M2-03-source.json",
+        "evidence/WAC-M2-03-gentle-cleaning.json"
+      ]
     },
     {
       "id": "AC-041",
@@ -588,8 +649,13 @@
       "title": "Defaults unchanged",
       "procedure": "Run the existing no-extra-options Raw and Zoom paths after adding presets.",
       "expected": "Original filters remain the default; Zoom does not accidentally enable cleaning stages.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-03.md",
+        "evidence/WAC-M2-03-source.json",
+        "evidence/WAC-M2-03-gentle-cleaning.json",
+        "evidence/WAC-M2-03-original-preservation.json"
+      ]
     },
     {
       "id": "AC-042",
@@ -597,8 +663,12 @@
       "title": "Listening candidate record",
       "procedure": "Compare original/gentle on the approved local corpus or record why unavailable.",
       "expected": "Reviewer evaluates words, consonants, breaths, voice character and artifacts; synthetic checks are not presented as listening approval.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-03.md",
+        "evidence/WAC-M2-03-source.json",
+        "evidence/WAC-M2-03-listening.md"
+      ]
     },
     {
       "id": "AC-043",
@@ -606,8 +676,14 @@
       "title": "Range and alignment",
       "procedure": "Preview from start, middle and near end of a known timed fixture plus a very short recording.",
       "expected": "Valid matched intervals only; no unexplained offset, overwrite or out-of-range processing.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-04.md",
+        "evidence/WAC-M2-04-source.json",
+        "evidence/WAC-M2-04-preview.json",
+        "evidence/WAC-M2-04-targeted-ps51.txt",
+        "evidence/WAC-M2-04-targeted-ps7.txt"
+      ]
     },
     {
       "id": "AC-044",
@@ -615,8 +691,14 @@
       "title": "Comparison gain",
       "procedure": "Measure the original/processed comparison pair with the documented matching method.",
       "expected": "Level matching is separate from the mastering preset and does not introduce clipping; unmeasurable cases are clearly labeled.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-04.md",
+        "evidence/WAC-M2-04-source.json",
+        "evidence/WAC-M2-04-preview.json",
+        "evidence/WAC-M2-04-targeted-ps51.txt",
+        "evidence/WAC-M2-04-targeted-ps7.txt"
+      ]
     },
     {
       "id": "AC-045",
@@ -624,8 +706,14 @@
       "title": "No hidden processing",
       "procedure": "Create/cancel a preview and inspect files, current settings and process state.",
       "expected": "No full recording starts implicitly, source is unchanged and only run-owned preview files are cleaned up.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-04.md",
+        "evidence/WAC-M2-04-source.json",
+        "evidence/WAC-M2-04-preview.json",
+        "evidence/WAC-M2-04-targeted-ps51.txt",
+        "evidence/WAC-M2-04-targeted-ps7.txt"
+      ]
     },
     {
       "id": "AC-046",
@@ -633,8 +721,12 @@
       "title": "Objective audio gate",
       "procedure": "Run all applicable M2 numeric and structural checks.",
       "expected": "Mandatory implemented-mode checks pass; ineligible/undefined metrics are explicitly classified.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-05.md",
+        "evidence/WAC-M2-05-source.json",
+        "evidence/WAC-M2-05-classifications.json"
+      ]
     },
     {
       "id": "AC-047",
@@ -642,8 +734,12 @@
       "title": "Human gate integrity",
       "procedure": "Inspect listening template, corpus consent and approval records.",
       "expected": "Real reviewer results are attributable; missing listening approval prevents default promotion, not a fabricated pass.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-05.md",
+        "evidence/WAC-M2-05-source.json",
+        "evidence/WAC-M2-05-listening.md"
+      ]
     },
     {
       "id": "AC-048",
@@ -651,8 +747,12 @@
       "title": "Reproducible settings",
       "procedure": "Recreate an output from the report using the same build/input/settings and push the checkpoint.",
       "expected": "Preset/format choices are traceable and the exact accepted revision is recoverable from GitHub.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": [
+        "evidence/WAC-M2-05.md",
+        "evidence/WAC-M2-05-source.json",
+        "evidence/WAC-M2-05-reproduction.json"
+      ]
     },
     {
       "id": "AC-049",

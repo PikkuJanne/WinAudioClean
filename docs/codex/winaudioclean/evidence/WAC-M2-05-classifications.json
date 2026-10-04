@@ -1,0 +1,5006 @@
+{
+  "task": "WAC-M2-05",
+  "acceptance": "AC-046",
+  "method": "Post-run audit of the same local reports hashed by the passed media matrices. This is derived classification evidence, not additional renders or compliance approval.",
+  "matrix_evidence_sha256": {
+    "evidence/WAC-M2-05-original.json": "04e12709b652525a13f755b3f547a179cd8436c80f26a3158d90d2b85997d5c0",
+    "evidence/WAC-M2-05-measured.json": "65a86fa20ba84474cfb5ae7ed31d78912c42def19a0edcf5587c9bd1280042f1",
+    "evidence/WAC-M2-05-gentle.json": "a12da70d83c102c5920317d25250a6938d15c7e37773abfe9939cf8cc0d8a609",
+    "evidence/WAC-M2-05-preview.json": "ea4df9f02ac36cdaa33a56df13aa9ed5ee66c056b8d7be4fed619bc4e1d2649a",
+    "evidence/WAC-M2-05-encoding.json": "93301f582f55914353b02ec0069b1acc74f1bca91b05c8c63d8ed0dc8d76e389"
+  },
+  "case_count": 116,
+  "all_processing_checks_pass": true,
+  "classification_counts": [
+    {
+      "matrix": "encoding",
+      "classification": "NOT_MEASURED",
+      "reason": "no_independent_measurement",
+      "exit_code": 0,
+      "count": 40
+    },
+    {
+      "matrix": "gentle",
+      "classification": "NOT_MEASURED",
+      "reason": "no_independent_measurement",
+      "exit_code": 0,
+      "count": 8
+    },
+    {
+      "matrix": "gentle",
+      "classification": "OUT_OF_TOLERANCE",
+      "reason": "loudness_out_of_tolerance",
+      "exit_code": 7,
+      "count": 2
+    },
+    {
+      "matrix": "gentle",
+      "classification": "PASSED",
+      "reason": null,
+      "exit_code": 0,
+      "count": 4
+    },
+    {
+      "matrix": "gentle",
+      "classification": "PASSED",
+      "reason": null,
+      "exit_code": 7,
+      "count": 2
+    },
+    {
+      "matrix": "measured",
+      "classification": "OUT_OF_TOLERANCE",
+      "reason": "loudness_out_of_tolerance",
+      "exit_code": 7,
+      "count": 6
+    },
+    {
+      "matrix": "measured",
+      "classification": "PASSED",
+      "reason": null,
+      "exit_code": 0,
+      "count": 4
+    },
+    {
+      "matrix": "measured",
+      "classification": "PASSED",
+      "reason": null,
+      "exit_code": 7,
+      "count": 2
+    },
+    {
+      "matrix": "measured",
+      "classification": "UNMEASURABLE",
+      "reason": "silence",
+      "exit_code": 7,
+      "count": 2
+    },
+    {
+      "matrix": "measured",
+      "classification": "UNMEASURABLE",
+      "reason": "too_short",
+      "exit_code": 7,
+      "count": 2
+    },
+    {
+      "matrix": "original",
+      "classification": "NOT_MEASURED",
+      "reason": "no_independent_measurement",
+      "exit_code": 0,
+      "count": 20
+    },
+    {
+      "matrix": "preview",
+      "classification": "PASSED",
+      "reason": null,
+      "exit_code": 0,
+      "count": 18
+    },
+    {
+      "matrix": "preview",
+      "classification": "PASSED",
+      "reason": null,
+      "exit_code": 7,
+      "count": 2
+    },
+    {
+      "matrix": "preview",
+      "classification": "UNMEASURABLE",
+      "reason": "silence",
+      "exit_code": 7,
+      "count": 2
+    },
+    {
+      "matrix": "preview",
+      "classification": "UNMEASURABLE",
+      "reason": "too_short",
+      "exit_code": 7,
+      "count": 2
+    }
+  ],
+  "unsupported_domain": {
+    "positive_integrated_or_threshold_lufs": "finite but rejected by inherited parser; not an undefined/silence result; ordinary Fast bypasses meter",
+    "fresh_rejection_regressions": [
+      "positive input integrated loudness",
+      "positive output integrated loudness",
+      "positive threshold",
+      "positive output threshold"
+    ]
+  },
+  "limits": [
+    "FFmpeg meter is the same implementation, not independently calibrated equipment.",
+    "Timestamp policy is fixture-tested; no universal codec seek guarantee.",
+    "Speech listening unperformed; Original defaults unchanged."
+  ],
+  "cases": [
+    {
+      "matrix": "original",
+      "id": "ps51-stereo-raw-16",
+      "local_report_sha256": "e23660364f906499433e08ca63e00a0a26113511329803a8873957fb9adfeee3",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-stereo-zoom-16",
+      "local_report_sha256": "bb47723643c04c0ebf6535f88ec344b12e69221da5059dfaadd4025d1ec42c98",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-mono-raw-16",
+      "local_report_sha256": "822c294bd2385f55936a8b6937b52db9797448e08c1d604acb4c1bf1910e8104",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-mono-zoom-16",
+      "local_report_sha256": "c413a311d19decb6ecf9dc5c9cbdc48533a053e9a3ec1db176b06141b516e4f0",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-short-raw-16",
+      "local_report_sha256": "119c850c76ba4dd132170061889bc07240e9150e1576343d64379e706b3cc6b3",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-short-zoom-16",
+      "local_report_sha256": "635d00e043cd9bb25e3a1542853770b823459205f8a987bb24dbede8f8454892",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-silence-raw-16",
+      "local_report_sha256": "d4cf025fdd33afb78b140f5ed95dfa9cad887f9f9528f2541f6d785b5bd21686",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-silence-zoom-16",
+      "local_report_sha256": "c89ca9359d21c849a1d1e0eb18cb013d72154777f196461e05541924d0436bef",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-stereo-raw-24",
+      "local_report_sha256": "d68da7e493572cc395537aa64bb51d64a4b1eca07a4a238d0a18e2b83d03fcc1",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps51-stereo-zoom-24",
+      "local_report_sha256": "8c54233f49d3b71e14843d88e2d980624857b11d8ebaefbfe4391ffbee679a34",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-stereo-raw-16",
+      "local_report_sha256": "28659a2d136b7e7e17b2894dc2d848ec77bfe18024c1fdcd316abc9e518bac24",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-stereo-zoom-16",
+      "local_report_sha256": "8b618b325020cf6a2a437a79b659ef066464ff706f1e5b42b2e10a238a352e18",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-mono-raw-16",
+      "local_report_sha256": "ef972e3ba887208854922fac5ab1744ac4309389b261b7e629d1d5f4a1f48820",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-mono-zoom-16",
+      "local_report_sha256": "1bed61ad377f47030834459200c970b85855d81f2d7de736ea3054cdab8d3aa4",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-short-raw-16",
+      "local_report_sha256": "2d86929fd059bc0b9b5f83299eb87f9375e55f3224bdf667b0efb955df0ddf82",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-short-zoom-16",
+      "local_report_sha256": "a9cd348f1eca0ff369fecb4c9b6757e63d2416707ca116be43ac582dea271a51",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-silence-raw-16",
+      "local_report_sha256": "d07641cf6ce777acebf4f8b8bcb9848d3c618b88b43811ab5d49b0ae0ac81269",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-silence-zoom-16",
+      "local_report_sha256": "7fac0f104fa7fd0b296fc28f03dac3ea1e709f1688162e9f9268ca3aa8154a34",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-stereo-raw-24",
+      "local_report_sha256": "2cdb7c02859b16a06ecd1757fdcf87ce8438045a1e90b51731e7c7fe6e17fb6b",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "original",
+      "id": "ps7-stereo-zoom-24",
+      "local_report_sha256": "74aa44782bae496e126bd866318db36c740b2290ec9931fc39186c35e00cc33d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-selected-raw-16",
+      "local_report_sha256": "16e846440a64ac6cd755cd53753146a05083023c42f52c92d7d9d3562fead117",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.8,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.8,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-stereo-zoom-24",
+      "local_report_sha256": "c72e503c3920174e73383619a1d0a8f02435f041b2d0e84b1af45d9578314798",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -11.99,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.97,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.7,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-mono-raw-24",
+      "local_report_sha256": "c62ca6f47a56161c83e11837dbe5e719d1fa34aaced57429fa1f294d74d39639",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.3,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-downmix-raw-16",
+      "local_report_sha256": "4cf75b80a3696af1f281071e54f7aae310e9ecb375ef30c76d51039ae1708687",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.49,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-high-lra-zoom-16",
+      "local_report_sha256": "bee56ca5eb0fb62cb303b3e5b3c32e08d69ed5e8b0500ddaf2d7a79869020e71",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.54,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 21.5,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-peaks-zoom-24",
+      "local_report_sha256": "e6ca545ace277700728589e3ae41358129fb96de17745d86590310dceb7ed0cb",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -14.66,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.45,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.3,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-silence-raw-16",
+      "local_report_sha256": "bc40463658afe53057e582175cd7bb8605a0388ff469b3dd43dfdb8231b70bc5",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "silence"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "silence",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps51-short-zoom-16",
+      "local_report_sha256": "2e04bcce177a7c4715aa935273545d250f0165b02f5c9fed9bccfe8d305df6bd",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "too_short"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "too_short",
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-selected-raw-16",
+      "local_report_sha256": "573e45cb52d3026ae16d7f5365270b5eeb9c93733a0b66f79e6e7b162f13a1f7",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.0,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.8,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.8,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-stereo-zoom-24",
+      "local_report_sha256": "cc6203fc9e6fe781b8b758784688227a35d6539f45c2fc4163e3c4a21f48c15d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -11.99,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.97,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.7,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-mono-raw-24",
+      "local_report_sha256": "3c7bac8d641fe5ed995571b16762314bf82321fde2674dca85a36c4d70f5a354",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.3,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-downmix-raw-16",
+      "local_report_sha256": "23487072d0d67e9a6678be560be824dfa3ce17a4a54ce54d0e18f669b2abe0cc",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.49,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.0,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-high-lra-zoom-16",
+      "local_report_sha256": "8f871e53dc779d50abf80da217d83f69a31e76631e3389a875602b4e32c2890a",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.54,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 21.5,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-peaks-zoom-24",
+      "local_report_sha256": "103263e818449ad39a141d8cbdc2f43e57febd7a04b110c4284750706a84298e",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -14.66,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.45,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.3,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-silence-raw-16",
+      "local_report_sha256": "7815e0f70236613e09dd72132f8b4e91bf64a29efc79761cef077f910f9cb2e7",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "silence"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "silence",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "measured",
+      "id": "ps7-short-zoom-16",
+      "local_report_sha256": "23f4183e04910c87bbf5754cdd767636c5ef9f4b7790596aff6955f867ead13a",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "too_short"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "too_short",
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-gentle-fast-stereo16",
+      "local_report_sha256": "485e4fc4b156c9fe8f06f023d680d0f249c954a2912b664c5d24f17380d022e1",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-gentle-accurate-stereo24",
+      "local_report_sha256": "e7a421a9fa1cd14ce5d22d80731b16dab7102674d37b9d933c978046792b8ba1",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.56,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.5,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-gentle-fast-mono24",
+      "local_report_sha256": "c34867345a9ec06c0901626d46c93c451ea3a6505b0c787eda50e2688488b46d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-gentle-accurate-downmix16",
+      "local_report_sha256": "09456ee70d02d5c8c40b0cebbe8b8ec514cb2ba6771c174faf9f70b83df12e8f",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -13,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.2,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-original-disabled-fast-selected16",
+      "local_report_sha256": "6e60b14dfe55c335e7aae12545e267642f0d9ad52880b25c05876e60f2b6c0f9",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-gentle-lower-accurate-mono16",
+      "local_report_sha256": "a8f0c1932e81bc7a8d62c57777443ca5a511be03a3688f9f0aaea64493361de4",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.3,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.6,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-gentle-upper-fast-selected24",
+      "local_report_sha256": "08a2ededa6287467794d6c22c2ba0176654d3f7031425fd77379ea138a728cdb",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps51-gentle-fractional-accurate-selected24",
+      "local_report_sha256": "8f01e3f8afe1a5916edaddc797672e871809bd5055b6e83abee05f8c851cb11e",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -11.99,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.56,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.6,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-gentle-fast-stereo16",
+      "local_report_sha256": "47324c0f5f53257230f9e32e062e43964d51bc4bba84094c22a7c3b2274e6489",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-gentle-accurate-stereo24",
+      "local_report_sha256": "7dfab8cddf22e21313f1beca5f065654938f62ee7bef9ed713b71ec8db114aae",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.0,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.56,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.5,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-gentle-fast-mono24",
+      "local_report_sha256": "539a65b24b96c741c612c03af220baa4f41864be03bd7f905d8e6f268f7ac82f",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-gentle-accurate-downmix16",
+      "local_report_sha256": "b504021a0a101215b7899385a46a2e9128562bc2d6aad93b68c6fb1df6b3c9ec",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback",
+        "final_loudness_out_of_tolerance"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -13.0,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.2,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "OUT_OF_TOLERANCE",
+        "reason": "loudness_out_of_tolerance"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-original-disabled-fast-selected16",
+      "local_report_sha256": "baac5c561f47f764075d29e91b432bb5b39b554c2a44a15a28f91a6f526e5e4d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-gentle-lower-accurate-mono16",
+      "local_report_sha256": "c3a8c7fbf086d534f3cb20cb74ec17d2e4726869905cbc3c6bbb7ba16da9d868",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -12.3,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.6,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": "ffmpeg_dynamic_fallback",
+      "actual_normalization_type": "dynamic"
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-gentle-upper-fast-selected24",
+      "local_report_sha256": "322c03a16c33329a12ff3966e434a9b9c0f29ab71e85e2300bd1016fda881166",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "gentle",
+      "id": "ps7-gentle-fractional-accurate-selected24",
+      "local_report_sha256": "d72761a9b5af4c0d1d2b5425a45e89d29775bb3490d34ebf1a358fb6ce593187",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Accurate",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": -11.99,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -2.56,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.6,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": "linear"
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-start-original-fast",
+      "local_report_sha256": "0463ff803427abc43c1bb0c4713b22d70bfce470d56b85b572a254f8c584e079",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -21.31,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -13.79,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.24,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.6,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -21.31,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -21.31,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -8.76,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.6,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-middle-gentle-fast",
+      "local_report_sha256": "3a082597bfa16a1007e603d0a1fb446ffd855a30be96abe008ffc3ae5cddd6e0",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.45,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.33,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.02,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-end-zoom-fast",
+      "local_report_sha256": "ae9cf4bb7cde51338af83019989000fa9d56226166e7047b33b64ed498c86de5",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.25,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.9,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.64,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.38,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.25,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.9,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.25,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -9.99,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-default-selected-gentle",
+      "local_report_sha256": "6ae7358481be00f21c179c7308a39dd4d6f018dab8af771697f82857f8d48fbd",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -21.92,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 9.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -13.98,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.28,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.8,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -21.92,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 9.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -21.9,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -9.22,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.8,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-short-zoom",
+      "local_report_sha256": "f0f156c43cc9328efb1138c5ae4593a3a91cb9dd9c8755e0fd575f9d4722044b",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Fast",
+      "warning_codes": [
+        "comparison_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -31.63,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -31.63,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -1.7,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "too_short"
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-silent-gentle",
+      "local_report_sha256": "e08e8fdc78d528d4d99ba307d97c068211ee019793caba53ca475822478c679b",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Fast",
+      "warning_codes": [
+        "comparison_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "silence"
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-hot-original-guard",
+      "local_report_sha256": "78433ba8007836b5df0c5e86f61f89f56fd8ebfcb60b9d0e9a383c475bb165e0",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -1.16,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": 0.12,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.4,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -12.11,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.14,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.4,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -12.13,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.83,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.5,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -12.11,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.14,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.4,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-middle-original-accurate-downmix",
+      "local_report_sha256": "57ff301960a4d6136210b1ba57aff72deee7e136369a37e221fbd5a58d0914ec",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -24.39,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 10.1,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -13.99,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.22,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.2,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -24.39,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 10.1,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -24.39,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -11.62,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.2,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-middle-disabled-fast",
+      "local_report_sha256": "2d4b4b3ef565b8341ffb3687f3a9452f9c2d4dd08ef4bd51d966d5db0edd5055",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -26.2,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.9,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -15.24,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.31,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -26.2,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.9,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -26.21,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -12.27,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-fractional-selected-gentle",
+      "local_report_sha256": "f52726889fafd6163492701b5690d5a8d9231e68298eec9b8ea4caf144aad1e0",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.1,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.51,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.32,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.9,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.1,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.59,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-shifted-selected-middle",
+      "local_report_sha256": "9a4b4389fa1a18c95a41821f5cf05252a64f2967df992310d90d1a1528249bcd",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.16,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.31,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.29,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "preview",
+      "id": "ps51-shifted-selected-start",
+      "local_report_sha256": "d1f9fa156db7474af7c3c04fa189c6bc18023becbff7e2e87f40d2fc5aa23e0d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -21.24,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.7,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.41,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.9,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -21.24,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.7,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -21.23,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -8.65,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.9,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-start-original-fast",
+      "local_report_sha256": "94de2f3b67b5d9b0a61fe32c30d1200d91610fa399627ff448b66cdc7ed3e3d7",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -21.31,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -13.79,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.24,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.6,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -21.31,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -21.31,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -8.76,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.6,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-middle-gentle-fast",
+      "local_report_sha256": "59b028c681514739217c45ffe41ccb9bcfaa9e4830fdc2cd5091b831a3315ea3",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.45,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.33,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.02,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-end-zoom-fast",
+      "local_report_sha256": "25d9353833f21cd47bf8ec0fb765ad904182f203e1a2b8153706861e43c38c6e",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.25,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.9,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.64,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.38,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.0,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.25,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.9,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.25,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -9.99,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 1.0,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-default-selected-gentle",
+      "local_report_sha256": "eaea47341bb1b4673e696529a0d1d2ab7ff78dae17c282672d6c06122b0b2153",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -21.92,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 9.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -13.98,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.28,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.8,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -21.92,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 9.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -21.9,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -9.22,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.8,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-short-zoom",
+      "local_report_sha256": "8981c94f46fb51486f6cf8a68a38a3934cfaee47ca804e1637d2b1286ad39c17",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Fast",
+      "warning_codes": [
+        "comparison_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -31.63,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -1.5,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -31.63,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "too_short"
+          },
+          "truePeakDbtp": {
+            "value": -1.7,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "too_short"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "too_short"
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-silent-gentle",
+      "local_report_sha256": "b243dc992ec3cef05dbef4bbefabe964512abafb8a570e4752c5f7f4ea3ec358",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Fast",
+      "warning_codes": [
+        "comparison_unmeasurable"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "silence"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "silence"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "silence"
+          }
+        }
+      },
+      "classification": {
+        "status": "UNMEASURABLE",
+        "reason": "silence"
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-hot-original-guard",
+      "local_report_sha256": "48b151c2985c019a8f63d75c1db7a127bcd13c543244882e1b3c0ade440ce9cc",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -1.16,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": 0.12,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.4,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -12.11,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.14,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.4,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -12.13,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.83,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.5,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -12.11,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.14,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 0.4,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-middle-original-accurate-downmix",
+      "local_report_sha256": "3970fdf26fc7d6b6b2fa07c7d967f7390f5d1b4cae584daedcd0aa64a00658ab",
+      "application_exit_code": 7,
+      "status": "WARNING",
+      "loudness_mode": "Accurate",
+      "warning_codes": [
+        "normalization_fallback"
+      ],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -24.39,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 10.1,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -13.99,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.22,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.2,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -24.39,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 10.1,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -24.39,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -11.62,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 2.2,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-middle-disabled-fast",
+      "local_report_sha256": "07e553f66c02be2a2a29eab08add72c896076283c75161ee5b72a758bf88ce67",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -26.2,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.9,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -15.24,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.31,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.0,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -26.2,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.9,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -26.21,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -12.27,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 2
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-fractional-selected-gentle",
+      "local_report_sha256": "7416aa78b0e816145bd095ec084c41a416524c9d60e6463e199be23c6f2020e8",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.1,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.51,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.32,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 4.9,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.1,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.78,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.59,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.0,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-shifted-selected-middle",
+      "local_report_sha256": "7c1226fdbc9179907c40979e5317e4b58858d07fad509c1502bf0989d4eb10ac",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.16,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.31,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 11.8,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -23.14,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -10.29,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 5.1,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "preview",
+      "id": "ps7-shifted-selected-start",
+      "local_report_sha256": "1343aac82e52df8ef859517ed79bafe1c79c789472c54ce31926e144925c6699",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Original": {
+          "integratedLufs": {
+            "value": -21.24,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.7,
+            "reason": null
+          }
+        },
+        "Processed": {
+          "integratedLufs": {
+            "value": -14.0,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.41,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.9,
+            "reason": null
+          }
+        },
+        "CompareOriginal": {
+          "integratedLufs": {
+            "value": -21.24,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -1.94,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 6.7,
+            "reason": null
+          }
+        },
+        "CompareProcessed": {
+          "integratedLufs": {
+            "value": -21.23,
+            "reason": null
+          },
+          "truePeakDbtp": {
+            "value": -8.65,
+            "reason": null
+          },
+          "loudnessRangeLu": {
+            "value": 3.9,
+            "reason": null
+          }
+        }
+      },
+      "classification": {
+        "status": "PASSED",
+        "reason": null
+      },
+      "metric_scope": "excerpt; Accurate analysis is bounded context only",
+      "seek_tolerance_samples": 49
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-1ch-raw-16",
+      "local_report_sha256": "10560505fd50c23760b55bc92169c88d9b1bc72648dc95cc66ced2ac4dd00d4c",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-1ch-raw-24",
+      "local_report_sha256": "64f185d3fc6db14160b93af473194ff46ffa77e43b578e9879bd219ee64a524d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-1ch-zoom-16",
+      "local_report_sha256": "44f176be7b7e93dd7730cc4d5b1f11d85e6029645d3cd90cf993db66ea3548ba",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-1ch-zoom-24",
+      "local_report_sha256": "d41795760b6f3bc9961372a137c2fc64d13bf274e3474c64575a2831a2823a3f",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-2ch-raw-16",
+      "local_report_sha256": "6fe251103f93fe859047052bc3308d5e6262cb5105cdb3f641ea6f34a49dca40",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-2ch-raw-24",
+      "local_report_sha256": "8bda313903e60b8ac3048b59067cbc3c81f70925e602d995a5aa4e24d4e04a85",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-2ch-zoom-16",
+      "local_report_sha256": "00710896ca3a6ec9f5ce3bce3524df4bb3502fa3fcdf9b9a5d9836e7e79e6d65",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-2ch-zoom-24",
+      "local_report_sha256": "2dc74e6be78f08f0475392a49cbbcd46e9871e17f76005e796799be729ec4232",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-1ch-raw-16",
+      "local_report_sha256": "096f28bccc0e0cbebf354c1750be4ebb8485cd9f2c2da60d1f1a39d3d39f0022",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-1ch-raw-24",
+      "local_report_sha256": "45499e97fdafac45e5fa034c341dc0d7c443887744a54b24a541d2371cba959a",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-1ch-zoom-16",
+      "local_report_sha256": "e57c933cc336069b9944bb2ae5da6789bfea2ebd9ba45010724ed5d28b886b88",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-1ch-zoom-24",
+      "local_report_sha256": "88647c9804a612d7170a5980834cfafdbf3077160863e2a966a65b0d52159bd1",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-2ch-raw-16",
+      "local_report_sha256": "b9970ee240c5c12f9117bb348aa366975e0b1e1647e5eb08d236f217d15f039b",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-2ch-raw-24",
+      "local_report_sha256": "f3730022517ea666195041bec40237f3685fc564d50e734a54f43bb0595b9819",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-2ch-zoom-16",
+      "local_report_sha256": "94c6e492e0dbc1eda6b51a165ec3fb55199df55ce516fb48ed12688d4057432a",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-2ch-zoom-24",
+      "local_report_sha256": "039e722341abe78c4a73718d8c3c36658e54c7e169872940f1faba6e2d1f4763",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-2ch-raw-16-mono",
+      "local_report_sha256": "bf7e7c4257826b9205d1fddcf89f1f571bf518192f14d3bac8199f8303687ca3",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-2ch-zoom-24-mono",
+      "local_report_sha256": "22c3dac06438778b505cb1831e8035d7423905077d7ddc5d8738c67825d6af8d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-48000-2ch-raw-24-rf64",
+      "local_report_sha256": "8d9bb1fbdcaaa752f0d1d1e86ba777264902a00ee3688cf0a07ce36c1e058de9",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps51-44100-1ch-zoom-16-rf64",
+      "local_report_sha256": "ccd44713bb91bf9c1b6aef2605924a61aa671f8cd543ed72bea2e628382acd2a",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-1ch-raw-16",
+      "local_report_sha256": "01f8686f1a8ac50ce195cf16c01f70c04018f346db1e841911eed0baab656e23",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-1ch-raw-24",
+      "local_report_sha256": "1640bb787c2b5565450b78e17f9bd575aad123bfcc7fc66e19fe70cac61506f3",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-1ch-zoom-16",
+      "local_report_sha256": "8c5641a142319be80f7ff9e55f8ef6a3a0cf143568b4817d8b80b7712fa6bb4d",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-1ch-zoom-24",
+      "local_report_sha256": "9f3dfa1edbdf24c3fa8d32cc9537c7cb48c774e370499c91ebf69d6306bf3df8",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-2ch-raw-16",
+      "local_report_sha256": "e4d72b0b6767fabe5e33dead16f97ae28688f0fadbf590a01afd6b7493fd661f",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-2ch-raw-24",
+      "local_report_sha256": "f7871625c0e1b7e9806dd213fd427e6cd0f648b8bde6585da1cc847d8c54d51e",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-2ch-zoom-16",
+      "local_report_sha256": "c6385f2237bac8fabb3e14fce28f82e8ce3e15b2e11ea97cee8d20a42085bda7",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-2ch-zoom-24",
+      "local_report_sha256": "3723c08c72690544a04f27b3244783f5616a29af0e5935f218a58a35609561f0",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-1ch-raw-16",
+      "local_report_sha256": "9be2390210139a3aa6d32e682e63fdc26c810d8b59e808b3b3d6cd52771a7b36",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-1ch-raw-24",
+      "local_report_sha256": "2815e30f1414d001244ad3160877fbb1e77cf3512ac8868b0f5af76b83ab416f",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-1ch-zoom-16",
+      "local_report_sha256": "6875e329e47d476f7a48a91604d915e254062bf3a0e0e05a81b511ee6fd4acea",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-1ch-zoom-24",
+      "local_report_sha256": "c3fe19e96c4bb5d9313e659ff41482e8445b6e1e3026b92c22732509688acf92",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-2ch-raw-16",
+      "local_report_sha256": "c6f058c4a620fd7045bff40ae8dcfea63e69efc27d92c4d54e39865ec48ff406",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-2ch-raw-24",
+      "local_report_sha256": "1927b59eb24739978fca22df484caa5dfe03eb0c9d38fe608210e411537192f6",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-2ch-zoom-16",
+      "local_report_sha256": "8eb45a469f21bd503a68df5904567e1759d1386b97dd56834ebb3b8da8516664",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-2ch-zoom-24",
+      "local_report_sha256": "ccfa536da3f63713e9aee3899bb93ff315232be3671f5d8d7ba29f2ef3623009",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-2ch-raw-16-mono",
+      "local_report_sha256": "3b3c196f30824b94264899d89268c03405acb4277592f9d77c7d66e030b039e5",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-2ch-zoom-24-mono",
+      "local_report_sha256": "4fe534f8fa8ad8d65e07af98624a747887489acd5ae1da2ea2c9f0b09751bd84",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-48000-2ch-raw-24-rf64",
+      "local_report_sha256": "6b122585a85c7f13438d8bff2a5966d33cac2c9493cc22312719ee9762e3f914",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    },
+    {
+      "matrix": "encoding",
+      "id": "ps7-44100-1ch-zoom-16-rf64",
+      "local_report_sha256": "12a61fb67d035f2d73a1b031c13fe7d51f5bcc401c737b06fb2cbf5e3e22a4d4",
+      "application_exit_code": 0,
+      "status": "SUCCESS",
+      "loudness_mode": "Fast",
+      "warning_codes": [],
+      "processing_checks_pass": true,
+      "measurements": {
+        "Export": {
+          "integratedLufs": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "truePeakDbtp": {
+            "value": null,
+            "reason": "not_measured"
+          },
+          "loudnessRangeLu": {
+            "value": null,
+            "reason": "not_measured"
+          }
+        }
+      },
+      "classification": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "metric_scope": "ordinary encoded file; Fast unmeasured",
+      "fallback_reason": null,
+      "actual_normalization_type": null
+    }
+  ],
+  "status": "pass"
+}

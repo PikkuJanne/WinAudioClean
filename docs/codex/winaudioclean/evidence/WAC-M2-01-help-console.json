@@ -1,0 +1,109 @@
+{
+  "help": [
+    {
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$h = Get-Help ./WinAudioClean.ps1 -Full; $examples = @($h.examples.example); if ($examples.Count -ne 3) { throw 'Expected three examples' }; foreach ($e in $examples) { if ($e.code -match '[\\r\\n]') { throw 'Example command contains prose' }; if (-not $e.remarks) { throw 'Missing example remarks' } }; [pscustomobject]@{ version = $PSVersionTable.PSVersion.ToString(); synopsis = $h.Synopsis; examples = @($examples | ForEach-Object { $_.code }) } | ConvertTo-Json"
+      ],
+      "exit_code": 0,
+      "help": {
+        "version": "5.1.26100.9444",
+        "synopsis": "Cleans and levels spoken-word recordings locally with PowerShell and FFmpeg.",
+        "examples": [
+          ".\\WinAudioClean.ps1 -inputPath \"C:\\Audio\\recording.wav\"",
+          ".\\WinAudioClean.ps1 -inputPath \"C:\\Audio\\meeting.wav\" -Mode Zoom -NonInteractive",
+          ".\\WinAudioClean.ps1 -inputPath \"C:\\Audio\\recording.wav\" -Mode Raw -BitDepth 24"
+        ]
+      }
+    },
+    {
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$h = Get-Help ./WinAudioClean.ps1 -Full; $examples = @($h.examples.example); if ($examples.Count -ne 3) { throw 'Expected three examples' }; foreach ($e in $examples) { if ($e.code -match '[\\r\\n]') { throw 'Example command contains prose' }; if (-not $e.remarks) { throw 'Missing example remarks' } }; [pscustomobject]@{ version = $PSVersionTable.PSVersion.ToString(); synopsis = $h.Synopsis; examples = @($examples | ForEach-Object { $_.code }) } | ConvertTo-Json"
+      ],
+      "exit_code": 0,
+      "help": {
+        "version": "7.6.5",
+        "synopsis": "Cleans and levels spoken-word recordings locally with PowerShell and FFmpeg.",
+        "examples": [
+          ".\\WinAudioClean.ps1 -inputPath \"C:\\Audio\\recording.wav\"",
+          ".\\WinAudioClean.ps1 -inputPath \"C:\\Audio\\meeting.wav\" -Mode Zoom -NonInteractive",
+          ".\\WinAudioClean.ps1 -inputPath \"C:\\Audio\\recording.wav\" -Mode Raw -BitDepth 24"
+        ]
+      }
+    }
+  ],
+  "interactive": [
+    {
+      "task": "WAC-M2-01",
+      "case": "AC-036",
+      "shell": "Windows PowerShell 5.1",
+      "input": "synthetic_stereo_48k.wav",
+      "terminal": "exec PTY",
+      "typed_choice": "1",
+      "mode": "Raw",
+      "presetId": "original",
+      "presetVersion": "1.0.0",
+      "toolVersion": "2.3",
+      "status": "SUCCESS",
+      "loudnessCompliance": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "runtime_sha256": "7f2a020e168aca82247812e144d54279dec4bf5f4618727939510eef16d07bc8",
+      "notes": "Real unmodified application prompt through PTY, existing real FFmpeg; no Explorer or listening claim.",
+      "application_exit_code": 0,
+      "command": "powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\\WinAudioClean.ps1 -inputPath .\\.wac-local\\WAC-M0-03\\run-1\\fixtures\\synthetic_stereo_48k.wav -OutputDirectory .\\.wac-local\\WAC-M2-01\\console-raw -FfmpegPath .\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe -FfprobePath .\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "report_checks": {
+        "preset_json": true,
+        "preset_text": true,
+        "preset_summary": true,
+        "tool_version_separate": true
+      }
+    },
+    {
+      "task": "WAC-M2-01",
+      "case": "AC-036",
+      "shell": "PowerShell 7",
+      "input": "synthetic_stereo_48k.wav",
+      "terminal": "exec PTY",
+      "typed_choice": "2",
+      "process_exit": 0,
+      "application_exit_code": 0,
+      "mode": "Zoom",
+      "presetId": "original",
+      "presetVersion": "1.0.0",
+      "toolVersion": "2.3",
+      "status": "SUCCESS",
+      "loudnessCompliance": {
+        "status": "NOT_MEASURED",
+        "reason": "no_independent_measurement"
+      },
+      "runtime_sha256": "04e70fbed9dc0a1cda1667bb3a86e9c55b6fbdb1fec83f4a37306508981102d8",
+      "notes": "Real unmodified application prompt through PTY; final shell printed WAC_INTERACTIVE_EXIT=0. No Explorer or listening claim.",
+      "command": "pwsh.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -File .\\WinAudioClean.ps1 -inputPath .\\.wac-local\\WAC-M0-03\\run-1\\fixtures\\synthetic_stereo_48k.wav -OutputDirectory .\\.wac-local\\WAC-M2-01\\console-zoom -FfmpegPath .\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe -FfprobePath .\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "report_checks": {
+        "preset_json": true,
+        "preset_text": true,
+        "preset_summary": true,
+        "tool_version_separate": true
+      }
+    }
+  ],
+  "comment_only_delta": {
+    "before_sha256": "7f2a020e168aca82247812e144d54279dec4bf5f4618727939510eef16d07bc8",
+    "after_sha256": "04e70fbed9dc0a1cda1667bb3a86e9c55b6fbdb1fec83f4a37306508981102d8",
+    "change": "Three blank lines in comment-based help to separate example commands from remarks. All bytes after the opening help block are identical.",
+    "runtime_body_sha256": "448871ed9221beffb38760c0c3e84e768901f0e72b1163b251e99e5c6e1cefa7"
+  }
+}
