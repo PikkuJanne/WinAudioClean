@@ -750,3 +750,18 @@ bytes and exact external FFmpeg 9.0.2 hashes/license probes. That GPL build rema
 user-supplied and bundling unapproved. Retain every prior broader gap and local
 privilege skip. Only M4-03 advances to 25 done / 5 todo and 75 pass / 15 not_run;
 next M4-04 has not started. Evidence: evidence/WAC-M4-03.md and its ledger.
+
+### 2026-10-04 — WAC-M4-04 user help and scoped example validation
+
+D42. Finish README/Get-Help and packaged setup/support/security guidance for the existing version 2.3 tool. Keep typed options, actual defaults, exact Original filters, local processing and separate ordinary/Preview/journal schemas consistent. The ordinary-only redacted exporter does not accept actual Preview JSON or JSONL journals. Recovery needs no private audio upload, administrator installation or global security disable. Short extraction/output paths account for generated names/nesting and host native path limits; retained PS7/PS5.1 observations do not establish universal path support.
+
+Final packaged documentation/controller source `1f10940ee970ebe719c21ba0e7290830beeb7123` passed all 64 actual cases. ZIP: 438904 bytes, SHA256 `d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7`; controller SHA256 `3cf5cd6fd7d24c4633e4163372e7b194a5840219a6b2534fc394f245b4a5266b`.
+
+Both local Full gates used the earlier frozen source `047aefe906ca7954a225d81f53286eb1275723dc`: ps51: Pester 1483 passed/1 skipped, Python 142 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 142 ran/1 skipped; zero failures/outside-scope cases. These are distinct source scopes; Full was not repeated for later documentation/controller-only edits. Retain the initial long-path/controller failures and successful shorter-path replays separately. Short local extraction/output paths are the remedy; no universal path limit or global security change is claimed.
+
+CI at `1f10940ee970ebe719c21ba0e7290830beeb7123` is pending (0/4 observed jobs); [observed run](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37182513533). Pending/unavailable/not-run CI is not a passed gate. Live branch synchronization and actual post-push PR/CI must be verified separately.
+
+All eight broader gaps remain. Original/Fast/default sound and BAT/script entry points stay unchanged; no publication or machine-security changes are authorized. Website draft metadata remains uncreated future M5-01 work.
+
+[Evidence](evidence/WAC-M4-04.md), [ledger](evidence/WAC-M4-04-validation.json).
+Accept AC-076..078 within these recorded engineering/documentation scopes: 26 tasks done / 4 todo, 78 AC pass / 12 not_run. Next WAC-M5-01 only after live synchronization. Feature commits/pushes and draft-PR upkeep remain authorized; publication, merge/settings/security changes and sound promotion retain existing boundaries.

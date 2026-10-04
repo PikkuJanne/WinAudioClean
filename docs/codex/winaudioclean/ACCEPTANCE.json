@@ -1145,8 +1145,8 @@
       "title": "Examples execute",
       "procedure": "Follow installation and commands from a clean release ZIP on the active machine.",
       "expected": "Examples run without hidden setup; help contains valid parameter descriptions and actual defaults.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"]
     },
     {
       "id": "AC-077",
@@ -1154,8 +1154,8 @@
       "title": "Support and privacy",
       "procedure": "Walk through missing dependency, corrupt media, permissions, output collision and redacted-report guidance.",
       "expected": "User can diagnose without uploading private audio or changing machine-wide security settings.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"]
     },
     {
       "id": "AC-078",
@@ -1163,8 +1163,8 @@
       "title": "Claims consistency",
       "procedure": "Compare README/Get-Help/preset labels/reports and website draft metadata.",
       "expected": "Versions, LUFS/peak units, local-processing statement and limitations agree.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"]
     },
     {
       "id": "AC-079",

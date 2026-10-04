@@ -1054,7 +1054,7 @@
       "depends_on": [
         "WAC-M4-03"
       ],
-      "status": "todo",
+      "status": "done",
       "approval_required": false,
       "scope": "Product README, comment-based Get-Help, examples, support/security documentation.",
       "implementation": [
@@ -1068,7 +1068,7 @@
         "AC-077",
         "AC-078"
       ],
-      "evidence": [],
+      "evidence": ["evidence/WAC-M4-04.md", "evidence/WAC-M4-04-validation.json"],
       "blocked_reason": null
     },
     {
