@@ -1,0 +1,59 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (12 files; shell 7.6.5).
+Static gate passed; 49 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 34 tests in 194ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.EntryPoints.Tests.ps1'
+Describing AC-004: actual entry points with bounded, controlled input
+  [+] AC-014: rejects missing -File -inputPath before prompting in powershell.exe 547ms (510ms|37ms)
+  [+] AC-014: rejects missing -File -inputPath before prompting in pwsh.exe 1.1s (1.1s|1ms)
+  [+] AC-014: rejects a missing dropped file via outer powershell.exe before the menu (inner Windows PowerShell) 630ms (628ms|2ms)
+  [+] AC-014: rejects a missing dropped file via outer pwsh.exe before the menu (inner Windows PowerShell) 1.32s (1.32s|2ms)
+
+Describing AC-014/015: actual script preflight is bounded and unattended on invalid requests
+  [+] rejects no input without a menu or processing in powershell.exe 371ms (369ms|3ms)
+  [+] rejects directory without a menu or processing in powershell.exe 387ms (386ms|1ms)
+  [+] rejects URL without a menu or processing in powershell.exe 390ms (389ms|1ms)
+  [+] rejects zero bytes without a menu or processing in powershell.exe 425ms (424ms|1ms)
+  [+] rejects destination file without a menu or processing in powershell.exe 405ms (404ms|1ms)
+  [+] rejects empty destination without a menu or processing in powershell.exe 398ms (397ms|1ms)
+  [+] rejects invalid mode without a menu or processing in powershell.exe 393ms (392ms|1ms)
+  [+] rejects empty mode without a menu or processing in powershell.exe 390ms (390ms|1ms)
+  [+] rejects missing mode without a menu or processing in powershell.exe 436ms (435ms|1ms)
+  [+] rejects redirected input without a menu or processing in powershell.exe 429ms (429ms|1ms)
+  [+] rejects host noninteractive without a menu or processing in powershell.exe 415ms (414ms|1ms)
+  [+] rejects no input without a menu or processing in pwsh.exe 1.06s (1.06s|1ms)
+  [+] rejects directory without a menu or processing in pwsh.exe 1.13s (1.13s|1ms)
+  [+] rejects URL without a menu or processing in pwsh.exe 1.05s (1.05s|1ms)
+  [+] rejects zero bytes without a menu or processing in pwsh.exe 1.07s (1.07s|1ms)
+  [+] rejects destination file without a menu or processing in pwsh.exe 1.06s (1.06s|1ms)
+  [+] rejects empty destination without a menu or processing in pwsh.exe 1.07s (1.07s|1ms)
+  [+] rejects invalid mode without a menu or processing in pwsh.exe 1.08s (1.08s|1ms)
+  [+] rejects empty mode without a menu or processing in pwsh.exe 1.07s (1.07s|1ms)
+  [+] rejects missing mode without a menu or processing in pwsh.exe 1.1s (1.1s|1ms)
+  [+] rejects redirected input without a menu or processing in pwsh.exe 1.12s (1.12s|1ms)
+  [+] rejects host noninteractive without a menu or processing in pwsh.exe 1.05s (1.05s|1ms)
+
+Describing Controlled runtime execution preserves mode, process and report wiring
+  [+] uses choice 1 and reports process exit 0 in powershell.exe 463ms (461ms|2ms)
+  [+] uses choice 1 and reports process exit 7 in powershell.exe 447ms (446ms|1ms)
+  [+] uses choice 2 and reports process exit 0 in powershell.exe 433ms (432ms|1ms)
+  [+] uses choice 2 and reports process exit 7 in powershell.exe 421ms (420ms|1ms)
+  [+] uses choice 1 and reports process exit 0 in pwsh.exe 1s (1s|1ms)
+  [+] uses choice 1 and reports process exit 7 in pwsh.exe 1.06s (1.06s|1ms)
+  [+] uses choice 2 and reports process exit 0 in pwsh.exe 1.09s (1.09s|1ms)
+  [+] uses choice 2 and reports process exit 7 in pwsh.exe 1.2s (1.2s|1ms)
+Tests completed in 26.73s
+Tests Passed: 34, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 34 Pester passed, 0 skipped, 0 outside scope.

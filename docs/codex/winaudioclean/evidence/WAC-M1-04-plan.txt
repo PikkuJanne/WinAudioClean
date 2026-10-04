@@ -1,0 +1,8 @@
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+
+Exit code: 0

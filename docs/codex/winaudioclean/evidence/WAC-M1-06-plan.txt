@@ -1,0 +1,21 @@
+Command: python -X utf8 docs/codex/winaudioclean/tools/handoff.py validate-plan --plan-root docs/codex/winaudioclean
+Exit: 0
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+
+Command: python -X utf8 docs/codex/winaudioclean/tools/handoff.py next --plan-root docs/codex/winaudioclean
+Exit: 0
+{
+  "ready": [
+    {
+      "id": "WAC-M1-07",
+      "title": "Reliability regression gate",
+      "approval_needed": false
+    }
+  ],
+  "blocked": []
+}

@@ -3,7 +3,7 @@ param([Parameter(Mandatory = $true)][string]$ScriptPath)
 $ErrorActionPreference = 'Stop'
 $script:sideEffects = 0
 $blockedCommands = @(
-    'Read-Host', 'Write-Host', 'Clear-Host', 'Start-Process', 'ffmpeg', 'ffmpeg.exe',
+    'Read-Host', 'Write-Host', 'Clear-Host', 'Start-Process', 'ffmpeg', 'ffmpeg.exe', 'ffprobe', 'ffprobe.exe',
     'Add-Content', 'Set-Content', 'Out-File', 'New-Item', 'Remove-Item', 'Copy-Item',
     'Move-Item', 'Write-Output', 'Write-Error', 'Write-Warning', 'Write-Information',
     'Write-Verbose', 'Write-Debug', 'Write-Progress'

@@ -1,0 +1,56 @@
+Import-Module : Errors occurred while loading the format data file:
+<repo>\.wac-local\Modules\Pester\5.7.1\Pester.Format.ps1xml, , C:\projects\WinAudioClean-
+governance\.wac-local\Modules\Pester\5.7.1\Pester.Format.ps1xml: The file was skipped because of the following validati
+on exception: AuthorizationManager check failed..
+<repo>\.wac-local\Modules\Pester\5.7.1\PesterConfiguration.Format.ps1xml, , C:\projects\W
+inAudioClean-governance\.wac-local\Modules\Pester\5.7.1\PesterConfiguration.Format.ps1xml: The file was skipped because
+ of the following validation exception: AuthorizationManager check failed..
+At line:1 char:1
++ Import-Module ./.wac-local/Modules/Pester/5.7.1/Pester.psd1 -Force; $ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [Import-Module], RuntimeException
+    + FullyQualifiedErrorId : FormatXmlUpdateException,Microsoft.PowerShell.Commands.ImportModuleCommand
+
+New-PesterConfiguration : The term 'New-PesterConfiguration' is not recognized as the name of a cmdlet, function, scrip
+t file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct
+ and try again.
+At line:1 char:86
++ ... /Pester.psd1 -Force; $configuration = New-PesterConfiguration; $confi ...
++                                           ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (New-PesterConfiguration:String) [], CommandNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+The property 'Path' cannot be found on this object. Verify that the property exists and can be set.
+At line:1 char:111
++ ... figuration; $configuration.Run.Path = "./tests/WinAudioClean.EntryPoi ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyNotFound
+
+The property 'PassThru' cannot be found on this object. Verify that the property exists and can be set.
+At line:1 char:184
++ ... n.EntryPoints.Tests.ps1"; $configuration.Run.PassThru = $true; $confi ...
++                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyNotFound
+
+The property 'Verbosity' cannot be found on this object. Verify that the property exists and can be set.
+At line:1 char:221
++ ... assThru = $true; $configuration.Output.Verbosity = "Detailed"; $confi ...
++                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyNotFound
+
+The property 'FullName' cannot be found on this object. Verify that the property exists and can be set.
+At line:1 char:267
++ ...  = "Detailed"; $configuration.Filter.FullName = "*uses mode*"; $resul ...
++                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : PropertyNotFound
+
+Invoke-Pester : A parameter cannot be found that matches parameter name 'Configuration'.
+At line:1 char:339
++ ... lName = "*uses mode*"; $result = Invoke-Pester -Configuration $config ...
++                                                    ~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Invoke-Pester], ParameterBindingException
+    + FullyQualifiedErrorId : NamedParameterNotFound,Invoke-Pester

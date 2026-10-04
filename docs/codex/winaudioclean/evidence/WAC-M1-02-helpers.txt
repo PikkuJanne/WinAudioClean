@@ -1,0 +1,38 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (15 files; shell 7.6.5).
+Static gate passed; 45 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 13 tests in 264ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] AC-007: matches the Raw filter values and order in BASELINE.json 125ms (93ms|33ms)
+  [+] AC-007: matches the Zoom filter values and order in BASELINE.json 6ms (4ms|2ms)
+  [+] selects the exact original Raw mode and filters for choice 1 9ms (8ms|2ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 8ms (7ms|2ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom () 58ms (54ms|4ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (invalid) 6ms (4ms|1ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (3) 5ms (3ms|1ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 10ms (8ms|3ms)
+  [+] accepts an input stem without an extension 27ms (5ms|23ms)
+  [+] characterizes the legacy minute-timestamp collision 9ms (8ms|1ms)
+  [+] keeps paths and filters as separate arguments and disables native stdin 11ms (9ms|2ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 7ms (6ms|1ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 968ms (963ms|5ms)
+Tests completed in 2.03s
+Tests Passed: 13, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 13 Pester passed, 0 skipped, 0 outside scope.

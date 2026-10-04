@@ -1,0 +1,41 @@
+console-ps51
+Inputs entered: empty Enter, wrong, q
+WinAudioClean 2.3
+============================
+Input:
+<repo>\.wac-local\WAC-M1-03\20261002T115537198468Z\fixtures\video + two tracks [synthetic].mkv
+FFmpeg: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)
+FFprobe: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)
+Choose an audio track by its absolute stream index:
+[1] pcm_s16le; 1 channel(s); 48000 Hz; ;
+[2] pcm_s16le; 2 channel(s); 48000 Hz; ;
+Invalid selection. Enter an audio index shown above, or Q to cancel.
+Invalid selection. Enter an audio index shown above, or Q to cancel.
+Cancelled. No audio was processed.
+WAC_TEST_HOST=5.1.26100.9444
+WAC_TEST_EXIT=130
+
+console-ps7
+Inputs entered: 0, 2
+WinAudioClean 2.3
+============================
+Input:
+<repo>\.wac-local\WAC-M1-03\20261002T115537198468Z\fixtures\video + two tracks [synthetic].mkv
+FFmpeg: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffmpeg.exe (ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers)
+FFprobe: <repo>\.wac-local\ffmpeg-setup\portable-curl\ffmpeg-9.0.2-essentials_build\bin\ffprobe.exe (ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers)
+Choose an audio track by its absolute stream index:
+[1] pcm_s16le; 1 channel(s); 48000 Hz; ;
+[2] pcm_s16le; 2 channel(s); 48000 Hz; ;
+Invalid selection. Enter an audio index shown above, or Q to cancel.
+Audio stream: 2 (pcm_s16le, 2 channel(s), 48000 Hz)
+
+Running WinAudioClean...
+Chain: ZOOM (Level Only)
+size=    2250KiB time=00:00:03.00 bitrate=6144.3kbits/s speed=27.3x elapsed=0:00:00.10
+
+DONE: SUCCESS
+Time Elapsed : 00:00.18
+Output Size  : 2,20 MB
+File saved to: <repo>\.wac-local\WAC-M1-03\console-ps7\video + two tracks [synthetic]_Cleaned_20261002-1401.wav
+WAC_TEST_HOST=7.6.5
+WAC_TEST_EXIT=0

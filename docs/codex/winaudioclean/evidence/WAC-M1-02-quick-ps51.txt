@@ -1,0 +1,112 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (18 files; shell 5.1.26100.9444).
+Static gate passed; 53 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 6 files.
+Discovery found 227 tests in 522ms.
+Filter 'Tag' set to ('Quick', 'Unit', 'Import').
+Filters selected 74 tests to run.
+Running tests.
+
+Running tests from 'WinAudioClean.Helpers.Tests.ps1'
+Describing Processing profiles preserve the reviewed baseline sound
+  [+] AC-007: matches the Raw filter values and order in BASELINE.json 152ms (104ms|49ms)
+  [+] AC-007: matches the Zoom filter values and order in BASELINE.json 7ms (6ms|1ms)
+  [+] selects the exact original Raw mode and filters for choice 1 11ms (9ms|2ms)
+  [+] selects the exact original Zoom mode and filters for choice 2 8ms (7ms|1ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom () 68ms (64ms|4ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (invalid) 7ms (5ms|2ms)
+  [+] AC-015: rejects an invalid choice instead of falling back to Zoom (3) 6ms (4ms|2ms)
+
+Describing Output naming and command construction preserve extraction behavior
+  [+] keeps spaces, brackets and extra dots in the stem while replacing its extension 12ms (8ms|4ms)
+  [+] accepts an input stem without an extension 7ms (5ms|1ms)
+  [+] characterizes the legacy minute-timestamp collision 8ms (7ms|1ms)
+  [+] keeps paths and filters as separate arguments and disables native stdin 14ms (12ms|2ms)
+  [+] characterizes the legacy overwrite flag pending transactional output work 8ms (6ms|2ms)
+
+Describing AC-005: importing helpers is unattended and has no side effects
+  [+] imports silently in a fresh current-shell host without prompts, processes, writes or exit 490ms (471ms|19ms)
+
+Running tests from 'WinAudioClean.Preflight.Tests.ps1'
+Describing AC-013: preflight treats filenames as literal data
+  [+] resolves and reads exactly meeting with spaces.wav 66ms (64ms|2ms)
+  [+] resolves and reads exactly meeting [draft].wav 14ms (13ms|2ms)
+  [+] resolves and reads exactly speaker's recording.wav 33ms (31ms|1ms)
+  [+] resolves and reads exactly meeting äöÅ.wav 20ms (18ms|2ms)
+  [+] resolves and reads exactly speaker & guest.wav 22ms (19ms|2ms)
+  [+] resolves and reads exactly meeting %completed%.wav 20ms (18ms|2ms)
+  [+] resolves and reads exactly meeting !important!.wav 63ms (61ms|2ms)
+  [+] resolves and reads exactly meeting (take 1).wav 19ms (17ms|2ms)
+  [+] does not expand brackets to a different existing filename 32ms (30ms|2ms)
+  [+] normalizes a relative path against the PowerShell working directory 16ms (14ms|2ms)
+  [+] rejects provider-qualified syntax even when the underlying file exists 25ms (24ms|1ms)
+
+Describing AC-014: input preflight rejects unsupported or unreadable input
+  [+] rejects empty path for both input and destination 21ms (16ms|4ms)
+  [+] rejects blank path for both input and destination 14ms (12ms|3ms)
+  [+] rejects HTTPS URL for both input and destination 20ms (19ms|2ms)
+  [+] rejects file URL for both input and destination 28ms (25ms|3ms)
+  [+] rejects environment provider for both input and destination 14ms (13ms|2ms)
+  [+] rejects registry provider for both input and destination 15ms (12ms|2ms)
+  [+] rejects UNC path for both input and destination 58ms (56ms|2ms)
+  [+] rejects forward-slash UNC path for both input and destination 9ms (7ms|1ms)
+  [+] rejects extended device path for both input and destination 40ms (33ms|7ms)
+  [+] rejects device namespace for both input and destination 19ms (13ms|6ms)
+  [+] rejects alternate data stream for both input and destination 15ms (13ms|2ms)
+  [+] rejects a missing file without creating it 23ms (21ms|2ms)
+  [+] rejects an existing directory 17ms (15ms|2ms)
+  [+] rejects a zero-byte file and leaves it unchanged 18ms (16ms|2ms)
+  [+] rejects a file that cannot be opened for reading 21ms (19ms|2ms)
+
+Describing AC-013/AC-014: destination preflight creates and verifies literal directories
+  [+] creates a literal destination containing meeting with spaces.wav without leaving probe files 40ms (34ms|5ms)
+  [+] creates a literal destination containing meeting [draft].wav without leaving probe files 18ms (17ms|2ms)
+  [+] creates a literal destination containing speaker's recording.wav without leaving probe files 10ms (8ms|2ms)
+  [+] creates a literal destination containing meeting äöÅ.wav without leaving probe files 11ms (9ms|2ms)
+  [+] creates a literal destination containing speaker & guest.wav without leaving probe files 8ms (6ms|1ms)
+  [+] creates a literal destination containing meeting %completed%.wav without leaving probe files 8ms (7ms|1ms)
+  [+] creates a literal destination containing meeting !important!.wav without leaving probe files 9ms (8ms|1ms)
+  [+] creates a literal destination containing meeting (take 1).wav without leaving probe files 7ms (6ms|1ms)
+  [+] normalizes and creates a nested relative destination 14ms (13ms|1ms)
+  [+] preserves existing files and removes only its own write probe 31ms (30ms|1ms)
+  [+] rejects a destination occupied by a file and preserves that file 11ms (10ms|1ms)
+  [+] rejects a directory whose ACL denies creating files 33ms (32ms|1ms)
+
+Describing AC-015: the menu retries invalid answers and permits cancellation
+  [+] selects Raw for 1 426ms (422ms|4ms)
+  [+] selects Zoom for 2 21ms (18ms|3ms)
+  [+] retries empty and invalid answers before accepting a valid choice 72ms (71ms|1ms)
+  [+] returns no mode for cancellation q 34ms (32ms|2ms)
+  [+] returns no mode for cancellation cancel 31ms (30ms|1ms)
+  [+] returns no mode when the host reports end of input 39ms (37ms|2ms)
+  [+] reports a clear unattended-use route when Read-Host fails 53ms (51ms|2ms)
+
+Describing AC-015: prompt eligibility follows host and script invocation boundaries
+  [+] allows an interactive host with ordinary startup switches 34ms (24ms|11ms)
+  [+] prevents prompting for the explicit application switch 13ms (9ms|4ms)
+  [+] prevents prompting for redirected standard input 6ms (4ms|2ms)
+  [+] prevents prompting for a noninteractive operating system session 9ms (6ms|2ms)
+  [+] recognizes host switch -NonInteractive before script arguments 10ms (8ms|2ms)
+  [+] recognizes host switch -noni before script arguments 5ms (2ms|2ms)
+  [+] recognizes host switch -nonin before script arguments 6ms (4ms|2ms)
+  [+] recognizes host switch -noninter before script arguments 7ms (6ms|1ms)
+  [+] recognizes host switch -NoNiNtErAcTiVe before script arguments 5ms (3ms|2ms)
+  [+] does not interpret application arguments after -File as host switches 8ms (7ms|2ms)
+  [+] does not interpret application arguments after -fi as host switches 4ms (2ms|2ms)
+  [+] does not interpret application arguments after -Command as host switches 6ms (4ms|2ms)
+  [+] does not interpret application arguments after -co as host switches 3ms (2ms|1ms)
+  [+] does not interpret application arguments after -EncodedCommand as host switches 4ms (3ms|2ms)
+  [+] does not interpret application arguments after -ec as host switches 5ms (4ms|2ms)
+  [+] does not confuse a longer lookalike argument with a supported host switch 5ms (4ms|1ms)
+Tests completed in 4.11s
+Tests Passed: 74, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 153
+Quick passed: 74 Pester passed, 0 skipped, 153 outside scope.

@@ -1,0 +1,97 @@
+Development module: Pester 5.7.1
+Development module: PSScriptAnalyzer 1.24.0
+PowerShell parser passed (22 files; shell 7.6.5).
+Static gate passed; 95 non-gating analyzer finding(s). Use -AnalyzerWarnings to inspect.
+{
+  "valid": true,
+  "tasks": 30,
+  "acceptance_cases": 90,
+  "improvements": 20
+}
+Pester v5.7.1
+
+Starting discovery in 1 files.
+Discovery found 70 tests in 237ms.
+Running tests.
+
+Running tests from '<repo>\tests\WinAudioClean.Validation.Tests.ps1'
+Describing AC-023/024: validate the owned PCM bytes before publication
+  [+] accepts complete PCM and leaves the validation handle open 264ms (224ms|40ms)
+  [+] accepts complete stereo PCM24 without imposing a new encoding default 13ms (11ms|2ms)
+  [+] accepts a complete extensible PCM format 51ms (49ms|2ms)
+  [+] rejects an extensible format claiming bytes beyond its own chunk 46ms (44ms|2ms)
+  [+] rejects a zero-length or header-only output: 0 16ms (12ms|3ms)
+  [+] rejects a zero-length or header-only output: 44 8ms (7ms|1ms)
+  [+] rejects truncated samples even when ffprobe reports plausible audio 13ms (12ms|2ms)
+  [+] rejects truncated data after RIFF length was repaired 11ms (9ms|2ms)
+  [+] rejects a complete but implausibly short result after both lengths were repaired 19ms (18ms|1ms)
+  [+] rejects mismatched probe Codec 16ms (14ms|2ms)
+  [+] rejects mismatched probe Channels 11ms (8ms|2ms)
+  [+] rejects mismatched probe SampleRate 12ms (10ms|2ms)
+  [+] rejects mismatched probe DurationSeconds 13ms (9ms|3ms)
+  [+] rejects changed selected channel count 11ms (9ms|2ms)
+  [+] enforces 10 ms PCM duration tolerance 44ms (42ms|2ms)
+  [+] allows at most 100 ms compressed padding difference 37ms (35ms|2ms)
+  [+] rejects an RF64 signature without its required header 22ms (21ms|2ms)
+  [+] rejects empty sample data 13ms (11ms|2ms)
+  [+] rejects inconsistent sample alignment 31ms (30ms|1ms)
+
+Describing AC-025/026: enforce the requested output format and channel policy
+  [+] accepts requested 16-bit mono output 37ms (30ms|7ms)
+  [+] accepts requested 24-bit mono output 10ms (8ms|2ms)
+  [+] accepts requested 16-bit stereo output 9ms (8ms|2ms)
+  [+] accepts requested 24-bit stereo output 10ms (8ms|2ms)
+  [+] rejects a probe/header-consistent legacy 192 kHz export 15ms (14ms|1ms)
+  [+] rejects a probe/header-consistent wrong bit depth 11ms (9ms|1ms)
+  [+] permits explicit mono conversion of the selected stereo track 8ms (7ms|1ms)
+  [+] rejects an unrequested mono conversion even if the probe agrees 9ms (8ms|1ms)
+  [+] rejects an unexpected stereo upmix 16ms (14ms|1ms)
+  [+] rejects an inconsistent output probe layout 9ms (8ms|1ms)
+  [+] accepts a conventional or unspecified mono extensible mask: 4 7ms (6ms|1ms)
+  [+] accepts a conventional or unspecified mono extensible mask: 0 4ms (3ms|1ms)
+  [+] rejects an unexpected extensible channel mask 7ms (7ms|1ms)
+  [+] accepts extensible stereo PCM24 with the expected FL/FR mask 14ms (12ms|1ms)
+  [+] rejects an extensible valid-bit count different from the requested depth 13ms (12ms|2ms)
+  [+] rejects ordinary RIFF when RF64 was requested 28ms (26ms|2ms)
+  [+] treats RIFF chunk identifiers as case-sensitive 19ms (18ms|2ms)
+  [+] treats WAVE chunk identifiers as case-sensitive 7ms (5ms|2ms)
+  [+] treats fmt  chunk identifiers as case-sensitive 7ms (6ms|2ms)
+  [+] treats data chunk identifiers as case-sensitive 8ms (6ms|2ms)
+
+Describing AC-027: validate RF64 sizes and samples on the held stream
+  [+] accepts a complete small RF64 fixture without closing the held stream 25ms (23ms|2ms)
+  [+] enforces explicit RF64 policy for an otherwise valid RF64 output 13ms (12ms|1ms)
+  [+] rejects a missing container size sentinel 10ms (9ms|1ms)
+  [+] requires ds64 before all other chunks 9ms (8ms|1ms)
+  [+] rejects malformed ds64 chunk length: 0 12ms (10ms|2ms)
+  [+] rejects malformed ds64 chunk length: 27 21ms (20ms|1ms)
+  [+] rejects malformed ds64 chunk length: 40 15ms (14ms|1ms)
+  [+] rejects unsupported ds64 tables 21ms (9ms|12ms)
+  [+] rejects 64-bit overflow in RIFF length 15ms (14ms|1ms)
+  [+] rejects 64-bit overflow in data length 7ms (6ms|1ms)
+  [+] rejects 64-bit overflow in sample count 5ms (4ms|1ms)
+  [+] rejects a 64-bit container size that disagrees with actual length 8ms (8ms|1ms)
+  [+] bounds a large data length before seeking or addition can overflow 9ms (8ms|1ms)
+  [+] rejects RF64 data without its sentinel 9ms (8ms|1ms)
+  [+] rejects empty sample data described by ds64 11ms (10ms|1ms)
+  [+] rejects inconsistent ds64 sample count: 0 14ms (12ms|2ms)
+  [+] rejects inconsistent ds64 sample count: 144001 4ms (3ms|1ms)
+  [+] rejects inconsistent ds64 sample count: 9007199254740993 5ms (4ms|1ms)
+  [+] rejects duplicate ds64 chunks 9ms (8ms|1ms)
+  [+] rejects a sentinel on an unlisted non-data chunk 8ms (7ms|1ms)
+  [+] rejects truncation even if the RF64 container length was repaired 9ms (8ms|1ms)
+
+Describing Selected-stream duration metadata
+  [+] parses invariant seconds 17ms (15ms|2ms)
+  [+] uses Matroska stream end time minus its start time 10ms (9ms|1ms)
+  [+] prefers direct stream duration over tags 5ms (4ms|1ms)
+  [+] leaves unknown or invalid timing unavailable:  16ms (14ms|2ms)
+  [+] leaves unknown or invalid timing unavailable: N/A 2ms (1ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: NaN 5ms (4ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: Infinity 2ms (2ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: 0 2ms (1ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: -1 2ms (1ms|1ms)
+  [+] leaves unknown or invalid timing unavailable: 3,5 2ms (1ms|1ms)
+Tests completed in 2.2s
+Tests Passed: 70, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+Targeted passed: 70 Pester passed, 0 skipped, 0 outside scope.

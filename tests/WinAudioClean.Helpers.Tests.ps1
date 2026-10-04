@@ -33,48 +33,47 @@ Describe 'Processing profiles preserve the reviewed baseline sound' -Tag 'Unit' 
         $processingProfile.FilterChain | Should -BeExactly $zoomFilters
     }
 
-    It 'characterizes the legacy invalid-choice fallback to Zoom (<Choice>)' -ForEach @(
+    It 'AC-015: rejects an invalid choice instead of falling back to Zoom (<Choice>)' -ForEach @(
         @{ Choice = '' }, @{ Choice = 'invalid' }, @{ Choice = '3' }
     ) {
-        # Known validation defect, scheduled for WAC-M1-01. This freezes the
-        # extraction baseline only; accepting invalid input is not a goal.
-        $processingProfile = Get-WacProcessingProfile -Choice $Choice
-        $processingProfile.ModeName | Should -BeExactly 'ZOOM (Level Only)'
-        $processingProfile.FilterChain | Should -BeExactly $zoomFilters
+        { Get-WacProcessingProfile -Choice $Choice } | Should -Throw '*Invalid processing choice*'
     }
 }
 
 Describe 'Output naming and command construction preserve extraction behavior' -Tag 'Unit' {
     It 'keeps spaces, brackets and extra dots in the stem while replacing its extension' {
-        Get-WacOutputPath -InputPath 'C:\WAC input\Meeting [draft].v2.m4a' -OutputFolder 'C:\WAC output' -Timestamp '20261002-1200' |
-            Should -BeExactly 'C:\WAC output\Meeting [draft].v2_Cleaned_20261002-1200.wav'
+        Get-WacOutputPath -InputPath 'C:\WAC input\Meeting [draft].v2.m4a' -OutputFolder 'C:\WAC output' -Timestamp '20261002-1200' -JobId '0123456789abcdef0123456789abcdef' |
+            Should -BeExactly 'C:\WAC output\Meeting [draft].v2_Cleaned_20261002-1200_0123456789abcdef0123456789abcdef.wav'
     }
 
     It 'accepts an input stem without an extension' {
-        Get-WacOutputPath -InputPath 'C:\WAC input\meeting' -OutputFolder 'C:\WAC output' -Timestamp '20261002-1200' |
-            Should -BeExactly 'C:\WAC output\meeting_Cleaned_20261002-1200.wav'
+        Get-WacOutputPath -InputPath 'C:\WAC input\meeting' -OutputFolder 'C:\WAC output' -Timestamp '20261002-1200' -JobId '0123456789abcdef0123456789abcdef' |
+            Should -BeExactly 'C:\WAC output\meeting_Cleaned_20261002-1200_0123456789abcdef0123456789abcdef.wav'
     }
 
-    It 'characterizes the legacy minute-timestamp collision' {
-        # Known collision risk, scheduled for WAC-M1-04. No files are created.
+    It 'uses a fresh job identifier for inputs with the same stem and timestamp' {
         $first = Get-WacOutputPath -InputPath 'C:\WAC input\same.wav' -OutputFolder 'C:\WAC output' -Timestamp '20261002-1200'
         $second = Get-WacOutputPath -InputPath 'C:\WAC input\same.mp3' -OutputFolder 'C:\WAC output' -Timestamp '20261002-1200'
-        $first | Should -BeExactly 'C:\WAC output\same_Cleaned_20261002-1200.wav'
-        $second | Should -BeExactly $first
+        $first | Should -Match '^C:\\WAC output\\same_Cleaned_20261002-1200_[a-f0-9]{32}\.wav$'
+        $second | Should -Match '^C:\\WAC output\\same_Cleaned_20261002-1200_[a-f0-9]{32}\.wav$'
+        $second | Should -Not -BeExactly $first
     }
 
-    It 'quotes paths and the filter string in the original FFmpeg argument order' {
-        $arguments = Get-WacFfmpegArguments -InputPath 'C:\WAC input\speaker [1].wav' -FilterChain $rawFilters -OutputFile 'C:\WAC output\speaker [1]_Cleaned.wav'
-        $expected = '-i "C:\WAC input\speaker [1].wav" -vn -af "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5" "C:\WAC output\speaker [1]_Cleaned.wav" -y -hide_banner -loglevel error -stats'
-        $arguments | Should -BeOfType [string]
+    It 'keeps paths and filters as separate arguments and disables native stdin' {
+        $arguments = Get-WacFfmpegArguments -InputPath 'C:\WAC input\speaker [1].wav' -FilterChain $rawFilters -OutputFile 'C:\WAC output\.wac-0123456789abcdef0123456789abcdef.partial' -AudioStreamIndex 3
+        $expected = @('-nostdin', '-protocol_whitelist', 'file', '-format_whitelist',
+            'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi', '-i', 'C:\WAC input\speaker [1].wav', '-map', '0:3', '-vn', '-af',
+            $rawFilters, '-ar', '48000', '-c:a', 'pcm_s16le', '-ac', '1', '-channel_layout', 'mono', '-map_metadata', '-1', '-map_chapters', '-1',
+            '-f', 'wav', '-rf64', 'never', 'C:\WAC output\.wac-0123456789abcdef0123456789abcdef.partial', '-y', '-hide_banner', '-loglevel', 'error', '-stats')
         $arguments | Should -BeExactly $expected
     }
 
-    It 'characterizes the legacy overwrite flag pending transactional output work' {
-        # WAC-M1-04 will replace this unsafe baseline. This does not authorize
-        # overwriting recordings or prior exports, and no process runs here.
-        Get-WacFfmpegArguments -InputPath 'input.wav' -FilterChain $zoomFilters -OutputFile 'output.wav' |
-            Should -Match '"output\.wav" -y -hide_banner -loglevel error -stats$'
+    It 'explicitly writes WAV to the caller-owned partial path' {
+        $arguments = Get-WacFfmpegArguments -InputPath 'input.wav' -FilterChain $zoomFilters -OutputFile '.wac-0123456789abcdef0123456789abcdef.partial' -AudioStreamIndex 0
+        $overwriteIndex = [Array]::IndexOf($arguments, '-y')
+        $overwriteIndex | Should -BeGreaterThan 0
+        $arguments[$overwriteIndex - 1] | Should -BeExactly '.wac-0123456789abcdef0123456789abcdef.partial'
+        $arguments[[Array]::IndexOf($arguments, '-f') + 1] | Should -BeExactly 'wav'
     }
 }
 

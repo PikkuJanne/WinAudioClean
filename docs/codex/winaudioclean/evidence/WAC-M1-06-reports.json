@@ -1,0 +1,2484 @@
+{
+  "task": "WAC-M1-06",
+  "created_utc": "20261002T135739509756Z",
+  "notice": "Synthetic local report mechanics. Injected permission/native/validation failures use isolated application copies; no ACL/security changes, uploads, speech listening or real volume exhaustion.",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.6",
+    "child_psmodulepath_removed": true,
+    "ps51": "5.1.26100.9444",
+    "ps7": "7.6.5"
+  },
+  "source_revision": "cbe732c10bf815e57936fc8ddce50f1c86aa1559",
+  "runtime_sha256_before": {
+    "WinAudioClean.ps1": "74e07f865b8392ff70556fb3a4e57979a8136dc9b93cf22958edef6e7a3a9066",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+  },
+  "harness_sha256": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+  "harness_invocation": [
+    "<user-profile>\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+    "-X",
+    "utf8",
+    "scripts/Test-RunReports.py",
+    "--ffmpeg",
+    ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffmpeg.exe",
+    "--ffprobe",
+    ".wac-local/ffmpeg-setup/portable-curl/ffmpeg-9.0.2-essentials_build/bin/ffprobe.exe",
+    "--output",
+    ".wac-local/WAC-M1-06/reports-final-1"
+  ],
+  "tools": {
+    "ffmpeg": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec",
+      "version": "ffmpeg version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers"
+    },
+    "ffprobe": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52",
+      "version": "ffprobe version 9.0.2-essentials_build-www.gyan.dev Copyright (c) 2007-2026 the FFmpeg developers"
+    }
+  },
+  "cases": [
+    {
+      "id": "ps51-success",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "expected_status": "SUCCESS",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-success\\WinAudioClean_efd2d3cd0b0648088956874d414ec080.json",
+            "sha256": "c6ef345676608a04e2f1045218e6dda0b737476078f2a83c3d175b112b7ae222"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-success\\WinAudioClean_efd2d3cd0b0648088956874d414ec080.txt",
+            "sha256": "ecdacacda19a609cc737de59b50a65d13d38216158edaa11c53d93d6f86fd399"
+          },
+          "schema_version": 1,
+          "job_id": "efd2d3cd0b0648088956874d414ec080",
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4072797,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": false,
+          "native_stderr_retained": false,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      }
+    },
+    {
+      "id": "ps51-encoder",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder\\WinAudioClean_d34ee07247ce4a2eac67be763185aa37.json",
+            "sha256": "3a55714ec518f9ecdf058153d466ace5299bf0c9bf2aa3ffcbdeaec358f84eaf"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder\\WinAudioClean_d34ee07247ce4a2eac67be763185aa37.txt",
+            "sha256": "4e6a50e6393dd7f34151c812a03bebe9c7fd0efc49908b1a3ceb2db9245943cc"
+          },
+          "schema_version": 1,
+          "job_id": "d34ee07247ce4a2eac67be763185aa37",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 4,
+          "native_exit_code": 17,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4118394,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true
+    },
+    {
+      "id": "ps51-validation",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation\\WinAudioClean_10eca669e5004ee8ba5c2828ea435ad0.json",
+            "sha256": "9ee745f8ea6f892902c3aa37276589f03b508fca6464fe5c6ef2dc8fc01f5c9e"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation\\WinAudioClean_10eca669e5004ee8ba5c2828ea435ad0.txt",
+            "sha256": "ba8f10ba50209a4fda24ef39534c13adafc1aa370f5262412fd331f83e4d46a9"
+          },
+          "schema_version": 1,
+          "job_id": "10eca669e5004ee8ba5c2828ea435ad0",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 5,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4117091,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true
+    },
+    {
+      "id": "ps51-json-permission",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 0,
+      "reports": [],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-json-permission\\WinAudioClean_ee5832e004704e67b447bafdb317d3e9.txt",
+          "sha256": "f4b1efe989f11a6fffc037beae1781e42472a9e385029a2353ef4976c13e0116"
+        },
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-json-permission\\WinAudioClean_Log.txt",
+          "sha256": "f4b1efe989f11a6fffc037beae1781e42472a9e385029a2353ef4976c13e0116"
+        }
+      ]
+    },
+    {
+      "id": "ps51-summary-permission",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-permission\\WinAudioClean_3c43642e2c7b479889932a648d0da9ef.json",
+            "sha256": "a8667ab00538341e7bac72eb21a9ae87ffeb4f662c8cdb1af031f2fcadc50095"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-permission\\WinAudioClean_3c43642e2c7b479889932a648d0da9ef.txt",
+            "sha256": "eb15f5483fb928785da4b6a91ea96797eaa7ca21dbe3162c7cd98e358439eb46"
+          },
+          "schema_version": 1,
+          "job_id": "3c43642e2c7b479889932a648d0da9ef",
+          "status": "WARNING",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 7,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4532059,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-permission\\WinAudioClean_3c43642e2c7b479889932a648d0da9ef.txt",
+          "sha256": "eb15f5483fb928785da4b6a91ea96797eaa7ca21dbe3162c7cd98e358439eb46"
+        }
+      ]
+    },
+    {
+      "id": "ps51-encoder-summary-permission",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-permission\\WinAudioClean_c164558870c54fe4a5bf9906bb5209ac.json",
+            "sha256": "d5d7ba506733ee841bdb7d082d2ce3a8d584e6a1c1d3f9010a5c37b4448850ab"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-permission\\WinAudioClean_c164558870c54fe4a5bf9906bb5209ac.txt",
+            "sha256": "75e551fe84d346e74a2633faa1eaa790019fa275dd109d3af3e369cb247f9cba"
+          },
+          "schema_version": 1,
+          "job_id": "c164558870c54fe4a5bf9906bb5209ac",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 4,
+          "native_exit_code": 17,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.3941323,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-permission\\WinAudioClean_c164558870c54fe4a5bf9906bb5209ac.txt",
+          "sha256": "75e551fe84d346e74a2633faa1eaa790019fa275dd109d3af3e369cb247f9cba"
+        }
+      ]
+    },
+    {
+      "id": "ps51-validation-summary-permission",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-summary-permission\\WinAudioClean_6220c035601c4efdaef6377597b253bf.json",
+            "sha256": "73b58c5d4254aa8df46e492b37ca30b41dc77d4cf62de15b87ce8691f34af6e1"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-summary-permission\\WinAudioClean_6220c035601c4efdaef6377597b253bf.txt",
+            "sha256": "3a049f49dd84e7004818f70f71335b82c6310d1680a7d867d08decf5c308e7df"
+          },
+          "schema_version": 1,
+          "job_id": "6220c035601c4efdaef6377597b253bf",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 5,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4096976,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-summary-permission\\WinAudioClean_6220c035601c4efdaef6377597b253bf.txt",
+          "sha256": "3a049f49dd84e7004818f70f71335b82c6310d1680a7d867d08decf5c308e7df"
+        }
+      ]
+    },
+    {
+      "id": "ps51-text-partial-write",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-text-partial-write\\WinAudioClean_7e44e8dd69474c0eb8317c106af4558c.json",
+            "sha256": "79b5613c55e43b5439594aade8a5cb5327cc9e52b9b4970e3c516f9078b24c17"
+          },
+          "text": null,
+          "schema_version": 1,
+          "job_id": "7e44e8dd69474c0eb8317c106af4558c",
+          "status": "WARNING",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 7,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4418375,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-text-partial-write\\WinAudioClean_Log.txt",
+          "sha256": "5f48d8d71baf33e3a046efd4358a87629e343fbf40bd0b69b414a7a99b972dd6"
+        }
+      ]
+    },
+    {
+      "id": "ps51-summary-partial-write",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write\\WinAudioClean_a01854168d5c47188ee0b122baff3c5c.json",
+            "sha256": "33fcb656eee34f319746836d683965b15a0e94c3930ff119638dc02dc3e886c7"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write\\WinAudioClean_a01854168d5c47188ee0b122baff3c5c.txt",
+            "sha256": "440b3a4543e3a76f4c716f04640f850a247a51d4964e03bce6b553d7196655ac"
+          },
+          "schema_version": 1,
+          "job_id": "a01854168d5c47188ee0b122baff3c5c",
+          "status": "WARNING",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 7,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4023125,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "prior_summary_unchanged": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write\\WinAudioClean_a01854168d5c47188ee0b122baff3c5c.txt",
+          "sha256": "440b3a4543e3a76f4c716f04640f850a247a51d4964e03bce6b553d7196655ac"
+        },
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write\\WinAudioClean_Log.txt",
+          "sha256": "f1d58cceb0885074607df9090b609eeb2cad959726edacb41fcb3447616af5f9"
+        }
+      ]
+    },
+    {
+      "id": "ps51-encoder-summary-partial-write",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-partial-write\\WinAudioClean_eb7f27e8fbc74abb8932e9e384a149fc.json",
+            "sha256": "2666b84161736fe91d09f2bb1ad2723798ee62dc6f65f9db4d42c31887ba6ecc"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-partial-write\\WinAudioClean_eb7f27e8fbc74abb8932e9e384a149fc.txt",
+            "sha256": "6d7400dc51becc30a25a42c257f61a44a0d0b2e3aafabcd52c57f5144358f54d"
+          },
+          "schema_version": 1,
+          "job_id": "eb7f27e8fbc74abb8932e9e384a149fc",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 4,
+          "native_exit_code": 17,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.3960959,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "prior_summary_unchanged": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-partial-write\\WinAudioClean_eb7f27e8fbc74abb8932e9e384a149fc.txt",
+          "sha256": "6d7400dc51becc30a25a42c257f61a44a0d0b2e3aafabcd52c57f5144358f54d"
+        },
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-partial-write\\WinAudioClean_Log.txt",
+          "sha256": "f1d58cceb0885074607df9090b609eeb2cad959726edacb41fcb3447616af5f9"
+        }
+      ]
+    },
+    {
+      "id": "ps51-concurrent",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent\\WinAudioClean_e9983ad0ce67411984800ac8f9397674.json",
+            "sha256": "47cc46071ef6b35c143457a656b7235af0512bff32e5dde86a5d4431dad01c8d"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent\\WinAudioClean_e9983ad0ce67411984800ac8f9397674.txt",
+            "sha256": "0e1fdf2402c0bd0cde693026d17266b045ee4ca391361f9868e6da8f37ef3c95"
+          },
+          "schema_version": 1,
+          "job_id": "e9983ad0ce67411984800ac8f9397674",
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4013889,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": false,
+          "native_stderr_retained": false,
+          "passed": true
+        },
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent\\WinAudioClean_eac672fb74a34c429e00f203a65e8981.json",
+            "sha256": "385577e8f35a220a77e3149401d9ab137ffec30a28bf66122b7ab432525ff7e4"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent\\WinAudioClean_eac672fb74a34c429e00f203a65e8981.txt",
+            "sha256": "24dace33a9954c69f51419f798f69e9de7f99e36b5de10bcc29e1e588aef5239"
+          },
+          "schema_version": 1,
+          "job_id": "eac672fb74a34c429e00f203a65e8981",
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3,
+          "processing_elapsed_seconds": 0.4016213,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": false,
+          "native_stderr_retained": false,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "ps51-redaction",
+      "exit_code": 0,
+      "repeat_exit_code": 2,
+      "raw_report": {
+        "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-sensitive-local-report.json",
+        "sha256": "2b42675e27337753e2099a4f45c23588272cfa7e9783c05f9704bad43a6c2c60"
+      },
+      "redacted_report": {
+        "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-redacted.json",
+        "sha256": "cffb7dc659471e3565f395423116319e5c2c049de91df3b4af120d946be49f4c"
+      },
+      "raw_unchanged": true,
+      "redacted_unchanged_after_repeat": true,
+      "sensitive_tokens_absent": true,
+      "passed": true
+    },
+    {
+      "id": "ps7-success",
+      "expected_exit": 0,
+      "exit_code": 0,
+      "expected_status": "SUCCESS",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-success\\WinAudioClean_f459de4d8f4a4107b5cd52678ea637bd.json",
+            "sha256": "39c5a25f2e27d8357eb27c9f88334cfc41fd5bb0ac71db8cff7a3f0575c51e88"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-success\\WinAudioClean_f459de4d8f4a4107b5cd52678ea637bd.txt",
+            "sha256": "a2d6bf642ee929ab6bcdf243f3b4654d2d2810fc4da7f6ff21d435ff7a53ec6d"
+          },
+          "schema_version": 1,
+          "job_id": "f459de4d8f4a4107b5cd52678ea637bd",
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.5475153,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": false,
+          "native_stderr_retained": false,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      }
+    },
+    {
+      "id": "ps7-encoder",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder\\WinAudioClean_6a794a979e694dc58ea3da4c69d169f7.json",
+            "sha256": "12dec2da831191f10010a47ea8edb63260700c305c8580f8b031053a5ceb12c0"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder\\WinAudioClean_6a794a979e694dc58ea3da4c69d169f7.txt",
+            "sha256": "80ba42f15cd1936b6a69e726fcc635ca4e86501d7687dd65cbb7e9f9183c4be6"
+          },
+          "schema_version": 1,
+          "job_id": "6a794a979e694dc58ea3da4c69d169f7",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 4,
+          "native_exit_code": 17,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.7160622,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true
+    },
+    {
+      "id": "ps7-validation",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation\\WinAudioClean_9f332c39acfc4757b686efff899b2b9a.json",
+            "sha256": "4f360543c8ffd2480fb71c7611a0c5825449ac0c957d10dcc684875d8cae4fc4"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation\\WinAudioClean_9f332c39acfc4757b686efff899b2b9a.txt",
+            "sha256": "7fe5365b66bdf9674f379b3b1b27a07b625895af97e0f01a683c9b0f4a428c39"
+          },
+          "schema_version": 1,
+          "job_id": "9f332c39acfc4757b686efff899b2b9a",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 5,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.7531097,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true
+    },
+    {
+      "id": "ps7-json-permission",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 0,
+      "reports": [],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-json-permission\\WinAudioClean_1090fa7151074fbdbc5eeb8f02f57c83.txt",
+          "sha256": "acac7729c8e79628c0f8d8c807872c12f4d8de2fa798a9ed860ece1c9aedcb44"
+        },
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-json-permission\\WinAudioClean_Log.txt",
+          "sha256": "acac7729c8e79628c0f8d8c807872c12f4d8de2fa798a9ed860ece1c9aedcb44"
+        }
+      ]
+    },
+    {
+      "id": "ps7-summary-permission",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-permission\\WinAudioClean_b6602aaee9ed4c96822eeba79baa8a01.json",
+            "sha256": "a9032f438bd64fcf41b14375364a4bf29494d679cffc7be4eda197cb8199339f"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-permission\\WinAudioClean_b6602aaee9ed4c96822eeba79baa8a01.txt",
+            "sha256": "09d9087d4d1227a11cb6ca22606f68e864c20b758b7078b98fc81ab94039298f"
+          },
+          "schema_version": 1,
+          "job_id": "b6602aaee9ed4c96822eeba79baa8a01",
+          "status": "WARNING",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 7,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.6398404,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-permission\\WinAudioClean_b6602aaee9ed4c96822eeba79baa8a01.txt",
+          "sha256": "09d9087d4d1227a11cb6ca22606f68e864c20b758b7078b98fc81ab94039298f"
+        }
+      ]
+    },
+    {
+      "id": "ps7-encoder-summary-permission",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-permission\\WinAudioClean_5a0640d6d7a64edeab9e6cbeb0fdfbce.json",
+            "sha256": "00140f6eed92d69a94177299df333db1dc87924daf7438c35047c92d764086e0"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-permission\\WinAudioClean_5a0640d6d7a64edeab9e6cbeb0fdfbce.txt",
+            "sha256": "594e4022ee4835172aedffc83533d494cf08a8dcc5f0c4d5aa886408c2967b52"
+          },
+          "schema_version": 1,
+          "job_id": "5a0640d6d7a64edeab9e6cbeb0fdfbce",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 4,
+          "native_exit_code": 17,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.6854697,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-permission\\WinAudioClean_5a0640d6d7a64edeab9e6cbeb0fdfbce.txt",
+          "sha256": "594e4022ee4835172aedffc83533d494cf08a8dcc5f0c4d5aa886408c2967b52"
+        }
+      ]
+    },
+    {
+      "id": "ps7-validation-summary-permission",
+      "expected_exit": 5,
+      "exit_code": 5,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-summary-permission\\WinAudioClean_98e69db796434a0ead7b34f81c3e0965.json",
+            "sha256": "ca143b56c96debc3ef763484635b8e7f18cff6ba2ee72b1751f0bd1b7a06c4d2"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-summary-permission\\WinAudioClean_98e69db796434a0ead7b34f81c3e0965.txt",
+            "sha256": "07a20550dada0c45d144f3bc00cec1de0013cf973d2f49cc1f4864eded2e64ba"
+          },
+          "schema_version": 1,
+          "job_id": "98e69db796434a0ead7b34f81c3e0965",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 5,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.5950989,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-summary-permission\\WinAudioClean_98e69db796434a0ead7b34f81c3e0965.txt",
+          "sha256": "07a20550dada0c45d144f3bc00cec1de0013cf973d2f49cc1f4864eded2e64ba"
+        }
+      ]
+    },
+    {
+      "id": "ps7-text-partial-write",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-text-partial-write\\WinAudioClean_2242531514bc47cd9182e8405b63ace2.json",
+            "sha256": "e8848346618a5712e28b6d43f0dfb0fbc1658bcba672393281355eb1ea1e275c"
+          },
+          "text": null,
+          "schema_version": 1,
+          "job_id": "2242531514bc47cd9182e8405b63ace2",
+          "status": "WARNING",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 7,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.5806029,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-text-partial-write\\WinAudioClean_Log.txt",
+          "sha256": "b62b5dcd96d16938c6e899a777ad083df4e1cfcd564231faa39cebafd10460b5"
+        }
+      ]
+    },
+    {
+      "id": "ps7-summary-partial-write",
+      "expected_exit": 7,
+      "exit_code": 7,
+      "expected_status": "WARNING",
+      "audio_count": 1,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write\\WinAudioClean_5a925c83963b4b96935d936ea9e87362.json",
+            "sha256": "0fb61adfff7ade1251a801bab95638c0a40c37f5871d8a8f50063b42e70ab68b"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write\\WinAudioClean_5a925c83963b4b96935d936ea9e87362.txt",
+            "sha256": "578b8ec30498db756d461eed1626cd8846d3a1bb666e0bc555b30f55913d574b"
+          },
+          "schema_version": 1,
+          "job_id": "5a925c83963b4b96935d936ea9e87362",
+          "status": "WARNING",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 7,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.6153779,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "verified_audio": {
+        "codec_name": "pcm_s24le",
+        "sample_rate": "48000",
+        "channels": 2,
+        "bits_per_sample": 24,
+        "duration": "3.000000"
+      },
+      "prior_summary_unchanged": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write\\WinAudioClean_5a925c83963b4b96935d936ea9e87362.txt",
+          "sha256": "578b8ec30498db756d461eed1626cd8846d3a1bb666e0bc555b30f55913d574b"
+        },
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write\\WinAudioClean_Log.txt",
+          "sha256": "f1d58cceb0885074607df9090b609eeb2cad959726edacb41fcb3447616af5f9"
+        }
+      ]
+    },
+    {
+      "id": "ps7-encoder-summary-partial-write",
+      "expected_exit": 4,
+      "exit_code": 4,
+      "expected_status": "FAILED",
+      "audio_count": 0,
+      "report_count": 1,
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-partial-write\\WinAudioClean_fcc83fb9fa4a46a2ac92ef6430f87c13.json",
+            "sha256": "d98bb7693214289dd6ecbcc42d07c12e5d6e1bfe81110be26f666c9714716760"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-partial-write\\WinAudioClean_fcc83fb9fa4a46a2ac92ef6430f87c13.txt",
+            "sha256": "2a4ff548d469e8d886c8bc938596033edfceba3501a27b9d42b3f69cb36e3d51"
+          },
+          "schema_version": 1,
+          "job_id": "fcc83fb9fa4a46a2ac92ef6430f87c13",
+          "status": "FAILED",
+          "processing_status": "FAILED",
+          "application_exit_code": 4,
+          "native_exit_code": 17,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.6477881,
+          "published": false,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": false,
+          "native_stdout_retained": true,
+          "native_stderr_retained": true,
+          "passed": true
+        }
+      ],
+      "source_unchanged": true,
+      "prior_unchanged": true,
+      "partial_count": 0,
+      "passed": true,
+      "prior_summary_unchanged": true,
+      "surviving_text_reports": [
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-partial-write\\WinAudioClean_fcc83fb9fa4a46a2ac92ef6430f87c13.txt",
+          "sha256": "2a4ff548d469e8d886c8bc938596033edfceba3501a27b9d42b3f69cb36e3d51"
+        },
+        {
+          "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-partial-write\\WinAudioClean_Log.txt",
+          "sha256": "f1d58cceb0885074607df9090b609eeb2cad959726edacb41fcb3447616af5f9"
+        }
+      ]
+    },
+    {
+      "id": "ps7-concurrent",
+      "exit_codes": [
+        0,
+        0
+      ],
+      "reports": [
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent\\WinAudioClean_17ff3cfc62f3479e87604f936d907e14.json",
+            "sha256": "f6e1606f0e409a982b8f9761adc6286052431b0472cbcfd4b919f74362ab75c9"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent\\WinAudioClean_17ff3cfc62f3479e87604f936d907e14.txt",
+            "sha256": "f18f91b7a00f6fb0953c8633d3c85f00ff23a01a605869a7eef268ad3bc4b208"
+          },
+          "schema_version": 1,
+          "job_id": "17ff3cfc62f3479e87604f936d907e14",
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.6952293,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": false,
+          "native_stderr_retained": false,
+          "passed": true
+        },
+        {
+          "json": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent\\WinAudioClean_d5793eb9e9494fc1ac43aba5c2233ad5.json",
+            "sha256": "549bc43af9e1fa0df16c69581ec18b77eee08bbfc313bd31589f04ae0e2d925b"
+          },
+          "text": {
+            "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent\\WinAudioClean_d5793eb9e9494fc1ac43aba5c2233ad5.txt",
+            "sha256": "c9e60ffb105dce4c4b2045c257a1398ab1268e562eca8ba53ce1c479bcf8df58"
+          },
+          "schema_version": 1,
+          "job_id": "d5793eb9e9494fc1ac43aba5c2233ad5",
+          "status": "SUCCESS",
+          "processing_status": "SUCCESS",
+          "application_exit_code": 0,
+          "native_exit_code": 0,
+          "input_duration_seconds": 3.0,
+          "processing_elapsed_seconds": 0.7030213,
+          "published": true,
+          "output_format": {
+            "sampleRate": 48000,
+            "bitDepth": 24,
+            "codec": "pcm_s24le",
+            "channels": 2,
+            "channelLayout": "stereo",
+            "container": "RIFF"
+          },
+          "metrics_null_with_reason": {
+            "integratedLufs": true,
+            "truePeakDbtp": true,
+            "loudnessRangeLu": true
+          },
+          "text_contiguous_in_summary": true,
+          "native_stdout_retained": false,
+          "native_stderr_retained": false,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "id": "ps7-redaction",
+      "exit_code": 0,
+      "repeat_exit_code": 2,
+      "raw_report": {
+        "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-sensitive-local-report.json",
+        "sha256": "6938958db3802b5839b9f22d1930930fdd2c0fcd13f0a7d941210072d6b03313"
+      },
+      "redacted_report": {
+        "path": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-redacted.json",
+        "sha256": "8fd835330307c065c7d4c8c6671fa35ca6cf2e09d1b35275704b72fcede07eb0"
+      },
+      "raw_unchanged": true,
+      "redacted_unchanged_after_repeat": true,
+      "sensitive_tokens_absent": true,
+      "passed": true
+    }
+  ],
+  "commands": [
+    {
+      "id": "ffmpeg-version",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.023,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ffmpeg-version-stdout.txt",
+      "stdout_sha256": "711056f2bc922237113d5defe7da4dbd97beaab41098e5f8d425753dbfea99ff",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ffmpeg-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ffprobe-version",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-version"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.022,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ffprobe-version-stdout.txt",
+      "stdout_sha256": "c28ec08933e2c9eeac8a7341b1fced84e23745c7ca69e26e7ca83226714ef209",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ffprobe-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-version",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$PSVersionTable.PSVersion.ToString()"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.198,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-version-stdout.txt",
+      "stdout_sha256": "20e955843dca875613392595b8b605fe7c7ddeb5dd374f8eea4f6f2820fcf270",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-success",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-success",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.864,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-success-stdout.txt",
+      "stdout_sha256": "321efef0424a95c1ac9b50dc70f7dbcf59b1fdd4d3c39a407f2e2a97815e9b1c",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-success-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-success",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-success\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155740925_efd2d3cd0b0648088956874d414ec080.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.021,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-success-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-success-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-encoder",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 1.755,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-stdout.txt",
+      "stdout_sha256": "48e0609efb21eea9b1e72ec32d84a8c24a583aa27c4705c6851543db80255b00",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-validation",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 2.008,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-stdout.txt",
+      "stdout_sha256": "efb1939f45e0ebefdbb536f085e18f5b765b75485f79eba4a5dbee5944bdad08",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-stderr.txt",
+      "stderr_sha256": "259a09bbe9b0b6f591c51e6b77a14580b68994c0dc13e5f95b0c629b9d993be8"
+    },
+    {
+      "id": "ps51-json-permission",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-json-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 1.852,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-json-permission-stdout.txt",
+      "stdout_sha256": "799b5c1d29af097936fc084ccadee5da6f30103391a5e26dc5f115c638cd94df",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-json-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-json-permission",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-json-permission\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155746659_ee5832e004704e67b447bafdb317d3e9.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.025,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-json-permission-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-json-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-summary-permission",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 2.068,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-permission-stdout.txt",
+      "stdout_sha256": "758c1e224b7bb07ac51a3effeb447e64784124a6c33fdb465bf1d90966850242",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-summary-permission",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-permission\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155748564_3c43642e2c7b479889932a648d0da9ef.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.022,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-summary-permission-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-summary-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-encoder-summary-permission",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 1.808,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-permission-stdout.txt",
+      "stdout_sha256": "c06d839380e30eb58b81ed4398914d93d5253d025c08eb5ade4c924b39700bb7",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-validation-summary-permission",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-summary-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 1.911,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-summary-permission-stdout.txt",
+      "stdout_sha256": "011326430f10a34e9b219d1c157d5fa5a555d342762e63c349ee30f4297f2fb6",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-validation-summary-permission-stderr.txt",
+      "stderr_sha256": "259a09bbe9b0b6f591c51e6b77a14580b68994c0dc13e5f95b0c629b9d993be8"
+    },
+    {
+      "id": "ps51-text-partial-write",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-text-partial-write",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 2.025,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-text-partial-write-stdout.txt",
+      "stdout_sha256": "de51a17968c5b7188c678b3ba15b6f27b5ae55792fc85191c02b94056b1e7284",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-text-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-text-partial-write",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-text-partial-write\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155754459_7e44e8dd69474c0eb8317c106af4558c.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.024,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-text-partial-write-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-text-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-summary-partial-write",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 1.954,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write-stdout.txt",
+      "stdout_sha256": "6b6894414ca750c2d07fbda8d8e79861bb79614bc3805853aaf8e8cab9bac86e",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps51-summary-partial-write",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-summary-partial-write\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155756559_a01854168d5c47188ee0b122baff3c5c.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.025,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-summary-partial-write-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps51-summary-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-encoder-summary-partial-write",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-partial-write",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 1.791,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-partial-write-stdout.txt",
+      "stdout_sha256": "2b5ee76e70b668a0aa0fc203278e10a1d9aa6c512e6065543f7a4205fb7f00e2",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-encoder-summary-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-concurrent-1",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.078,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent-1-stdout.txt",
+      "stdout_sha256": "9c5f63c201caf78dfc93aef32a3b6bafbaddbe675550fa3ae6f18f9f512776f2",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent-1-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-concurrent-2",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.079,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent-2-stdout.txt",
+      "stdout_sha256": "372455ccd66ba94991a4d7cc669e87a7724a5a4e02733bb92bdc6e3088601b19",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-concurrent-2-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-redact",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-ExportDiagnostic",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-sensitive-local-report.json",
+        "-DiagnosticOutputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-redacted.json"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.813,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-redact-stdout.txt",
+      "stdout_sha256": "4a07238116ba8a7f1f7c2c7c51801092f095343b1bec86ffb10e3627283bc760",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-redact-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps51-redact-no-overwrite",
+      "command": [
+        "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-ExportDiagnostic",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-sensitive-local-report.json",
+        "-DiagnosticOutputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps51-redacted.json"
+      ],
+      "exit_code": 2,
+      "timed_out": false,
+      "elapsed_seconds": 0.826,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-redact-no-overwrite-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps51-redact-no-overwrite-stderr.txt",
+      "stderr_sha256": "afc24716870d2beda416cc540d1e6634bab9b07284b6886b176ccec97b5e442d"
+    },
+    {
+      "id": "ps7-version",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-Command",
+        "$PSVersionTable.PSVersion.ToString()"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.308,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-version-stdout.txt",
+      "stdout_sha256": "f1b9015fddbc74eb77f6ac486b89917547a7ff3848591e50bd7b084b560cc2df",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-version-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-success",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-success",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 2.946,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-success-stdout.txt",
+      "stdout_sha256": "bec8e3dda521dc6a3164336cf9f24ae10d3814bfed2f77c2b92b0bb9d88fdc3c",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-success-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-success",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-success\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155805678_f459de4d8f4a4107b5cd52678ea637bd.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.035,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-success-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-success-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-encoder",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 3.545,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-stdout.txt",
+      "stdout_sha256": "81f15f5167e5e9b29153501d4857ec37edf94ddc90b9028169fc18636ead7348",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-validation",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 3.692,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-stdout.txt",
+      "stdout_sha256": "9ac763a67a0b3e9fbeaaee0bd8e535fcfd1d9f490f3d9eec412e61c0fff8ec1d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-stderr.txt",
+      "stderr_sha256": "a67397e107233e828cdc857a1ff2071c846259d7aa8726d9d08ddfe86b82bc8c"
+    },
+    {
+      "id": "ps7-json-permission",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-json-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 3.511,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-json-permission-stdout.txt",
+      "stdout_sha256": "86b428c4228e35134d247cb88186e0796e64482cee8ea8c4ff012a8de8aec084",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-json-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-json-permission",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-json-permission\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155818252_1090fa7151074fbdbc5eeb8f02f57c83.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.034,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-json-permission-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-json-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-summary-permission",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 3.504,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-permission-stdout.txt",
+      "stdout_sha256": "de7d3a6b18a12d931c1350940faa2e204799d85197db6cbe4d2dbe37d77343da",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-summary-permission",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-permission\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155822250_b6602aaee9ed4c96822eeba79baa8a01.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.032,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-summary-permission-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-summary-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-encoder-summary-permission",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 3.162,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-permission-stdout.txt",
+      "stdout_sha256": "34d3d7b158e599b574508743245244f2be1e835e2e1ef878561e5925957c5bd0",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-permission-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-validation-summary-permission",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-summary-permission",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 5,
+      "timed_out": false,
+      "elapsed_seconds": 3.103,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-summary-permission-stdout.txt",
+      "stdout_sha256": "b9150a3aa4d5607767cf1a2b1754115643470ce6b5545a99bb05bc84193ca399",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-validation-summary-permission-stderr.txt",
+      "stderr_sha256": "a67397e107233e828cdc857a1ff2071c846259d7aa8726d9d08ddfe86b82bc8c"
+    },
+    {
+      "id": "ps7-text-partial-write",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-text-partial-write",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 3.117,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-text-partial-write-stdout.txt",
+      "stdout_sha256": "5d23af3f98c11a2fe8f3775f354a204367f23fc2e579714a0b77ac4c34460c54",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-text-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-text-partial-write",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-text-partial-write\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155833728_2242531514bc47cd9182e8405b63ace2.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.032,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-text-partial-write-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-text-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-summary-partial-write",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 7,
+      "timed_out": false,
+      "elapsed_seconds": 2.914,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write-stdout.txt",
+      "stdout_sha256": "33120742f4dbc0d866feb622e6c6e933fc20513241ff5defbcb175b972aa3bbe",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "probe-ps7-summary-partial-write",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-summary-partial-write\\PRIVATE_FILENAME_TOKEN_Cleaned_20261002-155837435_5a925c83963b4b96935d936ea9e87362.wav"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 0.026,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-summary-partial-write-stdout.txt",
+      "stdout_sha256": "20819103387538ceae334a3ec8d411a98ff0ccf49e4e578d0c5b56b76d2f178d",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\probe-ps7-summary-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-encoder-summary-partial-write",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-partial-write",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 4,
+      "timed_out": false,
+      "elapsed_seconds": 3.437,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-partial-write-stdout.txt",
+      "stdout_sha256": "529e9b3d4df0cf73552f8aa6f2adf56d84d5e89c3d04660e2024e467c0739ce2",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-encoder-summary-partial-write-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-concurrent-1",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 3.876,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent-1-stdout.txt",
+      "stdout_sha256": "4680ad05a913a6c5312b0f28c806964a6c07dc64059337ae7144002cfacade89",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent-1-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-concurrent-2",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-inputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+        "-OutputDirectory",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent",
+        "-Mode",
+        "Raw",
+        "-BitDepth",
+        "24",
+        "-FfmpegPath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-FfprobePath",
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-NonInteractive"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 4.075,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent-2-stdout.txt",
+      "stdout_sha256": "0434ba8df9e174c8565a87cd5f3fc74fffc465561126c6162b2b98356c18ad5b",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-concurrent-2-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-redact",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-ExportDiagnostic",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-sensitive-local-report.json",
+        "-DiagnosticOutputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-redacted.json"
+      ],
+      "exit_code": 0,
+      "timed_out": false,
+      "elapsed_seconds": 1.502,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-redact-stdout.txt",
+      "stdout_sha256": "7b12407fead6a578788fc0b5e31d696349e2f785f066855605399701240c5bfb",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-redact-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "ps7-redact-no-overwrite",
+      "command": [
+        "<user-profile>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "-NoLogo",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "<repo>\\WinAudioClean.ps1",
+        "-ExportDiagnostic",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-sensitive-local-report.json",
+        "-DiagnosticOutputPath",
+        "<repo>\\.wac-local\\WAC-M1-06\\reports-final-1\\ps7-redacted.json"
+      ],
+      "exit_code": 2,
+      "timed_out": false,
+      "elapsed_seconds": 1.565,
+      "stdout_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-redact-no-overwrite-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": ".wac-local\\WAC-M1-06\\reports-final-1\\ps7-redact-no-overwrite-stderr.txt",
+      "stderr_sha256": "0deb713ce44adad94dfb47a3d88f38cf1a6426feebf969e044fe12b3558b48fe"
+    }
+  ],
+  "fixture": {
+    "path": ".wac-local\\WAC-M1-06\\reports-final-1\\PRIVATE_FILENAME_TOKEN.wav",
+    "sha256": "d9cab1787f04f00e8f6ebc271818a470e76e83a376ef9ac64ed035a1afbc98c9"
+  },
+  "fault_application": {
+    "override_sha256": "075eb8644244b134c415622bdbc5886830ad740be1b24e91df3415767ce0f4ad",
+    "files": [
+      {
+        "path": ".wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.IO.ps1",
+        "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+      },
+      {
+        "path": ".wac-local\\WAC-M1-06\\reports-final-1\\fault-application\\WinAudioClean.ps1",
+        "sha256": "c5fdc5d052aed888242fa181648b164320a3c5f872ddcc26dc713a5391646793"
+      }
+    ],
+    "seam": "Actual render first, then override native result or truncate owned partial; report creation throws a controlled permission error."
+  },
+  "status": "pass",
+  "runtime_sha256_after": {
+    "WinAudioClean.ps1": "74e07f865b8392ff70556fb3a4e57979a8136dc9b93cf22958edef6e7a3a9066",
+    "WinAudioClean.IO.ps1": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+  },
+  "runtime_unchanged_during_run": true,
+  "harness_sha256_after": "976e43042007ee13e952de5709b91e227142e3bb317bde0b944a8eb036af2d5f",
+  "harness_unchanged_during_run": true
+}

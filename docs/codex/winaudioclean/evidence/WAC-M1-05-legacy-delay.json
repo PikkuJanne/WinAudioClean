@@ -1,0 +1,347 @@
+{
+  "task": "WAC-M1-05",
+  "purpose": "Measure whether Raw delay existed with original unspecified WAV output encoder, independently of the new explicit48k policy.",
+  "created_utc": "2026-10-02T13:22:31.589769+00:00",
+  "environment": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.14.6"
+  },
+  "runtime_sha256_before": {
+    "WinAudioClean.ps1": "45da24151286e57b5a72be8ef9b604894dac789fc29082c9be75bd1ac5463339",
+    "WinAudioClean.IO.ps1": "146d5aece5a0666d39fd56f025080a4e0fecdcea678e69bd00c6fa5501202621"
+  },
+  "harness_sha256": "05b18e180810a850985d31bc15dd808ba581b68b0478f1212cd80540243a29bd",
+  "fixture": {
+    "path": "<repo>\\.wac-local\\WAC-M1-05\\encoding-final-1\\fixtures\\48000-2ch.wav",
+    "sha256": "9fabaf8804c0824c7e192a055405341b2253cc10054326decc517d5aeece902b"
+  },
+  "explicit48k_reference": {
+    "path": "<repo>\\.wac-local\\WAC-M1-05\\encoding-final-1\\references\\48000-2ch-raw-16.wav",
+    "sha256": "e0b39fba8a53efe774f982ec544b643a3d85047e24457fc81408d05a5f20389c"
+  },
+  "tools": {
+    "ffmpeg.exe": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+      "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec"
+    },
+    "ffprobe.exe": {
+      "path": "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+      "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+    }
+  },
+  "commands": [
+    {
+      "id": "legacy-raw-render",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffmpeg.exe",
+        "-nostdin",
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-i",
+        "<repo>\\.wac-local\\WAC-M1-05\\encoding-final-1\\fixtures\\48000-2ch.wav",
+        "-map",
+        "0:0",
+        "-vn",
+        "-af",
+        "adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5",
+        "<repo>\\.wac-local\\WAC-M1-05\\legacy-delay-check\\legacy-unspecified-encoder.wav"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 1.230427,
+      "stdout_log": "<repo>\\.wac-local\\WAC-M1-05\\legacy-delay-check\\legacy-raw-render-stdout.txt",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_log": "<repo>\\.wac-local\\WAC-M1-05\\legacy-delay-check\\legacy-raw-render-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "legacy-raw-probe",
+      "command": [
+        "<repo>\\.wac-local\\ffmpeg-setup\\portable-curl\\ffmpeg-9.0.2-essentials_build\\bin\\ffprobe.exe",
+        "-v",
+        "error",
+        "-show_streams",
+        "-show_format",
+        "-of",
+        "json",
+        "<repo>\\.wac-local\\WAC-M1-05\\legacy-delay-check\\legacy-unspecified-encoder.wav"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.286693,
+      "stdout_log": "<repo>\\.wac-local\\WAC-M1-05\\legacy-delay-check\\legacy-raw-probe-stdout.txt",
+      "stdout_sha256": "b5cdc090e189005ca1b9f54942f15196c6b1e08eb87ac3d6aacda053e1d3ba83",
+      "stderr_log": "<repo>\\.wac-local\\WAC-M1-05\\legacy-delay-check\\legacy-raw-probe-stderr.txt",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "legacy_probe": {
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "pcm_s16le",
+        "codec_long_name": "PCM signed 16-bit little-endian",
+        "codec_type": "audio",
+        "codec_tag_string": "[1][0][0][0]",
+        "codec_tag": "0x0001",
+        "sample_fmt": "s16",
+        "sample_rate": "192000",
+        "channels": 2,
+        "channel_layout": "stereo",
+        "bits_per_sample": 16,
+        "initial_padding": 0,
+        "r_frame_rate": "0/0",
+        "avg_frame_rate": "0/0",
+        "time_base": "1/192000",
+        "duration_ts": 1152000,
+        "duration": "6.000000",
+        "bit_rate": "6144000",
+        "disposition": {
+          "default": 0,
+          "dub": 0,
+          "original": 0,
+          "comment": 0,
+          "lyrics": 0,
+          "karaoke": 0,
+          "forced": 0,
+          "hearing_impaired": 0,
+          "visual_impaired": 0,
+          "clean_effects": 0,
+          "attached_pic": 0,
+          "timed_thumbnails": 0,
+          "non_diegetic": 0,
+          "captions": 0,
+          "descriptions": 0,
+          "metadata": 0,
+          "dependent": 0,
+          "still_image": 0,
+          "multilayer": 0
+        }
+      }
+    ],
+    "format": {
+      "filename": "<repo>\\.wac-local\\WAC-M1-05\\legacy-delay-check\\legacy-unspecified-encoder.wav",
+      "nb_streams": 1,
+      "nb_programs": 0,
+      "nb_stream_groups": 0,
+      "format_name": "wav",
+      "format_long_name": "WAV / WAVE (Waveform Audio)",
+      "duration": "6.000000",
+      "size": "4608102",
+      "bit_rate": "6144136",
+      "probe_score": 99,
+      "tags": {
+        "encoder": "Lavf63.1.102"
+      }
+    }
+  },
+  "legacy_output_sha256": "a604c2c886211d5c2fa46fea351014dc77c28e3a8c0fc4859a8cc7fa882e41e1",
+  "legacy_measurements": {
+    "duration_seconds": 6.0,
+    "frames": 1152000,
+    "channels": [
+      {
+        "index": 0,
+        "tone_power": {
+          "440": 317198986.5288086,
+          "880": 7.081564420649556
+        },
+        "expected_to_other_power_ratio": 44792219.301694006,
+        "markers": [
+          {
+            "known_center_seconds": 1.25,
+            "measured_center_seconds": 1.2752682394388646,
+            "offset_ms": 25.268239438864583
+          },
+          {
+            "known_center_seconds": 4.75,
+            "measured_center_seconds": 4.775005481437566,
+            "offset_ms": 25.005481437566424
+          }
+        ],
+        "silence_and_activity": {
+          "first_half_second_max": 0.0,
+          "last_half_second_max": 0.0,
+          "activity_threshold_rms": 0.005,
+          "first_active_seconds": 0.777,
+          "last_active_seconds": 5.275
+        },
+        "impulses": [
+          {
+            "known_time_seconds": 2.0,
+            "sample_at_known_time": 0.045013427734375,
+            "local_peak_abs": 0.176788330078125,
+            "local_peak_offset_ms": 5.0
+          },
+          {
+            "known_time_seconds": 3.75,
+            "sample_at_known_time": 0.064239501953125,
+            "local_peak_abs": 0.2523193359375,
+            "local_peak_offset_ms": -4.072916666666667
+          }
+        ],
+        "nominal_marker_alignment_within_10ms": false,
+        "nominal_activity_alignment_within_20ms": false,
+        "passed": true
+      },
+      {
+        "index": 1,
+        "tone_power": {
+          "440": 23.42135679210446,
+          "880": 314627078.3133545
+        },
+        "expected_to_other_power_ratio": 13433341.249445377,
+        "markers": [
+          {
+            "known_center_seconds": 1.25,
+            "measured_center_seconds": 1.2752709889907659,
+            "offset_ms": 25.27098899076585
+          },
+          {
+            "known_center_seconds": 4.75,
+            "measured_center_seconds": 4.775008519012757,
+            "offset_ms": 25.008519012756913
+          }
+        ],
+        "silence_and_activity": {
+          "first_half_second_max": 0.0,
+          "last_half_second_max": 0.0,
+          "activity_threshold_rms": 0.005,
+          "first_active_seconds": 0.777,
+          "last_active_seconds": 5.275
+        },
+        "impulses": [
+          {
+            "known_time_seconds": 2.0,
+            "sample_at_known_time": 0.02239990234375,
+            "local_peak_abs": 0.176239013671875,
+            "local_peak_offset_ms": 4.807291666666667
+          },
+          {
+            "known_time_seconds": 3.75,
+            "sample_at_known_time": 0.031982421875,
+            "local_peak_abs": 0.25189208984375,
+            "local_peak_offset_ms": -4.854166666666667
+          }
+        ],
+        "nominal_marker_alignment_within_10ms": false,
+        "nominal_activity_alignment_within_20ms": false,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "explicit48k_measurements": {
+    "duration_seconds": 6.0,
+    "frames": 288000,
+    "channels": [
+      {
+        "index": 0,
+        "tone_power": {
+          "440": 19825040.366149902,
+          "880": 0.42785744970606565
+        },
+        "expected_to_other_power_ratio": 46335620.379566915,
+        "markers": [
+          {
+            "known_center_seconds": 1.25,
+            "measured_center_seconds": 1.2752763569388734,
+            "offset_ms": 25.276356938873423
+          },
+          {
+            "known_center_seconds": 4.75,
+            "measured_center_seconds": 4.775013492150928,
+            "offset_ms": 25.013492150928407
+          }
+        ],
+        "silence_and_activity": {
+          "first_half_second_max": 0.0,
+          "last_half_second_max": 0.0,
+          "activity_threshold_rms": 0.005,
+          "first_active_seconds": 0.777,
+          "last_active_seconds": 5.275
+        },
+        "impulses": [
+          {
+            "known_time_seconds": 2.0,
+            "sample_at_known_time": 0.045013427734375,
+            "local_peak_abs": 0.176788330078125,
+            "local_peak_offset_ms": 5.0
+          },
+          {
+            "known_time_seconds": 3.75,
+            "sample_at_known_time": 0.064239501953125,
+            "local_peak_abs": 0.25225830078125,
+            "local_peak_offset_ms": -4.0625
+          }
+        ],
+        "nominal_marker_alignment_within_10ms": false,
+        "nominal_activity_alignment_within_20ms": false,
+        "passed": true
+      },
+      {
+        "index": 1,
+        "tone_power": {
+          "440": 1.4766787113632815,
+          "880": 19664596.785286427
+        },
+        "expected_to_other_power_ratio": 13316774.07818246,
+        "markers": [
+          {
+            "known_center_seconds": 1.25,
+            "measured_center_seconds": 1.2752787945195454,
+            "offset_ms": 25.2787945195454
+          },
+          {
+            "known_center_seconds": 4.75,
+            "measured_center_seconds": 4.775016325741549,
+            "offset_ms": 25.016325741549217
+          }
+        ],
+        "silence_and_activity": {
+          "first_half_second_max": 0.0,
+          "last_half_second_max": 0.0,
+          "activity_threshold_rms": 0.005,
+          "first_active_seconds": 0.777,
+          "last_active_seconds": 5.275
+        },
+        "impulses": [
+          {
+            "known_time_seconds": 2.0,
+            "sample_at_known_time": 0.02239990234375,
+            "local_peak_abs": 0.1761474609375,
+            "local_peak_offset_ms": 4.8125
+          },
+          {
+            "known_time_seconds": 3.75,
+            "sample_at_known_time": 0.031982421875,
+            "local_peak_abs": 0.25189208984375,
+            "local_peak_offset_ms": -4.854166666666667
+          }
+        ],
+        "nominal_marker_alignment_within_10ms": false,
+        "nominal_activity_alignment_within_20ms": false,
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "marker_offset_difference_ms": [
+    [
+      0.00811750000884004,
+      0.008010713361983335
+    ],
+    [
+      0.00780552877954932,
+      0.007806728792303375
+    ]
+  ],
+  "runtime_sha256_after": {
+    "WinAudioClean.ps1": "45da24151286e57b5a72be8ef9b604894dac789fc29082c9be75bd1ac5463339",
+    "WinAudioClean.IO.ps1": "146d5aece5a0666d39fd56f025080a4e0fecdcea678e69bd00c6fa5501202621"
+  },
+  "runtime_unchanged": true,
+  "fixture_unchanged": true,
+  "status": "pass",
+  "scope": "Independent direct FFmpeg render with exact original filters and unspecified WAV encoder. This isolates legacy filter timing; it is not a historical application invocation, listening check or bit-identical output claim.",
+  "source_revision": "afbf25aa8f935517a2a14b0f5fa655cb8a8c6e7e"
+}
