@@ -1,0 +1,36 @@
+{
+  "task": "WAC-M0-03",
+  "acceptance_id": "AC-008",
+  "starting_commit": "7291ce86535e9c689befbdb60563ed9eb4b1b2a6",
+  "run_exit_codes": [
+    0,
+    0
+  ],
+  "report_byte_identity": true,
+  "reports": [
+    {
+      "file": "WAC-M0-03-run-1.json",
+      "sha256": "a187eee1935ab3448eae4a9c8fce78fa050646ba0959a401fb6edd900509e153"
+    },
+    {
+      "file": "WAC-M0-03-run-2.json",
+      "sha256": "a187eee1935ab3448eae4a9c8fce78fa050646ba0959a401fb6edd900509e153"
+    }
+  ],
+  "fixture_pairs": 5,
+  "output_pairs": 20,
+  "fixture_output_files_rehashed": true,
+  "all_output_hashes_and_metrics_identical": true,
+  "differences": [],
+  "formats": {
+    "legacy_rate_hz": 192000,
+    "comparison_rate_hz": 48000,
+    "container": "wav",
+    "codec": "pcm_s16le",
+    "bits_per_sample": 16
+  },
+  "all_channels_preserved": true,
+  "maximum_duration_difference_seconds": 0.0,
+  "listening": "pending; no permission-cleared speech corpus supplied",
+  "scope": "Two independent generations and render/measurement runs on one recorded Windows build. No cross-build, launcher, alignment, speech-quality or large-file claim."
+}

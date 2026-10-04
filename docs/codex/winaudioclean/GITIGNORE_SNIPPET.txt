@@ -1,0 +1,9 @@
+# Review and merge these patterns with existing .gitignore during M0; do not overwrite it.
+# Use a designated local workspace, not broad patterns that hide intended test fixtures.
+/.wac-local/
+/artifacts/local/
+/dist/
+__pycache__/
+*.pyc
+# Add narrowly scoped private corpus/log/download directories chosen in the actual repo.
+# Do not ignore all WAV/JSON/TXT files globally; tests, reports and consent metadata may be intentional.

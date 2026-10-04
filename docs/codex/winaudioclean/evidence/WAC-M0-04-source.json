@@ -1,0 +1,79 @@
+{
+  "task": "WAC-M0-04",
+  "starting_commit": "e1bd07b96dc23ab7d84ac0f236ca599a866c73a3",
+  "identity": "SHA256 of tested working-tree bytes. All listed source is unchanged from starting commit; this task changes governance/evidence only.",
+  "files": [
+    {
+      "path": "WinAudioClean.bat",
+      "sha256": "7d8a3ff8b68ec92ef72be54361b7f1eef9dc626c0b3bb8067d154a61d675b13b"
+    },
+    {
+      "path": "WinAudioClean.ps1",
+      "sha256": "1e7ea19b66ddc972ede227e09dd0276058e43bcf9ccd0ed526aadbf0fa44e4b6"
+    },
+    {
+      "path": "docs/codex/winaudioclean/BASELINE.json",
+      "sha256": "064274e31b0edab5b17b70970829651a87aae36caa20567430ad516bd21009b9"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tests/test_characterize_filters.py",
+      "sha256": "d3be2710c6bc1618e5714498eae08cb8a4d231bc1cc2eabac469561df45bbb22"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tests/test_handoff.py",
+      "sha256": "dadaa4a33106fecc547adfb7fe5c69d096f1be4b13c622184b57ee73d822422a"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/characterize_filters.py",
+      "sha256": "16e797354a4e02f323cea04f69689d41258b92155255e53eb3b1e99799016adf"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/generate_fixtures.py",
+      "sha256": "8aaf4d83b146af809d2656dcd50c10a98dd29b9feb178541b3629131a7d98c3b"
+    },
+    {
+      "path": "docs/codex/winaudioclean/tools/handoff.py",
+      "sha256": "39af80c3e4398dc6420ac89c2e1e6e165791e577dcb40551fa44cbcb0f7c2c4a"
+    },
+    {
+      "path": "scripts/DevDependencies.psd1",
+      "sha256": "238b21c9916bd1e6bed3dd764d3abb07cf6d289a28f9af07f19f5bb28542ce90"
+    },
+    {
+      "path": "scripts/Install-DevDependencies.ps1",
+      "sha256": "db415126fecbf20cc6b00805e176cdaf02a099947a0555381894488751830c14"
+    },
+    {
+      "path": "scripts/Invoke-Tests.ps1",
+      "sha256": "153636e8fa21875b98fcfda3fa1253cd737301b971af43a756d2973d182f994b"
+    },
+    {
+      "path": "scripts/PSScriptAnalyzerSettings.psd1",
+      "sha256": "94e65567fb0445c2d8e26f2fa3a8b37e739d17683d815c266c21a5193730955c"
+    },
+    {
+      "path": "tests/WinAudioClean.EntryPoints.Tests.ps1",
+      "sha256": "afa829bf7543116ad60bb58c88de646346f21869d93d1e4b113f6a3693fef668"
+    },
+    {
+      "path": "tests/WinAudioClean.Helpers.Tests.ps1",
+      "sha256": "7aad37a5a5b789d93c72fe37d3af9c1bdc782ba7432eb905c9c99f12d1415cec"
+    },
+    {
+      "path": "tests/fixtures/Import-Safety.ps1",
+      "sha256": "8332eff135dc547095cca7fe019e2ca4c3ddeb66bf73af98ca04a4e4cf0f7638"
+    },
+    {
+      "path": "tests/fixtures/Invoke-ControlledApplication.ps1",
+      "sha256": "c6add42ec5f59a27e64fdb3b59e01a1ecd1b62ded13c9f9112a260852174edf4"
+    },
+    {
+      "path": "tests/fixtures/Invoke-Launcher.ps1",
+      "sha256": "292dec83cc6c63d95a7b8aa96731893b123e29419408174d1259a39c627650d8"
+    },
+    {
+      "path": "tests/fixtures/TestProcess.ps1",
+      "sha256": "9278382914eba153fcf03754aeba5d9a18ba3416cdaa80d3a0a1eb83a3605a85"
+    }
+  ]
+}
