@@ -1,3 +1,35 @@
+# Next model: WAC-M5-02 — Rehearse clean-checkout and release-candidate reconstruction
+
+Date: 2026-10-04. **WAC-M5-01 is complete.** Canonical 27 done / 3 todo / 0 blocked; 81 AC pass / 9 not_run. **Next: WAC-M5-02 — Rehearse clean-checkout and release-candidate reconstruction**, unlocked and not started.
+
+The portable static website draft, versioned release metadata/schema, MIT asset
+registry, validator and 20 regressions are implemented. Source `11fe377c5fd05624dcc280d89fd119741c6fde9e` passed both actual local Full gates: ps51: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped. Every gate exited 0, with zero outside-scope cases and unchanged source/website contents. Retain local privilege skips and all eight broader gaps.
+
+All 15 actual browser metadata fixtures, 17 independent VM vectors, selected
+palette contrast and keyboard/desktop/mobile checks pass within their recorded
+scopes. Only a temporary actual-package fixture enables its local download.
+Committed metadata remains draft with null release fields. Screenshots/audio and
+consent inventories remain pending; no listening or publication is inferred.
+The verified package fixture remains the earlier accepted source 1f10940,
+438904 bytes / SHA256 d543ab046e9b1c5330552038f4eaa9eea794b2392ced079e620ed2f65cf04bf7.
+
+Tested-source CI is **passed**: [observed run](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37187177111). Actual final closure PR/CI/live synchronization must be inspected separately at its own SHA. Source/host/hash/count evidence: [accepted record](evidence/WAC-M5-01.md), [ledger](evidence/WAC-M5-01-validation.json).
+
+Read AGENTS, STATUS, DECISIONS, TASKS, ACCEPTANCE, SYNC_PROTOCOL, COVERAGE and
+tasks/WAC-M5-02. Use maintained WinAudioClean-governance on
+codex/wac-m5-release-readiness with exact origin
+https://github.com/PikkuJanne/WinAudioClean.git. Draft PR #6 remains stacked on
+codex/wac-m4-regression. Recover actual branch, HEAD and live PR; do not use a cached
+tracking ref as delivery proof. Preserve the source-only original and runtime,
+BAT/script/default sound and package allowlist.
+
+Do not repeat stable Full solely for closure metadata. New source, failures or
+unresolved concerns justify additional gates. No merge/main push/tag/release,
+bundling, settings changes, deployment or sound promotion is authorized. Start
+only M5-02 when requested, after fresh checkpoint synchronization.
+
+## Historical M5-01 implementation checkpoint (superseded)
+
 # Next model: finish WAC-M5-01 validation
 
 Date: 2026-10-04. WAC-M5-01 implementation and validation are in progress.

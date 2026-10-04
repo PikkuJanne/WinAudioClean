@@ -1,3 +1,45 @@
+# WAC-M5-01 — Accepted static website draft and release metadata
+
+AC-079..081 pass on 2026-10-04 within the recorded local/browser/fixture scopes.
+The implemented isolated page and its draft metadata never enable a committed
+stable download. Existing branding and MIT bytes are preserved; application
+screenshots and permission-cleared audio remain explicitly pending. Runtime,
+launcher, defaults, package allowlist and CI workflow are unchanged.
+
+Both actual clean-source local Full gates passed at `11fe377c5fd05624dcc280d89fd119741c6fde9e`:
+ps51: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped; ps7: Pester 1483 passed/1 skipped, Python 162 ran/1 skipped. Versions: Windows build 26300, PS5.1.26100.9444 / 7.6.5,
+Python 3.14.6, Pester 5.7.1, PSScriptAnalyzer 1.24.0. All exit 0, zero outside
+scope, seven source-group digests match between gates and remain unchanged.
+Static analysis passed with these non-gating finding counts: ps51: 285; ps7: 285.
+The two suites each retain one local symbolic-link privilege skip per host;
+exact names and reasons are recorded in the validation ledger.
+The separate website content digest is
+`6fe2adfe1b02b148d89bdd07068282b7e762e93d23f8a4a8d31f19e2059c941a` on both gates. CI wrapper
+hashes omit website; the supplemental website scope is explicitly separate.
+
+Focused metadata Python 20/20 (zero skips), actual browser 15/15, independent
+Node VM 17/17, strict actual package/manifest/sidecars and seven negative metadata
+fixtures pass. Keyboard focus/links, desktop/mobile widths and selected contrast
+ratios are recorded separately. No real samples/consent, comprehensive
+accessibility audit, listening, new candidate build or packet capture is claimed.
+The accepted package source/hash and exact physical text/license hash scopes
+remain in the [validation ledger](WAC-M5-01-validation.json).
+
+Actual tested-source CI state is **passed** ([observed run](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37187177111)). Final metadata-closure
+CI will be observed separately after its push. Metadata checks are recorded below;
+explicit staging and scope/privacy review complete the local checkpoint.
+All eight broader gaps and both local privilege skip categories remain. Canonical
+totals are 27 done / 3 todo and 81 pass / 9 not_run. Next only **WAC-M5-02**.
+
+Implementation SHA was live-synchronized on the feature branch before these
+gates, with draft PR #6 stacked on the M4 branch. Final closure SHA/live equality
+and PR/CI status will be recorded outside that commit to avoid self-reference.
+No release/deployment/merge/main push/tag/settings/bundling/sound promotion.
+
+Final metadata closure checks passed: plan validation (30 tasks / 90 acceptance cases), coverage traceability (81 mapped cases / 43 commands / 10 reviews / 8 retained gaps), next-task selection (only WAC-M5-02 ready; zero blocked), 13 coverage regressions and the one canonical-plan test. Every command exited 0 with no skips in these metadata checks. Exact commands and results are in the validation ledger. The tested website and application source remain unchanged.
+
+## Historical focused implementation checks (superseded by accepted scopes)
+
 # WAC-M5-01 — Static website draft and release metadata
 
 Implementation and validation are in progress on 2026-10-04. Engineering

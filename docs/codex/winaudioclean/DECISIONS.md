@@ -765,3 +765,24 @@ All eight broader gaps remain. Original/Fast/default sound and BAT/script entry 
 
 [Evidence](evidence/WAC-M4-04.md), [ledger](evidence/WAC-M4-04-validation.json).
 Accept AC-076..078 within these recorded engineering/documentation scopes: 26 tasks done / 4 todo, 78 AC pass / 12 not_run. Next WAC-M5-01 only after live synchronization. Feature commits/pushes and draft-PR upkeep remain authorized; publication, merge/settings/security changes and sound promotion retain existing boundaries.
+
+### 2026-10-04 — WAC-M5-01 isolated static distribution draft
+
+D43. Keep the product page portable in website/ with no hosting configuration,
+uploads/accounts/processing service/telemetry/updater or tool dependency on it.
+Reuse the existing MIT repository icon/license. Version 2.3 is still authoritative
+in the main script; draft metadata has null date/source/URL/name/hash/size and
+disabled downloads. Published metadata requires complete identity plus a real
+package inspection. Temporary published-like local fixtures establish byte/source
+identity only; publication remains separately approved. Real screenshots and
+permission-cleared samples stay pending with empty inventories and an explicit
+future consent checklist; no marketing/audio claims are fabricated.
+
+Accept AC-079..081 at `11fe377c5fd05624dcc280d89fd119741c6fde9e` from the focused schema/consent/path checks,
+actual package seven mutations, 15 browser fixtures, 17 independent VM vectors,
+selected keyboard/layout/contrast review and both stable cumulative Full gates.
+Preserve duplicate-key/newline/traversal fixes, initial CRLF-only comparison
+failure, distinct source/license scopes and all eight broader gaps. Record CI
+as actually observed (passed); final closure CI is separate. Canonical 27
+done / 3 todo, 81 pass / 9 not_run. Next only M5-02. No new publication/default-sound
+approval. Evidence: evidence/WAC-M5-01.md and WAC-M5-01-validation.json.

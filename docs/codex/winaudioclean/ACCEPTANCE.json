@@ -1172,8 +1172,8 @@
       "title": "Architecture boundary",
       "procedure": "Inspect page code, browser requests and runtime script behavior.",
       "expected": "Website only presents/distributes; tool never needs the website to process audio; no upload endpoint/telemetry is introduced.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-01.md", "evidence/WAC-M5-01-validation.json"]
     },
     {
       "id": "AC-080",
@@ -1181,8 +1181,8 @@
       "title": "Metadata correctness",
       "procedure": "Validate draft and published-like fixture metadata against packaging output.",
       "expected": "No fabricated release link/hash; draft/unpublished assets cannot appear as a working stable download.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-01.md", "evidence/WAC-M5-01-validation.json"]
     },
     {
       "id": "AC-081",
@@ -1190,8 +1190,8 @@
       "title": "Accessible presentation",
       "procedure": "Test keyboard navigation, meaningful labels, readable layout and sample consent records.",
       "expected": "Page is usable and honest; missing real assets are marked pending without fake screenshots/reviews.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-01.md", "evidence/WAC-M5-01-validation.json"]
     },
     {
       "id": "AC-082",
