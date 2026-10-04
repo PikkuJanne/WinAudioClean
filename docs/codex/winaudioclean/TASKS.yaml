@@ -1113,7 +1113,7 @@
       "depends_on": [
         "WAC-M5-01"
       ],
-      "status": "todo",
+      "status": "in_progress",
       "approval_required": false,
       "scope": "Temporary clean clone/worktree on the same active machine and release-candidate evidence.",
       "implementation": [
@@ -1127,7 +1127,7 @@
         "AC-083",
         "AC-084"
       ],
-      "evidence": [],
+      "evidence": ["evidence/WAC-M5-02.md"],
       "blocked_reason": null
     },
     {

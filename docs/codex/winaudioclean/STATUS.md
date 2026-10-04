@@ -1,5 +1,19 @@
 # Current status
 
+Date: 2026-10-04. **WAC-M5-02 is in progress.** Canonical 27 done / 1 in_progress / 2 todo; 81 AC pass / 9 not_run. AC-082..084 remain not_run until actual reconstruction, candidate, privacy/rollback and cumulative checks pass.
+
+Starting checkpoint `7b7edc46247172874ca2a9a66e9ba4160e5b899b` is clean and live-synchronized on `codex/wac-m5-release-readiness`; draft PR #6 stays based on `codex/wac-m4-regression`. Its own CI was observed pending at session start and is distinct from the passed M5-01 implementation CI. Recover the live state before relying on cached refs.
+
+A fresh GitHub clone on this active machine recovered the exact starting revision in detached HEAD. Fresh checkout-local pinned developer setup is in progress; it does not reuse the maintained checkout's tool/module caches. Narrow documentation fixes add safe separate-folder prior-source rollback and correct the stale website sentence. The draft stays download-disabled; screenshots/audio remain pending.
+
+Read the task brief, RECONSTRUCTION.md, PORTABLE_PACKAGE.md, CI.md and tests/README.md. Push and freeze the documented source checkpoint before fetching it into the rehearsal clone. Stabilize selected package/metadata tests, build four actual candidates, inspect source/manifest/checksum/provenance, reject altered checksum/version inputs, and review privacy and protected-byte rollback. Run each required actual local Full gate once on the stable clean clone; preserve the resulting exact source/tool/hash/count evidence and any failures/skips.
+
+Evidence: [in-progress record](evidence/WAC-M5-02.md). Preserve all eight broader coverage gaps, the source-only original, runtime/BAT/default filters and package allowlist. No main push, merge, release/tag, settings/security change, bundling, publication or sound promotion. Stop after M5-02; next only M5-03 when this task is accepted and synchronized.
+
+## Historical accepted M5-01 checkpoint
+
+# Current status
+
 Date: 2026-10-04. **WAC-M5-01 is complete.** Canonical 27 done / 3 todo / 0 blocked; 81 AC pass / 9 not_run. **Next: WAC-M5-02 — Rehearse clean-checkout and release-candidate reconstruction**, unlocked and not started.
 
 The portable static website draft, versioned release metadata/schema, MIT asset
