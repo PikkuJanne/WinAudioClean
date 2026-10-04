@@ -786,3 +786,11 @@ failure, distinct source/license scopes and all eight broader gaps. Record CI
 as actually observed (passed); final closure CI is separate. Canonical 27
 done / 3 todo, 81 pass / 9 not_run. Next only M5-02. No new publication/default-sound
 approval. Evidence: evidence/WAC-M5-01.md and WAC-M5-01-validation.json.
+
+### 2026-10-04 — WAC-M5-02 actual clean reconstruction and safe prior-source rollback
+
+D44. Recover exact pushed source `250052238451ef7293e1f5cb49267b71e6e148cf` in a fresh detached GitHub clone on the active Windows machine. Fresh checkout-local verified developer setup at `7b7edc46247172874ca2a9a66e9ba4160e5b899b` remains valid through four unchanged installer/manifest Git blobs. Existing OS/developer prerequisites and externally supplied approved FFmpeg remain explicit; no hidden maintained-checkout tool/module cache is needed.
+
+Accept AC-082..084 from focused Release/package/website checks, four byte-identical 442766-byte version 2.3 candidates (SHA256 `f0ae14fcba29c29396e9298f7dcf571d9a8dbb8451f52304c3b92c4517c8804e`), exact source/manifest/sidecar/ephemeral metadata identity, checksum/version rejection including actual documented helper, bounded payload/static-asset privacy review and four prior/current synthetic rollback runs preserving 39 hashes. Prior source 1f10940 reconstructs its earlier accepted hash. Both clean-source Full gates passed; exact versions/counts/skips/source/hash and CI state passed remain in the ledger.
+
+Document complete-package separate-folder rollback without source/settings/export deletion or preference reset. Correct stale README draft-metadata copy; keep runtime/BAT/defaults/allowlist and draft publication fields unchanged. Do not infer listening, private media consent, new-machine/clean OS support, exhaustive security audit or publication. Preserve all eight broader gaps. Canonical 28 done / 2 todo; 84 pass / 6 not_run. Next only WAC-M5-03; its final audit is not started. Evidence: evidence/WAC-M5-02.md and evidence/WAC-M5-02-validation.json. Final closure delivery/CI is observed outside that commit to avoid self-reference.

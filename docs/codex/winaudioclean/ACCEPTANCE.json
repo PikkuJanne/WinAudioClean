@@ -1199,8 +1199,8 @@
       "title": "GitHub reconstruction",
       "procedure": "Fetch the checkpoint and create a clean detached worktree/clone for the explicit SHA.",
       "expected": "Project builds/tests using documented prerequisites; no hidden local edits or untracked runtime dependencies are required.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-02.md", "evidence/WAC-M5-02-validation.json"]
     },
     {
       "id": "AC-083",
@@ -1208,8 +1208,8 @@
       "title": "Candidate integrity",
       "procedure": "Compare candidate contents, hashes and version across packaging and website metadata.",
       "expected": "All artifacts identify the same source revision/version; invalid checksum/version inputs fail validation.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-02.md", "evidence/WAC-M5-02-validation.json"]
     },
     {
       "id": "AC-084",
@@ -1217,8 +1217,8 @@
       "title": "Privacy and rollback",
       "procedure": "Review candidate files and documented rollback to a prior release/source tag.",
       "expected": "No confidential content ships and rollback does not erase source recordings/settings without consent.",
-      "status": "not_run",
-      "evidence": []
+      "status": "pass",
+      "evidence": ["evidence/WAC-M5-02.md", "evidence/WAC-M5-02-validation.json"]
     },
     {
       "id": "AC-085",
