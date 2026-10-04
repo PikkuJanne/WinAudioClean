@@ -1,6 +1,6 @@
 # Acceptance coverage and retained gates
 
-[COVERAGE.json](COVERAGE.json) maps AC-001..087 to concrete commands, reports and scoped named reviews. The active M5-03 map has 87 cases, 43 command scopes, 12 named reviews and eight retained gaps. All 90 canonical case dispositions are reconciled in [the final audit](evidence/WAC-M5-03-audit.json); approval-only AC-088..090 remain unrun for M5-04. Available map coverage is distinct from an executed acceptance pass.
+[COVERAGE.json](COVERAGE.json) maps AC-001..090. The completed merge-only M5-04 map contains 90 cases, 43 command scopes, 13 named reviews and eight retained unrun gaps. AC-088..090 accept only actual authorized merges and their verification; release/site publication is explicitly future separate-project work. Available coverage and canonical engineering/action pass do not imply broad listening/platform/stress execution. See [merge evidence](evidence/WAC-M5-04.md).
 
 Canonical acceptance remains [ACCEPTANCE.json](ACCEPTANCE.json). A command in
 this inventory means runnable coverage is available. It does not mean the
