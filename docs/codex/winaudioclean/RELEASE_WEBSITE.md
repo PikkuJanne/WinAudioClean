@@ -23,3 +23,7 @@ A draft metadata record must not have a working-looking invented stable release 
 ## Approval record
 
 Use APPROVALS.md. Record action, exact commit/artifact hash, target, owner approval reference/date and result. “Build a Codex bundle” is not release or deployment consent. Publishing is not necessary to complete the engineering handoff at WAC-M5-03.
+
+## Final checklist
+
+Use [HANDOFF.md](HANDOFF.md) for the concrete gate/action checklist, exact audited PR stack, version 2.3 tool-only candidate identity, retained risks and pending owner instructions. Audit status and full/post-push results remain separate. Release assets must be rebuilt/inspected at the exact approved source; a merge or final evidence revision must not silently reuse older provenance. The final live SHA and actual asset manifest belong in the external post-push packet/PR checkpoint to avoid recursive evidence commits. Deployment has no approved destination; media and draft publication fields remain pending.

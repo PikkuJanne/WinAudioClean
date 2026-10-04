@@ -1,3 +1,15 @@
+# Next model: finish WAC-M5-03 final acceptance
+
+Date: 2026-10-04. **WAC-M5-03 is in progress.** Canonical 28 done / 1 in_progress / 1 todo; 84 pass / 6 not_run. AC-085..087 remain not_run until final exact-source gates and delivery are recorded.
+
+Baseline `b471c2dc577cf1138007778e6bef0c56c703b9e0` is clean/live-synchronized on `codex/wac-m5-release-readiness`, PR #6 draft/base M4, with all four CI jobs passed. One bounded audit reconciles all 20 implementation groups/all 90 cases and existing evidence; no known current regression blocker found in that scope. Preserve all eight broader gates, privilege skips, historical failures and missing media/listening; no owner waiver or consequential approval.
+
+[Handoff/action checklist](HANDOFF.md), [traceability](TRACEABILITY.md), [audit](evidence/WAC-M5-03-audit.json), [evidence](evidence/WAC-M5-03.md). Freeze/push this documented audit checkpoint before new four builds and one sequential Full per PS5.1/PS7 at its exact clean SHA. Keep source fixed until both complete; no broad listening/manual/stress reruns or default changes. Close governance/evidence afterward and do not repeat Full solely for metadata closure. Rebuild final exact-head candidate after push and generate the external approval packet/PR checkpoint.
+
+No merge, main push, tag/release, settings/security/bundling change or website deployment. Stop after M5-03; next M5-04 requires exact owner approval of action/revision/assets/target, and is not started. Preserve source-only original; use maintained WinAudioClean-governance and exact origin https://github.com/PikkuJanne/WinAudioClean.git.
+
+## Historical M5-02 accepted checkpoint
+
 # Next model: WAC-M5-03 — Final acceptance and approval-ready handoff
 
 Date: 2026-10-04. **WAC-M5-02 is complete.** Canonical 28 done / 2 todo / 0 blocked; 84 AC pass / 6 not_run. **Next: WAC-M5-03 — Final acceptance and approval-ready handoff**, unlocked and not started.
