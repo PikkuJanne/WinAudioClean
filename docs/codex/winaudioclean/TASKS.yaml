@@ -1202,9 +1202,9 @@
         "AC-089",
         "AC-090"
       ],
-      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json", "evidence/WAC-M5-04-v1.0.0.md", "evidence/WAC-M5-04-v1.0.0.json"],
       "blocked_reason": null,
-      "approval_ref": "evidence/WAC-M5-04-validation.json#owner_approval"
+      "approval_ref": "evidence/WAC-M5-04-v1.0.0.json#owner_approval"
     }
   ]
 }

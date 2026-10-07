@@ -1,7 +1,8 @@
 # WinAudioClean 1.0.0
 
-The first public version is **v1.0.0**. Check availability and package details on
-the [GitHub releases page](https://github.com/PikkuJanne/WinAudioClean/releases).
+**[v1.0.0 is published on GitHub](https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.0).**
+Download the tool-only ZIP and its matching checksum/provenance files from that release.
+Website hosting will follow separately in the future multi-tool website project.
 Earlier internal builds used version `2.3`; their historical reports remain valid.
 
 Clean and level speech recordings locally with PowerShell and FFmpeg. Choose **Raw** for cleaning plus leveling, or **Zoom/Teams** for leveling only. The built-in **Original** preset preserves the legacy filter settings. Results depend on the recording; listen before using the export.

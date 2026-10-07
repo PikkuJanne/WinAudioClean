@@ -1254,8 +1254,8 @@
       "procedure": "Attempt to plan merge/tag/release/settings change/deployment without a matching approval record.",
       "expected": "Action stays blocked; no side effect. Ordinary feature commits/pushes/draft PR updates remain permitted.",
       "status": "pass",
-      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
-      "acceptance_scope": "Actual owner's merge-only instruction bound to the accepted source and six exact heads; no tag/release/site/settings/default promotion action or inferred approval."
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json", "evidence/WAC-M5-04-v1.0.0.md", "evidence/WAC-M5-04-v1.0.0.json"],
+      "acceptance_scope": "Historical merge-only acceptance: Actual owner's merge-only instruction bound to the accepted source and six exact heads; no tag/release/site/settings/default promotion action or inferred approval. The October 7 owner instruction Publish v1.0.0 here explicitly authorized first public GitHub publication and necessary integration; website hosting remains deferred and eight gaps unwaived."
     },
     {
       "id": "AC-089",
@@ -1264,8 +1264,8 @@
       "procedure": "Compare approved SHA/artifact/target to the live candidate immediately before action.",
       "expected": "Mismatch stops publication and returns an updated proposal; no force push or surprise main push.",
       "status": "pass",
-      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
-      "acceptance_scope": "Actual premerge exact head/main/preview-tree/check comparisons and six ordinary parent-chain receipts; downstream retargeting occurred only after approved predecessors."
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json", "evidence/WAC-M5-04-v1.0.0.md", "evidence/WAC-M5-04-v1.0.0.json"],
+      "acceptance_scope": "Historical merge-only acceptance: Actual premerge exact head/main/preview-tree/check comparisons and six ordinary parent-chain receipts; downstream retargeting occurred only after approved predecessors. First public v1.0.0 additionally binds the exact ordinary merged source 6dcf1bf56bc474b2c42353ed3779205468f1237c to tag, new four-build ZIP/checksum/provenance and live GitHub target before publication."
     },
     {
       "id": "AC-090",
@@ -1274,8 +1274,8 @@
       "procedure": "For each approved action, check actual remote state and downloaded asset hash/site metadata.",
       "expected": "Recorded result matches what was published; outstanding approvals and rollback route are explicit.",
       "status": "pass",
-      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json"],
-      "acceptance_scope": "Actual six merged PR/main/parent/tree/source-branch results, exact accepted C tree equality and fresh successful C PR CI. Merge6 main push CI is recorded pending or passed as observed; final closure requires actual main/follow-up CI and live delivery verification externally. Release/site are outside this approved subset."
+      "evidence": ["evidence/WAC-M5-04.md", "evidence/WAC-M5-04-validation.json", "evidence/WAC-M5-04-v1.0.0.md", "evidence/WAC-M5-04-v1.0.0.json"],
+      "acceptance_scope": "Historical merge-only acceptance: Actual six merged PR/main/parent/tree/source-branch results, exact accepted C tree equality and fresh successful C PR CI. Merge6 main push CI is recorded pending or passed as observed; final closure requires actual main/follow-up CI and live delivery verification externally. Release/site are outside this approved subset. v1.0.0 publication additionally verified the live tag/release and all three downloaded asset hashes against four source-bound builds; published website metadata describes that GitHub release. Hosting remains deferred."
     }
   ]
 }

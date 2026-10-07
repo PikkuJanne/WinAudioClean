@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "task_id": "WAC-M5-04",
-  "status": "in_progress",
+  "status": "done",
   "owner_date": "2026-10-07",
   "owner_approval": {
     "request": "The project is ready, please update everything to reflect that v1.0.0 is in fact pubished.",
@@ -81,11 +81,956 @@
       "main_version_help_only": true,
       "preview_default_version_only": true,
       "main_sha256": "4e94aef6014dedebac0ab291717b0a5ec21454af34284bece0379f0ae15da70b",
-      "preview_sha256": "c8aad4c392db0347e58671c80cc8bb16d35fd5703196333a81f90a119e5b0e9b"
+      "preview_sha256": "c8aad4c392db0347e58671c80cc8bb16d35fd5703196333a81f90a119e5b0e9b",
+      "hash_scope": "physical_checkout_bytes_at_preparation",
+      "package_git_blob_sha256_at_release_source": {
+        "WinAudioClean.ps1": "4e94aef6014dedebac0ab291717b0a5ec21454af34284bece0379f0ae15da70b",
+        "WinAudioClean.Preview.ps1": "35ef94276eac5aa65c35932846affa1bd4639726904639a6028136df2865d4d4"
+      }
     }
   ],
-  "publication": null,
+  "publication": {
+    "release_id": 405838712,
+    "tag": "v1.0.0",
+    "source": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+    "tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+    "version": "1.0.0",
+    "url": "https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.0",
+    "published_at": "2026-10-07T14:14:20Z",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "name": "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.provenance.json",
+        "id": 618899167,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/releases/download/v1.0.0/WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.provenance.json",
+        "bytes": 2560,
+        "sha256": "e92fad4f62d7a1b36a577a9717caa1b278dafa5ff7d2f4e0ba37abe99a4ea8c0",
+        "download_verified": true
+      },
+      {
+        "name": "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.sha256",
+        "id": 618899168,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/releases/download/v1.0.0/WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.sha256",
+        "bytes": 113,
+        "sha256": "14c6935658a1c6eb3160b429509d1c44f4581a5233bdaebe014dd58194aa115a",
+        "download_verified": true
+      },
+      {
+        "name": "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip",
+        "id": 618899169,
+        "url": "https://github.com/PikkuJanne/WinAudioClean/releases/download/v1.0.0/WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip",
+        "bytes": 443971,
+        "sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46",
+        "download_verified": true
+      }
+    ],
+    "inspection": {
+      "passed": true,
+      "version": "1.0.0",
+      "source_commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+      "source_tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+      "zip_sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46",
+      "payload_count": 17,
+      "entry_count": 18,
+      "manifest_sha256": "565efe0a92137ed76b79af42165709b0e4e25388dfdf645078a164a97538534d",
+      "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+      "ordered_stored_fixed_timestamp": true,
+      "committed_blobs_identical": true
+    },
+    "receipt_sha256": "1b37e4e00670fd1e25a0af1a4b0ac6d52da711736a72abb3d992c0c3801d55bf"
+  },
   "website_hosting": "deferred to future multi-tool project",
   "broader_gaps": "eight unrun and unwaived; see COVERAGE.json",
-  "preservation": "Historical 2.3 evidence and WAC-M5-03 immutable audit preserved; preset/schema versions, defaults and filters unchanged."
+  "preservation": "Historical 2.3 evidence and WAC-M5-03 immutable audit preserved; preset/schema versions, defaults and filters unchanged.",
+  "release_source": {
+    "commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+    "tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+    "ordinary_merge_parents": [
+      "944aaa1c57ae192237f0fee057dd672db4be22d9",
+      "e8cd99288ebe1d0d7c0875b9dacd438e877e8451"
+    ]
+  },
+  "local_full": {
+    "source": "e8cd99288ebe1d0d7c0875b9dacd438e877e8451",
+    "release_source": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+    "whole_git_tree_equal": true,
+    "reports": [
+      {
+        "family": "ps51",
+        "scope": "local",
+        "level": "Full",
+        "source": "e8cd99288ebe1d0d7c0875b9dacd438e877e8451",
+        "status": "passed",
+        "exit_code": 0,
+        "versions": {
+          "python": "3.14.6",
+          "powershell": "5.1.26100.9444",
+          "modules": {
+            "Pester": "5.7.1",
+            "PSScriptAnalyzer": "1.24.0"
+          }
+        },
+        "pester": {
+          "passed": 1484,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 168,
+          "skipped": 1
+        },
+        "physical_checkout_source_group_sha256": {
+          "runtime": "ce1bc973e48a6b41ef7bdf868dbe07a72bee5620fd9bc0977f98836b20f5cf67",
+          "scripts": "7c610d3ac434e71c9d496187215c5deaa768513d360a6de1ba1413dc86e3aeec",
+          "tests": "5ce4be2e970359064268ac6df9a56fadec7fa070d183cb8703dd6f5b30ebcc9c",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "e36629ed55001e5cf14a2ea698ee9f84762881d9fe9957eaa2f6f7c0d8517a2a",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "60b4ab9a3fda6d1d468789fc419d2cb57a93c30afa481e54225c56b01d2d3c71"
+        },
+        "report_sha256": "d7d54edd8394e5187b894d541275a0afc8f5c08af64c7eb2de35a4a768efc2e3",
+        "launcher_log_sha256": "4877d3ebbbd981357ccf51569c41b1ec86909de587fca01abbf261b7696bcfbf"
+      },
+      {
+        "family": "ps7",
+        "scope": "local",
+        "level": "Full",
+        "source": "e8cd99288ebe1d0d7c0875b9dacd438e877e8451",
+        "status": "passed",
+        "exit_code": 0,
+        "versions": {
+          "python": "3.14.6",
+          "powershell": "7.6.5",
+          "modules": {
+            "Pester": "5.7.1",
+            "PSScriptAnalyzer": "1.24.0"
+          }
+        },
+        "pester": {
+          "passed": 1484,
+          "skipped": 1,
+          "outside_scope": 0
+        },
+        "python": {
+          "ran": 168,
+          "skipped": 1
+        },
+        "physical_checkout_source_group_sha256": {
+          "runtime": "ce1bc973e48a6b41ef7bdf868dbe07a72bee5620fd9bc0977f98836b20f5cf67",
+          "scripts": "7c610d3ac434e71c9d496187215c5deaa768513d360a6de1ba1413dc86e3aeec",
+          "tests": "5ce4be2e970359064268ac6df9a56fadec7fa070d183cb8703dd6f5b30ebcc9c",
+          "github": "e9cfa89bb7437179f45bd72ecacb02144133dda0c0e6ec916a1a28415698dea6",
+          "governance_tests": "e36629ed55001e5cf14a2ea698ee9f84762881d9fe9957eaa2f6f7c0d8517a2a",
+          "governance_tools": "018f36d3a57ebab33a9611196b7c0980ff3aa7d7021e29efc5ba3df859cd5717",
+          "governance_inputs": "60b4ab9a3fda6d1d468789fc419d2cb57a93c30afa481e54225c56b01d2d3c71"
+        },
+        "report_sha256": "08b40096329c3fb666d036c80437af8ffefe7869c6a9bb99f76df455f203d859",
+        "launcher_log_sha256": "b1d29f6d58440900c7570e25726e000b860505b2d68fec246f959bfa3b39b995"
+      }
+    ],
+    "capture_sha256": "b9bf9429738afd4b96ce089877b6c0eecfa848b9fc10a59a7fb3136b2b3856d1"
+  },
+  "deterministic_builds": {
+    "source": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+    "tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+    "count": 4,
+    "all_three_files_identical": true,
+    "payload_files": 17,
+    "zip_entries": 18,
+    "invalid_metadata_rejections": 28,
+    "builds": [
+      {
+        "host": "ps51",
+        "pass": 1,
+        "files": {
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.provenance.json": {
+            "bytes": 2560,
+            "sha256": "e92fad4f62d7a1b36a577a9717caa1b278dafa5ff7d2f4e0ba37abe99a4ea8c0"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.sha256": {
+            "bytes": 113,
+            "sha256": "14c6935658a1c6eb3160b429509d1c44f4581a5233bdaebe014dd58194aa115a"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip": {
+            "bytes": 443971,
+            "sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46"
+          }
+        },
+        "inspection": {
+          "passed": true,
+          "version": "1.0.0",
+          "source_commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+          "source_tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+          "zip_sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46",
+          "payload_count": 17,
+          "entry_count": 18,
+          "manifest_sha256": "565efe0a92137ed76b79af42165709b0e4e25388dfdf645078a164a97538534d",
+          "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+          "ordered_stored_fixed_timestamp": true,
+          "committed_blobs_identical": true
+        },
+        "invalid_metadata_rejections": 7
+      },
+      {
+        "host": "ps51",
+        "pass": 2,
+        "files": {
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.provenance.json": {
+            "bytes": 2560,
+            "sha256": "e92fad4f62d7a1b36a577a9717caa1b278dafa5ff7d2f4e0ba37abe99a4ea8c0"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.sha256": {
+            "bytes": 113,
+            "sha256": "14c6935658a1c6eb3160b429509d1c44f4581a5233bdaebe014dd58194aa115a"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip": {
+            "bytes": 443971,
+            "sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46"
+          }
+        },
+        "inspection": {
+          "passed": true,
+          "version": "1.0.0",
+          "source_commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+          "source_tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+          "zip_sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46",
+          "payload_count": 17,
+          "entry_count": 18,
+          "manifest_sha256": "565efe0a92137ed76b79af42165709b0e4e25388dfdf645078a164a97538534d",
+          "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+          "ordered_stored_fixed_timestamp": true,
+          "committed_blobs_identical": true
+        },
+        "invalid_metadata_rejections": 7
+      },
+      {
+        "host": "ps7",
+        "pass": 1,
+        "files": {
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.provenance.json": {
+            "bytes": 2560,
+            "sha256": "e92fad4f62d7a1b36a577a9717caa1b278dafa5ff7d2f4e0ba37abe99a4ea8c0"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.sha256": {
+            "bytes": 113,
+            "sha256": "14c6935658a1c6eb3160b429509d1c44f4581a5233bdaebe014dd58194aa115a"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip": {
+            "bytes": 443971,
+            "sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46"
+          }
+        },
+        "inspection": {
+          "passed": true,
+          "version": "1.0.0",
+          "source_commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+          "source_tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+          "zip_sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46",
+          "payload_count": 17,
+          "entry_count": 18,
+          "manifest_sha256": "565efe0a92137ed76b79af42165709b0e4e25388dfdf645078a164a97538534d",
+          "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+          "ordered_stored_fixed_timestamp": true,
+          "committed_blobs_identical": true
+        },
+        "invalid_metadata_rejections": 7
+      },
+      {
+        "host": "ps7",
+        "pass": 2,
+        "files": {
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.provenance.json": {
+            "bytes": 2560,
+            "sha256": "e92fad4f62d7a1b36a577a9717caa1b278dafa5ff7d2f4e0ba37abe99a4ea8c0"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.sha256": {
+            "bytes": 113,
+            "sha256": "14c6935658a1c6eb3160b429509d1c44f4581a5233bdaebe014dd58194aa115a"
+          },
+          "WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip": {
+            "bytes": 443971,
+            "sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46"
+          }
+        },
+        "inspection": {
+          "passed": true,
+          "version": "1.0.0",
+          "source_commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+          "source_tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+          "zip_sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46",
+          "payload_count": 17,
+          "entry_count": 18,
+          "manifest_sha256": "565efe0a92137ed76b79af42165709b0e4e25388dfdf645078a164a97538534d",
+          "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+          "ordered_stored_fixed_timestamp": true,
+          "committed_blobs_identical": true
+        },
+        "invalid_metadata_rejections": 7
+      }
+    ],
+    "capture_sha256": "9a78b42d47b6e7eb8a8e9ab9b16d4a6a3b99cb4cac2ed1cf5e6508ae0c9bba62"
+  },
+  "actual_ci": {
+    "preparation_pr": {
+      "source": "e8cd99288ebe1d0d7c0875b9dacd438e877e8451",
+      "event": "pull_request",
+      "state": "passed",
+      "workflow_id": 374090478,
+      "workflow_path": ".github/workflows/windows-validation.yml",
+      "run_id": 37627929336,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37627929336",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "capture_sha256": "d558b41333a4ae385f5e5fd664d5d36f3890c4fda6a80c7571f44d1c1f9e96c7"
+    },
+    "preparation_push": {
+      "source": "e8cd99288ebe1d0d7c0875b9dacd438e877e8451",
+      "event": "push",
+      "state": "passed",
+      "workflow_id": 374090478,
+      "workflow_path": ".github/workflows/windows-validation.yml",
+      "run_id": 37627885590,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37627885590",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "capture_sha256": "99f2804d12f3ecf757b23870f541e0b338a7845e22d450ad8e2ec044a146c0c7"
+    },
+    "release_main_push": {
+      "source": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+      "event": "push",
+      "state": "passed",
+      "workflow_id": 374090478,
+      "workflow_path": ".github/workflows/windows-validation.yml",
+      "run_id": 37632349046,
+      "url": "https://github.com/PikkuJanne/WinAudioClean/actions/runs/37632349046",
+      "jobs": [
+        {
+          "name": "Windows windows-2022 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2022 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps51",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Windows windows-2025 / ps7",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "capture_sha256": "8674133f5340ca903e8f4f39a7272fe13f6a93ecf7386a011a844f22fe88190c"
+    }
+  },
+  "portable_smoke": {
+    "passed": true,
+    "scope": "synthetic_local_portable_package",
+    "source": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+    "archive": {
+      "passed": true,
+      "version": "1.0.0",
+      "source_commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+      "source_tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+      "zip_sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46",
+      "payload_count": 17,
+      "entry_count": 18,
+      "manifest_sha256": "565efe0a92137ed76b79af42165709b0e4e25388dfdf645078a164a97538534d",
+      "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+      "ordered_stored_fixed_timestamp": true,
+      "committed_blobs_identical": true
+    },
+    "real_route_cases": 8,
+    "builtin_bootstrap_cases": 4,
+    "cases": [
+      {
+        "id": "bat_unattended-ps51-raw",
+        "route": "bat_unattended",
+        "shell": "ps51",
+        "mode": "Raw",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "0f81ab063075d72cb44353525c499c92d3d20acbfd02fa301a2796dc667282d8",
+        "report_text_sha256": "5134e0c9673d63ed92c1a751448272da20431fe91a489485c9d04804f71b6727",
+        "stdout_sha256": "88addf4bb2648b909c37002229330050a9248dcdbc119440cd9c204a1bb6d66d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      },
+      {
+        "id": "bat_unattended-ps51-zoom",
+        "route": "bat_unattended",
+        "shell": "ps51",
+        "mode": "Zoom",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "3b480bc7be2480e13754ade4244444247215c1df67249f9a4159df94a5052d54",
+        "report_text_sha256": "319d2bd24bd0940f5d6ef358ea3f3a5454634f73fa946f8e174bce7900e47aab",
+        "stdout_sha256": "36a2f608bd8a6b36172e6977931e4f73598ca9f30c930f5ffcda6fe32615e88d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      },
+      {
+        "id": "bat_unattended-ps7-raw",
+        "route": "bat_unattended",
+        "shell": "ps7",
+        "mode": "Raw",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "c6dc33d396f59eccc0270169178d52f7b066af62357e67b3c44d6aa8c750552b",
+        "report_text_sha256": "57cbc97858755826b3d50846116bbcc62bc482c028fde3e6017644e06a4c0de8",
+        "stdout_sha256": "0178c040f31ac05eac434050168019e13a6e6baadd245dbbe5665816decca5f7",
+        "stderr_sha256": "75ab5cf3e3e046c1083c776e61c6ec9fc4aa17b5f60d3ed94f713ea4ac3053c8",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      },
+      {
+        "id": "bat_unattended-ps7-zoom",
+        "route": "bat_unattended",
+        "shell": "ps7",
+        "mode": "Zoom",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "6ce239e1f19d7b64e115c42f119e379235f65ff94798d761878d8bf9a668fe8b",
+        "report_text_sha256": "238ce9ed494102bc8ca96a160e90a3b274eb1255425f788e4a1d55829695875f",
+        "stdout_sha256": "ea55b7045622444b131d24f9208d171b0babcf6558f8e4ad11dcacf064673fce",
+        "stderr_sha256": "2b94702b511b46ac25b6643e87d67d19f2bd952c9fb180eee990ba3771e9495f",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      },
+      {
+        "id": "builtin_bootstrap-ps51-raw",
+        "route": "builtin_bootstrap",
+        "shell": "ps51",
+        "mode": "Raw",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "e7f6f81ac7b415103583e572c91767ddcc02a9c6588a252e07dcc4f58f1ac333",
+        "report_text_sha256": "0a441de8cd4ff0da331f7dfa1d62dd0dc30ad8f6627cb8d57b82cc6e32281646",
+        "stdout_sha256": "8e8b6c0842f950cc83c552c7704f60382dfcf75d2b24cbea66787476c6977a1b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": true,
+        "builtin_test_modules_loaded": 0
+      },
+      {
+        "id": "builtin_bootstrap-ps51-zoom",
+        "route": "builtin_bootstrap",
+        "shell": "ps51",
+        "mode": "Zoom",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "b255e1f165a7f1d58486bd112b61ac005eeb01f8fbb24ab1f450f3a2dba48556",
+        "report_text_sha256": "66b8c72c3e45fc6c7dad882d75412ed40c7ee017f1761cf82c8a5984159aa955",
+        "stdout_sha256": "203f6267fb983d63e32443d0adf9f9402b84e23918eaab9e495c01137d982398",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": true,
+        "builtin_test_modules_loaded": 0
+      },
+      {
+        "id": "builtin_bootstrap-ps7-raw",
+        "route": "builtin_bootstrap",
+        "shell": "ps7",
+        "mode": "Raw",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "e55a0ef637608891cfb821feb726bb3bbf9619e121cb13b20e1f000f16aa0828",
+        "report_text_sha256": "f9ebcbc049c1b5a5f0442d207507c0934d4640537928a4468b68e02d3d39d4c5",
+        "stdout_sha256": "eac6cbe63dfffd64b1de1d773e812e1defd8f7a9d72b670c24a0a89583061cda",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": true,
+        "builtin_test_modules_loaded": 0
+      },
+      {
+        "id": "builtin_bootstrap-ps7-zoom",
+        "route": "builtin_bootstrap",
+        "shell": "ps7",
+        "mode": "Zoom",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "f8cd7c3a86484086d9ac87042f6cafcd778b30788b64ce4602f16001e6090375",
+        "report_text_sha256": "b1a96b0cc659cb813c7624eebc119057cf380c44d18a52610e4aeedb723da949",
+        "stdout_sha256": "5bcf42d746da308e1b870c92289673a8e0faebe5e9f36626feefc307660733dc",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": true,
+        "builtin_test_modules_loaded": 0
+      },
+      {
+        "id": "powershell_file-ps51-raw",
+        "route": "powershell_file",
+        "shell": "ps51",
+        "mode": "Raw",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "2340c31f9db23a77afaf861c7a386c3628bf78552f60be7464a6088288527183",
+        "report_text_sha256": "7ec8f4a6757f5d15e046b04f4969bbf31806f8545097a00c6fd153d2a4a8b121",
+        "stdout_sha256": "1562239dfcca2301232c4255b0a6f1f1508c45b8c1b75ba3e302c191ed262cb4",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      },
+      {
+        "id": "powershell_file-ps51-zoom",
+        "route": "powershell_file",
+        "shell": "ps51",
+        "mode": "Zoom",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "552031a9b0dc79ca2f43b1e702d32b6195fd6d4bdc24dc0546db700ecb4f49ed",
+        "report_text_sha256": "fdb2614b2e0be4819f2aefb39acce24d8bfd65f16685fac7d6229653c6abbc0f",
+        "stdout_sha256": "8b392b9c8e68b735aa51861df87b0396fec43d4f625b7ad0c9bc273f5e93318f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      },
+      {
+        "id": "powershell_file-ps7-raw",
+        "route": "powershell_file",
+        "shell": "ps7",
+        "mode": "Raw",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "ec97a7ce93d02843fcda46e0543a6f5a4f1c764893a2bacaa4b9bbf295994d1b",
+        "report_text_sha256": "95aee53296be196e37ce1a4fe724afca0ebfa2990033ee23b6b8412b49431dd6",
+        "stdout_sha256": "70b4f22609b3fa019fa0b17b9a18b0fc81132f00847495c5d8cfcdcbec14a184",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      },
+      {
+        "id": "powershell_file-ps7-zoom",
+        "route": "powershell_file",
+        "shell": "ps7",
+        "mode": "Zoom",
+        "passed": true,
+        "exit_code": 0,
+        "timed_out": false,
+        "input_unchanged": true,
+        "package_unchanged": true,
+        "report_schema": 1,
+        "report_status": "SUCCESS",
+        "tool_version": "1.0.0",
+        "report_source_revision": null,
+        "report_source_revision_reason": "not_embedded",
+        "report_failure_count": 0,
+        "report_warning_count": 0,
+        "report_json_sha256": "ea7dd2cd5c31d5c9c20d1262deec4df61aa4b5c71a4fa4fa12f9e884adb0ec64",
+        "report_text_sha256": "cd67adba5bfd8cfeb078d76f08ab673e5b9f016c7e7104bca29118abb7ff9a4c",
+        "stdout_sha256": "275887ad66c7971fb3f2b5c984842475b7258a42adfb84268230f1ee257bde34",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "python_available": false,
+        "git_available": false,
+        "builtin_module_roots_only": false,
+        "builtin_test_modules_loaded": null
+      }
+    ],
+    "tools": {
+      "ffmpeg": {
+        "version": "9.0.2",
+        "sha256": "3256173f3f8bffd7df12227c68adf68025edb1832273a9530688a7bb1ed8edec"
+      },
+      "ffprobe": {
+        "version": "9.0.2",
+        "sha256": "f0d36ecbbdd3bcfac3efa078c96c7271c2e68b3810595552ac3b7f17e9a65c52"
+      }
+    },
+    "capture_sha256": "569ec730bbdfe0dd0339744053776f8725193e6ce0f0c2980ec38b633327bf43",
+    "limits": "Synthetic portable routes; no speech listening, private-media consent or universal platform claim."
+  },
+  "hash_scopes": {
+    "physical_checkout_sha256_at_release_source": {
+      "WinAudioClean.ps1": "4e94aef6014dedebac0ab291717b0a5ec21454af34284bece0379f0ae15da70b",
+      "WinAudioClean.Preview.ps1": "c8aad4c392db0347e58671c80cc8bb16d35fd5703196333a81f90a119e5b0e9b",
+      "docs/codex/winaudioclean/evidence/WAC-M5-03-audit.json": "00034e36000c461dbd8c12193e20647b324e3960c542228331e6293ab2c96cae"
+    },
+    "package_committed_git_blob_sha256": {
+      "source": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+      "payload": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477"
+        },
+        {
+          "path": "README.md",
+          "bytes": 21412,
+          "sha256": "689d08143024a69977e0dbda2202e07c3b3bc42c57929e6e1fe65a4cbe666ca3"
+        },
+        {
+          "path": "THIRD_PARTY_NOTICES.md",
+          "bytes": 1236,
+          "sha256": "50b09c4045af569610c764cd147197920940ce0c12618a48ba0bfa0d0a0a10ec"
+        },
+        {
+          "path": "WinAudioClean.Batch.ps1",
+          "bytes": 19634,
+          "sha256": "d54b32dac27a98d4e16ed0a81127e72657a07b0fffa6fd7eaa44e6081ab03ce7"
+        },
+        {
+          "path": "WinAudioClean.IO.ps1",
+          "bytes": 26826,
+          "sha256": "fcc9f6b69ddb97e20f06242e9a14d2cd02df194c598806d360e0d85627278e46"
+        },
+        {
+          "path": "WinAudioClean.Launcher.ps1",
+          "bytes": 14397,
+          "sha256": "76ecbd33bc94f892f77c3e6a39ce92a53d23512bd4f0b5180c35db4f03219026"
+        },
+        {
+          "path": "WinAudioClean.Output.ps1",
+          "bytes": 11184,
+          "sha256": "44f87bdb049ed3bede6e680c9a76281926af64329f39ad3ccc829553357f2bb4"
+        },
+        {
+          "path": "WinAudioClean.Preview.ps1",
+          "bytes": 46367,
+          "sha256": "35ef94276eac5aa65c35932846affa1bd4639726904639a6028136df2865d4d4"
+        },
+        {
+          "path": "WinAudioClean.Queue.ps1",
+          "bytes": 14069,
+          "sha256": "54d943fe1bf71a260941e13f7dc5266d3e7149de0742b2826474cab25b7c61f8"
+        },
+        {
+          "path": "WinAudioClean.Settings.ps1",
+          "bytes": 28208,
+          "sha256": "a42f51ed6155aeb9525b337255fc541f06fea56a1baf8de57168c0a1e8a55755"
+        },
+        {
+          "path": "WinAudioClean.bat",
+          "bytes": 3621,
+          "sha256": "6e27f9ad0ca277c7952f159f1ec398d6a9ea0c3fa5f9d935fb39c47c1d71935b"
+        },
+        {
+          "path": "WinAudioClean.ico",
+          "bytes": 30763,
+          "sha256": "438dd08b6509f91dbed800f281aa89de7582cc2270e5e5a684d78c570d53f501"
+        },
+        {
+          "path": "WinAudioClean.ps1",
+          "bytes": 156051,
+          "sha256": "4e94aef6014dedebac0ab291717b0a5ec21454af34284bece0379f0ae15da70b"
+        },
+        {
+          "path": "docs/PORTABLE_PACKAGE.md",
+          "bytes": 9046,
+          "sha256": "259a4a47ae3a88992ba746cf807090a60f68c0481b29b21b1b5d51b114e20573"
+        },
+        {
+          "path": "docs/SECURITY.md",
+          "bytes": 4635,
+          "sha256": "1e48e13284dd7b5c0ad6f2426199fe79070515b8b0db1374b9368e8cfa957310"
+        },
+        {
+          "path": "docs/SUPPORT.md",
+          "bytes": 10929,
+          "sha256": "99e108f6c0c9dc23623ace5ac97719dcd153b7309076d15dc2a1fa273052d66a"
+        },
+        {
+          "path": "docs/codex/winaudioclean/DATA_FORMATS.md",
+          "bytes": 39913,
+          "sha256": "4b58c2249556b4d1321d471d5e285e255e1c0369d660dffde66bc88492533e13"
+        }
+      ]
+    },
+    "immutable_audit_git_blob_sha256": "9da449debfa16132e2455c3adf84f75bf0c38c5dfbce7e48ec9f6892060ea6bb"
+  },
+  "retained_gap_ids": [
+    "speech-listening",
+    "explorer-matrix",
+    "picker-gesture",
+    "large-storage-stress",
+    "host-crash-powerloss",
+    "privileged-file-symlink",
+    "meter-seek-domain",
+    "unreleased-preview-writer"
+  ],
+  "owner_gap_waivers_recorded": false,
+  "post_closure_delivery": {
+    "head": null,
+    "ci": null,
+    "required": "Verify later closure commit/PR/main CI and live delivery externally; no future identities are claimed here."
+  },
+  "closure_validation": {
+    "scope": "Focused publication-status docs and metadata working-tree checks at the release source; later clean closure commit/main identities and CI are verified externally.",
+    "source_head": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+    "python": "3.14.6",
+    "governance": {
+      "capture_sha256": "406b6109271d3c330a06c3cd2c97d191fa39577240d4729a5de3e4c9365cf033",
+      "tracked_inputs_unchanged_during_tests": true,
+      "tracked_files_hashed": 583,
+      "tracked_input_inventory_sha256": "f6dfed9f19a520f26775d784005dbf41098e442960d495bd228b979533f77e0f",
+      "checks": [
+        {
+          "name": "validate-plan",
+          "status": "pass",
+          "exit_code": 0,
+          "stdout_sha256": "a5dbec61e7e667cb2596f6ac6d02efb47f3212f79e3b8b57cdf021bfc08eab1b",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "result": {
+            "valid": true,
+            "tasks": 30,
+            "acceptance_cases": 90,
+            "improvements": 20
+          }
+        },
+        {
+          "name": "coverage",
+          "status": "pass",
+          "exit_code": 0,
+          "stdout_sha256": "9674c760c787316a3af201bf26709990901d7174d0d8e6990e67b51ca5714c79",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "result": {
+            "mapped_cases": 90,
+            "required_cases": 90,
+            "commands": 43,
+            "named_reviews": 13,
+            "retained_gaps": 8,
+            "scope": "Structural traceability only; commands are available coverage, not execution results."
+          }
+        },
+        {
+          "name": "handoff-unit",
+          "status": "pass",
+          "exit_code": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "2cc9b015684337768da8cfd192ac06cfd2d1d9b30438eaa850b90b772d4cd3d4",
+          "unit": {
+            "tests_run": 54,
+            "seconds": 284.002,
+            "skipped": 1
+          }
+        },
+        {
+          "name": "coverage-unit",
+          "status": "pass",
+          "exit_code": 0,
+          "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "stderr_sha256": "6ee85e22b9d511d401bb82207db9b59fda69b195dc73082da5070dd3ee2d271f",
+          "unit": {
+            "tests_run": 13,
+            "seconds": 0.387,
+            "skipped": 0
+          }
+        }
+      ],
+      "privilege_skip": "test_handoff.PathAndOriginTests.test_symlink_rejected: Symlink privileges unavailable"
+    },
+    "website": {
+      "capture_sha256": "f690d5379f52337a2f321bf524cad7d38d3aee11361118c8c499b4301a46df7c",
+      "status": "passed",
+      "commands_exit": [
+        0,
+        0
+      ],
+      "unit": {
+        "ran": 21,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": true
+      },
+      "published_package": {
+        "committed_blobs_identical": true,
+        "entry_count": 18,
+        "license_sha256": "714ffa7a21614e637d7dbb17a2e86e4575d7ecd2b6d36b5b67ab3fdcc4193477",
+        "manifest_sha256": "565efe0a92137ed76b79af42165709b0e4e25388dfdf645078a164a97538534d",
+        "ordered_stored_fixed_timestamp": true,
+        "passed": true,
+        "payload_count": 17,
+        "source_commit": "6dcf1bf56bc474b2c42353ed3779205468f1237c",
+        "source_tree": "b58e2bf43602ceb908555197cc4fdb88e1e93ceb",
+        "version": "1.0.0",
+        "zip_bytes": 443971,
+        "zip_sha256": "d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46"
+      },
+      "release": {
+        "download_enabled": true,
+        "status": "published",
+        "version": "1.0.0"
+      },
+      "metadata_sha256": "37300b19824e8d7ff5b54676b21fbb0d47cdd075149e3ba246e0e46b7b8d0fdb",
+      "metadata_hash_scope": "physical working-tree bytes during the focused website test",
+      "schema_sha256": "424fce742b9999e12161c41c4bc7ce0c4fa0140c41c876d32134083cc095ec37",
+      "inputs_unchanged_during_tests": true
+    }
+  }
 }
