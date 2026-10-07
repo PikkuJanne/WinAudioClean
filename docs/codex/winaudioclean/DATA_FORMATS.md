@@ -11,7 +11,8 @@ A persisted default-sound change still requires the user's own explicit settings
 ### Implemented preferences — WAC-M3-01 (2026-10-02)
 
 Preference schema version `1` is separate from ordinary/preview report schema
-version `1` and application `2.3`. The default local path is the current user's
+version `1` and the then-internal application `2.3`. The current public application
+version is `1.0.0`; this does not change the saved-settings schema. The default local path is the current user's
 ApplicationData folder plus `WinAudioClean\settings.json`. `-SettingsPath`
 selects an isolated local file. Reading never saves; only `-SaveSettings` or
 `-ResetSettings` writes preferences. The optional Settings sibling is needed
@@ -99,7 +100,7 @@ remain console-only. New per-run files use CreateNew and UTF-8 without a BOM.
 | `diagnostics`, `privacy` | Separate native stdout/stderr, processing/output/cleanup errors, local report paths and a privacy notice. |
 
 Preset identity is additive in schema version 1. It names the base filter values
-and order, separately from `toolVersion` (currently `2.3`), mode and export
+and order, separately from `toolVersion` (currently `1.0.0`), mode and export
 format. Since M2-03, customized renders also require their effective settings
 and exact graph; the base identity alone is insufficient. JSON, text and the
 summary carry the identity and customization flag. Redacted
@@ -566,7 +567,7 @@ detailed records and journals before sharing.
 
 ## Website release metadata
 
-Use schemaVersion, status (draft/published), version, releasedAt, repository, sourceCommit, archiveName, downloadUrl, sha256, requirements, dependencyPolicy and changelog reference. Draft status uses null publication URL/date/hash when not known and disables the download button. Only actual approved artifact output may populate published fields. Validate metadata against the package manifest; reject version/checksum mismatch. Do not use an executable runtime auto-update manifest.
+The implemented `website/release.schema.json` uses `schemaVersion`, `application`, `status` (`draft`/`published`), `version`, `date`, `download` (`url`, `fileName`, `sha256`, `bytes`), `source` (`commit`, `tree`) and `requirements`. Draft status requires null publication fields and disables download. Published fields must come from the actual approved GitHub release and measured artifact; validate them against the package manifest, checksum and provenance. The filename binds version and source revision. Unknown fields, mismatched version/hash/source and unsupported URLs fail validation. Publication metadata describes the GitHub package; it does not certify website hosting. The application never reads it or performs automatic updates.
 
 ## Acceptance and task records
 

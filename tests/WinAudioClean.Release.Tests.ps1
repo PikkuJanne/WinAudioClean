@@ -81,16 +81,19 @@ BeforeAll {
 }
 
 Describe 'Committed tool-only release packaging' -Tag 'Release', 'Packaging' {
-    It 'builds identical bytes twice and preserves every allowed payload byte with consistent integrity metadata' {
-        $fixture = New-ReleaseFixture
+    It 'builds identical <Version> bytes twice and preserves every allowed payload byte with consistent integrity metadata' -ForEach @(
+        @{ Version = '2.3' }
+        @{ Version = '1.0.0' }
+    ) {
+        $fixture = New-ReleaseFixture -VersionSource ('$scriptVersion = "' + $Version + '"')
         $one = Join-Path $fixture.Root 'dist/one'
         $two = Join-Path $fixture.Root 'dist/two'
         $first = & $fixture.Builder -Revision $fixture.Commit -OutputDirectory $one
         $second = & $fixture.Builder -Revision $fixture.Commit -OutputDirectory $two
-        $first.version | Should -BeExactly '2.3'
+        $first.version | Should -BeExactly $Version
         $first.source_commit | Should -BeExactly $fixture.Commit
         $first.source_tree | Should -BeExactly $fixture.Tree
-        $first.zip | Should -BeExactly ('WinAudioClean-2.3-' + $fixture.Commit.Substring(0, 12) + '-tool-only.zip')
+        $first.zip | Should -BeExactly ('WinAudioClean-' + $Version + '-' + $fixture.Commit.Substring(0, 12) + '-tool-only.zip')
         foreach ($name in @($first.zip, $first.checksum, $first.provenance)) {
             [Convert]::ToBase64String([IO.File]::ReadAllBytes((Join-Path $one $name))) |
                 Should -BeExactly ([Convert]::ToBase64String([IO.File]::ReadAllBytes((Join-Path $two $name))))
@@ -118,7 +121,7 @@ Describe 'Committed tool-only release packaging' -Tag 'Release', 'Packaging' {
         }
         $manifest = [Text.Encoding]::UTF8.GetString(($entries | Where-Object Path -CEQ 'PACKAGE-MANIFEST.json').Bytes) | ConvertFrom-Json
         $manifest.schema_version | Should -Be 1
-        $manifest.version | Should -BeExactly '2.3'
+        $manifest.version | Should -BeExactly $Version
         $manifest.source_commit | Should -BeExactly $fixture.Commit
         $manifest.source_tree | Should -BeExactly $fixture.Tree
         $manifest.payload.Count | Should -Be 17

@@ -1,4 +1,8 @@
-# WinAudioClean 2.3
+# WinAudioClean 1.0.0
+
+The first public version is **v1.0.0**. Check availability and package details on
+the [GitHub releases page](https://github.com/PikkuJanne/WinAudioClean/releases).
+Earlier internal builds used version `2.3`; their historical reports remain valid.
 
 Clean and level speech recordings locally with PowerShell and FFmpeg. Choose **Raw** for cleaning plus leveling, or **Zoom/Teams** for leveling only. The built-in **Original** preset preserves the legacy filter settings. Results depend on the recording; listen before using the export.
 
@@ -167,7 +171,7 @@ Raw's numeric cleaning bounds are inclusive: `HighpassHz` 20..200 Hz; `NoiseFloo
 
 ## Sound and measurements
 
-Application **2.3**, Original **original / 1.0.0**, Gentle **gentle / 0.1.0**, and report schemas are separate versions. Default Raw Original/Fast preserves this exact graph:
+Application **1.0.0**, Original **original / 1.0.0**, Gentle **gentle / 0.1.0**, and report schemas are separate versions. The application and Original preset can share a version string while identifying different things. Default Raw Original/Fast preserves this exact graph:
 
 ```text
 adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
@@ -222,6 +226,6 @@ The source must be supported ordinary schema 1, at most 16 MiB; destination must
 
 Ctrl+C/Ctrl+Break in an attached Windows console requests owned-child cancellation and safe cleanup; `Q` cancels prompts. Publication alone reaches progress 100%, not proof of loudness/report success. Closing the window, killing PowerShell or power loss may prevent cleanup/reporting. Inspect `.wac-<id>.partial` only after its job has stopped; later runs do not sweep leftovers. New exports use no-replace publication; a collision fails safely and preserves the existing file.
 
-For missing dependencies, unreadable media, permission failures, collisions, settings recovery and private support reports, follow [troubleshooting](docs/SUPPORT.md). Read [security and privacy](docs/SECURITY.md) before sharing data. No mandatory GUI, server, account, cloud processing, telemetry or updater is used. Website/release publication is a separate action; this branch's package is a local candidate. The static website metadata is a draft with release fields unavailable and downloads disabled.
+For missing dependencies, unreadable media, permission failures, collisions, settings recovery and private support reports, follow [troubleshooting](docs/SUPPORT.md). Read [security and privacy](docs/SECURITY.md) before sharing data. No mandatory GUI, server, account, cloud processing, telemetry or updater is used. Website hosting will follow separately in the future multi-tool website project. The static page enables download only after complete release metadata passes validation.
 
 Provided as-is under the [MIT license](LICENSE). Third-party builds have their own obligations; see [notices](THIRD_PARTY_NOTICES.md).

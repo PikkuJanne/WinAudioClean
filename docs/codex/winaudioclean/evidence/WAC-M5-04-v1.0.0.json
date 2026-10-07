@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "task_id": "WAC-M5-04",
+  "status": "in_progress",
+  "owner_date": "2026-10-07",
+  "owner_approval": {
+    "request": "The project is ready, please update everything to reflect that v1.0.0 is in fact pubished.",
+    "clarification": "GitHub still has no `v1.0.0` release or tag for `PikkuJanne/WinAudioClean`. Does this request include publishing `v1.0.0` here, or should I reference a release published in another repository?",
+    "reply": "Publish v1.0.0 here",
+    "repository": "PikkuJanne/WinAudioClean",
+    "tag": "v1.0.0",
+    "scope": "First public tool-only GitHub release and necessary version/integration/metadata work; website hosting remains deferred."
+  },
+  "starting_main": {
+    "commit": "944aaa1c57ae192237f0fee057dd672db4be22d9",
+    "tree": "c30db586d2c170b089e69a1ab2c4c287a4290167",
+    "prior_pr_count": 7,
+    "ci_run": 37201715232,
+    "initial_attempt": "one PS5.1 media-test marker failure; race hypothesis unconfirmed",
+    "final_attempt": 2,
+    "final_jobs_passed": 4,
+    "checkpoint": "https://github.com/PikkuJanne/WinAudioClean/pull/7#issuecomment-5980181550"
+  },
+  "version": "1.0.0",
+  "validation": [
+    {
+      "check": "version preparation targeted Pester",
+      "hosts": {
+        "ps51": "5.1.26100.9444",
+        "ps7": "7.6.5"
+      },
+      "passed_per_host": 184,
+      "skipped_per_host": 0,
+      "exit_per_host": 0,
+      "modules": {
+        "Pester": "5.7.1",
+        "PSScriptAnalyzer": "1.24.0"
+      },
+      "capture_note": "PS5.1 initial ignored collector rejected three identical CLIXML summaries. Actual host exit0/counts184 verified from preserved raw log; corrected create-only receipt, no rerun.",
+      "raw_log_sha256": {
+        "ps51": "f69127c4159adb5c3d0df24ff1d75d2378ce7e84f7feb8e601c9c4b27d3f8f06",
+        "ps7": "e8ea4a9cda4c45031f4ac1621f419229d4c0ab4dda7aecbcc4d1635fc3e58d4d"
+      }
+    },
+    {
+      "check": "Python version identity and explicit legacy replay",
+      "python": "3.14.6",
+      "passed": 5,
+      "skipped": 0,
+      "exit": 0
+    },
+    {
+      "check": "Python package inspector regressions",
+      "passed": 8,
+      "skipped": 0,
+      "exit": 0
+    },
+    {
+      "check": "Python website metadata regressions",
+      "passed": 21,
+      "skipped": 0,
+      "exit": 0
+    },
+    {
+      "check": "actual draft metadata CLI",
+      "version": "1.0.0",
+      "status": "draft",
+      "download_enabled": false,
+      "exit": 0,
+      "sha256": "a95f405486a54984394d7b13c9e34fb3553c4349f4f44e0c1d6e36a6313bd4c4"
+    },
+    {
+      "check": "canonical plan",
+      "tasks": 30,
+      "acceptance_cases": 90,
+      "improvements": 20,
+      "valid": true
+    },
+    {
+      "check": "runtime preservation comparison",
+      "main_version_help_only": true,
+      "preview_default_version_only": true,
+      "main_sha256": "4e94aef6014dedebac0ab291717b0a5ec21454af34284bece0379f0ae15da70b",
+      "preview_sha256": "c8aad4c392db0347e58671c80cc8bb16d35fd5703196333a81f90a119e5b0e9b"
+    }
+  ],
+  "publication": null,
+  "website_hosting": "deferred to future multi-tool project",
+  "broader_gaps": "eight unrun and unwaived; see COVERAGE.json",
+  "preservation": "Historical 2.3 evidence and WAC-M5-03 immutable audit preserved; preset/schema versions, defaults and filters unchanged."
+}

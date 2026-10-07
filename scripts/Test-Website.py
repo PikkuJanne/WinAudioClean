@@ -259,7 +259,7 @@ def fixture_checks(fixture, archive, repo, schema):
 
 def write_fixture(fixture, output, repo):
     # Fixture publication is restricted to local task scratch space, and never
-    # replaces prior bytes. The website itself remains an unchanged draft.
+    # replaces prior bytes. Committed release metadata remains unchanged.
     original_output = output.absolute()
     output = original_output.resolve(strict=False)
     task_root = (repo / ".wac-local/WAC-M5-01").resolve(strict=False)

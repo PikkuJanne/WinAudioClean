@@ -22,18 +22,43 @@ finally:
 class WebsiteTests(unittest.TestCase):
     def setUp(self):
         self.schema = website.read_json((REPO / "website/release.schema.json").read_bytes())
-        self.draft = website.read_json((REPO / "website/release.json").read_bytes())
+        self.metadata = website.read_json((REPO / "website/release.json").read_bytes())
+        self.package = website.package_module(REPO)
+        self.version = self.package.source_version((REPO / "WinAudioClean.ps1").read_bytes())
+        # Draft rejection tests use their own fixture after checked-in metadata
+        # starts describing an actual published release.
+        self.draft = {
+            "schemaVersion": 1, "application": "WinAudioClean", "status": "draft",
+            "version": self.version, "date": None,
+            "download": {"url": None, "fileName": None, "sha256": None, "bytes": None},
+            "source": {"commit": None, "tree": None},
+            "requirements": {
+                "platforms": ["Windows desktop"], "powershell": ["5.1", "7"],
+                "ffmpeg": "Supply trusted FFmpeg and ffprobe separately.",
+                "installation": "Extract the complete tool-only package into a writable folder.",
+                "privacy": "Processing is local; reports can contain private paths.",
+            },
+        }
         self.registry = website.read_json((REPO / "website/assets.json").read_bytes())
 
     def rejects(self, value, code="metadata_schema"):
         with self.assertRaisesRegex(website.WebsiteError, "^" + code + "$" ):
             website.validate_release(value, self.schema)
 
-    def test_draft_version_matches_authoritative_script_and_disables_download(self):
-        package = website.package_module(REPO)
-        version = package.source_version((REPO / "WinAudioClean.ps1").read_bytes())
-        self.assertEqual(website.validate_release(self.draft, self.schema, version),
-                         {"status": "draft", "download_enabled": False, "version": version})
+    def test_checked_in_metadata_matches_authoritative_version_and_actual_status(self):
+        self.assertIn(self.metadata["status"], ("draft", "published"))
+        self.assertEqual(website.validate_release(self.metadata, self.schema, self.version),
+                         {"status": self.metadata["status"],
+                          "download_enabled": self.metadata["status"] == "published",
+                          "version": self.version})
+        # This schema/current-version/status check also works in shallow CI.
+        # Actual source/payload/sidecar binding belongs to Test-Website --package
+        # with the real ZIP and full source history; publication is verified
+        # separately. Metadata shape alone establishes neither of those facts.
+
+    def test_independent_draft_disables_download(self):
+        self.assertEqual(website.validate_release(self.draft, self.schema, self.version),
+                         {"status": "draft", "download_enabled": False, "version": self.version})
 
     def test_draft_cannot_claim_any_release_artifact_field(self):
         for section, key in (("download", "url"), ("download", "fileName"), ("download", "sha256"),

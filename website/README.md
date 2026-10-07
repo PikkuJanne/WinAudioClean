@@ -1,4 +1,4 @@
-# Static product page draft
+# Static product page
 
 This directory is a portable presentation package: HTML, CSS, JavaScript, local
 JSON metadata, the existing repository icon and its MIT license. It contains no
@@ -7,8 +7,9 @@ updater. The PowerShell/BAT application never reads this directory or contacts
 the page. Website requests are limited to its static files and deliberate links.
 
 Copy this complete directory to a future tools website when publication is
-separately approved. No deployment or release is performed by this task. The
-committed `release.json` is a **draft**: version 2.3 comes from the existing
+separately approved. GitHub `v1.0.0` publication is explicitly approved; website
+hosting remains deferred to the future multi-tool project. During preparation,
+committed `release.json` remains a **draft**: version 1.0.0 comes from the existing
 `scriptVersion` assignment, and its release date, source identity, URL, filename,
 checksum and archive size are explicitly unavailable. A local candidate ZIP is
 not a published release. The page starts with download disabled, validates all
@@ -44,7 +45,7 @@ then rejects seven independently altered metadata fixtures. It never invents or
 tests a remote release URL. Fixtures remain in memory unless `--fixture-output`
 names a new JSON file below ignored `.wac-local/WAC-M5-01` for local browser QA;
 create that parent directory first. Fixture success establishes package identity,
-not authorization or remote availability, and never edits this committed draft.
+not authorization or remote availability, and never edits committed metadata.
 
 `release.schema.json` uses JSON Schema draft 2020-12. The standard-library
 validator implements only its explicitly documented keyword subset and rejects

@@ -4,6 +4,11 @@ This combines preserved behavior and proposed later test contracts. Sections
 marked implemented describe current behavior; speech listening and later
 milestone requirements remain pending.
 
+Current public application version: **1.0.0** (2026-10-07). Earlier dated
+implementation sections record internal application `2.3`. Public numbering
+does not change the filter recipes, Original preset `1.0.0`, Gentle `0.1.0`,
+configuration/report schema `1`, or the retained listening requirements.
+
 ## Preserved baseline
 
 Raw prechain:

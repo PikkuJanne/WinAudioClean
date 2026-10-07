@@ -25,6 +25,7 @@ import sys
 
 
 RATE = 48000
+RECIPE_VERSIONS = ("2.3", "1.0.0")
 LEVEL = "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12"
 TOGGLES = ("Declip", "Declick", "Denoise", "Gate")
 BOUNDS = {"HighpassHz": (20, 200), "NoiseFloorDb": (-80, -20), "NoiseReductionDb": (0.01, 20),
@@ -64,7 +65,8 @@ def parameters(token):
 def profile_from_report(report):
     """Versioned application recipe plus typed effective report values only."""
     settings = report["settings"]
-    require(report["schemaVersion"] == 1 and report["toolVersion"] == "2.3", "Unsupported report/application version")
+    require(report["schemaVersion"] == 1 and report["toolVersion"] in RECIPE_VERSIONS,
+            "Unsupported report/application version")
     identity = report["presetId"]
     require(identity in ("original", "gentle"), "Unsupported base preset")
     require(report["presetVersion"] == ("1.0.0" if identity == "original" else "0.1.0"), "Unsupported preset version")
@@ -106,7 +108,7 @@ def profile_from_report(report):
                           + ":threshold=" + gate(cleaning["GateThresholdDb"], -45, "0.0056"))
     else:
         require(cleaning is None and identity == "original" and not report["presetCustomized"], "Invalid Zoom choices")
-    # Schema 1 has no leveling knobs: the application-2.3 recipe is fixed.
+    # Legacy development 2.3 and public 1.0.0 share this fixed schema-1 recipe.
     stages.append(LEVEL)
     stages.append("loudnorm=I=-12:TP=-1.5")
     return ",".join(stages)
@@ -233,7 +235,7 @@ def main():
 
     summary = {"task": "WAC-M2-05", "acceptance": "AC-048", "created_utc": stamp,
                "notice": "Report-driven direct FFmpeg reproduction on synthetic inputs; no speech listening, independent meter calibration or cross-build guarantee.",
-               "method": "The unchanged app produces local reports in two hosts. Replay ignores seed CLI choices and rebuilds graphs from each report. Leveling has the fixed application-2.3 recipe; exact reported graphs must agree before execution. Comparison WAVs use the recreated excerpts as binary stdin.",
+               "method": "The unchanged processing recipe produces local reports in two hosts. Replay ignores seed CLI choices and rebuilds graphs from each report. Legacy development 2.3 and public 1.0.0 share the fixed schema-1 recipe; exact reported graphs must agree before execution. Comparison WAVs use the recreated excerpts as binary stdin.",
                "path_policy": "Commands retain actual argument order/content with audio/report/log paths replaced by opaque aliases. The ignored scratch directory holds the full local artifacts. Aliases are linked by file hashes, not shareable media paths.",
                "source_revision": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=repo, text=True).strip(),
                "source_sha256_before": source_hashes(), "harness_invocation": sys.orig_argv,

@@ -363,7 +363,7 @@ function Invoke-WacPreview {
         [ValidateSet('16', '24')][string]$BitDepth = '16', [switch]$Mono, [switch]$Rf64,
         [string]$Start = '0', [string]$Duration = '45', [bool]$DurationExplicit = $false,
         [string]$AudioStreamIndex, [bool]$Interactive = $false,
-        [string]$ToolVersion = '2.3', [string]$FfmpegVersion, [string]$FfprobeVersion,
+        [string]$ToolVersion = '1.0.0', [string]$FfmpegVersion, [string]$FfprobeVersion,
         [string]$ReportFolder, $OutputLayout)
     $script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]'
     $transactions = [ordered]@{}; $assets = [ordered]@{}; $stages = [ordered]@{}; $primary = $null
