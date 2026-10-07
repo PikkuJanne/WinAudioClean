@@ -12,12 +12,21 @@ Application version comes from `scriptVersion` in `WinAudioClean.ps1`.
 packaged file's byte count/SHA256. The ZIP name includes its source revision.
 A locally built candidate is not a published release or a download promise.
 
-The first public application version is **1.0.0**. Use the
+The first public application version **1.0.0** is published on the
 [v1.0.0 release page](https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.0)
-to check availability of the tool-only ZIP and matching checksum/provenance files. The filename
+with the tool-only ZIP and matching checksum/provenance files. The filename
 and manifest identify the exact tagged source. Previous internal `2.3` candidates
 below are retained historical checkpoints. Public numbering does not change
 Original `1.0.0`, Gentle `0.1.0`, saved-settings/report schema `1`, or default sound.
+
+## Published v1.0.0 identity
+
+Published at 2026-10-07T14:14:20Z. Tag source: `6dcf1bf56bc474b2c42353ed3779205468f1237c`; tree `b58e2bf43602ceb908555197cc4fdb88e1e93ceb`.
+
+- Archive: `WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip` (443971 bytes).
+- SHA256: `d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46`.
+- ZIP, checksum and provenance were downloaded from GitHub and compared with four identical builds.
+- Manifest inspection verified all 17 committed payload files and 18 ZIP entries.
 
 ## Verify a download before extraction
 

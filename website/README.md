@@ -6,13 +6,14 @@ hosting configuration, upload form, accounts, processing service, analytics or
 updater. The PowerShell/BAT application never reads this directory or contacts
 the page. Website requests are limited to its static files and deliberate links.
 
-Copy this complete directory to a future tools website when publication is
-separately approved. GitHub `v1.0.0` publication is explicitly approved; website
-hosting remains deferred to the future multi-tool project. During preparation,
-committed `release.json` remains a **draft**: version 1.0.0 comes from the existing
-`scriptVersion` assignment, and its release date, source identity, URL, filename,
-checksum and archive size are explicitly unavailable. A local candidate ZIP is
-not a published release. The page starts with download disabled, validates all
+GitHub **[v1.0.0 is published](https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.0)**.
+Committed `release.json` records its actual publication date, tagged source, ZIP
+URL/name, measured size and verified SHA256. Version 1.0.0 matches the authoritative
+`scriptVersion` assignment. All three release assets were downloaded and checked.
+
+Copy this complete directory to the future multi-tool website when hosting is
+separately approved. Website hosting remains deferred. The page starts with
+download disabled, validates all
 metadata before enabling it, and retains the disabled state after load or
 validation failure. Opening `index.html` with a `file:` URL may block JSON loads;
 the pending/unavailable fallback still works.
@@ -28,16 +29,19 @@ python -m http.server 8765 --bind 127.0.0.1 --directory website
 Open `http://127.0.0.1:8765/`. This server only previews the static page; Python
 and a server are not tool installation requirements. Stop it with Ctrl+C.
 
-From the repository root, validate the schema, current script version, original
-icon/license bytes and pending sample-consent registry:
+Place all three downloaded v1.0.0 assets together under ignored
+`.wac-local/release-downloads/`. From the repository root, validate actual
+metadata/package identity, current script version, original icon/license bytes
+and pending sample-consent registry:
 
 ```powershell
-python scripts/Test-Website.py --repo .
+python scripts/Test-Website.py --repo . --package ".wac-local/release-downloads/WinAudioClean-1.0.0-6dcf1bf56bc4-tool-only.zip"
 python -m unittest discover -s docs/codex/winaudioclean/tests -p test_website.py -v
 ```
 
-To check a real candidate, add `--fixture-package <actual-tool-only-ZIP>` to the
-first command. The validator builds a published-like fixture from the actual
+The published-metadata check requires the actual ZIP and matching sidecars.
+To check another candidate, use an independent draft fixture with `--release
+<draft-fixture.json> --fixture-package <actual-tool-only-ZIP>` instead. The validator builds a published-like fixture from the actual
 archive's version/commit/tree and source date, with a **local basename**, measured
 size and measured SHA256. It checks all committed payload bytes, the generated
 manifest, checksum sidecar and provenance with the existing package inspector,

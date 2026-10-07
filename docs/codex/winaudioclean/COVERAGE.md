@@ -1,11 +1,14 @@
 # Acceptance coverage and retained gates
 
-2026-10-07: the owner explicitly approved first public `v1.0.0` GitHub
-publication, superseding the earlier GitHub-release deferral only. Necessary
-version/fixture/document work is in progress; actual publication and downloaded
-asset checks will extend M5-04 evidence after execution. Website hosting stays
-deferred; eight broader gaps remain unrun/unwaived. See the
-[supplemental release record](evidence/WAC-M5-04-v1.0.0.md).
+Date: 2026-10-07. **GitHub v1.0.0 is published and its three downloaded assets are verified.** Owner approval (2026-10-07): **Publish v1.0.0 here** in PikkuJanne/WinAudioClean. This superseded the earlier GitHub-release deferral only.
+
+Actual release source: 6dcf1bf56bc474b2c42353ed3779205468f1237c; tree b58e2bf43602ceb908555197cc4fdb88e1e93ceb. Tag v1.0.0 resolves to that source. [Release](https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.0) published at 2026-10-07T14:14:20Z. ZIP, checksum and provenance downloads match all four deterministic source-bound builds: 17 committed payload files plus the manifest (18 ZIP entries). ZIP SHA256: d418a721b6ce8494e3a0233f4b8502120f90d2c17ad7c3e34aa539899abe8a46; 443971 bytes.
+
+Local Full ran once per host at preparation source e8cd99288ebe1d0d7c0875b9dacd438e877e8451, whose entire Git tree equals the merged release source: ps51: Pester 1484 passed/1 skipped, Python 168 ran/1 skipped; ps7: Pester 1484 passed/1 skipped, Python 168 ran/1 skipped. Both Full results passed with zero outside-scope cases. Preparation PR/push CI and release-main push CI each passed four Windows jobs. The actual portable smoke passed eight real file/BAT routes and four built-in bootstrap routes on synthetic input.
+
+Earlier R7 attempt-1 failure and unchanged-source successful retry remain recorded; the startup/PID-marker hypothesis is unconfirmed. Historical 2.3 evidence, schema/preset versions, default processing and the immutable M5-03 audit remain intact. All eight broader gaps are unrun/unwaived; website hosting and screenshots/audio/consent remain deferred. No direct main push, settings/bundling, history rewrite, branch deletion, private-data publication or sound promotion is included.
+
+Engineering acceptance remains 30 completed tasks and 90 scoped passing cases, with no unlocked next task. Verify current main/CI and this metadata closure's Git identity through the external PR checkpoint; a commit cannot include its own future SHA. [Release evidence](evidence/WAC-M5-04-v1.0.0.md), [ledger](evidence/WAC-M5-04-v1.0.0.json).
 
 The following October 4 coverage description is historical:
 
