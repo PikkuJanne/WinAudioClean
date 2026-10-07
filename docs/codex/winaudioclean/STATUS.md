@@ -1,3 +1,17 @@
+# Current status - v1.0.0 release preparation
+
+Date: 2026-10-07. **First public version 1.0.0 is authorized; preparation is in progress. Publication has not yet been verified.** Owner instruction: **Publish v1.0.0 here**. Here means `PikkuJanne/WinAudioClean` on GitHub. This supersedes the earlier GitHub-release deferral only; website hosting remains deferred.
+
+Recovered baseline: clean local/live `main` at R7 `944aaa1c57ae192237f0fee057dd672db4be22d9`, with all seven PRs integrated. [Main CI run 37201715232](https://github.com/PikkuJanne/WinAudioClean/actions/runs/37201715232) attempt 1 failed with one Pester failure on windows-2025/ps51; unchanged-source attempt 2 passed all four jobs. Preserve the failure and unconfirmed startup/PID-marker hypothesis: no actual exception message or named Phase was exported. See the [external PR7 delivery checkpoint](https://github.com/PikkuJanne/WinAudioClean/pull/7#issuecomment-5980181550). These results do not replace validation of the new release source.
+
+Approved preparation includes necessary application-version/document integration through ordinary derivative PRs, then the first public `v1.0.0` tag/tool-only release. Historical application 2.3/candidate identities remain unchanged. Preserve preset/config/report schema versions and processing defaults. The October 7 audit found no v1.0.0 tag or releases; bind the new tag/ZIP/manifest/checksum/provenance to one exact frozen validated source, and verify actual uploaded/downloaded hashes before recording publication complete. Future source/URL/results are observed externally, not invented inside their own commit.
+
+Earlier engineering/merge acceptance remains 30 done/90 pass within its scopes. All eight broader gates remain unrun/unwaived; screenshots/audio/consent are pending. Preserve the immutable M5-03 audit, historical text/evidence and source-only original. Direct main pushes, website hosting, settings, bundling, history rewrite, branch deletion, sound promotion and private-data publication remain outside scope.
+
+Current preparation evidence: [release record](evidence/WAC-M5-04-v1.0.0.md), [validation ledger](evidence/WAC-M5-04-v1.0.0.json).
+
+## Historical records through 2026-10-04
+
 # Current status
 
 Date: 2026-10-04. **WAC-M5-04 merge-only acceptance is complete; final delivery remains subject to external green CI/live verification.** Canonical 30 done / 0 todo; 90 pass / 0 not_run. No next unlocked task. All eight broader gates remain unrun and unwaived; these canonical engineering/action passes do not certify broader listening/platform/stress claims.

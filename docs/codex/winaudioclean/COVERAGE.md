@@ -1,5 +1,14 @@
 # Acceptance coverage and retained gates
 
+2026-10-07: the owner explicitly approved first public `v1.0.0` GitHub
+publication, superseding the earlier GitHub-release deferral only. Necessary
+version/fixture/document work is in progress; actual publication and downloaded
+asset checks will extend M5-04 evidence after execution. Website hosting stays
+deferred; eight broader gaps remain unrun/unwaived. See the
+[supplemental release record](evidence/WAC-M5-04-v1.0.0.md).
+
+The following October 4 coverage description is historical:
+
 [COVERAGE.json](COVERAGE.json) maps AC-001..090. The completed merge-only M5-04 map contains 90 cases, 43 command scopes, 13 named reviews and eight retained unrun gaps. AC-088..090 accept only actual authorized merges and their verification; release/site publication is explicitly future separate-project work. Available coverage and canonical engineering/action pass do not imply broad listening/platform/stress execution. See [merge evidence](evidence/WAC-M5-04.md).
 
 Canonical acceptance remains [ACCEPTANCE.json](ACCEPTANCE.json). A command in

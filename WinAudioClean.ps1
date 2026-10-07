@@ -234,7 +234,7 @@ WAVs only; open them yourself. No playback or full render starts automatically.
 Explicitly save to a separate example preferences file without processing audio.
 CLI overrides saved values; normal runs never save automatically.
 .NOTES
-Author: Janne Vuorela. Application version 2.3. Windows desktop with PS5.1/PS7.
+Author: Janne Vuorela. Application version 1.0.0. Windows desktop with PS5.1/PS7.
 Windows 10/11 are intended targets; active-machine validation used build 26300,
 PS5.1.26100.9444 / PS7.6.5 and FFmpeg/ffprobe 9.0.2 essentials. Other OS/build
 and managed-policy compatibility is not universally verified.
@@ -2183,7 +2183,7 @@ if ($batchRequested -or $folderRequested -or $PSBoundParameters.ContainsKey('Bat
 }
 
 # --- CONFIGURATION ---
-$scriptVersion = "2.3"
+$scriptVersion = "1.0.0"
 
 # The preview component is optional for normal exports. Loading defines helpers;
 # it never renders or launches playback. Existing full-render installations and

@@ -1,3 +1,17 @@
+# Current v1.0.0 publication scope
+
+2026-10-07: all seven earlier PRs are integrated at R7
+`944aaa1c57ae192237f0fee057dd672db4be22d9`; its unchanged-source CI retry passed
+all four jobs, with the initial failure preserved. The owner explicitly approved
+**Publish v1.0.0 here** in `PikkuJanne/WinAudioClean`. First public application
+version `1.0.0` preparation is in progress; publication is not yet verified.
+Website hosting remains deferred to the future multi-tool project. Existing
+20-group/30-task/90-case engineering scopes and eight unrun/unwaived gaps remain.
+See [the supplemental release record](evidence/WAC-M5-04-v1.0.0.md) and
+[ledger](evidence/WAC-M5-04-v1.0.0.json).
+
+## Historical integration records through 2026-10-04
+
 # Integrated main and bounded 20-group acceptance
 
 Date: 2026-10-04. **WAC-M5-04 merge-only acceptance is complete; final delivery remains subject to external green CI/live verification.** Canonical 30 done / 0 todo; 90 pass / 0 not_run. No next unlocked task. All eight broader gates remain unrun and unwaived; these canonical engineering/action passes do not certify broader listening/platform/stress claims.

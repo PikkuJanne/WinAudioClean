@@ -28,6 +28,23 @@ PRESET_ID = "original"
 PRESET_VERSION = "1.0.0"
 
 
+def source_application_version(main: Path) -> str:
+    """Read the same literal version authority used by the package inspector."""
+    spec = importlib.util.spec_from_file_location(
+        "wac_original_release_version", Path(__file__).with_name("Test-ReleasePackage.py"))
+    package = importlib.util.module_from_spec(spec)
+    previous_bytecode_flag = sys.dont_write_bytecode
+    try:
+        sys.dont_write_bytecode = True
+        spec.loader.exec_module(package)
+    finally:
+        sys.dont_write_bytecode = previous_bytecode_flag
+    try:
+        return package.source_version(main.read_bytes())
+    except package.CheckError as exc:
+        raise ValueError(str(exc)) from exc
+
+
 def sha256(path: Path) -> str:
     with path.open("rb") as source:
         digest = hashlib.sha256()
@@ -55,6 +72,7 @@ def main() -> int:
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     repo = Path(__file__).resolve().parent.parent
+    application_version = source_application_version(repo / "WinAudioClean.ps1")
     ffmpeg, ffprobe = args.ffmpeg.resolve(strict=True), args.ffprobe.resolve(strict=True)
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     output = (args.output or repo / ".wac-local" / "WAC-M2-01" / stamp).resolve()
@@ -67,7 +85,8 @@ def main() -> int:
     baseline_path = repo / "docs/codex/winaudioclean/BASELINE.json"
     generator_path = repo / "docs/codex/winaudioclean/tools/generate_fixtures.py"
     runtime = [repo / "WinAudioClean.ps1", repo / "WinAudioClean.IO.ps1"]
-    sources = runtime + [Path(__file__).resolve(), baseline_path, generator_path]
+    sources = runtime + [Path(__file__).resolve(), baseline_path, generator_path,
+                         Path(__file__).with_name("Test-ReleasePackage.py")]
     replacements = [(str(repo), "<repo>"), (str(Path.home()), "<user-profile>")]
 
     def sanitize(value):
@@ -94,6 +113,7 @@ def main() -> int:
         "source_sha256_before": source_hashes(), "harness_invocation": sys.orig_argv,
         "tools": {name: {"path": str(path), "sha256": sha256(path)}
                   for name, path in (("ffmpeg", ffmpeg), ("ffprobe", ffprobe))},
+        "expected_application_version": application_version,
         "expected_preset": {"id": PRESET_ID, "version": PRESET_VERSION},
         "fixtures": [], "references": [], "cases": [], "commands": [],
     }
@@ -177,7 +197,7 @@ def main() -> int:
                  "same_ffmpeg_version": report["dependencies"]["ffmpeg"]["version"] == summary["tools"]["ffmpeg"]["version"]}
         expected_format = {"sampleRate": RATE, "bitDepth": bits, "codec": f"pcm_s{bits}le", "channels": channels,
                            "channelLayout": "mono" if channels == 1 else "stereo", "container": "RIFF"}
-        facts["passed"] = (facts["schema_version"] == 1 and facts["tool_version"] == "2.3"
+        facts["passed"] = (facts["schema_version"] == 1 and facts["tool_version"] == application_version
                            and facts["preset_id"] == PRESET_ID and facts["preset_name"] == "Original" and facts["preset_version"] == PRESET_VERSION
                            and facts["preset_version_reason"] is None and facts["mode"] == mode
                            and facts["exact_filters"] == filters and facts["format"] == expected_format

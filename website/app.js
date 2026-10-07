@@ -125,22 +125,25 @@
     setText('release-badge', 'UNAVAILABLE');
     setText('release-state', 'Metadata unavailable');
     setText('release-status', message);
-    setText('download-note', 'No working release link is claimed. Read the setup guide and source repository for current information.');
+    setText('download-note', 'A download cannot be enabled without valid release metadata. Read the setup guide and GitHub release history for current information.');
   }
 
   function render(value) {
     setText('release-version', value.version);
     if (value.status === 'draft') {
       setText('release-badge', 'DRAFT');
-      setText('release-state', 'Draft / unpublished');
-      setText('release-status', 'No published download is available.');
+      setText('release-state', 'Release publication pending verification');
+      setText('release-status', 'No published download is recorded in this metadata.');
+      setText('release-date', 'Not recorded');
+      setText('release-checksum', 'Not recorded');
+      setText('download-note', 'A local candidate is not a published release. Downloads stay disabled until the actual release identity is verified.');
       return;
     }
     var download = document.getElementById('release-download');
     var unavailable = document.getElementById('download-unavailable');
     if (!download || !unavailable) { return; }
     setText('release-badge', 'PUBLISHED');
-    setText('release-state', 'Published metadata');
+    setText('release-state', 'Published release');
     setText('release-date', value.date);
     setText('release-status', 'Tool-only ZIP · ' + value.download.bytes.toLocaleString('en-US') + ' bytes');
     setText('release-checksum', value.download.sha256);

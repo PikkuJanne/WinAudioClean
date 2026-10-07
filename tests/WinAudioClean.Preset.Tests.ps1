@@ -97,8 +97,9 @@ Describe 'AC-036: menu choices and direct invocations persist the effective Orig
         $report.presetName | Should -BeExactly 'Original'
         $report.presetVersion | Should -BeExactly '1.0.0'
         $jsonText | Should -Match '"presetVersionReason"\s*:\s*null'
-        $report.toolVersion | Should -BeExactly '2.3'
-        $report.toolVersion | Should -Not -Be $report.presetVersion
+        # Application and preset versions describe independent identities even
+        # when the first public application and Original share the same text.
+        $report.toolVersion | Should -BeExactly '1.0.0'
         $report.settings.mode | Should -BeExactly $Mode
         $report.status | Should -BeExactly 'SUCCESS'
         $expectedFilters = $baseline.filters.level
@@ -110,7 +111,7 @@ Describe 'AC-036: menu choices and direct invocations persist the effective Orig
         $summary = Get-Content -Raw -LiteralPath (Join-Path $sandbox.Output 'WinAudioClean_Log.txt')
         foreach ($human in @($text, $summary)) {
             $human | Should -Match '(?m)^PRESET\s+: Original \(ID: original; version: 1\.0\.0\)\r?$'
-            $human | Should -Match '(?m)^TOOL VERSION\s+: 2\.3;'
+            $human | Should -Match '(?m)^TOOL VERSION\s+: 1\.0\.0;'
             $human | Should -Not -Match 'preset not_versioned'
             $human | Should -Match ([regex]::Escape($report.jobId))
         }

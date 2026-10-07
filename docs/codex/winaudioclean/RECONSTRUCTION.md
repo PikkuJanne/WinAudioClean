@@ -123,8 +123,22 @@ if ($LASTEXITCODE -ne 0) { throw 'PS7 Release checks failed.' }
 if ($LASTEXITCODE -ne 0) { throw 'Package inspector regressions failed.' }
 & $wacTools.Python -B -X utf8 -m unittest discover -s docs/codex/winaudioclean/tests -p test_website.py -v
 if ($LASTEXITCODE -ne 0) { throw 'Website metadata regressions failed.' }
-& $wacTools.Python -B -X utf8 scripts/Test-Website.py --repo .
-if ($LASTEXITCODE -ne 0) { throw 'Committed draft metadata check failed.' }
+# Rehearsal uses an independent draft fixture without altering public metadata.
+$wacMetadata = Get-Content -Raw -LiteralPath website/release.json | ConvertFrom-Json
+$wacFixture = $wacMetadata | ConvertTo-Json -Depth 8 | ConvertFrom-Json
+$wacFixture.status = 'draft'
+$wacFixture.date = $null
+$wacFixture.download.url = $null
+$wacFixture.download.fileName = $null
+$wacFixture.download.sha256 = $null
+$wacFixture.download.bytes = $null
+$wacFixture.source.commit = $null
+$wacFixture.source.tree = $null
+$wacDraftPath = Join-Path $wacCapture 'rehearsal-draft.json'
+if (Test-Path -LiteralPath $wacDraftPath) { throw 'Choose a new fixture path.' }
+[IO.File]::WriteAllText($wacDraftPath, ($wacFixture | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+& $wacTools.Python -B -X utf8 scripts/Test-Website.py --repo . --release $wacDraftPath
+if ($LASTEXITCODE -ne 0) { throw 'Rehearsal draft metadata check failed.' }
 ```
 
 Capture actual commands, exits, versions, counts and skips; an unrun or skipped
@@ -159,8 +173,8 @@ foreach ($wacShell in @(@{name='ps51'; path=$wacPs51}, @{name='ps7'; path=$wacTo
         $wacBuilds += $wacOutput
     }
 }
-$wacDraft = Get-Content -Raw -LiteralPath website/release.json | ConvertFrom-Json
-$wacName = 'WinAudioClean-' + $wacDraft.version + '-' + $wacRevision.Substring(0,12) + '-tool-only.zip'
+$wacMetadata = Get-Content -Raw -LiteralPath website/release.json | ConvertFrom-Json
+$wacName = 'WinAudioClean-' + $wacMetadata.version + '-' + $wacRevision.Substring(0,12) + '-tool-only.zip'
 $wacArchives = @($wacBuilds | ForEach-Object { Get-Item -LiteralPath (Join-Path $_ $wacName) })
 $wacFacts = @($wacArchives | ForEach-Object {
     [pscustomobject]@{bytes=$_.Length; sha256=(Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant()}
@@ -168,7 +182,7 @@ $wacFacts = @($wacArchives | ForEach-Object {
 if ($wacFacts.Count -ne 4 -or @($wacFacts.sha256 | Select-Object -Unique).Count -ne 1 -or
     @($wacFacts.bytes | Select-Object -Unique).Count -ne 1) { throw 'Candidates differ.' }
 foreach ($wacArchive in $wacArchives) {
-    & $wacTools.Python -B -X utf8 scripts/Test-Website.py --repo . --fixture-package $wacArchive.FullName
+    & $wacTools.Python -B -X utf8 scripts/Test-Website.py --repo . --release $wacDraftPath --fixture-package $wacArchive.FullName
     if ($LASTEXITCODE -ne 0) { throw 'Candidate/metadata identity check failed.' }
 }
 if ((git rev-parse HEAD) -cne $wacRevision -or (git status --porcelain=v1 --untracked-files=all)) {
@@ -182,12 +196,14 @@ checksums and provenance sidecar. It excludes developer modules/tools, website,
 recordings, preferences and raw logs. Four equal hashes establish equality only
 for the observed source and host versions, not universal reproducibility.
 
-The public `release.json` remains draft with null publication fields and disabled
-download. The controller derives a complete published-like fixture in memory
-from each actual candidate and checks the main script's authoritative version.
-Record its source/hash/version alongside the unchanged draft JSON/schema hashes;
-null draft source fields do not invent a release identity. Do not rewrite draft
-metadata as published merely to make a rehearsal pass. The optional
+The controller derives a complete published-like fixture in memory from each
+actual candidate and checks the main script's authoritative version. Record its
+source/hash/version alongside the unchanged committed metadata/schema hashes.
+A draft requires null publication fields; an actual published record must be
+checked with `--package <verified-release-ZIP>` as well. When rehearsing a newer
+source, use an independent draft fixture via `--release <fixture.json>` with
+`--fixture-package <new-candidate>`; retain the published record unchanged.
+Never label a rehearsal published merely to make it pass. The optional
 `--fixture-output` path belongs to M5-01 browser QA; use the in-memory API for this
 reconstruction.
 
