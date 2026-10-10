@@ -1,3 +1,16 @@
+# Website asset cleanup checkpoint — 10 October 2026
+
+This separately authorized cleanup starts from public main `75fed6188f5c5dde13029ebc9426fc210d44d52f` in a fresh
+isolated clone. The obsolete website-only paths and direct references are prepared
+on a focused branch; application/runtime/package code and existing tags/releases
+remain unchanged. Historical engineering acceptance is retained.
+
+See [the cleanup record](../../WEBSITE_ASSET_CLEANUP.md) for scope,
+classification and checks. GitHub PR/check/default-branch delivery must still be
+observed before treating current-main cleanup as complete.
+
+---
+
 # Current status - v1.0.0 GitHub release verified
 
 Date: 2026-10-07. **GitHub v1.0.0 is published and its three downloaded assets are verified.** Owner approval (2026-10-07): **Publish v1.0.0 here** in PikkuJanne/WinAudioClean. This superseded the earlier GitHub-release deferral only.

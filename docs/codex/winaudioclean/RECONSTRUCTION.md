@@ -8,8 +8,8 @@ synthetic fixtures and raw logs local and ignored. Export only reviewed source
 identities, hashes, versions, fixed case codes and test counts as evidence.
 
 Read [development prerequisites](../../../tests/README.md), [pinned setup and
-local parity](CI.md), [portable package verification](../../PORTABLE_PACKAGE.md)
-and the [static metadata contract](../../../website/README.md) first. These checks
+local parity](CI.md) and [portable package verification](../../PORTABLE_PACKAGE.md)
+first. These checks
 need Git, Windows PowerShell 5.1, development Python, Pester and PSScriptAnalyzer.
 Native test fixtures also use the installed Windows .NET Framework `csc.exe`.
 The explicit setup supplies pinned Python 3.14.6, PowerShell 7.6.5, Pester 5.7.1
@@ -121,32 +121,12 @@ if ($LASTEXITCODE -ne 0) { throw 'PS5.1 Release checks failed.' }
 if ($LASTEXITCODE -ne 0) { throw 'PS7 Release checks failed.' }
 & $wacTools.Python -B -X utf8 -m unittest discover -s docs/codex/winaudioclean/tests -p test_release_package.py -v
 if ($LASTEXITCODE -ne 0) { throw 'Package inspector regressions failed.' }
-& $wacTools.Python -B -X utf8 -m unittest discover -s docs/codex/winaudioclean/tests -p test_website.py -v
-if ($LASTEXITCODE -ne 0) { throw 'Website metadata regressions failed.' }
-# Rehearsal uses an independent draft fixture without altering public metadata.
-$wacMetadata = Get-Content -Raw -LiteralPath website/release.json | ConvertFrom-Json
-$wacFixture = $wacMetadata | ConvertTo-Json -Depth 8 | ConvertFrom-Json
-$wacFixture.status = 'draft'
-$wacFixture.date = $null
-$wacFixture.download.url = $null
-$wacFixture.download.fileName = $null
-$wacFixture.download.sha256 = $null
-$wacFixture.download.bytes = $null
-$wacFixture.source.commit = $null
-$wacFixture.source.tree = $null
-$wacDraftPath = Join-Path $wacCapture 'rehearsal-draft.json'
-if (Test-Path -LiteralPath $wacDraftPath) { throw 'Choose a new fixture path.' }
-[IO.File]::WriteAllText($wacDraftPath, ($wacFixture | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-& $wacTools.Python -B -X utf8 scripts/Test-Website.py --repo . --release $wacDraftPath
-if ($LASTEXITCODE -ne 0) { throw 'Rehearsal draft metadata check failed.' }
 ```
 
 Capture actual commands, exits, versions, counts and skips; an unrun or skipped
 case is not a pass. Stabilize failures before building. For the required
 cumulative gate, use the unchanged wrapper on both hosts after focused checks
-are stable, retain each sanitized parity JSON before the next invocation, and
-record website hashes separately because its existing source groups omit that
-directory:
+are stable and retain each sanitized parity JSON before the next invocation:
 
 ```powershell
 & $wacTools.Python -B -X utf8 scripts/Invoke-CIChecks.py --shell-path $wacPs51 --shell-family ps51 --level Full
@@ -173,18 +153,31 @@ foreach ($wacShell in @(@{name='ps51'; path=$wacPs51}, @{name='ps7'; path=$wacTo
         $wacBuilds += $wacOutput
     }
 }
-$wacMetadata = Get-Content -Raw -LiteralPath website/release.json | ConvertFrom-Json
-$wacName = 'WinAudioClean-' + $wacMetadata.version + '-' + $wacRevision.Substring(0,12) + '-tool-only.zip'
+$wacName = (Get-ChildItem -LiteralPath $wacBuilds[0] -File -Filter 'WinAudioClean-*-tool-only.zip' | Select-Object -ExpandProperty Name)
+if (@($wacName).Count -ne 1) { throw 'Expected exactly one archive.' }
 $wacArchives = @($wacBuilds | ForEach-Object { Get-Item -LiteralPath (Join-Path $_ $wacName) })
 $wacFacts = @($wacArchives | ForEach-Object {
     [pscustomobject]@{bytes=$_.Length; sha256=(Get-FileHash -Algorithm SHA256 -LiteralPath $_.FullName).Hash.ToLowerInvariant()}
 })
 if ($wacFacts.Count -ne 4 -or @($wacFacts.sha256 | Select-Object -Unique).Count -ne 1 -or
     @($wacFacts.bytes | Select-Object -Unique).Count -ne 1) { throw 'Candidates differ.' }
-foreach ($wacArchive in $wacArchives) {
-    & $wacTools.Python -B -X utf8 scripts/Test-Website.py --repo . --release $wacDraftPath --fixture-package $wacArchive.FullName
-    if ($LASTEXITCODE -ne 0) { throw 'Candidate/metadata identity check failed.' }
-}
+$wacInspect = @'
+import importlib.util, json, sys
+from pathlib import Path
+sys.dont_write_bytecode = True
+spec = importlib.util.spec_from_file_location("wac_package", Path.cwd() / "scripts/Test-ReleasePackage.py")
+check = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(check)
+expected, blobs = check.expected_source(sys.argv[1])
+for name in sys.argv[2:]:
+    _, facts = check.inspect_archive(Path(name), expected, blobs)
+    print(json.dumps(facts, sort_keys=True))
+'@
+$wacInspectPath = Join-Path $wacCapture 'inspect-candidates.py'
+if (Test-Path -LiteralPath $wacInspectPath) { throw 'Inspector helper already exists.' }
+[IO.File]::WriteAllText($wacInspectPath, $wacInspect, [Text.UTF8Encoding]::new($false))
+& $wacTools.Python -B -X utf8 $wacInspectPath $wacRevision @($wacArchives.FullName)
+if ($LASTEXITCODE -ne 0) { throw 'Candidate identity check failed.' }
 if ((git rev-parse HEAD) -cne $wacRevision -or (git status --porcelain=v1 --untracked-files=all)) {
     throw 'Source changed during reconstruction.'
 }
@@ -196,77 +189,17 @@ checksums and provenance sidecar. It excludes developer modules/tools, website,
 recordings, preferences and raw logs. Four equal hashes establish equality only
 for the observed source and host versions, not universal reproducibility.
 
-The controller derives a complete published-like fixture in memory from each
-actual candidate and checks the main script's authoritative version. Record its
-source/hash/version alongside the unchanged committed metadata/schema hashes.
-A draft requires null publication fields; an actual published record must be
-checked with `--package <verified-release-ZIP>` as well. When rehearsing a newer
-source, use an independent draft fixture via `--release <fixture.json>` with
-`--fixture-package <new-candidate>`; retain the published record unchanged.
-Never label a rehearsal published merely to make it pass. The optional
-`--fixture-output` path belongs to M5-01 browser QA; use the in-memory API for this
-reconstruction.
+Candidate verification uses the independent tool-only package inspector. The
+superseded standalone website, website metadata fixtures and dedicated validator
+were removed on 10 October 2026. Historical browser and metadata acceptance
+records remain dated evidence; they do not describe the new multi-tool website.
 
-## Reject a corrupt checksum and a wrong version
+## Reject invalid package layouts
 
-Run this against one already verified new candidate. It retains a new bad-copy
-fixture under the ignored capture directory, never modifies the original, and
-requires the two specific failure codes. A computed wrong checksum/version is
-negative test data, not a release claim.
-
-```powershell
-$wacNegatives = @'
-import copy, hashlib, importlib.util, json, shutil, sys, uuid
-from pathlib import Path
-sys.dont_write_bytecode = True
-repo = Path.cwd().resolve()
-archive = Path(sys.argv[1]).resolve()
-original_hash = hashlib.sha256(archive.read_bytes()).hexdigest()
-spec = importlib.util.spec_from_file_location("wac_rehearsal", repo / "scripts/Test-Website.py")
-check = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(check)
-schema = check.read_json((repo / "website/release.schema.json").read_bytes())
-draft = check.read_json((repo / "website/release.json").read_bytes())
-candidate = check.metadata_from_package(archive, repo, draft, schema)
-codes = []
-wrong_version = copy.deepcopy(candidate)
-wrong_version["version"] = "0.0" if candidate["version"] != "0.0" else "1.0"
-try:
-    check.validate_release(wrong_version, schema, candidate["version"])
-except check.WebsiteError as error:
-    if str(error) != "source_version_mismatch":
-        raise
-    codes.append(str(error))
-else:
-    raise RuntimeError("Wrong version was accepted")
-folder = repo / ".wac-local/reconstruction" / ("negative-" + uuid.uuid4().hex)
-folder.mkdir()
-for source in (archive, archive.with_suffix(".sha256"), archive.with_suffix(".provenance.json")):
-    shutil.copyfile(source, folder / source.name)
-bad_archive = folder / archive.name
-checksum = bad_archive.with_suffix(".sha256")
-data = checksum.read_bytes()
-checksum.write_bytes((b"0" if data[:1] != b"0" else b"1") + data[1:])
-try:
-    check.inspect_package(candidate, bad_archive, repo, schema)
-except check.WebsiteError as error:
-    if str(error) != "package_checksum_mismatch":
-        raise
-    codes.append(str(error))
-else:
-    raise RuntimeError("Wrong checksum was accepted")
-if hashlib.sha256(archive.read_bytes()).hexdigest() != original_hash:
-    raise RuntimeError("Original candidate changed")
-print(json.dumps({"passed": True, "source_commit": candidate["source"]["commit"],
-                  "version": candidate["version"], "zip_sha256": original_hash,
-                  "negative_codes": codes, "published": False}, sort_keys=True))
-'@
-$wacNegativePath = Join-Path $wacCapture 'check-negatives.py'
-if (Test-Path -LiteralPath $wacNegativePath) { throw 'Negative helper already exists.' }
-[IO.File]::WriteAllText($wacNegativePath, $wacNegatives, [Text.UTF8Encoding]::new($false))
-& $wacTools.Python -B -X utf8 $wacNegativePath $wacArchives[0].FullName
-if ($LASTEXITCODE -ne 0) { throw 'Negative integrity checks failed.' }
-```
+The focused `test_release_package.py` suite above exercises corrupt layout,
+hidden data and altered payload fixtures against the maintained inspector.
+Keep actual archives and matching checksum/provenance files together; follow
+[portable verification](../../PORTABLE_PACKAGE.md) before extracting or running.
 
 Review candidate inventory and tracked/staged changes before acceptance. Exact
 allowlisted Git-blob equality is the package-content check; separately review
