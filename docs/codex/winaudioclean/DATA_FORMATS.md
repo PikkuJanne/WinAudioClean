@@ -565,9 +565,13 @@ allowlist and omits progress snapshots, native PIDs, arbitrary stage labels and
 detailed native output; CANCELLED is an accepted terminal status. Review local
 detailed records and journals before sharing.
 
-## Website release metadata
+## Historical website metadata
 
-The implemented `website/release.schema.json` uses `schemaVersion`, `application`, `status` (`draft`/`published`), `version`, `date`, `download` (`url`, `fileName`, `sha256`, `bytes`), `source` (`commit`, `tree`) and `requirements`. Draft status requires null publication fields and disables download. Published fields must come from the actual approved GitHub release and measured artifact; validate them against the package manifest, checksum and provenance. The filename binds version and source revision. Unknown fields, mismatched version/hash/source and unsupported URLs fail validation. Publication metadata describes the GitHub package; it does not certify website hosting. The application never reads it or performs automatic updates.
+The superseded standalone website metadata/schema and dedicated validator were
+removed from the current tree on 10 October 2026. Prior metadata validation and
+publication facts remain in the dated engineering evidence. The application
+never consumed that presentation metadata. The immutable v1.0.0 release,
+manifest, checksum and provenance sidecars remain the download authorities.
 
 ## Acceptance and task records
 

@@ -1,4 +1,5 @@
 {
+  "website_cleanup_checkpoint": {"date":"2026-10-10","scope":"Owner-authorized obsolete website-only material cleanup; historical engineering tasks/acceptance retained.","status":"prepared_pending_github_checks","base_commit":"75fed6188f5c5dde13029ebc9426fc210d44d52f","evidence":"../../WEBSITE_ASSET_CLEANUP.md","release_history_changed":false},
   "schema_version": 1,
   "project": "WinAudioClean",
   "repository": "PikkuJanne/WinAudioClean",
