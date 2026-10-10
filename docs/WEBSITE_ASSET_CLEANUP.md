@@ -20,9 +20,9 @@ dated reports remain. The retired website command is explicitly historical;
 package reconstruction now uses the maintained independent tool-only inspector.
 
 The root `WinAudioClean.ico` and `WinAudioClean_icon.png` remain application/shared
-branding. `WinAudioClean_poster.png` is retained as ambiguous: no active consumer
-was found, but filename and age do not prove website-only obsolescence. Exact
-owner classification is needed for that one file.
+branding. The owner explicitly confirmed retaining `WinAudioClean_poster.png`
+during this cleanup on 10 October 2026. It remains in the tool repository and
+is not a source for the separate website. That disposition is resolved.
 
 Local checks: coverage/plan validators pass; package inspector 8/8 and version
 identity 5/5 pass. Full Python governance ran 147 tests successfully (one explicit skip). GitHub Windows workflow
