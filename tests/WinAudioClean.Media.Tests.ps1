@@ -142,7 +142,7 @@ Describe 'Hotfix: stale Windows environments discover only eligible named instal
         Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly ($Scope.ToLowerInvariant() + ' FFMPEG')
         Resolve-WacExecutable -Name ffprobe.exe -SiblingDirectory ([IO.Path]::GetDirectoryName($selected)) |
             Should -BeExactly $expectedProbe
-        Get-WacExecutableSource -Name ffprobe.exe | Should -BeExactly 'portable sibling'
+        Get-WacExecutableSource -Name ffprobe.exe | Should -BeExactly 'selected FFmpeg sibling'
     }
 
     It 'preserves process PATH ahead of every newly supported fallback' {

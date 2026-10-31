@@ -6,7 +6,10 @@ process, publish the next free patch (v1.0.1 is available), download the public
 ZIP and repeat checksum/identity/conversion checks. No further owner approval or
 manual retest is required. Work is in a separate fresh clone; the supplied source
 snapshot is preserved. Do not change audio, schemas or repository protections.
-See [hotfix evidence](evidence/WAC-HOTFIX-1.0.1.md) for observed checkpoints.
+Implementation is frozen; targeted and initial package acceptance passed. Final
+Full/CI/release facts belong to [PR 11](https://github.com/PikkuJanne/WinAudioClean/pull/11)
+and the v1.0.1 release. Inspect those live records before continuing publication;
+never overwrite a published tag or archive. See [hotfix evidence](evidence/WAC-HOTFIX-1.0.1.md).
 
 ---
 

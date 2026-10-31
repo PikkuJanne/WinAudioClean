@@ -1,5 +1,5 @@
 {
-  "hotfix_1_0_1_checkpoint": {"date":"2026-10-31","status":"validation_in_progress","contract":"Both hotfixes plus actual extracted Windows BAT/shortcut conversions, exact dependency identity, unchanged audio recipes, Full gates and public-download verification.","evidence":"evidence/WAC-HOTFIX-1.0.1.md","historical_cases_unchanged":true},
+  "hotfix_1_0_1_checkpoint": {"date":"2026-10-31","status":"targeted_and_candidate_package_passed_final_gates_required","contract":"Both hotfixes plus actual extracted Windows BAT/shortcut conversions, exact dependency identity, unchanged audio recipes, Full gates and public-download verification.","evidence":"evidence/WAC-HOTFIX-1.0.1.md","delivery_record":"https://github.com/PikkuJanne/WinAudioClean/pull/11","historical_cases_unchanged":true},
   "schema_version": 1,
   "cases": [
     {

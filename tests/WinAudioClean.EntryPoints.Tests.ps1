@@ -276,12 +276,35 @@ Describe 'AC-017: actual native execution reports success, failure and reporting
         [IO.File]::WriteAllBytes($inputFile, [byte[]]@(1, 2, 3))
         $outputDirectory = Join-Path $scratch 'output'
         if ($BrokenExecutable) { [IO.File]::WriteAllText((Join-Path $scratch 'ffmpeg.exe'), 'invalid executable') }
+        else {
+            # Empty process PATH no longer establishes complete absence: the
+            # owner's/runner's persisted environment may name a real install.
+            # In this scratch copy only, simulate all scoped environment reads
+            # as absent. Keep the real resolver, entry flow and failure renderer;
+            # never change the account, machine environment or product source.
+            $appText = [IO.File]::ReadAllText($app)
+            $parseTokens = $null; $parseErrors = $null
+            $appAst = [Management.Automation.Language.Parser]::ParseInput($appText, [ref]$parseTokens, [ref]$parseErrors)
+            $parseErrors.Count | Should -Be 0
+            $environmentHelpers = @($appAst.FindAll({
+                param($node)
+                $node -is [Management.Automation.Language.FunctionDefinitionAst] -and $node.Name -eq 'Get-WacEnvironmentValue'
+            }, $true))
+            $environmentHelpers.Count | Should -Be 1
+            $extent = $environmentHelpers[0].Extent
+            $adapter = 'function Get-WacEnvironmentValue { param([string]$Name, [string]$Scope) return $null }'
+            $controlledApp = $appText.Remove($extent.StartOffset, $extent.EndOffset - $extent.StartOffset).Insert($extent.StartOffset, $adapter)
+            $controlledApp.Replace($adapter, $extent.Text) | Should -BeExactly $appText
+            [IO.File]::WriteAllText($app, $controlledApp, [Text.UTF8Encoding]::new($true))
+        }
         Copy-Item -LiteralPath $nativeFixture -Destination (Join-Path $scratch 'ffprobe.exe')
         $arguments = '-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File {0} -inputPath {1} -OutputDirectory {2} -Mode Zoom -NonInteractive' -f
             (ConvertTo-WacTestQuotedArgument $app), (ConvertTo-WacTestQuotedArgument $inputFile), (ConvertTo-WacTestQuotedArgument $outputDirectory)
         $result = Invoke-WacTestProcess -FilePath $ShellPath -Arguments $arguments -WorkingDirectory $scratch -EnvironmentVariables @{ PATH = '' }
         $result.ExitCode | Should -Be 3
         $result.StandardError | Should -Not -BeNullOrEmpty
+        $result.StandardError | Should -Match 'Next step:'
+        ($result.StandardOutput + $result.StandardError) | Should -Not -Match 'CategoryInfo|FullyQualifiedErrorId|\x1b'
         $result.StandardOutput | Should -Not -Match 'DONE: SUCCESS|Enter selection'
         # Inspection now rejects the dependency before the rendering/reporting
         # stage, so no render report should suggest that cleaning was attempted.

@@ -82,7 +82,13 @@ public static class WacSignalConsole {
     $parameters = @{ inputPath = $case.input; OutputDirectory = $case.output; IgnoreSavedSettings = $true }
     if ($case.status -eq 'DEPENDENCY') {
         $parameters.Mode = 'Zoom'; $parameters.FfmpegPath = [IO.Path]::Combine($case.root, 'missing.exe')
-    } else { [WacSignalConsole]::StartInput() }
+    } else {
+        if ($case.status -eq 'PAN_DEPENDENCY') {
+            $parameters.Mono = $true
+            $env:WAC_TEST_PROBE_STDOUT = '{"streams":[{"index":0,"codec_type":"audio","codec_name":"pcm_s16le","channels":2,"channel_layout":"stereo","sample_rate":"48000","duration":"3.000000"}]}'
+        }
+        [WacSignalConsole]::StartInput()
+    }
     & ([IO.Path]::Combine($case.root, 'WinAudioClean.ps1')) @parameters
     $result.exitCode = $LASTEXITCODE
     [WacSignalConsole]::StopInput()

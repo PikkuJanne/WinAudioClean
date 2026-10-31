@@ -834,7 +834,7 @@ function Resolve-WacExecutable {
         if ([string]::IsNullOrWhiteSpace($ExplicitPath)) { throw "An explicit $Name path cannot be empty." }
         $candidate = Resolve-WacFileSystemPath -Path $ExplicitPath
     } else {
-        $source = 'portable sibling'
+        $source = if ($Name -eq 'ffprobe.exe') { 'selected FFmpeg sibling' } else { 'portable sibling' }
         $candidate = Join-Path $SiblingDirectory $Name
         if (-not (Test-Path -LiteralPath $candidate -ErrorAction Stop)) {
             $command = Get-Command -Name $Name -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -2532,7 +2532,7 @@ catch {
     Write-WacDependencyFailure -Reason $_.Exception.Message -Interactive:$script:WacConsoleDesignEnabled
     exit 3
 }
-if ($script:WacConsoleDesignEnabled) { Write-WacConsoleText -Text 'ENGINE  READY  ffmpeg + ffprobe; selected filters validated' -Tone Success }
+if ($script:WacConsoleDesignEnabled -and $Preview) { Write-WacConsoleText -Text 'ENGINE  READY  ffmpeg + ffprobe; selected filters validated' -Tone Success }
 if ($Preview) {
     $previewArguments = @{
         InputPath = $inputPath; OutputFolder = $outFolder
@@ -2620,6 +2620,7 @@ try {
     exit 5
 }
 $containerName = if ($outputPolicy.Rf64) { 'RF64' } else { 'RIFF' }
+if ($script:WacConsoleDesignEnabled) { Write-WacConsoleText -Text 'ENGINE  READY  ffmpeg + ffprobe; selected filters validated' -Tone Success }
 Write-Host "Export: 48000 Hz, $($outputPolicy.Bits)-bit PCM, $($outputPolicy.Layout), $containerName WAV"
 Write-Host "Destination space: $availableBytes bytes available; $($spaceEstimate.RequiredBytes) bytes required including headroom."
 

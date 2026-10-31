@@ -7,6 +7,32 @@ than the synthetic merge commit). A push checks its own commit. Hosted Windows
 labels receive servicing updates; each artifact records actual Windows, image
 and shell versions. This is supplementary evidence for the supported hosts.
 
+Each job also builds the tool-only ZIP from its exact clean source and runs
+`Test-HotfixPackage.py` on extracted bytes. The explicit development-only
+`Install-HotfixTestEngine.ps1` fetches the versioned Gyan 9.0.2 essentials
+archive pinned in `CIDependencies.json` and verifies SHA256. The harness stages
+only the trusted pair in a separate directory with spaces, brackets and Unicode.
+Every positive conversion must record those exact absolute executables and
+retain their hashes; the process PATH contains only Windows system directories
+except for the separate process-PATH regression case.
+
+The package gate runs actual BAT Raw/Zoom conversions and direct PowerShell
+routes on both shells, plus temporary `.lnk` shell activation with an unrelated
+Start in directory, positional generated input, isolated saved preferences and
+automated final pause. Independent probing verifies 48 kHz stereo PCM16 and
+duration; source hashes remain unchanged. Decoded PCM is compared with public
+v1.0.0 using the same engine. This is synthetic audio mechanics evidence.
+
+On the disposable hosted runner only, separate real user-scope `FFMPEG`, quoted
+Unicode `Path`, and persisted-only `%FFMPEG%` expansion cases exercise stale
+launcher environments. Original values are restored in `finally` and reread for
+exact equality. The owner account is never used for those writes. Machine
+scope and complete absence use explicitly labeled controlled sources, while
+missing explicit tools, inoperable binaries and missing filters execute the
+unchanged packaged runtime. Failure checks require exit 3 and no completed WAV.
+No private console captures, paths, environment values, recordings or detailed
+reports are uploaded; the package gate prints only its fixed summary projection.
+
 ## Explicit development setup
 
 The audio application still has no Python/test-module dependency or downloader.
@@ -82,6 +108,7 @@ reader in that case. Existing native calls are sequential; this does not change
 the output encoding or the machine's console code page. Owned fresh-process
 tests compare exact raw byte lengths/hashes, including an intended leading BOM.
 
-Full uses synthetic native fixtures and the governance suite. The standalone
+Full uses synthetic native fixtures and the governance suite. The additional
+package gate covers the real-tool launch routes above. Other standalone
 real-FFmpeg matrices, formal speech listening, actual desktop gestures, broad
 storage/host-crash tests and privilege skips retain their documented scopes.

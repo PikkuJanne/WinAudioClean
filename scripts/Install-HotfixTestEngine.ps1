@@ -9,6 +9,7 @@ extracting; does not change PATH, user/machine settings, or installed software.
 [CmdletBinding()]
 param()
 $ErrorActionPreference = 'Stop'
+$ProgressPreference = 'SilentlyContinue'
 $repoRoot = Split-Path -Parent $PSScriptRoot
 $lock = Get-Content -Raw -LiteralPath (Join-Path $PSScriptRoot 'CIDependencies.json') | ConvertFrom-Json
 $tool = $lock.ffmpeg
@@ -20,7 +21,13 @@ $archive = Join-Path $stage 'engine.zip'
 $previousProtocol = [Net.ServicePointManager]::SecurityProtocol
 try {
     [Net.ServicePointManager]::SecurityProtocol = $previousProtocol -bor [Net.SecurityProtocolType]::Tls12
-    Invoke-WebRequest -UseBasicParsing -Uri $tool.uri -OutFile $archive -ErrorAction Stop
+    $curl = Join-Path $env:SystemRoot 'System32/curl.exe'
+    if ([IO.File]::Exists($curl)) {
+        & $curl --fail --location --silent --show-error --connect-timeout 20 --max-time 180 --retry 2 --output $archive $tool.uri
+        if ($LASTEXITCODE -ne 0) { throw 'Trusted hotfix engine download failed.' }
+    } else {
+        Invoke-WebRequest -UseBasicParsing -Uri $tool.uri -OutFile $archive -TimeoutSec 180 -ErrorAction Stop
+    }
     $actual = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
     if ($actual -cne $tool.sha256) { throw 'Trusted hotfix engine checksum mismatch; nothing was extracted or executed.' }
     Expand-Archive -LiteralPath $archive -DestinationPath (Join-Path $stage 'engine') -ErrorAction Stop

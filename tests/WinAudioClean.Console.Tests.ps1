@@ -129,7 +129,8 @@ Describe 'Signal console snapshots through a private Windows console' -Tag 'Cons
     It 'captures actual <Status> rendering at native buffer width <Width>' -ForEach @(
         @{ Width = 80; Status = 'SUCCESS' }, @{ Width = 32; Status = 'SUCCESS' },
         @{ Width = 80; Status = 'WARNING' }, @{ Width = 32; Status = 'WARNING' },
-        @{ Width = 80; Status = 'DEPENDENCY' }, @{ Width = 32; Status = 'DEPENDENCY' }
+        @{ Width = 80; Status = 'DEPENDENCY' }, @{ Width = 32; Status = 'DEPENDENCY' },
+        @{ Width = 80; Status = 'PAN_DEPENDENCY' }, @{ Width = 32; Status = 'PAN_DEPENDENCY' }
     ) {
         $scratch = Join-Path $TestDrive ([guid]::NewGuid().ToString('N'))
         $null = [IO.Directory]::CreateDirectory($scratch)
@@ -140,14 +141,16 @@ Describe 'Signal console snapshots through a private Windows console' -Tag 'Cons
             Copy-Item -LiteralPath $consoleNative -Destination (Join-Path $scratch $tool)
         }
         $inputFile = Join-Path $scratch 'generated.wav'
+        $channels = if ($Status -eq 'PAN_DEPENDENCY') { 2 } else { 1 }
+        $dataBytes = 288000 * $channels
         $writer = [IO.BinaryWriter]::new([IO.File]::Create($inputFile))
         try {
-            $writer.Write([Text.Encoding]::ASCII.GetBytes('RIFF')); $writer.Write([int](36 + 288000))
+            $writer.Write([Text.Encoding]::ASCII.GetBytes('RIFF')); $writer.Write([int](36 + $dataBytes))
             $writer.Write([Text.Encoding]::ASCII.GetBytes('WAVEfmt ')); $writer.Write([int]16)
-            $writer.Write([int16]1); $writer.Write([int16]1); $writer.Write([int]48000); $writer.Write([int]96000)
-            $writer.Write([int16]2); $writer.Write([int16]16)
-            $writer.Write([Text.Encoding]::ASCII.GetBytes('data')); $writer.Write([int]288000)
-            $writer.Write((New-Object byte[] 288000))
+            $writer.Write([int16]1); $writer.Write([int16]$channels); $writer.Write([int]48000); $writer.Write([int](96000 * $channels))
+            $writer.Write([int16](2 * $channels)); $writer.Write([int16]16)
+            $writer.Write([Text.Encoding]::ASCII.GetBytes('data')); $writer.Write([int]$dataBytes)
+            $writer.Write((New-Object byte[] $dataBytes))
         } finally { $writer.Dispose() }
         $sourceHash = (Get-FileHash -LiteralPath $inputFile -Algorithm SHA256).Hash
         $casePath = Join-Path $scratch 'case.json'
@@ -172,12 +175,13 @@ Describe 'Signal console snapshots through a private Windows console' -Tag 'Cons
         (Get-FileHash -LiteralPath $inputFile -Algorithm SHA256).Hash | Should -BeExactly $sourceHash
         $snapshot = $result.completed -replace '\s', ' '
         $snapshot | Should -Not -Match 'CategoryInfo|FullyQualifiedErrorId|\x1b'
-        if ($Status -eq 'DEPENDENCY') {
+        if ($Status -in @('DEPENDENCY', 'PAN_DEPENDENCY')) {
             $result.exitCode | Should -Be 3
-            $result.inputInjected | Should -BeFalse
+            $result.inputInjected | Should -Be ($Status -eq 'PAN_DEPENDENCY')
             $snapshot | Should -Match 'Dependency failed:'
             $snapshot | Should -Match 'Next step:'
             $snapshot | Should -Not -Match 'DONE: SUCCESS|\bREADY\b'
+            if ($Status -eq 'PAN_DEPENDENCY') { $snapshot | Should -Match 'pan' }
             @(Get-ChildItem -LiteralPath $caseData.output -Filter '*.wav').Count | Should -Be 0
         } else {
             $expectedExit = if ($Status -eq 'SUCCESS') { 0 } else { 7 }

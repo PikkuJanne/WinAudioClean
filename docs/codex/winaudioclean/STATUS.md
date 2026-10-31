@@ -1,11 +1,14 @@
 # v1.0.1 hotfix — 31 October 2026
 
-Both owner-requested hotfixes are being implemented and tested from main
+Both owner-requested hotfixes are implemented from main
 `3b7a6033949f450612e7d20acef79f4023e76644` in an isolated clone. The owner explicitly
 authorized the tested ordinary merge, patch tag and public stable release, then
 checksum/identity/conversion verification from the public ZIP. This supersedes
 older release deferrals for this patch. Historical audio/schema acceptance stays
-intact. See [hotfix evidence](evidence/WAC-HOTFIX-1.0.1.md).
+intact. Targeted both-host tests, 20 PCM regressions and the first extracted ZIP
+smoke passed. This source checkpoint freezes final Full/CI/package gates; final
+delivery facts are recorded in [PR 11](https://github.com/PikkuJanne/WinAudioClean/pull/11)
+and the stable release after observation. See [hotfix evidence](evidence/WAC-HOTFIX-1.0.1.md).
 
 ---
 

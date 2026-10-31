@@ -23,6 +23,9 @@ sys.dont_write_bytecode = True
 SPEC = importlib.util.spec_from_file_location("package_checks", Path(__file__).with_name("Test-ReleasePackage.py"))
 checks = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(checks)
+FAILURE_SPEC = importlib.util.spec_from_file_location("hotfix_failures", Path(__file__).with_name("Test-HotfixFailures.py"))
+failures = importlib.util.module_from_spec(FAILURE_SPEC)
+FAILURE_SPEC.loader.exec_module(failures)
 require = checks.require
 
 
@@ -49,7 +52,7 @@ def run(command, cwd, env, log, timeout=150):
 
 def clean_environment(system, shell):
     env = {key: value for key, value in os.environ.items()
-           if not key.upper().startswith(("WAC_LAUNCH_", "GITHUB_TOKEN", "GH_TOKEN"))
+           if not key.upper().startswith(("WAC_LAUNCH_", "WAC_TEST_", "GITHUB_TOKEN", "GH_TOKEN"))
            and key.upper() not in {"FFMPEG", "FFPROBE", "PATH", "PSMODULEPATH"}}
     env["PATH"] = ";".join(str(path) for path in
                             (system, system / "System32", system / "System32/WindowsPowerShell/v1.0"))
@@ -109,6 +112,11 @@ Add-Type -TypeDefinition @'
 using System;
 using System.Runtime.InteropServices;
 public static class WacShortcutConsole {
+    [StructLayout(LayoutKind.Sequential)] public struct Coord { public short X; public short Y; }
+    [StructLayout(LayoutKind.Sequential)] public struct Rect { public short Left; public short Top; public short Right; public short Bottom; }
+    [StructLayout(LayoutKind.Sequential)] public struct Info {
+        public Coord Size; public Coord Cursor; public ushort Attributes; public Rect Window; public Coord Maximum;
+    }
     [StructLayout(LayoutKind.Sequential)] public struct KeyEvent {
         public int KeyDown; public ushort Repeat; public ushort VirtualKey;
         public ushort ScanCode; public char Character; public uint Controls;
@@ -122,6 +130,9 @@ public static class WacShortcutConsole {
     [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)]
     public static extern IntPtr CreateFileW(string path, uint access, uint share, IntPtr security, uint creation, uint flags, IntPtr template);
     [DllImport("kernel32.dll")] public static extern bool CloseHandle(IntPtr handle);
+    [DllImport("kernel32.dll")] public static extern bool GetConsoleScreenBufferInfo(IntPtr handle,out Info info);
+    [DllImport("kernel32.dll",CharSet=CharSet.Unicode)]
+    public static extern bool ReadConsoleOutputCharacterW(IntPtr handle,System.Text.StringBuilder text,uint count,Coord at,out uint read);
     [DllImport("kernel32.dll", CharSet=CharSet.Unicode)]
     public static extern bool WriteConsoleInputW(IntPtr handle, InputRecord[] input, uint count, out uint written);
     public static bool Enter(uint pid) {
@@ -140,18 +151,42 @@ public static class WacShortcutConsole {
             finally { CloseHandle(handle); }
         } finally { FreeConsole(); }
     }
+    public static string Snapshot(uint pid) {
+        if (!AttachConsole(pid)) return null;
+        try {
+            IntPtr handle=CreateFileW("CONOUT$",0x80000000,3,IntPtr.Zero,3,0,IntPtr.Zero);
+            if (handle==new IntPtr(-1)) return null;
+            try {
+                Info info; if (!GetConsoleScreenBufferInfo(handle,out info)) return null;
+                uint count=(uint)Math.Min(info.Size.X*(info.Cursor.Y+1),200000);
+                var text=new System.Text.StringBuilder((int)count+1); uint read;
+                if (!ReadConsoleOutputCharacterW(handle,text,count,new Coord(),out read)) return null;
+                string raw=text.ToString(); var lines=new System.Text.StringBuilder();
+                for (int offset=0;offset<raw.Length;offset+=info.Size.X)
+                    lines.AppendLine(raw.Substring(offset,Math.Min(info.Size.X,raw.Length-offset)).TrimEnd());
+                return lines.ToString().TrimEnd();
+            } finally { CloseHandle(handle); }
+        } finally { FreeConsole(); }
+    }
 }
 '@
 [void][WacShortcutConsole]::FreeConsole()
 $child = Start-Process -FilePath $env:WAC_TEST_LINK -WorkingDirectory $env:WAC_TEST_CWD -WindowStyle Hidden -PassThru
 $deadline = [DateTime]::UtcNow.AddSeconds(120)
 $pauseHandled = $false
+$lastScreen = $null
 try {
-    while (-not $child.WaitForExit(500)) {
+    while (-not $child.WaitForExit(250)) {
         if ([DateTime]::UtcNow -gt $deadline) { throw 'Shortcut exceeded bounded wait.' }
+        $screen = [WacShortcutConsole]::Snapshot([uint32]$child.Id)
+        if ($screen -and $screen -cne $lastScreen) {
+            [IO.File]::AppendAllText($env:WAC_TEST_SCREEN, ($screen + "`r`n--- capture ---`r`n"), [Text.UTF8Encoding]::new($false))
+            $lastScreen = $screen
+        }
         # Saved mode preferences avoid a mode prompt; only the existing final
         # pause needs input. Never inject a mode before application validation.
-        if (@(Get-ChildItem -LiteralPath $env:WAC_LAUNCH_OUTPUT_DIRECTORY -Filter 'WinAudioClean_*.json' -ErrorAction SilentlyContinue).Count -gt 0) {
+        if (@(Get-ChildItem -LiteralPath $env:WAC_LAUNCH_OUTPUT_DIRECTORY -Filter 'WinAudioClean_*.json' -ErrorAction SilentlyContinue).Count -gt 0 -or
+            $screen -match 'FAILED|Next step:') {
             $pauseHandled = [WacShortcutConsole]::Enter([uint32]$child.Id) -or $pauseHandled
         }
     }
@@ -186,7 +221,8 @@ def main():
     parser.add_argument("--persisted-user", action="store_true")
     parser.add_argument("--baseline-ref", default="v1.0.0")
     args = parser.parse_args()
-    summary = {"schema_version": 1, "task": "WAC-HOTFIX-101", "passed": False, "cases": [], "error_code": None}
+    summary = {"schema_version": 1, "task": "WAC-HOTFIX-101", "passed": False,
+               "cases": [], "failure_cases": [], "error_code": None}
     created = False
     try:
         require(os.name == "nt", "windows_required")
@@ -240,22 +276,33 @@ def main():
                            "-OutputDirectory", str(destination), "-IgnoreSavedSettings", "-NonInteractive"]
             elif shortcut:
                 settings = args.output / (label + "-settings.json")
-                settings.write_text(json.dumps({"schemaVersion": 1, "settings": {"mode": mode}}), encoding="utf-8")
+                settings.write_text(json.dumps({"schemaVersion": 1,
+                                                "settings": {"mode": mode, "outputDirectory": str(destination)}}),
+                                    encoding="utf-8")
                 env.pop("WAC_LAUNCH_IGNORE_SAVED_SETTINGS")
                 env.pop("WAC_LAUNCH_INPUT")
                 env.update(WAC_LAUNCH_SETTINGS_PATH=str(settings), WAC_TEST_LINK=str(args.output / (label + ".lnk")),
                            WAC_TEST_BAT=str(package / "WinAudioClean.bat"), WAC_TEST_INPUT=str(tone),
-                           WAC_TEST_CWD=str(unrelated), WAC_TEST_LINK_RESULT=str(args.output / (label + "-link.json")))
+                           WAC_TEST_CWD=str(unrelated), WAC_TEST_LINK_RESULT=str(args.output / (label + "-link.json")),
+                           WAC_TEST_SCREEN=str(args.output / (label + "-screen.txt")))
                 command = [str(ps51), "-NoLogo", "-NoProfile", "-ExecutionPolicy", "Bypass", "-EncodedCommand", encoded(LINK_DRIVER)]
             else:
                 # /s /c receives a fixed BAT filename and fixed mode; user file
                 # paths are inherited data, never interpolated shell commands.
-                command = [str(cmd), "/d", "/s", "/c", '""' + str(package / "WinAudioClean.bat") + '" /unattended ' + mode + '"']
+                bat = str(package / "WinAudioClean.bat")
+                require(not re.search(r'["&|<>^%!()\r\n]', bat), "unsafe_controller_shell_path")
+                # CRT list2cmdline escaping inserts backslashes that CMD does
+                # not interpret as escapes. Use CMD's native quote framing.
+                command = '"' + str(cmd) + '" /d /s /c ""' + bat + '" /unattended ' + mode + '"'
             status, stdout, stderr = run(command, unrelated, env, args.output / label)
             require(status == 0, "route_failed_" + label)
             if not shortcut:
                 require(b"\x1b" not in stdout + stderr and b"Press any key" not in stdout + stderr
                         and b"SIGNAL CONTROL" not in stdout + stderr, "unattended_ui_leak")
+            else:
+                activation = checks.read_json(Path(env["WAC_TEST_LINK_RESULT"]).read_bytes())
+                require(activation == {"shell_link_activated": True, "bounded_completion": True},
+                        "shortcut_activation_not_observed")
             output, result = inspect_result(destination, tools, tone, expected["version"], mode)
             result.update(label=label, mode=mode, shell="ps51" if shell == ps51 else "ps7")
             summary["cases"].append(result)
@@ -294,10 +341,15 @@ def main():
             require(reference == pcm[("bat-ps51-" + mode.lower(), mode)]
                     == pcm[("bat-ps7-" + mode.lower(), mode)], "decoded_audio_regression")
         summary["decoded_pcm_matches_previous_public_source"] = True
+        failure_options = dict(package=package, root=args.output, unrelated=unrelated,
+                               tone=tone, tools=tools, ps51=ps51, ps7=args.ps7)
+        summary["failure_cases"] = failures.run_failures(checks, run, clean_environment, **failure_options)
+        summary["failure_cases"].extend(failures.run_absence_failures(checks, run, clean_environment,
+                                                                    **failure_options))
 
         if args.persisted_user:
             env = clean_environment(system, ps51)
-            code = "@{FFMPEG=[Environment]::GetEnvironmentVariable('FFMPEG','User');Path=[Environment]::GetEnvironmentVariable('Path','User')} | ConvertTo-Json -Compress"
+            code = "[Console]::OutputEncoding=[Text.UTF8Encoding]::new($false); @{FFMPEG=[Environment]::GetEnvironmentVariable('FFMPEG','User');Path=[Environment]::GetEnvironmentVariable('Path','User')} | ConvertTo-Json -Compress"
             status, stdout, _ = run([str(ps51), "-NoProfile", "-EncodedCommand", encoded(code)], unrelated, env,
                                    args.output / "read-user-environment", timeout=30)
             require(status == 0, "persisted_fixture_read_failed")
@@ -313,6 +365,10 @@ def main():
                 convert("persisted-user-reference", "Zoom", ps51, hint=False)
             finally:
                 set_user_environment(ps51, original, env, args.output, "restore-user-environment")
+                restored_status, restored_stdout, _ = run([str(ps51), "-NoProfile", "-EncodedCommand", encoded(code)],
+                                                         unrelated, env, args.output / "verify-restored-environment", timeout=30)
+                require(restored_status == 0 and json.loads(restored_stdout.decode("utf-8-sig")) == original,
+                        "persisted_environment_restore_mismatch")
             summary["persisted_user_environment_restored"] = True
         require(checks.package_unchanged(package, contents), "package_changed")
         require(checks.file_digest(tone) == before, "source_changed")
