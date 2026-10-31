@@ -772,3 +772,25 @@ Keep unknown-duration unit states separate from a real live-WebM helper/null-
 sink progress check and the application's rejection of unknown media timing
 with code 4 before a full render. These scopes do not broaden supported input
 timing. Distinguish objective output checks from unperformed listening review.
+
+## Portable hotfix regression
+
+`scripts/Test-HotfixPackage.py` accepts a clean-source tool-only ZIP with its
+checksum/provenance siblings, the expected commit, explicit trusted FFmpeg and
+FFprobe paths, a PowerShell 7 path, and a new ignored output folder. It validates
+the entire manifest against committed bytes before extraction. Example after
+building the candidate with `Build-Release.ps1`:
+
+```powershell
+python -B -X utf8 scripts/Test-HotfixPackage.py --zip <absolute-zip-path> --expected-commit <40-character-source-commit> --ffmpeg <absolute-ffmpeg.exe> --ffprobe <absolute-ffprobe.exe> --ps7 <absolute-pwsh.exe> --output <new-absolute-ignored-output-folder>
+```
+
+The controller exercises real BAT/direct/Windows-shell-link routes, exact
+selected engine identity, independent WAV probing and same-engine decoded PCM
+comparison with public v1.0.0. It requires that tag's source locally. The
+`--persisted-user` option is allowed only on a disposable GitHub-hosted runner;
+it never writes environment values in an owner's account. Expected dependency
+failure cases run on both hosts. Complete absence uses controlled environment
+sources in the unchanged extracted shared resolver and is labeled separately
+from actual launcher execution. Raw logs, native console snapshots, generated
+WAVs and detailed reports remain local below the supplied ignored folder.

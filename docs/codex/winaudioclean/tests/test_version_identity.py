@@ -45,15 +45,16 @@ def report(version, mode="Raw", gentle=False):
 
 
 class VersionIdentityTests(unittest.TestCase):
-    def test_current_application_and_original_versions_are_independent_even_when_equal(self):
-        self.assertEqual(original.source_application_version(REPO / "WinAudioClean.ps1"), "1.0.0")
+    def test_current_application_and_original_versions_are_independent(self):
+        self.assertEqual(original.source_application_version(REPO / "WinAudioClean.ps1"), "1.0.1")
         self.assertEqual((original.PRESET_ID, original.PRESET_VERSION), ("original", "1.0.0"))
         self.assertTrue(reproduction.profile_from_report(report("1.0.0")))
+        self.assertTrue(reproduction.profile_from_report(report("1.0.1")))
 
     def test_version_reader_preserves_legacy_literals_and_rejects_computed_or_duplicate_versions(self):
         with tempfile.TemporaryDirectory() as temporary:
             source = Path(temporary) / "WinAudioClean.ps1"
-            for version in ("2.3", "1.0.0"):
+            for version in ("2.3", "1.0.0", "1.0.1"):
                 with self.subTest(version=version):
                     source.write_text('$scriptVersion = "' + version + '"\n', encoding="utf-8")
                     self.assertEqual(original.source_application_version(source), version)
@@ -71,6 +72,7 @@ class VersionIdentityTests(unittest.TestCase):
                 legacy = reproduction.profile_from_report(report("2.3", mode, gentle))
                 public = reproduction.profile_from_report(report("1.0.0", mode, gentle))
                 self.assertEqual(public, legacy)
+                self.assertEqual(reproduction.profile_from_report(report("1.0.1", mode, gentle)), legacy)
                 if not gentle:
                     expected = baseline["filters"]["level"]
                     if mode == "Raw":
@@ -78,7 +80,7 @@ class VersionIdentityTests(unittest.TestCase):
                     self.assertEqual(public, expected)
 
     def test_unknown_application_recipes_still_fail_closed(self):
-        for version in ("1.0", "1.0.1", "2.4", None, 1):
+        for version in ("1.0", "1.0.2", "2.4", None, 1):
             with self.subTest(version=version):
                 with self.assertRaisesRegex(ValueError, "^Unsupported report/application version$"):
                     reproduction.profile_from_report(report(version))

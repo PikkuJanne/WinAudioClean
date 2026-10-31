@@ -15,6 +15,13 @@
     "executable": "pwsh.exe",
     "source": "https://github.com/PowerShell/PowerShell/releases/tag/v7.6.5"
   },
+  "ffmpeg": {
+    "version": "9.0.2",
+    "uri": "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip",
+    "sha256": "60f467265b1e312373dbcd92200c2618a74850f98d3d078e94296bb3fa2047ba",
+    "source": "https://ffmpeg.org/download.html",
+    "checksum_source": "https://www.gyan.dev/ffmpeg/builds/packages/ffmpeg-9.0.2-essentials_build.zip.sha256"
+  },
   "actions": {
     "actions/checkout": {
       "version": "v5.0.0",

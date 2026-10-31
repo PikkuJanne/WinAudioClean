@@ -24,3 +24,10 @@ for the complete characterization, and the
 [pending listening checklist](../../docs/codex/winaudioclean/evidence/WAC-M0-03-listening.md)
 for owner-supplied speech. The PowerShell scripts beside this file are controlled
 test doubles and process helpers; they are not audio samples.
+
+`Invoke-SignalConsoleCase.ps1` runs unchanged application bytes in a hidden,
+private Windows console. Its observer reads the actual screen buffer, injects
+the existing mode key only after seeing its prompt, and captures menu, stage
+and terminal-outcome text at 80/32 columns. It uses the native synthetic-media
+fixture for controlled success/report-warning cases; package acceptance tests
+separately exercise real FFmpeg. It neither captures nor controls another console.

@@ -1,4 +1,5 @@
 {
+  "hotfix_1_0_1_checkpoint": {"date":"2026-10-31","scope":"Owner-requested FFmpeg discovery and interactive terminal hotfix; merge/tag/stable release plus public-download verification explicitly authorized.","status":"source_frozen_for_release_gates","base_commit":"3b7a6033949f450612e7d20acef79f4023e76644","evidence":"evidence/WAC-HOTFIX-1.0.1.md","delivery_record":"https://github.com/PikkuJanne/WinAudioClean/pull/11","historical_tasks_unchanged":true},
   "website_cleanup_checkpoint": {"date":"2026-10-10","scope":"Owner-authorized obsolete website-only material cleanup; historical engineering tasks/acceptance retained.","status":"prepared_pending_github_checks","base_commit":"75fed6188f5c5dde13029ebc9426fc210d44d52f","evidence":"../../WEBSITE_ASSET_CLEANUP.md","release_history_changed":false},
   "schema_version": 1,
   "project": "WinAudioClean",

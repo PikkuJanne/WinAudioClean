@@ -61,7 +61,11 @@ verify the chosen provider's exact build/integrity/license information. See
 check does not authenticate a binary.
 
 Place both tools beside the extracted scripts for the README examples. You can
-instead bind explicit `-FfmpegPath` / `-FfprobePath` or configure PATH. A bad
+instead use an existing `FFMPEG` variable or PATH installation, or bind explicit
+`-FfmpegPath` / `-FfprobePath`. On Windows the resolver also reads persisted user
+and machine values when the shortcut's process environment misses the tools.
+`FFMPEG` accepts the bin directory, installation root or full `ffmpeg.exe` path;
+no PATH edit, Explorer restart or permanent environment change is required. A bad
 explicit or present sibling tool fails without fallback. FFprobe also checks
 beside the resolved FFmpeg. No numeric minimum replaces capability checks.
 
