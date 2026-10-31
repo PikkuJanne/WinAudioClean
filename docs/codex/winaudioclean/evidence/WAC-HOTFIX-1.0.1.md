@@ -57,6 +57,13 @@ source text unchanged, and retains notfound/exit3/no-output assertions. Its four
 dependency cases pass under both Pester hosts. Initial interrupted Full runs
 are not claimed passing; final complete reruns remain required.
 
+The subsequent Full run caught stale application-version expectations in the
+live preset report/log tests. Only the app expectations were updated to 1.0.1;
+Original preset 1.0.0, exact filters and all output assertions stay intact. The
+complete nine-case Preset suite then passed in both PS5.1 and PS7. Its earlier
+Full failure is retained in ignored local evidence; final green exact-source
+Full/CI runs are required before delivery.
+
 Final exact source/CI/package/public-download identities and results are recorded
 externally in [PR 11](https://github.com/PikkuJanne/WinAudioClean/pull/11) and the
 [stable release](https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.1)
