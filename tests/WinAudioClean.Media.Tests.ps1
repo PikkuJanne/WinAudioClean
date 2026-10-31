@@ -15,6 +15,7 @@ Describe 'AC-019: dependency discovery has deterministic precedence' -Tag 'Media
             $null = [IO.Directory]::CreateDirectory($directory)
         }
         Mock Get-Command { $null } -ParameterFilter { $Name -in @('ffmpeg.exe', 'ffprobe.exe') }
+        Mock Get-WacEnvironmentValue { $null }
     }
 
     It 'uses explicit <ToolName> ahead of sibling and PATH' -ForEach @(
@@ -100,6 +101,195 @@ Describe 'AC-019: dependency discovery has deterministic precedence' -Tag 'Media
     }
 }
 
+Describe 'Hotfix: stale Windows environments discover only eligible named installations' -Tag 'Media', 'Unit' {
+    BeforeEach {
+        $script:hintRoot = Join-Path $TestDrive ('hint-' + [guid]::NewGuid().ToString('N'))
+        $script:hintBin = Join-Path $script:hintRoot ('tools [literal] ' + [char]0x00e4)
+        $script:emptyApp = Join-Path $script:hintRoot 'application'
+        $script:persistedBin = Join-Path $script:hintRoot 'persisted PATH'
+        foreach ($directory in @($script:hintBin, $script:emptyApp, $script:persistedBin)) {
+            $null = [IO.Directory]::CreateDirectory($directory)
+        }
+        $script:hintFfmpeg = Join-Path $script:hintBin 'ffmpeg.exe'
+        $script:hintProbe = Join-Path $script:hintBin 'ffprobe.exe'
+        [IO.File]::WriteAllBytes($script:hintFfmpeg, [byte[]]@(1))
+        [IO.File]::WriteAllBytes($script:hintProbe, [byte[]]@(1))
+        $script:persistedTool = Join-Path $script:persistedBin 'ffmpeg.exe'
+        [IO.File]::WriteAllBytes($script:persistedTool, [byte[]]@(2))
+        $script:environmentValues = @{}
+        Mock Get-WacEnvironmentValue { $script:environmentValues[$Scope + ':' + $Name] }
+        Mock Get-Command { $null } -ParameterFilter { $Name -in @('ffmpeg.exe', 'ffprobe.exe') }
+    }
+
+    It 'discovers <Kind> from <Scope> FFMPEG and resolves its exact sibling pair' -ForEach @(
+        @{ Scope = 'Process'; Kind = 'bin directory' }, @{ Scope = 'User'; Kind = 'bin directory' }, @{ Scope = 'Machine'; Kind = 'bin directory' }
+        @{ Scope = 'Process'; Kind = 'full executable' }, @{ Scope = 'User'; Kind = 'full executable' }, @{ Scope = 'Machine'; Kind = 'full executable' }
+        @{ Scope = 'Process'; Kind = 'installation root' }, @{ Scope = 'User'; Kind = 'installation root' }, @{ Scope = 'Machine'; Kind = 'installation root' }
+    ) {
+        $expectedFfmpeg = $script:hintFfmpeg; $expectedProbe = $script:hintProbe
+        if ($Kind -eq 'full executable') { $hint = $script:hintFfmpeg }
+        elseif ($Kind -eq 'installation root') {
+            $hint = Join-Path $script:hintRoot 'installation'
+            $bin = Join-Path $hint 'bin'
+            $null = [IO.Directory]::CreateDirectory($bin)
+            $expectedFfmpeg = Join-Path $bin 'ffmpeg.exe'; $expectedProbe = Join-Path $bin 'ffprobe.exe'
+            [IO.File]::Copy($script:hintFfmpeg, $expectedFfmpeg)
+            [IO.File]::Copy($script:hintProbe, $expectedProbe)
+        } else { $hint = $script:hintBin }
+        $script:environmentValues[$Scope + ':FFMPEG'] = $hint
+        $selected = Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp
+        $selected | Should -BeExactly $expectedFfmpeg
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly ($Scope.ToLowerInvariant() + ' FFMPEG')
+        Resolve-WacExecutable -Name ffprobe.exe -SiblingDirectory ([IO.Path]::GetDirectoryName($selected)) |
+            Should -BeExactly $expectedProbe
+        Get-WacExecutableSource -Name ffprobe.exe | Should -BeExactly 'portable sibling'
+    }
+
+    It 'preserves process PATH ahead of every newly supported fallback' {
+        $script:environmentValues['Process:FFMPEG'] = $script:hintBin
+        Mock Get-Command { [pscustomobject]@{ Source = $script:persistedTool } } -ParameterFilter { $Name -eq 'ffmpeg.exe' }
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:persistedTool
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly 'process PATH'
+        Should -Invoke Get-WacEnvironmentValue -Times 0 -Exactly
+    }
+
+    It 'rejects unsafe process PATH result <Value> without hiding it behind a hint' -ForEach @(
+        @{ Value = '.\ffmpeg.exe' }, @{ Value = '\\server\tools\ffmpeg.exe' }
+        @{ Value = '\\?\C:\tools\ffmpeg.exe' }, @{ Value = 'https://example.invalid/ffmpeg.exe' }
+    ) {
+        $script:environmentValues['Process:FFMPEG'] = $script:hintBin
+        $script:commandSource = $Value
+        Mock Get-Command { [pscustomobject]@{ Source = $script:commandSource } } -ParameterFilter { $Name -eq 'ffmpeg.exe' }
+        { Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp } | Should -Throw
+        Should -Invoke Get-WacEnvironmentValue -Times 0 -Exactly
+    }
+
+    It 'normalizes a quoted FFMPEG hint without evaluating literal shell characters' {
+        $literalBin = Join-Path $script:hintRoot 'literal & (tools) 100%'
+        $null = [IO.Directory]::CreateDirectory($literalBin)
+        $expected = Join-Path $literalBin 'ffmpeg.exe'
+        [IO.File]::Copy($script:hintFfmpeg, $expected)
+        $script:environmentValues['Process:FFMPEG'] = ' "' + $literalBin + '\\" '
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $expected
+    }
+
+    It 'reads fallback scopes on demand and prefers process then user then machine hints' {
+        $script:environmentValues['Process:FFMPEG'] = $script:hintBin
+        $script:environmentValues['User:FFMPEG'] = $script:persistedBin
+        $script:environmentValues['Machine:FFMPEG'] = $script:persistedBin
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+        Should -Invoke Get-WacEnvironmentValue -Times 0 -Exactly -ParameterFilter { $Scope -in @('User', 'Machine') }
+        $script:environmentValues['Process:FFMPEG'] = 'relative\invalid'
+        $script:environmentValues['User:FFMPEG'] = $script:hintBin
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly 'user FFMPEG'
+    }
+
+    It 'uses persisted <Scope> Path with quotes, Unicode, brackets and trailing separators literally' -ForEach @(
+        @{ Scope = 'User' }, @{ Scope = 'Machine' }
+    ) {
+        $script:environmentValues[$Scope + ':Path'] = ' ; "' + $script:hintBin + '\\" ; '
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly ($Scope.ToLowerInvariant() + ' Path')
+    }
+
+    It 'expands a persisted-only FFMPEG reference for Path when the hint root itself is inapplicable' {
+        $script:environmentValues['User:FFMPEG'] = $script:hintRoot
+        $script:environmentValues['User:Path'] = '"%FFMPEG%\persisted PATH"'
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:persistedTool
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly 'user Path'
+    }
+
+    It 'expands chained references across persisted scopes without changing the process environment' {
+        $script:environmentValues['User:FFMPEG'] = '%WAC_MACHINE_INSTALL%'
+        $script:environmentValues['Machine:WAC_MACHINE_INSTALL'] = '%WAC_FINAL_BIN%'
+        $script:environmentValues['User:WAC_FINAL_BIN'] = $script:hintBin
+        $beforePath = $env:Path; $beforeHint = $env:FFMPEG
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+        $env:Path | Should -BeExactly $beforePath
+        $env:FFMPEG | Should -BeExactly $beforeHint
+    }
+
+    It 'skips invalid <Description> and still selects the later persisted PATH candidate' -ForEach @(
+        @{ Description = 'empty hint'; Hint = '' }, @{ Description = 'whitespace'; Hint = '  ' }
+        @{ Description = 'relative path'; Hint = '.\tools' }, @{ Description = 'drive relative path'; Hint = 'C:tools' }
+        @{ Description = 'URL'; Hint = 'https://example.invalid/tools' }, @{ Description = 'UNC'; Hint = '\\server\share' }
+        @{ Description = 'device namespace'; Hint = '\\?\C:\tools' }, @{ Description = 'provider path'; Hint = 'FileSystem::C:\tools' }
+        @{ Description = 'wildcard'; Hint = 'C:\tools*' }, @{ Description = 'stream'; Hint = 'C:\tools:stream' }
+        @{ Description = 'unresolved variable'; Hint = '%WAC_ABSENT%' }, @{ Description = 'circular expansion'; Hint = '%FFMPEG%' }
+        @{ Description = 'wrong executable name'; Hint = 'C:\tools\ffplay.exe' }, @{ Description = 'embedded quote'; Hint = 'C:\bad"directory' }
+    ) {
+        $script:environmentValues['Process:FFMPEG'] = $Hint
+        $script:environmentValues['User:Path'] = $script:persistedBin
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:persistedTool
+    }
+
+    It 'skips unsafe, empty, unresolved and circular Path entries before the named directory' {
+        $script:environmentValues['User:WAC_CIRCLE'] = '%WAC_CIRCLE%'
+        $script:environmentValues['User:Path'] = '; ;.\tools;C:tools;https://example.invalid;\\server\share;\\?\C:\tools;%WAC_ABSENT%;%WAC_CIRCLE%;"' + $script:hintBin + '"'
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+    }
+
+    It 'bounds expanding references and falls through to a valid later source' {
+        $script:environmentValues['Process:FFMPEG'] = '%WAC_GROW%'
+        $script:environmentValues['User:WAC_GROW'] = '%WAC_GROW%\more'
+        $script:environmentValues['Machine:Path'] = $script:hintBin
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+        Should -Invoke Get-WacEnvironmentValue -Times 16 -Exactly -ParameterFilter { $Name -eq 'WAC_GROW' -and $Scope -eq 'User' }
+    }
+
+    It 'deduplicates automatic paths case-insensitively after normalization' {
+        $script:environmentValues['User:Path'] = $script:hintRoot + ';"' + $script:hintRoot.ToUpperInvariant() + '\";' + $script:hintBin
+        Mock Get-Item { throw 'missing automatic candidate' } -ParameterFilter { $LiteralPath -ieq (Join-Path $script:hintRoot 'ffmpeg.exe') }
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+        Should -Invoke Get-Item -Times 1 -Exactly -ParameterFilter { $LiteralPath -ieq (Join-Path $script:hintRoot 'ffmpeg.exe') }
+    }
+
+    It 'allows independent ffprobe PATH lookup when the selected ffmpeg has no sibling' {
+        $script:environmentValues['User:Path'] = $script:hintBin
+        $selected = Resolve-WacExecutable -Name ffprobe.exe -SiblingDirectory $script:emptyApp
+        $selected | Should -BeExactly $script:hintProbe
+        Get-WacExecutableSource -Name ffprobe.exe | Should -BeExactly 'user Path'
+    }
+
+    It 'does not search the working directory or recursively search a hinted installation' {
+        $script:environmentValues['Process:FFMPEG'] = $script:hintRoot
+        Push-Location -LiteralPath $script:hintBin
+        try {
+            { Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp } | Should -Throw '*not found*'
+        } finally { Pop-Location }
+    }
+
+    It 'never hides invalid explicit or portable choices behind valid automatic hints' {
+        $script:environmentValues['Process:FFMPEG'] = $script:hintBin
+        { Resolve-WacExecutable -Name ffmpeg.exe -ExplicitPath (Join-Path $script:emptyApp 'missing.exe') -SiblingDirectory $script:emptyApp } | Should -Throw
+        $null = [IO.Directory]::CreateDirectory((Join-Path $script:emptyApp 'ffmpeg.exe'))
+        { Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp } | Should -Throw
+        Should -Invoke Get-WacEnvironmentValue -Times 0 -Exactly
+    }
+
+    It 'clears selected-source metadata when a later resolution attempt fails' {
+        $script:environmentValues['Process:FFMPEG'] = $script:hintBin
+        $null = Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly 'process FFMPEG'
+        $script:environmentValues.Clear()
+        { Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp } | Should -Throw '*not found*'
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeNullOrEmpty
+    }
+
+    It 'skips empty and non-file automatic candidates before a later valid persisted path' {
+        $badBin = Join-Path $script:hintRoot 'bad hint'
+        $null = [IO.Directory]::CreateDirectory($badBin)
+        $script:environmentValues['Process:FFMPEG'] = $badBin
+        $script:environmentValues['User:Path'] = $script:hintBin
+        [IO.File]::WriteAllBytes((Join-Path $badBin 'ffmpeg.exe'), [byte[]]@())
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+        [IO.File]::Delete((Join-Path $badBin 'ffmpeg.exe'))
+        $null = [IO.Directory]::CreateDirectory((Join-Path $badBin 'ffmpeg.exe'))
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
+    }
+}
+
 Describe 'AC-019: dependency identity, capability and timeout checks' -Tag 'Media', 'Unit' {
     BeforeEach {
         $script:mediaNativeResult = [pscustomobject]@{
@@ -124,6 +314,13 @@ Describe 'AC-019: dependency identity, capability and timeout checks' -Tag 'Medi
         $script:mediaNativeResult.StandardOutput = 'ffmpeg version 7.1-test'
         $null = Get-WacToolVersion -FilePath 'C:\tools\ffmpeg.exe' -ToolName ffmpeg -TimeoutMilliseconds 125
         Should -Invoke Invoke-WacNativeProcess -Times 1 -Exactly -ParameterFilter { $TimeoutMilliseconds -eq 125 }
+    }
+
+    It 'distinguishes a selected tool that cannot execute from a missing tool and preserves diagnostics' {
+        $script:mediaNativeResult.Started = $false
+        $script:mediaNativeResult.Error = 'NATIVE_START_DETAIL'
+        { Get-WacToolVersion -FilePath 'C:\tools\ffmpeg.exe' -ToolName ffmpeg } |
+            Should -Throw '*found*could not execute*trusted Windows executable*NATIVE_START_DETAIL*'
     }
 
     It 'rejects a wrong or empty version banner (<Banner>)' -ForEach @(

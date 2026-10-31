@@ -26,8 +26,8 @@ def check(workflow, lock):
     require(job["timeout-minutes"] <= 45 and job["strategy"]["fail-fast"] is False, "bounded jobs")
     require(job["env"]["WAC_CI_SOURCE_SHA"] == REF, "tested head SHA")
     steps = job["steps"]
-    require(len(steps) == 5, "unexpected steps")
-    checkout, tools, modules, tests, upload = steps
+    require(len(steps) == 6, "unexpected steps")
+    checkout, tools, modules, tests, package, upload = steps
     for step, action in [(checkout, "actions/checkout"), (upload, "actions/upload-artifact")]:
         pin = lock["actions"][action]["commit"]
         require(re.fullmatch(r"[0-9a-f]{40}", pin) and step["uses"] == action + "@" + pin,
@@ -40,13 +40,20 @@ def check(workflow, lock):
     require(tests["shell"] == "powershell" and
             "scripts/Invoke-CIChecks.py --shell-path $taskShell --shell-family '${{ matrix.shell }}' --level Full" in tests["run"] and
             tests["run"].endswith("exit $LASTEXITCODE"), "local runner parity or exit")
+    require(package["shell"] == "powershell" and
+            "scripts/Install-HotfixTestEngine.ps1" in package["run"] and
+            "scripts/Build-Release.ps1 -Revision $env:WAC_CI_SOURCE_SHA" in package["run"] and
+            "scripts/Test-HotfixPackage.py" in package["run"] and
+            "--expected-commit $env:WAC_CI_SOURCE_SHA" in package["run"] and
+            "--persisted-user" in package["run"] and
+            package["run"].endswith("exit $LASTEXITCODE"), "portable real-engine gate or exit")
     require(upload["if"] == "${{ always() }}" and upload["with"] == {
         "name": "checks-${{ matrix.os }}-${{ matrix.shell }}",
         "path": "artifacts/local/ci/${{ matrix.shell }}.json",
         "retention-days": 7, "if-no-files-found": "warn", "include-hidden-files": False
     }, "artifact privacy or retention")
     require("secrets." not in json.dumps(workflow).lower(), "secret reference")
-    for name, host in [("python", "www.python.org"), ("powershell", "github.com")]:
+    for name, host in [("python", "www.python.org"), ("powershell", "github.com"), ("ffmpeg", "www.gyan.dev")]:
         tool = lock[name]
         require(tool["uri"].startswith("https://" + host + "/") and
                 re.fullmatch(r"[0-9a-f]{64}", tool["sha256"]), "download provenance")
@@ -86,7 +93,7 @@ class CIPolicyTests(unittest.TestCase):
     def test_raw_workspace_and_long_retention_are_rejected(self):
         for key, value in [("path", ".wac-local/**"), ("retention-days", 90), ("include-hidden-files", True)]:
             workflow = copy.deepcopy(self.workflow)
-            workflow["jobs"]["windows"]["steps"][4]["with"][key] = value
+            workflow["jobs"]["windows"]["steps"][5]["with"][key] = value
             with self.assertRaisesRegex(ValueError, "artifact privacy"):
                 check(workflow, self.lock)
 
@@ -105,6 +112,14 @@ class CIPolicyTests(unittest.TestCase):
         self.lock["python"]["sha256"] = ""
         with self.assertRaisesRegex(ValueError, "download provenance"):
             check(self.workflow, self.lock)
+
+    def test_portable_gate_cannot_omit_persisted_environment_or_mask_exit(self):
+        for old, new in [("--persisted-user", ""), ("exit $LASTEXITCODE", "exit 0")]:
+            workflow = copy.deepcopy(self.workflow)
+            gate = workflow["jobs"]["windows"]["steps"][4]
+            gate["run"] = gate["run"].replace(old, new)
+            with self.assertRaisesRegex(ValueError, "portable real-engine gate"):
+                check(workflow, self.lock)
 
 
 if __name__ == "__main__":

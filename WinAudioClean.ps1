@@ -76,12 +76,15 @@ current user's Music folder; CLI overrides saved preferences. No current-folder
 fallback. JobFolder optionally creates separate media/reports subfolders.
 .PARAMETER FfmpegPath
 Explicit literal Windows ffmpeg.exe path. Lookup is explicit path, beside this
-script, then PATH. Invalid explicit or present sibling candidates fail without
-fallback. Version/filter capabilities are checked; no download occurs.
+script, then process PATH. On a Windows lookup miss, read FFMPEG in process,
+user and machine scope, then persisted user/machine Path. FFMPEG accepts a bin
+directory, installation root or ffmpeg.exe path. Invalid explicit or present
+sibling candidates fail without fallback. Capability checks remain required.
 .PARAMETER FfprobePath
 Explicit literal Windows ffprobe.exe path. Lookup is explicit path, beside the
-resolved FFmpeg executable, then PATH. Invalid explicit/present sibling tools
-fail without fallback. Use a trusted compatible build with both executables.
+resolved FFmpeg executable, then process PATH and the same read-only Windows
+environment fallbacks. Invalid explicit/present sibling tools fail without
+fallback. Use a trusted compatible build with both executables.
 .PARAMETER AudioStreamIndex
 Nonnegative absolute media stream index (including video indexes). Automatically
 select the only audio track; otherwise choose interactively or bind the index
@@ -234,7 +237,7 @@ WAVs only; open them yourself. No playback or full render starts automatically.
 Explicitly save to a separate example preferences file without processing audio.
 CLI overrides saved values; normal runs never save automatically.
 .NOTES
-Author: Janne Vuorela. Application version 1.0.0. Windows desktop with PS5.1/PS7.
+Author: Janne Vuorela. Application version 1.0.1. Windows desktop with PS5.1/PS7.
 Windows 10/11 are intended targets; active-machine validation used build 26300,
 PS5.1.26100.9444 / PS7.6.5 and FFmpeg/ffprobe 9.0.2 essentials. Other OS/build
 and managed-policy compatibility is not universally verified.
@@ -242,7 +245,7 @@ Keep WinAudioClean.ps1, WinAudioClean.IO.ps1 and WinAudioClean.bat together.
 Keep WinAudioClean.Preview.ps1 beside them to use optional previews.
 Keep WinAudioClean.Settings.ps1 beside them to use saved preferences.
 Keep WinAudioClean.Batch.ps1 and WinAudioClean.Settings.ps1 for explicit lists.
-Supply FFmpeg/ffprobe through -FfmpegPath/-FfprobePath, beside the script, or PATH.
+Supply FFmpeg/ffprobe through explicit paths, beside the script, FFMPEG or PATH.
 No dependency is automatically downloaded. Processing time depends on the file
 and machine. Severe noise and lost/clipped detail may not be recoverable;
 80 Hz filtering and leveling can affect voice character. Speech-quality
@@ -461,6 +464,94 @@ function Test-WacInteractive {
     $true
 }
 
+function Get-WacConsoleWidth {
+    try {
+        $width = $Host.UI.RawUI.BufferSize.Width - 1
+        if ($width -ge 12) { return $width }
+    } catch { Write-Verbose 'Console width is unavailable; using a compact default.' }
+    79
+}
+
+function ConvertTo-WacConsoleLines {
+    param([AllowEmptyString()][string]$Text, [ValidateRange(12, 32766)][int]$Width = 79)
+    foreach ($line in [regex]::Split($Text, '\r?\n')) {
+        $remaining = $line
+        while ($remaining.Length -gt $Width) {
+            $split = $remaining.LastIndexOf(' ', $Width, $Width)
+            if ($split -lt 1) { $split = $Width }
+            $remaining.Substring(0, $split)
+            $remaining = $remaining.Substring($split).TrimStart(' ')
+        }
+        $remaining
+    }
+}
+
+function Write-WacConsoleText {
+    param([AllowEmptyString()][string]$Text,
+        [ValidateSet('Text', 'Heading', 'Success', 'Warning', 'Failure')][string]$Tone = 'Text',
+        [int]$Width = (Get-WacConsoleWidth))
+    # Use host colors only, never ANSI escapes or a replacement background.
+    $lightBackground = $false
+    try { $lightBackground = $Host.UI.RawUI.BackgroundColor -in @('Gray', 'White', 'Cyan', 'Yellow', 'Green', 'Magenta') }
+    catch { Write-Verbose 'Console palette is unavailable; retaining host text colors.' }
+    $color = switch ($Tone) {
+        'Heading' { if ($lightBackground) { 'DarkCyan' } else { 'Cyan' } }
+        'Success' { if ($lightBackground) { 'DarkGreen' } else { 'Green' } }
+        'Warning' { if ($lightBackground) { 'DarkYellow' } else { 'Yellow' } }
+        'Failure' { if ($lightBackground) { 'DarkRed' } else { 'Red' } }
+    }
+    foreach ($line in @(ConvertTo-WacConsoleLines -Text $Text -Width $Width)) {
+        if ($color) {
+            try { Write-Host $line -ForegroundColor $color -ErrorAction Stop }
+            catch { Write-Host $line }
+        } else { Write-Host $line }
+    }
+}
+
+function Write-WacConsoleHeader {
+    param([string]$Version, [string]$InputPath, [int]$Width = (Get-WacConsoleWidth))
+    Write-WacConsoleText -Text ("WINAUDIOCLEAN  //  SIGNAL CONTROL  v{0}" -f $Version) -Tone Heading -Width $Width
+    Write-WacConsoleText -Text ('-' * [math]::Min(69, $Width)) -Width $Width
+    Write-WacConsoleText -Text ('INPUT   ' + [IO.Path]::GetFileName($InputPath)) -Width $Width
+    Write-WacConsoleText -Text 'ENGINE  FOUND  ffmpeg + ffprobe' -Width $Width
+    Write-WacConsoleText -Text 'STATUS  Select a mode to validate its filters.' -Width $Width
+}
+
+function Write-WacConsoleMenu {
+    param([string]$Preset, [int]$Width = (Get-WacConsoleWidth))
+    Write-WacConsoleText -Text ("`nSelect Processing Mode ({0} preset):" -f $Preset) -Width $Width
+    Write-WacConsoleText -Text '[1] Raw recording' -Tone Heading -Width $Width
+    Write-WacConsoleText -Text '    Clean and level microphone audio' -Width $Width
+    Write-WacConsoleText -Text '[2] Zoom / Teams' -Tone Heading -Width $Width
+    Write-WacConsoleText -Text '    Level an already processed recording' -Width $Width
+    Write-WacConsoleText -Text '[Q] Cancel' -Width $Width
+}
+
+function Write-WacConsoleOutcome {
+    param([ValidateSet('SUCCESS', 'WARNING', 'CANCELLED', 'FAILED')][string]$Status,
+        [string]$OutputPath, [string]$Detail, [int]$Width = (Get-WacConsoleWidth))
+    $tone = switch ($Status) { 'SUCCESS' { 'Success' } 'FAILED' { 'Failure' } default { 'Warning' } }
+    Write-WacConsoleText -Text ("`nDONE: " + $Status) -Tone $tone -Width $Width
+    if ($Status -in @('SUCCESS', 'WARNING')) {
+        Write-WacConsoleText -Text ('OUTPUT  ' + $OutputPath) -Tone $tone -Width $Width
+    }
+    if ($Detail) { Write-WacConsoleText -Text $Detail -Width $Width }
+}
+
+function Write-WacDependencyFailure {
+    param([string]$Reason, [bool]$Interactive = $false, [int]$Width = (Get-WacConsoleWidth))
+    $message = 'Dependency failed: ' + $Reason
+    $next = 'Next step: verify access to your existing FFmpeg/ffprobe pair; select it with -FfmpegPath and -FfprobePath if needed.'
+    if ($Interactive) {
+        Write-WacConsoleText -Text $message -Tone Failure -Width $Width
+        Write-WacConsoleText -Text $next -Width $Width
+    } else {
+        # Expected dependency failures are concise diagnostics, not PowerShell error records.
+        [Console]::Error.WriteLine($message)
+        [Console]::Error.WriteLine($next)
+    }
+}
+
 function Read-WacHostSelection {
     param([string]$Prompt)
     $restore = $null -ne $script:WacRunContext -and $script:WacRunContext.ConsoleHandlerRegistered
@@ -670,26 +761,134 @@ function Get-WacLocalMediaArguments {
         'wav,mp3,flac,ogg,mov,matroska,webm,aac,aiff,asf,avi')
 }
 
+function Get-WacEnvironmentValue {
+    param([string]$Name, [ValidateSet('Process', 'User', 'Machine')][string]$Scope)
+
+    # Read only. A desktop shortcut may inherit an older environment than the
+    # persisted user/machine values; never refresh or replace the process PATH.
+    try { [Environment]::GetEnvironmentVariable($Name, [EnvironmentVariableTarget]$Scope) }
+    catch { return $null }
+}
+
+function Expand-WacEnvironmentPath {
+    param([AllowNull()][string]$Value)
+
+    if ([string]::IsNullOrWhiteSpace($Value) -or $Value.Length -gt 32767) { return $null }
+    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    for ($depth = 0; $depth -lt 16; $depth++) {
+        $Value = $Value.Trim()
+        if ($Value.Length -ge 2 -and $Value[0] -eq '"' -and $Value[$Value.Length - 1] -eq '"') {
+            $Value = $Value.Substring(1, $Value.Length - 2).Trim()
+        }
+        if ([string]::IsNullOrWhiteSpace($Value) -or -not $seen.Add($Value)) { return $null }
+        $references = @([regex]::Matches($Value, '%([^%]+)%'))
+        if ($references.Count -eq 0) {
+            $trimmed = $Value.TrimEnd([char[]]'\/')
+            if ($trimmed -match '^[a-zA-Z]:$' -and $Value -match '^[a-zA-Z]:[\\/]+$') { $trimmed += '\' }
+            return $trimmed
+        }
+        foreach ($reference in $references) {
+            $replacement = $null
+            foreach ($scope in @('Process', 'User', 'Machine')) {
+                $replacement = Get-WacEnvironmentValue -Name $reference.Groups[1].Value -Scope $scope
+                if (-not [string]::IsNullOrWhiteSpace($replacement)) { break }
+            }
+            if ([string]::IsNullOrWhiteSpace($replacement)) { return $null }
+            $Value = $Value.Replace($reference.Value, $replacement)
+            if ($Value.Length -gt 32767) { return $null }
+        }
+    }
+    # Unresolved and circular expansions are inapplicable automatic hints.
+    $null
+}
+
+function Get-WacAutomaticExecutable {
+    param([string]$Path, [Collections.Generic.HashSet[string]]$Seen)
+
+    if ([string]::IsNullOrWhiteSpace($Path) -or $Path -notmatch '^[a-zA-Z]:[\\/]') { return $null }
+    try { $candidate = Resolve-WacFileSystemPath -Path $Path }
+    catch { return $null }
+    if (-not $Seen.Add($candidate)) { return $null }
+    try { $item = Get-Item -LiteralPath $candidate -Force -ErrorAction Stop }
+    catch { return $null }
+    if ($item -is [IO.FileInfo] -and $item.Extension -ieq '.exe' -and $item.Length -gt 0) { $item.FullName }
+}
+
+function Get-WacExecutableSource {
+    param([ValidateSet('ffmpeg.exe', 'ffprobe.exe')][string]$Name)
+
+    $sources = Get-Variable -Scope Script -Name WacExecutableSources -ErrorAction SilentlyContinue
+    if ($null -ne $sources -and $sources.Value.ContainsKey($Name)) { $sources.Value[$Name] }
+}
+
 function Resolve-WacExecutable {
     param([ValidateSet('ffmpeg.exe', 'ffprobe.exe')][string]$Name,
         [string]$ExplicitPath, [string]$SiblingDirectory)
 
+    if (-not (Get-Variable -Scope Script -Name WacExecutableSources -ErrorAction SilentlyContinue)) {
+        $script:WacExecutableSources = @{}
+    }
+    $script:WacExecutableSources.Remove($Name)
+    $source = 'explicit path'
     if ($PSBoundParameters.ContainsKey('ExplicitPath')) {
         if ([string]::IsNullOrWhiteSpace($ExplicitPath)) { throw "An explicit $Name path cannot be empty." }
         $candidate = Resolve-WacFileSystemPath -Path $ExplicitPath
     } else {
+        $source = 'portable sibling'
         $candidate = Join-Path $SiblingDirectory $Name
         if (-not (Test-Path -LiteralPath $candidate -ErrorAction Stop)) {
             $command = Get-Command -Name $Name -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
-            if (-not $command) { throw "$Name not found. Supply its explicit path, put it in '$SiblingDirectory', or add it to PATH. No tools are downloaded automatically." }
-            $candidate = Resolve-WacFileSystemPath -Path $command.Source
+            if ($command) {
+                if ($command.Source -notmatch '^[a-zA-Z]:[\\/]') {
+                    throw "Invalid $Name selected by process PATH. Select an absolute local executable path."
+                }
+                $candidate = Resolve-WacFileSystemPath -Path $command.Source
+                $source = 'process PATH'
+            } else {
+                $candidate = $null
+                if ([Environment]::OSVersion.Platform -eq [PlatformID]::Win32NT) {
+                    $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+                    foreach ($scope in @('Process', 'User', 'Machine')) {
+                        $hint = Expand-WacEnvironmentPath -Value (Get-WacEnvironmentValue -Name 'FFMPEG' -Scope $scope)
+                        if ([string]::IsNullOrWhiteSpace($hint) -or $hint -notmatch '^[a-zA-Z]:[\\/]') { continue }
+                        try { $hint = Resolve-WacFileSystemPath -Path $hint }
+                        catch { continue }
+                        if ([IO.Path]::GetFileName($hint) -ieq 'ffmpeg.exe') { $hint = [IO.Path]::GetDirectoryName($hint) }
+                        elseif ([IO.Path]::GetExtension($hint) -ieq '.exe') { continue }
+                        foreach ($directory in @($hint, [IO.Path]::Combine($hint, 'bin'))) {
+                            $candidate = Get-WacAutomaticExecutable -Path ([IO.Path]::Combine($directory, $Name)) -Seen $seen
+                            if ($candidate) { $source = $scope.ToLowerInvariant() + ' FFMPEG'; break }
+                        }
+                        if ($candidate) { break }
+                    }
+                    if (-not $candidate) {
+                        foreach ($scope in @('User', 'Machine')) {
+                            $persistedPath = Get-WacEnvironmentValue -Name 'Path' -Scope $scope
+                            foreach ($entry in ($persistedPath -split ';')) {
+                                $directory = Expand-WacEnvironmentPath -Value $entry
+                                if ([string]::IsNullOrWhiteSpace($directory) -or $directory -notmatch '^[a-zA-Z]:[\\/]') { continue }
+                                try { $directory = Resolve-WacFileSystemPath -Path $directory }
+                                catch { continue }
+                                $candidate = Get-WacAutomaticExecutable -Path ([IO.Path]::Combine($directory, $Name)) -Seen $seen
+                                if ($candidate) { $source = $scope.ToLowerInvariant() + ' Path'; break }
+                            }
+                            if ($candidate) { break }
+                        }
+                    }
+                }
+                if (-not $candidate) {
+                    throw "$Name not found. Select an existing installation with FFMPEG, PATH, or an explicit tool path. No tools are downloaded automatically."
+                }
+            }
         }
     }
+    $candidate = Resolve-WacFileSystemPath -Path $candidate
     try { $item = Get-Item -LiteralPath $candidate -Force -ErrorAction Stop }
     catch { throw "Cannot access $Name at '$candidate'. Check the explicit path or installation." }
     if ($item -isnot [IO.FileInfo] -or $item.Extension -ne '.exe' -or $item.Length -eq 0) {
         throw "Invalid $Name executable at '$candidate'. Supply a nonempty Windows .exe file."
     }
+    $script:WacExecutableSources[$Name] = $source
     $item.FullName
 }
 
@@ -707,6 +906,9 @@ function Get-WacToolVersion {
         [ValidateRange(1, 60000)][int]$TimeoutMilliseconds = 15000)
 
     $result = Invoke-WacNativeProcess -FilePath $FilePath -ArgumentList @('-version') -TimeoutMilliseconds $TimeoutMilliseconds
+    if (-not $result.Started) {
+        throw "$ToolName was found at '$FilePath' but could not execute. Check that the selected file is a trusted Windows executable and its access is permitted. $($result.Error) $($result.CleanupError)"
+    }
     Assert-WacInspectionResult -Result $result -Operation "$ToolName version check at '$FilePath'"
     $versionLine = ($result.StandardOutput -split '\r?\n' | Select-Object -First 1).Trim()
     if ($versionLine -notmatch ('^' + $ToolName + ' version \S+')) {
@@ -1202,6 +1404,7 @@ function Update-WacProgress {
 
 function Add-WacProgressStage {
     param([string]$Stage, [double]$DurationSeconds = 0, [int]$StartPercent = 0, [int]$EndPercent = 95)
+    if ($script:WacConsoleDesignEnabled) { Write-WacConsoleText -Text ('STATUS  ' + $Stage.ToUpperInvariant()) -Tone Heading }
     $state = New-WacProgressState -RunContext $script:WacRunContext -Stage $Stage -DurationSeconds $DurationSeconds -StartPercent $StartPercent -EndPercent $EndPercent
     if ($null -eq $script:WacProgressStages) { $script:WacProgressStages = New-Object 'System.Collections.Generic.List[object]' }
     $script:WacProgressStages.Add($state)
@@ -2114,6 +2317,7 @@ $script:WacOutputLayout = $WacOutputLayout
 try {
 
 $interactive = Test-WacInteractive -NonInteractive:$NonInteractive
+$script:WacConsoleDesignEnabled = $interactive -and -not [Console]::IsOutputRedirected -and -not [Console]::IsErrorRedirected
 try {
     if (($PickFile -or $OpenOutputFolder) -and -not $interactive) {
         throw 'PickFile and OpenOutputFolder require an interactive console. Omit these actions for terminal or unattended use.'
@@ -2183,7 +2387,7 @@ if ($batchRequested -or $folderRequested -or $PSBoundParameters.ContainsKey('Bat
 }
 
 # --- CONFIGURATION ---
-$scriptVersion = "1.0.0"
+$scriptVersion = "1.0.1"
 
 # The preview component is optional for normal exports. Loading defines helpers;
 # it never renders or launches playback. Existing full-render installations and
@@ -2258,26 +2462,34 @@ try {
     $ffprobeVersion = Get-WacToolVersion -FilePath $ffprobePath -ToolName ffprobe
 } catch {
     if ($WacRunContext.IsCancellationRequested) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
-    Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
+    Write-WacDependencyFailure -Reason $_.Exception.Message -Interactive:$script:WacConsoleDesignEnabled
     exit 3
 }
 
 # --- TUI: HEADER ---
-if ($interactive) { Clear-Host }
-Write-Host "WinAudioClean $scriptVersion" -ForegroundColor Cyan
-Write-Host "============================" -ForegroundColor Gray
-Write-Host "Input: " -NoNewline; Write-Host $inputPath -ForegroundColor Yellow
-Write-Host "FFmpeg: $ffmpegPath ($ffmpegVersion)" -ForegroundColor Gray
-Write-Host "FFprobe: $ffprobePath ($ffprobeVersion)" -ForegroundColor Gray
+if ($script:WacConsoleDesignEnabled) {
+    Write-WacConsoleHeader -Version $scriptVersion -InputPath $inputPath
+    Write-WacConsoleText -Text ("FFmpeg: $ffmpegPath ($ffmpegVersion); source: " + (Get-WacExecutableSource -Name 'ffmpeg.exe'))
+    Write-WacConsoleText -Text ("FFprobe: $ffprobePath ($ffprobeVersion); source: " + (Get-WacExecutableSource -Name 'ffprobe.exe'))
+} else {
+    Write-Host "WinAudioClean $scriptVersion" -ForegroundColor Cyan
+    Write-Host "============================" -ForegroundColor Gray
+    Write-Host "Input: " -NoNewline; Write-Host $inputPath -ForegroundColor Yellow
+    Write-Host "FFmpeg: $ffmpegPath ($ffmpegVersion); source: $(Get-WacExecutableSource -Name 'ffmpeg.exe')" -ForegroundColor Gray
+    Write-Host "FFprobe: $ffprobePath ($ffprobeVersion); source: $(Get-WacExecutableSource -Name 'ffprobe.exe')" -ForegroundColor Gray
+}
 
 # --- TUI: SELECTION ---
 if (-not $Mode) {
+    if ($script:WacConsoleDesignEnabled) { Write-WacConsoleMenu -Preset $Preset }
+    else {
     Write-Host ("`nSelect Processing Mode ({0} preset):" -f $Preset) -ForegroundColor White
     Write-Host "[1] RAW RECORDING (Clean + Level)" -ForegroundColor Green
     Write-Host "    -> Cleaning plus leveling for mic recordings. Listen for speech changes."
     Write-Host "[2] ZOOM/TEAMS (Level Only)" -ForegroundColor Magenta
     Write-Host "    -> Leveling for meeting audio; skips the Raw cleaning filters."
     Write-Host '[Q] Cancel'
+    }
     try { $Mode = Read-WacMode }
     catch {
         Write-Error -Message $_.Exception.Message -ErrorAction Continue
@@ -2317,9 +2529,10 @@ try {
 }
 catch {
     if ($WacRunContext.IsCancellationRequested) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
-    Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
+    Write-WacDependencyFailure -Reason $_.Exception.Message -Interactive:$script:WacConsoleDesignEnabled
     exit 3
 }
+if ($script:WacConsoleDesignEnabled) { Write-WacConsoleText -Text 'ENGINE  READY  ffmpeg + ffprobe; selected filters validated' -Tone Success }
 if ($Preview) {
     $previewArguments = @{
         InputPath = $inputPath; OutputFolder = $outFolder
@@ -2395,7 +2608,7 @@ if ($outputPolicy.FilterPrefix) {
     try { Test-WacRequiredFilters -FfmpegPath $ffmpegPath -FilterChain 'pan' }
     catch {
         if ($WacRunContext.IsCancellationRequested) { Write-Host 'Cancelled. No audio was processed.'; exit 130 }
-        Write-Error -Message ("Dependency failed: " + $_.Exception.Message) -ErrorAction Continue
+        Write-WacDependencyFailure -Reason $_.Exception.Message -Interactive:$script:WacConsoleDesignEnabled
         exit 3
     }
 }
@@ -2412,8 +2625,12 @@ Write-Host "Destination space: $availableBytes bytes available; $($spaceEstimate
 
 
 # --- EXECUTION ---
-Write-Host "`nRunning WinAudioClean..." -ForegroundColor Cyan
-Write-Host "Chain: $modeName" -ForegroundColor Gray
+if ($script:WacConsoleDesignEnabled) {
+    Write-WacConsoleText -Text ("`nSTATUS  PROCESSING  " + $modeName) -Tone Heading
+} else {
+    Write-Host "`nRunning WinAudioClean..." -ForegroundColor Cyan
+    Write-Host "Chain: $modeName" -ForegroundColor Gray
+}
 
 $startedAt = [DateTime]::UtcNow
 $stopWatch = [System.Diagnostics.Stopwatch]::StartNew()
@@ -2592,7 +2809,20 @@ $status = $report.status
 }
 
 # --- FEEDBACK ---
-if ($status -eq "SUCCESS") {
+if ($script:WacConsoleDesignEnabled) {
+    $detail = switch ($status) {
+        'SUCCESS' { "Time: $duration  |  Size: $outputSizeMB" }
+        'WARNING' { 'Audio was published with warnings: ' + ($report.warningCodes -join ', ') }
+        'CANCELLED' { 'Owned processing stopped; pending inputs were not started.' }
+        default {
+            if ($validationError) { $validationError }
+            elseif ($process.Error) { $process.Error }
+            elseif ($analysisFailed) { $normalization.analysis.error }
+            else { "Processing failed. Native exit: $nativeExitText. Application exit: $applicationExitCode. See diagnostics above." }
+        }
+    }
+    Write-WacConsoleOutcome -Status $status -OutputPath $outputFile -Detail $detail
+} elseif ($status -eq "SUCCESS") {
     Write-Host "`nDONE: SUCCESS" -ForegroundColor Green
     Write-Host "Time Elapsed : $duration"
     Write-Host "Output Size  : $outputSizeMB"

@@ -1,3 +1,14 @@
+# v1.0.1 hotfix — 31 October 2026
+
+Both owner-requested hotfixes are being implemented and tested from main
+`3b7a6033949f450612e7d20acef79f4023e76644` in an isolated clone. The owner explicitly
+authorized the tested ordinary merge, patch tag and public stable release, then
+checksum/identity/conversion verification from the public ZIP. This supersedes
+older release deferrals for this patch. Historical audio/schema acceptance stays
+intact. See [hotfix evidence](evidence/WAC-HOTFIX-1.0.1.md).
+
+---
+
 # Website asset cleanup checkpoint — 10 October 2026
 
 This separately authorized cleanup starts from public main `75fed6188f5c5dde13029ebc9426fc210d44d52f` in a fresh

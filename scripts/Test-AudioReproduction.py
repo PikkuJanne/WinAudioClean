@@ -25,7 +25,7 @@ import sys
 
 
 RATE = 48000
-RECIPE_VERSIONS = ("2.3", "1.0.0")
+RECIPE_VERSIONS = ("2.3", "1.0.0", "1.0.1")
 LEVEL = "dynaudnorm=f=200:g=11:p=0.85:m=20:s=12"
 TOGGLES = ("Declip", "Declick", "Denoise", "Gate")
 BOUNDS = {"HighpassHz": (20, 200), "NoiseFloorDb": (-80, -20), "NoiseReductionDb": (0.01, 20),

@@ -41,6 +41,11 @@
           "run": "$taskShell = if ('${{ matrix.shell }}' -eq 'ps51') { Join-Path $env:SystemRoot 'System32/WindowsPowerShell/v1.0/powershell.exe' } else { $env:WAC_CI_PS7 }\n& $env:WAC_CI_PYTHON -X utf8 scripts/Invoke-CIChecks.py --shell-path $taskShell --shell-family '${{ matrix.shell }}' --level Full\nexit $LASTEXITCODE"
         },
         {
+          "name": "Test extracted portable ZIP and shell shortcuts with real audio tools",
+          "shell": "powershell",
+          "run": "$ErrorActionPreference = 'Stop'\n$engine = ./scripts/Install-HotfixTestEngine.ps1\ngit fetch --no-tags origin refs/tags/v1.0.0:refs/tags/v1.0.0\nif ($LASTEXITCODE -ne 0) { throw 'Cannot read public audio regression baseline.' }\n$destination = Join-Path $env:GITHUB_WORKSPACE '.wac-local/hotfix-package'\n./scripts/Build-Release.ps1 -Revision $env:WAC_CI_SOURCE_SHA -OutputDirectory $destination | Out-Null\n$zip = @(Get-ChildItem -LiteralPath $destination -Filter '*.zip')\nif ($zip.Count -ne 1) { throw 'Expected one clean-source package.' }\n& $env:WAC_CI_PYTHON -X utf8 scripts/Test-HotfixPackage.py --zip $zip[0].FullName --expected-commit $env:WAC_CI_SOURCE_SHA --ffmpeg $engine.Ffmpeg --ffprobe $engine.Ffprobe --ps7 $env:WAC_CI_PS7 --output (Join-Path $env:GITHUB_WORKSPACE '.wac-local/hotfix-smoke') --persisted-user\nexit $LASTEXITCODE"
+        },
+        {
           "name": "Retain sanitized result only",
           "if": "${{ always() }}",
           "uses": "actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02",

@@ -1,3 +1,15 @@
+# v1.0.1 hotfix — 31 October 2026
+
+Active owner request: finish FFmpeg discovery and SIGNAL CONTROL terminal,
+automate all Windows acceptance, merge the tested fix through the ordinary PR
+process, publish the next free patch (v1.0.1 is available), download the public
+ZIP and repeat checksum/identity/conversion checks. No further owner approval or
+manual retest is required. Work is in a separate fresh clone; the supplied source
+snapshot is preserved. Do not change audio, schemas or repository protections.
+See [hotfix evidence](evidence/WAC-HOTFIX-1.0.1.md) for observed checkpoints.
+
+---
+
 # Website asset cleanup checkpoint — 10 October 2026
 
 This separately authorized cleanup starts from public main `75fed6188f5c5dde13029ebc9426fc210d44d52f` in a fresh

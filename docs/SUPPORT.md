@@ -14,9 +14,17 @@ job directory. Queue results also have a JSONL journal with per-item exits.
 
 ## Missing or incompatible dependencies
 
-FFmpeg lookup is an explicit `-FfmpegPath`, a sibling `ffmpeg.exe`, then `PATH`.
+FFmpeg lookup is an explicit `-FfmpegPath`, a sibling `ffmpeg.exe`, then process `PATH`.
 ffprobe lookup is an explicit `-FfprobePath`, the resolved FFmpeg directory,
-then `PATH`. Inspect the resolved paths and versions printed in the console.
+then process `PATH`. After a genuine Windows lookup miss, the shared resolver reads
+`FFMPEG` in process, persisted user and persisted machine scope, then persisted
+user/machine `Path`. This lets desktop shortcuts find existing installations even
+when their inherited environment is stale. `FFMPEG` accepts an absolute bin
+directory, an installation root containing `bin`, or the full `ffmpeg.exe` path.
+Quoted values, spaces, Unicode and bounded `%VARIABLE%` references are supported;
+unresolved, circular, empty and unsafe entries are skipped. No environment or
+registry values are changed. Inspect each selected absolute path, lookup source
+and version in the local console diagnostics.
 An invalid explicit path or present invalid sibling fails; it does not fall
 back to another installation. Move the unintended sibling aside or correct
 the explicit path before retrying.

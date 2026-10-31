@@ -1,6 +1,6 @@
-# WinAudioClean 1.0.0
+# WinAudioClean 1.0.1
 
-**[v1.0.0 is published on GitHub](https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.0).**
+**[Get v1.0.1 on GitHub](https://github.com/PikkuJanne/WinAudioClean/releases/tag/v1.0.1).**
 Download the tool-only ZIP and its matching checksum/provenance files from that release.
 Website hosting will follow separately in the future multi-tool website project.
 Earlier internal builds used version `2.3`; their historical reports remain valid.
@@ -11,7 +11,7 @@ Clean and level speech recordings locally with PowerShell and FFmpeg. Choose **R
 
 1. Use a Windows desktop with Windows PowerShell 5.1 or PowerShell 7. The active-machine checks used Windows build 26300, PowerShell 5.1.26100.9444 / 7.6.5 and FFmpeg/ffprobe 9.0.2 essentials. Windows 10/11 are intended targets; other builds and managed security configurations are not universally verified.
 2. Verify the tool-only ZIP using the [portable package guide](docs/PORTABLE_PACKAGE.md), then extract **all** its files into a short folder you can write to. Installation needs no administrator rights, Git, Python or test modules.
-3. Obtain a Windows FFmpeg distribution with both `ffmpeg.exe` and `ffprobe.exe`; check its origin, integrity and license. Put both beside `WinAudioClean.ps1` and keep all eight PowerShell components beside the BAT. Nothing is downloaded automatically. See [dependency notices](THIRD_PARTY_NOTICES.md).
+3. Use a trusted Windows FFmpeg distribution with both `ffmpeg.exe` and `ffprobe.exe`. An existing `FFMPEG` variable or `PATH` installation is supported, including persisted user/machine values missed by an older desktop shortcut environment. `FFMPEG` may name the bin directory, installation root or full `ffmpeg.exe` path. Portable sibling tools and explicit paths remain supported. Keep all eight PowerShell components beside the BAT. Nothing is downloaded automatically. See [dependency notices](THIRD_PARTY_NOTICES.md).
 4. Open PowerShell in the extracted folder. For the examples below, copy one of your recordings there as `recording.wav` (a readable mono/stereo WAV; at least four seconds for the explicit preview). The file is your input, not part of the ZIP. Other supported media can be supplied with its real filename.
 5. Run the first command below. `Exports` is created automatically. `-IgnoreSavedSettings` makes these examples independent of any existing preferences.
 
@@ -25,6 +25,12 @@ The host's `-ExecutionPolicy` applies to this process. Follow your organization'
 Check the displayed result and the new WAV/reports in `Exports`, then listen. Sources and prior exports are preserved. A valid WAV with a loudness/report warning returns `7`; it needs review. Early input/dependency/probe failures may produce only console diagnostics.
 
 For ordinary interactive use, drag a simply named file onto `WinAudioClean.bat`, choose `1` (Raw), `2` (Zoom/Teams), or `Q` to cancel, and read the result before its final pause. With saved mode preferences there may be no mode prompt. CMD can alter punctuation before the BAT starts: use direct PowerShell or the environment/manifest route below for complex names, especially `%`, `!`, ambiguous quotes or parentheses rejected by the launcher. Several safely transported files run sequentially with one mode choice.
+
+The interactive **SIGNAL CONTROL** console uses a compact cyan heading, numbered
+actions and explicit engine/stage/outcome labels. Success is green, warnings amber
+and failures red where the host supports color; words and ASCII remain usable in
+narrow consoles. Unattended/redirected runs keep their existing text interface.
+See the [v1.0.1 release notes](https://github.com/PikkuJanne/WinAudioClean/blob/main/docs/RELEASE_NOTES_v1.0.1.md) for the hotfix scope.
 
 Processing stays on your machine. Reports can contain private paths, filenames, tags and native diagnostics. Drive letters, mapped drives, junctions and redirected folders can still point to network/synchronized storage. See [support and privacy](docs/SUPPORT.md).
 
@@ -172,7 +178,7 @@ Raw's numeric cleaning bounds are inclusive: `HighpassHz` 20..200 Hz; `NoiseFloo
 
 ## Sound and measurements
 
-Application **1.0.0**, Original **original / 1.0.0**, Gentle **gentle / 0.1.0**, and report schemas are separate versions. The application and Original preset can share a version string while identifying different things. Default Raw Original/Fast preserves this exact graph:
+Application **1.0.1**, Original **original / 1.0.0**, Gentle **gentle / 0.1.0**, and report schemas are separate versions. Default Raw Original/Fast preserves this exact graph:
 
 ```text
 adeclip,highpass=f=80,adeclick,afftdn=nf=-25,agate=range=0.056:threshold=0.0056,dynaudnorm=f=200:g=11:p=0.85:m=20:s=12,loudnorm=I=-12:TP=-1.5
@@ -190,7 +196,7 @@ The requested targets are **-12 LUFS integrated loudness** and **-1.5 dBTP true 
 
 ## Dependencies and limits
 
-FFmpeg resolves from explicit `-FfmpegPath`, beside the script, then PATH. FFprobe resolves from explicit `-FfprobePath`, beside the resolved FFmpeg, then PATH. A bad explicit or present sibling executable fails without fallback. Version responses and mode-specific filter capabilities are checked; there is no claimed universal minimum/build compatibility. Version/filter/media inspections have 15-second deadlines. Fast render has no fixed total timeout; Accurate and Preview use duration-derived bounded deadlines. Diagnostics are captured in memory and long-file/memory stress is unverified.
+FFmpeg resolves from explicit `-FfmpegPath`, beside the script, then process PATH. FFprobe resolves from explicit `-FfprobePath`, beside the resolved FFmpeg, then process PATH. After a Windows lookup miss, both support `FFMPEG` in process, persisted user, then persisted machine scope, followed by persisted user/machine `Path`. Quoted paths, spaces, Unicode and bounded `%VARIABLE%` references are supported. Lookup reads these values without changing the environment or registry. Only eligible absolute local executable paths are selected. A bad explicit or present sibling executable fails without fallback. Local diagnostics identify each selected tool and source; expected dependency errors give a reason and next step. Version responses and mode-specific filter capabilities are checked; there is no claimed universal minimum/build compatibility. Version/filter/media inspections have 15-second deadlines. Fast render has no fixed total timeout; Accurate and Preview use duration-derived bounded deadlines. Diagnostics are captured in memory and long-file/memory stress is unverified.
 
 Supported demuxers: WAV, MP3, FLAC, Ogg, MOV/MP4/M4A, Matroska/WebM, AAC, AIFF, ASF, AVI, subject to available decoders. Only FFmpeg's `file` protocol is allowed. URLs, playlists, concat lists, devices, UNC/device/provider paths and alternate data streams are unsupported. Ordinary drive/relative paths handle spaces, brackets, apostrophes and Unicode through direct PowerShell. That does not certify every CMD positional spelling.
 
