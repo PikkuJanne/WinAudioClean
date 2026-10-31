@@ -17,7 +17,10 @@ environment was restored afterward. No owner persisted environment is changed.
 
 Implementation is frozen for final Full/CI/release gates. Observed local checks:
 
-- Media: 142/142 tests pass in PS5.1 and PS7, including 45 added cases.
+- Media: 147/147 tests pass in PS5.1 and PS7, including 50 added cases.
+  Final edge coverage recognizes existing directories ending in .exe before
+  interpreting file hints, and normalizes quoted persisted reference values
+  before appending path components. The hosted reference fixture exercises it.
 - Console: 21 cases covered in each host, including eight actual classic-console
   captures at 80/32 columns for menu/stages/success/warning/dependency failure and
   the late mono-pan capability failure. No premature READY or failed output.
@@ -30,7 +33,10 @@ Implementation is frozen for final Full/CI/release gates. Observed local checks:
   Independent FFprobe verifies stereo 48 kHz PCM16 and eight-second duration;
   source hashes stay unchanged and decoded PCM matches public v1.0.0.
 - That candidate also passed ten actual packaged dependency-failure runs and
-  four controlled-source packaged-resolver absence cases. The latter explicitly
+  four controlled-source packaged-resolver absence cases. The later c503777
+  candidate repeats all nine positive and fourteen negative checks successfully
+  (ZIP SHA256 706974f9844f19d78965d959a892081163c2a655c7f753758d91efcaef5c5db2).
+  The controlled absence cases explicitly
   simulate machine/environment reads and do not claim BAT-launcher coverage.
 
 Existing-engine SHA256 identities: FFmpeg

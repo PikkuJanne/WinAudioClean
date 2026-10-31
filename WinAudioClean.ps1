@@ -794,6 +794,11 @@ function Expand-WacEnvironmentPath {
                 if (-not [string]::IsNullOrWhiteSpace($replacement)) { break }
             }
             if ([string]::IsNullOrWhiteSpace($replacement)) { return $null }
+            $replacement = $replacement.Trim()
+            if ($replacement.Length -ge 2 -and $replacement[0] -eq '"' -and $replacement[$replacement.Length - 1] -eq '"') {
+                $replacement = $replacement.Substring(1, $replacement.Length - 2).Trim()
+            }
+            if ([string]::IsNullOrWhiteSpace($replacement)) { return $null }
             $Value = $Value.Replace($reference.Value, $replacement)
             if ($Value.Length -gt 32767) { return $null }
         }
@@ -853,8 +858,10 @@ function Resolve-WacExecutable {
                         if ([string]::IsNullOrWhiteSpace($hint) -or $hint -notmatch '^[a-zA-Z]:[\\/]') { continue }
                         try { $hint = Resolve-WacFileSystemPath -Path $hint }
                         catch { continue }
-                        if ([IO.Path]::GetFileName($hint) -ieq 'ffmpeg.exe') { $hint = [IO.Path]::GetDirectoryName($hint) }
-                        elseif ([IO.Path]::GetExtension($hint) -ieq '.exe') { continue }
+                        if (-not [IO.Directory]::Exists($hint)) {
+                            if ([IO.Path]::GetFileName($hint) -ieq 'ffmpeg.exe') { $hint = [IO.Path]::GetDirectoryName($hint) }
+                            elseif ([IO.Path]::GetExtension($hint) -ieq '.exe') { continue }
+                        }
                         foreach ($directory in @($hint, [IO.Path]::Combine($hint, 'bin'))) {
                             $candidate = Get-WacAutomaticExecutable -Path ([IO.Path]::Combine($directory, $Name)) -Seen $seen
                             if ($candidate) { $source = $scope.ToLowerInvariant() + ' FFMPEG'; break }

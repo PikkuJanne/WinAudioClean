@@ -361,7 +361,7 @@ def main():
                 convert("persisted-user-path", "Zoom", ps51, hint=False)
                 # FFMPEG is only persisted; expansion must not rely on a value
                 # in this controller or the stale launcher environment.
-                set_user_environment(ps51, {"FFMPEG": str(args.output), "Path": '"%FFMPEG%\\' + str(staged.relative_to(args.output)) + '"'}, env, args.output, "set-user-reference")
+                set_user_environment(ps51, {"FFMPEG": ' "' + str(args.output) + '" ', "Path": '"%FFMPEG%\\' + str(staged.relative_to(args.output)) + '"'}, env, args.output, "set-user-reference")
                 convert("persisted-user-reference", "Zoom", ps51, hint=False)
             finally:
                 set_user_environment(ps51, original, env, args.output, "restore-user-environment")

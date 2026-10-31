@@ -145,6 +145,25 @@ Describe 'Hotfix: stale Windows environments discover only eligible named instal
         Get-WacExecutableSource -Name ffprobe.exe | Should -BeExactly 'selected FFmpeg sibling'
     }
 
+    It 'accepts an existing <DirectoryName> directory as <Layout> before interpreting its suffix' -ForEach @(
+        @{ DirectoryName = 'tools.exe'; Layout = 'bin directory' }
+        @{ DirectoryName = 'tools.exe'; Layout = 'installation root' }
+        @{ DirectoryName = 'ffmpeg.exe'; Layout = 'bin directory' }
+        @{ DirectoryName = 'ffmpeg.exe'; Layout = 'installation root' }
+    ) {
+        $hint = Join-Path $script:hintRoot $DirectoryName
+        $bin = if ($Layout -eq 'installation root') { Join-Path $hint 'bin' } else { $hint }
+        $null = [IO.Directory]::CreateDirectory($bin)
+        $expectedFfmpeg = Join-Path $bin 'ffmpeg.exe'; $expectedProbe = Join-Path $bin 'ffprobe.exe'
+        [IO.File]::Copy($script:hintFfmpeg, $expectedFfmpeg)
+        [IO.File]::Copy($script:hintProbe, $expectedProbe)
+        $script:environmentValues['Process:FFMPEG'] = $hint
+        $selected = Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp
+        $selected | Should -BeExactly $expectedFfmpeg
+        Resolve-WacExecutable -Name ffprobe.exe -SiblingDirectory ([IO.Path]::GetDirectoryName($selected)) |
+            Should -BeExactly $expectedProbe
+    }
+
     It 'preserves process PATH ahead of every newly supported fallback' {
         $script:environmentValues['Process:FFMPEG'] = $script:hintBin
         Mock Get-Command { [pscustomobject]@{ Source = $script:persistedTool } } -ParameterFilter { $Name -eq 'ffmpeg.exe' }
@@ -208,6 +227,18 @@ Describe 'Hotfix: stale Windows environments discover only eligible named instal
         Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $script:hintFfmpeg
         $env:Path | Should -BeExactly $beforePath
         $env:FFMPEG | Should -BeExactly $beforeHint
+    }
+
+    It 'normalizes surrounding quotes and whitespace on persisted reference values before adding path components' {
+        $root = Join-Path $script:hintRoot 'quoted installation root'
+        $bin = Join-Path $root 'deep\bin'
+        $null = [IO.Directory]::CreateDirectory($bin)
+        $expected = Join-Path $bin 'ffmpeg.exe'
+        [IO.File]::Copy($script:hintFfmpeg, $expected)
+        $script:environmentValues['User:FFMPEG'] = ' "' + $root + '" '
+        $script:environmentValues['User:Path'] = '%FFMPEG%\deep\bin'
+        Resolve-WacExecutable -Name ffmpeg.exe -SiblingDirectory $script:emptyApp | Should -BeExactly $expected
+        Get-WacExecutableSource -Name ffmpeg.exe | Should -BeExactly 'user Path'
     }
 
     It 'skips invalid <Description> and still selects the later persisted PATH candidate' -ForEach @(
